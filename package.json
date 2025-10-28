@@ -1,0 +1,24 @@
+{
+  "name": "copilot-configurations",
+  "version": "1.0.0",
+  "description": "GitHub Copilot configurations and prompts",
+  "private": true,
+  "scripts": {
+    "prepare": "husky",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:md": "prettier --write '**/*.md'"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.2.11",
+    "prettier": "^3.3.3"
+  },
+  "keywords": [
+    "copilot",
+    "github",
+    "prompts"
+  ],
+  "author": "",
+  "license": "MIT"
+}
