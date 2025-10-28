@@ -1,14 +1,14 @@
 ---
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools: [
-    "createFile",
-    "createDirectory",
-    "editFiles",
-    "codebase",
+    "edit/createFile",
+    "edit/createDirectory",
+    "edit/editFiles",
+    "search/codebase",
     "think",
-    "Context7",
-    "Figma Dev Mode MCP",
-    "atlassian",
+    "Context7/*",
+    "Figma Dev Mode MCP/*",
+    "atlassian/*",
   ]
 ---
 

@@ -1,19 +1,18 @@
 ---
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
 tools: [ 
-    "createFile",
-    "createDirectory",
-    "editFiles",
-    "search",
+    "edit/createFile",
+    "edit/createDirectory",
+    "edit/editFiles",
+    "search/codebase",
     "runCommands",
     "runTasks",
     "think",
     "problems",
     "todos",
-    "playwright",
-    "sequentialthinking",
-    "Context7",
-    "Figma Dev Mode MCP",
+    "playwright/*",
+    "Context7/*",
+    "Figma Dev Mode MCP/*",
   ]
 ---
 

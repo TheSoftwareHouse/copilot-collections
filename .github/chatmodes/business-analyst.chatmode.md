@@ -1,13 +1,13 @@
 ---
 description: "Agent specializing in building context for development tasks from a business analysis perspective."
 tools: [ 
-  "createFile", 
-  "createDirectory", 
-  "editFiles",
-  "codebase", 
+  "edit/createFile",
+  "edit/createDirectory",
+  "edit/editFiles",
+  "search/codebase",
   "think", 
-  "Figma Dev Mode MCP", 
-  "atlassian"
+  "Figma Dev Mode MCP/*", 
+  "atlassian/*"
 ]
 ---
 
