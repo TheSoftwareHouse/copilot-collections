@@ -18,6 +18,7 @@ Make sure to follow the steps below:
 6. Provide guidelines for testing and validating the implementation to ensure it meets the defined requirements.
 7. Save the implementation plan in a markdown file named after the task or feature in kebab-case format with .plan.md suffix.
 8. Ensure that the implementation plan is clear, concise, and tailored to the needs of the development team.
+9. **Focus only on changes specific to THIS task**: The implementation plan should ONLY include work directly related to the current task/Jira ticket. If the task requires prerequisite work or dependencies to be completed first, assume those are ALREADY DONE. Do not include implementation steps for prerequisites, dependencies, or related tasks - they should be tracked separately. Only plan what needs to be implemented for THIS specific task.
 
 The planning file should include:
 
