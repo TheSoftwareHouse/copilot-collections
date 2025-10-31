@@ -29,5 +29,12 @@ The research file should include:
 4. Relevant Links: Any relevant links to documentation, designs, or other resources.
 5. Diagrams/Flowcharts: Any relevant diagrams or flowcharts that help illustrate the requirements
    or processes.
+6. Current Implementation Status: Analysis of existing codebase to identify:
+   - Existing components, functions, or features that are related to this task
+   - What is already implemented and can be reused
+   - What needs to be created from scratch
+   - What needs to be modified or extended
+   - Key files and directories relevant to this task
+   Use semantic search to automatically discover related code in the project.
 
 Make sure to update the research file if new information is discovered during the conversation. All of the updates should be clearly documented in separate sections with timestamps.
