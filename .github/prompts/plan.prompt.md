@@ -46,7 +46,6 @@ List of sections to include in the planning file:
      - A box to check when the task is done.
    - Include only work that has to be done, not the work that is already completed or out of scope for this task
 - Security Considerations - Any security aspects that need to be addressed during implementation
-- Security Considerations - Any security aspects that need to be addressed during implementation
 - Quality assurance - A list of acceptance criteria for the whole tasks in a form of a checklist to verify the implementation meets the defined requirements at the end of implementation
 - Change Log - A section to document any changes made to the original plan during implementation
 
@@ -58,4 +57,4 @@ Follow the above structure and naming conventions strictly to ensure clarity and
 
 In case of any ambiguities or missing information for the planning, ask for clarification before finalizing the plan.
 
-Update the planning file after each interaction if new information is gathered.
+Update the plan file after each interaction if new information is gathered.

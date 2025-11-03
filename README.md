@@ -27,7 +27,7 @@ The other of the phases is always the same: Research -> Plan -> Implement -> Rev
 - /research <JIRA_ID> or task description - gathers all information about the task, used to build a context and fill-up the gaps
 - /plan <JIRA_ID> or task description - creates a plan of implementation
 - /implement <JIRA_ID> or task description - implements the plan
-- /review <JIRA_ID> - checks the implementation against plan
+- /review <JIRA_ID> or task description - checks the implementation against plan
 
 ### Installation
 - clone the repository
