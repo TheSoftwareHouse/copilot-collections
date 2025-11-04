@@ -7,23 +7,27 @@ Our workflow is based on 3 phases:
 - Research - build a context based on task description, jira, figma and other sources
 - Plan - build an implementation plans divided into tasks and phases
 - Implement - implement the plan
+- Review - to perform core review against acceptance criteria and security guidelines
 
-The other of the phases is always the same: Research -> Plan -> Implement
+The other of the phases is always the same: Research -> Plan -> Implement -> Review
 
 ### Example usage
 1. Start with /research <JIRA_ID>
 2. Continue with /plan <JIRA_ID>
-3. End with /implement <JIRA_ID>
+3. Continue with /implement <JIRA_ID>
+4. End with /review <JIRA_ID>
 
 ### Chatmodes
 - Architect - used for designing solution and implementation proposal
 - Business Analyst - used for knowledge and task information gathering
 - Software Engineer - used for task implementation
+- Code Reviewer - used to perform code review
 
 ### Prompts
 - /research <JIRA_ID> or task description - gathers all information about the task, used to build a context and fill-up the gaps
 - /plan <JIRA_ID> or task description - creates a plan of implementation
 - /implement <JIRA_ID> or task description - implements the plan
+- /review <JIRA_ID> or task description - checks the implementation against plan
 
 ### Installation
 - clone the repository

@@ -1,19 +1,6 @@
 ---
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
-tools: [ 
-    "edit/createFile",
-    "edit/createDirectory",
-    "edit/editFiles",
-    "search/codebase",
-    "runCommands",
-    "runTasks",
-    "think",
-    "problems",
-    "todos",
-    "playwright/*",
-    "Context7/*",
-    "Figma Dev Mode MCP/*",
-  ]
+tools: ['edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runCommands', 'runTasks', 'playwright/*', 'Context7/*', 'Figma Dev Mode MCP/*', 'think', 'problems', 'todos']
 ---
 
 Role: You are a software engineer responsible for implementing software solutions based on provided requirements and technical designs. You write clean, efficient, and maintainable code to deliver high-quality software that meets the specified needs.

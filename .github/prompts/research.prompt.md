@@ -1,6 +1,6 @@
 ---
 mode: "business-analyst"
-model: "Claude Sonnet 4.5"
+model: "GPT-5"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---
 
@@ -21,15 +21,15 @@ Make sure to follow the steps below:
 7. Save the gathered information in a markdown file named after the task or feature in kebab-case format with .research.md suffix.
 8. Ensure that the research file is clear, concise, and tailored to the needs of the development team.
 
-The research file should include:
+The research file should always follow the same structure described below for consistency across different tasks. Don't add or remove sections unless explicitly instructed.
 
-1. Title: The title of the task or feature.
-2. Description: A brief overview of the task or feature.
-3. Gathered Information: A detailed list of information gathered from the task analysis.
-4. Relevant Links: Any relevant links to documentation, designs, or other resources.
-5. Diagrams/Flowcharts: Any relevant diagrams or flowcharts that help illustrate the requirements
-   or processes.
-6. Current Implementation Status: Analysis of existing codebase to identify:
+List of sections to include in the research file:
+- Task details - Title, Description, Priority, Reporter, Created date, Due date, Labels, Estimated effort
+- Business impact - Explanation of how the task aligns with business goals and objectives
+- Gathered Information - Detailed list of information gathered from the task analysis
+- Relevant Links - Any relevant links to documentation, designs, or other resources
+- Diagrams/Flowcharts - Any relevant diagrams or flowcharts that help illustrate the requirements or processes
+- Current Implementation Status - Analysis of existing codebase to identify:
    - Existing components, functions, or features that are related to this task
    - What is already implemented and can be reused
    - What needs to be created from scratch
@@ -37,4 +37,8 @@ The research file should include:
    - Key files and directories relevant to this task
    Use semantic search to automatically discover related code in the project.
 
-Make sure to update the research file if new information is discovered during the conversation. All of the updates should be clearly documented in separate sections with timestamps.
+Follow the above structure and naming conventions strictly to ensure clarity and consistency.
+
+In case of any ambiguities or missing information in the task description, ask for clarification before finalizing the context.
+
+Uppdate the research file after each interaction if new information is gathered.
