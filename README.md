@@ -3,7 +3,8 @@
 This repository contains configurations and prompts for GitHub Copilot.
 
 ## Workflow
-Our workflow is based on 3 phases:
+Our workflow is based on 4 phases:
+
 - Research - build a context based on task description, jira, figma and other sources
 - Plan - build an implementation plans divided into tasks and phases
 - Implement - implement the plan
