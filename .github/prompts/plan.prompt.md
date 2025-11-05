@@ -26,6 +26,7 @@ Make sure to follow the steps below:
 9. Ensure that the implementation plan is clear, concise, and tailored to the needs of the development team.
 10. **Focus only on changes specific to THIS task**: The implementation plan should ONLY include work directly related to the current task/Jira ticket. If the task requires prerequisite work or dependencies to be completed first, assume those are ALREADY DONE. Do not include implementation steps for prerequisites, dependencies, or related tasks - they should be tracked separately. Only plan what needs to be implemented for THIS specific task.
 11. **Avoid duplicating existing work**: Never plan to create components, functions, or utilities that already exist. Always check the "Current Implementation Analysis" section and plan to reuse or modify existing code instead of recreating it.
+12. Only plan the features that are part of the research/feature context. Do not add extra features or enhancements that are not part of the original task requirements. If you identify potential improvements, document them separately in separate improvements section, but do not include them in the main implementation plan.
 
 The plan file should always follow the same structure described below for consistency across different tasks. Don't add or remove sections unless explicitly instructed.
 

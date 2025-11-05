@@ -15,13 +15,15 @@ If you need to make changes to the original solution during implementation, ensu
 Follow these steps in your workflow:
 
 1. Review the implementation plan and feature context thoroughly.
-2. Start implementing the feature according to the plan, following each task step by step.
-3. After completing each task step, update the relevant plan to reflect the progress made by checking the box for the completed task step in the plan document.
-4. After each phase make sure to:
+2. Focus only on implementation plan, don't try to implement anything that is not part of the plan unless explicitly instructed.
+3. Don't implement improvements from the plans improvements section unless explicitly instructed.
+4. Start implementing the feature according to the plan, following each task step by step.
+5. After completing each task step, update the relevant plan to reflect the progress made by checking the box for the completed task step in the plan document.
+6. After each phase make sure to:
     - Review the implementation against the plan and feature context to ensure all requirements are met.
     - Run tests to verify that the implementation works as expected and does not introduce new issues.
-5. Before making any changes to the original solution during implementation ask for confirmation. Make sure to document those changes in the specified plan file in Changelog section.
-6. At the end of the implementation, perform a final review of the entire feature following acceptance criteria checklist to ensure all tasks have been completed as per the plan and that the feature meets the defined requirements. Make sure to update the acceptance criteria checklist after every verified item.
+7. Before making any changes to the original solution during implementation ask for confirmation. Make sure to document those changes in the specified plan file in Changelog section.
+8. At the end of the implementation, perform a final review of the entire feature following acceptance criteria checklist to ensure all tasks have been completed as per the plan and that the feature meets the defined requirements. Make sure to update the acceptance criteria checklist after every verified item.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
 
