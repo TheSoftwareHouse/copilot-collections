@@ -1,5 +1,5 @@
 ---
-mode: "architect"
+agent: "architect"
 model: "Claude Sonnet 4.5"
 description: "Prepare detailed implementation plan for given feature."
 ---

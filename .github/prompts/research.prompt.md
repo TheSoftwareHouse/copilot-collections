@@ -1,5 +1,5 @@
 ---
-mode: "business-analyst"
+agent: "business-analyst"
 model: "GPT-5"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---

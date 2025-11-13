@@ -1,5 +1,5 @@
 ---
-mode: "code-reviewer"
+agent: "code-reviewer"
 model: "GPT-5"
 description: "Check the implementation against the plan and feature context."
 ---
