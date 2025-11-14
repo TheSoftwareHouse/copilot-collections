@@ -36,7 +36,7 @@ The other of the phases is always the same: Research -> Plan -> Implement -> Rev
   - type CMD + shift + p -> Open User Settings
   - type chat.modeFilesLocation and add new location for mode files
   - type chat.promptFilesLocation and add new location for prompt files
-- activate experimental thinking - CMD + shift + p -> Open User Settings -> type chat.thinkingTool -> activate
+- activate experimental thinking - CMD + shift + p -> Open User Settings -> type Custom Agent in Subagent -> activate
 - install necessary MCP Servers
   - Atlassian
   - Figma Dev Mode
@@ -45,17 +45,17 @@ The other of the phases is always the same: Research -> Plan -> Implement -> Rev
 
 ## Usage in External Projects
 
-To use these shared configurations in your own projects, add the following to your project's `.vscode/settings.json`:
+To use these shared configuration in your own projects, add the following to your project's `.vscode/settings.json`:
 
 ```json
 {
   "chat.promptFilesLocations": {
     ".github/prompts": true,
-    "../copilot-configurations/.github/prompts": true
+    "../copilot-configuration/.github/prompts": true
   },
   "chat.modeFilesLocations": {
     ".github/chatmodes": true,
-    "../copilot-configurations/.github/chatmodes": true
+    "../copilot-configuration/.github/agents": true
   },
   "github.copilot.chat.agent.thinkingTool": true //We use it in chatmodes. You can turn on in user configuration
 }
@@ -68,7 +68,7 @@ To use these shared configurations in your own projects, add the following to yo
    ```bash
    # If your project is at ~/Projects/my-project
    cd ~/Projects
-   git clone <this-repo-url> copilot-configurations
+   git clone <this-repo-url> copilot-configuration
    ```
 
 2. Your directory structure should look like:
