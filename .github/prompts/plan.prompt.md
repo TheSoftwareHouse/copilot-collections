@@ -1,6 +1,6 @@
 ---
 agent: "architect"
-model: "Claude Sonnet 4.5"
+model: "GPT-5.1 (Preview)"
 description: "Prepare detailed implementation plan for given feature."
 ---
 

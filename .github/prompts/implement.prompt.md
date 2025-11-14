@@ -1,6 +1,6 @@
 ---
 agent: "software-engineer"
-model: "Claude Sonnet 4.5"
+model: "GPT-5.1-Codex (Preview)"
 description: "Implement feature according to the plan."
 ---
 
