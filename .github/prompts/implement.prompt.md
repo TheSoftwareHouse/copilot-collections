@@ -1,5 +1,5 @@
 ---
-mode: "software-engineer"
+agent: "software-engineer"
 model: "Claude Sonnet 4.5"
 description: "Implement feature according to the plan."
 ---
