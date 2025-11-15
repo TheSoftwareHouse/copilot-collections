@@ -1,6 +1,6 @@
 ---
 agent: "code-reviewer"
-model: "GPT-5"
+model: "GPT-5.1 (Preview)"
 description: "Check the implementation against the plan and feature context."
 ---
 
