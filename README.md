@@ -168,33 +168,52 @@ If you prefer the UI instead of editing JSON directly:
 
 To unlock the full workflow (Jira, Figma, code search, browser automation), configure the following MCP servers.
 
-### Example `mcp.json` / configuration
+### Configuration
+
+We provide a ready-to-use configuration file in [`.vscode/mcp.json`](./.vscode/mcp.json).
+
+To learn more about configuring these servers, check their official documentation:
+
+- [Atlassian MCP](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/)
+- [Context7 MCP](https://github.com/upstash/context7)
+- [Playwright MCP](https://github.com/microsoft/playwright-mcp)
+- [Figma MCP](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
+
+### Configuring Context7 API Key
+
+To get higher rate limits and access to private repositories, you can provide a Context7 API key.
+You can get your key at [context7.com/dashboard](https://context7.com/dashboard).
+
+We use VS Code's `inputs` feature to securely prompt for the API key. When you first use the Context7 MCP, VS Code will ask for the key and store it securely.
+
+To enable this, modify your [`.vscode/mcp.json`](./.vscode/mcp.json) to use the `--api-key` CLI argument with an input variable:
 
 ```json
 {
   "servers": {
-    "playwright": {
-      "command": "npx",
-      "args": ["@playwright/mcp@latest"],
-      "type": "stdio"
-    },
     "Context7": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp@latest"]
-    },
-    "Figma Dev Mode MCP": {
-      "url": "http://127.0.0.1:3845/mcp",
-      "type": "http"
-    },
-    "atlassian": {
-      "url": "https://mcp.atlassian.com/v1/sse",
-      "type": "http"
+      "args": [
+        "-y",
+        "@upstash/context7-mcp@latest",
+        "--api-key",
+        "${input:context7-api-key}"
+      ]
     }
   },
-  "inputs": []
+  "inputs": [
+    {
+      "id": "context7-api-key",
+      "description": "Context7 API Key (optional, for higher rate limits)",
+      "type": "promptString",
+      "password": true
+    }
+  ]
 }
 ```
+
+**Note regarding Figma:** The `Figma Dev Mode MCP` requires the [Figma desktop app](https://www.figma.com/downloads/) to be running in [Dev Mode](https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode) to work correctly.
 
 ### What each MCP is used for
 
