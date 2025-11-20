@@ -3,6 +3,10 @@ target: vscode
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Context7/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search','github/get_copilot_space', 'github/list_copilot_spaces', 'agent', 'search/usages', 'sequential-thinking/*']
 handoffs: 
+  - label: Prepare UI/Figma verification
+    agent: ui-figma-verifier
+    prompt: /verify-figma-plan Prepare UI/Figma verification checklist based on the plan and designs
+    send: false
   - label: Start Implementation
     agent: tsh-software-engineer
     prompt: /implement Implement feature according to the plan
