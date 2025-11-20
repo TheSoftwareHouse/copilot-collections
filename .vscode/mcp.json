@@ -1,0 +1,23 @@
+{
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "type": "stdio"
+    },
+    "Context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "Figma Dev Mode MCP": {
+      "url": "http://127.0.0.1:3845/mcp",
+      "type": "http"
+    },
+    "atlassian": {
+      "url": "https://mcp.atlassian.com/v1/sse",
+      "type": "http"
+    }
+  },
+  "inputs": []
+}
