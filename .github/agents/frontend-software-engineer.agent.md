@@ -3,6 +3,10 @@ target: vscode
 description: "Agent specializing in implementing frontend solutions (web UI & design systems) based on specified requirements, UX/UI designs and technical designs."
 tools: ['runCommands', 'runTasks', 'atlassian/search', 'Context7/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser']
 handoffs: 
+  - label: Verify UI against Figma
+    agent: ui-figma-verifier
+    prompt: /verify-figma Verify that the implemented UI matches the Figma design and frontend guidelines
+    send: false
   - label: Perform Code Review
     agent: code-reviewer
     prompt: /review Check the implementation against the plan and feature context
