@@ -164,13 +164,29 @@ If you prefer the UI instead of editing JSON directly:
 
 ---
 
-## 🔌 Required MCP Servers
+## 🔌 MCP Server Configuration
 
-To unlock the full workflow (Jira, Figma, code search, browser automation), configure the following MCP servers.
+To unlock the full workflow (Jira, Figma, code search, browser automation), you need to configure the MCP servers. We provide a ready-to-use template in [`.vscode/mcp.json`](./.vscode/mcp.json).
 
-### Configuration
+You have two options for installation:
 
-We provide a ready-to-use configuration file in [`.vscode/mcp.json`](./.vscode/mcp.json).
+### Option 1: User Profile (Recommended)
+
+This is the best option as it enables these tools globally across all your projects.
+
+1. Open the **Command Palette**: `CMD` + `Shift` + `P`.
+2. Type and select **“MCP: Open User Configuration”**.
+3. This will open your global `mcp.json` file.
+4. Copy the contents of [`.vscode/mcp.json`](./.vscode/mcp.json) from this repository and paste them into your user configuration file.
+
+### Option 2: Workspace Configuration
+
+Use this if you want to enable these tools only for a specific project.
+
+1. Copy the `.vscode/mcp.json` file from this repository.
+2. Paste it into the `.vscode` folder of your target project (e.g., `my-project/.vscode/mcp.json`).
+
+### Official Documentation
 
 To learn more about configuring these servers, check their official documentation:
 
@@ -186,7 +202,7 @@ You can get your key at [context7.com/dashboard](https://context7.com/dashboard)
 
 We use VS Code's `inputs` feature to securely prompt for the API key. When you first use the Context7 MCP, VS Code will ask for the key and store it securely.
 
-To enable this, modify your [`.vscode/mcp.json`](./.vscode/mcp.json) to use the `--api-key` CLI argument with an input variable:
+To enable this, modify your `mcp.json` configuration (User or Workspace) to use the `--api-key` CLI argument with an input variable:
 
 ```json
 {
