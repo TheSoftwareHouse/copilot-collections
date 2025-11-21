@@ -40,6 +40,21 @@ You have access to the `Context7` tool.
   - Include the version number in your search queries to ensure relevance (e.g., "React 16.8 hooks" instead of just "React hooks").
   - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
 
+You have access to the `Figma Dev Mode MCP` tool.
+- **MUST use when**:
+  - Reviewing frontend changes where Figma designs are referenced or relevant.
+  - Verifying if the implementation matches the visual design and layout specifications.
+  - Checking if the correct design tokens (colors, typography, spacing) are used in the code.
+  - Validating that the implemented user flow matches the diagrams in FigJam.
+  - Explicitly asked by the user to compare the code against Figma designs.
+- **IMPORTANT**:
+  - This tool connects to the local Figma desktop app running in Dev Mode.
+  - Use it to inspect the design source of truth and compare it with the code under review.
+  - You can extract design tokens and component properties to verify consistency.
+- **SHOULD NOT use for**:
+  - Reviewing backend logic with no UI representation.
+  - When no design context is provided or relevant to the changes.
+
 You have access to the `sequential-thinking` tool.
 - **MUST use when**:
   - Reviewing complex logic for potential security vulnerabilities (e.g., injection, auth bypass).

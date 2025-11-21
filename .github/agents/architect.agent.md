@@ -45,6 +45,21 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching the local codebase (use `search` or `grep_search` instead).
 
+You have access to the `Figma Dev Mode MCP` tool.
+- **MUST use when**:
+  - Designing the component hierarchy and data flow based on UI requirements.
+  - Identifying necessary API endpoints and data structures to support the visual design.
+  - Analyzing system interactions and state transitions depicted in FigJam diagrams.
+  - Validating that the proposed technical architecture can support the required UX patterns (e.g., real-time updates, complex filtering).
+  - Checking for technical constraints implied by the design (e.g., image sizes, animation performance requirements).
+- **IMPORTANT**:
+  - This tool connects to the local Figma desktop app running in Dev Mode.
+  - Use it to translate visual requirements into technical specifications (API contracts, database schemas, component interfaces).
+  - Look for "hidden" complexity in the designs (e.g., conditional logic, error states) that impacts the architecture.
+- **SHOULD NOT use for**:
+  - Extracting CSS values or pixel-perfect styling details (leave this for the Software Engineer).
+  - When the task is purely backend with no frontend impact.
+
 You have access to the `sequential-thinking` tool.
 - **MUST use when**:
   - Designing complex system architectures and component interactions.

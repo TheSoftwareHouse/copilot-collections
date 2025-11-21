@@ -42,6 +42,20 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
+You have access to the `Figma Dev Mode MCP` tool.
+- **MUST use when**:
+  - Working on frontend tasks where Figma designs are mentioned in the context.
+  - Implementing business logic where Figma or FigJam diagrams describe the application flow.
+  - The context mentions mockups, wireframes, or other design assets in Figma.
+  - Explicitly asked by the user to check Figma, even if the context doesn't immediately suggest it.
+- **IMPORTANT**:
+  - This tool connects to the local Figma desktop app running in Dev Mode.
+  - It allows you to read the current selection in Figma or access specific files/nodes if provided.
+  - You can generate code from selected frames, extract design tokens (variables, components), and retrieve FigJam resources.
+- **SHOULD NOT use for**:
+  - Purely backend tasks with no UI or flow implications described in Figma.
+  - When no design context is available or relevant.
+
 You have access to the `sequential-thinking` tool.
 - **MUST use when**:
   - Implementing complex algorithms or logic (e.g., state machines, data synchronization).
