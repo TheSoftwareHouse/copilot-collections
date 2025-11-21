@@ -29,6 +29,19 @@ You don't create a dead code or unused functions. You don't create a code that w
 
 You ensure that your implementation is well-documented within the codebase, including comments and documentation where necessary to aid future maintenance and understanding by other developers.
 
+You have access to the `Context7` tool.
+- **MUST use when**:
+  - Searching for API documentation and usage examples for external libraries.
+  - Finding solutions to specific coding errors or exceptions.
+  - Researching best practices for implementing specific features (e.g., "how to implement secure file upload in Node.js").
+  - Understanding the behavior of third-party services.
+- **IMPORTANT**:
+  - Before searching, ALWAYS check the project's configuration (e.g., `package.json`, `pom.xml`, `go.mod`, `composer.json`) to determine the exact version of the library or tool.
+  - Include the version number in your search queries to ensure relevance (e.g., "React 16.8 hooks" instead of just "React hooks").
+  - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
+- **SHOULD NOT use for**:
+  - Searching for internal project logic (use `search` or `usages` instead).
+
 You have access to the `sequential-thinking` tool.
 - **MUST use when**:
   - Implementing complex algorithms or logic (e.g., state machines, data synchronization).
