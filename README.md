@@ -194,6 +194,7 @@ To learn more about configuring these servers, check their official documentatio
 - [Context7 MCP](https://github.com/upstash/context7)
 - [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 - [Figma MCP](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
+- [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking)
 
 ### Configuring Context7 API Key
 
@@ -237,8 +238,17 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 - 🎨 **Figma Dev Mode MCP** – pull design details, components, and variables for design‑driven work.
 - 📚 **Context7 MCP** – semantic search in external docs and knowledge bases.
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
+- 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
 
 > Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP’s own documentation.
+
+### 🧠 Sequential Thinking MCP
+
+We use the **Sequential Thinking MCP** to handle complex logic, reduce hallucinations, and ensure thorough problem analysis. It allows agents to:
+
+- **Revise** previous thoughts when new information is found.
+- **Branch** into alternative lines of thinking.
+- **Track** progress through a complex task.
 
 ---
 
