@@ -57,3 +57,21 @@ You have access to the `sequential-thinking` tool.
 - **SHOULD NOT use for**:
   - Trivial code changes (e.g., renaming variables, updating text).
   - Writing simple boilerplate code.
+
+You have access to the `playwright` tool.
+- **MUST use when**:
+  - Working on frontend tasks to verify your implementation by interacting with the running application.
+  - Validating user interactions (e.g., clicking buttons, submitting forms, navigation).
+  - Checking that UI elements are correctly rendered and accessible.
+  - Debugging frontend issues by inspecting the actual page state (accessibility tree).
+  - Verifying that no console errors occur during user interactions.
+- **SHOULD use when**:
+  - You want to "self-correct" or "verify" your work before marking a task as done.
+  - You need to explore the application's UI to understand the existing structure.
+- **IMPORTANT**:
+  - Ensure the local development server is running before attempting to navigate to the app.
+  - This tool operates primarily on the **accessibility tree**, which provides a structured view of the page. This is often more reliable than visual screenshots for logical verification.
+  - Use it to click through the app and simulate real user behavior to ensure your changes work as intended.
+- **SHOULD NOT use for**:
+  - Backend-only tasks where no UI is involved.
+  - Unit testing individual functions (use the project's test runner for that).
