@@ -20,7 +20,7 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Code Reviewer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/review` with consistent behavior across projects.
-- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright.
+- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
 ---
