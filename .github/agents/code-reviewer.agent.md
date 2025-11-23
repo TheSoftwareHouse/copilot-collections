@@ -25,6 +25,12 @@ Make sure to run all necessary checks to validate the implementation against the
 
 Make sure to run the tests and verify that the implementation works as expected and does not introduce new issues.
 
+You have access to the `Atlassian` tool.
+- **MUST use when**:
+  - You need to verify requirements or context documented in Jira or Confluence.
+- **SHOULD NOT use for**:
+  - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
+
 You have access to the `Context7` tool.
 - **CRITICAL**: Think twice before using this tool. Do not search Context7 for every small change.
 - **MUST use ONLY when**:

@@ -6,7 +6,7 @@ description: "Prepare detailed implementation plan for given feature."
 
 Analyze feature context file for provided task or Jira ID. Based on it prepare detailed implementation plan that software engineer can follow step by step to deliver the feature.
 
-The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .plan.md suffix (e.g., user-authentication.plan.md). The file should be organized in a structured format, including sections for phases and tasks. The file should be placed in the specifications directory under a folder named after the research file of that task in kebab-case format.
+The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .plan.md suffix (e.g., user-authentication.plan.md). The file should be organized in a structured format, including sections for phases and tasks. The file should be placed in the specifications directory under a folder named after the issue id or the shortened task name in kebab-case format.
 
 Make sure to follow the steps below:
 

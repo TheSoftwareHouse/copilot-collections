@@ -6,7 +6,7 @@ description: "Prepare a context for a specific task or feature from a business a
 
 Research tasks based on provided JIRA ID or task description.
 
-The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .research.md suffix (e.g., user-authentication.feature.research.md). The file should be organized in a structured format, including sections for gathered information, relevant links, and any diagrams or flowcharts that will help developers understand the task. The file should be placed in the specifications directory under a folder named after the research file of that task in kebab-case format.
+The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .research.md suffix (e.g., user-authentication.feature.research.md). The file should be organized in a structured format, including sections for gathered information, relevant links, and any diagrams or flowcharts that will help developers understand the task. The file should be placed in the specifications directory under a folder named after the issue id or generated task name in kebab-case format.
 
 It should contain every relevant information needed to build a comprehensive context for the task or feature.
 
