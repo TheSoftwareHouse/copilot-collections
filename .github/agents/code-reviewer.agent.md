@@ -25,6 +25,42 @@ Make sure to run all necessary checks to validate the implementation against the
 
 Make sure to run the tests and verify that the implementation works as expected and does not introduce new issues.
 
+You have access to the `Atlassian` tool.
+- **MUST use when**:
+  - You need to verify requirements or context documented in Jira or Confluence.
+- **SHOULD NOT use for**:
+  - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
+
+You have access to the `Context7` tool.
+- **CRITICAL**: Think twice before using this tool. Do not search Context7 for every small change.
+- **MUST use ONLY when**:
+  - The code heavily relies on a specific framework or external library and you need to verify API usage.
+  - Verifying if a specific implementation follows security best practices (e.g., OWASP guidelines) for a specific library version.
+  - Checking for known vulnerabilities in used libraries or patterns.
+- **SHOULD NOT use for**:
+  - Minor code changes or small refactors.
+  - Checking internal business logic consistency (use local context).
+  - Standard language features.
+- **IMPORTANT**:
+  - Before searching, ALWAYS check the project's configuration (e.g., `package.json`, `pom.xml`, `go.mod`, `composer.json`) to determine the exact version of the library or tool.
+  - Include the version number in your search queries to ensure relevance (e.g., "React 16.8 hooks" instead of just "React hooks").
+  - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
+
+You have access to the `Figma Dev Mode MCP` tool.
+- **MUST use when**:
+  - Reviewing frontend changes where Figma designs are referenced or relevant.
+  - Verifying if the implementation matches the visual design and layout specifications.
+  - Checking if the correct design tokens (colors, typography, spacing) are used in the code.
+  - Validating that the implemented user flow matches the diagrams in FigJam.
+  - Explicitly asked by the user to compare the code against Figma designs.
+- **IMPORTANT**:
+  - This tool connects to the local Figma desktop app running in Dev Mode.
+  - Use it to inspect the design source of truth and compare it with the code under review.
+  - You can extract design tokens and component properties to verify consistency.
+- **SHOULD NOT use for**:
+  - Reviewing backend logic with no UI representation.
+  - When no design context is provided or relevant to the changes.
+
 You have access to the `sequential-thinking` tool.
 - **MUST use when**:
   - Reviewing complex logic for potential security vulnerabilities (e.g., injection, auth bypass).
