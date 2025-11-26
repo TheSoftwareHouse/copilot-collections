@@ -4,7 +4,7 @@ description: "Agent specializing in building context for development tasks from 
 tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runSubagent', 'usages', 'sequential-thinking/*']
 handoffs: 
   - label: Prepare Implementation Plan
-    agent: architect
+    agent: tsh-architect
     prompt: /plan Create implementation plan for the current task
     send: false
 ---
