@@ -31,6 +31,9 @@ You have access to the `Atlassian` tool.
   - Extending your understanding of project requirements documented in Jira or Confluence.
   - Searching for related issues or documentation within the Atlassian ecosystem.
   - Gathering domain knowledge documented in Confluence pages.
+- **IMPORTANT**:
+  - Always check first available atlassian resources by calling `List accesible Resources`
+  - If there is more than one accessible resource, make sure to ask which one to use before proceeding.
 - **SHOULD NOT use for**:
   - Non-Atlassian related research or documentation.
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.

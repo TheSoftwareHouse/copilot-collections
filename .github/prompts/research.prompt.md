@@ -15,7 +15,7 @@ Make sure to follow the steps below:
 1. Gather all information related to the task from the codebase, Atlassian tools (Jira, Confluence) and other relevant sources.
 2. Analyze the task thoroughly, including its parents and subtasks if applicable, to get the full picture of the requirements.
 3. Check all external links added to the task. Make sure to check the confluence pages linked to the task to gather more information about requirements and processes.
-4. In case there are Figma designs linked to the task, review all of them using Figma MCP server (it's very important) and include relevant information in the context.
+4. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using Figma MCP server (it's very important) and include relevant information in the context.
 5. Analyze if there are any ambiguities or missing information in the task description. If there are any ask for clarification before finalizing the context.
 6. Don't provide implementation details, focus on gathering requirements, user stories, acceptance criteria and key flows.
 7. Save the gathered information in a markdown file named after the task or feature in kebab-case format with .research.md suffix.
