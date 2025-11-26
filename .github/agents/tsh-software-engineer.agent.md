@@ -4,7 +4,7 @@ description: "Agent specializing in implementing software solutions based on spe
 tools: ['runCommands', 'runTasks', 'atlassian/search', 'Context7/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser', 'sequential-thinking/*']
 handoffs: 
   - label: Perform Code Review
-    agent: code-reviewer
+    agent: tsh-code-reviewer
     prompt: /review Check the implementation against the plan and feature context
     send: false
 ---

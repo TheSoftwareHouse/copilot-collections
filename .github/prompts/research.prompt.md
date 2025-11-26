@@ -1,5 +1,5 @@
 ---
-agent: "business-analyst"
+agent: "tsh-business-analyst"
 model: "GPT-5.1 (Preview)"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---

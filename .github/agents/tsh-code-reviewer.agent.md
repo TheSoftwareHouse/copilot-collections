@@ -4,7 +4,7 @@ description: "Agent specializing in performing code review."
 tools: ['runCommands', 'runTasks', 'atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Context7/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'changes', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser', 'sequential-thinking/*']
 handoffs: 
   - label: Implement changes requested after code review
-    agent: software-engineer
+    agent: tsh-software-engineer
     prompt: /implement Implement changes requested after code review
     send: false
 ---

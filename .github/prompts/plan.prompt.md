@@ -1,5 +1,5 @@
 ---
-agent: "architect"
+agent: "tsh-architect"
 model: "GPT-5.1 (Preview)"
 description: "Prepare detailed implementation plan for given feature."
 ---

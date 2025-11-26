@@ -4,7 +4,7 @@ description: "Agent specializing in designing the solution architecture and tech
 tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Context7/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'runSubagent', 'usages', 'sequential-thinking/*']
 handoffs: 
   - label: Start Implementation
-    agent: software-engineer
+    agent: tsh-software-engineer
     prompt: /implement Implement feature according to the plan
     send: false
 ---
