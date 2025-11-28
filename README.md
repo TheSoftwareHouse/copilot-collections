@@ -89,6 +89,8 @@ You can run the same flow with either a **Jira ticket ID** or a **free‑form ta
 
 These are configured as Copilot **agents / sub‑agents**.
 
+> 📖 For detailed handoff flows and agent interactions, see [AGENTS.md](./AGENTS.md).
+
 ### 🧱 Architect
 - Focus: **solution design and implementation proposals**.
 - Helps break down complex tasks into components and interfaces.

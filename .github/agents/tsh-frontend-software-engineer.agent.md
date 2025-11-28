@@ -4,12 +4,16 @@ description: "Agent specializing in implementing frontend solutions (web UI & de
 tools: ['runCommands', 'runTasks', 'atlassian/search', 'Context7/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser']
 handoffs: 
   - label: Verify UI against Figma
-    agent: ui-figma-verifier
+    agent: tsh-ui-reviewer
     prompt: /verify-figma Verify that the implemented UI matches the Figma design and frontend guidelines
     send: false
   - label: Perform Code Review
-    agent: code-reviewer
+    agent: tsh-code-reviewer
     prompt: /review Check the implementation against the plan and feature context
+    send: false
+  - label: Commit Implementation Changes
+    agent: tsh-git-committer
+    prompt: /commit-changes Create a new branch and commit the implementation changes following the project's git conventions
     send: false
 ---
 
