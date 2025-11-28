@@ -19,6 +19,10 @@
       "url": "http://127.0.0.1:3845/mcp",
       "type": "http"
     },
+    "Figma MCP Server": {
+      "url": "https://mcp.figma.com/mcp",
+      "type": "http"
+    },
     "atlassian": {
       "url": "https://mcp.atlassian.com/v1/sse",
       "type": "http"

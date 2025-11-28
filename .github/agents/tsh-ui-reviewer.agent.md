@@ -1,14 +1,14 @@
 ---
 target: vscode
 description: "Agent specializing in verifying that implemented UI matches the Figma design and frontend guidelines."
-tools: ['runCommands', 'runTasks', 'Context7/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser']
+tools: ['runCommands', 'runTasks', 'Context7/*', 'Figma Dev Mode MCP/*', 'Figma MCP Server/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser']
 handoffs: 
   - label: Implement fixes after UI/Figma verification
-    agent: frontend-software-engineer
+    agent: tsh-frontend-software-engineer
     prompt: /implement Implement UI fixes requested after Figma verification
     send: false
   - label: Perform Code Review
-    agent: code-reviewer
+    agent: tsh-code-reviewer
     prompt: /review Check the implementation against the plan and feature context
     send: false
 ---
