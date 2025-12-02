@@ -1,6 +1,6 @@
 ---
 agent: "tsh-business-analyst"
-model: "GPT-5.1 (Preview)"
+model: "Claude Opus 4.5 (Preview)"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---
 
