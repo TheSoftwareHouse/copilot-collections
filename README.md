@@ -25,9 +25,16 @@
 
 ---
 
-## 📝 Requirements
+## ⚠️ VS Code Version Requirement
 
-Visual Studio Code (minimum 1.106.0) or up-to-date version of JetBrains Editor (supporting custom agents).
+**This configuration requires VS Code version 1.106 or later.**
+
+[VS Code 1.106](https://code.visualstudio.com/updates/v1_106) introduced a **breaking change**: **chat modes** have been renamed to **custom agents**. 
+
+- ✅ **Custom agents** are now stored in `.github/agents/` with `.agent.md` extension
+- ❌ **Chat modes** (`.chatmode.md` files in `.github/chatmodes/`) are deprecated
+
+If you're using an older version of VS Code, the agent files in this repository will not work correctly. Please update to VS Code 1.106 or later to use this configuration.
 
 ---
 
