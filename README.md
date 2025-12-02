@@ -25,6 +25,12 @@
 
 ---
 
+## 📝 Requirements
+
+Visual Studio Code (minimum 1.106.0) or up-to-date version of JetBrains Editor (supporting custom agents).
+
+---
+
 ## 🧭 Supported Workflow
 
 Our standard workflow is always:
