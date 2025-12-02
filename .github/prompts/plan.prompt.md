@@ -1,6 +1,6 @@
 ---
 agent: "tsh-architect"
-model: "GPT-5.1 (Preview)"
+model: "Claude Opus 4.5 (Preview)"
 description: "Prepare detailed implementation plan for given feature."
 ---
 
