@@ -10,24 +10,24 @@ The file outcome should be a markdown file named after the task jira id in kebab
 
 Make sure to follow the steps below:
 
-1. Analyze the feature context file thoroughly to understand the requirements and scope of the feature.
-2. **Verify Current Implementation**: Before planning, perform a thorough analysis of the existing codebase:
+1. Analyze the feature context file thoroughly to understand the requirements and scope of the feature. Cross-check the information with industry, domains and company best practices to ensure completeness.
+2. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation. Check the copilot spaces available for the project to gather more information about those best practices.
+3. **Verify Current Implementation**: Before planning, perform a thorough analysis of the existing codebase:
    - Use semantic search to find components, functions, hooks, utilities, or files related to the feature requirements
    - Identify what is already implemented and functional
    - Identify what exists but needs modification or extension
    - Identify what needs to be created from scratch
    - Document your findings in the "Current Implementation Analysis" section of the plan
-3. Understand the project best practices and quality standards to ensure the implementation plan aligns with them.
-4. Prepare implementation plan with detailed code changes required to be implemented, broken down into phases.
-5. For each phase, identify the specific tasks that need to be completed, providing a clear title, description, action type ([CREATE], [MODIFY], or [REUSE]), and definition of done for each task with a checkbox for each definition of done item to mark when completed.
-6. Consider any security aspects that need to be addressed during implementation and include them in the plan.
-7. Provide guidelines for testing and validating the implementation to ensure it meets the defined requirements.
-8. Save the implementation plan in a markdown file named after the task or feature in kebab-case format with .plan.md suffix.
-9. Ensure that the implementation plan is clear, concise, and tailored to the needs of the development team.
-10. **Focus only on changes specific to THIS task**: The implementation plan should ONLY include work directly related to the current task/Jira ticket. If the task requires prerequisite work or dependencies to be completed first, assume those are ALREADY DONE. Do not include implementation steps for prerequisites, dependencies, or related tasks - they should be tracked separately. Only plan what needs to be implemented for THIS specific task.
-11. **Avoid duplicating existing work**: Never plan to create components, functions, or utilities that already exist. Always check the "Current Implementation Analysis" section and plan to reuse or modify existing code instead of recreating it.
+4. Understand the project best practices and quality standards to ensure the implementation plan aligns with them.
+5. Prepare implementation plan with detailed code changes required to be implemented, broken down into phases.
+6. For each phase, identify the specific tasks that need to be completed, providing a clear title, description, action type ([CREATE], [MODIFY], or [REUSE]), and definition of done for each task with a checkbox for each definition of done item to mark when completed.
+7. Consider any security aspects that need to be addressed during implementation and include them in the plan.
+8. Provide guidelines for testing and validating the implementation to ensure it meets the defined requirements.
+9. Save the implementation plan in a markdown file named after the task or feature in kebab-case format with .plan.md suffix.
+10. Ensure that the implementation plan is clear, concise, and tailored to the needs of the development team.
+11. **Focus only on changes specific to THIS task**: The implementation plan should ONLY include work directly related to the current task/Jira ticket. If the task requires prerequisite work or dependencies to be completed first, assume those are ALREADY DONE. Do not include implementation steps for prerequisites, dependencies, or related tasks - they should be tracked separately. Only plan what needs to be implemented for THIS specific task.
+12. **Avoid duplicating existing work**: Never plan to create components, functions, or utilities that already exist. Always check the "Current Implementation Analysis" section and plan to reuse or modify existing code instead of recreating it.
 12. Only plan the features that are part of the research/feature context. Do not add extra features or enhancements that are not part of the original task requirements. If you identify potential improvements, document them separately in separate improvements section, but do not include them in the main implementation plan.
-
 The plan file should always follow the same structure described below for consistency across different tasks. Don't add or remove sections unless explicitly instructed.
 
 When planing BUG FIXES make sure to include steps to reproduce the issue, analyze the root cause, and implement a fix that addresses the problem without introducing new issues. Use tests to reproduce and then verify the fix.
