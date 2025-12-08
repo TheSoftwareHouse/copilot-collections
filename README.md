@@ -210,6 +210,22 @@ To learn more about configuring these servers, check their official documentatio
 - [Figma MCP](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
 - [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking)
 
+### Configuring GitHub MCP
+
+GitHub MCP should be configured to use Remote MCP (otherwise it won't have support for Spaces). On top of that it should be configured to use oAuth rather than PAT (Personal Access Token).
+
+In order to activate Spaces, `X-MCP-Toolsets` header has to be set to `all`.
+
+```json
+ "github": {
+      "type": "http",
+      "url": "https://api.githubcopilot.com/mcp/",
+      "headers": {
+        "X-MCP-Toolsets": "all"
+      }
+    }
+```
+
 ### Configuring Context7 API Key
 
 To get higher rate limits and access to private repositories, you can provide a Context7 API key.
