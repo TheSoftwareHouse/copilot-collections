@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/getTaskOutput', 'execute/runTask', 'atlassian/search', 'Context7/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*']
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/getTaskOutput', 'execute/runTask', 'atlassian/search', 'Context7/*', 'Figma MCP Server/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*']
 ---
 
 ## Agent Role and Responsibilities
@@ -94,7 +94,7 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `Figma Dev Mode MCP` tool.
+You have access to the `Figma MCP Server` tool.
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.
   - Implementing business logic where Figma or FigJam diagrams describe the application flow.

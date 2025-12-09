@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "Agent specializing in building context for development tasks from a business analysis perspective."
-tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'agent', 'search/usages', 'sequential-thinking/*', 'github/get_copilot_space', 'github/list_copilot_spaces']
+tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Figma MCP Server/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'agent', 'search/usages', 'sequential-thinking/*', 'github/get_copilot_space', 'github/list_copilot_spaces']
 handoffs: 
   - label: Prepare Implementation Plan
     agent: tsh-architect
@@ -54,7 +54,7 @@ You have access to the `Atlassian` tool.
   - Non-Atlassian related research or documentation.
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
-You have access to the `Figma Dev Mode MCP` tool.
+You have access to the `Figma MCP Server` tool.
 - **MUST use when**:
   - The task references Figma designs, mockups, or FigJam boards.
   - Analyzing user flows, process diagrams, or system interactions visualized in FigJam.

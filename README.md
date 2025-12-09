@@ -83,6 +83,28 @@ Our standard workflow is always:
 
 You can run the same flow with either a **Jira ticket ID** or a **free‑form task description**.
 
+#### Example Frontend Flow (with Figma designs)
+
+For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
+
+```text
+1️⃣ /research     <JIRA_ID or task description>
+2️⃣ /plan         <JIRA_ID or task description>
+3️⃣ /review-ui    Prepare UI verification checklist (optional, before implementation)
+4️⃣ /implement-ui <JIRA_ID or task description>
+5️⃣ /review       <JIRA_ID or task description>
+```
+
+**What makes `/implement-ui` special:**
+
+- Runs an **iterative verification loop** after each UI component
+- Captures current state with **Playwright** (accessibility tree, screenshots)
+- Compares with **Figma MCP** specifications (spacing, typography, colors, tokens)
+- **Automatically fixes** mismatches and re-verifies until perfect
+- Produces a **UI Verification Summary** with iteration counts and design gaps
+
+This ensures the implemented UI matches the Figma design before code review.
+
 ---
 
 ## 🧑‍🤝‍🧑 Agents
@@ -105,6 +127,18 @@ These are configured as Copilot **agents / sub‑agents**.
 - Focus: **implementing the agreed plan**.
 - Writes and refactors code in small, reviewable steps.
 - Follows repository style, tests where available, and avoids over‑engineering.
+
+### 🎨 Frontend Software Engineer
+- Focus: **implementing UI components and frontend features**.
+- Specialized in design systems, accessibility, and responsive behavior.
+- Uses **iterative Figma verification loop** to ensure pixel-perfect implementation.
+- Verifies implementation against Figma designs using Playwright and Figma MCP.
+
+### 🔎 UI Reviewer
+- Focus: **verifying UI implementation against Figma designs**.
+- Prepares verification checklists before implementation.
+- Compares rendered UI with design specifications.
+- Reports mismatches categorized by severity (Critical, Major, Minor).
 
 ### 🔍 Code Reviewer
 - Focus: **structured code review and risk detection**.
@@ -133,6 +167,19 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Implements the previously defined plan.
 - Proposes file changes, refactors, and new code in a focused way.
 - Outputs: concrete modifications and guidance on how to apply/test them.
+
+### `/implement-ui <JIRA_ID | description>`
+- Implements UI features with **iterative Figma verification**.
+- Extends `/implement` with a verification loop after each component.
+- Uses **Playwright** to capture current UI state and **Figma MCP** to compare with designs.
+- Automatically fixes mismatches and re-verifies until implementation matches design.
+- Outputs: code changes + UI Verification Summary with iteration counts.
+
+### `/review-ui`
+- Prepares a **UI verification checklist** based on Figma designs.
+- Analyzes design structure, tokens, responsive behavior, and component variants.
+- Best used **before implementation** to define verification criteria.
+- Outputs: structured checklist grouped by area (layout, typography, colors, states, a11y).
 
 ### `/review <JIRA_ID | description>`
 - Reviews the final implementation against the plan and requirements.
@@ -268,12 +315,10 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 }
 ```
 
-**Note regarding Figma:** The `Figma Dev Mode MCP` requires the [Figma desktop app](https://www.figma.com/downloads/) to be running in [Dev Mode](https://help.figma.com/hc/en-us/articles/15023124644247-Guide-to-Dev-Mode) to work correctly.
-
 ### What each MCP is used for
 
 - 🧩 **Atlassian MCP** – access Jira issues for `/research`, `/plan`, `/implement`, `/review`.
-- 🎨 **Figma Dev Mode MCP** – pull design details, components, and variables for design‑driven work.
+- 🎨 **Figma MCP Server** – pull design details, components, and variables for design‑driven work.
 - 📚 **Context7 MCP** – semantic search in external docs and knowledge bases.
 - 🐙 **GitHub MCP** – access Copilot Spaces for industry, domain, and technology-specific knowledge bases.
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
@@ -303,6 +348,13 @@ Once the repo is cloned and `.vscode/settings.json` is configured:
    - `/plan <JIRA_ID>`
    - `/implement <JIRA_ID>`
    - `/review <JIRA_ID>`
+
+   **For frontend tasks with Figma designs:**
+   - `/research <JIRA_ID>` – gather requirements including design context
+   - `/plan <JIRA_ID>` – create implementation plan
+   - `/review-ui` – prepare UI verification checklist (optional)
+   - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification
+   - `/review <JIRA_ID>` – final code review
 
 All of these will leverage the shared configuration from `copilot-configuration` while still respecting your project’s own code and context.
 
