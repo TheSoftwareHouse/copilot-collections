@@ -1,6 +1,6 @@
 ---
 agent: "tsh-code-reviewer"
-model: "GPT-5.1 (Preview)"
+model: "Claude Opus 4.5 (Preview)"
 description: "Check the implementation against the plan and feature context."
 ---
 
