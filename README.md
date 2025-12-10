@@ -76,12 +76,25 @@ Our standard workflow is always:
 
 ```text
 1️⃣ /research <JIRA_ID or task description>
+   ↳ 📖 Review the generated research document
+   ↳ ✅ Verify accuracy, iterate if needed
+
 2️⃣ /plan     <JIRA_ID or task description>
+   ↳ 📖 Review the implementation plan
+   ↳ ✅ Confirm scope, phases, and acceptance criteria
+
 3️⃣ /implement<JIRA_ID or task description>
+   ↳ 📖 Review code changes after each phase
+   ↳ ✅ Test functionality, verify against plan
+
 4️⃣ /review   <JIRA_ID or task description>
+   ↳ 📖 Review findings and recommendations
+   ↳ ✅ Address blockers before merging
 ```
 
 You can run the same flow with either a **Jira ticket ID** or a **free‑form task description**.
+
+> ⚠️ **Important:** Each step requires your review and verification. Open the generated documents, go through them carefully, and iterate as many times as needed until the output looks correct. AI assistance does not replace human judgment – treat each output as a draft that needs your approval before proceeding.
 
 #### Example Frontend Flow (with Figma designs)
 
@@ -89,11 +102,27 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 
 ```text
 1️⃣ /research     <JIRA_ID or task description>
+   ↳ 📖 Review research doc – verify Figma links, requirements
+   ↳ ✅ Iterate until context is complete and accurate
+
 2️⃣ /plan         <JIRA_ID or task description>
-3️⃣ /review-ui    Prepare UI verification checklist (optional, before implementation)
+   ↳ 📖 Review plan – check component breakdown, design references
+   ↳ ✅ Confirm phases align with Figma structure
+
+3️⃣ /review-ui    Prepare UI verification checklist (optional)
+   ↳ 📖 Review checklist – verify it covers all design aspects
+   ↳ ✅ Add missing items before implementation
+
 4️⃣ /implement-ui <JIRA_ID or task description>
+   ↳ 📖 Review code changes and UI Verification Summary
+   ↳ ✅ Manually verify critical UI elements in browser
+
 5️⃣ /review       <JIRA_ID or task description>
+   ↳ 📖 Review findings – code quality, a11y, performance
+   ↳ ✅ Address all blockers before merging
 ```
+
+> ⚠️ **Important:** The automated Figma verification loop helps catch visual mismatches, but it does not replace manual review. Always visually inspect the implemented UI in the browser, test interactions, and verify responsive behavior yourself.
 
 **What makes `/implement-ui` special:**
 
