@@ -111,8 +111,6 @@ This ensures the implemented UI matches the Figma design before code review.
 
 These are configured as Copilot **agents / sub‑agents**.
 
-> 📖 For detailed handoff flows and agent interactions, see [AGENTS.md](./AGENTS.md).
-
 ### 🧱 Architect
 - Focus: **solution design and implementation proposals**.
 - Helps break down complex tasks into components and interfaces.

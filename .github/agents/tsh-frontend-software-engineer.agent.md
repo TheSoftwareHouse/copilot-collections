@@ -11,10 +11,6 @@ handoffs:
     agent: tsh-code-reviewer
     prompt: /review Check the implementation against the plan and feature context
     send: false
-  - label: Commit Implementation Changes
-    agent: tsh-git-committer
-    prompt: /commit-changes Create a new branch and commit the implementation changes following the project's git conventions
-    send: false
 ---
 
 ## Agent Role and Responsibilities
