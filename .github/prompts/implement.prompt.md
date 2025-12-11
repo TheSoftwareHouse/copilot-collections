@@ -26,7 +26,7 @@ Always follow these steps in your workflow:
 8. After each phase make sure to:
     - Review the implementation against the plan and feature context to ensure all requirements are met.
     - Run tests to verify that the implementation works as expected and does not introduce new issues.
-9. Before making any changes to the original solution during implementation ask for confirmation. Make sure to document those changes in the specified plan file in Changelog section.
+9. Before making any changes to the original solution during implementation ask for confirmation. Make sure to document those changes in the specified plan file in Changelog section with timestamps.
 10. Before handing over the implementation to review, ensure that all tasks in the implementation plan have been completed and that the feature meets the defined requirements. Make sure to update the acceptance criteria checklist after every verified item.
 11. At the end of the implementation, run a tsh-code-reviewer agent to review the implementation against the plan and feature context. Return the findings of the code review as part of the implementation handoff.
 
