@@ -11,8 +11,8 @@ This prompt **extends and does not replace** the base implementation workflow de
 ---
 ## Relationship to Base Workflow
 
-- **IMPORTANT**: First, read and fully understand [implement.prompt.md](./implement.prompt.md) – it defines the complete base workflow (steps 1–11) that you MUST follow.
-- You MUST execute **all steps (1–11)** from `implement.prompt.md`, including **step 11 (final code review by `tsh-code-reviewer` agent)**.
+- **IMPORTANT**: First, read and fully understand [implement.prompt.md](./implement.prompt.md) – it defines the complete base workflow steps
+- You MUST execute **all steps** from `implement.prompt.md`, including *final code review by `tsh-code-reviewer` agent**.
 - Treat this prompt as an **extension focused on UI and Figma verification** – it adds UI-specific behaviors but does not remove or replace any base workflow steps.
 - All constraints from `research.prompt.md` and `plan.prompt.md` remain valid: do not go out of scope, do not re‑implement existing solutions, and always update the plan/checklists instead of silently changing scope.
 
