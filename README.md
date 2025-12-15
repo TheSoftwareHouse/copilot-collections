@@ -124,6 +124,15 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 
 > ⚠️ **Important:** The automated Figma verification loop helps catch visual mismatches, but it does not replace manual review. Always visually inspect the implemented UI in the browser, test interactions, and verify responsive behavior yourself.
 
+**What makes `/review-ui` useful:**
+
+- Uses **Figma MCP** to extract design specifications (layout, spacing, typography, colors, states)
+- Uses **Playwright MCP** to capture the current implementation (accessibility tree, screenshots)
+- Compares **EXPECTED** (Figma) vs **ACTUAL** (implementation) automatically
+- Produces a **structured verification report** with mismatches categorized by severity (Critical, Major, Minor)
+- Can be used **before implementation** to create verification criteria, or **during/after** to validate progress
+- Reports exactly what needs to be fixed with specific expected vs actual values
+
 **What makes `/implement-ui` special:**
 
 - Runs an **iterative verification loop** after each UI component

@@ -2,15 +2,6 @@
 target: vscode
 description: "Agent specializing in implementing frontend solutions (web UI & design systems) based on specified requirements, UX/UI designs and technical designs."
 tools: ['runCommands', 'runTasks', 'atlassian/search', 'Context7/*', 'Figma MCP Server/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser', 'sequential-thinking/*']
-handoffs: 
-  - label: Verify UI against Figma
-    agent: tsh-ui-reviewer
-    prompt: /review-ui Verify that the implemented UI matches the Figma design and frontend guidelines
-    send: false
-  - label: Perform Code Review
-    agent: tsh-code-reviewer
-    prompt: /review Check the implementation against the plan and feature context
-    send: false
 ---
 
 ## Agent Role and Responsibilities
