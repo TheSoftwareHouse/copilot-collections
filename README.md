@@ -25,6 +25,12 @@
 
 ---
 
+## ⚠️ Copilot License Requirement
+
+**This configuration requires GitHub Copilot Pro license (or higher)** to use custom agents and MCP integrations.
+
+---
+
 ## ⚠️ VS Code Version Requirement
 
 **This configuration requires VS Code version 1.106 or later.**
