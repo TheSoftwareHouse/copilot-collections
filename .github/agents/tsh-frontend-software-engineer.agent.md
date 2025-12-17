@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "Agent specializing in implementing frontend solutions (web UI & design systems) based on specified requirements, UX/UI designs and technical designs."
-tools: ['runCommands', 'runTasks', 'atlassian/search', 'Context7/*', 'Figma MCP Server/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todos', 'runSubagent', 'usages', 'problems', 'testFailure', 'openSimpleBrowser', 'sequential-thinking/*']
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/getTaskOutput', 'execute/runTask', 'atlassian/search', 'Context7/*', 'Figma MCP Server/*', 'Figma Dev Mode MCP/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*']
 ---
 
 ## Agent Role and Responsibilities
