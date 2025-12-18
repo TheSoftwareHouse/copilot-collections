@@ -1,15 +1,6 @@
 ---
 agent: "tsh-ui-reviewer"
-model: "GPT-5.1 (Preview)"
-description: "Verify UI implementation against Figma designs using MCP tools."
----
-
-Your goal is to verify that the implemented UI matches the Figma design exactly. You MUST use Figma MCP Server and Playwright MCP to perform this verification. No exceptions.
-
-## MANDATORY REQUIREMENTS
----
-agent: "tsh-ui-reviewer"
-model: "GPT-5.1 (Preview)"
+model: "Claude Opus 4.5 (Preview)"
 description: "Verify UI implementation against Figma designs using MCP tools."
 ---
 
@@ -19,7 +10,6 @@ This prompt is complementary to:
 - `research.prompt.md` – for understanding business context and gathering Figma links.
 - `plan.prompt.md` – for understanding scope, tasks, and the mapping between plan items and design references.
 
----
 ## Mandatory Requirements
 
 You MUST:
