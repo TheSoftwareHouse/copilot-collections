@@ -1,11 +1,15 @@
 ---
 target: vscode
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
-tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Context7/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search','github/get_copilot_space', 'github/list_copilot_spaces', 'agent', 'search/usages', 'sequential-thinking/*']
+tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'Context7/*', 'Figma MCP Server/*', 'Figma Dev Mode MCP/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search','github/get_copilot_space', 'github/list_copilot_spaces', 'agent', 'search/usages', 'sequential-thinking/*']
 handoffs: 
   - label: Start Implementation
     agent: tsh-software-engineer
     prompt: /implement Implement feature according to the plan
+    send: false
+  - label: Start Frontend Implementation
+    agent: tsh-frontend-software-engineer
+    prompt: /implement-ui Implement frontend feature according to the plan
     send: false
 ---
 
@@ -69,7 +73,7 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching the local codebase (use `search` or `grep_search` instead).
 
-You have access to the `Figma Dev Mode MCP` tool.
+You have access to the `Figma MCP Server` tool.
 - **MUST use when**:
   - Designing the component hierarchy and data flow based on UI requirements.
   - Identifying necessary API endpoints and data structures to support the visual design.
