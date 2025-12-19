@@ -175,6 +175,13 @@ These are configured as Copilot **agents / sub‑agents**.
 - Checks changes against acceptance criteria, security and reliability guidelines.
 - Suggests concrete improvements, alternative designs, and missing tests.
 
+### 🧪 E2E Engineer
+- Focus: **end-to-end testing with Playwright**.
+- Creates comprehensive, reliable test suites for critical user journeys.
+- Uses Page Object Model, proper fixtures, and accessibility-first locators.
+- Integrates with Playwright MCP for real-time test debugging and validation.
+- Follows testing pyramid principles - E2E for critical paths, not unit-level validation.
+
 Each agent is designed to be used together with the workflow prompts below.
 
 ---
@@ -215,6 +222,13 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Cross-references task requirements with the current codebase.
 - Produces a structured gap report for planning next steps.
 
+### 🧪 E2E Testing
+- Focus: **end-to-end testing patterns and practices** using Playwright.
+- Provides Page Object Model patterns, test structure templates, and mocking strategies.
+- Includes a verification loop with iteration limits and flaky test detection.
+- Covers error recovery strategies and CI readiness checklists.
+- Ensures consistent, reliable E2E tests across the team.
+
 ---
 
 ## 💬 Prompts & Chat Commands
@@ -254,7 +268,12 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Reviews the final implementation against the plan and requirements.
 - Highlights security, reliability, performance, and maintainability concerns.
 - Outputs: structured review with clear “pass/blockers/suggestions”.
-
+### `/e2e <JIRA_ID | description>`
+- Creates comprehensive **end-to-end tests** for the feature using Playwright.
+- Analyzes the application, designs test scenarios, and implements Page Objects.
+- Uses **Playwright MCP** for real-time interaction and test verification.
+- Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
+- Outputs: Page Objects, test files, fixtures, and execution report.
 ---
 
 ## 🧩 Installation in VS Code

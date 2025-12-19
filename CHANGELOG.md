@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Skills support for modular, domain-specific agent capabilities (architecture-design, code-review, codebase-analysis, implementation-gap-analysis, task-analysis)
+- Skills support for modular, domain-specific agent capabilities (architecture-design, code-review, codebase-analysis, e2e-testing, implementation-gap-analysis, task-analysis)
 
 ### Changed
 
