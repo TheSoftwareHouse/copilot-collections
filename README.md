@@ -2,7 +2,7 @@
   <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Copilot" width="72" />
 </p>
 
-<h1 align="center">⚙️ Copilot Configurations</h1>
+<h1 align="center">⚙️ Copilot Collections</h1>
 
 <p align="center">
   Opinionated GitHub Copilot setup for delivery teams – with shared workflows, agents, prompts, and MCP integrations.

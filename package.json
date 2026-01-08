@@ -1,7 +1,7 @@
 {
-  "name": "copilot-configurations",
+  "name": "copilot-collections",
   "version": "1.0.0",
-  "description": "GitHub Copilot configurations and prompts",
+  "description": "Opinionated AI-enabled workflows for software engineering",
   "private": true,
   "scripts": {
     "prepare": "husky",
