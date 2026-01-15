@@ -1,6 +1,6 @@
 ---
 agent: "tsh-architect"
-model: "Claude Opus 4.5 (Preview)"
+model: "Claude Opus 4.5"
 description: "Prepare detailed implementation plan for given feature."
 ---
 
