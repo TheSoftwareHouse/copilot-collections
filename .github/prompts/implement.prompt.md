@@ -1,6 +1,6 @@
 ---
 agent: "tsh-software-engineer"
-model: "Claude Opus 4.5 (Preview)"
+model: "Claude Opus 4.5"
 description: "Implement feature according to the plan."
 ---
 
