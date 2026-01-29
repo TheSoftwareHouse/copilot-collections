@@ -60,91 +60,83 @@ If MCP tools are not available in the current environment, you must:
 ---
 ## Verification Workflow
 
-Perform the following steps for each UI surface (page/section/component) that is in scope of the plan:
+This is an **iterative refinement process**. You continuously compare implementation against Figma and fix differences until they match.
 
-### 1. CALL Figma MCP – EXPECTED state
+### Core Loop
 
-- Use the mapped Figma URL/node to retrieve design information via Figma MCP:
-   - Layout structure (frames, groups, containers, grids).
-   - Spacing, alignment, and sizing.
-   - Typography (font, size, weight, line height, letter spacing).
-   - Colors, radii, borders, shadows.
-   - Component types and variants, including states (hover, active, disabled, error, loading, etc.).
-- Treat this as the **EXPECTED** reference for the UI surface.
-
-### 2. CALL Playwright MCP – ACTUAL state
-
-- Navigate to the relevant route/view in the running application.
-- Capture:
-   - Accessibility tree (to understand semantic structure and names).
-   - Screenshot(s) of the current UI.
-   - Any console errors or warnings related to this view.
-- Treat this as the **ACTUAL** implementation snapshot.
-
-### 3. Compare EXPECTED vs ACTUAL
-
-Compare in three dimensions:
-
-- **Structure**:
-   - Presence and count of major sections and components.
-   - Nesting/grouping (e.g. header, navigation, content, side panels, dialogs).
-   - Use of correct design‑system components where applicable.
-- **Visual details**:
-   - Spacing and alignment between elements.
-   - Typography and color usage, including semantic tokens.
-   - Radii, borders, shadows, and dividers.
-- **States and behavior**:
-   - States present in Figma are implemented (hover, focus, error, disabled, loading, etc.).
-   - Responsive behavior if Figma specifies multiple breakpoints.
-
-Classify each mismatch as:
-
-- **Critical** – missing/wrong major section, wrong page/flow structure, or incorrect key component.
-- **Major** – wrong variant, wrong tokens, missing important state, noticeable visual deviation.
-- **Minor** – small spacing/typography tweaks or low‑impact visual differences within tolerance.
-
-### 4. Fix and iterate (if in fixing mode)
-
-When you are expected to also fix issues (e.g. when called from an implementation context):
-
-- Implement the necessary changes in the code.
-- Re‑run **Playwright** capture for the affected view.
-- Re‑compare against the Figma EXPECTED state.
-- Repeat this loop until all Critical and Major issues are resolved.
-
-If you are in a **pure review** role (read‑only):
-
-- Do not modify the code.
-- Clearly describe the changes that should be made to achieve alignment.
-
----
-## Verification Loop
-
-After each fix or iteration for a given view:
-
-```text
-CALL Playwright (capture ACTUAL) → Compare with EXPECTED (from Figma MCP) → Identify remaining mismatches → Fix or recommend fixes → Repeat
+```
+REPEAT until implementation matches Figma:
+    1. Get EXPECTED state from Figma MCP
+    2. Get ACTUAL state from Playwright MCP  
+    3. Compare EXPECTED vs ACTUAL
+    4. If differences exist → fix the code → go back to step 1
+    5. If no differences → done
 ```
 
-Continue iterating until:
+**Every difference you find MUST be fixed. You cannot exit the loop while differences exist.**
 
-- All structural elements match Figma.
-- All visual details match Figma within 1–2px tolerance.
-- No Critical or Major mismatches remain.
+---
+
+### Rules
+
+1. **Call BOTH tools in EVERY iteration** – never rely on memory of previous calls
+2. **Every difference triggers a fix** – do not skip or rationalize differences
+3. **After fixing, verify again** – run another full iteration
+4. **Maximum 5 iterations** – escalate if still not matching
+
+---
+
+### Iteration Steps
+
+**Step 1: Get EXPECTED (Figma MCP)**
+- Call Figma MCP for the current component/node
+- Extract: layout, spacing, typography, colors, dimensions, states
+
+**Step 2: Get ACTUAL (Playwright MCP)**
+- Navigate to the running app
+- Capture: accessibility tree, screenshot, console errors
+
+**Step 3: Compare**
+- Compare each property from Figma against implementation
+- List all differences found
+
+**Step 4: Decision**
+- **Differences found** → Fix the code, document in Change Log, go back to Step 1
+- **No differences** → Mark task as complete, exit loop
+
+---
+
+### When you find a difference
+
+1. **Fix the code** to match Figma exactly
+2. **Document the fix** in the Change Log
+3. **Verify the fix** by running another iteration
+4. **Repeat** until no differences remain
+
+**Do not:**
+- Skip fixes because implementation "works"
+- Classify differences as "acceptable" (only 1-2px browser variance is acceptable)
+- Exit the loop while differences exist
+
+---
+
+### If in pure review role (read-only)
+
+Do not modify code. Instead, describe required changes with specific values.
 
 ---
 ## Output & Plan Integration
 
-For each verified view/component, provide a structured list of findings:
+For each verified view/component, provide:
 
-- **Scope**: Name/description of the view/component being verified.
-- **Status**: `Pass` or `Fail`.
+- **Scope**: What was verified
+- **Status**: `Pass` or `Fail`
 - **Mismatches** (if any):
    - **Severity**: Critical/Major/Minor.
    - **Location**: Component/element/selector or logical section.
-   - **Expected**: Summary of what Figma shows (from Figma MCP call).
-   - **Actual**: Summary of what Playwright captured.
-   - **Recommended fix / Fix applied**: What should be changed (or what was changed, if you are allowed to modify code).
+   - **Expected**: Exact value from Figma MCP (e.g., "padding: 24px").
+   - **Actual**: Exact value from Playwright (e.g., "padding: 20px").
+   - **Recommended fix / Fix applied**: What should be changed (or what was changed).
 
 At the end of the review:
 

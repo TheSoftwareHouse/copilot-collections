@@ -47,121 +47,109 @@ Before step 6 of the base workflow (starting implementation), ensure:
 ---
 ## UI Verification Loop (per UI component/section)
 
-During step 6–7 of the base workflow, after implementing each UI component or section, you must run the following **EXPECTED vs ACTUAL verification loop** **automatically** before marking the corresponding task as completed in the plan.
+This is an **iterative refinement process**. The goal is to continuously compare your implementation against the Figma design and fix any differences until they match. You drive this loop autonomously.
 
-- Treat this loop as a fully automated process:
-   - Invoke Figma MCP and Playwright MCP on your own.
-   - Repeat the steps until the criteria are met or the iteration limit is reached.
-   - Do not ask the user for permission before each individual iteration.
+### Core Principle
 
-### 1. Determine the design reference for the current scope
+```
+REPEAT until implementation matches Figma:
+    1. Get EXPECTED state from Figma MCP
+    2. Get ACTUAL state from Playwright MCP  
+    3. Compare EXPECTED vs ACTUAL
+    4. If differences exist → fix the code → go back to step 1
+    5. If no differences → done
+```
 
-- Map the current component/section to a Figma reference using, in order:
-   - Explicit mapping from the plan's `Task details` / `Design References`.
-   - Figma URLs in the research file's `Relevant Links` section.
-   - If multiple URLs match, choose the one whose name/description best matches the current component or view.
-- If no suitable Figma link exists, document this in the plan (`Change Log` and/or a short note in the relevant phase) and, if appropriate, ask for clarification.
+**This is a self-correcting loop. Every difference you find MUST be fixed before you can exit the loop.**
 
-### 2. FIRST: Extract Figma specifications (EXPECTED) via Figma MCP
+---
 
-- You MUST call Figma MCP tools **before** evaluating the implementation.
-- For the chosen Figma URL/node:
-   - Extract layout structure (containers, groups, grids).
-   - Extract spacing, typography, colors, radii, shadows, and component variants.
-   - Identify relevant states (default, hover, active, error, loading, disabled, etc.).
-- Treat the extracted information as the **EXPECTED** design contract.
+### Loop Execution Rules
 
-### 3. SECOND: Capture the current implementation (ACTUAL) via Playwright
+1. **Call BOTH tools in EVERY iteration**
+   - You MUST call Figma MCP to get EXPECTED state
+   - You MUST call Playwright MCP to get ACTUAL state
+   - You MUST compare them in the same response
+   - Never rely on memory of previous Figma calls
 
-- Use Playwright MCP to:
-   - Navigate to the page/route showing the implemented component.
-   - Capture the accessibility tree to understand structure and semantics.
-   - Capture at least one screenshot for visual comparison.
-   - Check for console errors/warnings related to the view.
-- Treat this as the **ACTUAL** implementation snapshot.
+2. **Every difference triggers a fix**
+   - If EXPECTED ≠ ACTUAL → fix the code to match EXPECTED
+   - Do not skip differences or mark them as "acceptable"
+   - Do not rationalize why the difference is okay
+   - The only acceptable variance is 1-2px browser rendering differences
 
-### 4. THIRD: Compare EXPECTED vs ACTUAL
+3. **After fixing, verify again**
+   - After each code fix, run another full iteration (Figma + Playwright)
+   - Continue until no differences remain
+   - Maximum 5 iterations per component (escalate if still not matching)
 
-Compare in the following order:
+4. **Do not exit the loop prematurely**
+   - You can only mark a task as done when EXPECTED = ACTUAL
+   - Finding a difference and not fixing it means the loop is not complete
 
-- **Structure**:
-   - Presence and count of key containers and elements.
-   - Nesting and grouping (e.g. header, content, sidebar, tabs, buttons).
-   - Component usage (design‑system components vs custom markup).
-- **Visual details**:
-   - Spacing (margins/paddings/gaps, alignment).
-   - Typography (font family, size, weight, line height, letter spacing).
-   - Color usage (tokens and semantic roles, including states).
-   - Radii, borders, shadows, dividers.
-- **Behavior and states**:
-   - Visible states present in Figma (hover, focus, error, disabled, loading).
-   - Responsive behavior if Figma specifies multiple breakpoints.
+---
 
-Classify each mismatch as:
+### Iteration Steps
 
-- **Critical** – structural mismatch (missing/extra sections, wrong hierarchy, incorrect component used).
-- **Major** – wrong component variant, incorrect token usage, missing important state, clear visual deviation.
-- **Minor** – small spacing/typography tweaks, low‑impact visual nits within tolerance.
+**Step 1: Get EXPECTED (Figma MCP)**
+- Call Figma MCP for the current component/node
+- Extract all design values: layout, spacing, typography, colors, dimensions, states
 
-### 5. Fix and iterate (auto‑loop with iteration limit)
+**Step 2: Get ACTUAL (Playwright MCP)**
+- Navigate to the running app
+- Capture: accessibility tree, screenshot, console errors
 
-If any mismatches are found:
+**Step 3: Compare side-by-side**
+- Compare each property from Figma against implementation
+- List all differences found
 
-- Adjust the implementation to resolve them.
-- Briefly document the changes in the plan's `Change Log` (e.g. "Adjusted spacing between header and tabs to match Figma").
-- **Automatically repeat steps 3–4** for the same component/section until the criteria are met or the iteration limit is reached.
+**Step 4: Decision point**
+- **If differences found**: Fix the code, document in Change Log, go back to Step 1
+- **If no differences**: Mark task as complete, exit loop
 
-You MUST treat this as an internal loop you drive yourself:
+---
 
-- Do not ask the user whether to run another Playwright/Figma check.
-- Run another capture/compare cycle whenever the code changes in a way that could affect the ACTUAL UI state.
+### What to do when you find a difference
 
-If after several iterations:
+When EXPECTED ≠ ACTUAL:
 
-- All Critical and Major mismatches have been resolved, and
-- Any remaining differences (if present) are Minor and within tolerance,
+1. **Fix the code** – change your implementation to match Figma exactly
+2. **Document the fix** – add a brief note to the plan's Change Log
+3. **Verify the fix** – run another iteration (back to Step 1)
+4. **Repeat** – until no differences remain
 
-→ then:
+**Do not:**
+- Skip the fix because the current implementation "works"
+- Classify differences as "minor" or "within tolerance" (unless truly 1-2px browser variance)
+- Exit the loop while differences exist
+- Ask the user if you should fix it – just fix it
 
-- Mark the relevant task in the plan as done (checkbox).
-- Note in your working notes or commit message that the component passed Figma verification.
+---
+
+### Escalation (after 5 iterations)
 
 ---
 ## Additional Phase Review (extension of step 8)
 
 When performing the phase review required by the base workflow:
 
-- Confirm that every UI‑related task in the phase has:
-   - Passed the verification loop described above, and
-   - Had its task checkbox updated in the plan.
-- Re‑run targeted UI verification (Figma + Playwright) for any high‑risk flows or complex views if the phase introduced cross‑cutting changes.
+- Confirm that every UI‑related task in the phase has passed the verification loop (EXPECTED = ACTUAL)
+- Re‑run targeted UI verification for any high‑risk flows if needed
 
 ---
 ## UI Verification Summary (before step 11)
 
-Before handing off to the `tsh-code-reviewer` agent (step 11 of the base workflow):
+Before handing off to the `tsh-code-reviewer` agent:
 
-- Prepare a concise **UI Verification Summary** to include in your final response:
-   - List of components/sections verified.
-   - Number of verification iterations per component.
-   - Any design gaps or ambiguities discovered (e.g. missing states in Figma) – and how you handled them.
-   - Any deliberate deviations from the design (if any) with rationale (e.g. accessibility, technical constraints).
+- List components/sections verified
+- Number of verification iterations per component
+- Any design gaps discovered and how you handled them
+- Any deviations from design with rationale (accessibility, technical constraints)
 
 ---
-## Verification Loop Guidelines
+## Guidelines
 
-- **Maximum iterations (hard limit)**: For each individual component/section:
-   - You MUST NOT perform more than **5 full cycles** of: (Playwright capture → comparison with EXPECTED → code fix).
-   - If after 5 iterations Critical or Major mismatches still exist:
-      - Stop the automatic loop.
-      - Describe the blockers and current state in detail in the plan's `Change Log` and in your final summary.
-      - Explicitly ask the user whether to continue further iterations or escalate the issue to the architect/designer.
-- **Tolerance**: Allow 1–2px visual tolerance and minor rendering differences across browsers; focus on **design intent** and consistency with the design system, not pixel‑by‑pixel matching.
-- **Design gaps**: If Figma lacks a state or variant that is clearly needed:
-   - Follow the existing design‑system patterns.
-   - Document the chosen approach and the gap in the plan (e.g. under `Quality assurance` notes or `Change Log`).
-- **Responsive behavior**: If Figma specifies multiple breakpoints, verify at least desktop and one smaller breakpoint; otherwise, ensure the layout degrades gracefully.
-- **Accessibility**: During Playwright checks, always pay attention to:
-   - Focus order and keyboard navigation.
-   - Accessible names/labels for interactive elements.
-   - Sufficient color contrast, especially for text and key UI controls.
+- **Tolerance**: Only 1-2px browser rendering differences. All other differences must be fixed.
+- **Design gaps**: If Figma lacks a state, follow existing design system patterns and document it.
+- **Responsive**: If Figma shows multiple breakpoints, verify them. Otherwise ensure graceful degradation.
+- **Accessibility**: Check focus order, keyboard navigation, labels, color contrast.
