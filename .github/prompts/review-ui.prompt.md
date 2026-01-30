@@ -65,6 +65,9 @@ This is an **iterative refinement process**. You continuously compare implementa
 ### Core Loop
 
 ```
+BEFORE starting the loop:
+    0. Ensure you have a Figma URL for this component → if not, ASK the user
+
 REPEAT until implementation matches Figma:
     1. Get EXPECTED state from Figma MCP
     2. Get ACTUAL state from Playwright MCP  
@@ -74,6 +77,8 @@ REPEAT until implementation matches Figma:
 ```
 
 **Every difference you find MUST be fixed. You cannot exit the loop while differences exist.**
+
+**If Figma URL is missing**: Stop and ask the user to provide the link for the specific component you need to verify. Do not guess or skip verification.
 
 ---
 

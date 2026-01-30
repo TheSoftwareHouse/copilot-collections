@@ -4,6 +4,8 @@ model: "Claude Opus 4.5"
 description: "Implement UI feature according to the plan with iterative Figma verification until pixel-perfect."
 ---
 
+> **PREREQUISITE**: Before using this prompt, you MUST first read and understand [implement.prompt.md](./implement.prompt.md). This prompt extends the base implementation workflow – you will execute all 11 steps from the base workflow, with UI-specific additions described below.
+
 Implement the UI feature according to the **research context** and **implementation plan**, with continuous verification against Figma designs until the implementation matches the design within the agreed tolerance.
 
 This prompt **extends and does not replace** the base implementation workflow defined in [implement.prompt.md](./implement.prompt.md).
@@ -29,9 +31,20 @@ Always treat the **research** and **plan** files as the single source of truth f
       - Figma URLs and design references in `Task details`.
       - If present, a structured "Design References" subsection mapping views/components to Figma URLs or node IDs.
 - Use these Figma URLs as the **default source** for all Figma MCP calls.
-- Only ask the user for a Figma URL or node ID if:
-   - No Figma links are available in research/plan, or
-   - You are implementing a UI that is clearly out of scope of the documented design references.
+
+### When Figma link is missing
+
+If you cannot find a Figma URL for the component/section you are about to verify:
+
+1. **Stop the verification loop** for that component
+2. **Ask the user** to provide the Figma link for the specific section you need to verify
+3. **Wait for the link** before proceeding with verification
+4. **Add the link** to the plan file once provided (in `Task details` or `Design References`)
+
+Do NOT:
+- Skip verification because the link is missing
+- Guess what the design should look like
+- Proceed with implementation without Figma reference
 
 When you discover missing or updated design links during implementation, add them to the appropriate sections in the **plan** under `Task details` (and, if needed, note them in the Change Log).
 
@@ -52,6 +65,9 @@ This is an **iterative refinement process**. The goal is to continuously compare
 ### Core Principle
 
 ```
+BEFORE starting the loop:
+    0. Ensure you have a Figma URL for this component → if not, ASK the user
+
 REPEAT until implementation matches Figma:
     1. Get EXPECTED state from Figma MCP
     2. Get ACTUAL state from Playwright MCP  
@@ -127,6 +143,11 @@ When EXPECTED ≠ ACTUAL:
 ---
 
 ### Escalation (after 5 iterations)
+
+If after 5 full iterations differences still exist:
+- Stop the automatic loop
+- Document the remaining differences in the Change Log
+- Ask the user whether to continue or escalate to architect/designer
 
 ---
 ## Additional Phase Review (extension of step 8)
