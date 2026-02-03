@@ -22,13 +22,6 @@
     "atlassian": {
       "url": "https://mcp.atlassian.com/v1/mcp",
       "type": "http"
-    },
-    "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "headers": {
-        "X-MCP-Toolsets": "all"
-      }
     }
   },
   "inputs": []

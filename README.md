@@ -20,7 +20,7 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Code Reviewer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/review` with consistent behavior across projects.
-- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, GitHub, Playwright, Sequential Thinking.
+- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
 ---
@@ -296,26 +296,9 @@ To learn more about configuring these servers, check their official documentatio
 
 - [Atlassian MCP](https://support.atlassian.com/atlassian-rovo-mcp-server/docs/getting-started-with-the-atlassian-remote-mcp-server/)
 - [Context7 MCP](https://github.com/upstash/context7)
-- [GitHub MCP](https://github.com/github/github-mcp-server)
 - [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 - [Figma MCP](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
 - [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking)
-
-### Configuring GitHub MCP
-
-GitHub MCP should be configured to use Remote MCP (otherwise it won't have support for Spaces). On top of that it should be configured to use oAuth rather than PAT (Personal Access Token).
-
-In order to activate Spaces, `X-MCP-Toolsets` header has to be set to `all`.
-
-```json
- "github": {
-      "type": "http",
-      "url": "https://api.githubcopilot.com/mcp/",
-      "headers": {
-        "X-MCP-Toolsets": "all"
-      }
-    }
-```
 
 ### Configuring Context7 API Key
 
@@ -356,7 +339,6 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 - 🧩 **Atlassian MCP** – access Jira issues for `/research`, `/plan`, `/implement`, `/review`.
 - 🎨 **Figma MCP Server** – pull design details, components, and variables for design‑driven work.
 - 📚 **Context7 MCP** – semantic search in external docs and knowledge bases.
-- 🐙 **GitHub MCP** – access Copilot Spaces for industry, domain, and technology-specific knowledge bases.
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
 - 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
 
