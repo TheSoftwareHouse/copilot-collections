@@ -1,6 +1,6 @@
 ---
 agent: "tsh-ui-reviewer"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Verify UI implementation against Figma designs using MCP tools."
 ---
 

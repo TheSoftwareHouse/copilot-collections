@@ -1,6 +1,6 @@
 ---
 agent: "tsh-code-reviewer"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Check the implementation against the plan and feature context."
 ---
 

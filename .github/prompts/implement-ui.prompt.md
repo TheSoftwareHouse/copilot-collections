@@ -1,6 +1,6 @@
 ---
 agent: "tsh-frontend-software-engineer"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Implement UI feature according to the plan with iterative Figma verification until pixel-perfect."
 ---
 

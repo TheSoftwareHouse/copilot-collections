@@ -1,6 +1,6 @@
 ---
 agent: "tsh-business-analyst"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---
 
