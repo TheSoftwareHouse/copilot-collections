@@ -33,14 +33,7 @@
 
 ## ⚠️ VS Code Version Requirement
 
-**This configuration requires VS Code version 1.106 or later.**
-
-[VS Code 1.106](https://code.visualstudio.com/updates/v1_106) introduced a **breaking change**: **chat modes** have been renamed to **custom agents**. 
-
-- ✅ **Custom agents** are now stored in `.github/agents/` with `.agent.md` extension
-- ❌ **Chat modes** (`.chatmode.md` files in `.github/chatmodes/`) are deprecated
-
-If you're using an older version of VS Code, the agent files in this repository will not work correctly. Please update to VS Code 1.106 or later to use this configuration.
+**This configuration requires VS Code version 1.109 or later.**
 
 ---
 
@@ -246,25 +239,38 @@ You can configure this once at the **user level** and reuse it across all worksp
 ```jsonc
 {
   "chat.promptFilesLocations": {
-    "../copilot-configuration/.github/prompts": true
+    "~/projects/copilot-collections/.github/prompts": true
   },
-  "chat.modeFilesLocations": {
-    "../copilot-configuration/.github/agents": true
+  "chat.agentFilesLocations": {
+    "~/projects/copilot-collections/.github/agents": true
   },
-  "chat.customAgentInSubagent.enabled": true
+  "chat.agentSkillsLocations": {
+    "~/projects/copilot-collections/.github/skills": true
+  },
+  "chat.useAgentSkills": true,
+  "github.copilot.chat.searchSubagent.enabled": true,
+  "chat.experimental.useSkillAdherencePrompt": true,
+  "chat.customAgentInSubagent.enabled": true,
+  "github.copilot.chat.agentCustomizationSkill.enabled": true
 }
 ```
 
-- Adjust the relative path (`../copilot-configuration/...`) if your folder layout differs.
-- Once set, these locations are available in **all VS Code workspaces** that sit next to `copilot-configuration`.
+- Adjust the path (`~/projects/copilot-collections/...`) if your folder layout differs.
+- Once set, these locations are available in **all VS Code workspaces**.
 
 ### 3. Enable Copilot experimental features (UI)
 
 If you prefer the UI instead of editing JSON directly:
 
 1. Open **Settings** (`CMD` + `,`).
-3. Search for **“promptFilesLocations”** and **“modeFilesLocations”** and add entries pointing to the `copilot-configuration/.github/prompts` and `copilot-configuration/.github/agents` directories.
-3. Search for **“Custom Agent in Subagent”** and enable `chat.customAgentInSubagent.enabled`.
+2. Search for **"promptFilesLocations"** and add entry pointing to the `~/projects/copilot-collections/.github/prompts` directory.
+3. Search for **"agentFilesLocations"** and add entry pointing to the `~/projects/copilot-collections/.github/agents` directory.
+4. Search for **"agentSkillsLocations"** and add entry pointing to the `~/projects/copilot-collections/.github/skills` directory.
+5. Search for **"chat.useAgentSkills"** and enable it, this will allow Copilot to use Skills
+6. Search for **"chat.customAgentInSubagent.enabled"** and enable it, this will allow Custom Agents to be used in Subagents
+7. Search for **"github.copilot.chat.searchSubagent.enabled"** and enable it, this will allow Copilot ot use special search subagent for better codebase analysis
+8. Search for **"chat.experimental.useSkillAdherencePrompt"** and enable it, this will force Copilot to use Skills more often
+9. Search for **"github.copilot.chat.agentCustomizationSkill.enabled"** and enable it, this will enable a special Skill to help you build custom agents, skills, prompts
 
 ---
 
