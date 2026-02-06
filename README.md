@@ -18,7 +18,7 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Code Reviewer.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/review` with consistent behavior across projects.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
@@ -76,7 +76,7 @@ Our standard workflow is always:
    ↳ 📖 Review the implementation plan
    ↳ ✅ Confirm scope, phases, and acceptance criteria
 
-3️⃣ /implement<JIRA_ID or task description>
+3️⃣ /implement <JIRA_ID or task description>
    ↳ 📖 Review code changes after each phase
    ↳ ✅ Test functionality, verify against plan
 
@@ -222,8 +222,8 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 ### 1. Clone the repository
 
 ```bash
-cd ~/Projects
-git clone <this-repo-url> copilot-configuration
+cd ~/projects
+git clone <this-repo-url> copilot-collections
 ```
 
 The important part is that VS Code can see the `.github/prompts` and `.github/agents` folders from this repository.
@@ -268,7 +268,7 @@ If you prefer the UI instead of editing JSON directly:
 4. Search for **"agentSkillsLocations"** and add entry pointing to the `~/projects/copilot-collections/.github/skills` directory.
 5. Search for **"chat.useAgentSkills"** and enable it, this will allow Copilot to use Skills
 6. Search for **"chat.customAgentInSubagent.enabled"** and enable it, this will allow Custom Agents to be used in Subagents
-7. Search for **"github.copilot.chat.searchSubagent.enabled"** and enable it, this will allow Copilot ot use special search subagent for better codebase analysis
+7. Search for **"github.copilot.chat.searchSubagent.enabled"** and enable it, this will allow Copilot to use special search subagent for better codebase analysis
 8. Search for **"chat.experimental.useSkillAdherencePrompt"** and enable it, this will force Copilot to use Skills more often
 9. Search for **"github.copilot.chat.agentCustomizationSkill.enabled"** and enable it, this will enable a special Skill to help you build custom agents, skills, prompts
 
@@ -362,7 +362,7 @@ We use the **Sequential Thinking MCP** to handle complex logic, reduce hallucina
 
 ## 🛠 Using This Repository in Your Projects
 
-Once the repo is cloned and `.vscode/settings.json` is configured:
+Once the repo is cloned and VS Code User Settings are configured:
 
 1. Open your project in VS Code.
 2. Open **GitHub Copilot Chat**.
@@ -380,7 +380,7 @@ Once the repo is cloned and `.vscode/settings.json` is configured:
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification
    - `/review <JIRA_ID>` – final code review
 
-All of these will leverage the shared configuration from `copilot-configuration` while still respecting your project’s own code and context.
+All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.
 
 ---
 
@@ -396,4 +396,4 @@ All of these will leverage the shared configuration from `copilot-configuration`
 
 This project is licensed under the **MIT License**.
 
-© 2025 [The Software House](https://tsh.io)
+© 2026 [The Software House](https://tsh.io)
