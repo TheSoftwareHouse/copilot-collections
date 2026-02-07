@@ -179,6 +179,44 @@ Each agent is designed to be used together with the workflow prompts below.
 
 ---
 
+## 🧠 Skills
+
+Skills provide **specialized domain knowledge and structured workflows** that agents automatically load when relevant to a task. They encode tested, step-by-step processes for common activities — ensuring consistent, high-quality outputs across team members.
+
+Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
+
+### 🔍 Task Analysis
+- Focus: **gathering and expanding context** for a development task.
+- Pulls information from Jira, Confluence, GitHub, and other integrated tools.
+- Identifies gaps in task descriptions and asks clarification questions.
+- Produces a finalized research report with all findings.
+
+### 🧱 Architecture Design
+- Focus: **designing solution architecture** that follows best practices.
+- Analyzes the current codebase and task requirements.
+- Proposes a solution that is scalable, secure, and easy to maintain.
+- Covers patterns like DRY, KISS, DDD, CQRS, modular/hexagonal architecture, and more.
+
+### 📊 Codebase Analysis
+- Focus: **structured analysis of the entire codebase**.
+- Reviews repository structure, dependencies, scripts, and architecture.
+- Examines backend, frontend, infrastructure, and third-party integrations.
+- Identifies dead code, duplications, security concerns, and potential improvements.
+
+### 🔎 Code Review
+- Focus: **verifying implemented code** against quality standards.
+- Compares implementation to the task description and plan.
+- Validates test coverage, security, scalability, and best practices.
+- Runs available tests and static analysis tools.
+
+### 📋 Implementation Gap Analysis
+- Focus: **comparing expected vs. actual implementation state**.
+- Analyzes what needs to be built, what already exists, and what must be modified.
+- Cross-references task requirements with the current codebase.
+- Produces a structured gap report for planning next steps.
+
+---
+
 ## 💬 Prompts & Chat Commands
 
 All commands work with either a **Jira ID** or a **plain‑text description**.
