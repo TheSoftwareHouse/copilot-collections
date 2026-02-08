@@ -1,6 +1,6 @@
 ---
 agent: "tsh-architect"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Prepare detailed implementation plan for given feature."
 ---
 
@@ -11,7 +11,7 @@ The file outcome should be a markdown file named after the task jira id in kebab
 Make sure to follow the steps below:
 
 1. Analyze the feature context file thoroughly to understand the requirements and scope of the feature. Cross-check the information with industry, domains and company best practices to ensure completeness.
-2. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation. Check the copilot spaces available for the project to gather more information about those best practices.
+2. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation.
 3. **Verify Current Implementation**: Before planning, perform a thorough analysis of the existing codebase:
    - Use semantic search to find components, functions, hooks, utilities, or files related to the feature requirements
    - Identify what is already implemented and functional

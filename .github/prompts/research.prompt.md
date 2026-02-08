@@ -1,6 +1,6 @@
 ---
 agent: "tsh-business-analyst"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---
 
@@ -14,7 +14,7 @@ Make sure to follow the steps below:
 
 1. Gather all information related to the task from the codebase, Atlassian tools (Jira, Confluence) and other relevant sources.
 2. Analyze the task thoroughly, including its parents and subtasks if applicable, to get the full picture of the requirements.
-3. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation. Check the copilot spaces available for the project to gather more information about those best practices.
+3. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation.
 4. Check all external links added to the task. Make sure to check the confluence pages linked to the task to gather more information about requirements and processes.
 5. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using Figma MCP server (it's very important) and include relevant information in the context.
 6. Analyze if there are any ambiguities or missing information in the task description. If there are any ask for clarification before finalizing the context.
