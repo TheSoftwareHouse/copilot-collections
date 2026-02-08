@@ -111,14 +111,11 @@ You have access to the `Figma MCP Server` tool.
   - Working on frontend tasks where Figma designs are mentioned in the context.
   - Extracting design specifications: spacing, typography, colors, components, variants and interaction states.
   - Mapping design tokens to code (colors, fonts, spacing values).
-  - Verifying your implementation matches the design during the UI verification loop.
   - The context mentions mockups, wireframes, or other design assets in Figma.
 - **IMPORTANT**:
-  - This tool connects to the local Figma desktop app running in Dev Mode.
-  - Extract exact values (font sizes, line heights, radii, shadows, z-index levels) and map them to existing design tokens, variables or utility classes.
+  - This tool connects to Figma via the configured `figma-mcp-server` MCP endpoint (which may be a remote HTTPS service or a locally running integration, depending on your environment).
+  - Extract exact values and map them to existing design tokens.
   - Treat the linked design as the visual source of truth.
-  - Pay attention to layout grids and responsive behavior described in the designs.
-  - When the design is incomplete (missing state, breakpoint, or edge case), document it and choose the most consistent fallback from the design system.
 - **SHOULD NOT use for**:
   - Purely backend tasks with no UI implications.
   - When no design context is available or relevant.
@@ -140,20 +137,15 @@ You have access to the `sequential-thinking` tool.
 You have access to the `playwright` tool.
 - **MUST use when**:
   - Verifying your UI implementation by interacting with the running application.
-  - Executing the UI verification loop to compare implementation with Figma.
   - Validating user interactions (clicking buttons, submitting forms, navigation).
   - Checking that UI elements are correctly rendered and accessible.
   - Debugging frontend issues by inspecting the actual page state (accessibility tree).
   - Verifying that no console errors occur during user interactions.
   - Testing responsive behavior at different viewport sizes.
-- **SHOULD use when**:
-  - You want to "self-correct" or "verify" your work before marking a task as done.
-  - You need to explore the application's UI to understand the existing structure.
 - **IMPORTANT**:
   - Ensure the local development server is running before attempting to navigate to the app.
   - This tool operates primarily on the **accessibility tree**, which provides a structured view of the page.
   - Use it to click through the app and simulate real user behavior to ensure your changes work as intended.
-  - During UI verification loop, use it to capture current state and compare with Figma specs.
 - **SHOULD NOT use for**:
   - Backend-only tasks where no UI is involved.
   - Unit testing individual functions (use the project's test runner for that).

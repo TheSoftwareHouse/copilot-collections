@@ -1,153 +1,201 @@
 ---
 agent: "tsh-ui-reviewer"
 model: "Claude Opus 4.6"
-description: "Verify UI implementation against Figma designs using MCP tools."
+description: "Single-pass UI verification: compare implementation against Figma and report differences."
 ---
 
-Your goal is to verify that the implemented UI matches the **Figma design referenced in the research and plan**. You MUST use Figma MCP Server and Playwright MCP to perform this verification.
+Your goal is to perform a **single verification pass** comparing the current implementation against the Figma design. This is a **read-only** operation – you report differences but do not fix them.
 
-This prompt is complementary to:
-- `research.prompt.md` – for understanding business context and gathering Figma links.
-- `plan.prompt.md` – for understanding scope, tasks, and the mapping between plan items and design references.
-
-## Mandatory Requirements
-
-You MUST:
-
-- Read the **research** (`*.research.md`) and **plan** (`*.plan.md`) files for this task.
-- Use Figma URLs from those files as the **default design references**.
-- Call **Figma MCP Server** to extract design specifications from the Figma file/nodes.
-- Call **Playwright MCP** to capture the current implementation state.
-- Compare EXPECTED (Figma) vs ACTUAL (implementation) visually and structurally.
-- If mismatches are found: report them, implement fixes when appropriate, and iterate until the implementation matches Figma within tolerance.
-
-You MUST NOT:
-
-- Skip Figma MCP calls for any reason when verifying UI.
-- Rely only on checklists, documentation, or memory instead of calling Figma MCP.
-- Assume you know what the design looks like without calling Figma MCP.
-- Claim that you "used" Figma MCP or Playwright MCP unless the environment actually executed those tools.
-- Report verification as complete without having called both Figma MCP and Playwright at least once per verified view.
-
-If MCP tools are not available in the current environment, you must:
-
-- Explicitly state this limitation in your output.
-- **Do not fabricate** or role‑play Figma/Playwright usage – only describe what you truly observed from available tools.
-- Fall back to manual comparison using the Figma links from research/plan and whatever runtime/DOM/visual inspection tools you do have.
-- Clearly mark that verification is **partial** and which parts could not be automated.
+This prompt is called by `implement-ui.prompt.md` in a loop. Your job is to provide accurate comparison results so the implementation agent can fix issues.
 
 ---
-## Design References from Research & Plan
+## Input Requirements
 
-1. **Locate design references**:
-    - In the **research file** (`*.research.md`):
-       - Check `Relevant Links` for Figma URLs.
-       - Note any Figma links mentioned in `Gathered Information`.
-    - In the **plan file** (`*.plan.md`):
-       - Check `Task details` for Figma URLs or a "Design References" subsection.
-       - If present, use any explicit mapping from plan tasks/phases to Figma views/components or node IDs.
+Before running verification, ensure you have:
 
-2. **Map UI surface to Figma reference**:
-    - For each page/view/component you are verifying, map it to the most relevant Figma URL/node based on:
-       - Explicit mapping in the plan.
-       - Name/description matching between plan tasks and Figma frame/component names.
-    - Only ask the user for an additional Figma link or node ID if:
-       - No suitable Figma link exists in research/plan, or
-       - The plan calls out a design that is clearly missing from the existing links.
+1. **Figma URL** for the component/view to verify
+   - If missing: STOP and ask user for the link
+   - Do not guess or skip verification
 
-3. If you discover missing or outdated design references, describe them in your findings so the architect can update research/plan accordingly.
+2. **Running dev server** to capture the implementation state
 
 ---
-## Verification Workflow
+## Verification Steps
 
-Perform the following steps for each UI surface (page/section/component) that is in scope of the plan:
+**Step 1: Get EXPECTED (Figma MCP)**
+- Call Figma MCP for the component/node
+- Extract: **layer hierarchy**, layout direction, alignment, spacing, typography, colors, dimensions, states
+- Note the **structure**: what contains what, in what order
+- Note the **full page layout**: all sections from top to bottom
 
-### 1. CALL Figma MCP – EXPECTED state
+**Step 2: Get ACTUAL (Playwright MCP) - FULL PAGE**
+- Navigate to the running app
+- **Scroll to top of page first** before capturing
+- Capture: accessibility tree, screenshot, console errors
+- **If page is scrollable**: scroll through entire page and capture all sections
+- Analyze the **DOM structure**: container hierarchy, element nesting, order
+- Do NOT verify only the visible viewport - verify the ENTIRE page/component
 
-- Use the mapped Figma URL/node to retrieve design information via Figma MCP:
-   - Layout structure (frames, groups, containers, grids).
-   - Spacing, alignment, and sizing.
-   - Typography (font, size, weight, line height, letter spacing).
-   - Colors, radii, borders, shadows.
-   - Component types and variants, including states (hover, active, disabled, error, loading, etc.).
-- Treat this as the **EXPECTED** reference for the UI surface.
+**IMPORTANT: Full Page Verification**
+- Always start verification from the TOP of the page
+- If the page has scrollable content, verify ALL sections
+- Do not assume off-screen content matches - explicitly check it
+- Compare the COMPLETE page structure against Figma, not just visible fragment
 
-### 2. CALL Playwright MCP – ACTUAL state
+**Step 3: Compare Structure FIRST**
+- Does the container hierarchy match?
+- Is the layout direction (row/column) the same?
+- Is the element order the same?
+- Are there extra/missing wrapper elements?
+- **Are ALL sections from Figma present in the implementation?**
+- **If ANY structural difference → immediate FAIL**
 
-- Navigate to the relevant route/view in the running application.
-- Capture:
-   - Accessibility tree (to understand semantic structure and names).
-   - Screenshot(s) of the current UI.
-   - Any console errors or warnings related to this view.
-- Treat this as the **ACTUAL** implementation snapshot.
+**Step 4: Compare Dimensions & Visual**
+- Compare spacing, gaps, padding, margins
+- Compare typography, colors, radii, shadows
+- Compare component variants and states
 
-### 3. Compare EXPECTED vs ACTUAL
-
-Compare in three dimensions:
-
-- **Structure**:
-   - Presence and count of major sections and components.
-   - Nesting/grouping (e.g. header, navigation, content, side panels, dialogs).
-   - Use of correct design‑system components where applicable.
-- **Visual details**:
-   - Spacing and alignment between elements.
-   - Typography and color usage, including semantic tokens.
-   - Radii, borders, shadows, and dividers.
-- **States and behavior**:
-   - States present in Figma are implemented (hover, focus, error, disabled, loading, etc.).
-   - Responsive behavior if Figma specifies multiple breakpoints.
-
-Classify each mismatch as:
-
-- **Critical** – missing/wrong major section, wrong page/flow structure, or incorrect key component.
-- **Major** – wrong variant, wrong tokens, missing important state, noticeable visual deviation.
-- **Minor** – small spacing/typography tweaks or low‑impact visual differences within tolerance.
-
-### 4. Fix and iterate (if in fixing mode)
-
-When you are expected to also fix issues (e.g. when called from an implementation context):
-
-- Implement the necessary changes in the code.
-- Re‑run **Playwright** capture for the affected view.
-- Re‑compare against the Figma EXPECTED state.
-- Repeat this loop until all Critical and Major issues are resolved.
-
-If you are in a **pure review** role (read‑only):
-
-- Do not modify the code.
-- Clearly describe the changes that should be made to achieve alignment.
+**Step 5: Report ALL Findings**
+- Structure issues go in "Structural Issues" section
+- Dimension/visual issues go in "Differences" table
+- Include recommended fixes with exact expected values
 
 ---
-## Verification Loop
+## What to Verify
 
-After each fix or iteration for a given view:
+### Structure (CRITICAL - never ignore)
+- **Container hierarchy**: Does the DOM structure match Figma's layer hierarchy?
+- **Nesting depth**: Are elements nested at the same level as in Figma?
+- **Grouping**: Are related elements grouped together as in the design?
+- **Order**: Is the visual order of elements the same?
+- **Wrapper elements**: Are there extra/missing wrapper divs that change the layout?
 
-```text
-CALL Playwright (capture ACTUAL) → Compare with EXPECTED (from Figma MCP) → Identify remaining mismatches → Fix or recommend fixes → Repeat
+### Layout (CRITICAL - never ignore)
+- **Flex/Grid direction**: row vs column, wrap behavior
+- **Alignment**: justify-content, align-items values
+- **Distribution**: how space is distributed between elements
+- **Positioning**: relative, absolute, fixed - matches design intent?
+- **Centering**: is content centered as in design?
+
+### Dimensions (CRITICAL - never ignore)
+- **Container width**: max-width, fixed width constraints
+- **Card/panel boundaries**: does the card have the same width as in Figma?
+- **Content area vs viewport**: ratio of content width to available space
+- **Width**: fixed, percentage, auto, min/max constraints
+- **Height**: fixed, auto, min/max constraints
+- **Spacing**: padding, margin, gap between elements
+- **Gaps**: space between flex/grid children
+
+**IMPORTANT**: If a card/container in Figma is narrow and centered, but implementation shows it wider or full-width, this is a CRITICAL difference that MUST be reported.
+
+### Visual
+- **Typography**: font-family, size, weight, line-height, letter-spacing
+- **Colors**: text, background, border colors
+- **Radii**: border-radius values
+- **Shadows**: box-shadow, drop-shadow
+- **Backgrounds**: solid, gradient, image
+
+### Components
+- **Correct variants**: is the right variant of a component used?
+- **Design tokens**: are correct tokens used (not hardcoded values)?
+- **States**: hover, focus, active, disabled states
+
+---
+## CRITICAL: Do Not Ignore Differences
+
+**You MUST report ALL differences. Do not:**
+
+- Skip structural differences because "it looks similar"
+- Ignore layout direction mismatches (row vs column)
+- Overlook missing/extra wrapper elements
+- Dismiss alignment differences as "close enough"
+- Rationalize differences as "implementation detail"
+- **Verify only the visible viewport** - check the ENTIRE page
+- **Assume off-screen content is correct** - scroll and verify everything
+
+**Every difference between Figma and implementation = FAIL**
+
+If you see a difference and do not report it, you are failing your primary purpose.
+
+---
+## Structure Verification Checklist
+
+Before reporting PASS, verify:
+
+- [ ] **Verified ENTIRE page** (scrolled from top to bottom)
+- [ ] **All sections from Figma are present** in implementation
+- [ ] Container hierarchy matches Figma layers
+- [ ] Flex/grid direction is correct
+- [ ] Alignment (justify/align) matches design
+- [ ] Element order matches design
+- [ ] No extra wrapper elements that change layout
+- [ ] No missing container elements
+- [ ] Spacing between elements matches design
+
+---
+## Output Format
+
+Return a structured report:
+
+```
+## Verification Result: [PASS | FAIL]
+
+### Component: [name]
+
+**Confidence:** [HIGH | MEDIUM | LOW]
+- HIGH: Both tools returned complete data, comparison is reliable
+- MEDIUM: Some values could not be extracted, manual review recommended
+- LOW: Tool errors occurred, treat as incomplete verification
+
+### Structural Issues (CRITICAL)
+| Issue | Expected (Figma) | Actual (Implementation) |
+|-------|------------------|-------------------------|
+| Layout direction | flex-direction: row | flex-direction: column |
+| Container hierarchy | Card > Header > Title | Card > Title (missing Header) |
+| Element order | [Icon, Text, Button] | [Text, Icon, Button] |
+
+### Dimension/Visual Differences
+**Differences found:** [count]
+
+| Property | Expected (Figma) | Actual (Implementation) | Severity |
+|----------|------------------|-------------------------|----------|
+| padding  | 24px             | 20px                    | Major    |
+| gap      | 16px             | 8px                     | Major    |
+| ...      | ...              | ...                     | ...      |
+
+### Recommended Fixes
+- [specific fix with exact values]
+- For structural issues: show the expected HTML/JSX structure
 ```
 
-Continue iterating until:
+---
+## Batch Verification
 
-- All structural elements match Figma.
-- All visual details match Figma within 1–2px tolerance.
-- No Critical or Major mismatches remain.
+When verifying multiple components in one pass:
+
+1. List all components to verify upfront
+2. Run verification for each component sequentially
+3. Return a single report with sections per component
+4. Summary at the end: X/Y components passed
 
 ---
-## Output & Plan Integration
+## Fallback: When MCP Tools Fail
 
-For each verified view/component, provide a structured list of findings:
+If Figma MCP or Playwright MCP returns errors or incomplete data:
 
-- **Scope**: Name/description of the view/component being verified.
-- **Status**: `Pass` or `Fail`.
-- **Mismatches** (if any):
-   - **Severity**: Critical/Major/Minor.
-   - **Location**: Component/element/selector or logical section.
-   - **Expected**: Summary of what Figma shows (from Figma MCP call).
-   - **Actual**: Summary of what Playwright captured.
-   - **Recommended fix / Fix applied**: What should be changed (or what was changed, if you are allowed to modify code).
+1. **Report the tool failure** in the output (do not fabricate data)
+2. **Mark confidence as LOW**
+3. **Provide what you can verify** using available data
+4. **Recommend manual verification** for the affected properties
+5. **Do not block** the loop - return FAIL with partial report so caller can decide
 
-At the end of the review:
+---
+## Rules
 
-- Summarize overall alignment with Figma (per view and globally).
-- Suggest updates needed in the **plan** or **research** (e.g. missing design links, unclear states) under a recommended `UI/Figma Verification Findings` section.
-- If you modified code as part of the verification, mention that the **Change Log** in the plan should be updated to reflect those changes.
+1. **Call BOTH tools** – Figma MCP for EXPECTED, Playwright for ACTUAL
+2. **Report ALL differences** – structure, layout, dimensions, visual, components
+3. **Structure differences = automatic FAIL** – never ignore layout/hierarchy mismatches
+4. **Be precise** – include exact values from both sources
+5. **Do not fix code** – only report (caller will fix)
+6. **Tolerance**: Only 1-2px browser rendering variance is acceptable (NOT for structure/layout)
+7. **When in doubt, report it** – let the implementation agent decide if it's a real issue
