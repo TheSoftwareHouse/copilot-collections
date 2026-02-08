@@ -107,7 +107,7 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
    ↳ ✅ Manually verify critical UI elements in browser
    ↳ 🔄 Agent calls /review-ui in a loop until PASS or escalation
 
-5️⃣ /review       <JIRA_ID or task description>
+4️⃣ /review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
    ↳ ✅ Address all blockers before merging
 ```
@@ -165,10 +165,10 @@ These are configured as Copilot **agents / sub‑agents**.
 - Verifies implementation against Figma designs using Playwright and Figma MCP.
 
 ### 🔎 UI Reviewer
-- Focus: **verifying UI implementation against Figma designs**.
-- Prepares verification checklists before implementation.
-- Compares rendered UI with design specifications.
-- Reports mismatches categorized by severity (Critical, Major, Minor).
+- Focus: **single-pass UI verification against Figma designs**.
+- Performs read-only comparison: Figma (EXPECTED) vs Playwright (ACTUAL).
+- Returns PASS/FAIL verdict with structured difference table.
+- Called by `/implement-ui` in a loop; can also be used standalone.
 
 ### 🔍 Code Reviewer
 - Focus: **structured code review and risk detection**.
@@ -380,8 +380,7 @@ Once the repo is cloned and VS Code User Settings are configured:
    **For frontend tasks with Figma designs:**
    - `/research <JIRA_ID>` – gather requirements including design context
    - `/plan <JIRA_ID>` – create implementation plan
-   - `/review-ui` – prepare UI verification checklist (optional)
-   - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification
+   - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
 
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.

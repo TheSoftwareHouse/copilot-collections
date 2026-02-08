@@ -5,11 +5,11 @@ tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLast
 handoffs: 
   - label: Start Frontend Implementation
     agent: tsh-frontend-software-engineer
-    prompt: /implement-ui Implement UI feature according to the plan and UI verification checklist
+    prompt: /implement-ui Implement UI feature according to the plan with Figma verification loop
     send: false
   - label: Implement UI Fixes
     agent: tsh-frontend-software-engineer
-    prompt: /implement-ui Implement UI fixes based on verification findings
+    prompt: /implement-ui Implement UI fixes based on the verification report differences
     send: false
   - label: Perform Code Review
     agent: tsh-code-reviewer
