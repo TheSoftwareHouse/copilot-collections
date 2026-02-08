@@ -1,6 +1,6 @@
 ---
 agent: "tsh-frontend-software-engineer"
-model: "Claude Opus 4.5"
+model: "Claude Opus 4.6"
 description: "Implement UI feature according to the plan with iterative Figma verification until pixel-perfect."
 ---
 
@@ -60,94 +60,66 @@ Before step 6 of the base workflow (starting implementation), ensure:
 ---
 ## UI Verification Loop (per UI component/section)
 
-This is an **iterative refinement process**. The goal is to continuously compare your implementation against the Figma design and fix any differences until they match. You drive this loop autonomously.
+After implementing each UI component, run a verification loop using `review-ui.prompt.md` until the implementation matches the Figma design.
 
-### Core Principle
+### Core Loop
 
 ```
-BEFORE starting the loop:
-    0. Ensure you have a Figma URL for this component → if not, ASK the user
+BEFORE starting:
+    0. Ensure you have a Figma URL → if not, ASK user
 
-REPEAT until implementation matches Figma:
-    1. Get EXPECTED state from Figma MCP
-    2. Get ACTUAL state from Playwright MCP  
-    3. Compare EXPECTED vs ACTUAL
-    4. If differences exist → fix the code → go back to step 1
-    5. If no differences → done
+REPEAT (max 5 iterations):
+    1. Call /review-ui to verify current implementation
+    2. If PASS → done, exit loop
+    3. If FAIL → fix the reported differences → go to step 1
 ```
 
-**This is a self-correcting loop. Every difference you find MUST be fixed before you can exit the loop.**
+### Rules
 
----
+1. **Call `/review-ui` for every verification** – do not verify manually or skip this step
+2. **Fix all reported differences** – do not skip or rationalize
+3. **Verify again after fixing** – always re-run `/review-ui`
+4. **Maximum 5 iterations** – escalate if still not matching
+5. **Check confidence level** – if `/review-ui` returns LOW confidence, consider manual verification before fixing
 
-### Loop Execution Rules
+### When `/review-ui` returns FAIL
 
-1. **Call BOTH tools in EVERY iteration**
-   - You MUST call Figma MCP to get EXPECTED state
-   - You MUST call Playwright MCP to get ACTUAL state
-   - You MUST compare them in the same response
-   - Never rely on memory of previous Figma calls
+1. Read the difference table from the report
+2. Check confidence level:
+   - **HIGH**: Fix code to match EXPECTED values exactly
+   - **MEDIUM**: Fix obvious differences, manually verify unclear ones
+   - **LOW**: Manually verify before making changes, tool data may be incomplete
+3. Document fix in Change Log
+4. Run `/review-ui` again
 
-2. **Every difference triggers a fix**
-   - If EXPECTED ≠ ACTUAL → fix the code to match EXPECTED
-   - Do not skip differences or mark them as "acceptable"
-   - Do not rationalize why the difference is okay
-   - The only acceptable variance is 1-2px browser rendering differences
+### Fallback: When Tools Are Unreliable
 
-3. **After fixing, verify again**
-   - After each code fix, run another full iteration (Figma + Playwright)
-   - Continue until no differences remain
-   - Maximum 5 iterations per component (escalate if still not matching)
+If `/review-ui` consistently returns LOW confidence or tool errors:
 
-4. **Do not exit the loop prematurely**
-   - You can only mark a task as done when EXPECTED = ACTUAL
-   - Finding a difference and not fixing it means the loop is not complete
-
----
-
-### Iteration Steps
-
-**Step 1: Get EXPECTED (Figma MCP)**
-- Call Figma MCP for the current component/node
-- Extract all design values: layout, spacing, typography, colors, dimensions, states
-
-**Step 2: Get ACTUAL (Playwright MCP)**
-- Navigate to the running app
-- Capture: accessibility tree, screenshot, console errors
-
-**Step 3: Compare side-by-side**
-- Compare each property from Figma against implementation
-- List all differences found
-
-**Step 4: Decision point**
-- **If differences found**: Fix the code, document in Change Log, go back to Step 1
-- **If no differences**: Mark task as complete, exit loop
-
----
-
-### What to do when you find a difference
-
-When EXPECTED ≠ ACTUAL:
-
-1. **Fix the code** – change your implementation to match Figma exactly
-2. **Document the fix** – add a brief note to the plan's Change Log
-3. **Verify the fix** – run another iteration (back to Step 1)
-4. **Repeat** – until no differences remain
-
-**Do not:**
-- Skip the fix because the current implementation "works"
-- Classify differences as "minor" or "within tolerance" (unless truly 1-2px browser variance)
-- Exit the loop while differences exist
-- Ask the user if you should fix it – just fix it
-
----
+1. **Do not continue the automated loop blindly**
+2. **Perform manual verification**:
+   - Open Figma design in browser
+   - Open running app side-by-side
+   - Compare visually and note differences
+3. **Document the manual verification** in Change Log
+4. **Continue with next component** or escalate if unsure
 
 ### Escalation (after 5 iterations)
 
-If after 5 full iterations differences still exist:
-- Stop the automatic loop
-- Document the remaining differences in the Change Log
-- Ask the user whether to continue or escalate to architect/designer
+If still failing after 5 iterations:
+
+1. **Stop the loop** – do not start a 6th iteration
+2. **Prepare an escalation report** including:
+   - Figma URL and component/screen being verified
+   - Summary of each iteration: what changed, what remained
+   - Current remaining mismatches (grouped by structure, dimensions, visual, components)
+   - Suspected root causes (missing design tokens, conflicting constraints, missing Figma specs, etc.)
+3. **Document in Change Log** – record the escalation and remaining issues
+4. **Recommend next steps**:
+   - If implementation work is needed → suggest handoff to `tsh-frontend-software-engineer`
+   - If issues seem architectural → suggest handoff to `tsh-code-reviewer`
+   - If design is ambiguous → ask design owner for clarification
+5. **Ask for guidance** – explicitly request human decision before proceeding
 
 ---
 ## Additional Phase Review (extension of step 8)
@@ -174,3 +146,4 @@ Before handing off to the `tsh-code-reviewer` agent:
 - **Design gaps**: If Figma lacks a state, follow existing design system patterns and document it.
 - **Responsive**: If Figma shows multiple breakpoints, verify them. Otherwise ensure graceful degradation.
 - **Accessibility**: Check focus order, keyboard navigation, labels, color contrast.
+- **Token mapping**: When Figma shows raw values (e.g., #3B82F6), map them to existing design tokens (e.g., `--color-primary-500`) if available in the project.

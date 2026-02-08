@@ -109,13 +109,10 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
    ↳ 📖 Review plan – check component breakdown, design references
    ↳ ✅ Confirm phases align with Figma structure
 
-3️⃣ /review-ui    Prepare UI verification checklist (optional)
-   ↳ 📖 Review checklist – verify it covers all design aspects
-   ↳ ✅ Add missing items before implementation
-
-4️⃣ /implement-ui <JIRA_ID or task description>
+3️⃣ /implement-ui <JIRA_ID or task description>
    ↳ 📖 Review code changes and UI Verification Summary
    ↳ ✅ Manually verify critical UI elements in browser
+   ↳ 🔄 Agent calls /review-ui in a loop until PASS or escalation
 
 5️⃣ /review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
@@ -124,24 +121,28 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 
 > ⚠️ **Important:** The automated Figma verification loop helps catch visual mismatches, but it does not replace manual review. Always visually inspect the implemented UI in the browser, test interactions, and verify responsive behavior yourself.
 
-**What makes `/review-ui` useful:**
+**How the verification loop works:**
 
-- Uses **Figma MCP** to extract design specifications (layout, spacing, typography, colors, states)
-- Uses **Playwright MCP** to capture the current implementation (accessibility tree, screenshots)
-- Compares **EXPECTED** (Figma) vs **ACTUAL** (implementation) automatically
-- Produces a **structured verification report** with mismatches categorized by severity (Critical, Major, Minor)
-- Can be used **before implementation** to create verification criteria, or **during/after** to validate progress
-- Reports exactly what needs to be fixed with specific expected vs actual values
+1. `/implement-ui` implements a UI component
+2. Calls `/review-ui` to perform **single-pass verification** (read-only)
+3. `/review-ui` uses **Figma MCP** (EXPECTED) + **Playwright MCP** (ACTUAL) → returns PASS or FAIL with diff table
+4. If FAIL → `/implement-ui` fixes the code and calls `/review-ui` again
+5. Repeats until PASS or max 5 iterations (then escalates)
 
-**What makes `/implement-ui` special:**
+**What `/review-ui` does:**
 
-- Runs an **iterative verification loop** after each UI component
-- Captures current state with **Playwright** (accessibility tree, screenshots)
-- Compares with **Figma MCP** specifications (spacing, typography, colors, tokens)
-- **Automatically fixes** mismatches and re-verifies until perfect
-- Produces a **UI Verification Summary** with iteration counts and design gaps
+- Single-pass, **read-only** verification – does not modify code
+- Uses **Figma MCP** to extract design specifications
+- Uses **Playwright MCP** to capture current implementation
+- Returns structured report: PASS/FAIL + difference table with exact values
 
-This ensures the implemented UI matches the Figma design before code review.
+**What `/implement-ui` does:**
+
+- Implements UI components following the plan
+- Runs **iterative verification loop** calling `/review-ui` after each component
+- **Fixes mismatches** based on `/review-ui` reports
+- Escalates after 5 failed iterations with detailed report
+- Produces **UI Verification Summary** before code review
 
 ---
 
@@ -212,10 +213,11 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Outputs: code changes + UI Verification Summary with iteration counts.
 
 ### `/review-ui`
-- Prepares a **UI verification checklist** based on Figma designs.
-- Analyzes design structure, tokens, responsive behavior, and component variants.
-- Best used **before implementation** to define verification criteria.
-- Outputs: structured checklist grouped by area (layout, typography, colors, states, a11y).
+- Performs **single-pass UI verification** comparing implementation against Figma.
+- Uses **Figma MCP** (EXPECTED) and **Playwright MCP** (ACTUAL) to compare.
+- **Read-only** – reports differences but does not fix them.
+- Called by `/implement-ui` in a loop; can also be used standalone.
+- Outputs: PASS/FAIL verdict + structured difference table with exact values.
 
 ### `/review <JIRA_ID | description>`
 - Reviews the final implementation against the plan and requirements.
@@ -329,7 +331,7 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 ```json
 {
   "servers": {
-    "Context7": {
+    "context7": {
       "type": "stdio",
       "command": "npx",
       "args": [
@@ -350,6 +352,8 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
   ]
 }
 ```
+
+> **Note:** Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma-mcp-server`). If you copied an older template with different names, update your configuration to match the current template.
 
 ### What each MCP is used for
 

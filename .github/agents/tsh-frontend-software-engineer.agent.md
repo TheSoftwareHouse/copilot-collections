@@ -111,14 +111,9 @@ You have access to the `Figma MCP Server` tool.
   - Working on frontend tasks where Figma designs are mentioned in the context.
   - Extracting design specifications: spacing, typography, colors, components, variants and interaction states.
   - Mapping design tokens to code (colors, fonts, spacing values).
-  - Verifying your implementation matches the design during the UI verification loop.
   - The context mentions mockups, wireframes, or other design assets in Figma.
-- **UI Verification Loop**:
-  - Figma MCP provides EXPECTED state in each iteration of the verification loop.
-  - You MUST call it in every iteration, not just the first one.
-  - Pattern: `Figma MCP → Playwright → compare → fix → repeat`
 - **IMPORTANT**:
-  - This tool connects to the local Figma desktop app running in Dev Mode.
+  - This tool connects to Figma via the configured `figma-mcp-server` MCP endpoint (which may be a remote HTTPS service or a locally running integration, depending on your environment).
   - Extract exact values and map them to existing design tokens.
   - Treat the linked design as the visual source of truth.
 - **SHOULD NOT use for**:
@@ -142,16 +137,11 @@ You have access to the `sequential-thinking` tool.
 You have access to the `playwright` tool.
 - **MUST use when**:
   - Verifying your UI implementation by interacting with the running application.
-  - Executing the UI verification loop to compare implementation with Figma.
   - Validating user interactions (clicking buttons, submitting forms, navigation).
   - Checking that UI elements are correctly rendered and accessible.
   - Debugging frontend issues by inspecting the actual page state (accessibility tree).
   - Verifying that no console errors occur during user interactions.
   - Testing responsive behavior at different viewport sizes.
-- **UI Verification Loop**:
-  - Playwright provides ACTUAL state in each iteration.
-  - Always pair with Figma MCP - never use alone for verification.
-  - Pattern: `Figma MCP → Playwright → compare → fix → repeat`
 - **IMPORTANT**:
   - Ensure the local development server is running before attempting to navigate to the app.
   - This tool operates primarily on the **accessibility tree**, which provides a structured view of the page.
