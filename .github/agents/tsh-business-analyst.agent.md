@@ -28,17 +28,11 @@ Don't provide implementation details, focus on gathering requirements, user stor
 
 Don't provide any technical specifications, implementation plans, deployment plans or test plans, those will be provided by the architect later on.
 
-<<<<<<< HEAD
-Before starting any task, check all available skills and decide which are the best fit for the task at hand. You can use multiple skills in one task if needed, and you can use tools and skills in any order that you find most effective for completing the task.
-
-## Skills usage guidelines
-=======
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple 
 skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
 ## Skills Usage Guidelines
 
->>>>>>> deb7a89 (feat: refactor agents, prompts and skills to follow the same standard. Add new skill for technical context discovery.)
 - `task-analysis` - to analyze the task description, perform gap analysis, expand the context for the task, analyze the current state of the system in the context of the task, help build PRD, create a context for the task, gather information about the task from different sources.
 - `codebase-analysis` - to analyze the existing codebase and identify components, features, and patterns related to the task for the Current Implementation Status section.
 

@@ -19,6 +19,7 @@ If you need to make changes to the original solution during implementation, wait
 Before starting, load and follow these skills:
 - `technical-context-discovery` - to establish project conventions, coding standards, and existing patterns
 - `implementation-gap-analysis` - to verify current state before making changes
+- `backend-api-development` - when implementing backend API features: REST/GraphQL endpoints, DataGrid filtering/pagination, database handling, JWT authentication, external service adapters, logging, and Docker setup
 
 ## Workflow
 
