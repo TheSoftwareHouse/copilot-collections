@@ -8,17 +8,21 @@ Your goal is to review the implementation against the provided implementation pl
 
 Make sure to review not only the code and its acceptance criteria but also consider security aspects, code quality, testing coverage, and documentation.
 
-Follow these guidelines during your review:
-1. Start with implementation review. Focus on code correctness, code quality, security, testing, and documentation.
-2. Make sure to verify each item from tasks definition of done defined in phases. When the definition of done is met, check the box for the completed item in the plan document.
-3. Continue with checking acceptance criteria checklist from the plan file. When the acceptance criteria is met, check the box for the completed item in the checklist.
+## Required Skills
 
-When in comes to updating the definition of done and acceptance criteria checklist, you can only update those by checking the box for completed items. Do not modify the text of those sections.
+Before starting, load and follow these skills:
+- `code-review` - for the structured code review process covering correctness, quality, security, testing, best practices, and scalability
+- `implementation-gap-analysis` - to compare the implemented solution against the plan and verify completeness
+- `technical-context-discovery` - to understand project conventions and coding standards to review against
 
-At the end of the review provide a summary of your findings, including any issues identified and recommendations for improvement.
+## Workflow
 
-Add those findings to the plan file at the end of file in a new section named "Code Review Findings".
+1. **Understand context**: Load the `*.research.md` and `*.plan.md` files to understand the task requirements and implementation plan. Ensure to review `*.instructions.md` files for project-specific guidelines.
+2. **Review implementation**: Focus on code correctness, code quality, security, testing, and documentation.
+3. **Verify definition of done**: Check each item from the tasks' definition of done defined in the plan phases. When the definition of done is met, check the box for the completed item in the plan document.
+4. **Verify acceptance criteria**: Check each item from the acceptance criteria checklist in the plan file. When the acceptance criteria is met, check the box for the completed item.
+5. **Summarize findings**: Provide a summary of findings, including any issues identified and recommendations for improvement.
+6. **Document results**: Add findings to the plan file at the end in a new section named "Code Review Findings".
+7. **Update changelog**: Add information that code review was performed to the changelog section of the plan file.
 
-Ensure to follow the instructions provided in copilot-instructions.md for any additional guidelines specific to the project (look for *.instructions.md files).
-
-Make sure to add information that code review was performed to the changelog section of the plan file.
+When it comes to updating the definition of done and acceptance criteria checklist, you can only update those by checking the box for completed items. Do not modify the text of those sections.

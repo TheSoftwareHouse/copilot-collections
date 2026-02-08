@@ -5,7 +5,7 @@ description: Implementation gap analysis. Verify what has to be implemented. Ver
 
 # Implementation Gap Analysis
 
-This skills help to compare the current state of the system to expected changes. It validates what has to be implemented, what was already implemented and what has to be modified in order to deliver the feature.
+This skill helps compare the current state of the system to expected changes. It validates what has to be implemented, what was already implemented and what has to be modified in order to deliver the feature.
 
 ## Implementation Gap Analysis Process
 

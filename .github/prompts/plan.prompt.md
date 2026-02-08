@@ -4,57 +4,45 @@ model: "Claude Opus 4.6"
 description: "Prepare detailed implementation plan for given feature."
 ---
 
-Analyze feature context file for provided task or Jira ID. Based on it prepare detailed implementation plan that software engineer can follow step by step to deliver the feature.
+Analyze the feature context file for the provided task or Jira ID. Based on it, prepare a detailed implementation plan that a software engineer can follow step by step to deliver the feature.
 
-The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .plan.md suffix (e.g., user-authentication.plan.md). The file should be organized in a structured format, including sections for phases and tasks. The file should be placed in the specifications directory under a folder named after the issue id or the shortened task name in kebab-case format.
+The file outcome should be a markdown file named after the task Jira ID in kebab-case format or after task name (if no Jira task provided) with `.plan.md` suffix (e.g., `user-authentication.plan.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
 
-Make sure to follow the steps below:
+## Required Skills
 
-1. Analyze the feature context file thoroughly to understand the requirements and scope of the feature. Cross-check the information with industry, domains and company best practices to ensure completeness.
-2. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation.
-3. **Verify Current Implementation**: Before planning, perform a thorough analysis of the existing codebase:
-   - Use semantic search to find components, functions, hooks, utilities, or files related to the feature requirements
-   - Identify what is already implemented and functional
-   - Identify what exists but needs modification or extension
-   - Identify what needs to be created from scratch
-   - Document your findings in the "Current Implementation Analysis" section of the plan
-4. Understand the project best practices and quality standards to ensure the implementation plan aligns with them.
-5. Prepare implementation plan with detailed code changes required to be implemented, broken down into phases.
-6. For each phase, identify the specific tasks that need to be completed, providing a clear title, description, action type ([CREATE], [MODIFY], or [REUSE]), and definition of done for each task with a checkbox for each definition of done item to mark when completed.
-7. Consider any security aspects that need to be addressed during implementation and include them in the plan.
-8. Provide guidelines for testing and validating the implementation to ensure it meets the defined requirements.
-9. Save the implementation plan in a markdown file named after the task or feature in kebab-case format with .plan.md suffix.
-10. Ensure that the implementation plan is clear, concise, and tailored to the needs of the development team.
-11. **Focus only on changes specific to THIS task**: The implementation plan should ONLY include work directly related to the current task/Jira ticket. If the task requires prerequisite work or dependencies to be completed first, assume those are ALREADY DONE. Do not include implementation steps for prerequisites, dependencies, or related tasks - they should be tracked separately. Only plan what needs to be implemented for THIS specific task.
-12. **Avoid duplicating existing work**: Never plan to create components, functions, or utilities that already exist. Always check the "Current Implementation Analysis" section and plan to reuse or modify existing code instead of recreating it.
-12. Only plan the features that are part of the research/feature context. Do not add extra features or enhancements that are not part of the original task requirements. If you identify potential improvements, document them separately in separate improvements section, but do not include them in the main implementation plan.
-The plan file should always follow the same structure described below for consistency across different tasks. Don't add or remove sections unless explicitly instructed.
+Before starting, load and follow these skills:
+- `architecture-design` - for the architecture design process and output template (`plan.example.md`)
+- `codebase-analysis` - for analyzing the existing codebase
+- `implementation-gap-analysis` - for verifying what exists vs what needs to be built
+- `technical-context-discovery` - for understanding project conventions and patterns
 
-When planing BUG FIXES make sure to include steps to reproduce the issue, analyze the root cause, and implement a fix that addresses the problem without introducing new issues. Use tests to reproduce and then verify the fix.
+## Workflow
 
-List of sections to include in the planning file:
-- Task details - detailed information about the task or feature being implemented
-- Current Implementation Analysis: A clear breakdown of what already exists vs what needs to be done:
-   - **Already Implemented**: List of existing components, functions, utilities that will be reused (with file paths)
-   - **To Be Modified**: List of existing code that needs changes or extensions (with file paths and description of changes)
-   - **To Be Created**: List of new components, functions, utilities that need to be built from scratch
-   - This section helps avoid duplicate work and ensures we build on existing solutions
-- Implementation Plan - A phases as a list of checklists with tasks under each phase
-   - Each task should have:
-     - Task Title: A concise title for the task.
-     - Description: A brief description of what the task entails.
-     - **Action Type**: Clearly mark each task as [CREATE], [MODIFY], or [REUSE] to indicate the type of work
-     - A box to check when the task is done.
-   - Include only work that has to be done, not the work that is already completed or out of scope for this task
-- Security Considerations - Any security aspects that need to be addressed during implementation
-- Quality assurance - A list of acceptance criteria for the whole tasks in a form of a checklist to verify the implementation meets the defined requirements at the end of implementation
-- Change Log - A section to document any changes made to the original plan during implementation
+1. **Analyze context**: Review the feature context file (`.research.md`) thoroughly to understand the requirements and scope. Cross-check with industry, domain, and company best practices.
+2. **Analyze tech stack**: Understand the project's tech stack, industry, and domain to identify best practices for implementation.
+3. **Verify current implementation**: Before planning, perform a thorough analysis of the existing codebase:
+   - Use semantic search to find components, functions, hooks, utilities, or files related to the feature requirements.
+   - Identify what is already implemented and functional.
+   - Identify what exists but needs modification or extension.
+   - Identify what needs to be created from scratch.
+   - Document findings in the "Current Implementation Analysis" section.
+4. **Understand project standards**: Review project best practices and quality standards (check `*.instructions.md` files).
+5. **Prepare implementation plan**: Create detailed code changes broken down into phases.
+6. **Define tasks**: For each phase, identify specific tasks with:
+   - Clear title
+   - Description of what the task entails
+   - Action type: `[CREATE]`, `[MODIFY]`, or `[REUSE]`
+   - Definition of done as a checkbox list for each task
+7. **Address security**: Include security considerations relevant to the implementation.
+8. **Define testing**: Provide guidelines for testing and validating the implementation.
+9. **Save the plan**: Follow the `plan.example.md` template from the `architecture-design` skill strictly.
+10. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
+11. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
+12. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
 
-Focus only on implementation and acceptance criteria specific to THIS task. Do not include work related to prerequisites, dependencies, or other tasks.
+Don't provide deployment plans, code pushing instructions, or code review instructions in the repository.
 
-Don't provide deployment plans, code pushing instructions, code review instructions.
-
-Follow the above structure and naming conventions strictly to ensure clarity and consistency.
+Follow the template structure and naming conventions strictly to ensure clarity and consistency.
 
 In case of any ambiguities or missing information for the planning, ask for clarification before finalizing the plan.
 

@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-02-08
+
+### Added
+
+- Technical context discovery skill for codebase exploration and understanding
+
+### Changed
+
+- Refactored agents, prompts, and skills to follow a consistent standard
+- Improved architecture-design plan example with expanded detail
+- Updated implementation-gap-analysis and task-analysis examples
+- Streamlined agent definitions by extracting workflow logic into prompts and skills
+
 ## 2026-02-07
 
 ### Added

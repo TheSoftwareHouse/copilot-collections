@@ -1,38 +1,86 @@
-# <task-name> - implementation plan
+# <task-name> - Implementation Plan
 
-<task-details>
+## Task Details
 
-## Proposed solution
+| Field | Value |
+|---|---|
+| Jira ID | <jira-id> |
+| Title | <task-title> |
+| Description | <task-description> |
+| Priority | <priority> |
+| Related Research | <link-to-research-file> |
+
+## Proposed Solution
 
 <description-of-proposed-solution>
 
 <necessary-diagrams>
 
-## Implementation Status
+## Current Implementation Analysis
 
-### Already implemented
-List of things that are already implemented
+### Already Implemented
+List of existing components, functions, utilities that will be reused (with file paths):
+- <component/function> - `<file-path>` - <brief description>
 
-### Require modification
-List of things that require modification with information what has to be modified
+### To Be Modified
+List of existing code that needs changes or extensions (with file paths and description of changes):
+- <component/function> - `<file-path>` - <what needs to change>
 
-### To be implemented
-List of the things that have to be implemented with details on how to implement those
+### To Be Created
+List of new components, functions, utilities that need to be built from scratch:
+- <component/function> - <brief description of what it does>
 
-## Open questions
-List of open questions with provided answers
+## Open Questions
 
-## Implementation plan
+| # | Question | Answer | Status |
+|---|----------|--------|--------|
+| 1 | <question> | <answer> | ✅ Resolved / ❓ Open |
 
-### Phase 1
-#### Task 1 - <task-name>
-Description of the task
+## Implementation Plan
 
-#### Acceptance Criteria
-- [ ] - Criteria 1
-- [ ] - Criteria 2
-- [ ] - Criteria 3
+### Phase 1: <phase-name>
+
+#### Task 1.1 - [CREATE/MODIFY/REUSE] <task-name>
+**Description**: <brief description of what the task entails>
+
+**Definition of Done**:
+- [ ] <specific verifiable criterion>
+- [ ] <specific verifiable criterion>
+
+#### Task 1.2 - [CREATE/MODIFY/REUSE] <task-name>
+**Description**: <brief description>
+
+**Definition of Done**:
+- [ ] <specific verifiable criterion>
+
+### Phase 2: <phase-name>
+
+#### Task 2.1 - [CREATE/MODIFY/REUSE] <task-name>
+**Description**: <brief description>
+
+**Definition of Done**:
+- [ ] <specific verifiable criterion>
+
+## Security Considerations
+
+- <security consideration relevant to this task>
+
+## Quality Assurance
+
+Acceptance criteria checklist to verify the implementation meets the defined requirements:
+
+- [ ] <acceptance criterion 1>
+- [ ] <acceptance criterion 2>
+- [ ] <acceptance criterion 3>
+
+## Improvements (Out of Scope)
+
+Potential improvements identified during planning that are not part of the current task:
+
+- <improvement description>
 
 ## Changelog
 
-- <date> - what was changed
+| Date | Change Description |
+|------|-------------------|
+| <date> | Initial plan created |
