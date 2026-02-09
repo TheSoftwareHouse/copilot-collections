@@ -59,7 +59,7 @@ RUN → FAIL? → DEBUG (browser_snapshot) → FIX → REPEAT
 | Element not found | Alternative locator → check DOM → verify page loaded |
 | Network | Retry → consider mock → verify backend |
 | Flaky | Explicit waits → check race conditions → run 5x |
-| App bug | Mark `test.fixme('BUG: desc')` - counts as success |
+| App bug | Mark `test.fixme('BUG: desc')` - test is skipped; CI usually still passes unless skipped tests fail the build |
 
 ## CI Readiness Checklist
 
