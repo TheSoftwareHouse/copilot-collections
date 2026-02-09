@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "Agent specializing in building context for development tasks from a business analysis perspective."
-tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'agent', 'search/usages', 'vscode/runCommand', 'execute/killTerminal', 'execute/awaitTerminal', 'sequential-thinking/*']
+tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'agent', 'search/usages', 'vscode/runCommand', 'execute/killTerminal', 'execute/awaitTerminal', 'sequential-thinking/*', 'vscode/askQuestions']
 handoffs: 
   - label: Prepare Implementation Plan
     agent: tsh-architect
@@ -77,3 +77,15 @@ You have access to the `sequential-thinking` tool.
 - **SHOULD NOT use for**:
   - Simple text summarization.
   - Listing obvious acceptance criteria.
+
+You have access to the `vscode/askQuestions` tool.
+- **MUST use when**:
+  - Task descriptions contain missing or unclear requirements that cannot be resolved from Jira, Confluence, or Figma.
+  - Conflicting information is found between different sources and needs stakeholder clarification.
+  - Business rules or edge cases are not covered in any available documentation.
+- **IMPORTANT**:
+  - Keep questions focused and specific. Batch related questions together rather than asking one at a time.
+  - Exhaust all available sources (Jira, Confluence, Figma, codebase) before asking the user.
+- **SHOULD NOT use for**:
+  - Questions that can be answered from Jira, Confluence, or Figma.
+  - Technical implementation details (out of scope for business analysis).
