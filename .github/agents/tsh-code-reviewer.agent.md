@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "Agent specializing in performing code review."
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'read/getTaskOutput', 'execute/runTask', 'atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'context7/*', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'search/changes', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*']
+tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/killTerminal', 'execute/awaitTerminal', 'vscode/runCommand', 'atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'context7/*', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'search/changes', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*']
 handoffs: 
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
@@ -29,6 +29,8 @@ Make sure to run all necessary checks to validate the implementation against the
 Make sure to run the tests and verify that the implementation works as expected and does not introduce new issues.
 
 Before starting the review, ensure to understand coding guidelines and instructions provided in copilot-instructions.md or any other *.instructions.md files related to the feature. Make sure to understand project coding standards and best practices.
+
+Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
 ## Tool Usage Guidelines
 
