@@ -16,7 +16,7 @@ Analysis progress:
 - [ ] Step 1: Look for available external sources of information
 - [ ] Step 2: Gather information from all sources
 - [ ] Step 3: Identify gaps and ask clarification questions
-- [ ] Step 4: Based on the answers and gathered information finalize the reasearch report
+- [ ] Step 4: Based on the answers and gathered information finalize the research report
 ```
 
 **Step 1: Look for available external sources of information**
@@ -44,8 +44,8 @@ Find relevant information on knowledge base tools.
 
 Based on the gathered information and task description, look for ambiguities or missing information. Create questions and ask them to the user. Don't proceed until all questions are answered or you are directly told to continue.
 
-**Step 4: Based on the answers and gathered information finalize the reasearch report**
+**Step 4: Based on the answers and gathered information finalize the research report**
 
-Generate a report following the `./research.example.md` structure. Make sure to provide all necessary informations that you gathered, all findings and all answered questions.
+Generate a report following the `./research.example.md` structure. Make sure to provide all necessary information that you gathered, all findings and all answered questions.
 
 Don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
