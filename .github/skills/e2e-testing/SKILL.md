@@ -16,8 +16,10 @@ description: 'E2E testing patterns, verification procedures, and CI readiness ch
 
 ```typescript
 export class FeaturePage {
-  readonly submitBtn = this.page.getByRole('button', { name: 'Submit' });
   constructor(readonly page: Page) {}
+  get submitBtn() {
+    return this.page.getByRole('button', { name: 'Submit' });
+  }
   async navigate() { await this.page.goto('/feature'); }
 }
 ```
