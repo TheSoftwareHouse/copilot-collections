@@ -19,9 +19,9 @@ Analysis progress:
 - [ ] Step 4: Verify that solution has implemented all necessary tests
 - [ ] Step 5: Run the available tests
 - [ ] Step 6: Verify that solution follows the best practices
-- [ ] Step 7: Run static code analysis tools and formating tools
+- [ ] Step 7: Run static code analysis tools and formatting tools
 - [ ] Step 8: Validate the solution is secure
-- [ ] Step 9: Validate the solution is scallable
+- [ ] Step 9: Validate the solution is scalable
 ```
 
 **Step 1: Understand the task description**
@@ -59,7 +59,7 @@ Take into account project standards and a practices like SOLID, SRP, DDD, DRY, K
 
 Make sure that solution is not over engineered. Keep the cognitive complexity on a lower side.
 
-**Step 7: Run static code analysis tools and formating tools**
+**Step 7: Run static code analysis tools and formatting tools**
 
 Make sure to run linters, static code analysis tools and formatting tools.
 
@@ -67,7 +67,7 @@ Make sure to run linters, static code analysis tools and formatting tools.
 
 Focus on security. Check for potential OWASP TOP10 issues. Check for potential critical security issues that allows other users to take control over the system.
 
-**Step 9: Validate the solution is scallable**
+**Step 9: Validate the solution is scalable**
 
 Analyse if the implemented solution is scalable. Focus on areas like being able to scale it horizontaly, not having a stateful components, not having code with high computational complexity.
 

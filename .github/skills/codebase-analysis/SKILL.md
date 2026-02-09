@@ -80,7 +80,7 @@ Understand how the app is deployed.
 Check how we manage infrastructure (IaC or manual). What technology we use for infrastructure?
 How the app is deployed? Cloud, on-premise etc.
 Understand if app is containerised.
-Make sure to understand how scallable the infrastructure is.
+Make sure to understand how scalable the infrastructure is.
 
 **Step 8: Check third party integrations**
 

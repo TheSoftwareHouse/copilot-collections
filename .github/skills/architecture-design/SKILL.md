@@ -36,7 +36,7 @@ Based on your findings design a solution architecture.
 
 Follow the best security and software design patterns. 
 
-Your goal is to design a solution that is not overengineered and easy to comprehend by developers, that is at the same time scallable, secure and easy to maintain.
+Your goal is to design a solution that is not overengineered and easy to comprehend by developers, that is at the same time scalable, secure and easy to maintain.
 
 The example patterns you should check (but you are not limited to only use those):
 - Dont repeat yourself
