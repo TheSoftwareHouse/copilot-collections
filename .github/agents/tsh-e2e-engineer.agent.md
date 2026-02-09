@@ -31,6 +31,10 @@ You don't create dead code or unused test helpers. You don't create tests that w
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
+## Skills usage guidelines
+
+- `e2e-testing` - E2E testing patterns, verification procedures, and CI readiness checklists using Playwright. Use for writing, debugging, or reviewing end-to-end tests, fixing flaky tests, creating Page Objects, mocking external APIs.
+
 ## E2E Testing Standards
 
 **Always**:
