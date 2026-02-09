@@ -5,7 +5,7 @@ description: Design the architecture to solve a given task. Propose the solution
 
 # Architecture Design
 
-This skills helps you to design the architecture that follows the best practices, that solves the actuall business goal.
+This skills helps you to design the architecture that follows the best practices, that solves the actual business goal.
 
 ## Architecture Design Process
 
