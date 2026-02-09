@@ -15,9 +15,9 @@ Use the checklist below and track your progress:
 Analysis progress:
 - [ ] Step 1: Understand the goal of the task
 - [ ] Step 2: Analyse the current codebase
-- [ ] Step 3: Ask questions about ambigious parts
+- [ ] Step 3: Ask questions about ambiguous parts
 - [ ] Step 4: Design a solution
-- [ ] Step 5: Create a implementation plan document
+- [ ] Step 5: Create an implementation plan document
 ```
 
 **Step 1: Understand the goal of the task**
@@ -27,9 +27,9 @@ Thorougly process the conversation history and task `research.md` file to fully 
 Perform a current codebase analysis to get a full picture of a current system in a context of the task.
 Make sure to understand the project and domain best practices.
 
-**Step 3: Ask questions about ambigious parts**
+**Step 3: Ask questions about ambiguous parts**
 After getting a full picture of the codebase and the task, ask any remaining questions.
-Don't continue untill you get all of the answers.
+Don't continue until you get all of the answers.
 
 **Step 4: Design a solution**
 Based on your findings design a solution architecture.
