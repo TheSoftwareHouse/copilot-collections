@@ -5,7 +5,7 @@ description: Analyse the codebase of the system. Look for dependencies. Understa
 
 # Codebase Analysis
 
-This helps helps you do analyse the codebase in a structured way, getting the most out of it. It focus on architecture, patterns, code style, modules separation, testing approach, dependencies and infrastructure.
+This helps you analyze the codebase in a structured way, getting the most out of it. It focuses on architecture, patterns, code style, module separation, testing approach, dependencies, and infrastructure.
 
 ## Codebase Analysis Process
 
