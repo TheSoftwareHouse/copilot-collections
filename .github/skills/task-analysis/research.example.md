@@ -22,7 +22,7 @@ Any relevant links to documentation, designs, or other resources
 Any relevant diagrams or flowcharts that help illustrate the requirements or processes
 
 ## Gap Analysis
-All missing inforormation and gaps in task description, together with provided answers
+All missing information and gaps in task description, together with provided answers
 
 ### Question 1
 #### <question>
