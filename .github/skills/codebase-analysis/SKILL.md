@@ -18,7 +18,7 @@ Analysis progress:
 - [ ] Step 3: Check available scripts
 - [ ] Step 4: Check high level architecture
 - [ ] Step 5: Check backend code
-- [ ] Step 6: Check frotnend code
+- [ ] Step 6: Check frontend code
 - [ ] Step 7: Check infrastructure code
 - [ ] Step 8: Check third party integrations
 - [ ] Step 9: Check testing approach
@@ -105,8 +105,8 @@ Rate the general security approach.
 
 **Step 11: Look for potential improvements**
 
-Based on all finding propose a potential improvements.
-Divide them into Critical, To be implemented nut not critical, Nice to have
+Based on all findings, propose potential improvements.
+Divide them into Critical, To be implemented but not critical, Nice to have.
 
 Save the results into a separate structure document.
 Each step should be covered in separate section.
