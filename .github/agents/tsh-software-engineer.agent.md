@@ -64,7 +64,7 @@ If no Copilot instructions are found, or if they don't cover specific aspects, *
 
 If neither Copilot instructions nor sufficient existing codebase patterns are available (e.g., new project, greenfield feature, or first implementation of a specific pattern), **use external documentation and industry best practices**:
 
-- **Use `Context7` tool** to search for official documentation of the framework/library being used.
+- **Use `context7` tool** to search for official documentation of the framework/library being used.
 - Apply **industry-standard best practices** for the technology stack (e.g., NestJS official patterns, Express.js conventions, Spring Boot guidelines).
 - Follow **OWASP security guidelines** for secure coding practices.
 - Apply **SOLID principles** and clean architecture patterns.
@@ -83,7 +83,7 @@ If neither Copilot instructions nor sufficient existing codebase patterns are av
 
 ## Tool Usage Guidelines
 
-You have access to the `Context7` tool.
+You have access to the `context7` tool.
 - **MUST use when**:
   - Searching for API documentation and usage examples for external libraries.
   - Finding solutions to specific coding errors or exceptions.
@@ -96,7 +96,7 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `Figma MCP Server` tool.
+You have access to the `figma-mcp-server` tool.
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.
   - Implementing business logic where Figma or FigJam diagrams describe the application flow.

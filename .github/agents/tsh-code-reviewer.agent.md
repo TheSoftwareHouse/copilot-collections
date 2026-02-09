@@ -40,8 +40,8 @@ You have access to the `Atlassian` tool.
 - **SHOULD NOT use for**:
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
-You have access to the `Context7` tool.
-- **CRITICAL**: Think twice before using this tool. Do not search Context7 for every small change.
+You have access to the `context7` tool.
+- **CRITICAL**: Think twice before using this tool. Do not search context7 for every small change.
 - **MUST use ONLY when**:
   - The code heavily relies on a specific framework or external library and you need to verify API usage.
   - Verifying if a specific implementation follows security best practices (e.g., OWASP guidelines) for a specific library version.
@@ -55,7 +55,7 @@ You have access to the `Context7` tool.
   - Include the version number in your search queries to ensure relevance (e.g., "React 16.8 hooks" instead of just "React hooks").
   - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
 
-You have access to the `Figma MCP Server` tool.
+You have access to the `figma-mcp-server` tool.
 - **MUST use when**:
   - Reviewing frontend changes where Figma designs are referenced or relevant.
   - Verifying if the implementation matches the visual design and layout specifications.

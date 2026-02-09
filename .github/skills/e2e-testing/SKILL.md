@@ -5,13 +5,6 @@ description: 'E2E testing patterns, verification procedures, and CI readiness ch
 
 # E2E Testing Patterns & Practices
 
-## When to Use
-
-- Writing or modifying E2E tests
-- Debugging test failures or flaky tests
-- Reviewing E2E test code quality
-- Setting up CI pipelines for E2E tests
-
 ## Page Object Pattern
 
 ```typescript

@@ -49,7 +49,7 @@ You have access to the `Atlassian` tool.
   - Non-Atlassian related research or documentation.
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
-You have access to the `Figma MCP Server` tool.
+You have access to the `figma-mcp-server` tool.
 - **MUST use when**:
   - The task references Figma designs, mockups, or FigJam boards.
   - Analyzing user flows, process diagrams, or system interactions visualized in FigJam.

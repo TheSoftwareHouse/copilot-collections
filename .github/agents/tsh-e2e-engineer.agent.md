@@ -33,23 +33,33 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills usage guidelines
 
-- `e2e-testing` - E2E testing patterns, verification procedures, and CI readiness checklists using Playwright. Use for writing, debugging, or reviewing end-to-end tests, fixing flaky tests, creating Page Objects, mocking external APIs.
+- `e2e-testing` - to follow established test structure patterns, Page Object conventions, mocking strategies, error recovery procedures, and the verification loop when writing, debugging, or fixing E2E tests. Always load before creating new tests or diagnosing flaky failures.
 
 ## E2E Testing Standards
 
-**Always**:
-- Test names: `should [behavior] when [condition]`
-- Accessible locators: `getByRole`, `getByLabel`, `getByTestId`
-- Web-first assertions (no `waitForTimeout`)
-- Unique test data: `test-${Date.now()}-${test.info().parallelIndex}`
-- CI-ready: headless mode, env variables
+1. Locators & Selectors
+Use User-Visible Locators: Prioritize `getByRole`, `getByLabel`, and `getByText`.
 
-**Never**:
-- `waitForTimeout()` - use assertions
-- CSS selectors (`.btn-primary`)
-- Test interdependencies
-- Hardcoded credentials
-- `waitForLoadState('networkidle')`
+Avoid Implementation Details: Do not use CSS selectors based on classes (e.g., `.btn-primary`) or structure (XPath).
+
+Fallback: Use `getByTestId` only if user-visible locators are not feasible.
+
+2. Synchronization & Assertions
+Auto-waiting: Rely on built-in auto-waiting assertions (e.g., `expect(locator).toBeVisible()`).
+
+No Manual Timeouts: Never use `waitForTimeout()`.
+
+No Network Idle: Avoid `waitForLoadState('networkidle')` as it is flaky; wait for specific UI elements or API responses instead.
+
+3. Test Data & Isolation
+Dynamic Data: Generate unique test data for every run to support parallel execution (e.g., use a helper to append timestamps or UUIDs). For example: `test-${Date.now()}-${test.info().parallelIndex}`
+
+Isolation: Tests must not depend on the state left by previous tests.
+
+Security: Never hardcode credentials; use environment variables.
+
+4. Naming Conventions
+Pattern: 'should [behavior] when [condition]' (e.g., 'should display error when login fails').
 
 ## Technical Context Discovery
 
@@ -89,7 +99,7 @@ If no Copilot instructions are found, or if they don't cover specific aspects, *
 
 If neither Copilot instructions nor sufficient existing test patterns are available (e.g., new project, first E2E tests), **use external documentation and industry best practices**:
 
-- **Use `Context7` tool** to search for official Playwright documentation (check version in `package.json` first).
+- **Use `context7` tool** with library ID `/microsoft/playwright.dev` to query official Playwright documentation directly (no need to resolve the library first). Check version in `package.json` to include it in your query.
 - Apply **Playwright best practices** for test structure, locators, and assertions.
 - Follow **accessible locator strategies** (role-based locators over CSS selectors).
 - Use **Page Object Model** for maintainability.
@@ -105,20 +115,21 @@ If neither Copilot instructions nor sufficient existing test patterns are availa
 
 ## Tool Usage Guidelines
 
-You have access to the `Context7` tool.
+You have access to the `context7` tool.
+- **Playwright docs library ID**: `/microsoft/playwright.dev` — use this ID directly with `query-docs` to skip the `resolve-library-id` step.
 - **MUST use when**:
   - Searching for Playwright API documentation and usage examples.
   - Finding solutions to specific test failures or Playwright errors.
   - Researching best practices for implementing specific test scenarios (e.g., "how to test file uploads in Playwright").
   - Understanding Playwright features and their correct usage.
 - **IMPORTANT**:
-  - Before searching, ALWAYS check the project's `package.json` to determine the exact Playwright version.
-  - Include the version number in your search queries to ensure relevance (e.g., "Playwright 1.40 locators" instead of just "Playwright locators").
-  - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
+  - Always call `query-docs` with `libraryId: /microsoft/playwright.dev` — do NOT call `resolve-library-id` for Playwright.
+  - Before searching, check the project's `package.json` to determine the exact Playwright version and include it in your query for relevance.
+  - For non-Playwright libraries, use `resolve-library-id` first to obtain the correct ID.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `Figma MCP Server` tool.
+You have access to the `figma-mcp-server` tool.
 - **MUST use when**:
   - A Figma link is provided in the context or plan to understand the expected UI behavior.
   - Extracting element labels, button text, or UI structure to inform locator strategies.

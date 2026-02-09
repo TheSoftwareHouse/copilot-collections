@@ -22,13 +22,13 @@ Before running verification, ensure you have:
 ---
 ## Verification Steps
 
-**Step 1: Get EXPECTED (Figma MCP)**
-- Call Figma MCP for the component/node
+**Step 1: Get EXPECTED (`figma-mcp-server`)**
+- Call `figma-mcp-server` for the component/node
 - Extract: **layer hierarchy**, layout direction, alignment, spacing, typography, colors, dimensions, states
 - Note the **structure**: what contains what, in what order
 - Note the **full page layout**: all sections from top to bottom
 
-**Step 2: Get ACTUAL (Playwright MCP) - FULL PAGE**
+**Step 2: Get ACTUAL (`playwright`) - FULL PAGE**
 - Navigate to the running app
 - **Scroll to top of page first** before capturing
 - Capture: accessibility tree, screenshot, console errors
@@ -181,7 +181,7 @@ When verifying multiple components in one pass:
 ---
 ## Fallback: When MCP Tools Fail
 
-If Figma MCP or Playwright MCP returns errors or incomplete data:
+If `figma-mcp-server` or `playwright` returns errors or incomplete data:
 
 1. **Report the tool failure** in the output (do not fabricate data)
 2. **Mark confidence as LOW**
@@ -192,7 +192,7 @@ If Figma MCP or Playwright MCP returns errors or incomplete data:
 ---
 ## Rules
 
-1. **Call BOTH tools** – Figma MCP for EXPECTED, Playwright for ACTUAL
+1. **Call BOTH tools** – `figma-mcp-server` for EXPECTED, `playwright` for ACTUAL
 2. **Report ALL differences** – structure, layout, dimensions, visual, components
 3. **Structure differences = automatic FAIL** – never ignore layout/hierarchy mismatches
 4. **Be precise** – include exact values from both sources

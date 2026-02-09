@@ -12,10 +12,22 @@ description: "Create, maintain, and execute E2E tests for given feature or user 
 
 ## 1. Context
 
+Determine how context was provided and gather requirements accordingly:
+
+### Option A: Research & plan files exist
 - Read `*.research.md` → Jira context, Figma links, acceptance criteria
 - Read `*.plan.md` → implementation scope, definition of done
+
+### Option B: Context provided directly in the prompt
+When no research/plan files are referenced (e.g., user describes the feature, acceptance criteria, or test scope inline):
+- Extract requirements, acceptance criteria, and scope from the user's message
+- Treat the prompt message as the single source of truth for what to test
+- If critical information is missing (e.g., which pages/flows to cover, expected behaviors), ask for clarification before proceeding
+
+### Always (regardless of option)
 - Check `*.instructions.md` → project-specific conventions
 - Analyze `playwright.config.ts` + existing Page Objects
+- Discover existing test patterns and locator strategies in the codebase
 
 ---
 
@@ -25,7 +37,7 @@ Map acceptance criteria to scenarios:
 
 | Acceptance Criterion | Scenario Type | Test Name |
 |---------------------|---------------|-----------|
-| [from plan] | Happy/Error/Edge | `should [behavior] when [condition]` |
+| [from plan/prompt] | Happy/Error/Edge | `should [behavior] when [condition]` |
 
 Checklist:
 - [ ] Each criterion → at least one test
@@ -48,7 +60,7 @@ Use the `e2e-testing` skill for Page Object patterns, test structure, mocking, v
 ### Coverage
 | Criterion | Test | Status |
 |-----------|------|--------|
-| [from plan] | [file#test] | ✅/❌ |
+| [from plan/prompt] | [file#test] | ✅/❌ |
 
 Coverage: X/Y (Z%)
 
@@ -66,7 +78,7 @@ Coverage: X/Y (Z%)
 - NEW: pages/login.page.ts
 ```
 
-Update plan: check acceptance criteria, add files to Change Log.
+Update plan (if plan file exists): check acceptance criteria, add files to Change Log.
 
 ---
 
