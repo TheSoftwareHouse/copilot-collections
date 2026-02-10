@@ -36,6 +36,7 @@ Before starting any task, you check all available skills and decide which one is
 - `code-review` - to follow the structured code review process covering correctness, quality, security, testing, best practices, and scalability.
 - `implementation-gap-analysis` - to compare the implemented solution against the plan and verify completeness of all required changes.
 - `technical-context-discovery` - to understand project conventions, coding standards, and established patterns to review against.
+- `sql-and-database` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
 
 ## Tool Usage Guidelines
 
