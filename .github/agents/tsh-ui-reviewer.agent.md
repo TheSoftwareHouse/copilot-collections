@@ -1,7 +1,6 @@
 ---
-target: vscode
 description: "Agent specializing in verifying that implemented UI matches the Figma design and frontend guidelines."
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/killTerminal', 'execute/awaitTerminal', 'vscode/runCommand', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*', 'vscode/askQuestions']
+tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs: 
   - label: Start Frontend Implementation
     agent: tsh-frontend-software-engineer

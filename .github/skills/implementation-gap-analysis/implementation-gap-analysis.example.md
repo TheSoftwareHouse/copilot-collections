@@ -1,12 +1,37 @@
-# Implementation Gap Analysis
+# Implementation Gap Analysis - <task-name>
 
-<task-description>
+## Task Summary
 
-## To be implemented
-Put a list of things that have to be fully created
+<brief-task-description>
 
-## To be modified
-Put a list of things that have to be modified, together with information on how the modification has to look like.
+## Analysis
 
-## To be reused
-Put a list of things that can be re-used as they are.
+### To Be Implemented
+Items that need to be fully created from scratch:
+
+| # | Component/Feature | Description | Complexity |
+|---|---|---|---|
+| 1 | <component> | <what needs to be created> | Low/Medium/High |
+
+### To Be Modified
+Items that exist but need changes to support the new requirements:
+
+| # | Component/Feature | File Path | Required Changes |
+|---|---|---|---|
+| 1 | <component> | `<file-path>` | <description of modifications> |
+
+### To Be Reused
+Items that already exist and can be used as-is:
+
+| # | Component/Feature | File Path | How It Will Be Used |
+|---|---|---|---|
+| 1 | <component> | `<file-path>` | <description of reuse> |
+
+## Summary
+
+| Category | Count |
+|---|---|
+| To Be Implemented | <count> |
+| To Be Modified | <count> |
+| To Be Reused | <count> |
+| **Total Scope** | <total> |

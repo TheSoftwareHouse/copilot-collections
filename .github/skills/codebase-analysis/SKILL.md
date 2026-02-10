@@ -5,7 +5,7 @@ description: Analyse the codebase of the system. Look for dependencies. Understa
 
 # Codebase Analysis
 
-This helps you analyze the codebase in a structured way, getting the most out of it. It focuses on architecture, patterns, code style, module separation, testing approach, dependencies, and infrastructure.
+This skill helps you analyse the codebase in a structured way, getting the most out of it. It focuses on architecture, patterns, code style, module separation, testing approach, dependencies and infrastructure.
 
 ## Codebase Analysis Process
 
@@ -39,7 +39,7 @@ Find out where are the most crucial directories for each system.
 **Step 2: Check dependencies**
 
 Analyse all dependencies.
-Make sure to fully understand what frameworks, libraries, authentication systems etc are used.
+Make sure to fully understand what frameworks, libraries, authentication systems etc. are used.
 Make sure to note which dependencies are out of date and could be an issue later on.
 
 **Step 3: Check available scripts**
@@ -66,7 +66,7 @@ Make sure to understand what library we use for database communication.
 Understand how the backend is deployed.
 Understand how the authentication and authorisation works.
 
-**Step 6: Check frotnend code**
+**Step 6: Check frontend code**
 
 Check what framework we use.
 Understand what communication pattern (REST, Websocket, Graphql etc) we use.
@@ -86,7 +86,7 @@ Make sure to understand how scalable the infrastructure is.
 
 Check what third parties we use.
 List all of the 3rd party libraries and their purpose in a system.
-Understand how tightly they intergrate into the system and how hard it will be to exchange them in the future.
+Understand how tightly they integrate into the system and how hard it will be to exchange them in the future.
 
 **Step 9: Check testing approach**
 

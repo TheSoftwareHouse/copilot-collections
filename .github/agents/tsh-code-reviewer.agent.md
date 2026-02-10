@@ -1,7 +1,6 @@
 ---
-target: vscode
 description: "Agent specializing in performing code review."
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/killTerminal', 'execute/awaitTerminal', 'vscode/runCommand', 'atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'context7/*', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'search/changes', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*', 'vscode/askQuestions']
+tools: ['execute', 'read', 'atlassian/*', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs: 
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
@@ -31,6 +30,12 @@ Make sure to run the tests and verify that the implementation works as expected 
 Before starting the review, ensure to understand coding guidelines and instructions provided in copilot-instructions.md or any other *.instructions.md files related to the feature. Make sure to understand project coding standards and best practices.
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
+
+## Skills Usage Guidelines
+
+- `code-review` - to follow the structured code review process covering correctness, quality, security, testing, best practices, and scalability.
+- `implementation-gap-analysis` - to compare the implemented solution against the plan and verify completeness of all required changes.
+- `technical-context-discovery` - to understand project conventions, coding standards, and established patterns to review against.
 
 ## Tool Usage Guidelines
 

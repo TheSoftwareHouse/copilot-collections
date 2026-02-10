@@ -1,7 +1,6 @@
 ---
-target: vscode
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
-tools: ['atlassian/atlassianUserInfo', 'atlassian/fetch', 'atlassian/getAccessibleAtlassianResources', 'atlassian/getConfluencePage', 'atlassian/getConfluencePageDescendants', 'atlassian/getConfluencePageFooterComments', 'atlassian/getConfluencePageInlineComments', 'atlassian/getConfluenceSpaces', 'atlassian/getJiraIssue', 'atlassian/getJiraIssueRemoteIssueLinks', 'atlassian/getJiraIssueTypeMetaWithFields', 'atlassian/getJiraProjectIssueTypesMetadata', 'atlassian/getPagesInConfluenceSpace', 'atlassian/getTransitionsForJiraIssue', 'atlassian/getVisibleJiraProjects', 'atlassian/search', 'atlassian/searchConfluenceUsingCql', 'atlassian/searchJiraIssuesUsingJql', 'context7/*', 'figma-mcp-server/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'agent', 'search/usages', 'vscode/runCommand', 'execute/killTerminal', 'execute/awaitTerminal', 'sequential-thinking/*', 'vscode/askQuestions']
+tools: ['atlassian/*', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
 handoffs: 
   - label: Start Implementation
     agent: tsh-software-engineer
@@ -43,11 +42,12 @@ The plan you create is always divided into phases and tasks. Each phase is repre
 
 Before finalizing the technical specifications, ensure to review them thoroughly to confirm that all aspects of the solution have been considered and documented clearly. Collaborate with other team members, including business analysts and software engineers, to ensure successful project outcomes. Make sure to understand instructions provided in *.instructions.md files related to the feature.
 
-## Skills usage guidelines
+## Skills Usage Guidelines
 
-- `codebase-analysis` - to analyze the current codebase and understand the existing architecture, components, and patterns.
 - `architecture-design` - to design the overall architecture of the solution, including components, interactions, data flows and to prepare the implementation plan.
+- `codebase-analysis` - to analyze the current codebase and understand the existing architecture, components, and patterns.
 - `implementation-gap-analysis` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
+- `technical-context-discovery` - to establish project conventions, coding standards, and existing patterns before designing the solution.
 
 ## Tool Usage Guidelines
 

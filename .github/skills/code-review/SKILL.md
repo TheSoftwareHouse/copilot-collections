@@ -5,7 +5,7 @@ description: Perform code review. Quality analysis. Acceptance criteria verifica
 
 # Code review
 
-This helps you verify that the implemented code follow all best practices and quality standards.
+This skill helps you verify that the implemented code follows all best practices and quality standards.
 
 ## Code Review Process
 
@@ -73,4 +73,5 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 
 ## Connected Skills
 
-- implementation-gap-analysis
+- `implementation-gap-analysis`
+- `technical-context-discovery` - for understanding project conventions and standards to review against

@@ -5,7 +5,7 @@ description: Analyse task description, performs gap analysis, expand the context
 
 # Task Analysis
 
-This skills helps you gather and expand context about specific task to be developed, looks for gaps in tasks description and helps to understand the current state of the system.
+This skill helps you gather and expand context about a specific task to be developed, looks for gaps in the task description and helps to understand the current state of the system.
 
 ## Task analysis process
 
@@ -13,11 +13,22 @@ Use the checklist below and track your progress:
 
 ```
 Analysis progress:
+- [ ] Step 0: Determine input source
 - [ ] Step 1: Look for available external sources of information
 - [ ] Step 2: Gather information from all sources
 - [ ] Step 3: Identify gaps and ask clarification questions
 - [ ] Step 4: Based on the answers and gathered information finalize the research report
 ```
+
+**Step 0: Determine input source**
+
+Before gathering information, determine how the task context was provided:
+
+- **Research & plan files exist** (`*.research.md`, `*.plan.md`): Read them as the primary source of requirements, acceptance criteria, scope, and definition of done.
+- **Jira ID / task ID provided**: Use it to fetch task details from external tools (Step 1).
+- **Context provided directly in the prompt**: When neither files nor a task ID are referenced, extract requirements, acceptance criteria, and scope from the user's message. Treat the prompt as the single source of truth. If critical information is missing, ask for clarification before proceeding.
+
+This determination affects how much of Steps 1–2 you need to execute — if the context is already fully provided inline or in files, skip redundant external lookups.
 
 **Step 1: Look for available external sources of information**
 
@@ -42,10 +53,15 @@ Find relevant information on knowledge base tools.
 
 **Step 3: Identify gaps and ask clarification questions**
 
-Based on the gathered information and task description, look for ambiguities or missing information. Create questions and ask them to the user. Don't proceed until all questions are answered or you are directly told to continue.
+Based on the gathered information and task description, look for ambiguities or missing information. Create the questions and ask them to the user. Don't proceed until all questions are answered or you are directly told to continue.
 
 **Step 4: Based on the answers and gathered information finalize the research report**
 
 Generate a report following the `./research.example.md` structure. Make sure to provide all necessary information that you gathered, all findings and all answered questions.
 
 Don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
+
+## Connected Skills
+
+- `codebase-analysis` - for analyzing the existing codebase in the context of task requirements
+- `implementation-gap-analysis` - for understanding what already exists vs what needs to be built

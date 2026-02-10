@@ -8,23 +8,20 @@ description: "Create, maintain, and execute E2E tests for given feature or user 
 
 **Non-interactive** - make reasonable decisions, document them.
 
+## Required Skills
+
+Before starting, load and follow these skills:
+- `task-analysis` - to determine the input source and gather task requirements
+- `technical-context-discovery` - to establish test conventions, existing patterns, and project configuration
+- `e2e-testing` - for Page Object patterns, test structure, mocking strategies, verification loop rules, error recovery, and CI readiness checklist
+
 ---
 
 ## 1. Context
 
-Determine how context was provided and gather requirements accordingly:
+Follow the `task-analysis` skill's **Step 0 (Determine input source)** to identify whether context comes from research/plan files, a Jira ID, or directly from the prompt message.
 
-### Option A: Research & plan files exist
-- Read `*.research.md` → Jira context, Figma links, acceptance criteria
-- Read `*.plan.md` → implementation scope, definition of done
-
-### Option B: Context provided directly in the prompt
-When no research/plan files are referenced (e.g., user describes the feature, acceptance criteria, or test scope inline):
-- Extract requirements, acceptance criteria, and scope from the user's message
-- Treat the prompt message as the single source of truth for what to test
-- If critical information is missing (e.g., which pages/flows to cover, expected behaviors), ask for clarification before proceeding
-
-### Always (regardless of option)
+Additionally, always:
 - Check `*.instructions.md` → project-specific conventions
 - Analyze `playwright.config.ts` + existing Page Objects
 - Discover existing test patterns and locator strategies in the codebase
@@ -48,7 +45,12 @@ Checklist:
 
 ## 3. Implementation & Verification
 
-Use the `e2e-testing` skill for Page Object patterns, test structure, mocking, verification loop rules, error recovery, and CI readiness checklist.
+Follow the `e2e-testing` skill for:
+- Page Object patterns and test structure
+- Mocking strategies (external APIs only)
+- Verification loop rules and iteration limits
+- Error recovery procedures
+- CI readiness checklist
 
 ---
 

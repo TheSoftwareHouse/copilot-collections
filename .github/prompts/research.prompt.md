@@ -4,13 +4,19 @@ model: "Claude Opus 4.6"
 description: "Prepare a context for a specific task or feature from a business analysis perspective."
 ---
 
-Research tasks based on provided JIRA ID or task description.
+Research the task based on the provided Jira ID or task description.
 
-The file outcome should be a markdown file named after the task jira id in kebab-case format or after task name (if no jira task provided) with .research.md suffix (e.g., user-authentication.feature.research.md). The file should be organized in a structured format, including sections for gathered information, relevant links, and any diagrams or flowcharts that will help developers understand the task. The file should be placed in the specifications directory under a folder named after the issue id or generated task name in kebab-case format.
+The file outcome should be a markdown file named after the task Jira ID in kebab-case format or after task name (if no Jira task provided) with `.research.md` suffix (e.g., `user-authentication.research.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
 
 It should contain every relevant information needed to build a comprehensive context for the task or feature.
 
-Make sure to follow the steps below:
+## Required Skills
+
+Before starting, load and follow these skills:
+- `task-analysis` - for the structured research process and output template
+- `codebase-analysis` - for analyzing the existing codebase in the context of task requirements
+
+## Workflow
 
 1. Gather all information related to the task from the codebase, Atlassian tools (Jira, Confluence) and other relevant sources.
 2. Analyze the task thoroughly, including its parents and subtasks if applicable, to get the full picture of the requirements.
@@ -19,27 +25,11 @@ Make sure to follow the steps below:
 5. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using `figma-mcp-server` (it's very important) and include relevant information in the context.
 6. Analyze if there are any ambiguities or missing information in the task description. If there are any ask for clarification before finalizing the context.
 7. Don't provide implementation details, focus on gathering requirements, user stories, acceptance criteria and key flows.
-8. Save the gathered information in a markdown file named after the task or feature in kebab-case format with .research.md suffix.
+8. Save the gathered information following the `research.example.md` template from the `task-analysis` skill.
 9. Ensure that the research file is clear, concise, and tailored to the needs of the development team.
 
-The research file should always follow the same structure described below for consistency across different tasks. Don't add or remove sections unless explicitly instructed.
-
-List of sections to include in the research file:
-- Task details - Title, Description, Priority, Reporter, Created date, Due date, Labels, Estimated effort
-- Business impact - Explanation of how the task aligns with business goals and objectives
-- Gathered Information - Detailed list of information gathered from the task analysis
-- Relevant Links - Any relevant links to documentation, designs, or other resources
-- Diagrams/Flowcharts - Any relevant diagrams or flowcharts that help illustrate the requirements or processes
-- Current Implementation Status - Analysis of existing codebase to identify:
-   - Existing components, functions, or features that are related to this task
-   - What is already implemented and can be reused
-   - What needs to be created from scratch
-   - What needs to be modified or extended
-   - Key files and directories relevant to this task
-   Use semantic search to automatically discover related code in the project.
-
-Follow the above structure and naming conventions strictly to ensure clarity and consistency.
+Follow the template structure and naming conventions strictly to ensure clarity and consistency.
 
 In case of any ambiguities or missing information in the task description, ask for clarification before finalizing the context.
 
-Uppdate the research file after each interaction if new information is gathered.
+Update the research file after each interaction if new information is gathered.
