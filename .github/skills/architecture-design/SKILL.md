@@ -77,3 +77,4 @@ Don't add or remove any sections from the template. Follow the structure and nam
 - `codebase-analysis` - for analyzing the existing architecture, components, and patterns
 - `implementation-gap-analysis` - for verifying what was already implemented and what should be added
 - `technical-context-discovery` - for establishing project conventions and existing patterns before designing
+- `sql-and-database` - for designing database schemas, data models, normalisation strategies, and indexing as part of the solution architecture

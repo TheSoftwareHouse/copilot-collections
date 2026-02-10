@@ -14,6 +14,7 @@ Before starting, load and follow these skills:
 - `code-review` - for the structured code review process covering correctness, quality, security, testing, best practices, and scalability
 - `implementation-gap-analysis` - to compare the implemented solution against the plan and verify completeness
 - `technical-context-discovery` - to understand project conventions and coding standards to review against
+- `sql-and-database` - when reviewing database-related changes: schema design, migration safety, query performance, index coverage, and ORM usage
 
 ## Workflow
 

@@ -41,6 +41,7 @@ Before starting any task, you check all available skills and decide which one is
 - `codebase-analysis` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
 - `frontend-implementation` - for UI tasks: accessibility requirements, design system usage, component patterns, and performance guidelines.
 - `ui-verification` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
+- `sql-and-database` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 
 ## Tool Usage Guidelines
 
