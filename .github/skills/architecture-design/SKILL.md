@@ -5,7 +5,7 @@ description: Design the architecture to solve a given task. Propose the solution
 
 # Architecture Design
 
-This skills helps you to design the architecture that follows the best practices, that solves the actual business goal.
+This skill helps you design the architecture that follows best practices and solves the actual business goal.
 
 ## Architecture Design Process
 
@@ -21,7 +21,7 @@ Analysis progress:
 ```
 
 **Step 1: Understand the goal of the task**
-Thorougly process the conversation history and task `research.md` file to fully understand the business goal of the task.
+Thoroughly process the conversation history and task `*.research.md` file to fully understand the business goal of the task.
 
 **Step 2: Analyse the current codebase**
 Perform a current codebase analysis to get a full picture of a current system in a context of the task.
@@ -50,7 +50,7 @@ The example patterns you should check (but you are not limited to only use those
 
 Make sure to follow the best UI/UX patterns:
 - Atomic Design
-- Accesibility patterns (WCAG)
+- Accessibility patterns (WCAG)
 
 Make sure to follow security best practices like OWASP TOP10
 
@@ -71,3 +71,9 @@ Don't provide deployment plans, code pushing instructions, code review instructi
 Save the plan as a document following the `./plan.example.md` template.
 
 Don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
+
+## Connected Skills
+
+- `codebase-analysis` - for analyzing the existing architecture, components, and patterns
+- `implementation-gap-analysis` - for verifying what was already implemented and what should be added
+- `technical-context-discovery` - for establishing project conventions and existing patterns before designing

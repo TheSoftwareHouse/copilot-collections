@@ -1,7 +1,6 @@
 ---
-target: vscode
 description: "Agent specializing in implementing frontend solutions (web UI & design systems) based on specified requirements, UX/UI designs and technical designs."
-tools: ['execute/getTerminalOutput', 'execute/runInTerminal', 'read/terminalLastCommand', 'read/terminalSelection', 'execute/createAndRunTask', 'execute/killTerminal', 'execute/awaitTerminal', 'vscode/runCommand', 'atlassian/search', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'edit/createFile', 'edit/createDirectory', 'edit/editFiles', 'search', 'todo', 'agent', 'search/usages', 'read/problems', 'execute/testFailure', 'vscode/openSimpleBrowser', 'sequential-thinking/*', 'vscode/askQuestions']
+tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs:
   - label: Create E2E tests for implemented UI feature
     agent: tsh-e2e-engineer
