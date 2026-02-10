@@ -39,6 +39,7 @@ Before starting any task, you check all available skills and decide which one is
 - `technical-context-discovery` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
 - `implementation-gap-analysis` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
 - `codebase-analysis` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
+- `sql-and-database` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 
 ## Tool Usage Guidelines
 
