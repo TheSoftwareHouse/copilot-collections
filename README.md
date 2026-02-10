@@ -18,8 +18,8 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer.
-- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/review` with consistent behavior across projects.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
+- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e` with consistent behavior across projects.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -137,6 +137,25 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 - Escalates after 5 failed iterations with detailed report
 - Produces **UI Verification Summary** before code review
 
+#### Example E2E Testing Flow
+
+For features that need end-to-end test coverage:
+
+1️⃣ /research     <JIRA_ID or task description>
+   ↳ 📖 Review research doc – understand feature scope and user journeys
+   ↳ ✅ Identify critical paths that need E2E coverage
+
+2️⃣ /plan         <JIRA_ID or task description>
+   ↳ 📖 Review plan – confirm test scenarios and acceptance criteria
+   ↳ ✅ Ensure E2E testing is included in the plan
+
+4️⃣ /e2e          <JIRA_ID or task description>
+   ↳ 📖 Implements Page Objects, test files, and fixtures
+   ↳ ✅ Run tests locally, verify they pass
+   ↳ 🔄 Iterate on flaky or failing tests
+
+> ⚠️ **Important:** The `/e2e` command generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.
+
 ---
 
 ## 🧑‍🤝‍🧑 Agents
@@ -229,6 +248,12 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Covers error recovery strategies and CI readiness checklists.
 - Ensures consistent, reliable E2E tests across the team.
 
+### 🧭 Technical Context Discovery
+- Focus: **establishing technical context** before implementing any feature.
+- Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
+- Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
+- Ensures new code is consistent with established patterns and prevents conflicting conventions.
+
 ---
 
 ## 💬 Prompts & Chat Commands
@@ -268,6 +293,7 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Reviews the final implementation against the plan and requirements.
 - Highlights security, reliability, performance, and maintainability concerns.
 - Outputs: structured review with clear “pass/blockers/suggestions”.
+
 ### `/e2e <JIRA_ID | description>`
 - Creates comprehensive **end-to-end tests** for the feature using Playwright.
 - Analyzes the application, designs test scenarios, and implements Page Objects.
