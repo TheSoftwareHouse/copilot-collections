@@ -59,7 +59,7 @@ You have access to the `Atlassian` tool.
   - Non-Atlassian related research or documentation.
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
-You have access to the `Context7` tool.
+You have access to the `context7` tool.
 - **MUST use when**:
   - Evaluating third-party libraries or services by searching their documentation and comparisons.
   - Verifying compatibility and feature support for specific versions of frameworks or libraries.
@@ -71,7 +71,7 @@ You have access to the `Context7` tool.
 - **SHOULD NOT use for**:
   - Searching the local codebase (use `search` or `grep_search` instead).
 
-You have access to the `Figma MCP Server` tool.
+You have access to the `figma-mcp-server` tool.
 - **MUST use when**:
   - Designing the component hierarchy and data flow based on UI requirements.
   - Identifying necessary API endpoints and data structures to support the visual design.
