@@ -602,7 +602,7 @@ COMMIT;
 | Lock Type | SQL | Scope | Behaviour |
 |---|---|---|---|
 | **Row-level shared (FOR SHARE)** | `SELECT ... FOR SHARE` | Row | Other transactions can read but not modify the row |
-| **Row-level exclusive (FOR UPDATE)** | `SELECT ... FOR UPDATE` | Row | Other transactions cannot read (with FOR UPDATE) or modify the row |
+| **Row-level exclusive (FOR UPDATE)** | `SELECT ... FOR UPDATE` | Row | Blocks concurrent `SELECT ... FOR UPDATE`/`UPDATE`/`DELETE` on the row; plain `SELECT` can still read under MVCC |
 | **Table-level** | `LOCK TABLE ... IN <mode> MODE` | Table | Applies to the entire table — use sparingly |
 | **Advisory locks** | `pg_advisory_lock(key)` | Application-defined | Application-level coordination, not tied to specific rows |
 
