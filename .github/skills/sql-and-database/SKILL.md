@@ -515,23 +515,34 @@ For large data modifications, batch to avoid long locks and transaction log bloa
 -- Instead of one massive DELETE:
 -- DELETE FROM logs WHERE created_at < '2024-01-01';  -- locks millions of rows
 
--- Batch delete:
-DO $$
-DECLARE
-    rows_deleted INT;
-BEGIN
-    LOOP
-        DELETE FROM logs
-        WHERE id IN (
-            SELECT id FROM logs
-            WHERE created_at < '2024-01-01'
-            LIMIT 5000
-        );
-        GET DIAGNOSTICS rows_deleted = ROW_COUNT;
-        EXIT WHEN rows_deleted = 0;
-        COMMIT;
-    END LOOP;
-END $$;
+-- Batch delete from application/client code:
+-- In your application, run this statement in a loop until it affects 0 rows.
+DELETE FROM logs
+WHERE id IN (
+    SELECT id
+    FROM logs
+    WHERE created_at < '2024-01-01'
+    ORDER BY id
+    LIMIT 5000
+);
+
+-- Pseudocode (outside the database):
+-- repeat
+--   rows_deleted = execute(
+--     'DELETE FROM logs
+--       WHERE id IN (
+--         SELECT id
+--         FROM logs
+--         WHERE created_at < $1
+--         ORDER BY id
+--         LIMIT 5000
+--       )',
+--     ['2024-01-01']
+--   )
+-- until rows_deleted = 0;
+--
+-- Each iteration can run in its own transaction or in an explicit
+-- transaction per batch, controlled by the application.
 ```
 
 ---
