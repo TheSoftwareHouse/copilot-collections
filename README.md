@@ -20,8 +20,8 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e` with consistent behavior across projects.
-- � **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, SQL & Database Engineering.
-- �🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, SQL & Database Engineering.
+- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
 ---
