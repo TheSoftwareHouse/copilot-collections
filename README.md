@@ -20,8 +20,8 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e` with consistent behavior across projects.
-- � **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
-- �🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, SQL & Database Engineering.
+- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
 ---
@@ -254,6 +254,14 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
 - Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
 - Ensures new code is consistent with established patterns and prevents conflicting conventions.
+
+### 🗄️ SQL & Database Engineering
+- Focus: **database schema design, performant SQL, and query debugging**.
+- Covers naming conventions, primary key strategies, data type selection, and normalisation.
+- Provides indexing strategies, join optimisation, locking mechanics, and transaction patterns.
+- Includes query debugging with `EXPLAIN ANALYZE` and common anti-pattern detection.
+- Supports ORM integration with TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM.
+- Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 
 ---
 

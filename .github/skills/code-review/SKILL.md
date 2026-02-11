@@ -75,3 +75,4 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 
 - `implementation-gap-analysis`
 - `technical-context-discovery` - for understanding project conventions and standards to review against
+- `sql-and-database` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns
