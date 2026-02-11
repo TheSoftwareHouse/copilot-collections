@@ -916,11 +916,11 @@ DO UPDATE SET
     updated_at = NOW();
 
 -- MySQL: INSERT ... ON DUPLICATE KEY UPDATE
-INSERT INTO products (sku, name, price, updated_at)
+INSERT INTO products AS new (sku, name, price, updated_at)
 VALUES ('WIDGET-001', 'Widget', 19.99, NOW())
 ON DUPLICATE KEY UPDATE
-    name = VALUES(name),
-    price = VALUES(price),
+    name = new.name,
+    price = new.price,
     updated_at = NOW();
 ```
 
