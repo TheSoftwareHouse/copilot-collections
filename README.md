@@ -20,7 +20,7 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e` with consistent behavior across projects.
-- � **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
+- 📚 **Reusable skills** – Task Analysis, Architecture Design, Backend API Development, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
 - �🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -224,7 +224,13 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Proposes a solution that is scalable, secure, and easy to maintain.
 - Covers patterns like DRY, KISS, DDD, CQRS, modular/hexagonal architecture, and more.
 
-### 📊 Codebase Analysis
+### � Backend API Development
+- Focus: **backend API service development** patterns, standards, and procedures.
+- Covers REST/GraphQL APIs, CRUD endpoints, database handling, authentication, and testing strategies.
+- Applies to Node.js, PHP, .NET, Java, and Go backends.
+- Follows SRP, DRY, KISS, and YAGNI principles with modular architecture.
+
+### �📊 Codebase Analysis
 - Focus: **structured analysis of the entire codebase**.
 - Reviews repository structure, dependencies, scripts, and architecture.
 - Examines backend, frontend, infrastructure, and third-party integrations.

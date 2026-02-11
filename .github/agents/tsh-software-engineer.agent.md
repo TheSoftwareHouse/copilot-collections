@@ -39,6 +39,7 @@ Before starting any task, you check all available skills and decide which one is
 - `technical-context-discovery` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
 - `implementation-gap-analysis` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
 - `codebase-analysis` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
+- `backend-api-development` - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
 
 ## Tool Usage Guidelines
 
