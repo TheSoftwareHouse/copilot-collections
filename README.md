@@ -5,7 +5,7 @@
 <h1 align="center">⚙️ Copilot Collections</h1>
 
 <p align="center">
-  Opinionated GitHub Copilot setup for delivery teams – with shared workflows, agents, prompts, and MCP integrations.
+  Opinionated GitHub Copilot setup for delivery teams – with shared workflows, agents, prompts, skills and MCP integrations.
 </p>
 
 <p align="center">
