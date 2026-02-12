@@ -312,7 +312,7 @@ cd ~/projects
 git clone <this-repo-url> copilot-collections
 ```
 
-The important part is that VS Code can see the `.github/prompts` and `.github/agents` folders from this repository.
+The important part is that VS Code can see the `.github/prompts`, `.github/agents` and `.github/skills` folders from this repository.
 
 ### 2. Configure global Copilot locations (User Settings)
 
