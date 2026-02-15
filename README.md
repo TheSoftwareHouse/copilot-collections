@@ -19,7 +19,7 @@
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
-- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e` with consistent behavior across projects.
+- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
 - � **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
@@ -301,6 +301,16 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Uses **Playwright MCP** for real-time interaction and test verification.
 - Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
 - Outputs: Page Objects, test files, fixtures, and execution report.
+
+### `/code-quality-check`
+- Performs a **comprehensive code quality analysis** of the repository.
+- Detects dead code, unused imports, unreachable code paths, and orphaned files.
+- Identifies code duplications across functions, components, API patterns, and type definitions.
+- Proposes improvement opportunities covering complexity, naming, error handling, performance, and security.
+- Includes an **architecture review** evaluating module boundaries, dependency graph, and separation of concerns.
+- For monorepos, analyzes each layer/app separately using parallel subagents.
+- Outputs: prioritized `code-quality-report.md` with severity levels (🔴 Critical / 🟡 Important / 🟢 Nice to Have) and a recommended action plan.
+
 ---
 
 ## 🧩 Installation in VS Code
@@ -466,7 +476,8 @@ Once the repo is cloned and VS Code User Settings are configured:
    - `/plan <JIRA_ID>` – create implementation plan
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
-
+   **Standalone utilities:**
+   - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.
 
 ---
