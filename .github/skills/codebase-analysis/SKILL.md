@@ -108,9 +108,6 @@ Rate the general security approach.
 Based on all findings, propose potential improvements.
 Divide them into Critical, To be implemented but not critical, Nice to have.
 
-Save the results into a separate structure document.
-Each step should be covered in separate section.
-
 **Step 12: Check for deadcode and duplications**
 
 Analyse imports and dependencies to find out if there are any dead code or duplications in the codebase.
@@ -124,3 +121,11 @@ Look for code that is only used in their own test files and can be moved there o
 The process might take a while and because of that create a document containing a section for each step.
 
 During the processing make sure to update the document over the time.
+
+## Report
+
+When using this skill standalone (or when the user explicitly requests a separate codebase-analysis report), save the analysis results as a standalone document following the `./codebase-analysis.example.md` template.
+When this skill is invoked by another prompt or workflow that defines its own required output file/template, embed the relevant findings into that caller’s required output instead of creating a separate `codebase-analysis` report, unless the user explicitly asks for one.
+
+For standalone reports following `./codebase-analysis.example.md`, don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
+For monorepo repositories, duplicate the relevant sections (Backend Analysis, Frontend Analysis, etc.) per app/package when they differ significantly, and clearly label each with the app/package name.
