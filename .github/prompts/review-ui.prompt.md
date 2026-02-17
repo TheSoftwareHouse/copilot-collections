@@ -8,131 +8,25 @@ Your goal is to perform a **single verification pass** comparing the current imp
 
 This prompt is called by `implement-ui.prompt.md` in a loop. Your job is to provide accurate comparison results so the implementation agent can fix issues.
 
----
-## Input Requirements
+## Required Skills
 
-Before running verification, ensure you have:
+Before starting, load and follow these skills:
 
-1. **Figma URL** for the component/view to verify
-   - If missing: STOP and ask user for the link
-   - Do not guess or skip verification
-
-2. **Running dev server** to capture the implementation state
+- `ui-verification` - for verification criteria, structure checklist, severity definitions, and tolerances
 
 ---
-## Verification Steps
 
-**Step 1: Get EXPECTED (`figma-mcp-server`)**
-- Call `figma-mcp-server` for the component/node
-- Extract: **layer hierarchy**, layout direction, alignment, spacing, typography, colors, dimensions, states
-- Note the **structure**: what contains what, in what order
-- Note the **full page layout**: all sections from top to bottom
+## Workflow
 
-**Step 2: Get ACTUAL (`playwright`) - FULL PAGE**
-- Navigate to the running app
-- **Scroll to top of page first** before capturing
-- Capture: accessibility tree, screenshot, console errors
-- **If page is scrollable**: scroll through entire page and capture all sections
-- Analyze the **DOM structure**: container hierarchy, element nesting, order
-- Do NOT verify only the visible viewport - verify the ENTIRE page/component
-
-**IMPORTANT: Full Page Verification**
-- Always start verification from the TOP of the page
-- If the page has scrollable content, verify ALL sections
-- Do not assume off-screen content matches - explicitly check it
-- Compare the COMPLETE page structure against Figma, not just visible fragment
-
-**Step 3: Compare Structure FIRST**
-- Does the container hierarchy match?
-- Is the layout direction (row/column) the same?
-- Is the element order the same?
-- Are there extra/missing wrapper elements?
-- **Are ALL sections from Figma present in the implementation?**
-- **If ANY structural difference → immediate FAIL**
-
-**Step 4: Compare Dimensions & Visual**
-- Compare spacing, gaps, padding, margins
-- Compare typography, colors, radii, shadows
-- Compare component variants and states
-
-**Step 5: Report ALL Findings**
-- Structure issues go in "Structural Issues" section
-- Dimension/visual issues go in "Differences" table
-- Include recommended fixes with exact expected values
+1. **Validate inputs**: Ensure Figma URL is available and dev server is running. If anything is missing, STOP and ask user.
+2. **Get EXPECTED**: Call `figma-mcp-server` to extract layer hierarchy, layout, spacing, typography, colors, dimensions.
+3. **Get ACTUAL**: Use `playwright` to capture the running app - scroll through ENTIRE page, capture accessibility tree.
+4. **Verify you have valid data**: If anything is unexpected or unclear, **STOP and ask user**. Never guess.
+5. **Compare**: Follow `ui-verification` skill criteria - structure FIRST, then dimensions, then visual.
+6. **Report**: Generate structured report with all differences found.
 
 ---
-## What to Verify
 
-### Structure (CRITICAL - never ignore)
-- **Container hierarchy**: Does the DOM structure match Figma's layer hierarchy?
-- **Nesting depth**: Are elements nested at the same level as in Figma?
-- **Grouping**: Are related elements grouped together as in the design?
-- **Order**: Is the visual order of elements the same?
-- **Wrapper elements**: Are there extra/missing wrapper divs that change the layout?
-
-### Layout (CRITICAL - never ignore)
-- **Flex/Grid direction**: row vs column, wrap behavior
-- **Alignment**: justify-content, align-items values
-- **Distribution**: how space is distributed between elements
-- **Positioning**: relative, absolute, fixed - matches design intent?
-- **Centering**: is content centered as in design?
-
-### Dimensions (CRITICAL - never ignore)
-- **Container width**: max-width, fixed width constraints
-- **Card/panel boundaries**: does the card have the same width as in Figma?
-- **Content area vs viewport**: ratio of content width to available space
-- **Width**: fixed, percentage, auto, min/max constraints
-- **Height**: fixed, auto, min/max constraints
-- **Spacing**: padding, margin, gap between elements
-- **Gaps**: space between flex/grid children
-
-**IMPORTANT**: If a card/container in Figma is narrow and centered, but implementation shows it wider or full-width, this is a CRITICAL difference that MUST be reported.
-
-### Visual
-- **Typography**: font-family, size, weight, line-height, letter-spacing
-- **Colors**: text, background, border colors
-- **Radii**: border-radius values
-- **Shadows**: box-shadow, drop-shadow
-- **Backgrounds**: solid, gradient, image
-
-### Components
-- **Correct variants**: is the right variant of a component used?
-- **Design tokens**: are correct tokens used (not hardcoded values)?
-- **States**: hover, focus, active, disabled states
-
----
-## CRITICAL: Do Not Ignore Differences
-
-**You MUST report ALL differences. Do not:**
-
-- Skip structural differences because "it looks similar"
-- Ignore layout direction mismatches (row vs column)
-- Overlook missing/extra wrapper elements
-- Dismiss alignment differences as "close enough"
-- Rationalize differences as "implementation detail"
-- **Verify only the visible viewport** - check the ENTIRE page
-- **Assume off-screen content is correct** - scroll and verify everything
-
-**Every difference between Figma and implementation = FAIL**
-
-If you see a difference and do not report it, you are failing your primary purpose.
-
----
-## Structure Verification Checklist
-
-Before reporting PASS, verify:
-
-- [ ] **Verified ENTIRE page** (scrolled from top to bottom)
-- [ ] **All sections from Figma are present** in implementation
-- [ ] Container hierarchy matches Figma layers
-- [ ] Flex/grid direction is correct
-- [ ] Alignment (justify/align) matches design
-- [ ] Element order matches design
-- [ ] No extra wrapper elements that change layout
-- [ ] No missing container elements
-- [ ] Spacing between elements matches design
-
----
 ## Output Format
 
 Return a structured report:
@@ -169,6 +63,7 @@ Return a structured report:
 ```
 
 ---
+
 ## Batch Verification
 
 When verifying multiple components in one pass:
@@ -179,6 +74,7 @@ When verifying multiple components in one pass:
 4. Summary at the end: X/Y components passed
 
 ---
+
 ## Fallback: When MCP Tools Fail
 
 If `figma-mcp-server` or `playwright` returns errors or incomplete data:
@@ -190,6 +86,7 @@ If `figma-mcp-server` or `playwright` returns errors or incomplete data:
 5. **Do not block** the loop - return FAIL with partial report so caller can decide
 
 ---
+
 ## Rules
 
 1. **Call BOTH tools** – `figma-mcp-server` for EXPECTED, `playwright` for ACTUAL
