@@ -70,8 +70,6 @@ Before step 6 of the base workflow (starting implementation), ensure:
 - You have identified and opened all relevant Figma URLs from the research/plan files.
 - You understand the design system tokens and components available in the project.
 
-**CRITICAL**: If at any point you are unsure about anything - missing information, unexpected state, unclear requirements - **STOP and ask the user**. Never guess, assume, or work around missing information.
-
 ---
 
 ## UI Verification Loop (per UI component/section)

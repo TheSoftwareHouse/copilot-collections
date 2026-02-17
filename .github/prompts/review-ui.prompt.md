@@ -18,12 +18,11 @@ Before starting, load and follow these skills:
 
 ## Workflow
 
-1. **Validate inputs**: Ensure Figma URL is available and dev server is running. If anything is missing, STOP and ask user.
+1. **Validate inputs**: Ensure Figma URL is available and dev server is running.
 2. **Get EXPECTED**: Call `figma-mcp-server` to extract layer hierarchy, layout, spacing, typography, colors, dimensions.
 3. **Get ACTUAL**: Use `playwright` to capture the running app - scroll through ENTIRE page, capture accessibility tree.
-4. **Verify you have valid data**: If anything is unexpected or unclear, **STOP and ask user**. Never guess.
-5. **Compare**: Follow `ui-verification` skill criteria - structure FIRST, then dimensions, then visual.
-6. **Report**: Generate structured report with all differences found.
+4. **Compare**: Follow `ui-verification` skill criteria - structure FIRST, then dimensions, then visual.
+5. **Report**: Generate structured report with all differences found.
 
 ---
 
