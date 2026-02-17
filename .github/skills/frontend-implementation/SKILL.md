@@ -100,7 +100,9 @@ This skill provides patterns and guidelines for implementing frontend features t
 
 ## CRITICAL: Never Guess - Always Ask
 
-**If you are unsure about ANYTHING, STOP and ask the user** using `vscode/askQuestions`.
+**If you are unsure about ANYTHING, STOP and ask the user.**
+
+Check your available tools for a way to ask the user questions (e.g., a tool that allows user interaction or questions). Use it to get the missing information before continuing.
 
 Your job is to implement UI that matches the design exactly. If you don't have the design, credentials, tokens, or any other required information - you cannot do your job correctly. Do not guess. Do not assume. Do not improvise.
 

@@ -92,7 +92,9 @@ Structure differences are **automatic failures**. Always verify:
 
 ## CRITICAL: Never Guess - Always Ask
 
-**If you are unsure about ANYTHING, STOP and ask the user** using `vscode/askQuestions`.
+**If you are unsure about ANYTHING, STOP and ask the user.**
+
+Check your available tools for a way to ask the user questions (e.g., a tool that allows user interaction or questions). Use it to get the missing information before continuing.
 
 This skill requires comparing the actual implementation against the expected design. If you cannot reliably get either side of that comparison, you cannot do your job. Do not guess. Do not assume. Do not continue hoping it will work out.
 
