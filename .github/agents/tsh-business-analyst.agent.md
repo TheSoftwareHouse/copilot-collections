@@ -28,8 +28,7 @@ Don't provide implementation details, focus on gathering requirements, user stor
 
 Don't provide any technical specifications, implementation plans, deployment plans or test plans, those will be provided by the architect later on.
 
-Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple 
-skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
+Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
 ## Skills Usage Guidelines
 
