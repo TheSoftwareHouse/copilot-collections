@@ -1,22 +1,6 @@
 ---
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
-tools:
-  [
-    "execute",
-    "read",
-    "atlassian/search",
-    "context7/*",
-    "figma-mcp-server/*",
-    "playwright/*",
-    "sequential-thinking/*",
-    "edit",
-    "search",
-    "todo",
-    "agent",
-    "vscode/runCommand",
-    "vscode/openSimpleBrowser",
-    "vscode/askQuestions",
-  ]
+tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs:
   - label: Run Code Review
     agent: tsh-code-reviewer

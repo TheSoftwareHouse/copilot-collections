@@ -480,7 +480,7 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
 - 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
 
-> Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP’s own documentation.
+> Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP's own documentation.
 
 ### 🧠 Sequential Thinking MCP
 
@@ -510,63 +510,10 @@ Once the repo is cloned and VS Code User Settings are configured:
    - `/plan <JIRA_ID>` – create implementation plan
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
-     **Standalone utilities:**
-   - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
-     },
-     "inputs": [
-     {
-     "id": "context7-api-key",
-     "description": "Context7 API Key (optional, for higher rate limits)",
-     "type": "promptString",
-     "password": true
-     }
-     ]
-     }
 
-```
-
-> **Note:** Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma-mcp-server`). If you copied an older template with different names, update your configuration to match the current template.
-
-### What each MCP is used for
-
-- 🧩 **Atlassian MCP** – access Jira issues for `/research`, `/plan`, `/implement`, `/review`.
-- 🎨 **Figma MCP Server** – pull design details, components, and variables for design‑driven work.
-- 📚 **Context7 MCP** – semantic search in external docs and knowledge bases.
-- 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
-- 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
-
-> Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP’s own documentation.
-
-### 🧠 Sequential Thinking MCP
-
-We use the **Sequential Thinking MCP** to handle complex logic, reduce hallucinations, and ensure thorough problem analysis. It allows agents to:
-
-- **Revise** previous thoughts when new information is found.
-- **Branch** into alternative lines of thinking.
-- **Track** progress through a complex task.
-
----
-
-## 🛠 Using This Repository in Your Projects
-
-Once the repo is cloned and VS Code User Settings are configured:
-
-1. Open your project in VS Code.
-2. Open **GitHub Copilot Chat**.
-3. Switch to one of the configured **agents** (Architect, Business Analyst, Software Engineer, Code Reviewer).
-4. Use the workflow prompts:
-   - `/research <JIRA_ID>`
-   - `/plan <JIRA_ID>`
-   - `/implement <JIRA_ID>`
-   - `/review <JIRA_ID>`
-
-   **For frontend tasks with Figma designs:**
-   - `/research <JIRA_ID>` – gather requirements including design context
-   - `/plan <JIRA_ID>` – create implementation plan
-   - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
-   - `/review <JIRA_ID>` – final code review
    **Standalone utilities:**
    - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
+
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.
 
 ---
@@ -584,4 +531,3 @@ All of these will leverage the shared configuration from `copilot-collections` w
 This project is licensed under the **MIT License**.
 
 © 2026 [The Software House](https://tsh.io)
-```

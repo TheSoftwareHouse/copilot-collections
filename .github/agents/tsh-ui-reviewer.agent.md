@@ -2,7 +2,7 @@
 description: "Agent specializing in verifying that implemented UI matches the Figma design and frontend guidelines."
 tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs:
-  - label: Start Frontend Implementation
+  - label: Start UI Implementation
     agent: tsh-software-engineer
     prompt: /implement-ui Implement UI feature according to the plan with Figma verification loop
     send: false
