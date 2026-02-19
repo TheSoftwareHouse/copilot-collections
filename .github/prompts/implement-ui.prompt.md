@@ -57,7 +57,7 @@ Do NOT:
 - Guess what the design should look like
 - Proceed with implementation without Figma reference
 
-When you discover missing or updated design links during implementation, add them to the appropriate sections in the **plan** under `Task details` (and, if needed, note them in the Change Log).
+When you discover missing or updated design links during implementation, add them to the appropriate sections in the **plan** under `Task details` (and, if needed, note them in the Changelog).
 
 ---
 
@@ -103,7 +103,7 @@ REPEAT (max 5 iterations):
    - **HIGH**: Fix code to match EXPECTED values exactly
    - **MEDIUM**: Fix obvious differences, manually verify unclear ones
    - **LOW**: Manually verify before making changes, tool data may be incomplete
-3. Document fix in Change Log
+3. Document fix in Changelog
 4. Run `/review-ui` again
 
 ### Fallback: When Tools Are Unreliable
@@ -115,7 +115,7 @@ If `/review-ui` consistently returns LOW confidence or tool errors:
    - Open Figma design in browser
    - Open running app side-by-side
    - Compare visually and note differences
-3. **Document the manual verification** in Change Log
+3. **Document the manual verification** in Changelog
 4. **Continue with next component** or escalate if unsure
 
 ### Escalation (after 5 iterations)
@@ -128,7 +128,7 @@ If still failing after 5 iterations:
    - Summary of each iteration: what changed, what remained
    - Current remaining mismatches (grouped by structure, dimensions, visual, components)
    - Suspected root causes (missing design tokens, conflicting constraints, missing Figma specs, etc.)
-3. **Document in Change Log** – record the escalation and remaining issues
+3. **Document in Changelog** – record the escalation and remaining issues
 4. **Recommend next steps**:
    - If design is ambiguous → ask design owner for clarification
    - If issues seem architectural → escalate to architect
