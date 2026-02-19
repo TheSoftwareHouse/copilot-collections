@@ -18,9 +18,9 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -45,21 +45,25 @@ Our standard workflow is always:
 > **Research → Plan → Implement → Review**
 
 ### 1. 🔍 Research
+
 - Builds context around a task using Jira, Figma and other integrated tools.
 - Identifies missing information, risks, and open questions.
 - Produces a concise summary and a list of unknowns.
 
 ### 2. 🧱 Plan
+
 - Translates the task into a structured implementation plan.
 - Breaks work into phases and executable steps.
 - Clarifies acceptance criteria and technical constraints.
 
 ### 3. 🛠 Implement
+
 - Executes against the agreed plan.
 - Writes or modifies code with a focus on safety and clarity.
 - Keeps changes scoped to the task, respecting existing architecture.
 
 ### 4. ✅ Review
+
 - Performs a structured code review against:
   - Acceptance criteria
   - Security and reliability
@@ -142,18 +146,18 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 
 For features that need end-to-end test coverage:
 
-1️⃣ /research     <JIRA_ID or task description>
-   ↳ 📖 Review research doc – understand feature scope and user journeys
-   ↳ ✅ Identify critical paths that need E2E coverage
+1️⃣ /research <JIRA_ID or task description>
+↳ 📖 Review research doc – understand feature scope and user journeys
+↳ ✅ Identify critical paths that need E2E coverage
 
-2️⃣ /plan         <JIRA_ID or task description>
-   ↳ 📖 Review plan – confirm test scenarios and acceptance criteria
-   ↳ ✅ Ensure E2E testing is included in the plan
+2️⃣ /plan <JIRA_ID or task description>
+↳ 📖 Review plan – confirm test scenarios and acceptance criteria
+↳ ✅ Ensure E2E testing is included in the plan
 
-4️⃣ /e2e          <JIRA_ID or task description>
-   ↳ 📖 Implements Page Objects, test files, and fixtures
-   ↳ ✅ Run tests locally, verify they pass
-   ↳ 🔄 Iterate on flaky or failing tests
+4️⃣ /e2e <JIRA_ID or task description>
+↳ 📖 Implements Page Objects, test files, and fixtures
+↳ ✅ Run tests locally, verify they pass
+↳ 🔄 Iterate on flaky or failing tests
 
 > ⚠️ **Important:** The `/e2e` command generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.
 
@@ -164,38 +168,39 @@ For features that need end-to-end test coverage:
 These are configured as Copilot **agents / sub‑agents**.
 
 ### 🧱 Architect
+
 - Focus: **solution design and implementation proposals**.
 - Helps break down complex tasks into components and interfaces.
 - Produces architecture sketches, trade‑off analyses, and integration strategies.
 
 ### 📝 Business Analyst
+
 - Focus: **requirements, context and domain understanding**.
 - Extracts and organizes information from Jira issues and other sources.
 - Identifies missing requirements, stakeholders, edge cases, and business rules.
 
 ### 💻 Software Engineer
-- Focus: **implementing the agreed plan**.
+
+- Focus: **implementing the agreed plan** (backend and frontend).
 - Writes and refactors code in small, reviewable steps.
 - Follows repository style, tests where available, and avoids over‑engineering.
-
-### 🎨 Frontend Software Engineer
-- Focus: **implementing UI components and frontend features**.
-- Specialized in design systems, accessibility, and responsive behavior.
-- Uses **iterative Figma verification loop** to ensure pixel-perfect implementation.
-- Verifies implementation against Figma designs using Playwright and Figma MCP.
+- For UI tasks: uses design system, ensures accessibility, and runs iterative Figma verification.
 
 ### 🔎 UI Reviewer
+
 - Focus: **single-pass UI verification against Figma designs**.
 - Performs read-only comparison: Figma (EXPECTED) vs Playwright (ACTUAL).
 - Returns PASS/FAIL verdict with structured difference table.
 - Called by `/implement-ui` in a loop; can also be used standalone.
 
 ### 🔍 Code Reviewer
+
 - Focus: **structured code review and risk detection**.
 - Checks changes against acceptance criteria, security and reliability guidelines.
 - Suggests concrete improvements, alternative designs, and missing tests.
 
 ### 🧪 E2E Engineer
+
 - Focus: **end-to-end testing with Playwright**.
 - Creates comprehensive, reliable test suites for critical user journeys.
 - Uses Page Object Model, proper fixtures, and accessibility-first locators.
@@ -213,36 +218,42 @@ Skills provide **specialized domain knowledge and structured workflows** that ag
 Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
 
 ### 🔍 Task Analysis
+
 - Focus: **gathering and expanding context** for a development task.
 - Pulls information from Jira, Confluence, GitHub, and other integrated tools.
 - Identifies gaps in task descriptions and asks clarification questions.
 - Produces a finalized research report with all findings.
 
 ### 🧱 Architecture Design
+
 - Focus: **designing solution architecture** that follows best practices.
 - Analyzes the current codebase and task requirements.
 - Proposes a solution that is scalable, secure, and easy to maintain.
 - Covers patterns like DRY, KISS, DDD, CQRS, modular/hexagonal architecture, and more.
 
 ### 📊 Codebase Analysis
+
 - Focus: **structured analysis of the entire codebase**.
 - Reviews repository structure, dependencies, scripts, and architecture.
 - Examines backend, frontend, infrastructure, and third-party integrations.
 - Identifies dead code, duplications, security concerns, and potential improvements.
 
 ### 🔎 Code Review
+
 - Focus: **verifying implemented code** against quality standards.
 - Compares implementation to the task description and plan.
 - Validates test coverage, security, scalability, and best practices.
 - Runs available tests and static analysis tools.
 
 ### 📋 Implementation Gap Analysis
+
 - Focus: **comparing expected vs. actual implementation state**.
 - Analyzes what needs to be built, what already exists, and what must be modified.
 - Cross-references task requirements with the current codebase.
 - Produces a structured gap report for planning next steps.
 
 ### 🧪 E2E Testing
+
 - Focus: **end-to-end testing patterns and practices** using Playwright.
 - Provides Page Object Model patterns, test structure templates, and mocking strategies.
 - Includes a verification loop with iteration limits and flaky test detection.
@@ -250,10 +261,25 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Ensures consistent, reliable E2E tests across the team.
 
 ### 🧭 Technical Context Discovery
+
 - Focus: **establishing technical context** before implementing any feature.
 - Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
 - Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
 - Ensures new code is consistent with established patterns and prevents conflicting conventions.
+
+### 🎨 Frontend Implementation
+
+- Focus: **frontend implementation patterns and best practices**.
+- Covers accessibility requirements, design system usage, component patterns, and performance guidelines.
+- Provides token mapping process, semantic markup guidelines, and ARIA usage patterns.
+- Includes component implementation checklist and anti-patterns to avoid.
+
+### 🔍 UI Verification
+
+- Focus: **verifying UI implementation against Figma designs**.
+- Defines verification categories: structure, layout, dimensions, visual, components.
+- Provides severity definitions, tolerance rules, and verification checklists.
+- Includes confidence levels and report format for consistent verification outputs.
 
 ---
 
@@ -262,21 +288,25 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 All commands work with either a **Jira ID** or a **plain‑text description**.
 
 ### `/research <JIRA_ID | description>`
+
 - Gathers all available information about the task.
 - Pulls context from Jira, design artifacts, and code (via MCPs where applicable).
 - Outputs: task summary, assumptions, open questions, and suggested next steps.
 
 ### `/plan <JIRA_ID | description>`
+
 - Creates a **multi‑step implementation plan**.
 - Groups work into phases and tasks aligned with your repo structure.
 - Outputs: checklist‑style plan that can be executed by the Software Engineer agent.
 
 ### `/implement <JIRA_ID | description>`
+
 - Implements the previously defined plan.
 - Proposes file changes, refactors, and new code in a focused way.
 - Outputs: concrete modifications and guidance on how to apply/test them.
 
 ### `/implement-ui <JIRA_ID | description>`
+
 - Implements UI features with **iterative Figma verification**.
 - Extends `/implement` with a verification loop after each component.
 - Uses **Playwright** to capture current UI state and **Figma MCP** to compare with designs.
@@ -284,6 +314,7 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Outputs: code changes + UI Verification Summary with iteration counts.
 
 ### `/review-ui`
+
 - Performs **single-pass UI verification** comparing implementation against Figma.
 - Uses **Figma MCP** (EXPECTED) and **Playwright MCP** (ACTUAL) to compare.
 - **Read-only** – reports differences but does not fix them.
@@ -291,11 +322,13 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Outputs: PASS/FAIL verdict + structured difference table with exact values.
 
 ### `/review <JIRA_ID | description>`
+
 - Reviews the final implementation against the plan and requirements.
 - Highlights security, reliability, performance, and maintainability concerns.
 - Outputs: structured review with clear “pass/blockers/suggestions”.
 
 ### `/e2e <JIRA_ID | description>`
+
 - Creates comprehensive **end-to-end tests** for the feature using Playwright.
 - Analyzes the application, designs test scenarios, and implements Page Objects.
 - Uses **Playwright MCP** for real-time interaction and test verification.
@@ -303,6 +336,7 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Outputs: Page Objects, test files, fixtures, and execution report.
 
 ### `/code-quality-check`
+
 - Performs a **comprehensive code quality analysis** of the repository.
 - Detects dead code, unused imports, unreachable code paths, and orphaned files.
 - Identifies code duplications across functions, components, API patterns, and type definitions.
@@ -335,19 +369,19 @@ You can configure this once at the **user level** and reuse it across all worksp
 ```jsonc
 {
   "chat.promptFilesLocations": {
-    "~/projects/copilot-collections/.github/prompts": true
+    "~/projects/copilot-collections/.github/prompts": true,
   },
   "chat.agentFilesLocations": {
-    "~/projects/copilot-collections/.github/agents": true
+    "~/projects/copilot-collections/.github/agents": true,
   },
   "chat.agentSkillsLocations": {
-    "~/projects/copilot-collections/.github/skills": true
+    "~/projects/copilot-collections/.github/skills": true,
   },
   "chat.useAgentSkills": true,
   "github.copilot.chat.searchSubagent.enabled": true,
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.customAgentInSubagent.enabled": true,
-  "github.copilot.chat.agentCustomizationSkill.enabled": true
+  "github.copilot.chat.agentCustomizationSkill.enabled": true,
 }
 ```
 
@@ -446,7 +480,7 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
 - 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
 
-> Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP’s own documentation.
+> Some MCPs require **API keys or local apps running**. Configure auth as described in each MCP's own documentation.
 
 ### 🧠 Sequential Thinking MCP
 
@@ -476,8 +510,10 @@ Once the repo is cloned and VS Code User Settings are configured:
    - `/plan <JIRA_ID>` – create implementation plan
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
+
    **Standalone utilities:**
    - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
+
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.
 
 ---

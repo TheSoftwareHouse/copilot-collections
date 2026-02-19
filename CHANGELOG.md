@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-02-17
+
+### Added
+
+- Frontend Implementation skill (`frontend-implementation`) for accessibility, design system usage, component patterns, and performance guidelines
+- UI Verification skill (`ui-verification`) for verification criteria, tolerances, checklists, and severity definitions
+
+### Changed
+
+- Consolidated `tsh-frontend-software-engineer` agent into `tsh-software-engineer` - frontend capabilities are now handled via skills
+- Updated `tsh-software-engineer` tool guidelines with frontend-specific scenarios (Figma, Playwright, design tokens)
+- Made skills tool-agnostic by removing hardcoded tool names
+- Refactored `implement-ui.prompt.md` and `review-ui.prompt.md` to reference skills instead of duplicating content
+
+### Removed
+
+- `tsh-frontend-software-engineer` agent (replaced by `tsh-software-engineer` + frontend skills)
+
 ## 2026-02-15
 
 ### Added

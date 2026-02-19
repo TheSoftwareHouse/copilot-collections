@@ -39,10 +39,13 @@ Before starting any task, you check all available skills and decide which one is
 - `technical-context-discovery` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
 - `implementation-gap-analysis` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
 - `codebase-analysis` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
+- `frontend-implementation` - for UI tasks: accessibility requirements, design system usage, component patterns, and performance guidelines.
+- `ui-verification` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
 
 ## Tool Usage Guidelines
 
 You have access to the `context7` tool.
+
 - **MUST use when**:
   - Searching for API documentation and usage examples for external libraries.
   - Finding solutions to specific coding errors or exceptions.
@@ -56,20 +59,23 @@ You have access to the `context7` tool.
   - Searching for internal project logic (use `search` or `usages` instead).
 
 You have access to the `figma-mcp-server` tool.
+
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.
+  - Extracting design specifications: spacing, typography, colors, components, variants and interaction states.
   - Implementing business logic where Figma or FigJam diagrams describe the application flow.
   - The context mentions mockups, wireframes, or other design assets in Figma.
-  - Explicitly asked by the user to check Figma, even if the context doesn't immediately suggest it.
 - **IMPORTANT**:
-  - This tool connects to the local Figma desktop app running in Dev Mode.
-  - It allows you to read the current selection in Figma or access specific files/nodes if provided.
-  - You can generate code from selected frames, extract design tokens (variables, components), and retrieve FigJam resources.
+  - Treat the linked Figma design as the **visual source of truth** for UI implementation.
+  - Extract exact values and map them to existing design tokens in the codebase.
+  - This tool connects to Figma via MCP - ensure the connection is working before relying on it.
+  - **If blocked** (no Figma URL, access denied, tool errors): Stop and ask the user for help. Do not proceed without design reference.
 - **SHOULD NOT use for**:
   - Purely backend tasks with no UI or flow implications described in Figma.
   - When no design context is available or relevant.
 
 You have access to the `sequential-thinking` tool.
+
 - **MUST use when**:
   - Implementing complex algorithms or logic (e.g., state machines, data synchronization).
   - Debugging hard-to-reproduce issues or root cause analysis.
@@ -86,6 +92,7 @@ You have access to the `sequential-thinking` tool.
   - Writing simple boilerplate code.
 
 You have access to the `playwright` tool.
+
 - **MUST use when**:
   - Working on frontend tasks to verify your implementation by interacting with the running application.
   - Validating user interactions (e.g., clicking buttons, submitting forms, navigation).
@@ -99,18 +106,25 @@ You have access to the `playwright` tool.
   - Ensure the local development server is running before attempting to navigate to the app.
   - This tool operates primarily on the **accessibility tree**, which provides a structured view of the page. This is often more reliable than visual screenshots for logical verification.
   - Use it to click through the app and simulate real user behavior to ensure your changes work as intended.
+  - **If blocked** (server not running, auth required, unexpected page): Stop and ask the user for help. Do not verify against wrong content.
 - **SHOULD NOT use for**:
   - Backend-only tasks where no UI is involved.
   - Unit testing individual functions (use the project's test runner for that).
 
 You have access to the `vscode/askQuestions` tool.
+
 - **MUST use when**:
   - Requirements are ambiguous and the implementation plan does not provide enough detail to proceed safely.
   - Expected behavior for edge cases is not covered by the plan or codebase patterns.
   - Domain-specific business logic cannot be inferred from the codebase or available documentation.
+  - **Frontend/UI tasks**: You cannot access Figma, app requires authentication, dev server issues, missing design tokens, or any blocker preventing you from verifying your work.
+  - **Design unclear**: Missing states in design (error, empty, loading), unspecified interactions, ambiguous responsive behavior.
+  - **Spec vs Design conflict**: The specification and Figma design are inconsistent and you cannot determine which is correct.
+  - **Anything unexpected**: If something doesn't work as expected and you're unsure how to proceed.
 - **IMPORTANT**:
   - Keep questions focused and specific. Batch related questions together rather than asking one at a time.
-  - Check the implementation plan, codebase patterns, and external docs first.
+  - Check the implementation plan, Figma designs, codebase patterns, and external docs first.
+  - **Never guess or work around missing information** - always ask.
 - **SHOULD NOT use for**:
-  - Questions answerable from the codebase, plan, or documentation.
+  - Questions answerable from the codebase, plan, Figma, or documentation.
   - Architectural decisions (escalate to the architect instead).
