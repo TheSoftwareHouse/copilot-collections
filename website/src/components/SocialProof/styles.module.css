@@ -1,0 +1,123 @@
+.socialProof {
+  padding: 4rem 0;
+  background: linear-gradient(
+    160deg,
+    var(--hero-gradient-start),
+    var(--hero-gradient-end)
+  );
+  color: #ffffff;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.sectionSubtitle {
+  font-size: 1.15rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.quote {
+  max-width: 720px;
+  margin: 0 auto 3rem;
+  text-align: center;
+}
+
+.quoteText {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.5;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-text-start),
+    var(--gradient-text-end)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+}
+
+.quoteCaption {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.statCard {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.statCardValue {
+  font-size: 2.2rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-text-start),
+    var(--gradient-text-end)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.statCardLabel {
+  font-size: 0.95rem;
+  color: #94a3b8;
+}
+
+.gartnerContext {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.gartnerText {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.gartnerHighlight {
+  color: var(--gradient-text-start);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .quoteText {
+    font-size: 1.2rem;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

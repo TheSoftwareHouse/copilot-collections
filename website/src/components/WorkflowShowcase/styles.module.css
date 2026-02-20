@@ -1,0 +1,129 @@
+.showcase {
+  padding: 4rem 0;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.sectionSubtitle {
+  font-size: 1.15rem;
+  color: var(--ifm-color-emphasis-600);
+  margin: 0;
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.phase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid var(--card-border);
+  background: var(--ifm-background-color);
+  box-shadow: 0 1px 3px var(--card-shadow);
+  position: relative;
+}
+
+.phaseNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--gradient-text-start),
+    var(--gradient-text-end)
+  );
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.phaseName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.phaseAgent {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 0.25rem;
+}
+
+.phaseCommand {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.8rem;
+  color: var(--ifm-color-primary);
+  background: var(--section-bg-alt);
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.phaseDesc {
+  font-size: 0.85rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.codeExample {
+  max-width: 640px;
+  margin: 0 auto;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid var(--card-border);
+  background: #0d1117;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #c9d1d9;
+}
+
+.codeHeader {
+  background: #161b22;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #8b949e;
+  border-bottom: 1px solid #30363d;
+}
+
+.codeBody {
+  padding: 1rem;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.codeComment {
+  color: #8b949e;
+}
+
+.codeCommand {
+  color: #79c0ff;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

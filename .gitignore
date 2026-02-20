@@ -2,3 +2,10 @@ node_modules
 .vscode/settings.json
 .idea
 .DS_Store
+
+# Docusaurus
+website/build/
+website/.docusaurus/
+website/.cache-loader/
+website/node_modules/
+.vercel
