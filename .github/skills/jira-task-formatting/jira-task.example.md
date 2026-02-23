@@ -16,6 +16,7 @@ This document defines the expected structure and fields for Jira epics and stori
 | Acceptance Criteria | Yes | Business-oriented verifiable conditions |
 | Priority | Yes | Highest / High / Medium / Low |
 | Labels | No | Domain or feature area labels relevant to the project |
+| Jira Key | No | Jira issue key (e.g., PROJ-123). Populated after issue creation or import. |
 
 ### Description Format
 
@@ -58,6 +59,7 @@ h2. Success Metrics
 | Priority | Yes | Highest / High / Medium / Low |
 | Labels | No | Inherited from epic + story-specific labels |
 | Story Points | No | Team estimates during refinement. Agent provides sizing guidance: Small (1-3), Medium (5-8), Large (13+) |
+| Jira Key | No | Jira issue key (e.g., PROJ-123). Populated after issue creation or import. |
 
 ### Description Format
 
@@ -122,12 +124,21 @@ Labels are project-specific. Suggest labels based on the epic's domain area, but
 - Do not invent information to fill optional fields
 - Flag all `TBD` fields for user review
 
+### Jira Key Field
+
+The `Jira Key` field is empty (`—`) when the task has not yet been pushed to Jira. It is populated automatically after issue creation or when importing existing Jira issues. When a Jira key is present, the push flow will **update** the existing issue instead of creating a new one.
+
+- Do not manually fill this field — it is managed by the agent
+- After a successful push, the agent writes the Jira key back into `jira-tasks.md`
+- After a successful import, the agent populates the Jira key from the fetched issues
+
 ---
 
 ## Example: Fully Populated Epic with Stories
 
 ### Epic: User Authentication: Secure Login and Account Access
 
+**Jira Key**: —
 **Priority**: Highest
 
 **Description**:
@@ -163,6 +174,7 @@ h2. Success Metrics
 ### Story 1.1: User can register a new account
 
 **Parent**: User Authentication: Secure Login and Account Access
+**Jira Key**: PROJ-124
 **Priority**: Highest
 **Sizing Guidance**: Medium (5-8)
 
@@ -205,6 +217,7 @@ Discussed during workshop: SSO integration may be added later as a separate stor
 ### Story 1.2: User can log in with existing credentials
 
 **Parent**: User Authentication: Secure Login and Account Access
+**Jira Key**: —
 **Priority**: Highest
 **Sizing Guidance**: Small (1-3)
 
@@ -245,6 +258,7 @@ No specific technical considerations discussed.
 ### Story 1.3: User can reset forgotten password
 
 **Parent**: User Authentication: Secure Login and Account Access
+**Jira Key**: PROJ-126
 **Priority**: High
 **Sizing Guidance**: Medium (5-8)
 

@@ -265,19 +265,18 @@ Transform each finding from the analysis passes into a structured suggestion:
 
 Present all suggestions to the user for individual accept/reject decisions:
 
-1. **Group by epic**: Show suggestions in the context of the epic they affect. If a suggestion proposes a new epic, show it in a separate "New Epics" section at the end.
+1. **Order suggestions**: Order by epic, then by confidence within each epic (High first, then Medium, then Low). If a suggestion proposes a new epic, present it after all existing-epic suggestions.
 
-2. **Order within each group**: High confidence first, then Medium, then Low.
-
-3. **Use `askQuestions`**: Present suggestions in batches (respecting the tool's limits). For each suggestion, show:
+2. **One suggestion per popup**: Present exactly **one suggestion per `askQuestions` call**. Each popup must be self-contained — the user should be able to make a decision without needing context from a previous popup. For each suggestion, show:
+   - The parent epic title and affected story title/ID (e.g., "[Epic: User Auth > Story 1.2: User can log in]")
    - The suggestion summary and rationale
-   - The confidence level
+   - The confidence level (High / Medium / Low)
    - The action type (what will change if accepted)
    - Options: Accept / Reject
 
-4. **Iterate**: Continue until all suggestions have been decided. The user may also provide feedback that modifies a suggestion before accepting it.
+3. **Iterate**: Continue until all suggestions have been decided. The user may also provide feedback that modifies a suggestion before accepting it.
 
-5. **Record decisions**: Track which suggestions were accepted and which were rejected (with any stated reason).
+4. **Record decisions**: Track which suggestions were accepted and which were rejected (with any stated reason).
 
 **Step 8: Apply accepted suggestions**
 

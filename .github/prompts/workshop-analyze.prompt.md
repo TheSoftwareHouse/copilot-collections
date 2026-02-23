@@ -1,10 +1,10 @@
 ---
 agent: "tsh-workshop-analyst"
 model: "Claude Opus 4.6"
-description: "Process discovery workshop materials and create Jira-ready epics and user stories."
+description: "Process discovery workshop materials and create Jira-ready epics and user stories, or iterate on an existing Jira backlog."
 ---
 
-Analyze the provided workshop materials (transcripts, Figma designs, codebase context, or other reference documents) and convert them into structured, Jira-ready epics and user stories.
+Analyze the provided workshop materials (transcripts, Figma designs, codebase context, or other reference documents) and convert them into structured, Jira-ready epics and user stories. Alternatively, import an existing Jira backlog for local iteration and improvement.
 
 The file outcomes should be markdown files placed in the `specifications` directory under a folder named after the workshop topic in kebab-case format (e.g., `specifications/user-onboarding/`):
 - `cleaned-transcript.md` — Cleaned and structured transcript
@@ -23,6 +23,12 @@ Before starting, load and follow these skills in order:
 
 ## Workflow
 
+Determine the entry point based on what the user provides:
+
+**If the user provides existing Jira issue keys or a project key instead of workshop materials**, skip transcript processing and task extraction. Use the `jira-task-formatting` **Import Mode** to fetch and convert existing tasks into `jira-tasks.md`. Then proceed to quality review (Step 5) and formatting.
+
+**Standard workflow (workshop materials provided):**
+
 1. **Process transcript**: If a raw transcript is provided, clean it using the `transcript-processing` skill. Remove small talk, structure by topics, extract decisions and action items. Save as `cleaned-transcript.md`.
 2. **Analyze additional materials**: Review Figma designs (using `figma-mcp-server` tool), existing codebase (using `codebase-analysis` skill), and any other reference documents provided.
 3. **Extract tasks**: Using the `task-extraction` skill, identify epics and user stories from all processed materials. Save as `extracted-tasks.md`.
@@ -32,7 +38,7 @@ Before starting, load and follow these skills in order:
 7. **Confirm updated tasks**: After applying accepted suggestions, briefly summarize the changes made to `extracted-tasks.md` (new stories added, criteria added, stories modified). If the user wants to review the full updated task list, present it. Proceed when the user confirms.
 8. **Format for Jira**: Using the `jira-task-formatting` skill, apply the benchmark template to format all tasks for Jira. Save as `jira-tasks.md`.
 9. **Review Gate 2**: Present the final formatted tasks to the user. Confirm the target Jira project and get explicit approval before pushing.
-10. **Push to Jira**: Create epics first, then stories linked to their parent epics. Report created issue keys back to the user.
+10. **Push to Jira**: Create or update issues in Jira. For new tasks (no Jira key), create epics first, then stories linked to their parent epics. For tasks with existing Jira keys, update the corresponding issues. Present a sync summary before pushing. Report created/updated issue keys back to the user.
 
 ## Important
 
@@ -40,6 +46,8 @@ Before starting, load and follow these skills in order:
 - Use `askQuestions` proactively whenever confidence is low about scope, priority, or intent.
 - Both review gates are mandatory — no data is pushed to Jira without explicit user approval.
 - The quality review step (Gate 1.5) runs automatically after Gate 1 approval. The user reviews and accepts/rejects individual suggestions, but does not need to opt-in to the review itself.
+- When working with imported Jira tasks, the quality review step still applies — it can identify gaps in existing backlogs just as with newly extracted tasks.
+- After import or initial creation, individual task changes trigger a "Push to Jira now?" prompt. Batch pushes follow the standard Gate 2 approval.
 - If no transcript is provided (e.g., user provides structured notes or direct requirements), skip the transcript processing step and proceed directly to task extraction.
 
 Follow the template structures and naming conventions from each skill strictly to ensure clarity and consistency.

@@ -102,15 +102,15 @@ Review all extracted tasks and identify:
 - Conflicting information between different materials (e.g., transcript says one thing, Figma shows another)
 - Missing information that would significantly affect the task breakdown
 
-Use `askQuestions` to clarify these items with the user before finalizing. Group related questions together to minimize back-and-forth.
+Use `askQuestions` to clarify these items with the user. Ask exactly **one question per `askQuestions` call**. Each question must clearly identify the specific epic or story it relates to — include the story identifier and title in the question header and context (e.g., "[Epic: User Auth > Story 1.2: User can log in] The transcript mentions SSO but the Figma shows email/password only. Which scope is correct?"). This ensures each popup is self-contained and the user can focus on one decision at a time.
 
 **Step 8: Present task list for user validation**
 
-Present the complete task list to the user for review:
-- Show all epics with their stories in a structured format
-- Highlight any assumptions or low-confidence items
-- Ask explicitly: "Did I miss any tasks?" and "Should any of these be split, merged, or removed?"
-- Iterate based on feedback until the user approves the task list
+Present each story to the user individually for validation using one `askQuestions` call per story. Each question should include the story's full context: parent epic title, story title, and a brief summary of the acceptance criteria. Ask: "Is this story correct? Should it be split, merged, modified, or removed?"
+
+After presenting all stories, ask one final workflow-level question: "Did I miss any tasks that should be added?"
+
+Iterate based on feedback until the user approves the task list.
 
 This is **Review Gate 1** — the user must approve the task list before proceeding to Jira formatting.
 
