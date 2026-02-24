@@ -142,6 +142,24 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 - Escalates after 5 failed iterations with detailed report
 - Produces **UI Verification Summary** before code review
 
+#### Example Workshop Analysis Flow
+
+For converting discovery workshop recordings into Jira-ready tasks:
+
+```text
+1️⃣ /workshop-analyze <transcript + workshop materials>
+   ↳ 📖 Review cleaned transcript – verify topics, decisions, action items
+   ↳ ✅ Confirm nothing important was removed during cleaning
+
+   ↳ 📖 Review extracted epics and user stories
+   ↳ ✅ Verify scope, dependencies, and acceptance criteria (Gate 1)
+
+   ↳ 📖 Review Jira-formatted tasks before push
+   ↳ ✅ Approve creation of Jira issues (Gate 2)
+```
+
+> ⚠️ **Important:** The workshop analyst produces three artifacts in sequence: cleaned transcript, extracted tasks, and Jira-formatted tasks. Each artifact has a mandatory review gate – you must approve the output before the agent proceeds to the next step. Pay special attention to extracted tasks: verify that all epics and stories accurately reflect what was discussed in the workshop.
+
 #### Example E2E Testing Flow
 
 For features that need end-to-end test coverage:
@@ -569,6 +587,8 @@ Once the repo is cloned and VS Code User Settings are configured:
    - `/plan <JIRA_ID>` – create implementation plan
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
+   **For workshop analysis:**
+   - `/workshop-analyze <materials>` – full pipeline: clean transcript → extract tasks → format & push to Jira
 
    **Standalone utilities:**
    - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
