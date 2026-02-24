@@ -18,9 +18,9 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
-- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification, SQL & Database Engineering.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Workshop Analyst.
+- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check`, `/workshop-analyze`, `/transcript-clean`, `/create-jira-tasks` with consistent behavior across projects.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification, SQL & Database Engineering, Transcript Processing, Task Extraction, Jira Task Formatting.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -142,6 +142,24 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 - Escalates after 5 failed iterations with detailed report
 - Produces **UI Verification Summary** before code review
 
+#### Example Workshop Analysis Flow
+
+For converting discovery workshop recordings into Jira-ready tasks:
+
+```text
+1️⃣ /workshop-analyze <transcript + workshop materials>
+   ↳ 📖 Review cleaned transcript – verify topics, decisions, action items
+   ↳ ✅ Confirm nothing important was removed during cleaning
+
+   ↳ 📖 Review extracted epics and user stories
+   ↳ ✅ Verify scope, dependencies, and acceptance criteria (Gate 1)
+
+   ↳ 📖 Review Jira-formatted tasks before push
+   ↳ ✅ Approve creation of Jira issues (Gate 2)
+```
+
+> ⚠️ **Important:** The workshop analyst produces three artifacts in sequence: cleaned transcript, extracted tasks, and Jira-formatted tasks. Each artifact has a mandatory review gate – you must approve the output before the agent proceeds to the next step. Pay special attention to extracted tasks: verify that all epics and stories accurately reflect what was discussed in the workshop.
+
 #### Example E2E Testing Flow
 
 For features that need end-to-end test coverage:
@@ -206,6 +224,15 @@ These are configured as Copilot **agents / sub‑agents**.
 - Uses Page Object Model, proper fixtures, and accessibility-first locators.
 - Integrates with Playwright MCP for real-time test debugging and validation.
 - Follows testing pyramid principles - E2E for critical paths, not unit-level validation.
+
+### 📋 Workshop Analyst
+
+- Focus: **converting discovery workshop materials into Jira-ready epics and stories**.
+- Processes raw inputs: call transcripts, Figma designs, codebase context, and reference documents.
+- Cleans transcripts from small talk, structures content by topics, and extracts actionable work items.
+- Produces business-oriented output – no technical implementation details.
+- Manages a two-gate review process before pushing tasks to Jira.
+- Hands off to Business Analyst for deeper research and Architect for implementation planning.
 
 Each agent is designed to be used together with the workflow prompts below.
 
@@ -282,12 +309,34 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Includes confidence levels and report format for consistent verification outputs.
 
 ### 🗄️ SQL & Database Engineering
+
 - Focus: **database schema design, performant SQL, and query debugging**.
 - Covers naming conventions, primary key strategies, data type selection, and normalisation.
 - Provides indexing strategies, join optimisation, locking mechanics, and transaction patterns.
 - Includes query debugging with `EXPLAIN ANALYZE` and common anti-pattern detection.
 - Supports ORM integration with TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM.
 - Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
+
+### 📝 Transcript Processing
+
+- Focus: **cleaning raw workshop or meeting transcripts**.
+- Removes small talk, filler words, greetings, off-topic tangents, and technical difficulties.
+- Preserves all business-relevant discussion and structures content by topics.
+- Extracts key decisions, action items, and open questions into dedicated sections.
+
+### 📋 Task Extraction
+
+- Focus: **identifying epics and user stories from workshop materials**.
+- Analyzes cleaned transcripts, Figma designs, codebase context, and other documents.
+- Produces business-oriented task breakdowns with dependencies and assumptions.
+- Flags ambiguous items for user clarification before finalizing.
+
+### 🎫 Jira Task Formatting
+
+- Focus: **transforming extracted tasks into Jira-ready format**.
+- Applies a benchmark template to ensure consistent field mapping across all tasks.
+- Handles Jira markdown compatibility and two-gate review before push.
+- Guides the agent on creating epics and linked stories via Atlassian tools.
 
 ---
 
@@ -352,6 +401,26 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Includes an **architecture review** evaluating module boundaries, dependency graph, and separation of concerns.
 - For monorepos, analyzes each layer/app separately using parallel subagents.
 - Outputs: prioritized `code-quality-report.md` with severity levels (🔴 Critical / 🟡 Important / 🟢 Nice to Have) and a recommended action plan.
+
+### `/workshop-analyze <workshop materials>`
+
+- Processes discovery workshop materials end-to-end: clean transcript → extract tasks → format for Jira → push.
+- Accepts raw transcripts, Figma design links, codebase references, and other documents.
+- Produces three artifacts: `cleaned-transcript.md`, `extracted-tasks.md`, `jira-tasks.md`.
+- Includes two mandatory review gates before Jira creation.
+- Outputs: Jira-ready epics and stories, created in your Jira project after approval.
+
+### `/transcript-clean <transcript>`
+
+- Standalone command to clean a raw workshop transcript.
+- Removes small talk, structures content by discussion topics, extracts decisions and action items.
+- Outputs: `cleaned-transcript.md` in the specifications directory.
+
+### `/create-jira-tasks <extracted-tasks reference>`
+
+- Formats an existing `extracted-tasks.md` into Jira-ready structure and pushes to Jira.
+- Applies the benchmark template, validates completeness, and manages review gates.
+- Outputs: `jira-tasks.md` + created Jira issues with linked epics and stories.
 
 ---
 
@@ -518,6 +587,8 @@ Once the repo is cloned and VS Code User Settings are configured:
    - `/plan <JIRA_ID>` – create implementation plan
    - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
    - `/review <JIRA_ID>` – final code review
+   **For workshop analysis:**
+   - `/workshop-analyze <materials>` – full pipeline: clean transcript → extract tasks → format & push to Jira
 
    **Standalone utilities:**
    - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
