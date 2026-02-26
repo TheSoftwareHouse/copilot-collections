@@ -18,7 +18,7 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer, Copilot Orchestrator.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
 - 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
@@ -207,6 +207,12 @@ These are configured as Copilot **agents / sub‑agents**.
 - Expert in prompt engineering, context engineering, and AI engineering for custom agents, skills, prompts, and instructions.
 - Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
 - Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
+
+### 🔀 Copilot Orchestrator *(experimental)*
+- Focus: **coordinating complex, multi-step Copilot engineering tasks** using specialized sub-agents.
+- Decomposes work into focused subtasks and delegates to three workers: Researcher, Creator, and Reviewer — each running in an isolated context window.
+- Solves the "context rot" problem where complex tasks degrade quality in a monolithic agent's context window.
+- Coexists alongside Copilot Engineer for A/B comparison — see [Orchestrator Pattern](docs/orchestrator-pattern.md) for the full deep-dive.
 
 Each agent is designed to be used together with the workflow prompts below.
 
