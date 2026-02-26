@@ -1,12 +1,11 @@
-````skill
 ---
-name: prompt-creation
+name: creating-prompts
 description: "Create custom prompt files (.prompt.md) for GitHub Copilot in VS Code. Provides templates, guidelines, and a structured process for building prompt files that trigger specific workflows routed to the right custom agent and AI model. Use when creating, reviewing, or updating .prompt.md files."
 ---
 
-# Prompt Creation
+# Creating Prompts
 
-This skill helps you create well-structured custom prompt files for GitHub Copilot in VS Code. It enforces a consistent pattern across all prompts and ensures clear separation between prompt files, agent definitions, and skills.
+Creates well-structured custom prompt files for GitHub Copilot in VS Code. Enforces a consistent pattern across all prompts and ensures clear separation between prompt files, agent definitions, and skills.
 
 ## Core Design Principles
 
@@ -198,7 +197,6 @@ Variables are useful for prompts that operate on dynamic context (e.g., the curr
 ## Connected Skills
 
 - `agent-creation` - to understand agent patterns and ensure prompts don't overlap with agent responsibilities
+- `creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `technical-context-discovery` - to understand existing prompt patterns and project conventions before creating a new one
 - `codebase-analysis` - to analyze existing prompts and identify patterns to follow
-
-````
