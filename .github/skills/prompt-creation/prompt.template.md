@@ -17,6 +17,23 @@ description: "<one-sentence description of what the prompt does>"
 ---
 
 <!-- ============================================================ -->
+<!-- TABLE OF CONTENTS                                             -->
+<!-- This template defines the structure for .prompt.md files.     -->
+<!-- Sections marked (Required) must be present in every prompt.   -->
+<!-- Sections marked (Optional) can be removed if not needed.      -->
+<!-- ============================================================ -->
+<!-- Sections:                                                     -->
+<!--   1. Goal Statement .............. (Required)                 -->
+<!--   2. Prerequisites ............... (Optional)                 -->
+<!--   3. Input Requirements .......... (Optional)                 -->
+<!--   4. Required Skills ............. (Required)                 -->
+<!--   5. Workflow .................... (Required)                 -->
+<!--   6. Output Specification ........ (Optional)                 -->
+<!--   7. Handoff .................... (Optional)                 -->
+<!--   8. Constraints ................ (Optional)                 -->
+<!-- ============================================================ -->
+
+<!-- ============================================================ -->
 <!-- REQUIRED: Goal Statement                                      -->
 <!-- 1-2 paragraphs describing what the prompt accomplishes and    -->
 <!-- the expected outcome. Be specific about the workflow purpose. -->
@@ -24,7 +41,8 @@ description: "<one-sentence description of what the prompt does>"
 <!-- ============================================================ -->
 
 <goal>
-<what-this-prompt-does>
+Describe in 1-2 paragraphs what this prompt accomplishes and the expected outcome.
+Be specific about the workflow purpose. This is NOT the agent's role — it's the task being triggered.
 </goal>
 
 <!-- ============================================================ -->
