@@ -20,7 +20,7 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer, Copilot Orchestrator.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Agent Creation, Creating Skills, Prompt Creation.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -266,6 +266,24 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
 - Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
 - Ensures new code is consistent with established patterns and prevents conflicting conventions.
+
+### 🏗️ Agent Creation
+- Focus: **creating custom agents** (.agent.md) for GitHub Copilot in VS Code.
+- Provides templates, guidelines, and a structured process for building agent definitions.
+- Enforces separation of concerns between agents (WHO), skills (HOW), and prompts (WHAT).
+- Ensures consistent agent structure with clear behavior, personality, and responsibility definitions.
+
+### ✍️ Creating Skills
+- Focus: **creating well-structured, reusable skills** (SKILL.md) for GitHub Copilot.
+- Enforces gerund-form naming conventions, description guidelines, and body structure rules.
+- Provides templates, examples, and a validation checklist for consistent skill authoring.
+- Implements progressive disclosure patterns to optimize token usage across discovery, activation, and resource tiers.
+
+### 📝 Prompt Creation
+- Focus: **creating custom prompt files** (.prompt.md) for GitHub Copilot in VS Code.
+- Provides templates and guidelines for building prompt files that trigger specific workflows.
+- Routes workflows to the right custom agent and AI model via frontmatter configuration.
+- Ensures prompts focus on workflow steps without redefining agent identity or behavior.
 
 ---
 
