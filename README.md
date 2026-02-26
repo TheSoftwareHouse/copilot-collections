@@ -29,7 +29,7 @@ This repository supports the **full product development lifecycle** with AI-powe
 
 - 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer, Copilot Engineer, Copilot Orchestrator.
 - 💬 **Prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`.
-- 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
+- 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis, Agent Creation, Creating Skills, Prompt Creation.
 
 ### ✅ Quality – Review & Testing
 
@@ -369,6 +369,25 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Covers error recovery strategies and CI readiness checklists.
 - Ensures consistent, reliable E2E tests across the team.
 
+### 🛠️ Copilot Engineering Skills
+
+#### 🏗️ Agent Creation
+- Focus: **creating custom agents** (.agent.md) for GitHub Copilot in VS Code.
+- Provides templates, guidelines, and a structured process for building agent definitions.
+- Enforces separation of concerns between agents (WHO), skills (HOW), and prompts (WHAT).
+- Ensures consistent agent structure with clear behavior, personality, and responsibility definitions.
+
+#### ✍️ Creating Skills
+- Focus: **creating well-structured, reusable skills** (SKILL.md) for GitHub Copilot.
+- Enforces gerund-form naming conventions, description guidelines, and body structure rules.
+- Provides templates, examples, and a validation checklist for consistent skill authoring.
+- Implements progressive disclosure patterns to optimize token usage across discovery, activation, and resource tiers.
+
+#### 📝 Prompt Creation
+- Focus: **creating custom prompt files** (.prompt.md) for GitHub Copilot in VS Code.
+- Provides templates and guidelines for building prompt files that trigger specific workflows.
+- Routes workflows to the right custom agent and AI model via frontmatter configuration.
+- Ensures prompts focus on workflow steps without redefining agent identity or behavior.
 ---
 
 ## 💬 Prompts & Chat Commands
