@@ -27,7 +27,7 @@ This repository supports the **full product development lifecycle** with AI-powe
 
 ### 🛠 Development – Architecture & Implementation
 
-- 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer.
+- 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer, Copilot Engineer.
 - 💬 **Prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`.
 - 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
 
@@ -246,6 +246,12 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 - Uses Page Object Model, proper fixtures, and accessibility-first locators.
 - Integrates with Playwright MCP for real-time test debugging and validation.
 - Follows testing pyramid principles – E2E for critical paths, not unit-level validation.
+
+### 🛠️ Copilot Engineer
+- Focus: **designing, creating, reviewing, and improving Copilot customization artifacts**.
+- Expert in prompt engineering, context engineering, and AI engineering for custom agents, skills, prompts, and instructions.
+- Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
+- Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
 
 Each agent is designed to be used together with the workflow prompts below.
 
