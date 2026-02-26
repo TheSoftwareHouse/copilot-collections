@@ -30,31 +30,20 @@ description: "<What the skill does — core capabilities>. <When to use it — t
 # allowed-tools: Bash(git:*) Read
 ---
 
-<!-- ============================================================ -->
-<!-- Skill Title                                                    -->
-<!-- Use the skill name in natural language as an H1 heading.      -->
-<!-- ============================================================ -->
+<!-- GUARD: This file defines HOW to perform a specific task. Do NOT define
+     agent personality or behavior here (those belong in .agent.md files).
+     Do NOT define workflow triggers here (those belong in .prompt.md files).
+     Keep instructions concise — only add context the LLM doesn't already have. -->
+
+<!-- Skill Title -->
 
 # <Skill Title>
 
-<!-- ============================================================ -->
-<!-- REQUIRED: Introduction                                        -->
-<!-- 1-2 sentences describing what the skill does.                 -->
-<!-- Keep it concise — the description field handles discovery.    -->
-<!-- This paragraph is for the agent after it has already          -->
-<!-- decided to load the skill.                                    -->
-<!-- ============================================================ -->
+<!-- REQUIRED: Introduction (1-2 sentences, third person) -->
 
-This skill helps you <what the skill does in one sentence>.
+<What the skill does in one sentence — third person, no "you" or "I">.
 
-<!-- ============================================================ -->
-<!-- OPTIONAL: Core Principles                                     -->
-<!-- Use XML tags for principles when the skill has foundational   -->
-<!-- rules that constrain all decisions. These are the "always     -->
-<!-- true" rules the agent must internalize before starting.       -->
-<!--                                                               -->
-<!-- Omit this section if the skill is purely procedural.          -->
-<!-- ============================================================ -->
+<!-- OPTIONAL: Core Principles -->
 
 <!--
 <principles>
@@ -70,17 +59,7 @@ Description of another foundational rule.
 </principles>
 -->
 
-<!-- ============================================================ -->
-<!-- REQUIRED: Process / Workflow                                   -->
-<!-- The core of the skill. Break the task into sequential steps.  -->
-<!-- Include a trackable checklist at the top.                     -->
-<!--                                                               -->
-<!-- Guidelines:                                                   -->
-<!-- - Each step should be clear and actionable                    -->
-<!-- - Include decision points if the workflow branches            -->
-<!-- - Reference supporting files where appropriate                -->
-<!-- - Include validation/feedback loops for quality-critical work -->
-<!-- ============================================================ -->
+<!-- REQUIRED: Process / Workflow -->
 
 ## <Skill Process Name> Process
 
@@ -110,12 +89,7 @@ Progress:
 
 <Detailed instructions for this step.>
 
-<!-- ============================================================ -->
-<!-- OPTIONAL: Reference Tables                                    -->
-<!-- Quick-reference tables for rules, patterns, conventions,      -->
-<!-- or decision matrices that the agent may need during           -->
-<!-- execution. Keep them concise.                                 -->
-<!-- ============================================================ -->
+<!-- OPTIONAL: Reference Tables -->
 
 <!--
 ## Quick Reference
@@ -126,12 +100,7 @@ Progress:
 | <rule-2> | <description> |
 -->
 
-<!-- ============================================================ -->
-<!-- OPTIONAL: Common Patterns / Examples                          -->
-<!-- Include input/output examples if the skill's output quality   -->
-<!-- depends on understanding expected format or style.            -->
-<!-- Use examples instead of lengthy explanations.                 -->
-<!-- ============================================================ -->
+<!-- OPTIONAL: Common Patterns / Examples -->
 
 <!--
 ## Examples
@@ -147,12 +116,7 @@ Input: <what the agent receives>
 Output: <what the agent should produce>
 -->
 
-<!-- ============================================================ -->
-<!-- OPTIONAL: Validation Checklist                                -->
-<!-- Include when the skill produces a deliverable that should     -->
-<!-- be verified before completion. Agent uses this as a           -->
-<!-- self-check before finishing.                                  -->
-<!-- ============================================================ -->
+<!-- OPTIONAL: Validation Checklist -->
 
 <!--
 ## Validation Checklist
@@ -165,15 +129,7 @@ Validation:
 ```
 -->
 
-<!-- ============================================================ -->
-<!-- REQUIRED: Connected Skills                                    -->
-<!-- List related skills with brief rationale for each.            -->
-<!-- This helps the agent understand the skill ecosystem           -->
-<!-- and when to chain skills together.                            -->
-<!--                                                               -->
-<!-- Use the format: `skill-name` - when/why to use it             -->
-<!-- Remove this comment block in your final file.                 -->
-<!-- ============================================================ -->
+<!-- REQUIRED: Connected Skills -->
 
 ## Connected Skills
 

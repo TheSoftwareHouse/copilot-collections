@@ -5,7 +5,7 @@ description: "Create new skills (SKILL.md) for GitHub Copilot. Provides naming c
 
 # Creating Skills
 
-This skill helps you create well-structured, reusable skills for GitHub Copilot. It enforces naming conventions, content structure, and progressive disclosure patterns based on the Agent Skills specification and Anthropic's authoring best practices.
+Creates well-structured, reusable skills for GitHub Copilot. Enforces naming conventions, content structure, and progressive disclosure patterns based on the Agent Skills specification and best practices.
 
 ## Core Design Principles
 
@@ -121,7 +121,6 @@ This format clearly describes the activity or capability the skill provides. It 
 | Start/end | Must NOT start or end with a hyphen |
 | Consecutive hyphens | Must NOT contain `--` |
 | Directory match | Must match the parent directory name exactly |
-| Reserved words | Must NOT contain "anthropic" or "claude" |
 
 ### Naming Examples
 
@@ -145,6 +144,8 @@ Avoid:
 | Vague names | `helper`, `utils`, `tools` | Indiscoverable — agent can't match them to tasks |
 | Overly generic | `documents`, `data`, `files` | Too broad — will trigger on irrelevant tasks |
 | Inconsistent form | Mix of `code-review` and `creating-agents` | Breaks convention — confuses pattern recognition |
+
+> **Note**: Some existing skills in this workspace use noun-phrase form (e.g., `agent-creation`, `code-review`). Gerund form is the preferred convention for new skills. Existing skills will be renamed to gerund form incrementally.
 
 ### Shortening Long Names
 
@@ -233,6 +234,7 @@ The Markdown body after the frontmatter contains the skill instructions. There a
 
 - Only add context the LLM doesn't already have.
 - Use examples instead of explanations — they convey style and expectations more efficiently.
+- See [examples/reviewing-code.skill.md](examples/reviewing-code.skill.md) for a complete example demonstrating conciseness.
 - Provide a default approach, not multiple options. Add alternatives only when a specific condition requires them.
 - Don't explain concepts the LLM already knows (e.g., what PDFs are, how REST APIs work).
 
@@ -281,6 +283,7 @@ When the SKILL.md body approaches 500 lines, or when the skill includes resource
 **Step 6: Assemble and validate the skill**
 
 Use the `./skill.template.md` template to build the SKILL.md file.
+See [examples/reviewing-code.skill.md](examples/reviewing-code.skill.md) for a complete filled-in example.
 
 After assembling the skill, use `vscode/askQuestions` to run a final review with the user. Present the proposed `name`, `description`, and a summary of the skill's workflow steps. Ask the user to confirm or request changes before finalizing.
 
@@ -311,89 +314,7 @@ Validation:
 
 ## Common Patterns
 
-### Workflow with Checklist
-
-Break complex tasks into numbered steps with a trackable checklist:
-
-```markdown
-## Process
-
-Use the checklist below and track your progress:
-
-\```
-Progress:
-- [ ] Step 1: Gather context
-- [ ] Step 2: Analyze findings
-- [ ] Step 3: Produce output
-\```
-
-**Step 1: Gather context**
-
-<detailed instructions for step 1>
-
-**Step 2: Analyze findings**
-
-<detailed instructions for step 2>
-```
-
-### Template Pattern
-
-Provide output format templates. Match strictness to requirements:
-
-```markdown
-## Report Structure
-
-ALWAYS use this exact template:
-
-\```markdown
-# [Title]
-
-## Summary
-[One-paragraph overview]
-
-## Findings
-- Finding 1
-- Finding 2
-
-## Recommendations
-1. Recommendation 1
-2. Recommendation 2
-\```
-```
-
-### Conditional Workflow Pattern
-
-Guide the agent through decision points:
-
-```markdown
-## Modification Workflow
-
-1. Determine the type:
-   **Creating new?** → Follow "Creation workflow" below
-   **Editing existing?** → Follow "Editing workflow" below
-
-2. Creation workflow:
-   - <steps>
-
-3. Editing workflow:
-   - <steps>
-```
-
-### Feedback Loop Pattern
-
-For quality-critical tasks:
-
-```markdown
-## Validation Loop
-
-1. Produce the output
-2. Validate: run `scripts/validate.py output/`
-3. If validation fails:
-   - Review error messages
-   - Fix the issues
-   - Run validation again
-4. Only proceed when validation passes
-```
+For standard workflow patterns (checklists, templates, conditional workflows, feedback loops), see [references/common-patterns.md](references/common-patterns.md).
 
 ## Anti-Patterns to Avoid
 
@@ -409,7 +330,7 @@ For quality-critical tasks:
 
 ## Connected Skills
 
-- `creating-agents` - to understand how skills relate to agent definitions and avoid overlap
-- `creating-prompts` - to understand how prompts reference and trigger skills
-- `gathering-context` - to discover existing skill patterns in the project before creating a new one
-- `analyzing-codebase` - to analyze existing skills and identify conventions to follow
+- `agent-creation` - to understand how skills relate to agent definitions and avoid overlap
+- `prompt-creation` - to understand how prompts reference and trigger skills
+- `technical-context-discovery` - to discover existing skill patterns in the project before creating a new one
+- `codebase-analysis` - to analyze existing skills and identify conventions to follow
