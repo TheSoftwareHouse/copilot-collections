@@ -18,7 +18,7 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
 - 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
@@ -201,6 +201,12 @@ These are configured as Copilot **agents / sub‑agents**.
 - Uses Page Object Model, proper fixtures, and accessibility-first locators.
 - Integrates with Playwright MCP for real-time test debugging and validation.
 - Follows testing pyramid principles - E2E for critical paths, not unit-level validation.
+
+### 🛠️ Copilot Engineer
+- Focus: **designing, creating, reviewing, and improving Copilot customization artifacts**.
+- Expert in prompt engineering, context engineering, and AI engineering for custom agents, skills, prompts, and instructions.
+- Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
+- Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
 
 Each agent is designed to be used together with the workflow prompts below.
 
