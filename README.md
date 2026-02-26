@@ -20,7 +20,7 @@
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
 - 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer, Copilot Orchestrator.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Agent Creation, Creating Skills, Prompt Creation.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Agent Creation, Creating Skills, Creating Prompts.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -279,7 +279,7 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Provides templates, examples, and a validation checklist for consistent skill authoring.
 - Implements progressive disclosure patterns to optimize token usage across discovery, activation, and resource tiers.
 
-### 📝 Prompt Creation
+### 📝 Creating Prompts
 - Focus: **creating custom prompt files** (.prompt.md) for GitHub Copilot in VS Code.
 - Provides templates and guidelines for building prompt files that trigger specific workflows.
 - Routes workflows to the right custom agent and AI model via frontmatter configuration.

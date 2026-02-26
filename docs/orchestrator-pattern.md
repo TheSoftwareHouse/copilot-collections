@@ -130,7 +130,7 @@ Workers are **invisible to users** (`user-invokable: false`). Only the orchestra
 
 **Tools**: `read`, `search`, `edit`, `todo` — the **only worker with write access**. No `web/fetch` or `context7/*` (research happens before creation, not during).
 
-**Skills**: Autonomously loads `agent-creation`, `creating-skills`, or `prompt-creation` based on the artifact type being created. The orchestrator's delegation prompt specifies WHAT to create; the skill provides HOW.
+**Skills**: Autonomously loads `agent-creation`, `creating-skills`, or `creating-prompts` based on the artifact type being created. The orchestrator's delegation prompt specifies WHAT to create; the skill provides HOW.
 
 **Key constraints**:
 - Must follow the orchestrator's specification exactly
