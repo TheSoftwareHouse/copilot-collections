@@ -50,7 +50,7 @@ A prompt should only describe what is necessary for the specific workflow it tri
 
 </principles>
 
-## Prompt Creation Process
+## Creation Process
 
 Use the checklist below and track your progress:
 

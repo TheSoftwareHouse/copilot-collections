@@ -56,7 +56,7 @@ Before starting any task, you check all available skills and decide which one is
 <skills-usage>
 - `agent-creation` - when creating or reviewing .agent.md files; provides the structured creation process, template, and validation checklist for custom agents
 - `creating-skills` - when creating or reviewing SKILL.md files; provides naming conventions, body structure, progressive disclosure patterns, and validation checklists
-- `prompt-creation` - when creating or reviewing .prompt.md files; provides the structured creation process, template, and workflow focus guidelines
+- `creating-prompts` - when creating or reviewing .prompt.md files; provides the structured creation process, template, and workflow focus guidelines
 - `technical-context-discovery` - to understand existing customization patterns in the project before creating or modifying any artifact
 - `codebase-analysis` - to analyze existing customization files and identify patterns, inconsistencies, or opportunities for improvement
 </skills-usage>

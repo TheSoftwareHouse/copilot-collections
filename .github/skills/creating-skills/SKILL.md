@@ -331,6 +331,6 @@ For standard workflow patterns (checklists, templates, conditional workflows, fe
 ## Connected Skills
 
 - `agent-creation` - to understand how skills relate to agent definitions and avoid overlap
-- `prompt-creation` - to understand how prompts reference and trigger skills
+- `creating-prompts` - to understand how prompts reference and trigger skills
 - `technical-context-discovery` - to discover existing skill patterns in the project before creating a new one
 - `codebase-analysis` - to analyze existing skills and identify conventions to follow
