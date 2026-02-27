@@ -18,9 +18,9 @@
 ## 🚀 What This Repo Provides
 
 - 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Workshop Analyst.
+- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, Frontend Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Copilot Engineer, Copilot Orchestrator, Workshop Analyst.
 - 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check`, `/workshop-analyze`, `/transcript-clean`, `/create-jira-tasks` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification, SQL & Database Engineering, Transcript Processing, Task Extraction, Jira Task Formatting.
+- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification, SQL & Database Engineering, Transcript Processing, Task Extraction, Jira Task Formatting, Creating Agents, Creating Skills, Creating Prompts, Creating Instructions.
 - 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
 - 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
 
@@ -225,6 +225,18 @@ These are configured as Copilot **agents / sub‑agents**.
 - Integrates with Playwright MCP for real-time test debugging and validation.
 - Follows testing pyramid principles - E2E for critical paths, not unit-level validation.
 
+### 🛠️ Copilot Engineer
+- Focus: **designing, creating, reviewing, and improving Copilot customization artifacts**.
+- Expert in prompt engineering, context engineering, and AI engineering for custom agents, skills, prompts, and instructions.
+- Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
+- Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
+
+### 🔀 Copilot Orchestrator *(experimental)*
+- Focus: **coordinating complex, multi-step Copilot engineering tasks** using specialized sub-agents.
+- Decomposes work into focused subtasks and delegates to three workers: Researcher, Creator, and Reviewer — each running in an isolated context window.
+- Solves the "context rot" problem where complex tasks degrade quality in a monolithic agent's context window.
+- Coexists alongside Copilot Engineer for A/B comparison — see [Orchestrator Pattern](docs/orchestrator-pattern.md) for the full deep-dive.
+
 ### 📋 Workshop Analyst
 
 - Focus: **converting discovery workshop materials into Jira-ready epics and stories**.
@@ -243,6 +255,8 @@ Each agent is designed to be used together with the workflow prompts below.
 Skills provide **specialized domain knowledge and structured workflows** that agents automatically load when relevant to a task. They encode tested, step-by-step processes for common activities — ensuring consistent, high-quality outputs across team members.
 
 Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
+
+> 💡 Skills follow a **gerund-form naming convention** (`verb-ing` + `object`). See the [Creating Skills](.github/skills/creating-skills/SKILL.md) skill for the full authoring methodology.
 
 ### 🔍 Task Analysis
 
@@ -337,6 +351,30 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Applies a benchmark template to ensure consistent field mapping across all tasks.
 - Handles Jira markdown compatibility and two-gate review before push.
 - Guides the agent on creating epics and linked stories via Atlassian tools.
+
+### 🏗️ Creating Agents
+- Focus: **creating custom agents** (.agent.md) for GitHub Copilot in VS Code.
+- Provides templates, guidelines, and a structured process for building agent definitions.
+- Enforces separation of concerns between agents (WHO), skills (HOW), and prompts (WHAT).
+- Ensures consistent agent structure with clear behavior, personality, and responsibility definitions.
+
+### ✍️ Creating Skills
+- Focus: **creating well-structured, reusable skills** (SKILL.md) for GitHub Copilot.
+- Enforces gerund-form naming conventions, description guidelines, and body structure rules.
+- Provides templates, examples, and a validation checklist for consistent skill authoring.
+- Implements progressive disclosure patterns to optimize token usage across discovery, activation, and resource tiers.
+
+### 📝 Creating Prompts
+- Focus: **creating custom prompt files** (.prompt.md) for GitHub Copilot in VS Code.
+- Provides templates and guidelines for building prompt files that trigger specific workflows.
+- Routes workflows to the right custom agent and AI model via frontmatter configuration.
+- Ensures prompts focus on workflow steps without redefining agent identity or behavior.
+
+### 📜 Creating Instructions
+- Focus: **creating custom instruction files** (.instructions.md) for GitHub Copilot in VS Code.
+- Covers both repository-level instructions (the project constitution) and granular scoped instructions with applyTo glob patterns.
+- Provides templates, decision framework for when conventions belong in instructions vs. skills, and validation checklists.
+- Ensures instruction files are concise, self-contained, and focused on rules that linters and formatters don't enforce.
 
 ---
 
