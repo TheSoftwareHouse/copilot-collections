@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-02-24
+
+### Added
+
+- Workshop Analyst agent (`tsh-workshop-analyst`) for converting discovery workshop materials (transcripts, designs, codebase context) into Jira-ready epics and user stories
+- Transcript Processing skill (`transcript-processing`) for cleaning raw workshop/meeting transcripts and extracting structured business-relevant content
+- Task Extraction skill (`task-extraction`) for identifying and structuring epics and user stories from workshop materials
+- Task Quality Review skill (`task-quality-review`) for analyzing extracted tasks for quality gaps, missing edge cases, and improvement opportunities
+- Jira Task Formatting skill (`jira-task-formatting`) for transforming extracted tasks into Jira-ready format with field mapping and markdown compatibility
+- Workshop analysis prompts: `/workshop-analyze`, `/transcript-clean`, `/create-jira-tasks`
+
+## 2026-02-18
+
+### Added
+
+- SQL & Database engineering skill covering schema design (naming conventions, primary key strategies, data types, normalisation), performant SQL writing, indexing strategies, join optimisation, locking mechanics, transactions, query debugging with EXPLAIN ANALYZE, and ORM integration (TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, GORM). Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle
+
+## 2026-02-17
+
+### Added
+
+- Frontend Implementation skill (`frontend-implementation`) for accessibility, design system usage, component patterns, and performance guidelines
+- UI Verification skill (`ui-verification`) for verification criteria, tolerances, checklists, and severity definitions
+
+### Changed
+
+- Consolidated `tsh-frontend-software-engineer` agent into `tsh-software-engineer` - frontend capabilities are now handled via skills
+- Updated `tsh-software-engineer` tool guidelines with frontend-specific scenarios (Figma, Playwright, design tokens)
+- Made skills tool-agnostic by removing hardcoded tool names
+- Refactored `implement-ui.prompt.md` and `review-ui.prompt.md` to reference skills instead of duplicating content
+
+### Removed
+
+- `tsh-frontend-software-engineer` agent (replaced by `tsh-software-engineer` + frontend skills)
+
 ## 2026-02-15
 
 ### Added

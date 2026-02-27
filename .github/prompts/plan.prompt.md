@@ -15,6 +15,7 @@ Before starting, load and follow these skills:
 - `codebase-analysis` - for analyzing the existing codebase
 - `implementation-gap-analysis` - for verifying what exists vs what needs to be built
 - `technical-context-discovery` - for understanding project conventions and patterns
+- `sql-and-database` - when the feature involves database schema design, data model changes, migrations, or query-heavy implementation
 
 ## Workflow
 

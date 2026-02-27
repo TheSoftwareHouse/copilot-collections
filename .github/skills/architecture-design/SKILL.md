@@ -23,6 +23,8 @@ Analysis progress:
 **Step 1: Understand the goal of the task**
 Thoroughly process the conversation history and task `*.research.md` file to fully understand the business goal of the task.
 
+If the task or research file references PDF documents (technical specifications, API documentation, architecture documents, compliance requirements), use the `pdf-reader` tool to extract and review their content.
+
 **Step 2: Analyse the current codebase**
 Perform a current codebase analysis to get a full picture of a current system in a context of the task.
 Make sure to understand the project and domain best practices.
@@ -77,3 +79,4 @@ Don't add or remove any sections from the template. Follow the structure and nam
 - `codebase-analysis` - for analyzing the existing architecture, components, and patterns
 - `implementation-gap-analysis` - for verifying what was already implemented and what should be added
 - `technical-context-discovery` - for establishing project conventions and existing patterns before designing
+- `sql-and-database` - for designing database schemas, data models, normalisation strategies, and indexing as part of the solution architecture

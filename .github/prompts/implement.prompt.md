@@ -19,6 +19,7 @@ If you need to make changes to the original solution during implementation, wait
 Before starting, load and follow these skills:
 - `technical-context-discovery` - to establish project conventions, coding standards, and existing patterns
 - `implementation-gap-analysis` - to verify current state before making changes
+- `sql-and-database` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking
 
 ## Workflow
 
