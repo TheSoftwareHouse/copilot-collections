@@ -180,3 +180,4 @@ Role: You are a...
 - `creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `technical-context-discovery` - to understand existing agent patterns in the project before creating a new one
 - `codebase-analysis` - to analyze existing agents and identify patterns to follow
+- `creating-instructions` - to understand when coding standards and project conventions belong in instruction files rather than agent definitions

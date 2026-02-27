@@ -27,6 +27,7 @@ Before starting any creation task, determine the artifact type from the specific
 - `creating-agents` — when creating or modifying a `.agent.md` file. Provides the agent file template, structural conventions, and validation checklist.
 - `creating-skills` — when creating or modifying a `SKILL.md` file, including associated templates and examples. Provides naming conventions, body structure guidelines, and progressive disclosure patterns.
 - `creating-prompts` — when creating or modifying a `.prompt.md` file. Provides the prompt file template, workflow focus guidelines, and validation checklist.
+- `creating-instructions` — when creating or modifying `.instructions.md` files or `copilot-instructions.md`. Provides templates for both repository-level and granular instruction files, decision framework for instruction vs. skill placement, and validation checklist.
 
 ## Output Format and Quality Standards
 
