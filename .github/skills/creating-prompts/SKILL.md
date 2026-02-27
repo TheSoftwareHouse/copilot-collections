@@ -144,9 +144,9 @@ Verify the prompt file against this checklist:
 
 | Field | Required | Description |
 |---|---|---|
-| `agent` | **Yes*** | The custom agent used for running the prompt. Must match an agent filename in `.github/agents/` (without the `.agent.md` suffix). If omitted, the current agent in chat is used. |
-| `model` | **Yes*** | The AI model used when running the prompt. If omitted, the currently selected model in the model picker is used. |
-| `description` | **Yes*** | A short description of what the prompt does. Shown in the `/` menu. |
+| `agent` | **Yes** | The custom agent used for running the prompt. Must match an agent filename in `.github/agents/` (without the `.agent.md` suffix). If omitted, the current agent in chat is used. |
+| `model` | **Yes** | The AI model used when running the prompt. If omitted, the currently selected model in the model picker is used. |
+| `description` | **Yes** | A short description of what the prompt does. Shown in the `/` menu. |
 | `name` | No | Override display name shown in the `/` menu instead of the filename. |
 | `argument-hint` | No | Hint text shown in the chat input field to guide the user on what to provide (e.g., `[Jira ID or task description]`). |
 | `tools` | No | A list of tool or tool set names available for this prompt. Overrides agent defaults. Use `<server-name>/*` for all MCP server tools. |
