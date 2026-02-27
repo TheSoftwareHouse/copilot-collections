@@ -271,6 +271,8 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 
 ### 📋 Product Ideation Skills
 
+> 💡 Skills follow a **gerund-form naming convention** (`verb-ing` + `object`). See the [Creating Skills](.github/skills/creating-skills/SKILL.md) skill for the full authoring methodology.
+
 #### 🔍 Task Analysis
 
 - Focus: **gathering and expanding context** for a development task.
