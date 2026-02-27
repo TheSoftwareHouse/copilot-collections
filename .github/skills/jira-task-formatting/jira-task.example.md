@@ -17,6 +17,7 @@ This document defines the expected structure and fields for Jira epics and stori
 | Priority | Yes | Highest / High / Medium / Low |
 | Labels | No | Domain or feature area labels relevant to the project |
 | Jira Key | No | Jira issue key (e.g., PROJ-123). Populated after issue creation or import. |
+| Status | No | Current Jira workflow status (e.g., To Do, In Progress, Done). Populated from Jira during import or after push. Used to enforce the Protected Status Policy — tasks with a protected status are read-only. |
 
 ### Description Format
 
@@ -60,6 +61,7 @@ h2. Success Metrics
 | Labels | No | Inherited from epic + story-specific labels |
 | Story Points | No | Team estimates during refinement. Agent provides sizing guidance: Small (1-3), Medium (5-8), Large (13+) |
 | Jira Key | No | Jira issue key (e.g., PROJ-123). Populated after issue creation or import. |
+| Status | No | Current Jira workflow status (e.g., To Do, In Progress, Done). Populated from Jira during import or after push. Used to enforce the Protected Status Policy — tasks with a protected status are read-only. |
 
 ### Description Format
 
@@ -132,6 +134,15 @@ The `Jira Key` field is empty (`—`) when the task has not yet been pushed to J
 - After a successful push, the agent writes the Jira key back into `jira-tasks.md`
 - After a successful import, the agent populates the Jira key from the fetched issues
 
+### Status Field
+
+The `Status` field reflects the current Jira workflow status of the task (e.g., `To Do`, `In Progress`, `Done`, `Cancelled`, `PO APPROVE`). It is empty (`—`) for tasks that have not been pushed to or imported from Jira.
+
+- Do not manually fill this field — it is managed by the agent
+- After a successful import, the agent populates the Status from the fetched Jira issue
+- After a successful push (create or update), the agent records the current status returned by Jira
+- Tasks whose status is **Done**, **Cancelled**, or **PO APPROVE** are considered **protected** and are treated as read-only. The agent will not modify their content locally or push updates to Jira for them. See the Protected Status Policy in the agent file for full details.
+
 ---
 
 ## Example: Fully Populated Epic with Stories
@@ -139,6 +150,7 @@ The `Jira Key` field is empty (`—`) when the task has not yet been pushed to J
 ### Epic: User Authentication: Secure Login and Account Access
 
 **Jira Key**: —
+**Status**: —
 **Priority**: Highest
 
 **Description**:
@@ -175,6 +187,7 @@ h2. Success Metrics
 
 **Parent**: User Authentication: Secure Login and Account Access
 **Jira Key**: PROJ-124
+**Status**: In Progress
 **Priority**: Highest
 **Sizing Guidance**: Medium (5-8)
 
@@ -218,6 +231,7 @@ Discussed during workshop: SSO integration may be added later as a separate stor
 
 **Parent**: User Authentication: Secure Login and Account Access
 **Jira Key**: —
+**Status**: —
 **Priority**: Highest
 **Sizing Guidance**: Small (1-3)
 
@@ -259,6 +273,7 @@ No specific technical considerations discussed.
 
 **Parent**: User Authentication: Secure Login and Account Access
 **Jira Key**: PROJ-126
+**Status**: To Do
 **Priority**: High
 **Sizing Guidance**: Medium (5-8)
 

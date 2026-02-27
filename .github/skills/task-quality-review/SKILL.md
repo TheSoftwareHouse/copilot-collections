@@ -90,6 +90,8 @@ This model is derived entirely from the task list content. It is not a technical
 
 **Step 4: Run analysis passes**
 
+> **Protected Status Filter**: Before running analysis passes, filter out all tasks (epics and stories) whose Status field is Done, Cancelled, or PO APPROVE. These tasks are considered immutable and must not generate findings or suggestions. They may still be referenced as dependencies by other tasks, but they themselves are excluded from all analysis.
+
 Execute each of the following analysis passes against the domain model and task list. Each pass is independent and produces zero or more findings. A finding is a potential gap or improvement that will become a suggestion.
 
 ---
@@ -262,6 +264,8 @@ Transform each finding from the analysis passes into a structured suggestion:
 
 **Step 7: Present suggestions for user review**
 
+> **Protected Status Safety Net**: Before presenting suggestions, verify that no suggestion targets a task with a protected status (Done, Cancelled, or PO APPROVE). If any such suggestion exists, drop it silently — it should not have been generated (see Step 4 guard), but this acts as a defensive safety net.
+
 Present all suggestions to the user for individual accept/reject decisions:
 
 1. **Order suggestions**: Order by epic, then by confidence within each epic (High first, then Medium, then Low). If a suggestion proposes a new epic, present it after all existing-epic suggestions.
@@ -278,6 +282,8 @@ Present all suggestions to the user for individual accept/reject decisions:
 4. **Record decisions**: Track which suggestions were accepted and which were rejected (with any stated reason).
 
 **Step 8: Apply accepted suggestions**
+
+> **Protected Status Final Guard**: Before applying any accepted suggestion, re-check the target task's Status field. If the status is Done, Cancelled, or PO APPROVE, do not apply the change. Log it in the quality review report as "Skipped — task has protected status".
 
 For each accepted suggestion, apply the proposed change to `extracted-tasks.md`:
 

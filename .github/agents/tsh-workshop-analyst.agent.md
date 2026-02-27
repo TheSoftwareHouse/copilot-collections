@@ -39,6 +39,24 @@ No data is pushed to Jira without explicit user approval at all three gates.
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
+## Protected Status Policy
+
+The following Jira statuses are **protected**:
+- **Done**
+- **Cancelled**
+- **PO APPROVE**
+
+Tasks (epics or stories) whose Jira status matches any of the above are considered **immutable**. The following rules apply across all skills and workflows:
+
+1. **No local edits**: Tasks with a protected status MUST NOT be edited in `jira-tasks.md` or `extracted-tasks.md`. Their content is frozen.
+2. **No Jira updates**: Tasks with a protected status MUST NOT be updated in Jira via the Atlassian tool. No field may be changed.
+3. **No quality-review suggestions**: Tasks with a protected status MUST NOT be the target of any quality-review suggestion. Analysis passes must exclude them.
+4. **Formatting and push flows**: During formatting and push, protected tasks are **skipped**. The agent informs the user by listing all skipped tasks and their statuses in a summary.
+5. **Import behaviour**: During import from Jira, protected tasks **are** imported (so the user has full visibility of the backlog) but they are marked as read-only with a `🔒` indicator. They must never be modified or pushed back.
+6. **User override requests**: If a user explicitly requests editing a protected task, the agent MUST refuse and explain: _"This task has a protected status ([status]). Tasks with status Done, Cancelled, or PO APPROVE cannot be modified. If this status is incorrect, please update it in Jira first, then re-import."_
+
+This policy is the **single source of truth** for the protected status list. All skills reference this policy rather than maintaining their own copy of the list.
+
 ## Skills Usage Guidelines
 
 - `transcript-processing` - to clean raw workshop transcripts from small talk, structure by topics, and extract key decisions, action items, and open questions. Use at the beginning of the workflow when raw transcripts are provided.
@@ -65,10 +83,12 @@ You have access to the `Atlassian` tool.
   - Before batch-pushing, check each task's `Jira Key` field. Tasks with existing keys are **updated**, not recreated. Present a sync summary to the user showing: (a) tasks to be CREATED (no Jira key), (b) tasks to be UPDATED (existing key), (c) total counts. Get approval before proceeding.
   - When the user modifies a specific task, update the local `jira-tasks.md` first, then ask the user whether to push the change to Jira now.
   - If any issue creation or update fails, inform the user immediately and ask how to proceed.
+  - Before updating any Jira issue, check its current status. If the status is in the protected list (Done, Cancelled, PO APPROVE), skip the update and inform the user.
 - **SHOULD NOT use for**:
   - Searching for technical documentation or code-related information.
   - Any action before the user has approved at Gate 2 (for initial batch push).
   - Creating duplicate issues when a Jira key already exists in `jira-tasks.md`.
+  - Updating issues that have a protected status (Done, Cancelled, PO APPROVE).
 
 You have access to the `figma-mcp-server` tool.
 
