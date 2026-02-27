@@ -4,7 +4,7 @@ model: "Claude Opus 4.6"
 description: "Process discovery workshop materials and create Jira-ready epics and user stories, or iterate on an existing Jira backlog."
 ---
 
-Analyze the provided workshop materials (transcripts, Figma designs, codebase context, or other reference documents) and convert them into structured, Jira-ready epics and user stories. Alternatively, import an existing Jira backlog for local iteration and improvement.
+Analyze the provided workshop materials (transcripts, Figma designs, PDF documents, codebase context, or other reference documents) and convert them into structured, Jira-ready epics and user stories. Alternatively, import an existing Jira backlog for local iteration and improvement.
 
 The file outcomes should be markdown files placed in the `specifications` directory under a folder named after the workshop topic in kebab-case format (e.g., `specifications/user-onboarding/`):
 - `cleaned-transcript.md` — Cleaned and structured transcript
@@ -30,7 +30,7 @@ Determine the entry point based on what the user provides:
 **Standard workflow (workshop materials provided):**
 
 1. **Process transcript**: If a raw transcript is provided, clean it using the `transcript-processing` skill. Remove small talk, structure by topics, extract decisions and action items. Save as `cleaned-transcript.md`.
-2. **Analyze additional materials**: Review Figma designs (using `figma-mcp-server` tool), existing codebase (using `codebase-analysis` skill), and any other reference documents provided.
+2. **Analyze additional materials**: Review Figma designs (using `figma-mcp-server` tool), read PDF documents (using `pdf-reader` tool), existing codebase (using `codebase-analysis` skill), and any other reference documents provided.
 3. **Extract tasks**: Using the `task-extraction` skill, identify epics and user stories from all processed materials. Save as `extracted-tasks.md`.
 4. **Review Gate 1**: Present the extracted task list to the user for validation. Ask if any tasks were missed, should be split, merged, or removed. Iterate until the user approves.
 5. **Quality review**: Using the `task-quality-review` skill, run all analysis passes against the approved task list. Build the domain model, identify gaps, and produce structured suggestions. This step runs automatically after Gate 1 approval — do not ask the user whether to run it.

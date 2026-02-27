@@ -23,6 +23,8 @@ Analysis progress:
 **Step 1: Understand the goal of the task**
 Thoroughly process the conversation history and task `*.research.md` file to fully understand the business goal of the task.
 
+If the task or research file references PDF documents (technical specifications, API documentation, architecture documents, compliance requirements), use the `pdf-reader` tool to extract and review their content.
+
 **Step 2: Analyse the current codebase**
 Perform a current codebase analysis to get a full picture of a current system in a context of the task.
 Make sure to understand the project and domain best practices.

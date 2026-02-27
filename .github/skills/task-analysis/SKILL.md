@@ -27,6 +27,7 @@ Before gathering information, determine how the task context was provided:
 - **Research & plan files exist** (`*.research.md`, `*.plan.md`): Read them as the primary source of requirements, acceptance criteria, scope, and definition of done.
 - **Jira ID / task ID provided**: Use it to fetch task details from external tools (Step 1).
 - **Context provided directly in the prompt**: When neither files nor a task ID are referenced, extract requirements, acceptance criteria, and scope from the user's message. Treat the prompt as the single source of truth. If critical information is missing, ask for clarification before proceeding.
+- **PDF files attached or referenced**: Use the `pdf-reader` tool to extract content from PDF documents before analyzing them. Treat the extracted content as a primary source alongside research files and Jira tasks.
 
 This determination affects how much of Steps 1–2 you need to execute — if the context is already fully provided inline or in files, skip redundant external lookups.
 
@@ -48,6 +49,8 @@ For each available tool look for task related information on it. Make sure to lo
 In case of any external links, knowledge base link or designs, make sure to thoroughly check them through.
 
 Analyse the code base based on task requirements. Look for areas that will be related to given task.
+
+In case of any attached or referenced PDF files (requirements documents, client briefs, process descriptions, compliance documents), use the `pdf-reader` tool to extract their content and include relevant findings in the research report.
 
 Find relevant information on knowledge base tools.
 

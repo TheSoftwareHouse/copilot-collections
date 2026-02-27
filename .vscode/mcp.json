@@ -22,6 +22,11 @@
     "atlassian": {
       "url": "https://mcp.atlassian.com/v1/mcp",
       "type": "http"
+    },
+    "pdf-reader": {
+      "command": "npx",
+      "args": ["@sylphx/pdf-reader-mcp"],
+      "type": "stdio"
     }
   },
   "inputs": []

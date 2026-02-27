@@ -30,6 +30,7 @@ Determine the format of the raw transcript:
 - Plain text notes without speaker labels
 - Timestamped transcript (e.g., `[00:12:34] text`)
 - Mixed format
+- PDF document (transcript or meeting notes exported/provided as PDF — use `pdf-reader` tool to extract text content first)
 
 Extract meeting metadata where available:
 - Date and time of the workshop

@@ -45,6 +45,7 @@ Collect and thoroughly review all available workshop materials:
 - **Figma/FigJam designs**: If available, analyze screens, flows, and annotations for functional requirements
 - **Existing codebase**: Use `codebase-analysis` skill to understand what already exists and what needs to be built
 - **Other documents**: Confluence pages, shared documents, email threads, or any other reference materials provided by the user
+- **PDF documents**: If available, read PDF files using the `pdf-reader` tool to extract requirements, process descriptions, business rules, or any other relevant content provided by the client
 
 Create a mental model of the full scope discussed during the workshop before proceeding to extraction.
 
