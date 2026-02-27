@@ -39,6 +39,9 @@ Review the benchmark template to understand:
 **Step 2: Format each epic for Jira**
 
 For each epic in the extracted tasks document, create a Jira-ready epic entry with:
+
+> **Protected Status Guard**: If an epic has a protected status (Done, Cancelled, PO APPROVE), preserve its content exactly as imported. Do not reformat, reword, or modify any fields. Mark it with `🔒` in the output and skip all formatting steps below for this epic.
+
 - **Summary** (title): Follow the naming convention from the benchmark template
 - **Description**: Structured using the benchmark epic description format, including:
   - Business overview
@@ -51,6 +54,9 @@ For each epic in the extracted tasks document, create a Jira-ready epic entry wi
 **Step 3: Format each story for Jira**
 
 For each user story, create a Jira-ready story entry with:
+
+> **Protected Status Guard**: If a story has a protected status (Done, Cancelled, PO APPROVE), preserve its content exactly as imported. Do not reformat, reword, or modify any fields. Mark it with `🔒` in the output and skip all formatting steps below for this story.
+
 - **Summary** (title): Follow the naming convention from the benchmark template
 - **Description**: Structured using the benchmark story description format, including:
   - Context paragraph linking to the parent epic
@@ -65,6 +71,8 @@ For each user story, create a Jira-ready story entry with:
 
 **Step 4: Validate completeness against benchmark**
 
+> **Protected Status Guard**: Skip completeness validation for tasks with a protected status (Done, Cancelled, PO APPROVE) — their content is preserved as-is and is not subject to benchmark compliance.
+
 Cross-check every formatted task against the benchmark template:
 - Are all required fields populated?
 - Do descriptions follow the expected structure?
@@ -75,6 +83,8 @@ Cross-check every formatted task against the benchmark template:
 Create a summary table showing completeness status for each task.
 
 **Step 5: Flag uncertain fields and ask user**
+
+> **Protected Status Guard**: Do not flag or ask the user about fields on tasks with a protected status (Done, Cancelled, PO APPROVE). These tasks are read-only and their fields cannot be changed.
 
 For any task where:
 - A required field could not be confidently filled from the source materials
@@ -114,7 +124,8 @@ This is the final gate — after this, issues will be created in Jira.
 
 Before pushing, present a **sync summary** to the user:
 - **(a)** Tasks to be **CREATED** (Jira Key is `—`) — list titles and count
-- **(b)** Tasks to be **UPDATED** (Jira Key is populated, e.g., `PROJ-123`) — list titles, keys, and count
+- **(b)** Tasks to be **UPDATED** (Jira Key is populated, e.g., `PROJ-123`, and status is NOT protected) — list titles, keys, and count
+- **(c)** Tasks **SKIPPED** (Jira Key is populated and status is Done, Cancelled, or PO APPROVE) — list titles, keys, statuses, and count
 - Get explicit user approval before proceeding.
 
 Using the Atlassian tools, process issues based on their Jira Key:
@@ -127,12 +138,13 @@ Using the Atlassian tools, process issues based on their Jira Key:
 5. Add any **links** between stories (blocked-by, related-to relationships)
 
 **For tasks with an existing Jira Key (update):**
-1. Update the existing Jira issue with the local content
-2. Fields to update: Summary, Description, Acceptance Criteria, Priority, Labels
-3. Fields NOT to update: Issue Type, Parent link (unless the user explicitly requests re-linking)
-4. If an update fails because the issue no longer exists in Jira, inform the user and offer to create a new issue instead
+1. First, check the task's Status field. If the status is Done, Cancelled, or PO APPROVE, **skip this task** — do not send any update to Jira. It was already counted in the sync summary under category (c).
+2. Update the existing Jira issue with the local content
+3. Fields to update: Summary, Description, Acceptance Criteria, Priority, Labels
+4. Fields NOT to update: Issue Type, Parent link (unless the user explicitly requests re-linking)
+5. If an update fails because the issue no longer exists in Jira, inform the user and offer to create a new issue instead
 
-After all issues are processed, report the final state back to the user — showing all Jira keys in `jira-tasks.md` and confirming which were created vs. updated.
+After all issues are processed, report the final state back to the user — showing all Jira keys in `jira-tasks.md` and confirming which were created, updated, and skipped (with their statuses).
 
 If any issue creation or update fails, inform the user immediately and ask how to proceed.
 
@@ -140,6 +152,7 @@ If any issue creation or update fails, inform the user immediately and ask how t
 
 When the user requests a change to a specific task outside of the main formatting workflow (e.g., "add acceptance criteria to Story 2.3" or "change the priority of Epic 1"):
 
+0. **Check the task's Status field**. If it is Done, Cancelled, or PO APPROVE, inform the user that this task is protected and cannot be modified: _"This task has a protected status ([status]). Per the Protected Status Policy, tasks with status Done, Cancelled, or PO APPROVE cannot be modified. If this status is incorrect, please update it in Jira first, then re-import."_ Do not apply the change locally or in Jira. Stop here.
 1. **Update the local `jira-tasks.md` first** — apply the requested change to the file
 2. **Ask the user**: "Do you want to push this change to Jira now?" (using one `askQuestions` call)
 3. **If yes** — use the task's Jira key to update the specific issue via Atlassian MCP. If the task has no Jira key (`—`), inform the user that the task has not been pushed yet and offer to create it
@@ -203,8 +216,11 @@ Convert each fetched issue into the benchmark template format:
 | Issue Key | Jira Key | Populate directly (e.g., `PROJ-123`) |
 | Parent link | Parent epic reference | Map to parent epic title |
 | Story Points | Story Points / Sizing Guidance | If estimated, include; otherwise mark as TBD |
+| Status | Status | Direct mapping of the Jira workflow status (e.g., To Do, In Progress, Done). Used to enforce the Protected Status Policy. |
 
 If an imported description cannot be cleanly restructured into the benchmark format, flag it for user review using one `askQuestions` call per flagged task.
+
+> **Protected Status Handling on Import**: After mapping all fields, check each imported task's Status. If the status is Done, Cancelled, or PO APPROVE, mark the task as read-only by adding a `🔒` indicator next to its title. These tasks are imported for visibility but must never be modified locally or pushed back to Jira. Preserve their content exactly as fetched.
 
 **Step I-4: Generate jira-tasks.md**
 
