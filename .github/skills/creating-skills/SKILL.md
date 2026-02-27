@@ -140,12 +140,12 @@ Avoid:
 
 | Pattern | Example | Why |
 |---|---|---|
-| Noun phrases | `agent-creation` | Passive — doesn't convey action |
+| Noun phrases | `task-analysis` | Passive — doesn't convey action |
 | Vague names | `helper`, `utils`, `tools` | Indiscoverable — agent can't match them to tasks |
 | Overly generic | `documents`, `data`, `files` | Too broad — will trigger on irrelevant tasks |
 | Inconsistent form | Mix of `code-review` and `creating-agents` | Breaks convention — confuses pattern recognition |
 
-> **Note**: Some existing skills in this workspace use noun-phrase form (e.g., `agent-creation`, `code-review`). Gerund form is the preferred convention for new skills. Existing skills will be renamed to gerund form incrementally.
+> **Note**: Some existing skills in this workspace use noun-phrase form (e.g., `code-review`, `task-analysis`). Gerund form is the preferred convention for new skills. Existing skills will be renamed to gerund form incrementally.
 
 ### Shortening Long Names
 
@@ -330,7 +330,7 @@ For standard workflow patterns (checklists, templates, conditional workflows, fe
 
 ## Connected Skills
 
-- `agent-creation` - to understand how skills relate to agent definitions and avoid overlap
+- `creating-agents` - to understand how skills relate to agent definitions and avoid overlap
 - `creating-prompts` - to understand how prompts reference and trigger skills
 - `technical-context-discovery` - to discover existing skill patterns in the project before creating a new one
 - `codebase-analysis` - to analyze existing skills and identify conventions to follow

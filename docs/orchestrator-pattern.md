@@ -130,7 +130,7 @@ Workers are **invisible to users** (`user-invokable: false`). Only the orchestra
 
 **Tools**: `read`, `search`, `edit`, `todo` — the **only worker with write access**. No `web/fetch` or `context7/*` (research happens before creation, not during).
 
-**Skills**: Autonomously loads `agent-creation`, `creating-skills`, or `creating-prompts` based on the artifact type being created. The orchestrator's delegation prompt specifies WHAT to create; the skill provides HOW.
+**Skills**: Autonomously loads `creating-agents`, `creating-skills`, or `creating-prompts` based on the artifact type being created. The orchestrator's delegation prompt specifies WHAT to create; the skill provides HOW.
 
 **Key constraints**:
 - Must follow the orchestrator's specification exactly
@@ -217,7 +217,7 @@ Here is the typical end-to-end workflow for a "create a new agent" task:
  7. Creator creates the file, returns confirmation + brief summary
 
  8. Orchestrator → Reviewer: "Review the newly created file against the
-    agent-creation skill checklist, consistency with existing agents,
+    creating-agents skill checklist, consistency with existing agents,
     and separation of concerns principles"
 
  9. Reviewer returns severity-categorized findings
@@ -293,7 +293,7 @@ The consolidation decision is deliberately deferred until empirical results are 
 
 **Prompt engineering burden** (HIGH): The orchestrator's effectiveness depends heavily on the quality of delegation prompts it crafts. A vague delegation produces vague results. This is the critical success factor — the orchestrator must provide clear task statements, expected output formats, relevant context, and constraints in every delegation.
 
-**Skill loading in sub-agent context**: Whether skills load correctly when a worker runs as a sub-agent is an open question that needs practical validation. The creator worker references skills like `agent-creation` and `creating-skills` — confirming these activate properly in the sub-agent context is an early validation priority.
+**Skill loading in sub-agent context**: Whether skills load correctly when a worker runs as a sub-agent is an open question that needs practical validation. The creator worker references skills like `creating-agents` and `creating-skills` — confirming these activate properly in the sub-agent context is an early validation priority.
 
 **Worker model selection**: Workers could potentially use faster or cheaper models for straightforward tasks (e.g., a lighter model for research summarization). Whether this maintains quality is deferred to experimentation.
 

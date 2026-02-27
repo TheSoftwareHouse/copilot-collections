@@ -23,6 +23,22 @@ tools: ['<tool-1>', '<tool-2>', '<mcp-server>/*']
 ---
 
 <!-- ============================================================ -->
+<!-- TABLE OF CONTENTS                                             -->
+<!-- This template defines the structure for .agent.md files.      -->
+<!-- Sections marked (Required) must be present in every agent.    -->
+<!-- Sections marked (Optional) can be removed if not needed.      -->
+<!-- ============================================================ -->
+<!-- Sections:                                                     -->
+<!--   1. Agent Role .................. (Required)                 -->
+<!--   2. Skills Usage ................ (Required)                 -->
+<!--   3. Tool Usage .................. (Required)                 -->
+<!--   4. Domain Standards ............ (Optional)                 -->
+<!--   5. Collaboration ............... (Optional)                 -->
+<!--   6. Constraints ................. (Optional)                 -->
+<!--   7. Output Format ............... (Optional)                 -->
+<!-- ============================================================ -->
+
+<!-- ============================================================ -->
 <!-- REQUIRED SECTION: Agent Role and Responsibilities              -->
 <!-- Define WHO the agent is, not HOW specific workflows run.      -->
 <!-- Workflows belong in skills (.github/skills/) and prompts.      -->

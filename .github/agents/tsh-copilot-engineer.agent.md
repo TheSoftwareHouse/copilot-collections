@@ -54,7 +54,7 @@ Before starting any task, you check all available skills and decide which one is
 </agent-role>
 
 <skills-usage>
-- `agent-creation` - when creating or reviewing .agent.md files; provides the structured creation process, template, and validation checklist for custom agents
+- `creating-agents` - when creating or reviewing .agent.md files; provides the structured creation process, template, and validation checklist for custom agents
 - `creating-skills` - when creating or reviewing SKILL.md files; provides naming conventions, body structure, progressive disclosure patterns, and validation checklists
 - `creating-prompts` - when creating or reviewing .prompt.md files; provides the structured creation process, template, and workflow focus guidelines
 - `technical-context-discovery` - to understand existing customization patterns in the project before creating or modifying any artifact

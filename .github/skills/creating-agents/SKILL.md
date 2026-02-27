@@ -1,11 +1,11 @@
 ---
-name: agent-creation
+name: creating-agents
 description: "Create custom agents (.agent.md) for GitHub Copilot in VS Code. Provides templates, guidelines, and a structured process for building agent definitions that describe behavior, personality, responsibilities, and problem-solving approaches. Use when creating, reviewing, or updating .agent.md files."
 ---
 
-# Agent Creation
+# Creating Agents
 
-This skill helps you create well-structured custom agents for GitHub Copilot in VS Code. It enforces a consistent pattern across all agents and ensures clear separation between agent definitions, skills, and prompts.
+Creates well-structured custom agents for GitHub Copilot in VS Code. Enforces a consistent pattern across all agents and ensures clear separation between agent definitions, skills, and prompts.
 
 ## Core Design Principles
 
@@ -31,7 +31,7 @@ An agent should only describe what is necessary for its specific role. Avoid dup
 </minimal-scope>
 </principles>
 
-## Agent Creation Process
+## Creation Process
 
 Use the checklist below and track your progress:
 
@@ -158,7 +158,7 @@ All body content in the agent file must use XML-like tags for structure. Rules:
 2. Tags use lowercase-kebab-case naming
 3. Nesting is allowed for sub-sections: `<tool>` inside `<tool-usage>`
 4. Markdown formatting (bold, lists, tables, code blocks) is used inside XML tags for content
-5. Do not use XML attributes — use nested tags or Markdown content instead
+5. Avoid XML attributes for structural content — use nested tags or Markdown content instead. Exception: identifier attributes (e.g., `<tool name="...">`) are acceptable when they improve readability.
 
 Example structure:
 ```xml
@@ -176,5 +176,7 @@ Role: You are a...
 
 ## Connected Skills
 
+- `creating-prompts` - to understand how prompts reference agents and ensure agents don't overlap with prompt responsibilities
+- `creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `technical-context-discovery` - to understand existing agent patterns in the project before creating a new one
 - `codebase-analysis` - to analyze existing agents and identify patterns to follow

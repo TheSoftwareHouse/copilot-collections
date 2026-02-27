@@ -174,7 +174,7 @@ All body content in the prompt file must use XML-like tags for structure. Rules:
 2. Tags use lowercase-kebab-case naming
 3. Nesting is allowed for sub-sections
 4. Markdown formatting (bold, lists, tables, code blocks) is used inside XML tags for content
-5. Do not use XML attributes — use nested tags or Markdown content instead
+5. Avoid XML attributes for structural content — use nested tags or Markdown content instead. Exception: identifier attributes (e.g., `<tool name="...">`) are acceptable when they improve readability.
 
 ## Variables Reference
 
@@ -196,7 +196,7 @@ Variables are useful for prompts that operate on dynamic context (e.g., the curr
 
 ## Connected Skills
 
-- `agent-creation` - to understand agent patterns and ensure prompts don't overlap with agent responsibilities
+- `creating-agents` - to understand agent patterns and ensure prompts don't overlap with agent responsibilities
 - `creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `technical-context-discovery` - to understand existing prompt patterns and project conventions before creating a new one
 - `codebase-analysis` - to analyze existing prompts and identify patterns to follow
