@@ -208,6 +208,38 @@ Apply the following rules when writing tests:
 - Use a dedicated AWS test account — never run against production
 - Set `-timeout 30m` in CI to avoid hanging runs
 
+## Terraform vs Terragrunt Decision
+
+Use **plain Terraform** when:
+- Single environment, single region
+- 2–3 environments in the same region (use workspaces or directory layout)
+- Existing project without Terragrunt (don't migrate mid-project)
+
+Use **Terragrunt** when:
+- 4+ environments or multi-region deployments
+- Monorepo with many independent stacks (need `run-all`, dependency orchestration)
+- Team needs strict environment parity via inheritance
+- Multi-account AWS (landing zone pattern)
+- Greenfield with expected growth
+
+**Terragrunt Golden Path structure:**
+```
+infrastructure/
+├── terragrunt.hcl              # Root config (remote_state, generate provider)
+├── _envcommon/                  # Shared module references
+│   ├── vpc.hcl
+│   ├── eks.hcl
+│   └── rds.hcl
+├── dev/
+│   ├── env.hcl                 # Environment-level vars
+│   ├── vpc/terragrunt.hcl
+│   └── eks/terragrunt.hcl
+├── staging/
+│   └── ...
+└── prod/
+    └── ...
+```
+
 ## Related Skills
 
 - `multi-cloud-architecture` - For architectural decisions
