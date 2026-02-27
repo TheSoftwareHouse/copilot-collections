@@ -224,6 +224,8 @@ Skills provide **specialized domain knowledge and structured workflows** that ag
 
 Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
 
+> 💡 Skills follow a **gerund-form naming convention** (`verb-ing` + `object`). See the [Creating Skills](.github/skills/creating-skills/SKILL.md) skill for the full authoring methodology.
+
 ### 🔍 Task Analysis
 - Focus: **gathering and expanding context** for a development task.
 - Pulls information from Jira, Confluence, GitHub, and other integrated tools.
