@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
-tools: ['atlassian/*', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+tools: ['atlassian/*', 'context7/*', 'figma-mcp-server/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
 handoffs: 
   - label: Start Implementation
     agent: tsh-software-engineer
@@ -89,6 +89,21 @@ You have access to the `figma-mcp-server` tool.
 - **SHOULD NOT use for**:
   - Extracting CSS values or pixel-perfect styling details (leave this for the Software Engineer).
   - When the task is purely backend with no frontend impact.
+
+You have access to the `pdf-reader` tool.
+
+- **MUST use when**:
+  - Task references or links to PDF documents containing technical specifications, API documentation, architecture diagrams, or compliance requirements.
+  - A user attaches, mentions, or references a PDF file relevant to the architectural design.
+  - Reviewing PDF materials linked in Jira, Confluence, research files, or provided directly by the user.
+- **IMPORTANT**:
+  - Use this tool to read the full content of PDF files before incorporating them into the architectural design.
+  - Extract technical constraints, integration requirements, data models, API contracts, and non-functional requirements from PDF content.
+  - If a PDF cannot be read (corrupted, password-protected, scanned image without OCR), inform the user and ask for an alternative format.
+  - Cross-reference PDF content with codebase analysis and other documentation to validate architectural assumptions.
+- **SHOULD NOT use for**:
+  - Non-PDF file formats (use standard file reading tools instead).
+  - When the user has already provided the PDF content as pasted text in the conversation.
 
 You have access to the `sequential-thinking` tool.
 
