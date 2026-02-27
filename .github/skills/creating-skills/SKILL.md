@@ -334,3 +334,4 @@ For standard workflow patterns (checklists, templates, conditional workflows, fe
 - `creating-prompts` - to understand how prompts reference and trigger skills
 - `technical-context-discovery` - to discover existing skill patterns in the project before creating a new one
 - `codebase-analysis` - to analyze existing skills and identify conventions to follow
+- `creating-instructions` - to understand when project rules belong in instruction files rather than skill content

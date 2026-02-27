@@ -200,3 +200,4 @@ Variables are useful for prompts that operate on dynamic context (e.g., the curr
 - `creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `technical-context-discovery` - to understand existing prompt patterns and project conventions before creating a new one
 - `codebase-analysis` - to analyze existing prompts and identify patterns to follow
+- `creating-instructions` - to understand when coding standards belong in instruction files rather than prompt definitions
