@@ -9,15 +9,15 @@ Your goal is to perform a thorough code quality analysis of the repository. The 
 ## Required Skills
 
 Before starting, load and follow these skills:
-- `codebase-analysis` - for the structured codebase analysis process only (note: this prompt's "Report Structure" section overrides any report/template instructions from the skill)
-- `technical-context-discovery` - to understand project conventions, architecture patterns, and established practices
-- `code-review` - for code quality standards, best practices verification, and security considerations
+- `codebase-analysing` - for the structured codebase analysis process only (note: this prompt's "Report Structure" section overrides any report/template instructions from the skill)
+- `technical-context-discovering` - to understand project conventions, architecture patterns, and established practices
+- `code-reviewing` - for code quality standards, best practices verification, and security considerations
 
 ## Workflow
 
 ### Phase 1: Context Discovery
 
-1. Load and follow the `technical-context-discovery` skill to understand project conventions, coding standards, and existing patterns.
+1. Load and follow the `technical-context-discovering` skill to understand project conventions, coding standards, and existing patterns.
 2. Identify the repository type (monorepo vs single system). If it is a monorepo, identify all apps, packages, and shared libraries. Each layer/app must be analyzed and reported separately.
 3. Identify the tech stack, frameworks, and key dependencies for each layer/app.
 
@@ -26,7 +26,7 @@ Before starting, load and follow these skills:
 Run `tsh-architect` subagents in parallel — one per layer/app identified. Each subagent should receive detailed instructions including:
 - The specific layer/app path and tech stack to analyze
 - What to search for (dead code, duplications, improvement areas)
-- The skills to load (`codebase-analysis`, `code-review`)
+- The skills to load (`codebase-analysing`, `code-reviewing`)
 - To return structured findings in the format matching the report template
 
 For each layer/app, the subagent should:

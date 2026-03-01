@@ -5,11 +5,11 @@
 <h1 align="center">⚙️ Copilot Collections</h1>
 
 <p align="center">
-  Opinionated GitHub Copilot setup for delivery teams – with shared workflows, agents, prompts, skills and MCP integrations.
+  Opinionated GitHub Copilot setup that covers the <b>full product development lifecycle</b> – from product ideation, through development, to quality assurance.
 </p>
 
 <p align="center">
-  <b>Focus on building features – let Copilot handle the glue.</b><br/>
+  <b>Product Ideation → Development → Quality – one toolchain, end to end.</b><br/>
   Built by <a href="https://tsh.io" target="_blank">The Software House</a>.
 </p>
 
@@ -17,12 +17,30 @@
 
 ## 🚀 What This Repo Provides
 
-- 🧠 **Shared workflows** – a 4‑phase delivery flow: Research → Plan → Implement → Review.
-- 🧑‍💻 **Specialized agents** – Architect, Business Analyst, Software Engineer, UI Reviewer, Code Reviewer, E2E Engineer, Workshop Analyst.
-- 💬 **Task prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/review`, `/review-ui`, `/e2e`, `/code-quality-check`, `/workshop-analyze`, `/transcript-clean`, `/create-jira-tasks` with consistent behavior across projects.
-- 🧰 **Reusable skills** – Task Analysis, Architecture Design, Codebase Analysis, Code Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Frontend Implementation, UI Verification, SQL & Database Engineering, Transcript Processing, Task Extraction, Jira Task Formatting.
-- 🔌 **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking.
-- 🧩 **VS Code setup** – ready‑to‑plug global configuration via VS Code User Settings.
+This repository supports the **full product development lifecycle** with AI-powered agents, skills, and workflows organized into three phases:
+
+### 📋 Product Ideation – Requirements & Planning
+
+- 🧑‍💻 **Agents** – Business Analyst.
+- 💬 **Prompts** – `/analyze-materials`, `/clean-transcript`, `/create-jira-tasks`.
+- 🧰 **Skills** – Task Analysis, Transcript Processing, Task Extraction, Jira Task Formatting.
+
+### 🛠 Development – Architecture & Implementation
+
+- 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer.
+- 💬 **Prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`.
+- 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
+
+### ✅ Quality – Review & Testing
+
+- 🧑‍💻 **Agents** – Code Reviewer, UI Reviewer, E2E Engineer.
+- 💬 **Prompts** – `/review`, `/review-ui`, `/review-codebase`, `/implement-e2e`.
+- 🧰 **Skills** – Code Review, UI Verification, E2E Testing.
+
+### 🔌 Infrastructure
+
+- **MCP integrations** – Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking, PDF Reader.
+- **VS Code setup** – ready-to-plug global configuration via VS Code User Settings.
 
 ---
 
@@ -40,86 +58,108 @@
 
 ## 🧭 Supported Workflow
 
-Our standard workflow is always:
+We support the **full product development lifecycle**, organized into three phases:
 
-> **Research → Plan → Implement → Review**
+> **📋 Product Ideation → 🛠 Development → ✅ Quality**
 
-### 1. 🔍 Research
+### Phase 1: 📋 Product Ideation – Requirements & Planning
 
-- Builds context around a task using Jira, Figma and other integrated tools.
+- Converts raw inputs (workshop transcripts, Figma designs, documents) into structured, actionable work items.
+- Builds context around tasks using Jira, Figma, and other integrated tools.
 - Identifies missing information, risks, and open questions.
-- Produces a concise summary and a list of unknowns.
+- Produces Jira-ready epics and stories with a two-gate review process.
 
-### 2. 🧱 Plan
+### Phase 2: 🛠 Development – Architecture & Implementation
 
-- Translates the task into a structured implementation plan.
-- Breaks work into phases and executable steps.
-- Clarifies acceptance criteria and technical constraints.
-
-### 3. 🛠 Implement
-
-- Executes against the agreed plan.
+- Translates tasks into structured implementation plans with phases and technical constraints.
 - Writes or modifies code with a focus on safety and clarity.
 - Keeps changes scoped to the task, respecting existing architecture.
+- For UI tasks: uses iterative Figma verification to match designs.
 
-### 4. ✅ Review
+**Two tracks are available:**
 
-- Performs a structured code review against:
-  - Acceptance criteria
-  - Security and reliability
-  - Maintainability and style
-- Surfaces risks and suggested improvements.
+| | **Standard Flow** | **UI Flow** (with Figma) |
+|---|---|---|
+| Plan | `/plan` – architecture & steps | `/plan` – component breakdown with Figma refs |
+| Implement | `/implement` – backend & frontend code | `/implement-ui` – UI code + iterative Figma verification |
 
-#### Example End‑to‑End Usage
+### Phase 3: ✅ Quality – Review & Testing
+
+- Performs structured code review against acceptance criteria, security, and reliability.
+- Verifies UI implementation against Figma designs (single-pass or in loop).
+- Creates comprehensive end-to-end tests using Playwright.
+- Runs codebase-wide quality analysis (dead code, duplications, improvements).
+
+---
+
+### Example: Full Lifecycle (Standard Flow)
 
 ```text
-1️⃣ /research <JIRA_ID or task description>
+📋 PRODUCT IDEATION
+1️⃣ /analyze-materials <transcript + workshop materials>
+   ↳ 📖 Review cleaned transcript, extracted tasks, Jira-formatted output
+   ↳ ✅ Approve at each gate before proceeding
+
+🛠 DEVELOPMENT
+2️⃣ /research <JIRA_ID or task description>
    ↳ 📖 Review the generated research document
    ↳ ✅ Verify accuracy, iterate if needed
 
-2️⃣ /plan     <JIRA_ID or task description>
+3️⃣ /plan     <JIRA_ID or task description>
    ↳ 📖 Review the implementation plan
    ↳ ✅ Confirm scope, phases, and acceptance criteria
 
-3️⃣ /implement <JIRA_ID or task description>
+4️⃣ /implement <JIRA_ID or task description>
    ↳ 📖 Review code changes after each phase
    ↳ ✅ Test functionality, verify against plan
 
-4️⃣ /review   <JIRA_ID or task description>
+✅ QUALITY
+5️⃣ /review   <JIRA_ID or task description>
    ↳ 📖 Review findings and recommendations
    ↳ ✅ Address blockers before merging
+
+6️⃣ /implement-e2e <JIRA_ID or task description>
+   ↳ 📖 Review generated Page Objects, test files, and fixtures
+   ↳ ✅ Run tests locally, verify they pass
 ```
 
-You can run the same flow with either a **Jira ticket ID** or a **free‑form task description**.
-
-> ⚠️ **Important:** Each step requires your review and verification. Open the generated documents, go through them carefully, and iterate as many times as needed until the output looks correct. AI assistance does not replace human judgment – treat each output as a draft that needs your approval before proceeding.
-
-#### Example Frontend Flow (with Figma designs)
-
-For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
+### Example: Full Lifecycle (UI Flow with Figma)
 
 ```text
-1️⃣ /research     <JIRA_ID or task description>
+📋 PRODUCT IDEATION
+1️⃣ /analyze-materials <transcript + workshop materials>
+   ↳ 📖 Review cleaned transcript, extracted tasks, Jira-formatted output
+   ↳ ✅ Approve at each gate before proceeding
+
+🛠 DEVELOPMENT
+2️⃣ /research <JIRA_ID or task description>
    ↳ 📖 Review research doc – verify Figma links, requirements
    ↳ ✅ Iterate until context is complete and accurate
 
-2️⃣ /plan         <JIRA_ID or task description>
+3️⃣ /plan         <JIRA_ID or task description>
    ↳ 📖 Review plan – check component breakdown, design references
    ↳ ✅ Confirm phases align with Figma structure
 
-3️⃣ /implement-ui <JIRA_ID or task description>
+4️⃣ /implement-ui <JIRA_ID or task description>
    ↳ 📖 Review code changes and UI Verification Summary
    ↳ ✅ Manually verify critical UI elements in browser
    ↳ 🔄 Agent calls /review-ui in a loop until PASS or escalation
 
-4️⃣ /review       <JIRA_ID or task description>
+✅ QUALITY
+5️⃣ /review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
    ↳ ✅ Address all blockers before merging
+
+6️⃣ /implement-e2e <JIRA_ID or task description>
+   ↳ 📖 Review generated tests for the UI feature
+   ↳ ✅ Run tests locally, verify they pass
 ```
 
-> ⚠️ **Important:** The automated Figma verification loop helps catch visual mismatches, but it does not replace manual review. Always visually inspect the implemented UI in the browser, test interactions, and verify responsive behavior yourself.
+You can run any flow with either a **Jira ticket ID** or a **free-form task description**.
 
-**How the verification loop works:**
+> ⚠️ **Important:** Each step requires your review and verification. Open the generated documents, go through them carefully, and iterate as many times as needed until the output looks correct. AI assistance does not replace human judgment – treat each output as a draft that needs your approval before proceeding.
+
+### How the UI Verification Loop Works
 
 1. `/implement-ui` implements a UI component
 2. Calls `/review-ui` to perform **single-pass verification** (read-only)
@@ -127,27 +167,13 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow:
 4. If FAIL → `/implement-ui` fixes the code and calls `/review-ui` again
 5. Repeats until PASS or max 5 iterations (then escalates)
 
-**What `/review-ui` does:**
+### Example: Standalone Product Ideation
 
-- Single-pass, **read-only** verification – does not modify code
-- Uses **Figma MCP** to extract design specifications
-- Uses **Playwright MCP** to capture current implementation
-- Returns structured report: PASS/FAIL + difference table with exact values
-
-**What `/implement-ui` does:**
-
-- Implements UI components following the plan
-- Runs **iterative verification loop** calling `/review-ui` after each component
-- **Fixes mismatches** based on `/review-ui` reports
-- Escalates after 5 failed iterations with detailed report
-- Produces **UI Verification Summary** before code review
-
-#### Example Workshop Analysis Flow
-
-For converting discovery workshop recordings into Jira-ready tasks:
+For converting discovery workshop recordings into Jira-ready tasks without continuing to development:
 
 ```text
-1️⃣ /workshop-analyze <transcript + workshop materials>
+📋 PRODUCT IDEATION
+1️⃣ /analyze-materials <transcript + workshop materials>
    ↳ 📖 Review cleaned transcript – verify topics, decisions, action items
    ↳ ✅ Confirm nothing important was removed during cleaning
 
@@ -158,81 +184,68 @@ For converting discovery workshop recordings into Jira-ready tasks:
    ↳ ✅ Approve creation of Jira issues (Gate 2)
 ```
 
-> ⚠️ **Important:** The workshop analyst produces three artifacts in sequence: cleaned transcript, extracted tasks, and Jira-formatted tasks. Each artifact has a mandatory review gate – you must approve the output before the agent proceeds to the next step. Pay special attention to extracted tasks: verify that all epics and stories accurately reflect what was discussed in the workshop.
-
-#### Example E2E Testing Flow
-
-For features that need end-to-end test coverage:
-
-1️⃣ /research <JIRA_ID or task description>
-↳ 📖 Review research doc – understand feature scope and user journeys
-↳ ✅ Identify critical paths that need E2E coverage
-
-2️⃣ /plan <JIRA_ID or task description>
-↳ 📖 Review plan – confirm test scenarios and acceptance criteria
-↳ ✅ Ensure E2E testing is included in the plan
-
-4️⃣ /e2e <JIRA_ID or task description>
-↳ 📖 Implements Page Objects, test files, and fixtures
-↳ ✅ Run tests locally, verify they pass
-↳ 🔄 Iterate on flaky or failing tests
-
-> ⚠️ **Important:** The `/e2e` command generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.
+> ⚠️ **Important:** The business analyst produces three artifacts in sequence: cleaned transcript, extracted tasks, and Jira-formatted tasks. Each artifact has a mandatory review gate – you must approve the output before the agent proceeds to the next step.
 
 ---
 
 ## 🧑‍🤝‍🧑 Agents
 
-These are configured as Copilot **agents / sub‑agents**.
+These are configured as Copilot **agents / sub-agents**, organized by lifecycle phase.
 
-### 🧱 Architect
+### 📋 Product Ideation Agents
 
-- Focus: **solution design and implementation proposals**.
-- Helps break down complex tasks into components and interfaces.
-- Produces architecture sketches, trade‑off analyses, and integration strategies.
-
-### 📝 Business Analyst
-
-- Focus: **requirements, context and domain understanding**.
-- Extracts and organizes information from Jira issues and other sources.
-- Identifies missing requirements, stakeholders, edge cases, and business rules.
-
-### 💻 Software Engineer
-
-- Focus: **implementing the agreed plan** (backend and frontend).
-- Writes and refactors code in small, reviewable steps.
-- Follows repository style, tests where available, and avoids over‑engineering.
-- For UI tasks: uses design system, ensures accessibility, and runs iterative Figma verification.
-
-### 🔎 UI Reviewer
-
-- Focus: **single-pass UI verification against Figma designs**.
-- Performs read-only comparison: Figma (EXPECTED) vs Playwright (ACTUAL).
-- Returns PASS/FAIL verdict with structured difference table.
-- Called by `/implement-ui` in a loop; can also be used standalone.
-
-### 🔍 Code Reviewer
-
-- Focus: **structured code review and risk detection**.
-- Checks changes against acceptance criteria, security and reliability guidelines.
-- Suggests concrete improvements, alternative designs, and missing tests.
-
-### 🧪 E2E Engineer
-
-- Focus: **end-to-end testing with Playwright**.
-- Creates comprehensive, reliable test suites for critical user journeys.
-- Uses Page Object Model, proper fixtures, and accessibility-first locators.
-- Integrates with Playwright MCP for real-time test debugging and validation.
-- Follows testing pyramid principles - E2E for critical paths, not unit-level validation.
-
-### 📋 Workshop Analyst
+#### 📋 Business Analyst
 
 - Focus: **converting discovery workshop materials into Jira-ready epics and stories**.
 - Processes raw inputs: call transcripts, Figma designs, codebase context, and reference documents.
 - Cleans transcripts from small talk, structures content by topics, and extracts actionable work items.
 - Produces business-oriented output – no technical implementation details.
 - Manages a two-gate review process before pushing tasks to Jira.
-- Hands off to Business Analyst for deeper research and Architect for implementation planning.
+- Hands off to Context Engineer for deeper research and Architect for implementation planning.
+
+### 🛠 Development Agents
+
+#### 📝 Context Engineer
+
+- Focus: **requirements, context and domain understanding**.
+- Extracts and organizes information from Jira issues and other sources.
+- Identifies missing requirements, stakeholders, edge cases, and business rules.
+
+#### 🧱 Architect
+
+- Focus: **solution design and implementation proposals**.
+- Helps break down complex tasks into components and interfaces.
+- Produces architecture sketches, trade-off analyses, and integration strategies.
+
+#### 💻 Software Engineer
+
+- Focus: **implementing the agreed plan** (backend and frontend).
+- Writes and refactors code in small, reviewable steps.
+- Follows repository style, tests where available, and avoids over-engineering.
+- For UI tasks: uses design system, ensures accessibility, and runs iterative Figma verification.
+
+### ✅ Quality Agents
+
+#### 🔍 Code Reviewer
+
+- Focus: **structured code review and risk detection**.
+- Checks changes against acceptance criteria, security and reliability guidelines.
+- Suggests concrete improvements, alternative designs, and missing tests.
+
+#### 🔎 UI Reviewer
+
+- Focus: **single-pass UI verification against Figma designs**.
+- Performs read-only comparison: Figma (EXPECTED) vs Playwright (ACTUAL).
+- Returns PASS/FAIL verdict with structured difference table.
+- Called by `/implement-ui` in a loop; can also be used standalone.
+
+#### 🧪 E2E Engineer
+
+- Focus: **end-to-end testing with Playwright**.
+- Creates comprehensive, reliable test suites for critical user journeys.
+- Uses Page Object Model, proper fixtures, and accessibility-first locators.
+- Integrates with Playwright MCP for real-time test debugging and validation.
+- Follows testing pyramid principles – E2E for critical paths, not unit-level validation.
 
 Each agent is designed to be used together with the workflow prompts below.
 
@@ -244,71 +257,67 @@ Skills provide **specialized domain knowledge and structured workflows** that ag
 
 Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
 
-### 🔍 Task Analysis
+### 📋 Product Ideation Skills
+
+#### 🔍 Task Analysis
 
 - Focus: **gathering and expanding context** for a development task.
 - Pulls information from Jira, Confluence, GitHub, and other integrated tools.
 - Identifies gaps in task descriptions and asks clarification questions.
 - Produces a finalized research report with all findings.
 
-### 🧱 Architecture Design
+#### 📝 Transcript Processing
+
+- Focus: **cleaning raw workshop or meeting transcripts**.
+- Removes small talk, filler words, greetings, off-topic tangents, and technical difficulties.
+- Preserves all business-relevant discussion and structures content by topics.
+- Extracts key decisions, action items, and open questions into dedicated sections.
+
+#### 📋 Task Extraction
+
+- Focus: **identifying epics and user stories from workshop materials**.
+- Analyzes cleaned transcripts, Figma designs, codebase context, and other documents.
+- Produces business-oriented task breakdowns with dependencies and assumptions.
+- Flags ambiguous items for user clarification before finalizing.
+
+#### 🎫 Jira Task Formatting
+
+- Focus: **transforming extracted tasks into Jira-ready format**.
+- Applies a benchmark template to ensure consistent field mapping across all tasks.
+- Handles Jira markdown compatibility and two-gate review before push.
+- Guides the agent on creating epics and linked stories via Atlassian tools.
+
+### 🛠 Development Skills
+
+#### 🧱 Architecture Design
 
 - Focus: **designing solution architecture** that follows best practices.
 - Analyzes the current codebase and task requirements.
 - Proposes a solution that is scalable, secure, and easy to maintain.
 - Covers patterns like DRY, KISS, DDD, CQRS, modular/hexagonal architecture, and more.
 
-### 📊 Codebase Analysis
-
-- Focus: **structured analysis of the entire codebase**.
-- Reviews repository structure, dependencies, scripts, and architecture.
-- Examines backend, frontend, infrastructure, and third-party integrations.
-- Identifies dead code, duplications, security concerns, and potential improvements.
-
-### 🔎 Code Review
-
-- Focus: **verifying implemented code** against quality standards.
-- Compares implementation to the task description and plan.
-- Validates test coverage, security, scalability, and best practices.
-- Runs available tests and static analysis tools.
-
-### 📋 Implementation Gap Analysis
-
-- Focus: **comparing expected vs. actual implementation state**.
-- Analyzes what needs to be built, what already exists, and what must be modified.
-- Cross-references task requirements with the current codebase.
-- Produces a structured gap report for planning next steps.
-
-### 🧪 E2E Testing
-
-- Focus: **end-to-end testing patterns and practices** using Playwright.
-- Provides Page Object Model patterns, test structure templates, and mocking strategies.
-- Includes a verification loop with iteration limits and flaky test detection.
-- Covers error recovery strategies and CI readiness checklists.
-- Ensures consistent, reliable E2E tests across the team.
-
-### 🧭 Technical Context Discovery
+#### 🧭 Technical Context Discovery
 
 - Focus: **establishing technical context** before implementing any feature.
 - Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
 - Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
 - Ensures new code is consistent with established patterns and prevents conflicting conventions.
 
-### 🎨 Frontend Implementation
+#### 🎨 Frontend Implementation
 
 - Focus: **frontend implementation patterns and best practices**.
 - Covers accessibility requirements, design system usage, component patterns, and performance guidelines.
 - Provides token mapping process, semantic markup guidelines, and ARIA usage patterns.
 - Includes component implementation checklist and anti-patterns to avoid.
 
-### 🔍 UI Verification
+#### 📋 Implementation Gap Analysis
 
-- Focus: **verifying UI implementation against Figma designs**.
-- Defines verification categories: structure, layout, dimensions, visual, components.
-- Provides severity definitions, tolerance rules, and verification checklists.
-- Includes confidence levels and report format for consistent verification outputs.
+- Focus: **comparing expected vs. actual implementation state**.
+- Analyzes what needs to be built, what already exists, and what must be modified.
+- Cross-references task requirements with the current codebase.
+- Produces a structured gap report for planning next steps.
 
-### 🗄️ SQL & Database Engineering
+#### 🗄️ SQL & Database Engineering
 
 - Focus: **database schema design, performant SQL, and query debugging**.
 - Covers naming conventions, primary key strategies, data type selection, and normalisation.
@@ -317,52 +326,86 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Supports ORM integration with TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM.
 - Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 
-### 📝 Transcript Processing
+#### 📊 Codebase Analysis
 
-- Focus: **cleaning raw workshop or meeting transcripts**.
-- Removes small talk, filler words, greetings, off-topic tangents, and technical difficulties.
-- Preserves all business-relevant discussion and structures content by topics.
-- Extracts key decisions, action items, and open questions into dedicated sections.
+- Focus: **structured analysis of the entire codebase**.
+- Reviews repository structure, dependencies, scripts, and architecture.
+- Examines backend, frontend, infrastructure, and third-party integrations.
+- Identifies dead code, duplications, security concerns, and potential improvements.
 
-### 📋 Task Extraction
+### ✅ Quality Skills
 
-- Focus: **identifying epics and user stories from workshop materials**.
-- Analyzes cleaned transcripts, Figma designs, codebase context, and other documents.
-- Produces business-oriented task breakdowns with dependencies and assumptions.
-- Flags ambiguous items for user clarification before finalizing.
+#### 🔎 Code Review
 
-### 🎫 Jira Task Formatting
+- Focus: **verifying implemented code** against quality standards.
+- Compares implementation to the task description and plan.
+- Validates test coverage, security, scalability, and best practices.
+- Runs available tests and static analysis tools.
 
-- Focus: **transforming extracted tasks into Jira-ready format**.
-- Applies a benchmark template to ensure consistent field mapping across all tasks.
-- Handles Jira markdown compatibility and two-gate review before push.
-- Guides the agent on creating epics and linked stories via Atlassian tools.
+#### 🔍 UI Verification
+
+- Focus: **verifying UI implementation against Figma designs**.
+- Defines verification categories: structure, layout, dimensions, visual, components.
+- Provides severity definitions, tolerance rules, and verification checklists.
+- Includes confidence levels and report format for consistent verification outputs.
+
+#### 🧪 E2E Testing
+
+- Focus: **end-to-end testing patterns and practices** using Playwright.
+- Provides Page Object Model patterns, test structure templates, and mocking strategies.
+- Includes a verification loop with iteration limits and flaky test detection.
+- Covers error recovery strategies and CI readiness checklists.
+- Ensures consistent, reliable E2E tests across the team.
 
 ---
 
 ## 💬 Prompts & Chat Commands
 
-All commands work with either a **Jira ID** or a **plain‑text description**.
+All commands work with either a **Jira ID** or a **plain-text description**.
 
-### `/research <JIRA_ID | description>`
+### 📋 Product Ideation Commands
+
+#### `/analyze-materials <workshop materials>`
+
+- Processes discovery workshop materials end-to-end: clean transcript → extract tasks → format for Jira → push.
+- Accepts raw transcripts, Figma design links, codebase references, and other documents.
+- Produces three artifacts: `cleaned-transcript.md`, `extracted-tasks.md`, `jira-tasks.md`.
+- Includes two mandatory review gates before Jira creation.
+- Outputs: Jira-ready epics and stories, created in your Jira project after approval.
+
+#### `/clean-transcript <transcript>`
+
+- Standalone command to clean a raw workshop transcript.
+- Removes small talk, structures content by discussion topics, extracts decisions and action items.
+- Outputs: `cleaned-transcript.md` in the specifications directory.
+
+#### `/create-jira-tasks <extracted-tasks reference>`
+
+- Formats an existing `extracted-tasks.md` into Jira-ready structure and pushes to Jira.
+- Applies the benchmark template, validates completeness, and manages review gates.
+- Outputs: `jira-tasks.md` + created Jira issues with linked epics and stories.
+
+### 🛠 Development Commands
+
+#### `/research <JIRA_ID | description>`
 
 - Gathers all available information about the task.
 - Pulls context from Jira, design artifacts, and code (via MCPs where applicable).
 - Outputs: task summary, assumptions, open questions, and suggested next steps.
 
-### `/plan <JIRA_ID | description>`
+#### `/plan <JIRA_ID | description>`
 
-- Creates a **multi‑step implementation plan**.
+- Creates a **multi-step implementation plan**.
 - Groups work into phases and tasks aligned with your repo structure.
-- Outputs: checklist‑style plan that can be executed by the Software Engineer agent.
+- Outputs: checklist-style plan that can be executed by the Software Engineer agent.
 
-### `/implement <JIRA_ID | description>`
+#### `/implement <JIRA_ID | description>`
 
 - Implements the previously defined plan.
 - Proposes file changes, refactors, and new code in a focused way.
 - Outputs: concrete modifications and guidance on how to apply/test them.
 
-### `/implement-ui <JIRA_ID | description>`
+#### `/implement-ui <JIRA_ID | description>`
 
 - Implements UI features with **iterative Figma verification**.
 - Extends `/implement` with a verification loop after each component.
@@ -370,7 +413,15 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Automatically fixes mismatches and re-verifies until implementation matches design.
 - Outputs: code changes + UI Verification Summary with iteration counts.
 
-### `/review-ui`
+### ✅ Quality Commands
+
+#### `/review <JIRA_ID | description>`
+
+- Reviews the final implementation against the plan and requirements.
+- Highlights security, reliability, performance, and maintainability concerns.
+- Outputs: structured review with clear "pass/blockers/suggestions".
+
+#### `/review-ui`
 
 - Performs **single-pass UI verification** comparing implementation against Figma.
 - Uses **Figma MCP** (EXPECTED) and **Playwright MCP** (ACTUAL) to compare.
@@ -378,21 +429,7 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - Called by `/implement-ui` in a loop; can also be used standalone.
 - Outputs: PASS/FAIL verdict + structured difference table with exact values.
 
-### `/review <JIRA_ID | description>`
-
-- Reviews the final implementation against the plan and requirements.
-- Highlights security, reliability, performance, and maintainability concerns.
-- Outputs: structured review with clear “pass/blockers/suggestions”.
-
-### `/e2e <JIRA_ID | description>`
-
-- Creates comprehensive **end-to-end tests** for the feature using Playwright.
-- Analyzes the application, designs test scenarios, and implements Page Objects.
-- Uses **Playwright MCP** for real-time interaction and test verification.
-- Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
-- Outputs: Page Objects, test files, fixtures, and execution report.
-
-### `/code-quality-check`
+#### `/review-codebase`
 
 - Performs a **comprehensive code quality analysis** of the repository.
 - Detects dead code, unused imports, unreachable code paths, and orphaned files.
@@ -402,26 +439,13 @@ All commands work with either a **Jira ID** or a **plain‑text description**.
 - For monorepos, analyzes each layer/app separately using parallel subagents.
 - Outputs: prioritized `code-quality-report.md` with severity levels (🔴 Critical / 🟡 Important / 🟢 Nice to Have) and a recommended action plan.
 
-### `/workshop-analyze <workshop materials>`
+#### `/implement-e2e <JIRA_ID | description>`
 
-- Processes discovery workshop materials end-to-end: clean transcript → extract tasks → format for Jira → push.
-- Accepts raw transcripts, Figma design links, codebase references, and other documents.
-- Produces three artifacts: `cleaned-transcript.md`, `extracted-tasks.md`, `jira-tasks.md`.
-- Includes two mandatory review gates before Jira creation.
-- Outputs: Jira-ready epics and stories, created in your Jira project after approval.
-
-### `/transcript-clean <transcript>`
-
-- Standalone command to clean a raw workshop transcript.
-- Removes small talk, structures content by discussion topics, extracts decisions and action items.
-- Outputs: `cleaned-transcript.md` in the specifications directory.
-
-### `/create-jira-tasks <extracted-tasks reference>`
-
-- Formats an existing `extracted-tasks.md` into Jira-ready structure and pushes to Jira.
-- Applies the benchmark template, validates completeness, and manages review gates.
-- Outputs: `jira-tasks.md` + created Jira issues with linked epics and stories.
-
+- Creates comprehensive **end-to-end tests** for the feature using Playwright.
+- Analyzes the application, designs test scenarios, and implements Page Objects.
+- Uses **Playwright MCP** for real-time interaction and test verification.
+- Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
+- Outputs: Page Objects, test files, fixtures, and execution report.
 ---
 
 ## 🧩 Installation in VS Code
@@ -575,33 +599,43 @@ Once the repo is cloned and VS Code User Settings are configured:
 
 1. Open your project in VS Code.
 2. Open **GitHub Copilot Chat**.
-3. Switch to one of the configured **agents** (Architect, Business Analyst, Software Engineer, Code Reviewer).
-4. Use the workflow prompts:
-   - `/research <JIRA_ID>`
-   - `/plan <JIRA_ID>`
-   - `/implement <JIRA_ID>`
-   - `/review <JIRA_ID>`
+3. Pick an agent and prompt matching the lifecycle phase you need:
 
-   **For frontend tasks with Figma designs:**
-   - `/research <JIRA_ID>` – gather requirements including design context
-   - `/plan <JIRA_ID>` – create implementation plan
-   - `/implement-ui <JIRA_ID>` – implement with iterative Figma verification (calls `/review-ui` in loop)
-   - `/review <JIRA_ID>` – final code review
-   **For workshop analysis:**
-   - `/workshop-analyze <materials>` – full pipeline: clean transcript → extract tasks → format & push to Jira
+### 📋 Product Ideation – Create requirements & plan work
 
-   **Standalone utilities:**
-   - `/code-quality-check` – comprehensive code quality analysis (dead code, duplications, improvements)
+| Agent | Prompt | Purpose |
+|---|---|---|
+| Business Analyst | `/analyze-materials <materials>` | Clean transcript → extract tasks → push to Jira |
 
-All of these will leverage the shared configuration from `copilot-collections` while still respecting your project’s own code and context.
+### 🛠 Development – Architect & implement
+
+| Agent | Prompt | Purpose |
+|---|---|---|
+| Context Engineer | `/research <JIRA_ID>` | Gather context, identify gaps & risks |
+| Architect | `/plan <JIRA_ID>` | Create multi-step implementation plan |
+| Software Engineer | `/implement <JIRA_ID>` | Standard backend & frontend implementation |
+| Software Engineer | `/implement-ui <JIRA_ID>` | UI implementation with iterative Figma verification |
+
+### ✅ Quality – Review & test
+
+| Agent | Prompt | Purpose |
+|---|---|---|
+| Code Reviewer | `/review <JIRA_ID>` | Structured code review against criteria |
+| UI Reviewer | `/review-ui` | Single-pass UI vs Figma comparison |
+| E2E Engineer | `/implement-e2e <JIRA_ID>` | End-to-end test creation with Playwright |
+| — | `/review-codebase` | Full codebase quality analysis |
+
+All of these will leverage the shared configuration from `copilot-collections` while still respecting your project's own code and context.
 
 ---
 
 ## 📌 Summary
 
-- Central place for **shared Copilot agents, prompts, and workflows**.
+- Covers the **full product development lifecycle**: Product Ideation → Development → Quality.
+- Provides **specialized agents** for each phase – from Business Analyst to E2E Engineer.
+- Includes **reusable skills** encoding tested workflows for consistent, high-quality outputs.
 - Optimized for teams working with **Jira, Figma, MCPs, and VS Code**.
-- Designed to be **plug‑and‑play** – clone next to your projects, configure it once in **VS Code User Settings**, and start using `/research → /plan → /implement → /review` immediately in any workspace.
+- Designed to be **plug-and-play** – clone next to your projects, configure once in **VS Code User Settings**, and start using the full lifecycle immediately in any workspace.
 
 ---
 

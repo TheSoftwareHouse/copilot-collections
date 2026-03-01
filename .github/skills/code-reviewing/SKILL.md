@@ -1,5 +1,5 @@
 ---
-name: code-review
+name: code-reviewing
 description: Perform code review. Quality analysis. Acceptance criteria verification. Best practices review.
 ---
 
@@ -73,6 +73,6 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 
 ## Connected Skills
 
-- `implementation-gap-analysis`
-- `technical-context-discovery` - for understanding project conventions and standards to review against
-- `sql-and-database` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns
+- `implementation-gap-analysing`
+- `technical-context-discovering` - for understanding project conventions and standards to review against
+- `sql-and-database-understanding` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns

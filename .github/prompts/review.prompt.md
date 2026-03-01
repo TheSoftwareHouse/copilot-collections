@@ -11,10 +11,10 @@ Make sure to review not only the code and its acceptance criteria but also consi
 ## Required Skills
 
 Before starting, load and follow these skills:
-- `code-review` - for the structured code review process covering correctness, quality, security, testing, best practices, and scalability
-- `implementation-gap-analysis` - to compare the implemented solution against the plan and verify completeness
-- `technical-context-discovery` - to understand project conventions and coding standards to review against
-- `sql-and-database` - when reviewing database-related changes: schema design, migration safety, query performance, index coverage, and ORM usage
+- `code-reviewing` - for the structured code review process covering correctness, quality, security, testing, best practices, and scalability
+- `implementation-gap-analysing` - to compare the implemented solution against the plan and verify completeness
+- `technical-context-discovering` - to understand project conventions and coding standards to review against
+- `sql-and-database-understanding` - when reviewing database-related changes: schema design, migration safety, query performance, index coverage, and ORM usage
 
 ## Workflow
 

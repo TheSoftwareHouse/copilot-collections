@@ -1,5 +1,5 @@
 ---
-name: ui-verification
+name: ui-verifying
 description: UI verification criteria, structure checklists, severity definitions, and tolerance rules for comparing implementations against Figma designs. Use for verifying UI matches design, understanding what to check, and determining acceptable differences.
 ---
 
@@ -187,5 +187,5 @@ Before reporting PASS, verify:
 
 ## Connected Skills
 
-- `frontend-implementation` - for implementing fixes following design system patterns
-- `technical-context-discovery` - for understanding project's design token conventions
+- `implementing-frontend` - for implementing fixes following design system patterns
+- `technical-context-discovering` - for understanding project's design token conventions

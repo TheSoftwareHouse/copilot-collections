@@ -37,7 +37,7 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `ui-verification` - for verification criteria, structure checklist, severity definitions, and tolerances
+- `ui-verifying` - for verification criteria, structure checklist, severity definitions, and tolerances
 
 ## Tool Usage Guidelines
 

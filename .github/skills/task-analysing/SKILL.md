@@ -1,5 +1,5 @@
 ---
-name: task-analysis
+name: task-analysing
 description: Analyse task description, performs gap analysis, expand the context for the task, analyse the current state of the system in the context of the task, helps build PRD, creates a context for the task, gathers information about the task from different sources.
 ---
 
@@ -66,5 +66,5 @@ Don't add or remove any sections from the template. Follow the structure and nam
 
 ## Connected Skills
 
-- `codebase-analysis` - for analyzing the existing codebase in the context of task requirements
-- `implementation-gap-analysis` - for understanding what already exists vs what needs to be built
+- `codebase-analysing` - for analyzing the existing codebase in the context of task requirements
+- `implementation-gap-analysing` - for understanding what already exists vs what needs to be built

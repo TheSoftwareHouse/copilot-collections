@@ -1,5 +1,5 @@
 ---
-name: codebase-analysis
+name: codebase-analysing
 description: Analyse the codebase of the system. Look for dependencies. Understand how the business logic is implemented. Look for duplications.
 ---
 
@@ -124,8 +124,8 @@ During the processing make sure to update the document over the time.
 
 ## Report
 
-When using this skill standalone (or when the user explicitly requests a separate codebase-analysis report), save the analysis results as a standalone document following the `./codebase-analysis.example.md` template.
-When this skill is invoked by another prompt or workflow that defines its own required output file/template, embed the relevant findings into that caller’s required output instead of creating a separate `codebase-analysis` report, unless the user explicitly asks for one.
+When using this skill standalone (or when the user explicitly requests a separate codebase-analysing report), save the analysis results as a standalone document following the `./codebase-analysis.example.md` template.
+When this skill is invoked by another prompt or workflow that defines its own required output file/template, embed the relevant findings into that caller's required output instead of creating a separate `codebase-analysing` report, unless the user explicitly asks for one.
 
 For standalone reports following `./codebase-analysis.example.md`, don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
 For monorepo repositories, duplicate the relevant sections (Backend Analysis, Frontend Analysis, etc.) per app/package when they differ significantly, and clearly label each with the app/package name.

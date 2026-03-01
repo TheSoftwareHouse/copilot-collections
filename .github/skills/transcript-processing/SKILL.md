@@ -115,4 +115,4 @@ Review the output to ensure:
 
 ## Connected Skills
 
-- `task-extraction` - uses the cleaned transcript as a primary input for identifying epics and stories
+- `task-extracting` - uses the cleaned transcript as a primary input for identifying epics and stories

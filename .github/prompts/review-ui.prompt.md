@@ -12,7 +12,7 @@ This prompt is called by `implement-ui.prompt.md` in a loop. Your job is to prov
 
 Before starting, load and follow these skills:
 
-- `ui-verification` - for verification criteria, structure checklist, severity definitions, and tolerances
+- `ui-verifying` - for verification criteria, structure checklist, severity definitions, and tolerances
 
 ---
 
@@ -21,7 +21,7 @@ Before starting, load and follow these skills:
 1. **Validate inputs**: Ensure Figma URL is available and dev server is running.
 2. **Get EXPECTED**: Call `figma-mcp-server` to extract layer hierarchy, layout, spacing, typography, colors, dimensions.
 3. **Get ACTUAL**: Use `playwright` to capture the running app - scroll through ENTIRE page, capture accessibility tree.
-4. **Compare**: Follow `ui-verification` skill criteria - structure FIRST, then dimensions, then visual.
+4. **Compare**: Follow `ui-verifying` skill criteria - structure FIRST, then dimensions, then visual.
 5. **Report**: Generate structured report with all differences found.
 
 ---

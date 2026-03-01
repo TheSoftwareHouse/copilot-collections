@@ -1,5 +1,5 @@
 ---
-name: architecture-design
+name: architecture-designing
 description: Design the architecture to solve a given task. Propose the solutions to be used to deliver the task following the best practices and standards.
 ---
 
@@ -60,7 +60,7 @@ The design has to meet quality assurance criteria, meaning it has to be fully te
 
 Don't duplicate any work. 
 
-Make sure to use `implementation-gap-analysis` skill to verify what was already implemented from your plan and what should be added. Make sure to include the result in final plan.
+Make sure to use `implementation-gap-analysing` skill to verify what was already implemented from your plan and what should be added. Make sure to include the result in final plan.
 
 Make sure to divide the plan into a small phases. Each phase should be runnable on it's own and immediately have all quality gates ready. Each phase should have a list of tasks with special place to mark the finished tasks later on.
 
@@ -76,7 +76,7 @@ Don't add or remove any sections from the template. Follow the structure and nam
 
 ## Connected Skills
 
-- `codebase-analysis` - for analyzing the existing architecture, components, and patterns
-- `implementation-gap-analysis` - for verifying what was already implemented and what should be added
-- `technical-context-discovery` - for establishing project conventions and existing patterns before designing
-- `sql-and-database` - for designing database schemas, data models, normalisation strategies, and indexing as part of the solution architecture
+- `codebase-analysing` - for analyzing the existing architecture, components, and patterns
+- `implementation-gap-analysing` - for verifying what was already implemented and what should be added
+- `technical-context-discovering` - for establishing project conventions and existing patterns before designing
+- `sql-and-database-understanding` - for designing database schemas, data models, normalisation strategies, and indexing as part of the solution architecture

@@ -1,7 +1,7 @@
 ---
-agent: "tsh-business-analyst"
+agent: "tsh-context-engineer"
 model: "Claude Opus 4.6"
-description: "Prepare a context for a specific task or feature from a business analysis perspective."
+description: "Prepare a context for a specific task or feature from a context engineering perspective."
 ---
 
 Research the task based on the provided Jira ID or task description.
@@ -13,8 +13,8 @@ It should contain every relevant information needed to build a comprehensive con
 ## Required Skills
 
 Before starting, load and follow these skills:
-- `task-analysis` - for the structured research process and output template
-- `codebase-analysis` - for analyzing the existing codebase in the context of task requirements
+- `task-analysing` - for the structured research process and output template
+- `codebase-analysing` - for analyzing the existing codebase in the context of task requirements
 
 ## Workflow
 
@@ -25,7 +25,7 @@ Before starting, load and follow these skills:
 5. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using `figma-mcp-server` (it's very important) and include relevant information in the context.
 6. Analyze if there are any ambiguities or missing information in the task description. If there are any ask for clarification before finalizing the context.
 7. Don't provide implementation details, focus on gathering requirements, user stories, acceptance criteria and key flows.
-8. Save the gathered information following the `research.example.md` template from the `task-analysis` skill.
+8. Save the gathered information following the `research.example.md` template from the `task-analysing` skill.
 9. Ensure that the research file is clear, concise, and tailored to the needs of the development team.
 
 Follow the template structure and naming conventions strictly to ensure clarity and consistency.
