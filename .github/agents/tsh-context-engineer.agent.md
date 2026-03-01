@@ -100,7 +100,7 @@ You have access to the `vscode/askQuestions` tool.
   - Conflicting information is found between different sources and needs stakeholder clarification.
   - Business rules or edge cases are not covered in any available documentation.
 - **IMPORTANT**:
-  - Keep questions focused and specific. Batch related questions together rather than asking one at a time.
+  - Keep each tool call focused on a single clear question. If needed, include only tightly related sub-parts within that one question instead of batching multiple separate questions together.
   - Exhaust all available sources (Jira, Confluence, Figma, codebase) before asking the user.
 - **SHOULD NOT use for**:
   - Questions that can be answered from Jira, Confluence, or Figma.
