@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-01
+
+### Changed
+
+- Restructured README around the full product development lifecycle: Product Ideation → Development → Quality
+- Reorganized Agents, Skills, and Prompts sections into lifecycle phase groups (Product Ideation, Development, Quality)
+- Moved Context Engineer from Product Ideation to Development agents
+- Renamed "Backlog" phase to "Product Ideation" across the entire README
+- Updated workflow examples to show `/research` under Development (not Product Ideation)
+- Replaced flat prompt/agent listings with per-phase tables in "Using This Repository" section
+- Updated Summary to reflect full lifecycle framing
+- Renamed agent: `tsh-workshop-analyst` → `tsh-business-analyst`
+- Renamed agent: `tsh-business-analyst` → `tsh-context-engineer` (old Business Analyst became Context Engineer)
+- Renamed prompt: `/workshop-analyze` → `/analyze-materials`
+- Renamed prompt: `/transcript-clean` → `/clean-transcript`
+- Renamed prompt: `/code-quality-check` → `/review-codebase`
+- Renamed prompt: `/e2e` → `/implement-e2e`
+- Renamed skill: `task-extraction` → `task-extracting`
+- Renamed skill: `task-quality-review` → `task-quality-reviewing`
+- Renamed skill: `frontend-implementation` → `implementing-frontend`
+- Renamed skill: `ui-verification` → `ui-verifying`
+- Renamed skill: `architecture-design` → `architecture-designing`
+- Renamed skill: `code-review` → `code-reviewing`
+- Renamed skill: `codebase-analysis` → `codebase-analysing`
+- Renamed skill: `implementation-gap-analysis` → `implementation-gap-analysing`
+- Renamed skill: `task-analysis` → `task-analysing`
+
 ## 2026-02-24
 
 ### Added
