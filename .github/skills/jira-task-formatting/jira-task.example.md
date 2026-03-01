@@ -1,6 +1,6 @@
 # Jira Task Benchmark Template
 
-This document defines the expected structure and fields for Jira epics and stories created by the workshop analyst agent.
+This document defines the expected structure and fields for Jira epics and stories created by the business analyst agent.
 
 ---
 

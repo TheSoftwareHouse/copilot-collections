@@ -1,5 +1,5 @@
 ---
-agent: "tsh-workshop-analyst"
+agent: "tsh-business-analyst"
 model: "Claude Opus 4.6"
 description: "Format extracted tasks for Jira push, import existing Jira tasks for local iteration, or push modifications to existing Jira issues."
 ---

@@ -1,5 +1,5 @@
 ---
-name: task-quality-review
+name: task-quality-reviewing
 description: Analyze extracted epics and user stories for quality gaps, missing edge cases, and improvement opportunities. Runs domain-agnostic analysis passes, optionally enriches findings with Jira board context, and produces accept/reject suggestions that refine the task list before Jira formatting.
 ---
 
@@ -324,5 +324,5 @@ The report serves as an audit trail documenting:
 
 ## Connected Skills
 
-- `task-extraction` — provides the extracted tasks used as primary input for the quality review
+- `task-extracting` — provides the extracted tasks used as primary input for the quality review
 - `jira-task-formatting` — consumes the updated task list after quality review suggestions are applied

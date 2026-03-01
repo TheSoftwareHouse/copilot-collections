@@ -28,7 +28,7 @@ Formatting progress:
 
 Load two inputs:
 - The **benchmark template** (`./jira-task.example.md`) which defines the expected structure and fields for Jira epics and stories
-- The **extracted tasks document** (`extracted-tasks.md`) produced by the `task-extraction` skill
+- The **extracted tasks document** (`extracted-tasks.md`) produced by the `task-extracting` skill
 
 Review the benchmark template to understand:
 - Required fields for epics and stories
@@ -238,4 +238,4 @@ After import, the user can modify the local file. For each change, the agent ask
 
 ## Connected Skills
 
-- `task-extraction` - provides the extracted tasks used as input for formatting
+- `task-extracting` - provides the extracted tasks used as input for formatting

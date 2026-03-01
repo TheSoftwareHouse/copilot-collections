@@ -1,5 +1,5 @@
 ---
-name: frontend-implementation
+name: implementing-frontend
 description: Frontend implementation patterns, accessibility requirements, design system usage, and performance guidelines. Use for implementing UI components, working with design tokens, ensuring a11y compliance, and building reusable frontend code.
 ---
 
@@ -162,5 +162,5 @@ Code Quality:
 
 ## Connected Skills
 
-- `ui-verification` - for verifying implementation against Figma designs
-- `technical-context-discovery` - for understanding project conventions before implementing
+- `ui-verifying` - for verifying implementation against Figma designs
+- `technical-context-discovering` - for understanding project conventions before implementing

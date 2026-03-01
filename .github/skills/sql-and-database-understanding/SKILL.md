@@ -1,5 +1,5 @@
 ---
-name: sql-and-database
+name: sql-and-database-understanding
 description: SQL writing and database engineering patterns, standards, and procedures. Use for designing database schemas, writing performant SQL queries, normalisation strategies, indexing, joins optimisation, locking mechanics, transactions, query debugging with EXPLAIN, and ORM integration. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle. Covers ORM usage with TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM.
 ---
 
@@ -1225,6 +1225,6 @@ Seed the development database with production-scale data. Verify that queries pe
 ## Connected Skills
 
 - `backend-api-development` — for API layer patterns, repository pattern, and database handling guidance
-- `architecture-design` — for designing data models as part of broader system architecture
-- `code-review` — for validating SQL quality, index coverage, and query performance
-- `technical-context-discovery` — for establishing database conventions and existing patterns before designing
+- `architecture-designing` — for designing data models as part of broader system architecture
+- `code-reviewing` — for validating SQL quality, index coverage, and query performance
+- `technical-context-discovering` — for establishing database conventions and existing patterns before designing

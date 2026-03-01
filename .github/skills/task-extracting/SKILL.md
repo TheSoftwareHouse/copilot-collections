@@ -1,5 +1,5 @@
 ---
-name: task-extraction
+name: task-extracting
 description: Identify and structure epics and user stories from workshop materials (cleaned transcripts, Figma designs, codebase analysis, and other documents). Produces a business-oriented task breakdown with dependencies, assumptions, and open questions.
 ---
 
@@ -17,7 +17,7 @@ This skill helps you identify discrete pieces of work (epics and user stories) f
 ## What This Skill Does NOT Produce
 
 - Technical architecture or implementation details (use `tsh-architect` agent for that)
-- Detailed acceptance criteria from a QA perspective (use `tsh-business-analyst` agent for that)
+- Detailed acceptance criteria from a QA perspective (use `tsh-context-engineer` agent for that)
 - Story point estimates (left for team estimation sessions)
 - Sprint or release planning
 
@@ -43,7 +43,7 @@ Extraction progress:
 Collect and thoroughly review all available workshop materials:
 - **Cleaned transcript** (`cleaned-transcript.md`): Primary source — review all discussion topics, decisions, action items, and open questions
 - **Figma/FigJam designs**: If available, analyze screens, flows, and annotations for functional requirements
-- **Existing codebase**: Use `codebase-analysis` skill to understand what already exists and what needs to be built
+- **Existing codebase**: Use `codebase-analysing` skill to understand what already exists and what needs to be built
 - **Other documents**: Confluence pages, shared documents, email threads, or any other reference materials provided by the user
 - **PDF documents**: If available, read PDF files using the `pdf-reader` tool to extract requirements, process descriptions, business rules, or any other relevant content provided by the client
 
@@ -124,4 +124,4 @@ Save the file to `specifications/<workshop-name>/extracted-tasks.md`.
 ## Connected Skills
 
 - `transcript-processing` - provides the cleaned transcript used as primary input
-- `codebase-analysis` - for understanding existing system context when analyzing scope
+- `codebase-analysing` - for understanding existing system context when analyzing scope

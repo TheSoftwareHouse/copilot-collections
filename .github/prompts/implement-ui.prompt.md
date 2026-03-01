@@ -12,9 +12,9 @@ Implement the UI feature according to the **research context** and **implementat
 
 Before starting, load and follow these skills:
 
-- `frontend-implementation` - for accessibility, design system usage, component patterns, and performance guidelines
-- `ui-verification` - for understanding verification criteria, tolerances, and what constitutes PASS/FAIL
-- `technical-context-discovery` - to establish project conventions before implementing
+- `implementing-frontend` - for accessibility, design system usage, component patterns, and performance guidelines
+- `ui-verifying` - for understanding verification criteria, tolerances, and what constitutes PASS/FAIL
+- `technical-context-discovering` - to establish project conventions before implementing
 
 This prompt **extends and does not replace** the base implementation workflow defined in [implement.prompt.md](./implement.prompt.md).
 

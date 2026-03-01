@@ -1,5 +1,5 @@
 ---
-agent: "tsh-workshop-analyst"
+agent: "tsh-business-analyst"
 model: "Claude Opus 4.6"
 description: "Clean a raw workshop or meeting transcript from small talk and structure it by topics."
 ---
