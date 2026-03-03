@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-02
+
+### Added
+
+- Custom agent creation prompt (`/create-custom-agent`) for creating new `.agent.md` files via the orchestrator — researches existing patterns, guides design decisions, creates and validates the agent file
+- Custom skill creation prompt (`/create-custom-skill`) for creating new `SKILL.md` files via the orchestrator — enforces gerund naming, creates supporting resources alongside the skill file
+- Custom prompt creation prompt (`/create-custom-prompt`) for creating new `.prompt.md` files via the orchestrator — identifies correct agent routing, ensures prompt follows established patterns
+- Custom instructions creation prompt (`/create-custom-instructions`) for creating new `.instructions.md` or `copilot-instructions.md` files via the orchestrator — helps decide between repo-level and file-scoped instructions
+
+### Changed
+
+- Creating Agents, Creating Skills, Creating Prompts, and Creating Instructions skills marked as internal (agent-only) — hidden from the slash command menu via `user-invokable: false` in SKILL.md frontmatter while remaining accessible to agents
+- New `/create-custom-*` prompts serve as the recommended user-facing entry points for Copilot customization workflows, replacing direct skill invocation
+
 ## 2026-03-01
 
 ### Changed
