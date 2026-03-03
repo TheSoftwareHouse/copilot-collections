@@ -265,7 +265,7 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 - Focus: **coordinating complex, multi-step Copilot customization tasks** using specialized sub-agents.
 - Decomposes work into focused subtasks and delegates to three workers: Researcher, Creator, and Reviewer — each running in an isolated context window.
 - Solves the "context rot" problem where complex tasks degrade quality in a monolithic agent's context window.
-- Coexists alongside Copilot Engineer for A/B comparison — see [Orchestrator Pattern](docs/orchestrator-pattern.md) for the full deep-dive.
+- Coexists alongside Copilot Engineer for A/B comparison - you might get better results using the Orchestrator.
 
 Each agent is designed to be used together with the workflow prompts below.
 
