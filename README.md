@@ -28,7 +28,7 @@ This repository supports the **full product development lifecycle** with AI-powe
 ### 🛠 Development – Architecture & Implementation
 
 - 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer, Copilot Engineer, Copilot Orchestrator.
-- 💬 **Prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`.
+- 💬 **Prompts** – `/research`, `/plan`, `/implement`, `/implement-ui`, `/create-custom-agent`, `/create-custom-skill`, `/create-custom-prompt`, `/create-custom-instructions`.
 - 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis, Creating Agents, Creating Skills, Creating Prompts, Creating Instructions.
 
 ### ✅ Quality – Review & Testing
@@ -486,6 +486,42 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 - Uses **Playwright MCP** for real-time interaction and test verification.
 - Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
 - Outputs: Page Objects, test files, fixtures, and execution report.
+
+### 🧑‍💻 Copilot Customization Commands
+
+> To create or modify Copilot customization artifacts (agents, skills, prompts, instructions), use the `/create-custom-*` commands below. These route to the orchestrator which handles research, creation, and review automatically.
+
+#### `/create-custom-agent`
+
+- Creates a new custom agent (`.agent.md`) for VS Code Copilot.
+- Analyzes existing agents for patterns and conventions, guides through design decisions.
+- Validates that skill references, tool lists, and agent ecosystem integration are correct.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: a new agent file in `.github/agents/` following workspace conventions.
+
+#### `/create-custom-skill`
+
+- Creates a new custom skill (`SKILL.md`) for VS Code Copilot.
+- Analyzes existing skills for patterns, enforces gerund naming convention.
+- Creates supporting resources (templates, examples) alongside the SKILL.md.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: skill directory with SKILL.md and supporting files in `.github/skills/`.
+
+#### `/create-custom-prompt`
+
+- Creates a new custom prompt (`.prompt.md`) for VS Code Copilot.
+- Analyzes existing prompts, identifies the right agent routing target.
+- Ensures agent and model are specified following established patterns.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: prompt file in `.github/prompts/` with correct routing.
+
+#### `/create-custom-instructions`
+
+- Creates custom instructions (`.instructions.md` or `copilot-instructions.md`) for VS Code Copilot.
+- Helps decide between repository-level and file-scoped instructions.
+- Analyzes existing project conventions for appropriate scope and content.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: instructions file with appropriate scope and content.
 ---
 
 ## 🧩 Installation in VS Code
