@@ -23,16 +23,30 @@ Audit progress:
 **Step 1: Define scope and attack surface**
 
 **Detect tech stack** — Before mapping the attack surface, identify the technology stack by scanning manifest files and project structure:
-- Language detection: `package.json` (JS/TS), `requirements.txt`/`pyproject.toml` (Python), `pom.xml`/`build.gradle` (Java/Kotlin), `go.mod` (Go), `Gemfile` (Ruby), `Cargo.toml` (Rust), `*.csproj` (C#/.NET)
-- Backend framework: NestJS, Express, Fastify, Django, FastAPI, Flask, Spring Boot, Rails, ASP.NET, Gin, Echo
-- Frontend/mobile: React Native, Flutter, Next.js, Angular, Vue, SwiftUI, Jetpack Compose
-- Database/ORM: TypeORM, Prisma, Sequelize, SQLAlchemy, Hibernate, ActiveRecord, Entity Framework, GORM, Diesel
-- Auth mechanism: JWT (Auth0, Cognito, custom), OAuth2, session cookies, API keys, SAML
-- Infrastructure: Docker, Kubernetes, serverless (Lambda/Cloud Functions), cloud configs (AWS/GCP/Azure)
+
+Scan manifest and configuration files to identify the stack. Read the dependency list in each manifest to determine the specific framework, ORM, and libraries in use:
+- `package.json` → JS/TS ecosystem — check `dependencies` for framework (`express`, `@nestjs/core`, `next`, `react-native`, `@angular/core`, `vue`, etc.) and ORM (`typeorm`, `prisma`, `sequelize`, `drizzle`, etc.)
+- `requirements.txt` / `pyproject.toml` / `Pipfile` → Python ecosystem — check for `django`, `flask`, `fastapi`, `sqlalchemy`, `tortoise-orm`, etc.
+- `composer.json` → PHP ecosystem — check for `laravel/framework`, `symfony/*`, `doctrine/orm`, etc.
+- `pom.xml` / `build.gradle` / `build.gradle.kts` → Java/Kotlin ecosystem — check for `spring-boot`, `hibernate`, `quarkus`, etc.
+- `go.mod` → Go ecosystem — check for `gin`, `echo`, `fiber`, `gorm`, etc.
+- `Gemfile` → Ruby ecosystem — check for `rails`, `sinatra`, `sequel`, `activerecord`, etc.
+- `Cargo.toml` → Rust ecosystem — check for `actix-web`, `axum`, `rocket`, `diesel`, `sea-orm`, etc.
+- `*.csproj` / `*.sln` → .NET ecosystem — check for `ASP.NET`, `Entity Framework`, `Dapper`, etc.
+- `mix.exs` → Elixir ecosystem — check for `phoenix`, `ecto`, etc.
+- `build.sbt` → Scala ecosystem — check for `play`, `slick`, etc.
+- `pubspec.yaml` → Dart/Flutter ecosystem
+- Native mobile — `Podfile` (iOS/Swift), `build.gradle` with Android SDK (Kotlin/Java)
+
+If a manifest type is not listed above, identify it from the project structure and README. The goal is to discover what's actually used, not to match against a fixed list.
+
+Additionally, identify:
+- Auth mechanism — look for JWT libraries, OAuth2 integrations, session middleware, API key validation, SAML providers in the dependencies and auth-related code.
+- Infrastructure — check for `Dockerfile`, `docker-compose.yml`, `kubernetes/` or `k8s/` directories, serverless configs (`serverless.yml`, `sam-template.yaml`, cloud function configs), CI/CD pipelines (`.github/workflows/`, `.gitlab-ci.yml`, `Jenkinsfile`).
 
 Record the detected stack — it determines which platform-specific checks to apply in Step 5.
 
-Map what you're protecting:
+**Map what you're protecting:**
 - Identify all **entry points**: HTTP endpoints, WebSocket handlers, deep link schemes, file upload handlers, webhook receivers.
 - Identify **trust boundaries**: where unauthenticated requests become authenticated, where user data crosses service boundaries.
 - Identify **sensitive data flows**: auth tokens, PII, payment data, API keys — trace from input to storage to output.
@@ -76,7 +90,7 @@ Go through each category. Skip those not applicable to the stack.
 
 Based on the tech stack discovered in Step 1, apply the relevant sections below. Skip sections that don't match the detected stack.
 
-**Mobile applications** (React Native, Flutter, Swift/Kotlin native, etc.)
+**Mobile applications** (if mobile app detected)
 - Insecure local storage — unencrypted key-value stores (React Native: `AsyncStorage`; Android: `SharedPreferences`; iOS: `UserDefaults`) used for auth tokens, PII, or secrets. Prefer secure storage (Keychain, Keystore, `react-native-keychain`, `flutter_secure_storage`).
 - Deep link / URL scheme validation — verify handlers validate the full URL before acting. Check for open redirect or intent hijacking via custom URL schemes.
 - Debug mode in production — dev flags (`__DEV__`, `BuildConfig.DEBUG`, `#if DEBUG`) should prevent debug overlays, verbose logs, or mock auth in release builds.
@@ -85,7 +99,7 @@ Based on the tech stack discovered in Step 1, apply the relevant sections below.
 - Clipboard and screenshot exposure — sensitive screens should prevent clipboard copy of secrets and use platform APIs to block screenshots (`FLAG_SECURE` on Android, screenshot prevention on iOS).
 - Biometric authentication bypass — verify biometric prompts cannot be bypassed via fallback mechanisms without proper validation.
 
-**Backend frameworks** (NestJS, Express, Django, FastAPI, Spring Boot, Rails, ASP.NET, Go frameworks, etc.)
+**Backend frameworks** (if server-side framework detected)
 - Input validation pipeline — verify global validation is configured and enforced (NestJS: `ValidationPipe` with `whitelist`; Django: serializer validation; Spring: `@Valid` + `@Validated`; Express: validation middleware). Check for routes that bypass validation.
 - Auth guard/middleware coverage — identify unprotected routes. Verify auth is applied globally or per-route for all sensitive endpoints. Check for bypass conditions.
 - Configuration and secrets management — secrets should use typed/validated config injection, not raw `process.env` / `os.environ` string access that can silently return `undefined`/`None`.
@@ -97,21 +111,21 @@ Based on the tech stack discovered in Step 1, apply the relevant sections below.
 - Race conditions — check for TOCTOU patterns in financial/resource operations without database locking or optimistic concurrency. Especially in background job processors where retries can cause double execution.
 - API pagination limits — list endpoints must enforce maximum page sizes to prevent full table dumps. Check default and maximum limits.
 
-**Databases and ORMs** (TypeORM, Prisma, SQLAlchemy, Hibernate, ActiveRecord, Entity Framework, raw SQL, etc.)
+**Databases and ORMs** (if database layer detected)
 - Raw query injection — verify all dynamic queries use parameterized queries or prepared statements. Flag string interpolation/concatenation in SQL.
 - Migration safety — migrations should use raw SQL or framework migration tools, not application model code that may change after the migration is written.
 - Connection credential management — database credentials should come from environment/secrets, not hardcoded in config files.
 - Excessive permissions — application database user should have minimal required privileges (no `GRANT ALL`).
 - Query result exposure — verify queries don't select more columns than needed (especially password hashes, tokens).
 
-**Containers and infrastructure** (Docker, Kubernetes, serverless, cloud configs)
+**Containers and infrastructure** (if deployment/infra configs detected)
 - Dockerfile security — non-root user (`USER node`/`USER app`), minimal base image (Alpine/distroless), no secrets in build args or image layers, `.dockerignore` excludes `.env`/credentials/`node_modules`.
 - Kubernetes security — pod security context, no privileged containers, network policies, secrets not in plain ConfigMaps.
 - Cloud configuration — IAM least privilege, no public S3 buckets/storage, VPC/firewall rules, secrets in vault/secrets manager (not env vars in deployment configs).
 - Health check endpoints — should not expose sensitive system information.
 - CI/CD pipeline — secrets not logged, build artifacts verified, no credential leakage in build logs.
 
-**Frontend web applications** (React, Angular, Vue, Next.js, etc.)
+**Frontend web applications** (if web frontend detected)
 - XSS via unsafe rendering — `dangerouslySetInnerHTML` (React), `bypassSecurityTrustHtml` (Angular), `v-html` (Vue) without sanitization.
 - Sensitive data in client-side storage — `localStorage`/`sessionStorage` used for auth tokens (prefer `HttpOnly` cookies).
 - CSP (Content Security Policy) — verify CSP headers prevent inline scripts and restrict sources.
