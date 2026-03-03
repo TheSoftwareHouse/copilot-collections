@@ -17,7 +17,7 @@
 
 ## 🚀 What This Repo Provides
 
-This repository supports the **full product development lifecycle** with AI-powered agents, skills, and workflows organized into three phases:
+This repository supports the **full product development lifecycle** with AI-powered agents, skills, and workflows organized into three lifecycle phases — plus a cross-cutting track for Copilot customization:
 
 ### 📋 Product Ideation – Requirements & Planning
 
@@ -36,6 +36,12 @@ This repository supports the **full product development lifecycle** with AI-powe
 - 🧑‍💻 **Agents** – Code Reviewer, UI Reviewer, E2E Engineer.
 - 💬 **Prompts** – `/review`, `/review-ui`, `/review-codebase`, `/implement-e2e`.
 - 🧰 **Skills** – Code Review, UI Verification, E2E Testing.
+
+### ⚙️ Copilot Customization – Extending the Toolchain
+
+- 🧑‍💻 **Agents** – Copilot Engineer, Copilot Orchestrator.
+- 💬 **Prompts** – `/create-custom-agent`, `/create-custom-skill`, `/create-custom-prompt`, `/create-custom-instructions`.
+- 🧰 **Skills** – Creating Agents, Creating Skills, Creating Prompts, Creating Instructions.
 
 ### 🔌 Infrastructure
 
@@ -247,6 +253,20 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 - Integrates with Playwright MCP for real-time test debugging and validation.
 - Follows testing pyramid principles – E2E for critical paths, not unit-level validation.
 
+### ⚙️ Copilot Customization Agents
+
+#### ⚙️ Copilot Engineer
+- Focus: **designing, creating, reviewing, and improving Copilot customization artifacts**.
+- Expert in prompt engineering, context engineering, and AI engineering for custom agents, skills, prompts, and instructions.
+- Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
+- Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
+
+#### 🔀 Copilot Orchestrator *(experimental)*
+- Focus: **coordinating complex, multi-step Copilot customization tasks** using specialized sub-agents.
+- Decomposes work into focused subtasks and delegates to three workers: Researcher, Creator, and Reviewer — each running in an isolated context window.
+- Solves the "context rot" problem where complex tasks degrade quality in a monolithic agent's context window.
+- Coexists alongside Copilot Engineer for A/B comparison - you might get better results using the Orchestrator.
+
 Each agent is designed to be used together with the workflow prompts below.
 
 ---
@@ -258,6 +278,8 @@ Skills provide **specialized domain knowledge and structured workflows** that ag
 Skills are stored in `.github/skills/` and are picked up automatically by Copilot when enabled via `chat.agentSkillsLocations` in VS Code settings.
 
 ### 📋 Product Ideation Skills
+
+> 💡 Skills follow a **gerund-form naming convention** (`verb-ing` + `object`). See the [Creating Skills](.github/skills/creating-skills/SKILL.md) skill for the full authoring methodology.
 
 #### 🔍 Task Analysis
 
@@ -357,6 +379,32 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Covers error recovery strategies and CI readiness checklists.
 - Ensures consistent, reliable E2E tests across the team.
 
+### ⚙️ Copilot Customization Skills
+
+#### 🏗️ Creating Agents
+- Focus: **creating custom agents** (.agent.md) for GitHub Copilot in VS Code.
+- Provides templates, guidelines, and a structured process for building agent definitions.
+- Enforces separation of concerns between agents (WHO), skills (HOW), and prompts (WHAT).
+- Ensures consistent agent structure with clear behavior, personality, and responsibility definitions.
+
+#### ✍️ Creating Skills
+- Focus: **creating well-structured, reusable skills** (SKILL.md) for GitHub Copilot.
+- Enforces gerund-form naming conventions, description guidelines, and body structure rules.
+- Provides templates, examples, and a validation checklist for consistent skill authoring.
+- Implements progressive disclosure patterns to optimize token usage across discovery, activation, and resource tiers.
+
+#### 📝 Creating Prompts
+- Focus: **creating custom prompt files** (.prompt.md) for GitHub Copilot in VS Code.
+- Provides templates and guidelines for building prompt files that trigger specific workflows.
+- Routes workflows to the right custom agent and AI model via frontmatter configuration.
+- Ensures prompts focus on workflow steps without redefining agent identity or behavior.
+
+#### 📜 Creating Instructions
+- Focus: **creating custom instruction files** (.instructions.md) for GitHub Copilot in VS Code.
+- Covers both repository-level instructions (the project constitution) and granular scoped instructions with applyTo glob patterns.
+- Provides templates, decision framework for when conventions belong in instructions vs. skills, and validation checklists.
+- Ensures instruction files are concise, self-contained, and focused on rules that linters and formatters don't enforce.
+
 ---
 
 ## 💬 Prompts & Chat Commands
@@ -446,6 +494,43 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 - Uses **Playwright MCP** for real-time interaction and test verification.
 - Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
 - Outputs: Page Objects, test files, fixtures, and execution report.
+
+### ⚙️ Copilot Customization Commands
+
+> To create or modify Copilot customization artifacts (agents, skills, prompts, instructions), use the `/create-custom-*` commands below. These route to the orchestrator which handles research, creation, and review automatically.
+
+#### `/create-custom-agent`
+
+- Creates a new custom agent (`.agent.md`) for VS Code Copilot.
+- Analyzes existing agents for patterns and conventions, guides through design decisions.
+- Validates that skill references, tool lists, and agent ecosystem integration are correct.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: a new agent file in `.github/agents/` following workspace conventions.
+
+#### `/create-custom-skill`
+
+- Creates a new custom skill (`SKILL.md`) for VS Code Copilot.
+- Analyzes existing skills for patterns, enforces gerund naming convention.
+- Creates supporting resources (templates, examples) alongside the SKILL.md.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: skill directory with SKILL.md and supporting files in `.github/skills/`.
+
+#### `/create-custom-prompt`
+
+- Creates a new custom prompt (`.prompt.md`) for VS Code Copilot.
+- Analyzes existing prompts, identifies the right agent routing target.
+- Ensures agent and model are specified following established patterns.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: prompt file in `.github/prompts/` with correct routing.
+
+#### `/create-custom-instructions`
+
+- Creates custom instructions (`.instructions.md` or `copilot-instructions.md`) for VS Code Copilot.
+- Helps decide between repository-level and file-scoped instructions.
+- Analyzes existing project conventions for appropriate scope and content.
+- Routes to `tsh-copilot-orchestrator` which handles the research → create → review workflow.
+- Outputs: instructions file with appropriate scope and content.
+
 ---
 
 ## 🧩 Installation in VS Code
@@ -625,6 +710,15 @@ Once the repo is cloned and VS Code User Settings are configured:
 | E2E Engineer | `/implement-e2e <JIRA_ID>` | End-to-end test creation with Playwright |
 | — | `/review-codebase` | Full codebase quality analysis |
 
+### ⚙️ Copilot Customization – Extend the toolchain
+
+| Agent | Prompt | Purpose |
+|---|---|---|
+| Copilot Engineer / Orchestrator | `/create-custom-agent` | Create a new custom agent |
+| Copilot Engineer / Orchestrator | `/create-custom-skill` | Create a new custom skill |
+| Copilot Engineer / Orchestrator | `/create-custom-prompt` | Create a new custom prompt |
+| Copilot Engineer / Orchestrator | `/create-custom-instructions` | Create custom instruction files |
+
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project's own code and context.
 
 ---
@@ -633,6 +727,7 @@ All of these will leverage the shared configuration from `copilot-collections` w
 
 - Covers the **full product development lifecycle**: Product Ideation → Development → Quality.
 - Provides **specialized agents** for each phase – from Business Analyst to E2E Engineer.
+- Includes a **Copilot Customization** track for creating and maintaining custom agents, skills, prompts, and instructions.
 - Includes **reusable skills** encoding tested workflows for consistent, high-quality outputs.
 - Optimized for teams working with **Jira, Figma, MCPs, and VS Code**.
 - Designed to be **plug-and-play** – clone next to your projects, configure once in **VS Code User Settings**, and start using the full lifecycle immediately in any workspace.
