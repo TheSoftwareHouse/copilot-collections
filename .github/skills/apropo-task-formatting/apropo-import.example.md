@@ -1,4 +1,4 @@
-# Jira Task Benchmark Template
+# Apropo Task Benchmark Template
 
 This document defines the expected structure and fields for Apropo CSV file
 
@@ -16,7 +16,7 @@ This document defines the expected structure and fields for Apropo CSV file
 ```
 level_1, level_2, Description
 Technical,
-,Authroization, Login With Email and password
+,Authorization, Login With Email and password
 ,RBAC
 User Managment
 ,Add User to system
@@ -27,7 +27,7 @@ User Managment
 ```
 level_1, level_2, level_3, Description
 Technical,
-,Authroization,, Login With Email and password
+,Authorization,, Login With Email and password
 ,RBAC,, Simple roles
 Admin Panel
 ,User Managment
@@ -39,7 +39,7 @@ Admin Panel
 ```
 level_1, level_2, level_3, level_4
 Technical,
-,Authroization
+,Authorization
 ,RBAC
 Phase1,,,
 ,Admin Panel,,
