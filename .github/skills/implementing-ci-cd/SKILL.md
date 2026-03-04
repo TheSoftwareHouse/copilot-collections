@@ -1,5 +1,5 @@
 ---
-name: ci-cd-patterns
+name: implementing-ci-cd
 description: 'CI/CD pipeline design patterns and deployment strategies. Use when designing pipelines, implementing deployment strategies, or setting up automated delivery.'
 ---
 
@@ -51,7 +51,7 @@ Lint → Test → Build → Deploy (staging) → Deploy (production)
 | Multi-cloud | HashiCorp Vault with CI/CD auth |
 | Simple/small team | Platform native secrets |
 
-**Rule:** Prefer OIDC federation over long-lived access keys. Use `secrets-management` skill for implementation details.
+**Rule:** Prefer OIDC federation over long-lived access keys. Use `managing-secrets` skill for implementation details.
 
 ## Monorepo Strategy
 
@@ -63,11 +63,11 @@ Lint → Test → Build → Deploy (staging) → Deploy (production)
 
 ## Process
 
-1. **Discover context** → Use `technical-context-discovery` to find existing CI patterns
+1. **Discover context** → Use `technical-context-discovering` to find existing CI patterns
 2. **Detect platform** → Check for CI config files listed above
 3. **Look up syntax** → Use `context7` for platform-specific YAML syntax
 4. **Choose deployment strategy** → Use decision table above
-5. **Configure credentials** → Use `secrets-management` skill
+5. **Configure credentials** → Use `managing-secrets` skill
 6. **Validate** → Run pipeline in dry-run/plan mode first
 
 ## Checklist
@@ -190,5 +190,5 @@ apply:
 
 ## Related Skills
 
-- `secrets-management` - For credential configuration
-- `technical-context-discovery` - For finding existing patterns
+- `managing-secrets` - For credential configuration
+- `technical-context-discovering` - For finding existing patterns

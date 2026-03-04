@@ -1,5 +1,5 @@
 ---
-name: multi-cloud-architecture
+name: designing-multi-cloud-architecture
 description: Design multi-cloud architectures using a decision framework to select and integrate services across AWS, Azure, and GCP. Use when building multi-cloud systems, avoiding vendor lock-in, or leveraging best-of-breed services from multiple providers.
 ---
 
@@ -156,18 +156,37 @@ AWS / Azure / GCP
 - Optimize costs
 - Enhance security
 
-## Best Practices
+## Process
 
-1. **Use infrastructure as code** (Terraform/OpenTofu)
-2. **Implement CI/CD pipelines** for deployments
-3. **Design for failure** across clouds
-4. **Use managed services** when possible
-5. **Implement comprehensive monitoring**
-6. **Automate cost optimization**
-7. **Follow security best practices**
-8. **Document cloud-specific configurations**
-9. **Test disaster recovery** procedures
-10. **Train teams** on multiple clouds
+1. **Assess requirements** → Identify drivers (DR, compliance, best-of-breed, cost)
+2. **Choose pattern** → Select from patterns above based on requirements
+3. **Map services** → Use service comparison tables to select equivalents
+4. **Design abstraction** → Use Kubernetes + Terraform for portability
+5. **Plan networking** → Design cross-cloud connectivity (VPN, interconnect)
+6. **Implement IaC** → Use `implementing-terraform-modules` skill
+7. **Set up observability** → Unified monitoring across clouds
+8. **Document runbooks** → Cloud-specific operational procedures
+
+## Checklist
+
+- [ ] Multi-cloud drivers documented (DR, compliance, vendor diversification)
+- [ ] Service equivalents mapped across target clouds
+- [ ] Abstraction layer chosen (Kubernetes, Terraform, or both)
+- [ ] Cross-cloud networking designed and secured
+- [ ] Identity federation configured (single IAM source of truth)
+- [ ] Unified monitoring and logging implemented
+- [ ] Cost allocation and tracking across clouds
+- [ ] DR/failover procedures tested
+- [ ] Team trained on all target cloud platforms
+
+## Anti-Patterns
+
+| ❌ Don't | ✅ Do |
+|----------|-------|
+| Use proprietary services for portability needs | Choose cloud-agnostic alternatives (K8s, PostgreSQL) |
+| Duplicate everything across clouds | Be intentional about what runs where |
+| Manage each cloud differently | Use unified IaC and observability |
+| Ignore data transfer costs | Design to minimize cross-cloud traffic |
 
 ## Reference Files
 
@@ -176,5 +195,5 @@ AWS / Azure / GCP
 
 ## Related Skills
 
-- `terraform-module-library` - For IaC implementation
-- `cost-optimization` - For cost management
+- `implementing-terraform-modules` - For IaC implementation
+- `optimizing-cloud-cost` - For cost management

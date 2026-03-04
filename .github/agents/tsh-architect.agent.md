@@ -53,8 +53,13 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
 - `technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.
 - `sql-and-database-understanding` - when designing database schemas, data models, relationships, indexing strategies, normalisation decisions, and transaction/locking approaches as part of the solution architecture.
-- `multi-cloud-architecture` - when designing cross-provider infrastructure, selecting cloud services, or making build-vs-buy decisions across AWS, Azure, and GCP.
-- `cost-optimization` - when evaluating cost implications of architectural decisions, comparing pricing models, or designing cost-efficient infrastructure.
+- `designing-multi-cloud-architecture` - when designing cross-provider infrastructure, selecting cloud services, or making build-vs-buy decisions across AWS, Azure, and GCP.
+- `optimizing-cloud-cost` - when evaluating cost implications of architectural decisions, comparing pricing models, or designing cost-efficient infrastructure.
+- `implementing-ci-cd` - when designing CI/CD pipelines, deployment strategies, or delivery workflows as part of the solution architecture.
+- `implementing-terraform-modules` - when designing IaC structure, Terraform module hierarchy, or Terragrunt patterns.
+- `managing-secrets` - when designing secrets management, credential rotation, or vault integration as part of the solution.
+- `implementing-kubernetes` - when designing K8s workload configurations, scaling strategies, Helm chart structure, or cluster topology.
+- `implementing-observability` - when designing monitoring architecture, SLO frameworks, alerting strategies, or distributed tracing.
 
 ## Tool Usage Guidelines
 

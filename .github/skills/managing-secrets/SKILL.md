@@ -1,5 +1,5 @@
 ---
-name: secrets-management
+name: managing-secrets
 description: 'Secrets management patterns for cloud and Kubernetes environments. Use when implementing secure credential storage, rotation, or CI/CD authentication.'
 ---
 
@@ -85,6 +85,6 @@ Check for existing patterns:
 
 ## Related Skills
 
-- `ci-cd-patterns` - For pipeline credential setup
-- `terraform-module-library` - For IaC secret resource patterns
-- `cost-optimization` - Secret manager pricing considerations
+- `implementing-ci-cd` - For pipeline credential setup
+- `implementing-terraform-modules` - For IaC secret resource patterns
+- `optimizing-cloud-cost` - Secret manager pricing considerations

@@ -1,5 +1,5 @@
 ---
-name: terraform-module-library
+name: implementing-terraform-modules
 description: Build reusable Terraform modules for AWS, Azure, and GCP infrastructure following infrastructure-as-code best practices. Use when creating infrastructure modules, standardizing cloud provisioning, or implementing reusable IaC components.
 ---
 
@@ -242,5 +242,5 @@ infrastructure/
 
 ## Related Skills
 
-- `multi-cloud-architecture` - For architectural decisions
-- `cost-optimization` - For cost-effective designs
+- `designing-multi-cloud-architecture` - For architectural decisions
+- `optimizing-cloud-cost` - For cost-effective designs
