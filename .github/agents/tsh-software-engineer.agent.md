@@ -39,7 +39,11 @@ Before starting any task, you check all available skills and decide which one is
 - `technical-context-discovering` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
 - `implementation-gap-analysing` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
 - `codebase-analysing` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
-- `implementing-frontend` - for UI tasks: accessibility requirements, design system usage, component patterns, and performance guidelines.
+- `implementing-frontend` - for UI tasks: component patterns, composition, design tokens, barrel files, and Figma-to-code workflow.
+- `implementing-forms` - for form tasks: schema validation, field composition, error handling, multi-step form flows.
+- `writing-hooks` - for custom hooks: naming, composition, stable returns, effect cleanup, testing.
+- `ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
+- `optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
 - `sql-and-database-understanding` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 

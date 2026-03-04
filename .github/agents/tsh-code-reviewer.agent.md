@@ -37,6 +37,7 @@ Before starting any task, you check all available skills and decide which one is
 - `implementation-gap-analysing` - to compare the implemented solution against the plan and verify completeness of all required changes.
 - `technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
 - `sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
+- `reviewing-frontend` - for frontend-specific review criteria: component quality, hooks correctness, rendering issues, accessibility and performance spot-checks.
 
 ## Tool Usage Guidelines
 
