@@ -10,6 +10,10 @@ handoffs:
     agent: tsh-software-engineer
     prompt: /implement-ui Implement UI feature according to the plan with Figma verification
     send: false
+  - label: Start Infrastructure Implementation
+    agent: tsh-devops-engineer
+    prompt: Implement the infrastructure according to the architectural plan
+    send: false
 ---
 
 ## Agent Role and Responsibilities
@@ -49,6 +53,8 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
 - `technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.
 - `sql-and-database-understanding` - when designing database schemas, data models, relationships, indexing strategies, normalisation decisions, and transaction/locking approaches as part of the solution architecture.
+- `multi-cloud-architecture` - when designing cross-provider infrastructure, selecting cloud services, or making build-vs-buy decisions across AWS, Azure, and GCP.
+- `cost-optimization` - when evaluating cost implications of architectural decisions, comparing pricing models, or designing cost-efficient infrastructure.
 
 ## Tool Usage Guidelines
 
