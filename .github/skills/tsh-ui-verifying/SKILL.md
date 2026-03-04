@@ -5,20 +5,74 @@ description: UI verification criteria, structure checklists, severity definition
 
 # UI Verification
 
-This skill provides criteria and guidelines for verifying that UI implementations match Figma designs. It defines what to verify, severity levels, and acceptable tolerances.
+Verification process, criteria, and tolerances for comparing UI implementations against Figma designs.
 
-## When to Use
+## Verification Process
 
-- When verifying UI implementation against Figma designs
-- When performing self-verification before code review
-- When reviewing frontend changes that involve visual elements
-- When determining if a difference is a bug or acceptable variance
+Use the checklist below and track your progress:
+
+```
+Progress:
+- [ ] Step 1: Validate inputs
+- [ ] Step 2: Get EXPECTED from Figma
+- [ ] Step 3: Get ACTUAL from implementation
+- [ ] Step 4: Compare using verification categories
+- [ ] Step 5: Generate report
+```
+
+**Step 1: Validate inputs**
+
+Before starting verification, confirm:
+
+- Figma URL is available for the component/section being verified
+- Dev server URL is known:
+  - Check the project configuration (`package.json` scripts, `.env`, `vite.config`, `next.config`, etc.) for the configured port
+  - On first verification in a session, **ask the user to confirm** the dev server URL (e.g., "I detected port 3001 from package.json — is the app running at http://localhost:3001?"). The user can correct it if needed.
+  - Use the confirmed URL for all subsequent verifications in the same session
+- Dev server is running and the page is accessible at that URL
+- If any input is missing, stop and ask the user — do not proceed without all three (Figma URL, confirmed dev server URL, accessible page)
+
+**Step 2: Get EXPECTED from Figma**
+
+Use `figma-mcp-server` to extract the design specifications:
+
+- Layer hierarchy and component structure
+- Layout direction, alignment, spacing
+- Frame widths relative to page — these determine whether containers should be narrow/centered or full-width
+- Typography, colors, radii, shadows
+- Component variants and states
+
+**Step 3: Get ACTUAL from implementation**
+
+Use `playwright` to capture the running implementation. You MUST collect **all three** types of data — a verification that skips any type is incomplete:
+
+1. **Structure & content** — element hierarchy, order, grouping (via accessibility snapshot)
+2. **Actual rendered dimensions** — computed widths, heights, paddings, margins, gaps of every major container (via JavaScript evaluation of computed styles). This is the most commonly missed step — without it you cannot detect sizing/layout differences.
+3. **Visual appearance** — full-page screenshot for side-by-side comparison with the design
+
+> **CRITICAL**: The accessibility tree does NOT contain CSS dimensions. A full-width container and a narrow centered container produce identical accessibility trees. If you only collected structure without measuring actual rendered dimensions, your verification is INVALID — mark confidence as LOW and report what's missing.
+
+**Step 4: Compare using verification categories**
+
+Compare EXPECTED (Figma) against ACTUAL (implementation) following the Verification Order and Categories below. The Figma design is the **source of truth** for every comparison. When in doubt, the design wins.
+
+**Step 5: Generate report**
+
+Produce a structured report following the Report Format below. Include exact values from both Figma and implementation for every difference found.
+
+## Verification Order
+
+Always verify in this order — stop and report on first CRITICAL failure:
+
+1. **Structure** (CRITICAL)
+2. **Layout** (CRITICAL)
+3. **Dimensions** (CRITICAL)
+4. **Visual** (CRITICAL)
+5. **Components**
 
 ## Verification Categories
 
-### Structure (CRITICAL - never ignore)
-
-Structure differences are **automatic failures**. Always verify:
+### Structure (CRITICAL)
 
 | Check                   | Description                                              |
 | ----------------------- | -------------------------------------------------------- |
@@ -29,7 +83,7 @@ Structure differences are **automatic failures**. Always verify:
 | **Wrapper elements**    | Are there extra/missing wrapper divs that change layout? |
 | **Sections present**    | Are ALL sections from Figma present in implementation?   |
 
-### Layout (CRITICAL - never ignore)
+### Layout (CRITICAL)
 
 | Check                   | Description                                        |
 | ----------------------- | -------------------------------------------------- |
@@ -39,7 +93,7 @@ Structure differences are **automatic failures**. Always verify:
 | **Positioning**         | relative, absolute, fixed - matches design intent? |
 | **Centering**           | Is content centered as in design?                  |
 
-### Dimensions (CRITICAL - never ignore)
+### Dimensions (CRITICAL)
 
 | Check                        | Description                                  |
 | ---------------------------- | -------------------------------------------- |
@@ -50,7 +104,7 @@ Structure differences are **automatic failures**. Always verify:
 | **Spacing**                  | Padding, margin, gap between elements        |
 | **Gaps**                     | Space between flex/grid children             |
 
-**CRITICAL**: If a card/container in Figma is narrow and centered, but implementation shows it wider or full-width, this MUST be reported.
+> **WARNING**: Accessibility tree does NOT contain CSS dimensions. A full-width container and a narrow centered one look identical in it. You must measure actual computed styles to detect width/sizing differences.
 
 ### Visual
 
@@ -70,15 +124,7 @@ Structure differences are **automatic failures**. Always verify:
 | **Design tokens**    | Are correct tokens used (not hardcoded values)? |
 | **States**           | hover, focus, active, disabled states           |
 
-## Severity Definitions
-
-| Severity     | Description                                        | Action                            |
-| ------------ | -------------------------------------------------- | --------------------------------- |
-| **Critical** | Structure/layout differences, wrong component used | Must fix immediately              |
-| **Major**    | Dimensions off by >2px, wrong colors/typography    | Must fix before merge             |
-| **Minor**    | 1-2px browser rendering variance                   | Acceptable, document if recurring |
-
-## Tolerance Rules
+## Tolerances
 
 | Category         | Tolerance       | Notes                                |
 | ---------------- | --------------- | ------------------------------------ |
@@ -90,62 +136,29 @@ Structure differences are **automatic failures**. Always verify:
 | Typography       | **Exact match** | Font properties must match           |
 | Spacing          | **1-2px**       | Only for browser rendering variance  |
 
-## CRITICAL: Never Guess - Always Ask
+## Severity Definitions
 
-**If you are unsure about ANYTHING, STOP and ask the user.**
+| Severity     | Description                                        | Action                            |
+| ------------ | -------------------------------------------------- | --------------------------------- |
+| **Critical** | Structure/layout differences, wrong component used | Must fix immediately              |
+| **Major**    | Dimensions off by >2px, wrong colors/typography    | Must fix before merge             |
+| **Minor**    | 1-2px browser rendering variance                   | Acceptable, document if recurring |
 
-Check your available tools for a way to ask the user questions (e.g., a tool that allows user interaction or questions). Use it to get the missing information before continuing.
+## Verification Checklist
 
-This skill requires comparing the actual implementation against the expected design. If you cannot reliably get either side of that comparison, you cannot do your job. Do not guess. Do not assume. Do not continue hoping it will work out.
+Before reporting PASS:
 
-**The rule is simple:**
-
-- If something is missing → ask
-- If something is broken → ask
-- If something is unexpected → ask
-- If you're not 100% sure you're looking at the right thing → ask
-
-**Never:**
-
-- Continue working based on assumptions
-- Make up data you couldn't retrieve
-- Skip steps because something didn't work
-- "Work around" missing information
-
-## Pre-Verification Checklist
-
-Before starting verification:
-
-- [ ] Figma URL available for the component/view
-- [ ] Dev server is running
-- [ ] Page fully loaded (no skeleton states)
-- [ ] Correct viewport size set
-
-## Structure Verification Checklist
-
-Before reporting PASS, verify:
-
-- [ ] **Verified ENTIRE page** (scrolled from top to bottom)
-- [ ] **All sections from Figma are present** in implementation
+- [ ] Verified ENTIRE page (scrolled from top to bottom)
+- [ ] All sections from Figma are present in implementation
 - [ ] Container hierarchy matches Figma layers
 - [ ] Flex/grid direction is correct
 - [ ] Alignment (justify/align) matches design
 - [ ] Element order matches design
-- [ ] No extra wrapper elements that change layout
-- [ ] No missing container elements
-- [ ] Spacing between elements matches design
+- [ ] No extra/missing wrapper elements that change layout
+- [ ] Actual computed container widths measured (not inferred from accessibility tree)
+- [ ] Full-page screenshot taken and visually compared against Figma
 
-## Common Mistakes to Catch
-
-| Mistake                                 | Why It's Wrong                        |
-| --------------------------------------- | ------------------------------------- |
-| "It looks similar enough"               | Structure must match exactly          |
-| "It's just an extra wrapper"            | Extra wrappers change layout behavior |
-| "The alignment is close"                | Alignment must be exact               |
-| "Only verified visible viewport"        | Must verify entire scrollable page    |
-| "Assumed off-screen content is correct" | Must scroll and verify everything     |
-
-## Verification Report Format
+## Report Format
 
 ```markdown
 ## Verification Result: [PASS | FAIL]
@@ -154,36 +167,22 @@ Before reporting PASS, verify:
 
 **Confidence:** [HIGH | MEDIUM | LOW]
 
-- HIGH: Both tools returned complete data, comparison is reliable
-- MEDIUM: Some values could not be extracted, manual review recommended
-- LOW: Tool errors occurred, treat as incomplete verification
+### Differences
 
-### Structural Issues (CRITICAL)
-
-| Issue   | Expected (Figma) | Actual (Implementation) |
-| ------- | ---------------- | ----------------------- |
-| [issue] | [expected]       | [actual]                |
-
-### Dimension/Visual Differences
-
-**Differences found:** [count]
-
-| Property | Expected (Figma) | Actual (Implementation) | Severity               |
-| -------- | ---------------- | ----------------------- | ---------------------- |
-| [prop]   | [expected]       | [actual]                | [Critical/Major/Minor] |
+| Property | Expected (Figma) | Actual (Implementation) | Severity   |
+| -------- | ---------------- | ----------------------- | ---------- |
+| [prop]   | [expected]       | [actual]                | [severity] |
 
 ### Recommended Fixes
 
 - [specific fix with exact values]
 ```
 
-## Confidence Levels
+**Confidence levels:**
 
-| Level      | Meaning                                     | Action                                                |
-| ---------- | ------------------------------------------- | ----------------------------------------------------- |
-| **HIGH**   | Both Figma and implementation data complete | Trust the report, fix all differences                 |
-| **MEDIUM** | Some values couldn't be extracted           | Fix obvious differences, manually verify unclear ones |
-| **LOW**    | Tool errors occurred                        | Manual verification required before making changes    |
+- **HIGH** — Both Figma and implementation data complete, comparison is reliable
+- **MEDIUM** — Some values couldn't be extracted, manual review recommended
+- **LOW** — Tool errors occurred, manual verification required before making changes
 
 ## Connected Skills
 
