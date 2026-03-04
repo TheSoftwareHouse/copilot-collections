@@ -48,7 +48,6 @@ Provide output format templates. Match strictness to requirements:
 ALWAYS use this exact template:
 
 ```markdown
-
 # [Title]
 
 ## Summary
@@ -105,7 +104,7 @@ For quality-critical tasks that require iterative validation:
 
 Keep the skill body framework-agnostic. Place framework-specific APIs, examples, and conventions in `references/<framework>-patterns.md`. Include a loading section in the skill that points to the appropriate reference based on the project's technology:
 
-````markdown
+```markdown
 ## Framework-Specific Patterns
 
 The patterns above are framework-agnostic. For framework-specific implementation guidance, load the appropriate reference:
@@ -114,4 +113,4 @@ The patterns above are framework-agnostic. For framework-specific implementation
 - **Vue**: See `./references/vue-patterns.md` — composables, template syntax, reactivity API.
 
 This pattern enables skill reuse across projects using different frameworks while keeping framework-specific details precise and up to date. Use when the skill's core process (composition, testing, performance) applies universally but the API syntax varies by framework.
-````
+```
