@@ -105,7 +105,7 @@ You have access to the `pdf-reader` tool.
   - Non-PDF file formats (use standard file reading tools instead).
   - When the user has already provided the PDF content as pasted text in the conversation.
 
-You have access to the `terminal` (execute) tool.
+You have access to the `execute` tool (terminal access).
 
 - **MUST use when**:
   - Inspecting project configuration, installed dependencies, or runtime environment details that are not visible from file contents alone.
