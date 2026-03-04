@@ -16,18 +16,16 @@ Reusable formatting patterns for skill authors. Use these when structuring workf
 
 Break complex tasks into numbered steps with a trackable checklist:
 
-````markdown
+```markdown
 ## Process
 
 Use the checklist below and track your progress:
 
-```
 Progress:
 
 - [ ] Step 1: Gather context
 - [ ] Step 2: Analyze findings
 - [ ] Step 3: Produce output
-```
 
 **Step 1: Gather context**
 
@@ -36,7 +34,7 @@ Progress:
 **Step 2: Analyze findings**
 
 <detailed instructions for step 2>
-````
+```
 
 ### Template Pattern
 
