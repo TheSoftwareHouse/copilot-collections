@@ -4,7 +4,7 @@ tools: ['atlassian/*', 'figma-mcp-server/*', 'pdf-reader/*', 'sequential-thinkin
 handoffs: 
   - label: Prepare Implementation Plan
     agent: tsh-architect
-    prompt: /plan Create implementation plan for the current task
+    prompt: /tsh-plan Create implementation plan for the current task
     send: false
 ---
 
@@ -32,8 +32,8 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `task-analysing` - to analyze the task description, perform gap analysis, expand the context for the task, analyze the current state of the system in the context of the task, help build PRD, create a context for the task, gather information about the task from different sources.
-- `codebase-analysing` - to analyze the existing codebase and identify components, features, and patterns related to the task for the Current Implementation Status section.
+- `tsh-task-analysing` - to analyze the task description, perform gap analysis, expand the context for the task, analyze the current state of the system in the context of the task, help build PRD, create a context for the task, gather information about the task from different sources.
+- `tsh-codebase-analysing` - to analyze the existing codebase and identify components, features, and patterns related to the task for the Current Implementation Status section.
 
 ## Tool Usage Guidelines
 

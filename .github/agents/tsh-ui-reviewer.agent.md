@@ -4,15 +4,15 @@ tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'playwright/*', '
 handoffs:
   - label: Start UI Implementation
     agent: tsh-software-engineer
-    prompt: /implement-ui Implement UI feature according to the plan with Figma verification loop
+    prompt: /tsh-implement-ui Implement UI feature according to the plan with Figma verification loop
     send: false
   - label: Implement UI Fixes
     agent: tsh-software-engineer
-    prompt: /implement-ui Implement UI fixes based on the verification report differences
+    prompt: /tsh-implement-ui Implement UI fixes based on the verification report differences
     send: false
   - label: Perform Code Review
     agent: tsh-code-reviewer
-    prompt: /review Check the implementation against the plan and feature context
+    prompt: /tsh-review Check the implementation against the plan and feature context
     send: false
 ---
 
@@ -29,7 +29,7 @@ You focus on verifying:
 - Visual: typography, colors, radii, shadows, backgrounds
 - Components: correct variants, tokens, states
 
-You do **not** fix code. You report differences so the implementation agent can fix them. If called in a loop by `implement-ui.prompt.md`, each call is an independent verification pass.
+You do **not** fix code. You report differences so the implementation agent can fix them. If called in a loop by `tsh-implement-ui.prompt.md`, each call is an independent verification pass.
 
 If a Figma URL is missing for a component you need to verify, you stop and ask the user for the link before proceeding.
 
@@ -37,7 +37,7 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `ui-verifying` - for verification criteria, structure checklist, severity definitions, and tolerances
+- `tsh-ui-verifying` - for verification criteria, structure checklist, severity definitions, and tolerances
 
 ## Tool Usage Guidelines
 

@@ -4,7 +4,7 @@ tools: ['execute', 'read', 'atlassian/*', 'context7/*', 'figma-mcp-server/*', 's
 handoffs: 
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
-    prompt: /implement Implement changes requested after code review
+    prompt: /tsh-implement Implement changes requested after code review
     send: false
 ---
 
@@ -33,10 +33,10 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `code-reviewing` - to follow the structured code review process covering correctness, quality, security, testing, best practices, and scalability.
-- `implementation-gap-analysing` - to compare the implemented solution against the plan and verify completeness of all required changes.
-- `technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
-- `sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
+- `tsh-code-reviewing` - to follow the structured code review process covering correctness, quality, security, testing, best practices, and scalability.
+- `tsh-implementation-gap-analysing` - to compare the implemented solution against the plan and verify completeness of all required changes.
+- `tsh-technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
+- `tsh-sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
 
 ## Tool Usage Guidelines
 

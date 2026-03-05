@@ -4,11 +4,11 @@ tools: ['execute', 'atlassian/*', 'context7/*', 'figma-mcp-server/*', 'pdf-reade
 handoffs: 
   - label: Start Implementation
     agent: tsh-software-engineer
-    prompt: /implement Implement feature according to the plan
+    prompt: /tsh-implement Implement feature according to the plan
     send: false
   - label: Start UI Implementation
     agent: tsh-software-engineer
-    prompt: /implement-ui Implement UI feature according to the plan with Figma verification
+    prompt: /tsh-implement-ui Implement UI feature according to the plan with Figma verification
     send: false
 ---
 
@@ -44,11 +44,11 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 
 ## Skills Usage Guidelines
 
-- `architecture-designing` - to design the overall architecture of the solution, including components, interactions, data flows and to prepare the implementation plan.
-- `codebase-analysing` - to analyze the current codebase and understand the existing architecture, components, and patterns.
-- `implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
-- `technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.
-- `sql-and-database-understanding` - when designing database schemas, data models, relationships, indexing strategies, normalisation decisions, and transaction/locking approaches as part of the solution architecture.
+- `tsh-architecture-designing` - to design the overall architecture of the solution, including components, interactions, data flows and to prepare the implementation plan.
+- `tsh-codebase-analysing` - to analyze the current codebase and understand the existing architecture, components, and patterns.
+- `tsh-implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
+- `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.
+- `tsh-sql-and-database-understanding` - when designing database schemas, data models, relationships, indexing strategies, normalisation decisions, and transaction/locking approaches as part of the solution architecture.
 
 ## Tool Usage Guidelines
 

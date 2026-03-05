@@ -4,11 +4,11 @@ tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma-mcp-server/*
 handoffs:
   - label: Run Code Review
     agent: tsh-code-reviewer
-    prompt: /review Review the implementation against the plan and feature context
+    prompt: /tsh-review Review the implementation against the plan and feature context
     send: false
   - label: Write E2E Tests
     agent: tsh-e2e-engineer
-    prompt: /implement-e2e Create E2E tests for the implemented feature
+    prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
     send: false
 ---
 
@@ -36,12 +36,12 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `technical-context-discovering` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
-- `implementation-gap-analysing` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
-- `codebase-analysing` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
-- `implementing-frontend` - for UI tasks: accessibility requirements, design system usage, component patterns, and performance guidelines.
-- `ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
-- `sql-and-database-understanding` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
+- `tsh-technical-context-discovering` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
+- `tsh-implementation-gap-analysing` - to verify what already exists in the codebase vs what needs to be built, preventing duplicate work.
+- `tsh-codebase-analysing` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
+- `tsh-implementing-frontend` - for UI tasks: accessibility requirements, design system usage, component patterns, and performance guidelines.
+- `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
+- `tsh-sql-and-database-understanding` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 
 ## Tool Usage Guidelines
 
