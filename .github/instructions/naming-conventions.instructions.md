@@ -17,7 +17,7 @@ Every Copilot customization artifact in this repository must use the `tsh-` pref
 
 ## Why the prefix exists
 
-These artifacts are designed to be installed into other projects (via symlinks or copying). The `tsh-` prefix identifies them as originating from The Software House's copilot-collections repository and prevents naming collisions with project-specific customizations.
+These artifacts are designed to be installed into other projects (via setting path in VS Code settings or just copying). The `tsh-` prefix identifies them as originating from The Software House's copilot-collections repository and prevents naming collisions with project-specific customizations.
 
 ## Frontmatter `name` fields must match the prefixed name
 
