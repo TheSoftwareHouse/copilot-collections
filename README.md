@@ -50,6 +50,10 @@ This repository supports the **full product development lifecycle** with AI-powe
 
 ---
 
+> **Why the `tsh-` prefix?** All artifacts in this repository use the `tsh-` prefix (e.g., `/tsh-plan`, `tsh-architect`) to avoid naming collisions with your own project-specific agents, skills, and prompts. You can safely use this alongside your own customizations without renaming anything.
+
+---
+
 ## ⚠️ Copilot License Requirement
 
 **This configuration requires GitHub Copilot Pro license (or higher)** to use custom agents and MCP integrations.
