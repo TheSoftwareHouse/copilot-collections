@@ -10,6 +10,10 @@ handoffs:
     agent: tsh-software-engineer
     prompt: /tsh-implement-ui Implement UI feature according to the plan with Figma verification
     send: false
+  - label: Start Infrastructure Implementation
+    agent: tsh-devops-engineer
+    prompt: Implement the infrastructure according to the architectural plan
+    send: false
 ---
 
 ## Agent Role and Responsibilities
@@ -49,6 +53,13 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `tsh-implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.
 - `tsh-sql-and-database-understanding` - when designing database schemas, data models, relationships, indexing strategies, normalisation decisions, and transaction/locking approaches as part of the solution architecture.
+- `tsh-designing-multi-cloud-architecture` - when designing cross-provider infrastructure, selecting cloud services, or making build-vs-buy decisions across AWS, Azure, and GCP.
+- `tsh-optimizing-cloud-cost` - when evaluating cost implications of architectural decisions, comparing pricing models, or designing cost-efficient infrastructure.
+- `tsh-implementing-ci-cd` - when designing CI/CD pipelines, deployment strategies, or delivery workflows as part of the solution architecture.
+- `tsh-implementing-terraform-modules` - when designing IaC structure, Terraform module hierarchy, or Terragrunt patterns.
+- `tsh-managing-secrets` - when designing secrets management, credential rotation, or vault integration as part of the solution.
+- `tsh-implementing-kubernetes` - when designing K8s workload configurations, scaling strategies, Helm chart structure, or cluster topology.
+- `tsh-implementing-observability` - when designing monitoring architecture, SLO frameworks, alerting strategies, or distributed tracing.
 
 ## Tool Usage Guidelines
 
