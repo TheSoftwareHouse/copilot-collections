@@ -116,7 +116,7 @@ Before implementing, establish context in this order:
 
    b. **MANDATORY**: Spawn `tsh-architect` sub-agent with gathered requirements for architectural design decision. Do NOT select stack independently.
 
-   c. After receiving architect's recommendation, apply `designing-multi-cloud-architecture` skill for implementation details.
+   c. After receiving architect's recommendation, apply `tsh-designing-multi-cloud-architecture` skill for implementation details.
 
    Default fallback (if architect unavailable): **Managed Containers** (lowest complexity, production-ready).
 
@@ -142,30 +142,30 @@ Every design should include self-healing (GitOps drift reconciliation) and healt
 
 ## Skills Usage Guidelines
 
-- `technical-context-discovering` - to establish IaC conventions, project patterns, and existing infrastructure before making changes.
-- `codebase-analysing` - to understand existing Terraform, Helm, K8s manifests, and infrastructure codebase.
-- `optimizing-cloud-cost` - making pricing decisions, FinOps reviews, or evaluating cost impact of infrastructure changes.
-- `designing-multi-cloud-architecture` - implementing cross-provider infrastructure, selecting cloud services for deployment, or working with multi-cloud setups.
-- `implementing-terraform-modules` - creating or modifying Terraform modules, Terraform vs Terragrunt decisions.
-- `implementing-ci-cd` - designing or modifying CI/CD pipelines, deployment strategies, and delivery workflows.
-- `managing-secrets` - handling credentials, OIDC configuration, secret rotation, or vault setup.
-- `implementing-kubernetes` - deploying to K8s, configuring workloads, Helm charts, scaling (HPA/KEDA), or cluster resources.
-- `implementing-observability` - setting up monitoring, logging, alerting, distributed tracing, or defining SLOs/SLIs.
+- `tsh-technical-context-discovering` - to establish IaC conventions, project patterns, and existing infrastructure before making changes.
+- `tsh-codebase-analysing` - to understand existing Terraform, Helm, K8s manifests, and infrastructure codebase.
+- `tsh-optimizing-cloud-cost` - making pricing decisions, FinOps reviews, or evaluating cost impact of infrastructure changes.
+- `tsh-designing-multi-cloud-architecture` - implementing cross-provider infrastructure, selecting cloud services for deployment, or working with multi-cloud setups.
+- `tsh-implementing-terraform-modules` - creating or modifying Terraform modules, Terraform vs Terragrunt decisions.
+- `tsh-implementing-ci-cd` - designing or modifying CI/CD pipelines, deployment strategies, and delivery workflows.
+- `tsh-managing-secrets` - handling credentials, OIDC configuration, secret rotation, or vault setup.
+- `tsh-implementing-kubernetes` - deploying to K8s, configuring workloads, Helm charts, scaling (HPA/KEDA), or cluster resources.
+- `tsh-implementing-observability` - setting up monitoring, logging, alerting, distributed tracing, or defining SLOs/SLIs.
 
 ### Mandatory Skill Loading
 
 | Task Type | Required Skills (in order) |
 |-----------|----------------------------|
-| CI/CD pipelines | `technical-context-discovering` → `implementing-ci-cd` → `managing-secrets` |
-| Terraform/IaC pipelines | `technical-context-discovering` → `implementing-ci-cd` (IaC section) → `managing-secrets` |
-| Terraform modules | `technical-context-discovering` → `implementing-terraform-modules` → `managing-secrets` |
-| Terraform with cloud selection | `technical-context-discovering` → `implementing-terraform-modules` → `designing-multi-cloud-architecture` → `optimizing-cloud-cost` |
-| Kubernetes deployments | `technical-context-discovering` → `implementing-kubernetes` → `managing-secrets` |
-| Monitoring/alerting | `technical-context-discovering` → `implementing-observability` |
-| K8s observability stack | `technical-context-discovering` → `implementing-kubernetes` → `implementing-observability` |
-| Infrastructure audit | `technical-context-discovering` → `codebase-analysing` → `optimizing-cloud-cost` |
+| CI/CD pipelines | `tsh-technical-context-discovering` → `tsh-implementing-ci-cd` → `tsh-managing-secrets` |
+| Terraform/IaC pipelines | `tsh-technical-context-discovering` → `tsh-implementing-ci-cd` (IaC section) → `tsh-managing-secrets` |
+| Terraform modules | `tsh-technical-context-discovering` → `tsh-implementing-terraform-modules` → `tsh-managing-secrets` |
+| Terraform with cloud selection | `tsh-technical-context-discovering` → `tsh-implementing-terraform-modules` → `tsh-designing-multi-cloud-architecture` → `tsh-optimizing-cloud-cost` |
+| Kubernetes deployments | `tsh-technical-context-discovering` → `tsh-implementing-kubernetes` → `tsh-managing-secrets` |
+| Monitoring/alerting | `tsh-technical-context-discovering` → `tsh-implementing-observability` |
+| K8s observability stack | `tsh-technical-context-discovering` → `tsh-implementing-kubernetes` → `tsh-implementing-observability` |
+| Infrastructure audit | `tsh-technical-context-discovering` → `tsh-codebase-analysing` → `tsh-optimizing-cloud-cost` |
 
-**Rule:** For IaC pipelines, ALWAYS follow the IaC Checklist from `implementing-ci-cd` skill before delivering.
+**Rule:** For IaC pipelines, ALWAYS follow the IaC Checklist from `tsh-implementing-ci-cd` skill before delivering.
 
 ---
 

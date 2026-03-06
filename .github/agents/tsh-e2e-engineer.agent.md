@@ -4,7 +4,7 @@ tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma-mcp-server/*
 handoffs:
   - label: Report critical bug found during testing
     agent: tsh-software-engineer
-    prompt: /implement Fix the bug discovered during E2E testing
+    prompt: /tsh-implement Fix the bug discovered during E2E testing
     send: false
 ---
 
@@ -32,9 +32,9 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills usage guidelines
 
-- `task-analysing` - to determine whether context comes from research/plan files, a Jira ID, or directly from the prompt message, and gather requirements accordingly. Load at the start of every task to avoid redundant lookups.
-- `e2e-testing` - to follow established test structure patterns, Page Object conventions, mocking strategies, error recovery procedures, and the verification loop when writing, debugging, or fixing E2E tests. Always load before creating new tests or diagnosing flaky failures.
-- `technical-context-discovering` - to establish project conventions, test patterns, and configuration before writing any tests. Prioritize existing test codebase patterns (e.g., Page Objects in `pages/`, `pom/`, fixture patterns, locator strategies) over generic best practices.
+- `tsh-task-analysing` - to determine whether context comes from research/plan files, a Jira ID, or directly from the prompt message, and gather requirements accordingly. Load at the start of every task to avoid redundant lookups.
+- `tsh-e2e-testing` - to follow established test structure patterns, Page Object conventions, mocking strategies, error recovery procedures, and the verification loop when writing, debugging, or fixing E2E tests. Always load before creating new tests or diagnosing flaky failures.
+- `tsh-technical-context-discovering` - to establish project conventions, test patterns, and configuration before writing any tests. Prioritize existing test codebase patterns (e.g., Page Objects in `pages/`, `pom/`, fixture patterns, locator strategies) over generic best practices.
 
 ## E2E Testing Standards
 

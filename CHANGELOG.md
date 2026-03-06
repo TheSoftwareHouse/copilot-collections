@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-05
+
+### Changed
+
+- Added `tsh-` prefix to all Copilot customization artifacts to prevent naming collisions when used alongside project-specific customizations
+- Renamed all 18 skill directories to include `tsh-` prefix (e.g., `code-reviewing` → `tsh-code-reviewing`, `creating-agents` → `tsh-creating-agents`)
+- Renamed all 15 prompt files to include `tsh-` prefix (e.g., `/create-custom-agent` → `/tsh-create-custom-agent`, `/implement` → `/tsh-implement`)
+- Renamed worker agents to include `tsh-` prefix: `copilot-researcher` → `tsh-copilot-researcher`, `copilot-artifact-creator` → `tsh-copilot-artifact-creator`, `copilot-artifact-reviewer` → `tsh-copilot-artifact-reviewer`
+- Updated all cross-references between artifacts to use prefixed names
+
+### Added
+
+- Naming convention instruction (`.github/instructions/naming-conventions.instructions.md`) enforcing `tsh-` prefix on all artifact filenames, frontmatter names, and cross-references
+- `tsh-` prefix explanation note in README for external users
+
 ## 2026-03-02
 
 ### Added
