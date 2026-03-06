@@ -89,5 +89,5 @@ Skip for: adding alerts, creating dashboards, configuring log retention, adding 
 
 **Does NOT handle** (redirect to):
 - Application code instrumentation → coordinate with software engineer
-- Infrastructure provisioning → `/implement-terraform`
-- CI/CD pipelines → `/implement-pipeline`
+- Infrastructure provisioning → `/tsh-implement-terraform`
+- CI/CD pipelines → `/tsh-implement-pipeline`

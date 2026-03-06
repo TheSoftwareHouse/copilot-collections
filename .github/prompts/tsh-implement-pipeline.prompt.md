@@ -84,6 +84,6 @@ Skip for: adding test stages, fixing pipeline bugs, updating versions, adding ca
 ## Scope
 
 **Does NOT handle** (redirect to):
-- Infrastructure provisioning → `/implement-terraform`
-- Kubernetes deployment configuration → `/deploy-kubernetes`
-- Monitoring and alerting → `/implement-observability`
+- Infrastructure provisioning → `/tsh-implement-terraform`
+- Kubernetes deployment configuration → `/tsh-deploy-kubernetes`
+- Monitoring and alerting → `/tsh-implement-observability`

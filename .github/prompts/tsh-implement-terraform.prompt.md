@@ -94,6 +94,6 @@ Skip for: adding resources to existing modules, updating versions, fixing bugs, 
 ## Scope
 
 **Does NOT handle** (redirect to):
-- CI/CD pipelines for Terraform → `/implement-pipeline`
-- Kubernetes workload configuration → `/deploy-kubernetes`
-- Monitoring infrastructure → `/implement-observability`
+- CI/CD pipelines for Terraform → `/tsh-implement-pipeline`
+- Kubernetes workload configuration → `/tsh-deploy-kubernetes`
+- Monitoring infrastructure → `/tsh-implement-observability`

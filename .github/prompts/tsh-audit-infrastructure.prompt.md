@@ -86,9 +86,9 @@ Skip for: adding tags, updating configurations, simple fixes.
 - [list immediate actions with high impact and low effort]
 
 ### Remediation Roadmap
-1. [Critical] Description → `/implement-terraform`
-2. [High] Description → `/deploy-kubernetes`
-3. [Medium] Description → `/implement-observability`
+1. [Critical] Description → `/tsh-implement-terraform`
+2. [High] Description → `/tsh-deploy-kubernetes`
+3. [Medium] Description → `/tsh-implement-observability`
 ```
 
 ---
@@ -96,5 +96,5 @@ Skip for: adding tags, updating configurations, simple fixes.
 ## Scope
 
 **Does NOT handle** (redirect to):
-- Implementing fixes → `/implement-terraform`, `/deploy-kubernetes`, `/implement-pipeline`, `/implement-observability`
+- Implementing fixes → `/tsh-implement-terraform`, `/tsh-deploy-kubernetes`, `/tsh-implement-pipeline`, `/tsh-implement-observability`
 - Application code security → coordinate with software engineer

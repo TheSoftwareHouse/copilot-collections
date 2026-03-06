@@ -89,6 +89,6 @@ Skip for: HPA/PDB configuration, probes, resource limits, manifest fixes.
 ## Scope
 
 **Does NOT handle** (redirect to):
-- Cluster provisioning → `/implement-terraform`
-- CI/CD pipeline for deployment → `/implement-pipeline`
-- Monitoring and alerting → `/implement-observability`
+- Cluster provisioning → `/tsh-implement-terraform`
+- CI/CD pipeline for deployment → `/tsh-implement-pipeline`
+- Monitoring and alerting → `/tsh-implement-observability`
