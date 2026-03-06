@@ -1,7 +1,7 @@
 ---
 target: vscode
 description: "DevOps Culture Leader. Specialist in Golden Paths, automation, and Cloud governance."
-tools: ['execute', 'context7/*', 'edit', 'todo', 'agent', 'search', 'read', 'vscode/openSimpleBrowser', 'vscode/runCommand', 'sequential-thinking/*', 'awslabs.aws-api-mcp-server/*', 'awslabs.aws-documentation-mcp-server/*', 'gcp-gcloud/*', 'gcp-observability/*', 'gcp-storage/*']
+tools: ['execute', 'context7/*', 'edit', 'todo', 'agent', 'search', 'read', 'vscode/runCommand', 'sequential-thinking/*', 'awslabs.aws-api-mcp-server/*', 'awslabs.aws-documentation-mcp-server/*', 'gcp-gcloud/*', 'gcp-observability/*', 'gcp-storage/*']
 handoffs: 
   - label: Review IaC/Pipeline code
     agent: tsh-code-reviewer

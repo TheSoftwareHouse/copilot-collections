@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-06
+
+### Added
+
+- DevOps Engineer agent (`tsh-devops-engineer`) — Senior DevOps Engineer and Consultant persona specializing in Golden Paths, automation, and Cloud governance; mandatory architect sub-agent delegation for all design decisions; multi-cloud guardrails with FinOps alerts (>10% cost increase triggers alert); three-option output strategy (Golden Path, Cost-Optimized, Velocity); mandatory skill-loading chains for 8 task types; tools include AWS API MCP, AWS Docs MCP, GCP gcloud/observability/storage MCPs, Context7, Sequential Thinking
+- Multi-Cloud Architecture skill (`tsh-designing-multi-cloud-architecture`) for selecting and integrating services across AWS, Azure, and GCP with service comparison and multi-cloud pattern references
+- CI/CD Implementation skill (`tsh-implementing-ci-cd`) for pipeline design patterns and deployment strategies
+- Kubernetes Implementation skill (`tsh-implementing-kubernetes`) for deployment patterns, Helm charts, and cluster management
+- Observability Implementation skill (`tsh-implementing-observability`) for logging, monitoring, alerting, and distributed tracing patterns
+- Terraform Modules skill (`tsh-implementing-terraform-modules`) for reusable Terraform modules across AWS, Azure, and GCP with per-cloud module references
+- Secrets Management skill (`tsh-managing-secrets`) for secrets management patterns in cloud and Kubernetes environments
+- Cloud Cost Optimization skill (`tsh-optimizing-cloud-cost`) for rightsizing, tagging strategies, and spending analysis with tagging standards reference
+- AWS cost analysis prompt (`/tsh-analyze-aws-costs`) for cost optimization and tagging compliance audit with hybrid IaC + live API approach
+- GCP cost analysis prompt (`/tsh-analyze-gcp-costs`) for cost optimization and labeling compliance audit with hybrid IaC + live API approach
+- Infrastructure audit prompt (`/tsh-audit-infrastructure`) for multi-scope audit (AWS/Azure/GCP/K8s/CI-CD) covering security, cost, and best practices
+- Kubernetes deployment prompt (`/tsh-deploy-kubernetes`) for deployments, Helm charts, and workload configurations
+- CI/CD pipeline prompt (`/tsh-implement-pipeline`) for pipelines with deployment stages and environment protection
+- Terraform implementation prompt (`/tsh-implement-terraform`) for Terraform modules and cloud infrastructure provisioning
+- Observability implementation prompt (`/tsh-implement-observability`) for metrics, logs, traces, and alerting solutions
+
+### Changed
+
+- Updated Architect agent (`tsh-architect`) with handoff to DevOps Engineer for infrastructure implementation
+- Renamed 7 new infrastructure skill directories with `tsh-` prefix (continuation of 2026-03-05 prefix migration)
+- Renamed 7 new infrastructure prompt files with `tsh-` prefix
+- Updated all skill cross-references in architect agent, devops engineer agent, and all 7 infrastructure SKILL.md files
+- Updated all skill references in 7 infrastructure prompt files
+
 ## 2026-03-05
 
 ### Changed
