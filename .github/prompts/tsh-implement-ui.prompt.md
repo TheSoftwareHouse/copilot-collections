@@ -4,7 +4,7 @@ model: "Claude Opus 4.6"
 description: "Implement UI feature according to the plan with iterative Figma verification until pixel-perfect."
 ---
 
-> **PREREQUISITE**: Before using this prompt, you MUST first read and understand [tsh-implement.prompt.md](./tsh-implement.prompt.md). This prompt extends the base implementation workflow – you will execute all 11 steps from the base workflow, with UI-specific additions described below.
+> **PREREQUISITE**: Before using this prompt, you MUST first read and understand [tsh-implement-common-task.prompt.md](./tsh-implement-common-task.prompt.md). This prompt extends the base implementation workflow – you will execute all 11 steps from the base workflow, with UI-specific additions described below.
 
 Implement the UI feature according to the **research context** and **implementation plan**, with continuous verification against Figma designs until the implementation matches the design within the agreed tolerance.
 
@@ -17,14 +17,14 @@ Before starting, load and follow these skills:
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance, semantic HTML, ARIA, and automated axe-core verification
 - `tsh-technical-context-discovering` - to establish project conventions before implementing
 
-This prompt **extends and does not replace** the base implementation workflow defined in [tsh-implement.prompt.md](./tsh-implement.prompt.md).
+This prompt **extends and does not replace** the base implementation workflow defined in [tsh-implement-common-task.prompt.md](./tsh-implement-common-task.prompt.md).
 
 ---
 
 ## Relationship to Base Workflow
 
-- **IMPORTANT**: First, read and fully understand [tsh-implement.prompt.md](./tsh-implement.prompt.md) – it defines the complete base workflow steps
-- You MUST execute **all steps** from `tsh-implement.prompt.md`, including **final code review by `tsh-code-reviewer` agent**.
+- **IMPORTANT**: First, read and fully understand [tsh-implement-common-task.prompt.md](./tsh-implement-common-task.prompt.md) – it defines the complete base workflow steps
+- You MUST execute **all steps** from `tsh-implement-common-task.prompt.md`, including **final code review by `tsh-code-reviewer` agent**.
 - Treat this prompt as an **extension focused on UI and Figma verification** – it adds UI-specific behaviors but does not remove or replace any base workflow steps.
 - All constraints from `tsh-research.prompt.md` and `tsh-plan.prompt.md` remain valid: do not go out of scope, do not re‑implement existing solutions, and always update the plan/checklists instead of silently changing scope.
 
@@ -75,7 +75,7 @@ Before step 6 of the base workflow (starting implementation), ensure:
 
 ## Step Modifications to Base Workflow
 
-This prompt modifies specific steps from [tsh-implement.prompt.md](./tsh-implement.prompt.md). All other steps remain unchanged.
+This prompt modifies specific steps from [tsh-implement-common-task.prompt.md](./tsh-implement-common-task.prompt.md). All other steps remain unchanged.
 
 ### Modified Step 6: Implement with Figma Verification
 
