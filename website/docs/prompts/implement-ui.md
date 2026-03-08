@@ -23,9 +23,9 @@ Everything from [`/tsh-implement`](./implement), plus:
 1. **Locates Figma URLs** from the research and plan files.
 2. **Ensures dev server is running** and the target page is accessible.
 3. **Runs a verification loop** for each UI component:
-   - Calls `/tsh-review-ui` to compare implementation against Figma.
+   - Delegates verification to the `tsh-ui-reviewer` subagent (does not verify UI itself).
    - If PASS → moves to next component.
-   - If FAIL → fixes reported differences and re-runs `/tsh-review-ui`.
+   - If FAIL → fixes reported differences and re-runs the subagent.
    - Maximum **5 iterations** per component, then escalates.
 4. **Produces a UI Verification Summary** before handing off to code review.
 
@@ -36,10 +36,14 @@ BEFORE starting:
     0. Ensure Figma URL is available → if not, ASK user
 
 REPEAT (max 5 iterations):
-    1. Call /tsh-review-ui to verify current implementation
+    1. Run tsh-ui-reviewer subagent to verify current implementation
     2. If PASS → done, exit loop
     3. If FAIL → fix reported differences → go to step 1
 ```
+
+:::warning
+The Software Engineer never verifies UI itself. It delegates to the `tsh-ui-reviewer` subagent which uses Figma MCP and Playwright to extract and compare data. Mental comparison or code reading is not verification.
+:::
 
 ### Confidence Levels
 
@@ -50,6 +54,7 @@ REPEAT (max 5 iterations):
 ### Escalation (after 5 iterations)
 
 Stops the loop and prepares an escalation report with:
+
 - Summary of each iteration.
 - Remaining mismatches.
 - Suspected root causes.
@@ -57,11 +62,13 @@ Stops the loop and prepares an escalation report with:
 
 ## Additional Skills Loaded
 
-- `tsh-implementing-frontend` — Accessibility, design system, component patterns.
+- `tsh-implementing-frontend` — Component patterns, design system usage, composition.
 - `tsh-ui-verifying` — Verification criteria, tolerances, PASS/FAIL definitions.
+- `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance, semantic HTML, ARIA.
 - `tsh-technical-context-discovering` — Project conventions before implementing.
 
 ## Output
 
 Everything from `/tsh-implement`, plus:
+
 - UI Verification Summary listing verified components, iterations per component, design gaps, and deviations with rationale.

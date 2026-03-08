@@ -27,25 +27,29 @@ The Software Engineer agent implements software solutions based on provided requ
 
 ## Tool Access
 
-| Tool | Usage |
-|---|---|
-| **Atlassian** | Search for task requirements and related context (search only) |
-| **Context7** | Search API documentation, find solutions to errors, research best practices |
-| **Figma** | Extract design specifications for frontend tasks |
-| **Playwright** | Verify UI implementation by interacting with the running application |
-| **Sequential Thinking** | Implement complex algorithms, debug issues, plan refactoring |
-| **Terminal** | Run build tools, tests, linters, and scripts |
-| **File Read/Edit/Search** | Read, modify, and search workspace files |
-| **VS Code Commands** | Execute VS Code commands and preview in browser |
-| **Sub-agents** | Delegate subtasks to specialized agents |
-| **Todo** | Track implementation progress with structured checklists |
+| Tool                      | Usage                                                                       |
+| ------------------------- | --------------------------------------------------------------------------- |
+| **Atlassian**             | Search for task requirements and related context (search only)              |
+| **Context7**              | Search API documentation, find solutions to errors, research best practices |
+| **Figma**                 | Extract design specifications for frontend tasks                            |
+| **Playwright**            | Verify UI implementation by interacting with the running application        |
+| **Sequential Thinking**   | Implement complex algorithms, debug issues, plan refactoring                |
+| **Terminal**              | Run build tools, tests, linters, and scripts                                |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                    |
+| **VS Code Commands**      | Execute VS Code commands and preview in browser                             |
+| **Sub-agents**            | Delegate subtasks to specialized agents                                     |
+| **Todo**                  | Track implementation progress with structured checklists                    |
 
 ## Skills Loaded
 
 - `tsh-technical-context-discovering` — Establish project conventions and patterns before implementing.
 - `tsh-implementation-gap-analysing` — Verify what exists vs what needs to be built.
 - `tsh-codebase-analysing` — Understand existing architecture for complex features.
-- `tsh-implementing-frontend` — Accessibility, design system, component patterns.
+- `tsh-implementing-frontend` — Component patterns, composition, design tokens, Figma-to-code workflow.
+- `tsh-implementing-forms` — Schema validation, field composition, error handling, multi-step form flows.
+- `tsh-writing-hooks` — Custom hooks: naming, composition, stable returns, effect cleanup, testing.
+- `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management.
+- `tsh-optimizing-frontend` — Code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` — Tolerances and structure checklist for Figma verification.
 - `tsh-sql-and-database-understanding` — SQL queries, database schemas, migrations, ORM patterns.
 

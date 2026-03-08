@@ -28,21 +28,23 @@ The DevOps Engineer agent is a Senior DevOps Engineer and Consultant that propag
 
 ## Tool Access
 
-| Tool | Usage |
-|---|---|
-| **Context7** | Search cloud provider documentation, Terraform registry, Kubernetes API docs |
-| **Sequential Thinking** | Analyze complex infrastructure decisions, debug deployment issues |
-| **AWS API** | Query live AWS infrastructure, validate resources, check configurations |
-| **AWS Documentation** | Reference AWS service documentation and best practices |
-| **GCP Gcloud** | Google Cloud operations and resource management |
-| **GCP Observability** | Google Cloud monitoring and observability integration |
-| **GCP Storage** | Google Cloud Storage resource management |
-| **Terminal** | Run Terraform, kubectl, Helm, and other CLI tools |
-| **File Read/Edit/Search** | Read, modify, and search workspace files |
-| **Sub-agents** | Delegate to `tsh-architect` for architectural decisions |
+| Tool                      | Usage                                                                        |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| **Context7**              | Search cloud provider documentation, Terraform registry, Kubernetes API docs |
+| **Sequential Thinking**   | Analyze complex infrastructure decisions, debug deployment issues            |
+| **AWS API**               | Query live AWS infrastructure, validate resources, check configurations      |
+| **AWS Documentation**     | Reference AWS service documentation and best practices                       |
+| **GCP Gcloud**            | Google Cloud operations and resource management                              |
+| **GCP Observability**     | Google Cloud monitoring and observability integration                        |
+| **GCP Storage**           | Google Cloud Storage resource management                                     |
+| **Terminal**              | Run Terraform, kubectl, Helm, and other CLI tools                            |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                     |
+| **Sub-agents**            | Delegate to `tsh-architect` for architectural decisions                      |
 
 ## Skills Loaded
 
+- `tsh-technical-context-discovering` — Project conventions and infrastructure patterns.
+- `tsh-codebase-analysing` — Understand existing Terraform, Helm, K8s manifests, and infrastructure codebase.
 - `tsh-implementing-ci-cd` — CI/CD pipeline design patterns and deployment strategies.
 - `tsh-implementing-kubernetes` — Kubernetes deployment patterns, Helm charts, cluster management.
 - `tsh-implementing-terraform-modules` — Reusable Terraform modules for AWS, Azure, and GCP.
@@ -50,7 +52,6 @@ The DevOps Engineer agent is a Senior DevOps Engineer and Consultant that propag
 - `tsh-managing-secrets` — Secrets management for cloud and Kubernetes environments.
 - `tsh-optimizing-cloud-cost` — Cloud cost optimization through rightsizing and tagging.
 - `tsh-designing-multi-cloud-architecture` — Multi-cloud architecture design across providers.
-- `tsh-technical-context-discovering` — Project conventions and infrastructure patterns.
 
 ## Context Discovery
 

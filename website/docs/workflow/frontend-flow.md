@@ -47,8 +47,8 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 ## What `/tsh-implement-ui` Does
 
 - Implements UI components following the plan.
-- Runs **iterative verification loop** calling `/tsh-review-ui` after each component.
-- **Fixes mismatches** based on `/tsh-review-ui` reports.
+- Runs **iterative verification loop** delegating to the `tsh-ui-reviewer` subagent after each component.
+- **Fixes mismatches** based on subagent reports.
 - Escalates after 5 failed iterations with a detailed report.
 - Produces a **UI Verification Summary** before handing off to code review.
 
@@ -56,8 +56,9 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 
 The frontend flow loads these specialized skills:
 
-- **tsh-implementing-frontend** — Accessibility requirements, design system usage, component patterns, and performance guidelines.
+- **tsh-implementing-frontend** — Component patterns, design system usage, composition, and performance guidelines.
 - **tsh-ui-verifying** — Verification criteria, tolerances, severity definitions, and what constitutes PASS/FAIL.
+- **tsh-ensuring-accessibility** — WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard navigation.
 - **tsh-technical-context-discovering** — Project conventions and coding standards.
 
 :::warning Important

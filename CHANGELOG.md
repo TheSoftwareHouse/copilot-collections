@@ -4,6 +4,33 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-08
+
+### Added
+
+- Ensuring Accessibility skill (`tsh-ensuring-accessibility`) — WCAG 2.1 AA compliance, semantic HTML, ARIA patterns, keyboard navigation, focus management, screen reader support, and color contrast requirements
+- Implementing Forms skill (`tsh-implementing-forms`) — Form architecture, schema-based validation, field composition, error handling, multi-step form flows, and accessible form patterns
+- Frontend Optimization skill (`tsh-optimizing-frontend`) — Rendering optimization, code splitting, memoization strategies, bundle size control, asset optimization, and memory management with React-specific reference patterns
+- Frontend Review skill (`tsh-reviewing-frontend`) — Frontend-specific code review criteria: component anti-patterns, hooks quality, rendering correctness, accessibility and performance spot-checks, module organization with React-specific reference checklist
+- Writing Hooks skill (`tsh-writing-hooks`) — Custom hook and composable patterns: naming, composition, stable return shapes, lifecycle cleanup, and testing strategies with React-specific reference patterns
+- React-specific reference files (`references/react-patterns.md`) for implementing-frontend, optimizing-frontend, reviewing-frontend, and writing-hooks skills
+- Documentation pages for all 5 new skills on the website
+
+### Changed
+
+- Software Engineer agent (`tsh-software-engineer`) — Added 4 new frontend skills to skills list (`tsh-implementing-forms`, `tsh-writing-hooks`, `tsh-ensuring-accessibility`, `tsh-optimizing-frontend`); added `tsh-ui-reviewer` as subagent for verification delegation; reformatted tools list
+- Code Reviewer agent (`tsh-code-reviewer`) — Added `tsh-reviewing-frontend` skill for frontend-specific review criteria
+- UI Reviewer agent (`tsh-ui-reviewer`) — Rewritten to emphasize subagent usage pattern, mandatory tool-based verification (never mental comparison), transparent error reporting with LOW confidence; reformatted tools list
+- Frontend Implementation skill (`tsh-implementing-frontend`) — Refactored to focus on component patterns and composition, moved accessibility to dedicated `tsh-ensuring-accessibility` skill; added React-specific reference file
+- UI Verification skill (`tsh-ui-verifying`) — Rewritten with 5-step verification process, verification order (stop on first CRITICAL failure), and improved report format
+- `/tsh-implement-ui` prompt — Rewritten to use `tsh-ui-reviewer` as subagent (not `/tsh-review-ui` prompt call); added `tsh-ensuring-accessibility` skill; clarified that SE must never verify UI itself
+- `/tsh-review-ui` prompt — Simplified to delegate entirely to `tsh-ui-verifying` skill workflow; fixed "all differences" wording to align with skill's stop-on-critical-failure rule
+- Updated website documentation for Software Engineer, Code Reviewer, UI Reviewer agents and `/tsh-implement-ui`, `/tsh-review-ui` prompts
+- Updated skills overview: skill count 25 → 30, added new skills to Development and Quality tables, updated agent–skill matrix
+- Fixed Architect agent docs — added 7 missing skills (multi-cloud, cloud cost, CI/CD, Terraform, secrets, Kubernetes, observability)
+- Fixed DevOps Engineer agent docs — added missing `tsh-codebase-analysing` skill
+- Fixed Frontend Flow workflow docs — added `tsh-ensuring-accessibility` to required skills, updated subagent terminology
+
 ## 2026-03-06
 
 ### Added

@@ -12,8 +12,9 @@ Implement the UI feature according to the **research context** and **implementat
 
 Before starting, load and follow these skills:
 
-- `tsh-implementing-frontend` - for accessibility, design system usage, component patterns, and performance guidelines
+- `tsh-implementing-frontend` - for component patterns, design system usage, composition, and performance guidelines
 - `tsh-ui-verifying` - for understanding verification criteria, tolerances, and what constitutes PASS/FAIL
+- `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance, semantic HTML, ARIA, and automated axe-core verification
 - `tsh-technical-context-discovering` - to establish project conventions before implementing
 
 This prompt **extends and does not replace** the base implementation workflow defined in [tsh-implement.prompt.md](./tsh-implement.prompt.md).
@@ -72,85 +73,76 @@ Before step 6 of the base workflow (starting implementation), ensure:
 
 ---
 
-## UI Verification Loop (per UI component/section)
+## Step Modifications to Base Workflow
 
-After implementing each UI component, run a verification loop using `./tsh-review-ui.prompt.md` until the implementation matches the Figma design.
+This prompt modifies specific steps from [tsh-implement.prompt.md](./tsh-implement.prompt.md). All other steps remain unchanged.
 
-### Core Loop
+### Modified Step 6: Implement with Figma Verification
 
-```
-BEFORE starting:
-    0. Ensure you have a Figma URL → if not, ASK user
+When implementing a UI component/section from the plan:
 
-REPEAT (max 5 iterations):
-    1. Call /tsh-review-ui to verify current implementation
-    2. If PASS → done, exit loop
-    3. If FAIL → fix the reported differences → go to step 1
-```
+1. Write the code for the component
+2. **Before marking the task step as complete**, run `tsh-ui-reviewer` subagent to verify against Figma. Pass it: the Figma URL, the page URL in the running app, and the component/section name. The subagent has `figma-mcp-server` and `playwright` tools — it will extract the Figma design, measure the actual implementation via browser automation, and return a structured verification report.
+3. If the report says PASS → mark step complete, move to next
+4. If the report says FAIL → fix all differences listed in the report, then run `tsh-ui-reviewer` subagent again (max 5 iterations)
+5. Do NOT move to the next task step until verification passes or you escalate
 
-### Rules
+**You MUST NOT verify UI yourself.** You do not have the verification workflow — `tsh-ui-reviewer` does. Do not read Figma and "mentally compare" — that misses CSS dimensions, layout differences, and visual details. Always delegate to the subagent.
 
-1. **Call `/tsh-review-ui` for every verification** – do not verify manually or skip this step
-2. **Fix all reported differences** – do not skip or rationalize
-3. **Verify again after fixing** – always re-run `/tsh-review-ui`
-4. **Maximum 5 iterations** – escalate if still not matching
-5. **Check confidence level** – if `/tsh-review-ui` returns LOW confidence, consider manual verification before fixing
+This applies to every task step that produces visible UI. Non-visual steps (data fetching, state management, routing) do not need Figma verification.
 
-### When `/tsh-review-ui` returns FAIL
+### Modified Step 7: Update Plan with Verification Status
+
+After completing each task step, update the plan as usual AND note verification result (PASS, number of iterations, or escalation).
+
+### Modified Step 8: Phase Review with UI Check
+
+In addition to the standard phase review:
+
+- Confirm every UI task in the phase passed verification (EXPECTED = ACTUAL)
+- Re-run `tsh-ui-reviewer` subagent for high-risk flows if needed
+
+### New Step before 11: UI Verification Summary
+
+Before handing off to `tsh-code-reviewer`:
+
+- List components/sections verified by `tsh-ui-reviewer`
+- Number of verification iterations per component
+- Any design gaps discovered and how you handled them
+- Any deviations from design with rationale
+
+---
+
+## Verification Rules
+
+1. **Every UI component must be verified by `tsh-ui-reviewer` subagent** — minimum once per component, no exceptions. Do not verify UI yourself.
+2. **Fix all reported differences** — do not skip or rationalize
+3. **Re-run `tsh-ui-reviewer` after every fix** — never assume a fix worked
+4. **Maximum 5 iterations per component** — escalate if still failing
+5. **Check confidence level** — LOW confidence means tool data may be incomplete, ask user before fixing
+
+### When `tsh-ui-reviewer` returns FAIL
 
 1. Read the difference table from the report
-2. Check confidence level:
-   - **HIGH**: Fix code to match EXPECTED values exactly
-   - **MEDIUM**: Fix obvious differences, manually verify unclear ones
-   - **LOW**: Manually verify before making changes, tool data may be incomplete
+2. Fix code to match EXPECTED values — HIGH confidence: fix exactly; MEDIUM: fix obvious, verify unclear; LOW: ask user before making changes
 3. Document fix in Changelog
-4. Run `/tsh-review-ui` again
-
-### Fallback: When Tools Are Unreliable
-
-If `/tsh-review-ui` consistently returns LOW confidence or tool errors:
-
-1. **Do not continue the automated loop blindly**
-2. **Perform manual verification**:
-   - Open Figma design in browser
-   - Open running app side-by-side
-   - Compare visually and note differences
-3. **Document the manual verification** in Changelog
-4. **Continue with next component** or escalate if unsure
+4. Run `tsh-ui-reviewer` subagent again
 
 ### Escalation (after 5 iterations)
 
-If still failing after 5 iterations:
+If still failing after 5 iterations, **stop** and:
 
-1. **Stop the loop** – do not start a 6th iteration
-2. **Prepare an escalation report** including:
-   - Figma URL and component/screen being verified
-   - Summary of each iteration: what changed, what remained
-   - Current remaining mismatches (grouped by structure, dimensions, visual, components)
-   - Suspected root causes (missing design tokens, conflicting constraints, missing Figma specs, etc.)
-3. **Document in Changelog** – record the escalation and remaining issues
-4. **Recommend next steps**:
-   - If design is ambiguous → ask design owner for clarification
-   - If issues seem architectural → escalate to architect
-   - If blocked by technical constraints → document constraints and seek guidance
-5. **Ask for guidance** – explicitly request human decision before proceeding
+1. List remaining mismatches with Figma URL
+2. Describe what you tried in each iteration
+3. State suspected root cause
+4. Document in Changelog
+5. Ask the user for guidance — do not proceed without human decision
 
----
+### Fallback: When Subagent Returns Errors
 
-## Additional Phase Review (extension of step 8)
+If `tsh-ui-reviewer` consistently returns LOW confidence or tool errors:
 
-When performing the phase review required by the base workflow:
-
-- Confirm that every UI‑related task in the phase has passed the verification loop (EXPECTED = ACTUAL)
-- Re‑run targeted UI verification for any high‑risk flows if needed
-
----
-
-## UI Verification Summary (before step 11)
-
-Before handing off to the `tsh-code-reviewer` agent:
-
-- List components/sections verified
-- Number of verification iterations per component
-- Any design gaps discovered and how you handled them
-- Any deviations from design with rationale (accessibility, technical constraints)
+1. Do not continue the loop blindly
+2. Ask the user if they can verify manually (open Figma + app side-by-side)
+3. Document the issue in Changelog
+4. Continue with next component or escalate if unsure

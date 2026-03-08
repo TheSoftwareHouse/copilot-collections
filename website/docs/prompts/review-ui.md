@@ -36,15 +36,19 @@ Called automatically by `/tsh-implement-ui` in a verification loop. Can also be 
 ## Verification Result: [PASS | FAIL]
 
 ### Component: [name]
+
 **Confidence:** [HIGH | MEDIUM | LOW]
 
 ### Structural Issues (CRITICAL)
+
 | Issue | Expected (Figma) | Actual (Implementation) |
 
 ### Dimension/Visual Differences
+
 | Property | Expected (Figma) | Actual (Implementation) | Severity |
 
 ### Recommended Fixes
+
 - [specific fix with exact values]
 ```
 
@@ -54,12 +58,12 @@ Called automatically by `/tsh-implement-ui` in a verification loop. Can also be 
 - **Both tools required** — Uses Figma MCP (EXPECTED) and Playwright MCP (ACTUAL).
 - **Structure mismatches = automatic FAIL** — Layout/hierarchy issues are never ignored.
 - **1-2px tolerance** — Only for browser rendering variance, not for structure/layout.
-- **Reports all differences** — Structure, layout, dimensions, visual properties, components.
+- **Reports differences per verification order** — Structure, layout, dimensions, visual — stops on first CRITICAL failure as defined by the skill.
 
 ## Confidence Levels
 
-| Level | Meaning |
-|---|---|
-| **HIGH** | Both tools returned complete data; comparison is reliable |
+| Level      | Meaning                                                       |
+| ---------- | ------------------------------------------------------------- |
+| **HIGH**   | Both tools returned complete data; comparison is reliable     |
 | **MEDIUM** | Some values could not be extracted; manual review recommended |
-| **LOW** | Tool errors occurred; treat as incomplete verification |
+| **LOW**    | Tool errors occurred; treat as incomplete verification        |

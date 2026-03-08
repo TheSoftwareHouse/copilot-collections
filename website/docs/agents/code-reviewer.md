@@ -37,21 +37,22 @@ A structured review containing:
 
 ## Tool Access
 
-| Tool | Usage |
-|---|---|
-| **Atlassian** | Verify requirements and context from Jira or Confluence |
-| **Context7** | Verify framework API usage, check for known vulnerabilities |
-| **Figma** | Verify frontend implementation matches visual designs |
-| **Sequential Thinking** | Analyze complex security vulnerabilities, performance bottlenecks, race conditions |
-| **Terminal** | Run tests, linters, and build commands for verification |
-| **File Read/Edit/Search** | Read, modify, and search workspace files |
-| **VS Code Commands** | Execute VS Code commands and preview in browser |
-| **Sub-agents** | Delegate subtasks to specialized agents |
-| **Todo** | Track review progress with structured checklists |
+| Tool                      | Usage                                                                              |
+| ------------------------- | ---------------------------------------------------------------------------------- |
+| **Atlassian**             | Verify requirements and context from Jira or Confluence                            |
+| **Context7**              | Verify framework API usage, check for known vulnerabilities                        |
+| **Figma**                 | Verify frontend implementation matches visual designs                              |
+| **Sequential Thinking**   | Analyze complex security vulnerabilities, performance bottlenecks, race conditions |
+| **Terminal**              | Run tests, linters, and build commands for verification                            |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                           |
+| **VS Code Commands**      | Execute VS Code commands and preview in browser                                    |
+| **Sub-agents**            | Delegate subtasks to specialized agents                                            |
+| **Todo**                  | Track review progress with structured checklists                                   |
 
 ## Skills Loaded
 
 - `tsh-code-reviewing` — Structured review process covering correctness, quality, security, testing, and scalability.
+- `tsh-reviewing-frontend` — Frontend-specific review: component quality, hooks correctness, rendering, accessibility and performance spot-checks.
 - `tsh-implementation-gap-analysing` — Compare implementation against the plan and verify completeness.
 - `tsh-technical-context-discovering` — Understand project conventions and patterns.
 - `tsh-sql-and-database-understanding` — Review database-related code for SQL quality, indexes, migrations, and ORM usage.
