@@ -16,7 +16,7 @@ Each hook does one thing. Compose complex behavior by calling multiple hooks, no
 </single-responsibility>
 
 <stable-api-surface>
-Return an object (not a tuple) with stable references. Memoize callbacks and derived values using the framework's memoization primitives when consumers may pass them to memoized children. The hook's return shape is its public API — treat it as a contract.
+Prefer returning an object (rather than a tuple) once the hook returns more than 1–2 values, and keep references stable. Memoize callbacks and derived values using the framework's memoization primitives when consumers may pass them to memoized children. The hook's return shape is its public API — treat it as a contract.
 </stable-api-surface>
 
 <cleanup-everything>
