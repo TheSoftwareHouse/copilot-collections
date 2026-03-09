@@ -19,35 +19,16 @@ You have access to the `tsh-software-engineer` agent.
 
 - **MUST delegate to when**:
   - Implementing backend features, API development, database interactions, and complex business logic.
-  - Implementing frontend features without Figma design - UI components, and ensuring adherence to design specifications.
+  - Implementing complex frontend features requirng Figma and design verification
+   - Performing UX/UI optimizations and accessibility improvements on existing frontend features.
+  - Performing performance optimizations on frontend features, including code splitting, lazy loading, and optimizing rendering performance.
 - **IMPORTANT**:
-  - Always run this agent together with the relevant implementation prompt (e.g., `/tsh-implement-common-task`, etc.) to ensure that the implementation is aligned with the plan and feature context and that the implementation workflow is followed effectively.  
+  - Always use `/tsh-implement-ui` prompt when implementing fronfrontendtedn features based on figma designs to ensure that the implementation includes iterative Figma verification until pixel-perfect results are achieved.
+  - Use `/tsh-implement-common-task` prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
 - **SHOULD NOT delegate to**:
-  - Implementing frontend features with Figma design - delegate those to `tsh-frontend-engineer` agent for better Figma integration and design verification.
   - Implementing e2e tests - delegate those to `tsh-e2e-engineer` agent for better test design and implementation.
   - Implementing infrastructure and DevOps tasks - delegate those to `tsh-devops-engineer` agent for better expertise in cloud and infrastructure automation.
   
-You have access to the `tsh-frontend-engineer` agent.
-
-- **MUST delegate to when**:
-  - Implementing frontend features with Figma design - UI components, and ensuring adherence to design specifications.
-  - Performing UX/UI optimizations and accessibility improvements on existing frontend features.
-  - Performing performance optimizations on frontend features, including code splitting, lazy loading, and optimizing rendering performance.
-- **IMPORTANT**:
-  - Always run this agent together with `/tsh-implement-ui` prompt to ensure that the implementation is aligned with the Figma design and that the UI verification is performed as part of the implementation process. 
-- **SHOULD NOT delegate to**:
-  - Implementing frontend features without Figma design - delegate those to `tsh-software-engineer` agent for better handling of non-UI tasks.
-
-You have access to the `tsh-e2e-engineer` agent.
-- **MUST delegate to when**:
-  - Implementing end-to-end tests for new features or existing features that require improved test coverage.
-  - Designing and implementing test scenarios that cover critical user flows and edge cases.
-  - Maintaining and updating existing end-to-end tests to ensure they remain effective and relevant.
-- **IMPORTANT**:
-  - Always run this agent together with `/tsh-implement-e2e` prompt to ensure that the E2E test implementation is aligned with the implementation of the feature and that the tests are designed effectively to cover the implemented functionality.
-- **SHOULD NOT delegate to**:
-  - Implementing unit or integrations tests - delegate those to `tsh-software-engineer` agent for better integration with the implementation process.
-
 You have access to the `tsh-devops-engineer` agent.
 - **MUST delegate to when**:
   - Implementing infrastructure automation tasks, including provisioning and managing cloud resources using tools like Terraform or Kubernetes.
