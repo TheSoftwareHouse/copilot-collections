@@ -19,12 +19,12 @@ You have access to the `tsh-software-engineer` agent.
 
 - **MUST delegate to when**:
   - Implementing backend features, API development, database interactions, and complex business logic.
-  - Implementing complex frontend features requirng Figma and design verification
-   - Performing UX/UI optimizations and accessibility improvements on existing frontend features.
+  - Implementing complex frontend features requiring Figma and design verification.
+  - Performing UX/UI optimizations and accessibility improvements on existing frontend features.
   - Performing performance optimizations on frontend features, including code splitting, lazy loading, and optimizing rendering performance.
 - **IMPORTANT**:
-  - Always use `/tsh-implement-ui` prompt when implementing fronfrontendtedn features based on figma designs to ensure that the implementation includes iterative Figma verification until pixel-perfect results are achieved.
-  - Use `/tsh-implement-common-task` prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
+  - Always run subagent with [tsh-implement-ui.prompt.md](../prompts/tsh-implement-ui.prompt.md) prompt when implementing frontend features based on figma designs to ensure that the implementation includes iterative Figma verification until pixel-perfect results are achieved.
+  - Always run subagent with [tsh-implement-common-task.prompt.md](../prompts/tsh-implement-common-task.prompt.md) prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
 - **SHOULD NOT delegate to**:
   - Implementing e2e tests - delegate those to `tsh-e2e-engineer` agent for better test design and implementation.
   - Implementing infrastructure and DevOps tasks - delegate those to `tsh-devops-engineer` agent for better expertise in cloud and infrastructure automation.
@@ -35,7 +35,7 @@ You have access to the `tsh-devops-engineer` agent.
   - Implementing CI/CD pipelines to automate the build, test, and deployment processes.
   - Implementing monitoring and observability solutions to ensure the reliability and performance of the deployed applications.
 - **IMPORTANT**:
-  - Always run this agent together with the relevant infrastructure or DevOps-related prompt (e.g., `/tsh-implement-terraform`, `/tsh-deploy-kubernetes`, `/tsh-implement-pipeline`, etc.) to ensure that the implementation is aligned with the specific requirements and best practices for infrastructure and DevOps tasks.
+  - Always run subagent with the relevant infrastructure or DevOps implementation prompts (e.g. [tsh-implement-terraform.prompt.md](../prompts/tsh-implement-terraform.prompt.md), [tsh-deploy-kubernetes.prompt.md](../prompts/tsh-deploy-kubernetes.prompt.md), [tsh-implement-pipeline.prompt.md](../prompts/tsh-implement-pipeline.prompt.md)) to ensure that the implementation follows the specific workflow and best practices for that domain.
 - **SHOULD NOT delegate to**:
   - Implementing application code - delegate those to `tsh-software-engineer` or `tsh-frontend-engineer` agents based on the nature of the task.
 
@@ -50,7 +50,7 @@ You have access to the `tsh-architect` agent.
   - Performing codebase analysis to understand the existing architecture and patterns, which can inform the implementation process and help identify potential areas for improvement or refactoring during implementation.
   - Performing technical context discovery to establish project conventions, coding standards, and existing patterns that should be followed during implementation.
 **Important**:
-  - Always run this agent together with the relevant architectural or codebase analysis prompt (e.g., `/tsh-review-codebase`.) to ensure that the architectural guidance and codebase analysis are integrated into the implementation process effectively.
+  - Always run subagent with the relevant architectural or codebase analysis prompt (e.g., [tsh-review-codebase.prompt.md](../prompts/tsh-review-codebase.prompt.md)) to ensure that the architectural guidance and codebase analysis are integrated into the implementation process effectively.
 
 ## Tool Usage Guidelines
 
