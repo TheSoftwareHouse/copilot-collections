@@ -60,6 +60,10 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `tsh-managing-secrets` - when designing secrets management, credential rotation, or vault integration as part of the solution.
 - `tsh-implementing-kubernetes` - when designing K8s workload configurations, scaling strategies, Helm chart structure, or cluster topology.
 - `tsh-implementing-observability` - when designing monitoring architecture, SLO frameworks, alerting strategies, or distributed tracing.
+- `tsh-python-project-standards` - when planning Python projects: project structure, dependency management, code quality tooling.
+- `tsh-implementing-rag-pipelines` - when designing RAG system architecture: chunking strategy selection, embedding model trade-offs, vector store comparison, retrieval pipeline design.
+- `tsh-designing-agentic-workflows` - when designing agentic systems: architecture pattern selection (single agent, supervisor, hierarchical), framework evaluation criteria, state management design. Use `context7` to verify current framework landscape.
+- `tsh-evaluating-llm-outputs` - when designing evaluation strategy for LLM features: metric selection, tracing architecture, test dataset planning.
 
 ## Tool Usage Guidelines
 

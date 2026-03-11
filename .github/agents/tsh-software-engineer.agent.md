@@ -63,6 +63,10 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
+- `tsh-python-project-standards` - for Python projects: project structure, type safety, linting, async patterns, configuration management.
+- `tsh-implementing-rag-pipelines` - for RAG tasks: chunking, embeddings, vector stores, retrieval strategies, generation patterns. Use `context7` to fetch current framework API docs.
+- `tsh-designing-agentic-workflows` - for agentic tasks: tool calling, state management, memory patterns, guardrails. Use `context7` to fetch current framework API docs.
+- `tsh-evaluating-llm-outputs` - for LLM evaluation: metric-based evaluation, tracing, automated evals, regression testing. Use `context7` to fetch current evaluation tool docs.
 
 ## Tool Usage Guidelines
 

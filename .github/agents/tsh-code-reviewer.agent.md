@@ -38,6 +38,10 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
 - `tsh-sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
 - `tsh-reviewing-frontend` - for frontend-specific review criteria: component quality, hooks correctness, rendering issues, accessibility and performance spot-checks.
+- `tsh-python-project-standards` - when reviewing Python code: verify type safety, no hardcoded keys, proper async patterns.
+- `tsh-implementing-rag-pipelines` - when reviewing RAG code: verify chunking has overlap, retrieval uses re-ranking, context isn't stuffed.
+- `tsh-designing-agentic-workflows` - when reviewing agent code: verify typed tool schemas, max iteration limits, human-in-the-loop checkpoints.
+- `tsh-evaluating-llm-outputs` - when reviewing LLM code: verify eval setup exists, guardrails are in place, outputs are validated.
 
 ## Tool Usage Guidelines
 
