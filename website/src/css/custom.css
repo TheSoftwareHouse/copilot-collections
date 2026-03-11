@@ -285,3 +285,27 @@
 [data-theme='dark'] .docs-wrapper {
   --ifm-background-color: #1A1A1A;
 }
+
+/* ── Custom admonition: "tldr" — TSH brand accent ── */
+.alert--tldr {
+  --ifm-alert-background-color: rgba(109, 40, 217, 0.1);
+  --ifm-alert-background-color-highlight: rgba(109, 40, 217, 0.2);
+  --ifm-alert-foreground-color: #5b21b6;
+  --ifm-alert-border-color: #6D28D9;
+  background-color: rgba(109, 40, 217, 0.1);
+  border: 1px solid #6D28D9;
+  border-left-width: 5px;
+  color: #5b21b6;
+}
+
+[data-theme='dark'] .alert--tldr {
+  --ifm-alert-background-color: rgba(167, 139, 250, 0.1);
+  --ifm-alert-background-color-highlight: rgba(167, 139, 250, 0.2);
+  --ifm-alert-foreground-color: #c4b5fd;
+  --ifm-alert-border-color: #A78BFA;
+  background-color: rgba(167, 139, 250, 0.1);
+  border: 1px solid #A78BFA;
+  border-left-width: 5px;
+  color: #c4b5fd;
+}
+
