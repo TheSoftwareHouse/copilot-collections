@@ -62,9 +62,9 @@ Don't duplicate any work.
 
 Make sure to use `tsh-implementation-gap-analysing` skill to verify what was already implemented from your plan and what should be added. Make sure to include the result in final plan.
 
-Make sure to divide the plan into a small phases. Each phase should be runnable on it's own and immediately have all quality gates ready. Each phase should have a list of tasks with special place to mark the finished tasks later on.
+Make sure to divide the plan into a small phases.Each phase should have a list of tasks with special place to mark the finished tasks later on. After phase is finished only the fast running tests and quality checks should be run to verify that the implementation is on the right track - unit tests, integration tests, static code analysis, linters, formatting check and project build.
 
-The plan has to include code review phase at the end fully done by `tsh-code-reviewer` agent.
+The plan has to include code review phase at the end, fully done by `tsh-code-reviewer` agent using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Make sure to pass e2e execution to that agent as a part of the prompt and do not run those tests by yourself.
 
 Don't provide deployment plans, code pushing instructions, code review instructions on repository.
 

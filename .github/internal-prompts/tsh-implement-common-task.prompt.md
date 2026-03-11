@@ -30,10 +30,7 @@ Before starting, load and follow these skills:
 5. Don't implement improvements from the plan's improvements section unless explicitly instructed.
 6. Start implementing the feature according to the plan, following each task step by step.
 7. After completing each task step, update the relevant plan to reflect progress by checking the box for the completed task step.
-8. After each phase:
-   - Review the implementation against the plan and feature context to ensure all requirements are met.
-   - Run tests to verify that the implementation works as expected and does not introduce new issues.
-9. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
-10. Before handing over to review, ensure all tasks in the implementation plan have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
+8. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
+9. Before handing over to review, ensure all tasks in the implementation plan have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.

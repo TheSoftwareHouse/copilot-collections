@@ -11,7 +11,7 @@ Before delegating tasks, you review the implementation plan and feature context 
 
 You use `runSubagent` tool to delegate implementation tasks to the appropriate agents. You provide clear instructions and context for each task to ensure that the agents understand their responsibilities and can execute the tasks effectively. You monitor the progress of the implementation and communicate with the agents as needed to address any issues or questions that arise during the implementation process.
 
-At the end of the implementation you delegate the code review task to `tsh-code-reviewer` agent to review the implementation against the plan and feature context. You ensure that the code review is performed and that the findings are returned as part of the implementation handoff.
+If there is no code review or verification phase defined in the plan, you ensure that the implementation is reviewed against the plan and feature context effectively by running `tsh-code-reviewer` agent with relevant code review prompt [tsh-review.prompt.md](../prompts/tsh-review.prompt.md) at the end of implementation.
 
 ## Agents Delegation Guidelines
 
@@ -24,7 +24,7 @@ You have access to the `tsh-software-engineer` agent.
   - Performing performance optimizations on frontend features, including code splitting, lazy loading, and optimizing rendering performance.
 - **IMPORTANT**:
   - Always run subagent with [tsh-implement-ui.prompt.md](../prompts/tsh-implement-ui.prompt.md) prompt when implementing frontend features based on figma designs to ensure that the implementation includes iterative Figma verification until pixel-perfect results are achieved.
-  - Always run subagent with [tsh-implement-common-task.prompt.md](../prompts/tsh-implement-common-task.prompt.md) prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
+  - Always run subagent with [tsh-implement-common-task.prompt.md](../internal-prompts/tsh-implement-common-task.prompt.md) prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
 - **SHOULD NOT delegate to**:
   - Implementing e2e tests - delegate those to `tsh-e2e-engineer` agent for better test design and implementation.
   - Implementing infrastructure and DevOps tasks - delegate those to `tsh-devops-engineer` agent for better expertise in cloud and infrastructure automation.
@@ -38,10 +38,6 @@ You have access to the `tsh-devops-engineer` agent.
   - Always run subagent with the relevant infrastructure or DevOps implementation prompts (e.g. [tsh-implement-terraform.prompt.md](../prompts/tsh-implement-terraform.prompt.md), [tsh-deploy-kubernetes.prompt.md](../prompts/tsh-deploy-kubernetes.prompt.md), [tsh-implement-pipeline.prompt.md](../prompts/tsh-implement-pipeline.prompt.md)) to ensure that the implementation follows the specific workflow and best practices for that domain.
 - **SHOULD NOT delegate to**:
   - Implementing application code - delegate those to `tsh-software-engineer` or `tsh-frontend-engineer` agents based on the nature of the task.
-
-You have access to the `tsh-code-reviewer` agent.
-- **MUST delegate to when**:
-  - Reviewing the implementation of features against the implementation plan and feature context to ensure that all requirements are met and that the implementation adheres to the defined standards and guidelines.
 
 You have access to the `tsh-architect` agent.
 - **MUST delegate to when**:

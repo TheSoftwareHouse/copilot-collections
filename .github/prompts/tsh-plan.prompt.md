@@ -35,11 +35,10 @@ Before starting, load and follow these skills:
    - Action type: `[CREATE]`, `[MODIFY]`, or `[REUSE]`
    - Definition of done as a checkbox list for each task
 7. **Address security**: Include security considerations relevant to the implementation.
-8. **Define testing**: Provide guidelines for testing and validating the implementation.
-9. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
-10. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
-11. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
-12. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
+8. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
+9. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
+10. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
+11. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
 
 Don't provide deployment plans, code pushing instructions, or code review instructions in the repository.
 
