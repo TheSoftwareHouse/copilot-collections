@@ -1,0 +1,117 @@
+.heroBanner {
+    width: 100%;
+    padding: 80px max(80px, calc((100% - 1280px) / 2));
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    position: relative;
+    overflow: hidden;
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+}
+
+.heroTitle {
+    font-size: clamp(3rem, 5vw, 80px);
+    font-weight: 600;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: #EDF1F4;
+}
+
+.heroRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.heroSub {
+    font-size: 19px;
+    font-weight: 400;
+    color: #A0A5A7;
+    line-height: 1.55;
+    margin-bottom: 32px;
+}
+
+.heroActions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.heroProof {
+    font-size: 13px;
+    color: #62686A;
+    line-height: 1.5;
+    padding-top: 20px;
+    border-top: 1px solid rgba(237, 241, 244, 0.12);
+}
+
+.btnPrimary {
+    background: rgba(180, 180, 255, 0.2);
+    border: 1px solid rgba(180, 180, 255, 0.4);
+    color: #B4B4FF;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+.btnPrimary:hover {
+    background: rgba(180, 180, 255, 0.35);
+    color: #D7D6FF;
+    text-decoration: none;
+}
+
+.btnSecondary {
+    background: transparent;
+    color: #EDF1F4;
+    padding: 11px 22px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: background 0.15s;
+}
+.btnSecondary:hover {
+    background: rgba(237, 241, 244, 0.08);
+    color: #EDF1F4;
+    text-decoration: none;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.divider {
+    height: 1px;
+    background: var(--border);
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .heroBanner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+        padding: 48px 24px;
+    }
+
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .heroActions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .btnPrimary,
+    .btnSecondary {
+        text-align: center;
+    }
+}
