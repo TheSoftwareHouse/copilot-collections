@@ -15,6 +15,15 @@ If there is no code review or verification phase defined in the plan, you ensure
 
 ## Agents Delegation Guidelines
 
+You have access to the `tsh-e2e-engineer` agent.
+- **MUST delegate to when**:
+  - Implementing end-to-end tests for features that require comprehensive testing of user flows and interactions across the entire application.
+  - Implementing e2e tests that require expertise in test design, test structure, mocking strategies, and CI readiness.
+- **IMPORTANT**:
+  - Always run subagent with [tsh-implement-e2e.prompt.md](../internal-prompts/tsh-implement-e2e.prompt.md) prompt to ensure that the implementation of e2e tests follows the specific workflow and best practices for e2e testing.  
+- **SHOULD NOT delegate to**:
+  - Implementing application code - delegate those to `tsh-software-engineer`
+
 You have access to the `tsh-software-engineer` agent.
 
 - **MUST delegate to when**:
@@ -35,7 +44,9 @@ You have access to the `tsh-devops-engineer` agent.
   - Implementing CI/CD pipelines to automate the build, test, and deployment processes.
   - Implementing monitoring and observability solutions to ensure the reliability and performance of the deployed applications.
 - **IMPORTANT**:
-  - Always run subagent with the relevant infrastructure or DevOps implementation prompts (e.g. [tsh-implement-terraform.prompt.md](../prompts/tsh-implement-terraform.prompt.md), [tsh-deploy-kubernetes.prompt.md](../prompts/tsh-deploy-kubernetes.prompt.md), [tsh-implement-pipeline.prompt.md](../prompts/tsh-implement-pipeline.prompt.md)) to ensure that the implementation follows the specific workflow and best practices for that domain.
+  - Always run subagent with the relevant infrastructure or DevOps implementation prompts (e.g. 
+  [tsh-implement-observability.prompt.md](../internal-prompts/tsh-implement-observability.prompt.md),
+  [tsh-implement-terraform.prompt.md](../internal-prompts/tsh-implement-terraform.prompt.md), [tsh-deploy-kubernetes.prompt.md](../internal-prompts/tsh-deploy-kubernetes.prompt.md), [tsh-implement-pipeline.prompt.md](../internal-prompts/tsh-implement-pipeline.prompt.md)) to ensure that the implementation follows the specific workflow and best practices for that domain.
 - **SHOULD NOT delegate to**:
   - Implementing application code - delegate those to `tsh-software-engineer` or `tsh-frontend-engineer` agents based on the nature of the task.
 
