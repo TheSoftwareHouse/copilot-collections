@@ -1,0 +1,32 @@
+{
+  "servers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"],
+      "type": "stdio"
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "type": "stdio"
+    },
+    "pdf-reader": {
+      "command": "npx",
+      "args": ["@sylphx/pdf-reader-mcp"],
+      "type": "stdio"
+    },
+    "figma-mcp-server": {
+      "url": "https://mcp.figma.com/mcp",
+      "type": "http"
+    },
+    "atlassian": {
+      "url": "https://mcp.atlassian.com/v1/mcp",
+      "type": "http"
+    }
+  }
+}
