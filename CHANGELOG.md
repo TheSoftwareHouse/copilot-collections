@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-09
+
+### Added
+
+- `plugin.json` manifest at repository root for GitHub Copilot CLI plugin installation (`/plugin install tsh/copilot-collections`)
+- `.github/plugin/marketplace.json` registry for marketplace discovery (`/plugin marketplace add tsh/copilot-collections`)
+- `.mcp.json` at repository root for CLI-compatible MCP server configuration (6 servers: Playwright, Context7, Sequential Thinking, PDF Reader, Figma, Atlassian)
+- CLI installation instructions in README alongside existing VS Code installation guide
+- Prompts declared as CLI commands via `commands` field in `plugin.json`, exposing all 15 `tsh-*` workflow prompts to Copilot CLI users
+
 ## 2026-03-08
 
 ### Added
