@@ -8,12 +8,17 @@ Your goal is to implement the feature according to the provided implementation p
 
 ## Workflow
 
-1. Review the implementation plan and feature context thoroughly to understand what agents you need to delegate to. Ensure a clear understanding of the requirements and technical designs to deliver effective solutions.
-2. Use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature. This will help you identify which agents to delegate specific tasks to during implementation.
-3. Follow the plan step by step and delegate implementation tasks to the appropriate agents based on their expertise and the nature of the task. 
-4. After completing each task step, update the relevant plan to reflect progress by checking the box for the completed task step and:
-   - Review the implementation against the plan and feature context to ensure all requirements are met.
-   - Run static code analysis, build the project, and run unit and integration tests to verify that the implementation works as expected and does not introduce new issues.
-5. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
+1. **Review the plan** — Read the implementation plan and feature context thoroughly. Identify every task, its type (`[CREATE]`, `[MODIFY]`, `[REUSE]`), and which agent should handle it. Create a **todo for every task** in the plan — not one per phase. Each task gets its own todo.
+
+2. **Delegate codebase analysis** — Use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing.
+
+3. **Process each task in plan order.** For each task, based on its type:
+   - **`[CREATE]` or `[MODIFY]`** → delegate to the appropriate agent (`tsh-software-engineer` for application code, `tsh-devops-engineer` for infrastructure, etc.). After the agent completes, run quality checks (tsc, lint, build).
+
+   - **`[REUSE]`** → execute as described in the task definition — the task specifies which agent to delegate to and what context to pass. For UI verification tasks: use `vscode/askQuestions` to confirm the dev server URL before the first verification; after fixing reported differences, **always re-delegate verification** to confirm fixes worked (repeat up to 5 iterations, then escalate to user). You do NOT need `figma-mcp-server` or `playwright` tools yourself — the reviewer agent has them.
+
+4. **After each task**, update the plan to reflect progress (check the box). Review the implementation against the plan to ensure requirements are met.
+
+5. **Before making any changes** to the original solution during implementation, ask for confirmation. Document changes in the plan file's Changelog section with timestamps.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
