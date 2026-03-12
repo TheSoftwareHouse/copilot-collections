@@ -72,8 +72,8 @@ const config: Config = {
     navbar: {
       title: 'Copilot Collections',
       logo: {
-        alt: 'Copilot Collections',
-        src: 'img/logo.svg',
+        alt: 'tsh-logo',
+        src: 'img/logo-white.svg',
       },
       items: [
         {
@@ -125,10 +125,11 @@ const config: Config = {
           to: '/changelog',
           label: 'Changelog',
           position: 'right',
+          className: 'navbar__link--meta',
         },
         {
           href: 'https://github.com/TheSoftwareHouse/copilot-collections',
-          label: 'GitHub',
+          label: 'GitHub ↗',
           position: 'right',
           className: 'navbar__link--github',
         },
