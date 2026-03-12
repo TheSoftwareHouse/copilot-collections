@@ -1,0 +1,38 @@
+{
+  "name": "tsh-copilot-collections",
+  "description": "Opinionated GitHub Copilot setup covering the full product development lifecycle.",
+  "version": "1.0.0",
+  "author": {
+    "name": "The Software House",
+    "url": "https://tsh.io"
+  },
+  "homepage": "https://github.com/tsh/copilot-collections",
+  "repository": "https://github.com/tsh/copilot-collections",
+  "license": "MIT",
+  "keywords": ["copilot", "agents", "skills", "prompts", "mcp", "product-lifecycle", "product-ideation", "development", "quality-assurance", "jira", "figma", "playwright", "copilot-customization"],
+  "category": "developer-tools",
+  "tags": ["product-ideation", "development", "quality", "agents", "skills", "prompts", "mcp", "jira", "figma", "playwright"],
+  "agents": ".github/agents/",
+  "skills": [
+    ".github/skills/tsh-architecture-designing",
+    ".github/skills/tsh-code-reviewing",
+    ".github/skills/tsh-codebase-analysing",
+    ".github/skills/tsh-creating-agents",
+    ".github/skills/tsh-creating-instructions",
+    ".github/skills/tsh-creating-prompts",
+    ".github/skills/tsh-creating-skills",
+    ".github/skills/tsh-e2e-testing",
+    ".github/skills/tsh-implementation-gap-analysing",
+    ".github/skills/tsh-implementing-frontend",
+    ".github/skills/tsh-jira-task-formatting",
+    ".github/skills/tsh-sql-and-database-understanding",
+    ".github/skills/tsh-task-analysing",
+    ".github/skills/tsh-task-extracting",
+    ".github/skills/tsh-task-quality-reviewing",
+    ".github/skills/tsh-technical-context-discovering",
+    ".github/skills/tsh-transcript-processing",
+    ".github/skills/tsh-ui-verifying"
+  ],
+  "mcpServers": ".mcp.json",
+  "commands": ".github/prompts/"
+}
