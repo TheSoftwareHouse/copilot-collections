@@ -111,6 +111,53 @@ If Copilot cannot complete the setup automatically:
 2. Run `MCP: Open User Configuration`.
 3. Copy the contents of [`.vscode/mcp.json`](.vscode/mcp.json) into your user MCP config.
 
+## Installation via Copilot CLI
+
+If you use GitHub Copilot CLI, you can install this collection as a plugin with a single command.
+
+### Option 1: Direct install (recommended)
+
+```bash
+/plugin install tsh/copilot-collections
+```
+
+This clones the repository and registers all agents, skills, and MCP servers from `plugin.json`.
+
+### Option 2: Marketplace install
+
+First, register the marketplace:
+
+```bash
+/plugin marketplace add tsh/copilot-collections
+```
+
+Then install the plugin from the marketplace:
+
+```bash
+/plugin install tsh-copilot-collections@tsh-copilot-collections
+```
+
+### Updating
+
+To update to the latest version:
+
+```bash
+/plugin update
+```
+
+Restart your Copilot CLI session after installing or updating the plugin for changes to take effect.
+
+### Known CLI limitations
+
+The collection was originally built for VS Code. When used via CLI, some features may have reduced functionality:
+
+- **`vscode/*` tools** — Agents that use `vscode/runCommand` or `vscode/askQuestions` may not have access to these tools in CLI context. The agents remain functional for their core capabilities.
+- **`handoffs` blocks** — Agent handoff declarations in YAML frontmatter are VS Code-specific. The CLI may ignore them silently or produce warnings.
+- **HTTP-based MCP servers** — The Figma and Atlassian MCP servers use `type: "http"`, which is a VS Code-specific server type. These may require additional CLI configuration or may not be available.
+- **Prompts** — `.prompt.md` file discovery in CLI is unconfirmed. Prompts may not be available as slash commands after CLI installation.
+
+For maximum feature coverage, use the VS Code installation described above.
+
 ## First Commands To Try
 
 Once configured, open your target project and start with one of these:
