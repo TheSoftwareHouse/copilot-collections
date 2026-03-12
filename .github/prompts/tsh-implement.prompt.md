@@ -14,6 +14,6 @@ Your goal is to implement the feature according to the provided implementation p
 4. After completing each task step, update the relevant plan to reflect progress by checking the box for the completed task step and:
    - Review the implementation against the plan and feature context to ensure all requirements are met.
    - Run static code analysis, build the project, and run unit and integration tests to verify that the implementation works as expected and does not introduce new issues.
-6. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
+5. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.

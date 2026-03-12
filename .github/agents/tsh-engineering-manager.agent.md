@@ -1,6 +1,7 @@
 ---
 description: "Agent specializing delegating implementation tasks to specialized agents based on specified requirements and technical designs."
 tools: ['execute', 'read', 'atlassian/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+agents: ['tsh-e2e-engineer', 'tsh-software-engineer', 'tsh-devops-engineer', 'tsh-architect', "tsh-code-reviewer"]
 ---
 
 ## Agent Role and Responsibilities
@@ -74,3 +75,4 @@ You have access to the `sequential-thinking` tool.
 
 - **MUST use when**:
   - Deciding which agent to delegate a specific implementation task to, especially when the choice is not obvious.
+  
