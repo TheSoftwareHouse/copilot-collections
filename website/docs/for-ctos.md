@@ -12,6 +12,7 @@ Copilot Collections is an AI product engineering framework used daily by **300+ 
 - Copilot Collections restructures your delivery workflow around AI, rather than adding AI on top of it
 - 300+ engineers at TSH use it daily across 50+ commercial projects with great result: average lead time down 30%
 - Covers the full lifecycle: discovery workshop → structured backlog → implementation → code review
+- ~$50/person/month vs $100 for Claude Code and $200–300 for Cursor
 - Open source, MIT licence
 :::
 
