@@ -23,6 +23,9 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           routeBasePath: 'docs',
+          admonitions: {
+            keywords: ['note', 'tip', 'info', 'warning', 'danger', 'tldr'],
+          },
         },
         blog: false,
         pages: {},
