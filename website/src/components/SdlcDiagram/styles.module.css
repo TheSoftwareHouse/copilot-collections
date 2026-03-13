@@ -113,14 +113,7 @@
   border: 1px solid #f0d89a;
 }
 .phaseIdeation::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #f5a623, #e07b10);
-  border-radius: 14px 0 0 14px;
+  display: none;
 }
 
 .phaseDev {
@@ -128,14 +121,7 @@
   border: 1px solid #a8c8f0;
 }
 .phaseDev::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #3a8fff, #1a5fd4);
-  border-radius: 14px 0 0 14px;
+  display: none;
 }
 
 .phaseQuality {
@@ -143,14 +129,7 @@
   border: 1px solid #8edbb4;
 }
 .phaseQuality::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(to bottom, #1ec96a, #0da050);
-  border-radius: 14px 0 0 14px;
+  display: none;
 }
 
 /* Phase colors match original HTML — light on dark background */

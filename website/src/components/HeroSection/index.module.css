@@ -12,12 +12,13 @@
 .heroContent {
     position: relative;
     z-index: 1;
+    margin-top: 10px;
 }
 
 .heroTitle {
     font-size: clamp(3rem, 5vw, 80px);
     font-weight: 600;
-    line-height: 0.95;
+    line-height: 1;
     letter-spacing: -0.03em;
     margin: 0;
     color: var(--text);
