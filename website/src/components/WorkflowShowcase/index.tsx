@@ -10,7 +10,7 @@ export default function WorkflowShowcase(): React.JSX.Element {
         <h2>
           This is the
           <br />
-          new SDLC.
+          new SDLC
         </h2>
         <p>
           Every phase of delivery restructured around how AI actually works —
