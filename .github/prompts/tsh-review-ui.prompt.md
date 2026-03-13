@@ -25,3 +25,5 @@ Follow the 5-step verification process defined in the `tsh-ui-verifying` skill. 
 5. Generate structured report following the skill's report format
 
 The Figma design is the **source of truth** for every comparison. When in doubt, the design wins.
+
+**Enumerate ALL differences in a single pass.** Do not stop at the first critical finding — complete every verification category (Structure, Layout, Dimensions, Visual, Components) and report every difference found. The goal is to give the engineer a complete list so all fixes can be applied at once, minimizing the number of verify-fix iterations.
