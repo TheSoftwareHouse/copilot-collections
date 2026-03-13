@@ -6,8 +6,8 @@
 
 .frameworkInner {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 60px;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 72px;
   align-items: start;
 }
 
@@ -24,6 +24,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  max-width: 920px;
+  justify-self: end;
+  width: 100%;
 }
 
 .cardDark {

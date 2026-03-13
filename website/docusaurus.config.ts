@@ -76,7 +76,7 @@ const config: Config = {
       title: 'Copilot Collections',
       logo: {
         alt: 'Copilot Collections',
-        src: 'img/logo.svg',
+        src: 'img/logo-white.svg',
       },
       items: [
         {
@@ -128,10 +128,21 @@ const config: Config = {
           to: '/changelog',
           label: 'Changelog',
           position: 'right',
+          className: 'navbar__link--meta',
         },
         {
           href: 'https://github.com/TheSoftwareHouse/copilot-collections',
-          label: 'GitHub',
+          html: `
+            <span class="navbar__github-content">
+              <svg class="navbar__github-icon" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.69 1.26 3.35.97.1-.75.4-1.26.73-1.55-2.56-.29-5.24-1.28-5.24-5.71 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.04 0 0 .97-.31 3.19 1.18A11.1 11.1 0 0 1 12 6.13c.98 0 1.98.13 2.91.38 2.22-1.49 3.18-1.18 3.18-1.18.64 1.58.24 2.75.12 3.04.74.81 1.19 1.84 1.19 3.1 0 4.44-2.68 5.41-5.25 5.69.41.35.78 1.03.78 2.08 0 1.5-.01 2.71-.01 3.08 0 .31.2.68.79.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
+              </svg>
+              <span class="navbar__github-wordmark">GitHub</span>
+              <svg class="navbar__github-arrow" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M3 9 9 3M4 3h5v5" />
+              </svg>
+            </span>
+          `,
           position: 'right',
           className: 'navbar__link--github',
         },

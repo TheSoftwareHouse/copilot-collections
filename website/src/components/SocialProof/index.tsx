@@ -20,13 +20,13 @@ export default function SocialProof(): React.JSX.Element {
       <div className={styles.validatedInner}>
         <div className={styles.validatedHeader}>
           <h2>
-            Used daily by 300+
+            Used daily by <span className={styles.keepTogether}>300+</span>
             <br />
             engineers at TSH
           </h2>
           <Link
             className={styles.readMore}
-            to="/docs/for-ctos"
+            to="/docs/"
           >
             Read the methodology →
           </Link>

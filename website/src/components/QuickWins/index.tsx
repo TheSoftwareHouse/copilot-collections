@@ -106,7 +106,11 @@ export default function QuickWins(): React.JSX.Element {
               <div className={styles.ucTitle}>{uc.title}</div>
               <div className={styles.ucProblem}>{uc.problem}</div>
               <div className={styles.ucValue}>
-                <span className={styles.time}>{uc.time}</span>
+                <span className={styles.time}>
+                  <span className={styles.timeBracket}>[</span>
+                  {uc.time}
+                  <span className={styles.timeBracket}>]</span>
+                </span>
               </div>
             </div>
           ))}

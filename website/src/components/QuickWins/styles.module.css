@@ -108,6 +108,11 @@
   letter-spacing: 0.01em;
 }
 
+.timeBracket {
+  color: #B4B4FF;
+  font-weight: 600;
+}
+
 @media (max-width: 996px) {
   .useCases {
     padding: 60px 40px;
