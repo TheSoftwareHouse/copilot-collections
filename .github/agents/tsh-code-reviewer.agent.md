@@ -25,7 +25,7 @@ You focus on areas covering:
 
 Make sure to run all necessary checks to validate the implementation against the plan and feature context.
 
-Make sure to run the tests and verify that the implementation works as expected and does not introduce new issues.
+Make sure to run the tests (unit, integration, and any e2e) and verify that the implementation works as expected and does not introduce new issues.
 
 Before starting the review, ensure to understand coding guidelines and instructions provided in copilot-instructions.md or any other \*.instructions.md files related to the feature. Make sure to understand project coding standards and best practices.
 

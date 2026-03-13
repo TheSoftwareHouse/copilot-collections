@@ -4,7 +4,6 @@ tools:
   [
     "execute",
     "read",
-    "atlassian/search",
     "context7/*",
     "figma-mcp-server/*",
     "playwright/*",

@@ -36,11 +36,12 @@ Don't continue until you get all of the answers.
 **Step 4: Design a solution**
 Based on your findings design a solution architecture.
 
-Follow the best security and software design patterns. 
+Follow the best security and software design patterns.
 
 Your goal is to design a solution that is not over-engineered and easy to comprehend by developers, that is at the same time scalable, secure and easy to maintain.
 
 The example patterns you should check (but you are not limited to only use those):
+
 - Don't repeat yourself
 - Keep It Simple Stupid
 - Domain Driven Design
@@ -51,6 +52,7 @@ The example patterns you should check (but you are not limited to only use those
 - CQRS
 
 Make sure to follow the best UI/UX patterns:
+
 - Atomic Design
 - Accessibility patterns (WCAG)
 
@@ -58,13 +60,15 @@ Make sure to follow security best practices like OWASP TOP10
 
 The design has to meet quality assurance criteria, meaning it has to be fully tested using combination of e2e, unit and integration tests.
 
-Don't duplicate any work. 
+Don't duplicate any work.
 
 Make sure to use `tsh-implementation-gap-analysing` skill to verify what was already implemented from your plan and what should be added. Make sure to include the result in final plan.
 
-Make sure to divide the plan into a small phases. Each phase should be runnable on it's own and immediately have all quality gates ready. Each phase should have a list of tasks with special place to mark the finished tasks later on.
+Make sure to divide the plan into a small phases.Each phase should have a list of tasks with special place to mark the finished tasks later on. After phase is finished only the fast running tests and quality checks should be run to verify that the implementation is on the right track - unit tests, integration tests, static code analysis, linters, formatting check and project build.
 
-The plan has to include code review phase at the end fully done by `tsh-code-reviewer` agent.
+The plan has to include code review phase at the end, fully done by `tsh-code-reviewer` agent using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Make sure to pass e2e execution to that agent as a part of the prompt and do not run those tests by yourself.
+
+For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` agent using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop.
 
 Don't provide deployment plans, code pushing instructions, code review instructions on repository.
 
