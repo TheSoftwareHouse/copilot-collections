@@ -211,8 +211,37 @@
   margin-left: 4px;
 }
 
-.navbar__link--github svg {
-  display: none;
+.navbar__link--github::after {
+  display: none !important;
+}
+
+.navbar__github-content {
+  display: inline-flex;
+  align-items: center;
+    gap: 6px;
+    padding: 3px;
+}
+
+.navbar__github-icon {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.navbar__github-wordmark {
+  line-height: 1;
+}
+
+.navbar__github-arrow {
+  width: 10px;
+  height: 10px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+  flex-shrink: 0;
 }
 
 .navbar__link--github:hover {
@@ -258,14 +287,15 @@
 }
 
 .navbar__search::before {
-  content: '🔍';
+  content: '';
   position: absolute;
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  font-size: 13px;
-  line-height: 1;
+  width: 13px;
+  height: 13px;
+  background: url('/img/search.svg') center / contain no-repeat;
   opacity: 0.35;
 }
 
