@@ -50,7 +50,7 @@ You have access to the `tsh-devops-engineer` agent.
   [tsh-implement-observability.prompt.md](../internal-prompts/tsh-implement-observability.prompt.md),
   [tsh-implement-terraform.prompt.md](../internal-prompts/tsh-implement-terraform.prompt.md), [tsh-deploy-kubernetes.prompt.md](../internal-prompts/tsh-deploy-kubernetes.prompt.md), [tsh-implement-pipeline.prompt.md](../internal-prompts/tsh-implement-pipeline.prompt.md)) to ensure that the implementation follows the specific workflow and best practices for that domain.
 - **SHOULD NOT delegate to**:
-  - Implementing application code - delegate those to `tsh-software-engineer` or `tsh-frontend-engineer` agents based on the nature of the task.
+  - Implementing application code - delegate those to `tsh-software-engineer`.
 
 You have access to the `tsh-architect` agent.
 
