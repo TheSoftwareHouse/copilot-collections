@@ -4,7 +4,7 @@ tools:
   [
     "execute",
     "read",
-    "atlassian/*",
+
     "sequential-thinking/*",
     "edit",
     "search",
@@ -23,6 +23,7 @@ agents:
     "tsh-ui-reviewer",
     "tsh-context-engineer",
     "tsh-prompt-engineer",
+    "tsh-knowledge"
   ]
 ---
 
@@ -136,16 +137,16 @@ You have access to the `tsh-prompt-engineer` agent.
 - **SHOULD NOT delegate to**:
   - Implementing application code - delegate those to `tsh-software-engineer`.
 
+You have access to the `tsh-knowledge` agent.
+
+- **MUST delegate to when**:
+  - Accessing structured knowledge from external systems like Jira, Shortcut, and Confluence to gather requirements, technical context, project conventions, and implementation guidelines for the project. This includes:
+    - Accessing task details from task management systems like Jira or Shortcut to gather requirements and context for implementation tasks.
+    - Accessing documentation from knowledge bases like Confluence to gather technical context, project conventions, and implementation guidelines for the project.
+- **IMPORTANT**:
+  - When asked about anything related to tasks or knowledge, always run the `tsh-knowledge` subagent first as this is the only agent with access to structured external knowledge. This ensures that your responses are informed by the most accurate and up-to-date information from the project management and documentation systems.
+
 ## Tool Usage Guidelines
-
-You have access to the `Atlassian` tool.
-
-- **MUST use when**:
-  - Provided with Jira issue keys or Confluence page IDs to gather relevant information.
-  - Extending your understanding of technical requirements documented in Jira or Confluence.
-- **SHOULD NOT use for**:
-  - Non-Atlassian related research or documentation.
-  - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
 You have access to the `sequential-thinking` tool.
 

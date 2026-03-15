@@ -5,7 +5,7 @@ title: Prompts Overview
 
 # Prompts Overview
 
-Copilot Collections includes **12 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
+Copilot Collections includes **14 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
 
 ## How Prompts Work
 
@@ -16,7 +16,7 @@ Each prompt file defines:
 - **Description** — Shown in VS Code's command palette.
 - **Instructions** — Detailed workflow steps, required skills, and output format.
 
-When you type `/tsh-implement`, `/tsh-review`, etc. in the VS Code chat, the corresponding prompt file is loaded and executed by the bound agent.
+When you type `/tsh-research`, `/tsh-plan`, etc. in the VS Code chat, the corresponding prompt file is loaded and executed by the bound agent.
 
 ## Public Prompts
 
@@ -32,7 +32,9 @@ These are the user-facing commands available in VS Code chat.
 
 | Command | Agent | Description |
 |---|---|---|
-| [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate the full cycle: research → plan → implementation |
+| [/tsh-research](./public/research) | Context Engineer | Gather context and requirements for a task |
+| [/tsh-plan](./public/plan) | Architect | Create a structured implementation plan |
+| [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate implementation by delegating to specialized agents |
 
 ### ✅ Quality Commands
 
@@ -61,12 +63,10 @@ These are the user-facing commands available in VS Code chat.
 
 ## Delegation via /tsh-implement
 
-When you run [`/tsh-implement`](./public/implement), the Engineering Manager automatically handles the full development cycle. It first gathers context and creates an implementation plan (if needed), then delegates tasks to specialized agents. You don’t need to invoke individual agents — the orchestration is handled for you.
+When you run [`/tsh-implement`](./public/implement), the Engineering Manager automatically delegates tasks to specialized agents based on the implementation plan. You don't need to invoke individual agents — the orchestration is handled for you.
 
-| Phase | Delegated To |
+| Task Type | Delegated To |
 |---|---|
-| Research (context gathering) | Context Engineer (via [internal research prompt](./internal/research)) |
-| Planning (architecture) | Architect (via [internal plan prompt](./internal/plan)) |
 | Backend / general code | Software Engineer |
 | Frontend with Figma | Software Engineer (via [internal UI prompt](./internal/implement-ui)) |
 | E2E tests | E2E Engineer |
@@ -78,7 +78,7 @@ When you run [`/tsh-implement`](./public/implement), the Engineering Manager aut
 
 All prompts accept either:
 
-- A **Jira ticket ID**: `/tsh-implement PROJ-123`
-- A **task description**: `/tsh-implement Add pagination to the user list API`
+- A **Jira ticket ID**: `/tsh-research PROJ-123`
+- A **task description**: `/tsh-research Add pagination to the user list API`
 
 The agent adapts its behavior based on the input type — pulling context from Jira/Confluence for ticket IDs, or working from the description and codebase for free-form text.

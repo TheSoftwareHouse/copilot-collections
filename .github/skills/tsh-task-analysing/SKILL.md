@@ -25,7 +25,7 @@ Analysis progress:
 Before gathering information, determine how the task context was provided:
 
 - **Research & plan files exist** (`*.research.md`, `*.plan.md`): Read them as the primary source of requirements, acceptance criteria, scope, and definition of done.
-- **Jira ID / task ID provided**: Use it to fetch task details from external tools (Step 1).
+- **Task ID (Jira, Shortcut) provided**: Use it to fetch task details from external tools (Step 1).
 - **Context provided directly in the prompt**: When neither files nor a task ID are referenced, extract requirements, acceptance criteria, and scope from the user's message. Treat the prompt as the single source of truth. If critical information is missing, ask for clarification before proceeding.
 - **PDF files attached or referenced**: Use the `pdf-reader` tool to extract content from PDF documents before analyzing them. Treat the extracted content as a primary source alongside research files and Jira tasks.
 
@@ -35,6 +35,7 @@ This determination affects how much of Steps 1–2 you need to execute — if th
 
 Check what tools are available. Look for common task and knowledge management tools like:
 - Atlassian Jira
+- Shortcut
 - Atlassian Confluence
 - Notion
 - Linear

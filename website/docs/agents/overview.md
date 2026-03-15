@@ -16,35 +16,6 @@ Each agent has:
 - **Skill bindings** — Which skills it loads for domain-specific knowledge.
 - **Handoffs** — Buttons to seamlessly transition between workflow phases.
 
-## Agent Handoff Diagram
-
-```
-┌──────────────────────┐
-│  Business Analyst     │
-│  /tsh-analyze-materials│
-└──────┬───────────────┘
-       │ Start Implementation
-       ▼
-┌─────────────────────────┐
-│   Engineering Manager    │  ← Orchestrates the full cycle
-│   /tsh-implement         │
-└──────┬──────────────────┘
-       │ Delegates to specialized agents
-       ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
-       ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
-│  Engineer    │  │  (plan)      │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
-│  (research)  │  │              │  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
-       │
-       ▼
-┌──────────────┐
-│ Code Reviewer │
-│ /tsh-review   │
-└──────────────┘
-```
-
 ## Agent Summary
 
 ### 📋 Product Ideation Agents

@@ -4,9 +4,9 @@ model: "Claude Opus 4.6"
 description: "Prepare detailed implementation plan for given feature."
 ---
 
-Analyze the feature context file for the provided task or Jira ID. Based on it, prepare a detailed implementation plan that a software engineer can follow step by step to deliver the feature.
+Analyze the feature context file for the provided task or task ID. Based on it, prepare a detailed implementation plan that a software engineer can follow step by step to deliver the feature.
 
-The file outcome should be a markdown file named after the task Jira ID in kebab-case format or after task name (if no Jira task provided) with `.plan.md` suffix (e.g., `user-authentication.plan.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
+The file outcome should be a markdown file named after the task ID in kebab-case format or after task name (if no Jira task provided) with `.plan.md` suffix (e.g., `user-authentication.plan.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
 
 ## Required Skills
 

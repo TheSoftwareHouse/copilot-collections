@@ -48,8 +48,8 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 | Problem | Solution | Time |
 |---|---|---|
 | Workshop notes sitting in notebooks | `/tsh-analyze-materials` — epics and stories in Jira | ~15 min |
-| New developer struggling with context | `/tsh-implement PROJ-123` — Engineering Manager gathers research automatically | ~3 min |
-| No implementation plan | `/tsh-implement PROJ-123` — Engineering Manager creates plan automatically | ~5 min |
+| New developer struggling with context | `/tsh-research PROJ-123` — structured research doc | ~3 min |
+| No implementation plan | `/tsh-plan PROJ-123` — phased architecture plan | ~5 min |
 | UI doesn't match Figma | `/tsh-implement` — automated Figma verification loop via internal UI prompt | ~20 min |
 | Inconsistent code reviews | `/tsh-review PROJ-123` — structured multi-dimensional review | ~5 min |
 | Flaky or missing E2E tests | `/tsh-implement` — Engineering Manager delegates to E2E Engineer | ~10 min |
@@ -61,11 +61,13 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 
 Every task follows a structured lifecycle:
 
-> **Ideate → Implement → Review**
+> **Ideate → Research → Plan → Implement → Review**
 
 1. **Ideate** — Convert workshop materials into Jira-ready epics and stories.
-2. **Implement** — Engineering Manager orchestrates research, planning, and implementation with specialized agents.
-3. **Review** — Verify against acceptance criteria, security, and quality standards.
+2. **Research** — Gather context from Jira, Figma, and the codebase.
+3. **Plan** — Create a step-by-step implementation plan.
+4. **Implement** — Execute the plan with scoped, reviewable changes.
+5. **Review** — Verify against acceptance criteria, security, and quality standards.
 
 Each phase produces a documented artifact that feeds the next, ensuring nothing is lost between steps. Think of it as a **relay race** — every handoff is a reviewed artifact.
 
