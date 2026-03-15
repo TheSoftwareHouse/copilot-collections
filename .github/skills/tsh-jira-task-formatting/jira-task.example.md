@@ -131,7 +131,7 @@ Labels are project-specific. Suggest labels based on the epic's domain area, but
 The `Jira Key` field is empty (`—`) when the task has not yet been pushed to Jira. It is populated automatically after issue creation or when importing existing Jira issues. When a Jira key is present, the push flow will **update** the existing issue instead of creating a new one.
 
 - Do not manually fill this field — it is managed by the agent
-- After a successful push, the agent writes the Jira key back into `jira-tasks.md`
+- After a successful push, the agent writes the Jira key back into `formatted-tasks.md`
 - After a successful import, the agent populates the Jira key from the fetched issues
 
 ### Status Field

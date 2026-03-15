@@ -108,7 +108,7 @@ Generate the final output following the `./jira-task.example.md` template format
 
 Include the `Jira Key` field for every epic and story. For newly formatted tasks (not yet pushed to Jira), set the Jira Key to `—` as a placeholder. For tasks imported from Jira or previously pushed, preserve their existing Jira key.
 
-Save the file to `specifications/<workshop-name>/jira-tasks.md`.
+Save the file to `specifications/<workshop-name>/formatted-tasks.md`.
 
 **Step 8: Push Approval — User approves Jira push**
 
@@ -132,9 +132,9 @@ Using the Atlassian tools, process issues based on their Jira Key:
 
 **For tasks without a Jira Key (create):**
 1. Create all **epics** first (to get their Jira IDs)
-2. After creating each epic, **immediately** update the corresponding entry in `jira-tasks.md` with the returned Jira issue key — do not wait until all issues are created
+2. After creating each epic, **immediately** update the corresponding entry in `formatted-tasks.md` with the returned Jira issue key — do not wait until all issues are created
 3. Create all **stories** linked to their parent epics
-4. After creating each story, **immediately** update `jira-tasks.md` with its Jira key
+4. After creating each story, **immediately** update `formatted-tasks.md` with its Jira key
 5. Add any **links** between stories (blocked-by, related-to relationships)
 
 **For tasks with an existing Jira Key (update):**
@@ -144,7 +144,7 @@ Using the Atlassian tools, process issues based on their Jira Key:
 4. Fields NOT to update: Issue Type, Parent link (unless the user explicitly requests re-linking)
 5. If an update fails because the issue no longer exists in Jira, inform the user and offer to create a new issue instead
 
-After all issues are processed, report the final state back to the user — showing all Jira keys in `jira-tasks.md` and confirming which were created, updated, and skipped (with their statuses).
+After all issues are processed, report the final state back to the user — showing all Jira keys in `formatted-tasks.md` and confirming which were created, updated, and skipped (with their statuses).
 
 If any issue creation or update fails, inform the user immediately and ask how to proceed.
 
@@ -153,10 +153,10 @@ If any issue creation or update fails, inform the user immediately and ask how t
 When the user requests a change to a specific task outside of the main formatting workflow (e.g., "add acceptance criteria to Story 2.3" or "change the priority of Epic 1"):
 
 0. **Check the task's Status field**. If it is Done, Cancelled, or PO APPROVE, inform the user that this task is protected and cannot be modified: _"This task has a protected status ([status]). Per the Protected Status Policy, tasks with status Done, Cancelled, or PO APPROVE cannot be modified. If this status is incorrect, please update it in Jira first, then re-import."_ Do not apply the change locally or in Jira. Stop here.
-1. **Update the local `jira-tasks.md` first** — apply the requested change to the file
+1. **Update the local `formatted-tasks.md` first** — apply the requested change to the file
 2. **Ask the user**: "Do you want to push this change to Jira now?" (using one `askQuestions` call)
 3. **If yes** — use the task's Jira key to update the specific issue via Atlassian MCP. If the task has no Jira key (`—`), inform the user that the task has not been pushed yet and offer to create it
-4. **If no** — the change remains local in `jira-tasks.md` until the next batch push
+4. **If no** — the change remains local in `formatted-tasks.md` until the next batch push
 
 ## Jira Markdown Compatibility
 
@@ -173,7 +173,7 @@ Note: The markdown file saved locally uses standard markdown. The Jira-specific 
 
 ## Import Mode: Jira → Local
 
-This is an alternative entry point for the skill. Instead of formatting extracted tasks, the agent fetches existing Jira issues and converts them into the `jira-tasks.md` format with Jira keys pre-populated. This enables iterating on existing Jira backlogs using the agent's skills.
+This is an alternative entry point for the skill. Instead of formatting extracted tasks, the agent fetches existing Jira issues and converts them into the `formatted-tasks.md` format with Jira keys pre-populated. This enables iterating on existing Jira backlogs using the agent's skills.
 
 ### Import Process
 
@@ -182,7 +182,7 @@ Import progress:
 - [ ] Step I-1: Identify import target
 - [ ] Step I-2: Fetch issues from Jira
 - [ ] Step I-3: Map Jira fields to benchmark template
-- [ ] Step I-4: Generate jira-tasks.md
+- [ ] Step I-4: Generate formatted-tasks.md
 - [ ] Step I-5: Present imported tasks for user review
 - [ ] Step I-6: Save to specifications directory
 ```
@@ -222,9 +222,9 @@ If an imported description cannot be cleanly restructured into the benchmark for
 
 > **Protected Status Handling on Import**: After mapping all fields, check each imported task's Status. If the status is Done, Cancelled, or PO APPROVE, mark the task as read-only by adding a `🔒` indicator next to its title. These tasks are imported for visibility but must never be modified locally or pushed back to Jira. Preserve their content exactly as fetched.
 
-**Step I-4: Generate jira-tasks.md**
+**Step I-4: Generate formatted-tasks.md**
 
-Create the `jira-tasks.md` file with all imported tasks in the benchmark template format. Every task must have its `Jira Key` field populated with the actual Jira issue key.
+Create the `formatted-tasks.md` file with all imported tasks in the benchmark template format. Every task must have its `Jira Key` field populated with the actual Jira issue key.
 
 **Step I-5: Present imported tasks for user review**
 
@@ -232,7 +232,7 @@ Present each imported task to the user for review using one `askQuestions` call 
 
 **Step I-6: Save to specifications directory**
 
-Save the final file to `specifications/<project-or-topic>/jira-tasks.md`.
+Save the final file to `specifications/<project-or-topic>/formatted-tasks.md`.
 
 After import, the user can modify the local file. For each change, the agent asks whether to push it to Jira immediately (using the Per-Change Modification Flow above). The user can also batch-push all local changes later using the standard push flow (Step 8 → Step 9).
 

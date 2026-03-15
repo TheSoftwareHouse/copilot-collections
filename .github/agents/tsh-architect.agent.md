@@ -3,7 +3,6 @@ description: "Agent specializing in designing the solution architecture and tech
 tools:
   [
     "execute",
-    "atlassian/*",
     "context7/*",
     "figma-mcp-server/*",
     "pdf-reader/*",
@@ -75,16 +74,17 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `tsh-implementing-kubernetes` - when designing K8s workload configurations, scaling strategies, Helm chart structure, or cluster topology.
 - `tsh-implementing-observability` - when designing monitoring architecture, SLO frameworks, alerting strategies, or distributed tracing.
 
+## Agents Delegation Guidelines
+
+You have access to the `tsh-knowledge` agent.
+- **MUST delegate to when**:
+  - Accessing structured knowledge from external systems like Jira, Shortcut, and Confluence to gather requirements, technical context, project conventions, and implementation guidelines for the project. This includes:
+    - Accessing task details from task management systems like Jira or Shortcut to gather requirements and context for implementation tasks.
+    - Accessing documentation from knowledge bases like Confluence to gather technical context, project conventions, and implementation guidelines for the project.
+- **IMPORTANT**:
+  - When asked about anything related to tasks or knowledge, always run the `tsh-knowledge` subagent first as this is the only agent with access to structured external knowledge. This ensures that your responses are informed by the most accurate and up-to-date information from the project management and documentation systems.
+
 ## Tool Usage Guidelines
-
-You have access to the `Atlassian` tool.
-
-- **MUST use when**:
-  - Provided with Jira issue keys or Confluence page IDs to gather relevant information.
-  - Extending your understanding of technical requirements documented in Jira or Confluence.
-- **SHOULD NOT use for**:
-  - Non-Atlassian related research or documentation.
-  - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
 You have access to the `context7` tool.
 
@@ -120,7 +120,7 @@ You have access to the `pdf-reader` tool.
 - **MUST use when**:
   - Task references or links to PDF documents containing technical specifications, API documentation, architecture diagrams, or compliance requirements.
   - A user attaches, mentions, or references a PDF file relevant to the architectural design.
-  - Reviewing PDF materials linked in Jira, Confluence, research files, or provided directly by the user.
+  - Reviewing PDF materials linked in Jira, Shortcut, Confluence, research files, or provided directly by the user.
 - **IMPORTANT**:
   - Use this tool to read the full content of PDF files before incorporating them into the architectural design.
   - Extract technical constraints, integration requirements, data models, API contracts, and non-functional requirements from PDF content.
@@ -167,7 +167,7 @@ You have access to the `vscode/askQuestions` tool.
   - Validating assumptions about constraints or non-functional requirements.
 - **IMPORTANT**:
   - Keep questions focused and specific. Batch related questions together rather than asking one at a time.
-  - Prefer resolving unknowns from the codebase, Jira, or Confluence first — only ask the user when other sources are insufficient.
+  - Prefer resolving unknowns from the codebase, task management tools, or Confluence first — only ask the user when other sources are insufficient.
 - **SHOULD NOT use for**:
   - Questions answerable from the codebase or available documentation.
   - Implementation details that are the software engineer's responsibility.
