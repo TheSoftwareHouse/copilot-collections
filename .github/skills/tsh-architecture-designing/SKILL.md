@@ -68,7 +68,7 @@ Make sure to divide the plan into a small phases.Each phase should have a list o
 
 The plan has to include code review phase at the end, fully done by `tsh-code-reviewer` agent using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Make sure to pass e2e execution to that agent as a part of the prompt and do not run those tests by yourself.
 
-For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` agent using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop.
+For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` agent using [`tsh-review-ui.prompt.md`](../../internal-prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop.
 
 Don't provide deployment plans, code pushing instructions, code review instructions on repository.
 

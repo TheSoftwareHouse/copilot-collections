@@ -17,13 +17,9 @@ tools:
     "vscode/askQuestions",
   ]
 handoffs:
-  - label: Start UI Implementation
+  - label: Implement Fixes
     agent: tsh-engineering-manager
-    prompt: /tsh-implement-ui Implement UI feature according to the plan with Figma verification loop
-    send: false
-  - label: Implement UI Fixes
-    agent: tsh-engineering-manager
-    prompt: /tsh-implement-ui Implement UI fixes based on the verification report differences
+    prompt: /tsh-implement Fix UI differences based on the verification report
     send: false
   - label: Perform Code Review
     agent: tsh-code-reviewer

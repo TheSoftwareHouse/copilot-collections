@@ -82,7 +82,7 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 
 **Step 5: Verify implementation**
 
-- If a calling workflow provides a verification loop (e.g., `implement-ui.prompt.md` runs `tsh-ui-reviewer` automatically), defer to that workflow — do not duplicate verification here.
+- If the `tsh-engineering-manager` orchestrates the verify-fix loop (delegating to `tsh-ui-reviewer`), defer to that workflow — do not duplicate verification here.
 - If no verification workflow is active, use the `ui-verifying` skill directly to compare the implementation against the Figma design.
 - Walk through each interaction state (hover, focus, disabled, error, loading, empty) and verify correctness.
 - Iterate on differences until the implementation matches the design within acceptable tolerances.
