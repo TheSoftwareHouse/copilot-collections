@@ -72,6 +72,29 @@ const config: Config = {
   ],
 
   themeConfig: {
+    image: 'img/opengraph.png',
+    metadata: [
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:image:width',
+        content: '1200',
+      },
+      {
+        property: 'og:image:height',
+        content: '630',
+      },
+      {
+        property: 'og:image:alt',
+        content: 'Copilot Collections social preview with the headline Meet copilot collections and a GitHub mobile mockup.',
+      },
+      {
+        name: 'twitter:image:alt',
+        content: 'Copilot Collections by The Software House',
+      },
+    ],
     navbar: {
       title: 'Copilot Collections',
       logo: {
