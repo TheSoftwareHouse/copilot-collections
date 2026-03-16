@@ -1,11 +1,11 @@
 ---
 name: tsh-task-quality-reviewing
-description: Analyze extracted epics and user stories for quality gaps, missing edge cases, and improvement opportunities. Runs domain-agnostic analysis passes, optionally enriches findings with Jira board context, and produces accept/reject suggestions that refine the task list before Jira formatting.
+description: Analyze extracted epics and user stories for quality gaps, missing edge cases, and improvement opportunities. Runs domain-agnostic analysis passes, optionally enriches findings with Jira board context, validates decision alignment against the decision log, and produces accept/reject suggestions that refine the task list before Jira formatting.
 ---
 
 # Task Quality Review
 
-This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs 10 domain-agnostic analysis passes, optionally enriches findings with existing Jira board context, and produces a structured list of suggestions the user can individually accept or reject.
+This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs 11 domain-agnostic analysis passes (A–K), optionally enriches findings with existing Jira board context, and produces a structured list of suggestions the user can individually accept or reject.
 
 The output is a **quality review report** documenting all suggestions, their dispositions, and any changes applied to the task list.
 
@@ -50,6 +50,7 @@ Collect and review all available materials:
 
 - **`extracted-tasks.md`** (mandatory): The Gate 1-approved epic and story list. This is the primary input.
 - **`cleaned-transcript.md`** (if available): Cross-reference for details that may have been lost or simplified during task extraction.
+- **`decision-log.md`** (if available): The versioned decision log produced by `tsh-transcript-processing` and enriched by `tsh-task-extracting`. If a decision log exists, it MUST be loaded — it is required for Pass K (Decision Alignment).
 - **Other source materials**: Figma designs, codebase analysis, Confluence pages, or any other documents referenced during extraction.
 
 Build a complete picture of the project scope, actors, and features before proceeding to analysis.
@@ -230,6 +231,24 @@ _Example patterns_: A financial application does not include audit logging, whic
 
 ---
 
+**Pass K: Decision Alignment**
+
+If `decision-log.md` was loaded in Step 1, validate that the extracted stories are consistent with the recorded decisions. Skip this pass if no decision log is available.
+
+For each decision in the log, check:
+- **Orphaned decisions**: Decisions in `decision-log.md` that have NO affected stories linked to them. These may indicate missing stories that were discussed but never extracted.
+- **Contradicted decisions**: Stories whose acceptance criteria or description CONTRADICT an active decision. The story says one thing, the decision says another.
+- **Unresolved decisions**: Decisions marked as `⚠️ Unresolved` that need user clarification before stories depending on them can be finalized.
+- **Stale references**: Stories whose Source Decisions reference a decision, but whose acceptance criteria or description text aligns with a superseded version of that decision rather than the current active version (e.g., referencing DEC-003 but the story text matches v1 wording, not the current v2).
+- **Missing decision attribution**: Stories that clearly stem from a workshop decision but don't have the decision linked in their `Source Decisions` field.
+- **Revoked decision references**: Stories that still reference a `🔴 Revoked` decision and need to be removed or reassigned.
+
+A finding is generated when any of the above misalignments is detected between the decision log and the task list.
+
+_Example patterns_: A decision specifies Stripe as the payment provider, but no story covers payment integration. A story describes password-based login, but a decision mandates magic links. A story references a decision whose status is still unresolved.
+
+---
+
 **Step 5: Enrich with domain research**
 
 If domain-specific research tools are available (context7, web search):
@@ -255,6 +274,7 @@ Transform each finding from the analysis passes into a structured suggestion:
    - `ADD_TECHNICAL_NOTE`: The gap is about clarity or documentation, not functional scope. A note is added to an existing story.
    - `NEW_STORY`: The gap represents entirely new functionality that does not fit in any existing story.
    - `NEW_EPIC`: The gap represents a new capability area that warrants its own epic (rare — typically only for platform operations or major compliance requirements).
+   - `UPDATE_DECISION_LOG`: Correct or update an entry in `decision-log.md` (e.g., link missing affected stories, fix status, resolve conflicts).
 
 3. **Write the proposed change**: Draft the exact text to be added or modified. For new stories, follow the format established in `extracted-tasks.md`. For acceptance criteria, follow the checklist format. This ensures that accepting a suggestion immediately produces valid task list content.
 
@@ -292,6 +312,7 @@ For each accepted suggestion, apply the proposed change to `extracted-tasks.md`:
 - `ADD_TECHNICAL_NOTE`: Append the note to the specified story's technical notes section.
 - `NEW_STORY`: Add the new story under the appropriate epic, following the existing numbering convention (e.g., if Epic 2 has stories 2.1-2.7, a new story becomes 2.8).
 - `NEW_EPIC`: Add the new epic at the end of the document with the proposed stories, update the Epics Overview table, and update the Dependencies section if applicable.
+- `UPDATE_DECISION_LOG`: Apply the change to `decision-log.md` (e.g., link affected stories, update status, resolve conflicts) and regenerate the Mermaid diagram.
 
 After applying all changes, update the Workshop Summary table in `extracted-tasks.md` (total stories count, total epics count) to reflect the additions.
 
@@ -321,8 +342,12 @@ The report serves as an audit trail documenting:
 | H | Error State & Edge Case Coverage | High | ADD_ACCEPTANCE_CRITERION |
 | I | Notification & Communication Gaps | High | NEW_STORY or ADD_ACCEPTANCE_CRITERION |
 | J | Domain-Specific Research | Low–Medium | Varies |
+| K | Decision Alignment | High | MODIFY_STORY, NEW_STORY, or UPDATE_DECISION_LOG |
 
 ## Connected Skills
 
-- `tsh-task-extracting` — provides the extracted tasks used as primary input for the quality review
+- `tsh-task-extracting` — provides the extracted tasks used as primary input for the quality review; also enriches `decision-log.md` with affected story links
+- `tsh-transcript-processing` — produces `decision-log.md`, which is read by this skill for Pass K (Decision Alignment)
 - `tsh-jira-task-formatting` — consumes the updated task list after quality review suggestions are applied
+
+This skill reads `decision-log.md` and may write back corrections via accepted `UPDATE_DECISION_LOG` suggestions.

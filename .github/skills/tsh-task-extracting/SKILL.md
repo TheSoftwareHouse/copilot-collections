@@ -35,13 +35,15 @@ Extraction progress:
 - [ ] Step 6: Identify assumptions and out-of-scope items
 - [ ] Step 7: Flag ambiguities and ask clarifying questions
 - [ ] Step 8: Present task list for user validation
-- [ ] Step 9: Save the extracted tasks document
+- [ ] Step 9: Link stories to decisions
+- [ ] Step 10: Save the extracted tasks document
 ```
 
 **Step 1: Gather and review all input materials**
 
 Collect and thoroughly review all available workshop materials:
 - **Cleaned transcript** (`cleaned-transcript.md`): Primary source — review all discussion topics, decisions, action items, and open questions
+- **Decision log** (`decision-log.md`): If a decision log exists at `specifications/<workshop-name>/decision-log.md`, it MUST be loaded. Contains structured decisions (DEC-XXX) from transcript processing that will be linked to extracted stories in Step 9
 - **Figma/FigJam designs**: If available, analyze screens, flows, and annotations for functional requirements
 - **Existing codebase**: Use `tsh-codebase-analysing` skill to understand what already exists and what needs to be built
 - **Other documents**: Confluence pages, shared documents, email threads, or any other reference materials provided by the user
@@ -115,7 +117,18 @@ Iterate based on feedback until the user approves the task list.
 
 This is **Review Gate 1** — the user must approve the task list before proceeding to Jira formatting.
 
-**Step 9: Save the extracted tasks document**
+**Step 9: Link stories to decisions**
+
+If a `decision-log.md` was loaded in Step 1, link extracted stories to the decisions that informed them:
+
+1. Read the `decision-log.md` and build a map of all decisions (DEC-XXX IDs) with their descriptions and context
+2. For each extracted story, identify which decisions informed or constrained that story. Add a `Source Decisions` field listing the relevant DEC-XXX IDs (e.g., `DEC-001, DEC-003`). A story MAY have zero source decisions — not every story comes from an explicit decision; use `—` in that case
+3. Update `decision-log.md`: populate the `Affected Stories` field for each decision with story references (e.g., `Epic 1 > Story 1.2, Epic 3 > Story 3.1`). A decision MAY affect multiple stories
+4. If Figma, PDF, or codebase analysis reveals a NEW decision not present in the existing log, ADD it to `decision-log.md` with a sequential ID continuing from the last DEC-XXX and set the source accordingly (e.g., `Figma frame: Login Flow — shows social login buttons` or `PDF page 12 — regulatory requirement`). Regenerate the Mermaid diagram in the decision log to include the new decisions
+5. If a new source CONTRADICTS an existing decision, create a new version in the decision log superseding the old one. If the contradiction cannot be resolved, mark the decision as `⚠️ Unresolved` and add it to Open Questions
+6. If a decision is `🔴 Revoked`, do NOT link it to new stories. If existing stories reference a revoked decision, flag them for review in the Open Questions section
+
+**Step 10: Save the extracted tasks document**
 
 Generate the final output following the `./extracted-tasks.example.md` template.
 
@@ -123,5 +136,5 @@ Save the file to `specifications/<workshop-name>/extracted-tasks.md`.
 
 ## Connected Skills
 
-- `tsh-transcript-processing` - provides the cleaned transcript used as primary input
-- `tsh-codebase-analysing` - for understanding existing system context when analyzing scope
+- `tsh-transcript-processing` — provides the cleaned transcript and `decision-log.md` used as inputs. This skill both reads AND writes to the decision log: it reads existing decisions to link them to stories, and writes back affected story references and any new decisions discovered from non-transcript sources
+- `tsh-codebase-analysing` — for understanding existing system context when analyzing scope

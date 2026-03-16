@@ -37,6 +37,8 @@
 
 **Priority**: <Critical / High / Medium / Low>
 
+**Source Decisions**: DEC-001, DEC-003
+
 ### Story 1.2: <Story Title>
 
 **User Story**: As a <role>, I want <capability> so that <benefit>.
@@ -48,6 +50,8 @@
 **High-Level Technical Notes**: <notes or "None">
 
 **Priority**: <priority>
+
+**Source Decisions**: —
 
 ## Epic 2: <Epic Title>
 
@@ -66,6 +70,8 @@
 **High-Level Technical Notes**: <notes or "None">
 
 **Priority**: <priority>
+
+**Source Decisions**: DEC-002
 
 ## Dependencies
 

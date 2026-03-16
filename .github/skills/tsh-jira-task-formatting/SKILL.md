@@ -69,6 +69,8 @@ For each user story, create a Jira-ready story entry with:
 - **Parent epic**: Reference to the parent epic by title (will be linked by ID after creation)
 - **Priority**: Mapped from extracted task priority
 
+> **Note on Source Decisions**: The `Source Decisions` field from `extracted-tasks.md` is a **local-only traceability field** — it is preserved in `jira-tasks.md` for reference but is NOT pushed to Jira. When formatting stories for Jira, omit this field from the Jira description.
+
 **Step 4: Validate completeness against benchmark**
 
 > **Protected Status Guard**: Skip completeness validation for tasks with a protected status (Done, Cancelled, PO APPROVE) — their content is preserved as-is and is not subject to benchmark compliance.

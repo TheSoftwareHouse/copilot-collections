@@ -130,6 +130,65 @@ Add new epic:
 
 ---
 
+#### S-05 · High · NEW_STORY
+
+**Target**: Epic 2 (new story)
+
+**Finding** (Pass K: Decision Alignment):
+DEC-001 (Payment provider: Stripe) has no affected stories. No story covers payment integration.
+
+**Proposed Change**:
+Add new story under Epic 2:
+
+### Story 2.4: As a customer, I can pay using Stripe
+
+**User Story**: As a customer, I want to pay using Stripe so that I can complete my purchase securely.
+
+**Acceptance Criteria**:
+- [ ] Customer can complete payment via Stripe checkout
+- [ ] Payment confirmation is displayed after successful transaction
+
+**Source Decisions**: DEC-001
+
+**High-Level Technical Notes**: None
+
+**Priority**: High
+
+**Decision**: ✅ Accepted
+
+---
+
+#### S-06 · High · MODIFY_STORY
+
+**Target**: Story 1.2 — <Story Title>
+
+**Finding** (Pass K: Decision Alignment):
+Story 1.2 (Login) describes password-based authentication, but DEC-002 specifies magic links.
+
+**Proposed Change**:
+Update Story 1.2 acceptance criteria to use magic links per DEC-002:
+- [ ] User receives a magic link via email after entering their address
+- [ ] User is authenticated upon clicking the magic link
+- Remove: ~~User can log in with email and password~~
+
+**Decision**: ✅ Accepted
+
+---
+
+#### S-07 · Medium · UPDATE_DECISION_LOG
+
+**Target**: decision-log.md — DEC-003
+
+**Finding** (Pass K: Decision Alignment):
+DEC-003 is marked ⚠️ Unresolved — Stories 3.1 and 3.2 depend on notification channel decision.
+
+**Proposed Change**:
+Escalate DEC-003 to user for resolution before finalizing Stories 3.1 and 3.2. Update `decision-log.md` to add Stories 3.1 and 3.2 as affected stories and flag the dependency blocker.
+
+**Decision**: ✅ Accepted
+
+---
+
 ## Applied Changes Summary
 
 | # | Suggestion | Action | Target |
@@ -137,6 +196,9 @@ Add new epic:
 | S-01 | <brief summary> | ADD_ACCEPTANCE_CRITERION | Story 1.3 |
 | S-03 | <brief summary> | MODIFY_STORY | Story 2.1 |
 | S-04 | <brief summary> | NEW_EPIC | Epic N (new) |
+| S-05 | Payment integration story for DEC-001 (Stripe) | NEW_STORY | Story 2.4 (new) |
+| S-06 | Update login to magic links per DEC-002 | MODIFY_STORY | Story 1.2 |
+| S-07 | Resolve DEC-003 and link affected stories 3.1, 3.2 | UPDATE_DECISION_LOG | decision-log.md — DEC-003 |
 
 **Updated Totals**: <X> epics (+<N> new), <Y> stories (+<M> new, <K> modified)
 
