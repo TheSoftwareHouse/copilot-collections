@@ -6,7 +6,7 @@ description: "Single-pass UI verification: compare implementation against Figma 
 
 Perform a single verification pass comparing the current implementation against the Figma design. Report all differences found — do not fix code.
 
-This prompt can be used standalone (user invokes directly) or the same verification is performed when `tsh-ui-reviewer` is called as a subagent from `tsh-implement-ui`.
+This prompt can be used standalone (user invokes directly) or the same verification is performed when `tsh-ui-reviewer` is called as a subagent from `/tsh-implement`.
 
 ## Required Skills
 
