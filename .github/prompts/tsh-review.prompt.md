@@ -22,8 +22,9 @@ Before starting, load and follow these skills:
 2. **Review implementation**: Focus on code correctness, code quality, security, testing, and documentation.
 3. **Verify definition of done**: Check each item from the tasks' definition of done defined in the plan phases. When the definition of done is met, check the box for the completed item in the plan document.
 4. **Verify acceptance criteria**: Check each item from the acceptance criteria checklist in the plan file. When the acceptance criteria is met, check the box for the completed item.
-5. **Summarize findings**: Provide a summary of findings, including any issues identified and recommendations for improvement.
-6. **Document results**: Add findings to the plan file at the end in a new section named "Code Review Findings".
-7. **Update changelog**: Add information that code review was performed to the changelog section of the plan file.
+5. **Verify quality gates**: Run all relevant tests (unit, integration, E2E) and ensure they pass. Run static code analysis tools, linters, and formatting tools to ensure code quality. Make sure to check app build and docker build if applicable.
+6. **Summarize findings**: Provide a summary of findings, including any issues identified and recommendations for improvement.
+7. **Document results**: Add findings to the plan file at the end in a new section named "Code Review Findings".
+8. **Update changelog**: Add information that code review was performed to the changelog section of the plan file.
 
 When it comes to updating the definition of done and acceptance criteria checklist, you can only update those by checking the box for completed items. Do not modify the text of those sections.

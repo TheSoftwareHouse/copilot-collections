@@ -62,4 +62,4 @@ Each technical specification includes:
 After creating the plan, the Architect can hand off to:
 
 - **Software Engineer** → `/tsh-implement` (standard implementation)
-- **Software Engineer** → `/tsh-implement-ui` (frontend implementation with Figma verification)
+- **Software Engineer** → `/tsh-implement` (frontend implementation with Figma verification via internal UI prompt)

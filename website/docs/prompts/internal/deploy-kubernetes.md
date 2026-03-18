@@ -5,16 +5,22 @@ title: /tsh-deploy-kubernetes
 
 # /tsh-deploy-kubernetes
 
+:::info
+Not invoked directly by users. To trigger Kubernetes deployments, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [DevOps Engineer](../../agents/devops-engineer).
+:::
+
 **Agent:** DevOps Engineer
-**File:** `.github/prompts/tsh-deploy-kubernetes.prompt.md`
+**File:** `.github/internal-prompts/tsh-deploy-kubernetes.prompt.md`
 
 Creates Kubernetes deployments, Helm charts, and configures workload resources following production-ready patterns.
 
-## Usage
+## How It’s Triggered
 
 ```text
-/tsh-deploy-kubernetes <describe what to deploy or modify in Kubernetes>
+/tsh-implement <describe what to deploy or modify in Kubernetes>
 ```
+
+The Engineering Manager identifies Kubernetes tasks in the plan and delegates them to the DevOps Engineer automatically.
 
 ## What It Does
 

@@ -5,16 +5,22 @@ title: /tsh-implement-terraform
 
 # /tsh-implement-terraform
 
+:::info
+Not invoked directly by users. To trigger Terraform implementation, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [DevOps Engineer](../../agents/devops-engineer).
+:::
+
 **Agent:** DevOps Engineer
-**File:** `.github/prompts/tsh-implement-terraform.prompt.md`
+**File:** `.github/internal-prompts/tsh-implement-terraform.prompt.md`
 
 Creates Terraform modules and provisions cloud infrastructure safely following established IaC patterns and safety guardrails.
 
-## Usage
+## How It’s Triggered
 
 ```text
-/tsh-implement-terraform <describe what infrastructure to provision or modify>
+/tsh-implement <describe what infrastructure to provision or modify>
 ```
+
+The Engineering Manager identifies Terraform tasks in the plan and delegates them to the DevOps Engineer automatically.
 
 ## What It Does
 

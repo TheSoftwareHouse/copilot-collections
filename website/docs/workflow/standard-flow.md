@@ -37,9 +37,9 @@ The standard workflow is used for backend and fullstack tasks. It follows the fu
 /tsh-implement <JIRA_ID or task description>
 ```
 
-- **Agent:** Software Engineer
-- **What it does:** Implements the previously defined plan. Proposes file changes, refactors, and new code in a focused way.
-- **What it produces:** Concrete code modifications and guidance on how to apply/test them.
+- **Agent:** Engineering Manager
+- **What it does:** Orchestrates the implementation by delegating tasks from the plan to specialized agents (Software Engineer for code, DevOps Engineer for infrastructure, E2E Engineer for tests).
+- **What it produces:** Concrete code modifications applied by delegated agents, with quality checks after each task.
 - **Your action:** Review code changes after each phase. Test functionality. Verify against the plan.
 
 ### 4. Review
@@ -64,8 +64,7 @@ The standard workflow is used for backend and fullstack tasks. It follows the fu
    ↳ 📖 Review the implementation plan
    ↳ ✅ Confirm scope, phases, and acceptance criteria
 
-3⃣️ /tsh-implement <JIRA_ID or task description>
-   ↳ 📖 Review code changes after each phase
+3⃣️ /tsh-implement <JIRA_ID or task description>   ↳ 📖 Engineering Manager delegates to specialized agents   ↳ 📖 Review code changes after each phase
    ↳ ✅ Test functionality, verify against plan
 
 4⃣️ /tsh-review   <JIRA_ID or task description>

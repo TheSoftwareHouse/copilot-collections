@@ -79,7 +79,7 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/research PROJ-456
+/tsh-research PROJ-456
 ```
 
 | Step | What Happens |
@@ -126,7 +126,7 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-implement-ui PROJ-321
+/tsh-implement PROJ-321
 ```
 
 | Step | What Happens |
@@ -136,7 +136,7 @@ This page shows how teams integrate Copilot Collections into their daily routine
 | **3. Automated verification loop** | `/tsh-review-ui` is called automatically. Playwright captures the running app; Figma MCP provides expected values. A structured PASS/FAIL diff table is generated. |
 | **4. Auto-fix cycle** | If FAIL, the agent fixes mismatches and re-verifies — up to 5 iterations — until the component passes or escalates. |
 
-**Key prompts & agents:** `/tsh-implement-ui` → Software Engineer, `/tsh-review-ui` → UI Reviewer  
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Software Engineer, `/tsh-review-ui` → UI Reviewer  
 **Key skills:** `tsh-implementing-frontend`, `tsh-ui-verifying`, `tsh-technical-context-discovering`
 
 **Value:** Design-to-code accuracy reaches 95–99%. Design QA feedback rounds are reduced by 60–80%. Accessibility compliance is built in from the start, not bolted on after review.
@@ -154,7 +154,7 @@ This page shows how teams integrate Copilot Collections into their daily routine
 ```text
 /tsh-research PROJ-555
 /tsh-plan PROJ-555
-/tsh-implement PROJ-555
+/tsh-implement Add new tables and migrate existing data for PROJ-555
 ```
 
 | Step | What Happens |
@@ -289,8 +289,12 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-implement-e2e PROJ-654
+/tsh-implement Add E2E tests for the checkout flow in PROJ-654
 ```
+
+:::tip
+When the implementation plan contains E2E test tasks, the Engineering Manager automatically delegates them to the E2E Engineer agent. You don't need to invoke E2E testing separately — just use `/tsh-implement`.
+:::
 
 | Step | What Happens |
 |---|---|
@@ -299,7 +303,7 @@ This page shows how teams integrate Copilot Collections into their daily routine
 | **3. Test implementation** | Tests follow BDD-style Arrange-Act-Assert structure with dynamic test data (timestamps/UUIDs) — no shared state between tests. |
 | **4. Stability verification** | Tests must pass **3+ consecutive times** in headless mode before being committed. Flaky detection is built into the verification loop. |
 
-**Key prompts & agents:** `/tsh-implement-e2e` → E2E Engineer  
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → E2E Engineer  
 **Key skills:** `tsh-e2e-testing`, `tsh-technical-context-discovering`
 
 **Value:** E2E test flakiness is reduced by 50–80%. Tests use proper auto-waiting assertions instead of arbitrary timeouts. Page Object patterns make tests maintainable and resistant to UI refactors.
@@ -342,19 +346,19 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-implement-terraform Create a VPC with public and private subnets for EKS
-/tsh-deploy-kubernetes Deploy the payment service with HPA and PDB
-/tsh-implement-pipeline Create GitHub Actions CI/CD for the monorepo
+/tsh-implement Create a VPC with public and private subnets for EKS
+/tsh-implement Deploy the payment service with HPA and PDB
+/tsh-implement Create GitHub Actions CI/CD for the monorepo
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Context discovery** | The DevOps Engineer agent discovers existing IaC patterns, naming conventions, tagging policies, and CI/CD platform. |
-| **2. Architecture consultation** | For new designs, the agent delegates to the Architect sub-agent for architectural guidance before implementing. |
+| **1. Delegation** | The Engineering Manager reads the plan and delegates infrastructure tasks to the DevOps Engineer. |
+| **2. Context discovery** | The DevOps Engineer discovers existing IaC patterns, naming conventions, tagging policies, and CI/CD platform. |
 | **3. Implementation** | Infrastructure code is written following project conventions with proper naming, tagging, cost estimation, and safety guardrails. |
 | **4. Safety checks** | `terraform plan`, `--dry-run`, or `validate` is run before any changes. Destructive operations require explicit authorization. |
 
-**Key prompts & agents:** `/tsh-implement-terraform`, `/tsh-deploy-kubernetes`, `/tsh-implement-pipeline` → DevOps Engineer
+**Key prompt:** `/tsh-implement` → Engineering Manager delegates to DevOps Engineer
 **Key skills:** `tsh-implementing-terraform-modules`, `tsh-implementing-kubernetes`, `tsh-implementing-ci-cd`, `tsh-managing-secrets`
 
 **Value:** Infrastructure follows production patterns from day one. Cost estimation is built into every proposal. Safety guardrails prevent accidental destruction. Reusable modules reduce duplication across projects.

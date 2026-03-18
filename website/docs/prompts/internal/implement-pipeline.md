@@ -5,16 +5,22 @@ title: /tsh-implement-pipeline
 
 # /tsh-implement-pipeline
 
+:::info
+Not invoked directly by users. To trigger CI/CD pipeline implementation, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [DevOps Engineer](../../agents/devops-engineer).
+:::
+
 **Agent:** DevOps Engineer
-**File:** `.github/prompts/tsh-implement-pipeline.prompt.md`
+**File:** `.github/internal-prompts/tsh-implement-pipeline.prompt.md`
 
 Creates or modifies CI/CD pipelines with proper deployment stages, environment protection, and secure authentication.
 
-## Usage
+## How It’s Triggered
 
 ```text
-/tsh-implement-pipeline <describe the pipeline to create or modify>
+/tsh-implement <describe the pipeline to create or modify>
 ```
+
+The Engineering Manager identifies CI/CD pipeline tasks in the plan and delegates them to the DevOps Engineer automatically.
 
 ## What It Does
 

@@ -11,6 +11,7 @@ The file outcome should be a markdown file named after the task Jira ID in kebab
 ## Required Skills
 
 Before starting, load and follow these skills:
+
 - `tsh-architecture-designing` - for the architecture design process and output template (`plan.example.md`)
 - `tsh-codebase-analysing` - for analyzing the existing codebase
 - `tsh-implementation-gap-analysing` - for verifying what exists vs what needs to be built
@@ -35,7 +36,7 @@ Before starting, load and follow these skills:
    - Action type: `[CREATE]`, `[MODIFY]`, or `[REUSE]`
    - Definition of done as a checkbox list for each task
 7. **Address security**: Include security considerations relevant to the implementation.
-8. **Define testing**: Provide guidelines for testing and validating the implementation.
+8. **UI verification tasks**: For features with UI components based on Figma designs, add a `[REUSE]` UI verification task immediately after each implementation task that produces visible UI. The verification task should reference `tsh-ui-reviewer` agent, include the Figma URL, and describe the verify-fix loop (max 5 iterations). Non-visual tasks (data fetching, state management, API integration) do not need verification tasks.
 9. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
 10. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
 11. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.

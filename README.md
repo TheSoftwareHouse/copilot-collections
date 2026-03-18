@@ -28,7 +28,7 @@ This repository supports the **full product development lifecycle** with AI-powe
 ### 🛠 Development – Architecture & Implementation
 
 - 🧑‍💻 **Agents** – Context Engineer, Architect, Software Engineer.
-- 💬 **Prompts** – `/tsh-research`, `/tsh-plan`, `/tsh-implement`, `/tsh-implement-ui`.
+- 💬 **Prompts** – `/tsh-research`, `/tsh-plan`, `/tsh-implement`.
 - 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
 
 ### ✅ Quality – Review & Testing
@@ -84,14 +84,14 @@ We support the **full product development lifecycle**, organized into three phas
 - Translates tasks into structured implementation plans with phases and technical constraints.
 - Writes or modifies code with a focus on safety and clarity.
 - Keeps changes scoped to the task, respecting existing architecture.
-- For UI tasks: uses iterative Figma verification to match designs.
+- For UI tasks: automatically includes iterative Figma verification to match designs.
 
-**Two tracks are available:**
+**Single flow: Plan → Implement**
 
-| | **Standard Flow** | **UI Flow** (with Figma) |
+| Step | Command | What happens |
 |---|---|---|
-| Plan | `/tsh-plan` – architecture & steps | `/tsh-plan` – component breakdown with Figma refs |
-| Implement | `/tsh-implement` – backend & frontend code | `/tsh-implement-ui` – UI code + iterative Figma verification |
+| Plan | `/tsh-plan` | Architecture & steps; for UI tasks includes component breakdown with Figma refs |
+| Implement | `/tsh-implement` | Backend & frontend code; for UI tasks includes iterative Figma verification (via internal prompt) |
 
 ### Phase 3: ✅ Quality – Review & Testing
 
@@ -150,7 +150,7 @@ We support the **full product development lifecycle**, organized into three phas
    ↳ 📖 Review plan – check component breakdown, design references
    ↳ ✅ Confirm phases align with Figma structure
 
-4️⃣ /tsh-implement-ui <JIRA_ID or task description>
+4️⃣ /tsh-implement <JIRA_ID or task description>
    ↳ 📖 Review code changes and UI Verification Summary
    ↳ ✅ Manually verify critical UI elements in browser
    ↳ 🔄 Agent calls /tsh-review-ui in a loop until PASS or escalation
@@ -171,10 +171,10 @@ You can run any flow with either a **Jira ticket ID** or a **free-form task desc
 
 ### How the UI Verification Loop Works
 
-1. `/tsh-implement-ui` implements a UI component
+1. `/tsh-implement` delegates a UI component to the Software Engineer
 2. Calls `/tsh-review-ui` to perform **single-pass verification** (read-only)
 3. `/tsh-review-ui` uses **Figma MCP** (EXPECTED) + **Playwright MCP** (ACTUAL) → returns PASS or FAIL with diff table
-4. If FAIL → `/tsh-implement-ui` fixes the code and calls `/tsh-review-ui` again
+4. If FAIL → the Engineering Manager delegates the fix and calls `/tsh-review-ui` again
 5. Repeats until PASS or max 5 iterations (then escalates)
 
 ### Example: Standalone Product Ideation
@@ -247,7 +247,7 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 - Focus: **single-pass UI verification against Figma designs**.
 - Performs read-only comparison: Figma (EXPECTED) vs Playwright (ACTUAL).
 - Returns PASS/FAIL verdict with structured difference table.
-- Called by `/tsh-implement-ui` prompt in a loop; can also be used standalone.
+- Called by `/tsh-implement` prompt in a loop; can also be used standalone.
 
 #### 🧪 E2E Engineer
 
@@ -463,14 +463,6 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 - Proposes file changes, refactors, and new code in a focused way.
 - Outputs: concrete modifications and guidance on how to apply/test them.
 
-#### `/tsh-implement-ui <JIRA_ID | description>`
-
-- Implements UI features with **iterative Figma verification**.
-- Extends `/tsh-implement` with a verification loop after each component.
-- Uses **Playwright** to capture current UI state and **Figma MCP** to compare with designs.
-- Automatically fixes mismatches and re-verifies until implementation matches design.
-- Outputs: code changes + UI Verification Summary with iteration counts.
-
 ### ✅ Quality Commands
 
 #### `/tsh-review <JIRA_ID | description>`
@@ -484,7 +476,7 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 - Performs **single-pass UI verification** comparing implementation against Figma.
 - Uses **Figma MCP** (EXPECTED) and **Playwright MCP** (ACTUAL) to compare.
 - **Read-only** – reports differences but does not fix them.
-- Called by `/tsh-implement-ui` in a loop; can also be used standalone.
+- Called by `/tsh-implement` in a loop; can also be used standalone.
 - Outputs: PASS/FAIL verdict + structured difference table with exact values.
 
 #### `/tsh-review-codebase`
@@ -708,8 +700,7 @@ Once the repo is cloned and VS Code User Settings are configured:
 |---|---|---|
 | Context Engineer | `/tsh-research <JIRA_ID>` | Gather context, identify gaps & risks |
 | Architect | `/tsh-plan <JIRA_ID>` | Create multi-step implementation plan |
-| Software Engineer | `/tsh-implement <JIRA_ID>` | Standard backend & frontend implementation |
-| Software Engineer | `/tsh-implement-ui <JIRA_ID>` | UI implementation with iterative Figma verification |
+| Software Engineer | `/tsh-implement <JIRA_ID>` | Backend, frontend, and UI implementation (UI tasks include iterative Figma verification) |
 
 ### ✅ Quality – Review & test
 
@@ -718,7 +709,7 @@ Once the repo is cloned and VS Code User Settings are configured:
 | Code Reviewer | `/tsh-review <JIRA_ID>` | Structured code review against criteria |
 | UI Reviewer | `/tsh-review-ui` | Single-pass UI vs Figma comparison |
 | E2E Engineer | `/tsh-implement-e2e <JIRA_ID>` | End-to-end test creation with Playwright |
-| — | `/tsh-review-codebase` | Full codebase quality analysis |
+| Architect | `/tsh-review-codebase` | Full codebase quality analysis |
 
 ### ⚙️ Copilot Customization – Extend the toolchain
 

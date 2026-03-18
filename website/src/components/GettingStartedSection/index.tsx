@@ -9,7 +9,7 @@ const steps = [
     title: 'Clone the repo',
     description: (
       <>
-        <code>git clone [repo] copilot-configuration</code> alongside your
+        <code>git clone [repo] copilot-collections</code> alongside your
         existing projects
       </>
     ),
@@ -42,7 +42,7 @@ const steps = [
     description: (
       <>
         Open Copilot Chat → select an agent → type{' '}
-        <code>/research [JIRA_ID]</code>. If agents appear in the dropdown,
+        <code>/tsh-research [JIRA_ID]</code>. If agents appear in the dropdown,
         you're ready.
       </>
     ),
@@ -63,7 +63,7 @@ export default function GettingStartedSection(): React.JSX.Element {
           </h2>
           <p className={styles.sub}>
             Clone the repo next to your projects, configure VS Code User
-            Settings once, and start using <code>/research</code> in any
+            Settings once, and start using <code>/tsh-research</code> in any
             workspace immediately.
           </p>
           <div className={styles.gsActions}>

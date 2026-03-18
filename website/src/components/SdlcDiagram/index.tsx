@@ -31,7 +31,7 @@ export default function SdlcDiagram(): React.JSX.Element {
           </div>
           <div className={styles.card}>
             <div className={styles.cardCmd}>
-              <strong className={styles.cardCmdStrong}>/analyze-materials</strong>
+              <strong className={styles.cardCmdStrong}>/tsh-analyze-materials</strong>
             </div>
             <div className={styles.cardDesc}>
               Clean transcript → extract tasks → produce Jira-ready stories with
@@ -48,7 +48,7 @@ export default function SdlcDiagram(): React.JSX.Element {
           </div>
           <div className={styles.card}>
             <div className={styles.cardCmd}>
-              <strong className={styles.cardCmdStrong}>/research</strong>
+              <strong className={styles.cardCmdStrong}>/tsh-research</strong>
             </div>
             <div className={styles.cardDesc}>
               Gather all technical context — Jira, GitHub, Figma — in a single
@@ -58,29 +58,48 @@ export default function SdlcDiagram(): React.JSX.Element {
           <div className={styles.innerConn} />
           <div className={styles.card}>
             <div className={styles.cardCmd}>
-              <strong className={styles.cardCmdStrong}>/plan</strong>
+              <strong className={styles.cardCmdStrong}>/tsh-plan</strong>
             </div>
             <div className={styles.cardDesc}>
               Design architecture, define steps, surface edge cases before
               writing a line of code
             </div>
           </div>
-          <div className={styles.parallelLabel}>↓ parallel execution</div>
-          <div className={styles.grid2}>
+          <div className={styles.innerConn} />
+          <div className={styles.card}>
+            <div className={styles.cardCmd}>
+              <strong className={styles.cardCmdStrong}>/tsh-implement</strong>
+              <span style={{fontSize: '0.7rem', opacity: 0.7, marginLeft: '0.5rem'}}>Engineering Manager</span>
+            </div>
+            <div className={styles.cardDesc}>
+              Orchestrates work — delegates backend, frontend, infra, and tests
+              to specialized agents
+            </div>
+          </div>
+          <div className={styles.parallelLabel}>↓ delegates to</div>
+          <div className={styles.grid3}>
             <div className={styles.card}>
               <div className={styles.cardCmd}>
-                <strong className={styles.cardCmdStrong}>/implement</strong>
+                <strong className={styles.cardCmdStrong}>Software Engineer</strong>
               </div>
               <div className={styles.cardDesc}>
-                Backend logic, APIs, data layer
+                Backend, frontend, APIs, data layers
               </div>
             </div>
             <div className={styles.card}>
               <div className={styles.cardCmd}>
-                <strong className={styles.cardCmdStrong}>/implement-ui</strong>
+                <strong className={styles.cardCmdStrong}>DevOps Engineer</strong>
               </div>
               <div className={styles.cardDesc}>
-                Frontend against Figma specs
+                Cloud and infrastructure
+              </div>
+            </div>
+            <div className={styles.card}>
+              <div className={styles.cardCmd}>
+                <strong className={styles.cardCmdStrong}>E2E Engineer</strong>
+              </div>
+              <div className={styles.cardDesc}>
+                End-to-end tests
               </div>
             </div>
           </div>
@@ -103,7 +122,7 @@ export default function SdlcDiagram(): React.JSX.Element {
           <div className={styles.grid2}>
             <div className={styles.card}>
               <div className={styles.cardCmd}>
-                <strong className={styles.cardCmdStrong}>/review</strong>
+                <strong className={styles.cardCmdStrong}>/tsh-review</strong>
               </div>
               <div className={styles.cardDesc}>
                 PASS / BLOCKER / SUGGESTION — security, perf, coding standards
@@ -111,7 +130,7 @@ export default function SdlcDiagram(): React.JSX.Element {
             </div>
             <div className={styles.card}>
               <div className={styles.cardCmd}>
-                <strong className={styles.cardCmdStrong}>/review-ui</strong>
+                <strong className={styles.cardCmdStrong}>/tsh-review-ui</strong>
               </div>
               <div className={styles.cardDesc}>
                 Playwright vs Figma · up to 5 auto-iterations
