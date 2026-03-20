@@ -30,6 +30,16 @@ You don't create dead code or unused test helpers. You don't create tests that w
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
+## Plan Progress and Definition of Done
+
+When working from a `*.plan.md` file — whether implementing the full plan or a delegated subset (e.g., a single phase or task) — you MUST:
+
+1. After completing each task, update the plan by checking the task's progress checkbox.
+2. After satisfying any item in the task's **Definition of Done** checklist, immediately check that checkbox in the plan document.
+3. After verifying any **acceptance criteria** item, check the corresponding checkbox.
+4. Only update checkboxes for the delegated scope. Do not touch tasks, DoD items, or acceptance criteria belonging to phases/tasks outside your current assignment.
+5. Do not modify the text of Definition of Done or acceptance criteria sections — only check boxes.
+
 ## Skills usage guidelines
 
 - `tsh-task-analysing` - to determine whether context comes from research/plan files, a Jira ID, or directly from the prompt message, and gather requirements accordingly. Load at the start of every task to avoid redundant lookups.
