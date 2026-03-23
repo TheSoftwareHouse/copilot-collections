@@ -34,10 +34,11 @@ Use the checklist below and track progress:
 ```
 Progress:
 - [ ] Step 1: Gather design context
-- [ ] Step 2: Plan component structure
-- [ ] Step 3: Implement components
-- [ ] Step 4: Organize modules
-- [ ] Step 5: Verify implementation
+- [ ] Step 2: Identify and prepare design assets
+- [ ] Step 3: Plan component structure
+- [ ] Step 4: Implement components
+- [ ] Step 5: Organize modules
+- [ ] Step 6: Verify implementation
 ```
 
 **Step 1: Gather design context**
@@ -52,7 +53,25 @@ Progress:
 - Identify all states the design implies: default, hover, focus, active, disabled, loading, error, empty.
 - Identify responsive breakpoints from the design. Check how the component should adapt across screen sizes — layout shifts, hidden/shown elements, typography scaling. Map breakpoints to the project's existing responsive tokens or media queries.
 
-**Step 2: Plan component structure**
+**Step 2: Identify and prepare design assets**
+
+Before planning or writing any code, identify all visual assets in the Figma design that must be used as files — not recreated in code. This step is **mandatory** when implementing from Figma designs.
+
+- Using the Figma MCP server, scan the design for nodes that represent visual assets:
+  - **Icons**: Vector nodes, boolean operation groups, or components with names containing `icon`, `ico`, `ic/`, or similar naming patterns.
+  - **Illustrations**: Complex vector groups, decorative graphics, or multi-colored SVG compositions.
+  - **Images**: Nodes with image fills (photographs, product images, avatars, hero banners).
+  - **Logos and brand marks**: Logo components or brand-specific graphics.
+- For each identified asset, determine:
+  1. **Does it already exist in the project?** Search the codebase asset directories (e.g., `public/`, `src/assets/`, `static/`) for a matching file.
+  2. **Is it from an icon library?** Check if the icon matches a library already used in the project (e.g., `lucide-react`, `heroicons`, `material-icons`). If yes, use the library import — no export needed.
+  3. **Is it a custom asset?** If not found in the project or an icon library, it must be exported from Figma.
+- For any assets that need to be exported, **stop and ask the user** to export them from Figma before proceeding. Provide specific guidance:
+  - List each asset that needs export by name/description and its location in the Figma design.
+  - Recommend export format: **SVG** for icons, illustrations, and logos; **PNG @2x** or **WebP** for photographs and raster images.
+  - Suggest a target directory in the project following existing conventions (e.g., `src/assets/icons/`, `public/images/`).
+
+**Step 3: Plan component structure**
 
 - Decide component boundaries: what is a reusable component vs. page-specific layout.
 - Identify the props interface for each component — typed, with sensible defaults.
@@ -60,7 +79,7 @@ Progress:
 - Search the codebase for existing similar components. Extend or compose existing components rather than duplicating.
 - Sketch the component tree: parent → children relationships, data flow direction, and where state lives.
 
-**Step 3: Implement components**
+**Step 4: Implement components**
 
 Follow these patterns for every component:
 
@@ -71,7 +90,7 @@ Follow these patterns for every component:
 - **Three UI states**: Every data-dependent component must handle loading (progress indicator), error (meaningful message + recovery action), and empty (helpful message when no data).
 - **Design tokens**: All visual values (colors, spacing, typography, shadows, radii) must come from the design system. Zero hardcoded values.
 
-**Step 4: Organize modules**
+**Step 5: Organize modules**
 
 Apply barrel file rules from the Barrel File Guidelines table below:
 
@@ -80,7 +99,7 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 - Skip barrels for internal utility folders that serve a single parent component.
 - Verify the barrel doesn't re-export unused internals that bloat the bundle.
 
-**Step 5: Verify implementation**
+**Step 6: Verify implementation**
 
 - If a calling workflow provides a verification loop (e.g., the Engineering Manager runs `tsh-ui-reviewer` automatically during `/tsh-implement`), defer to that workflow — do not duplicate verification here.
 - If no verification workflow is active, use the `ui-verifying` skill directly to compare the implementation against the Figma design.
@@ -120,6 +139,7 @@ Component:
 - [ ] Loading state — shows progress indicator
 - [ ] Empty state — meaningful message when no data
 - [ ] Composition — uses children/slots, not prop sprawl
+- [ ] Assets — uses exported files, no recreated icons/images
 ```
 
 ## Anti-Patterns
@@ -134,6 +154,7 @@ Component:
 | `export default`                             | Named exports for consistency and refactoring                      |
 | `any` type for props                         | Explicit type definitions                                          |
 | Barrel file for internal utils               | Direct imports for single-consumer folders                         |
+| Recreating Figma icons/images in code (inline SVG paths, CSS shapes) | Export assets from Figma, save to project asset directory, reference via `<img>` or component import |
 
 ## Framework-Specific Patterns
 
