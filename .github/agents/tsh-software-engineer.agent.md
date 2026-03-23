@@ -16,7 +16,7 @@ tools:
     "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
-agents: [tsh-ui-reviewer]
+agents: [tsh-ui-reviewer, tsh-prompt-engineer]
 handoffs:
   - label: Run Code Review
     agent: tsh-code-reviewer
@@ -25,6 +25,10 @@ handoffs:
   - label: Write E2E Tests
     agent: tsh-e2e-engineer
     prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
+    send: false
+  - label: Optimize Prompts
+    agent: tsh-prompt-engineer
+    prompt: Optimize the LLM prompts in the implementation
     send: false
 ---
 
@@ -72,6 +76,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
+- `tsh-engineering-prompts` - for LLM prompt design: structure patterns, optimization, security, templates. Delegate to `tsh-prompt-engineer` for complex prompt work.
 
 ## Tool Usage Guidelines
 
