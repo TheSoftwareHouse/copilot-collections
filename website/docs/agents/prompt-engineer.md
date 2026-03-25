@@ -47,11 +47,4 @@ This agent handles **LLM application prompts** (prompts consumed by LLM APIs at 
 The Prompt Engineer is invoked in two ways:
 
 - **Direct:** User invokes `@tsh-prompt-engineer` for standalone prompt tasks.
-- **Orchestrated:** The Engineering Manager delegates prompt tasks directly to the Prompt Engineer during feature implementation. Copilot does not allow subagents to call further subagents, so the manager handles this delegation — not the software engineer.
-
-## Handoffs
-
-After completing prompt work, the Prompt Engineer can hand off to:
-
-- **Software Engineer** → Continue implementation with optimized prompts.
-- **Code Reviewer** → Review the prompt implementation.
+- **Orchestrated:** The Engineering Manager delegates LLM prompt tasks directly to the Prompt Engineer during feature implementation. After completing prompt work, control returns to the manager for the next task in the plan.

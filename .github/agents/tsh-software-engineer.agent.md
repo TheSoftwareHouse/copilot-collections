@@ -16,7 +16,7 @@ tools:
     "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
-agents: [tsh-ui-reviewer, tsh-prompt-engineer]
+agents: [tsh-ui-reviewer]
 handoffs:
   - label: Run Code Review
     agent: tsh-code-reviewer
@@ -25,10 +25,6 @@ handoffs:
   - label: Write E2E Tests
     agent: tsh-e2e-engineer
     prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
-    send: false
-  - label: Optimize Prompts
-    agent: tsh-prompt-engineer
-    prompt: Optimize the LLM prompts in the implementation
     send: false
 ---
 

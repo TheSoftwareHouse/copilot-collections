@@ -56,6 +56,7 @@ A structured review containing:
 - `tsh-implementation-gap-analysing` — Compare implementation against the plan and verify completeness.
 - `tsh-technical-context-discovering` — Understand project conventions and patterns.
 - `tsh-sql-and-database-understanding` — Review database-related code for SQL quality, indexes, migrations, and ORM usage.
+- `tsh-engineering-prompts` — Review LLM prompt code: injection defenses, delimiter separation, output format specification, prompt file and LLM client usage patterns.
 
 ## Handoffs
 

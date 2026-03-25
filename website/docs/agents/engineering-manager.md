@@ -19,9 +19,9 @@ Implementation Plan
 │  Engineering Manager  │ ← Reads plan, delegates tasks
 └──────┬───────────────┘
        │
-  ┌────┼────┬────┬────┬────┐
-  ▼    ▼    ▼    ▼    ▼    ▼
- SE   E2E  DevOps Arch  CR  UIR
+  ┌────┼────┬────┬────┬────┬────┐
+  ▼    ▼    ▼    ▼    ▼    ▼    ▼
+ SE   E2E  DevOps Arch  CR  UIR  PE
 ```
 
 The Engineering Manager is bound to the `/tsh-implement` public prompt. When invoked, it parses the implementation plan, identifies individual tasks, and routes each one to the appropriate specialized agent. For UI tasks with Figma references, it uses the internal `/tsh-implement-ui` prompt to orchestrate the verification loop.
@@ -35,6 +35,7 @@ The Engineering Manager is bound to the `/tsh-implement` public prompt. When inv
 | **DevOps Engineer** | Infrastructure, CI/CD, deployments | Task involves infrastructure changes or pipeline configuration |
 | **Architect** | Codebase analysis, technical context | Before implementation starts, to establish codebase understanding |
 | **Code Reviewer** | Code quality, best practices | After implementation completes, or when no review phase is defined |
+| **Prompt Engineer** | LLM application prompts | Task involves designing, optimizing, or securing LLM prompts |
 | **UI Reviewer** | Figma verification, visual correctness | After UI implementation, to verify against design specifications |
 
 ## How to Use

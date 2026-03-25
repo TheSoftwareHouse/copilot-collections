@@ -38,7 +38,7 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
 - `tsh-sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
 - `tsh-reviewing-frontend` - for frontend-specific review criteria: component quality, hooks correctness, rendering issues, accessibility and performance spot-checks.
-- `tsh-engineering-prompts` - when reviewing LLM prompt code: verify prompt injection defenses, proper delimiter separation, output format specification, no hardcoded role/persona in user prompts.
+- `tsh-engineering-prompts` - when reviewing LLM prompt code: verify prompt injection defenses, proper delimiter separation, output format specification, no hardcoded role/persona in user prompts. To detect: search for prompt/template files (e.g., `prompts/` directory, `*.prompt.txt`) and LLM client usage in code (`openai`, `anthropic`, `bedrock`, `converse`, `langchain`).
 
 ## Tool Usage Guidelines
 
