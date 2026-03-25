@@ -39,7 +39,7 @@ IF the task is missing both the necessary information and the implementation pla
 
 When you change between research, planning and implementation phases, make sure to wait for user confirmation before proceeding to the next phase. Use `vscode/askQuestions` tool to ask the user if they want to proceed with the next phase after research and planning phases.
 
-Make sure to understand where the task is stored as it can be stored in Jira, Confluence or in the repository as a markdown file. Use `Atlassian` tool to access Jira and Confluence when needed.
+Make sure to understand where the task is stored as it can be stored in Task Management tool, or in the repository as a markdown file. Use `tsh-knowledge` agent to access Task Management systems and knowledge base.
 
 Before delegating tasks, you review the implementation plan and feature context to understand the requirements and technical designs. You identify the specific tasks that need to be implemented and determine which specialized agents are best suited for each task based on their expertise and capabilities.
 
