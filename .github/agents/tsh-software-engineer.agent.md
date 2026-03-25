@@ -72,7 +72,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
-- `tsh-engineering-prompts` - for LLM prompt design: structure patterns, optimization, security, templates. 
+- `tsh-engineering-prompts` - for LLM prompt design: structure patterns, optimization, security, templates.
 
 ## Tool Usage Guidelines
 
