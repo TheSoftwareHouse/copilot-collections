@@ -595,6 +595,22 @@ Then install the plugin from the marketplace:
 /plugin install tsh-copilot-collections@tsh-copilot-collections
 ```
 
+### Option 3: Install from a Local Path
+
+If you've already cloned the repository locally (e.g., during the [VS Code installation](#-installation-in-vs-code)), you can install it directly from disk:
+
+```bash
+/plugin install /path/to/copilot-collections
+```
+
+For example, if you cloned to `~/projects`:
+
+```bash
+/plugin install ~/projects/copilot-collections
+```
+
+This registers the local copy as a plugin without cloning it again. Useful when you want to use the same checkout for both VS Code and CLI.
+
 ### Updating
 
 To update to the latest version:
