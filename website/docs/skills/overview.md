@@ -36,6 +36,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-architecture-designing](./architecture-design)                | Solution architecture design and implementation plan creation | Architect                  |
 | [tsh-technical-context-discovering](./technical-context-discovery) | Project conventions and pattern discovery                     | Architect, CR, SE, E2E, CE |
 | [tsh-implementing-frontend](./frontend-implementation)             | UI component patterns, composition, design tokens             | Software Engineer          |
+| [tsh-implementing-react-native](./react-native-implementation)     | React Native component patterns, navigation, performance      | Software Engineer          |
 | [tsh-implementing-forms](./implementing-forms)                     | Form architecture, schema validation, multi-step flows        | Software Engineer          |
 | [tsh-writing-hooks](./writing-hooks)                               | Custom hook/composable patterns, lifecycle, testing           | Software Engineer          |
 | [tsh-ensuring-accessibility](./ensuring-accessibility)             | WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard nav     | Software Engineer          |
@@ -91,6 +92,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | tsh-implementing-ci-cd                 |     |     |           |     |     |             |     | ✅     |              |
 | tsh-implementing-forms                 |     |     |           | ✅  |     |             |     |        |              |
 | tsh-implementing-frontend              |     |     |           | ✅  |     |             |     |        |              |
+| tsh-implementing-react-native          |     |     |           | ✅  |     |             |     |        |              |
 | tsh-implementing-kubernetes            |     |     |           |     |     |             |     | ✅     |              |
 | tsh-implementing-observability         |     |     |           |     |     |             |     | ✅     |              |
 | tsh-implementing-terraform-modules     |     |     |           |     |     |             |     | ✅     |              |

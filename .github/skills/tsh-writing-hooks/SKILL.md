@@ -219,6 +219,7 @@ The patterns above are framework-agnostic. For framework-specific hook/composabl
 ## Connected Skills
 
 - `tsh-implementing-frontend` — hooks are used within components; this skill covers component patterns
+- `tsh-implementing-react-native` — hooks are used the same way in React Native; this skill covers RN-specific component patterns
 - `tsh-optimizing-frontend` — for memoization strategies and performance patterns in hooks
 - `tsh-reviewing-frontend` — for hook-specific code review criteria
 - `tsh-implementing-forms` — for form-related custom hooks (field state, validation triggers)

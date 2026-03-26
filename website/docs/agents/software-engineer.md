@@ -46,6 +46,7 @@ The Software Engineer agent implements software solutions based on provided requ
 - `tsh-implementation-gap-analysing` — Verify what exists vs what needs to be built.
 - `tsh-codebase-analysing` — Understand existing architecture for complex features.
 - `tsh-implementing-frontend` — Component patterns, composition, design tokens, Figma-to-code workflow.
+- `tsh-implementing-react-native` — React Native mobile UI: platform-specific components, navigation, gestures, animations, Figma-to-native workflow.
 - `tsh-implementing-forms` — Schema validation, field composition, error handling, multi-step form flows.
 - `tsh-writing-hooks` — Custom hooks: naming, composition, stable returns, effect cleanup, testing.
 - `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management.

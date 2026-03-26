@@ -217,6 +217,7 @@ Accessibility:
 ## Connected Skills
 
 - `tsh-implementing-frontend` — for component composition patterns that support accessible structure
+- `tsh-implementing-react-native` — for React Native accessibility (VoiceOver, TalkBack, accessibilityRole, accessibilityLabel)
 - `tsh-implementing-forms` — for accessible form field patterns, labels, and error announcements
 - `tsh-reviewing-frontend` — for accessibility spot-checks during code review
 - `tsh-optimizing-frontend` — for performance optimizations that also impact accessibility (loading speed, interaction responsiveness)

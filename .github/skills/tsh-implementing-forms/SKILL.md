@@ -146,6 +146,7 @@ Form:
 ## Connected Skills
 
 - `tsh-implementing-frontend` — for component composition patterns and framework-specific references (form library integration, validation library choice)
+- `tsh-implementing-react-native` — for React Native form implementation (KeyboardAvoidingView, mobile input patterns)
 - `tsh-ensuring-accessibility` — for WCAG compliance in form fields, labels, and error announcements
 - `tsh-writing-hooks` — for custom form-related hooks/composables (useFormField, useMultiStepForm)
 - `tsh-reviewing-frontend` — for form-specific review criteria during code review

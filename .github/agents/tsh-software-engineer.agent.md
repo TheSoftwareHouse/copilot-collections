@@ -67,6 +67,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - `tsh-codebase-analysing` - to understand the existing architecture, components, and patterns when working on complex features that span multiple modules.
 - `tsh-sql-and-database-understanding` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 - `tsh-implementing-frontend` - for UI tasks: component patterns, composition, design tokens, barrel files, and Figma-to-code workflow.
+- `tsh-implementing-react-native` - for React Native mobile UI tasks: platform-specific components, native styling with design tokens, navigation, gestures, animations, and Figma-to-native workflow.
 - `tsh-implementing-forms` - for form tasks: schema validation, field composition, error handling, multi-step form flows.
 - `tsh-writing-hooks` - for custom hooks: naming, composition, stable returns, effect cleanup, testing.
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.

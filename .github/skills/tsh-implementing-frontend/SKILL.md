@@ -150,3 +150,4 @@ The patterns above are framework-agnostic. For framework-specific implementation
 - `tsh-implementing-forms` — for form-specific component patterns and validation
 - `tsh-writing-hooks` — for custom hook patterns used within components
 - `tsh-reviewing-frontend` — for frontend-specific code review of implemented components
+- `tsh-implementing-react-native` — for React Native mobile projects using similar component patterns
