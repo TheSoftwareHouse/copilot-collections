@@ -46,6 +46,13 @@ The agent's model array is **Kimi K2.7 Code**, **GPT-5.3-Codex**, and **Gemini 3
 - `tsh-technical-context-discovering` — Establish project conventions and patterns before implementing.
 - `tsh-implementation-gap-analysing` — Verify what exists vs what needs to be built.
 - `tsh-codebase-analysing` — Understand existing architecture for complex features.
+- `tsh-implementing-frontend` — Component patterns, composition, design tokens, Figma-to-code workflow.
+- `tsh-implementing-react-native` — React Native mobile UI: platform-specific components, navigation, gestures, animations, Figma-to-native workflow.
+- `tsh-implementing-forms` — Schema validation, field composition, error handling, multi-step form flows.
+- `tsh-writing-hooks` — Custom hooks: naming, composition, stable returns, effect cleanup, testing.
+- `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management.
+- `tsh-optimizing-frontend` — Code splitting, memoization, bundle size, rendering optimization, memory management.
+- `tsh-ui-verifying` — Tolerances and structure checklist for Figma verification.
 - `tsh-sql-and-database-understanding` — SQL queries, database schemas, migrations, ORM patterns.
 - `tsh-implementing-backend` — REST and GraphQL APIs, CRUD endpoints, data handling, authentication, and service integration.
 

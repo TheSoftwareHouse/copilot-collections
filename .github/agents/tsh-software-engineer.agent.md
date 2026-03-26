@@ -97,6 +97,10 @@ Pre-existing uncommitted changes in the working tree are intentional and OUTSIDE
 - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 </skill>
 
+<skill name="tsh-implementing-react-native">
+- for React Native mobile UI tasks: platform-specific components, native styling with design tokens, navigation, gestures, animations, and Figma-to-native workflow.
+</skill>
+
 <skill name="tsh-implementing-backend">
 - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
 </skill>
