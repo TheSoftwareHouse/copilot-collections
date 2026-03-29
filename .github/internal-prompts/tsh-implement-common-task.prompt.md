@@ -20,7 +20,7 @@ Before starting, load and follow these skills:
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns
 - `tsh-implementation-gap-analysing` - to verify current state before making changes
 - `tsh-sql-and-database-understanding` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking
-- `backend-api-development` - when implementing backend API features: REST/GraphQL endpoints, DataGrid filtering/pagination, database handling, JWT authentication, external service adapters, logging, and Docker setup
+- `tsh-implementing-backend` - when implementing backend API features: REST/GraphQL endpoints, DataGrid filtering/pagination, database handling, JWT authentication, external service adapters, logging, and Docker setup
 
 ## Workflow
 

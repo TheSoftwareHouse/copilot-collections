@@ -13,7 +13,6 @@ tools:
     "todo",
     "agent",
     "vscode/runCommand",
-    "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
 agents: [tsh-ui-reviewer]
@@ -72,8 +71,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
-- `tsh-engineering-prompts` - for LLM prompt design: structure patterns, optimization, security, templates.
-- `backend-api-development` - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
+- `tsh-implementing-backend` - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
 
 ## Tool Usage Guidelines
 

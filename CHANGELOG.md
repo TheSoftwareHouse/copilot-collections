@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-03-30
+
+### Added
+
+- Backend development skill `tsh-implementing-backend`
+
+### Changed
+
+- Updated `tsh-implementing-backend` skill reference in `tsh-software-engineer` agent
+- Updated `tsh-implementing-backend` as a conditional skill in `implement` prompt for backend API tasks
+
 ## 2026-03-20
 
 ### Changed
@@ -227,13 +238,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
-- Backend API development skill covering TSH standards for REST/GraphQL APIs, DataGrid filtering/pagination, JWT authentication, database handling (migrations, ORM, repository pattern, seeding), external service adapters, testing strategy, logging/observability, Docker setup, and security (OWASP TOP 10)
 - Technical context discovery skill for codebase exploration and understanding
 
 ### Changed
 
-- Added `backend-api-development` skill reference to `tsh-software-engineer` agent
-- Added `backend-api-development` as a conditional skill in `implement` prompt for backend API tasks
 - Refactored agents, prompts, and skills to follow a consistent standard
 - Improved architecture-design plan example with expanded detail
 - Updated implementation-gap-analysis and task-analysis examples

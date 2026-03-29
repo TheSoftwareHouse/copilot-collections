@@ -1,11 +1,11 @@
 ---
-name: backend-api-development
-description: Backend API service development patterns, standards, and procedures. Use for building REST/GraphQL APIs, implementing CRUD endpoints, database handling, authentication, testing strategies, external service integrations, filtering/pagination (DataGrid), logging, Docker setup, and modular architecture. Applies to Node.js, PHP, .NET, Java, and Go backends.
+name: tsh-implementing-backend
+description: Backend service implementation patterns, standards, and procedures. Use for building REST/GraphQL APIs, implementing CRUD endpoints, database handling, authentication, testing strategies, external service integrations, filtering/pagination (DataGrid), logging, Docker setup, and modular architecture. Applies to Node.js, PHP, .NET, Java, and Go backends.
 ---
 
-# Backend API Development
+# Implementing Backend
 
-This skill provides standards and procedures for building backend API services following TSH best practices. It is language-agnostic and applies to Node.js, PHP, .NET, Java, and Go projects.
+Provides patterns for building backend API services with modular architecture, structured testing, and production-ready infrastructure following TSH best practices.
 
 ## When to Use
 
@@ -225,15 +225,7 @@ Authorization: Bearer <token>
 - Depend on **interfaces/abstractions**, not concrete implementations.
 - DI enables testability: in tests, swap real implementations with mocks/stubs.
 
-**Language-specific recommendations:**
-| Language | DI Approach |
-|---|---|
-| Node.js (Express) | Awilix, tsyringe, or InversifyJS |
-| Node.js (NestJS) | Built-in NestJS DI |
-| PHP (Symfony/Laravel) | Built-in service container |
-| .NET | Built-in `Microsoft.Extensions.DependencyInjection` |
-| Java (Spring) | Built-in Spring IoC |
-| Go | Wire, Fx, or manual constructor injection |
+See the technology-specific references below for recommended DI frameworks per language.
 
 ## Database Handling
 
@@ -298,11 +290,13 @@ src/
 
 ### Test Pyramid
 
-| Level | What to Test | Tools |
-|---|---|---|
-| **Unit Tests** | Pure business logic in services, domain models, utility functions. Mock all external dependencies. | Jest, Mocha, xUnit, JUnit, PHPUnit, Go testing |
-| **Integration Tests** | API endpoints end-to-end (HTTP request → response). Use a real test database. | Supertest, REST Assured, Testcontainers |
-| **E2E Tests** | Critical user flows across the full stack. | Playwright, Cypress (for frontend) |
+| Level | What to Test |
+|---|---|
+| **Unit Tests** | Pure business logic in services, domain models, utility functions. Mock all external dependencies. |
+| **Integration Tests** | API endpoints end-to-end (HTTP request → response). Use a real test database. |
+| **E2E Tests** | Critical user flows across the full stack. |
+
+See the technology-specific references below for recommended testing tools per language.
 
 ### Integration Tests for Endpoints
 
@@ -354,11 +348,13 @@ describe('POST /users', () => {
 ### Swagger / OpenAPI
 
 - **Every API must be documented** using OpenAPI/Swagger specification.
-- Prefer auto-generated docs from code annotations/decorators when the framework supports it (e.g. NestJS `@nestjs/swagger`, Spring `springdoc-openapi`, .NET Swashbuckle).
+- Prefer auto-generated docs from code annotations/decorators when the framework supports it.
 - If auto-generation is not available, maintain a separate `swagger.yml` file split by domain.
 - Serve documentation at `/api-docs` endpoint.
 - Document: request/response schemas, query parameters, authentication requirements, error responses, and example values.
 - Keep documentation in sync with the actual API — stale docs are worse than no docs.
+
+See the technology-specific references below for recommended Swagger tooling per language.
 
 ## Docker & Local Development
 
@@ -372,9 +368,9 @@ describe('POST /users', () => {
 ### Dockerfile Best Practices
 
 - Use multi-stage builds to keep images small.
-- Pin base image versions (e.g. `node:20-alpine`, not `node:latest`).
+- Pin base image versions (e.g. `node:20-alpine`, `php:8.3-fpm-alpine`, `mcr.microsoft.com/dotnet/aspnet:8.0`).
 - Install only production dependencies in the final stage.
-- Use `.dockerignore` to exclude `node_modules`, `.git`, test files, etc.
+- Use `.dockerignore` to exclude build artifacts, test files, etc.
 - Run as a non-root user in the container.
 
 ## Health Check
@@ -396,9 +392,11 @@ For more thorough health checks, optionally verify database connectivity and cri
 
 ### Structured Logging
 
-- Use a **structured logger** (Winston, Pino, Serilog, SLF4J/Logback, Zap) — never `console.log` in production.
+- Use a **structured logger** — never `console.log` or `print` in production.
 - Log in **JSON format** for machine parseability.
 - Include contextual fields in every log entry: `timestamp`, `level`, `requestId`/`correlationId`, `userId` (if authenticated), `service`.
+
+See the technology-specific references below for recommended logging libraries per language.
 
 ### Log Levels
 
@@ -439,7 +437,7 @@ For more thorough health checks, optionally verify database connectivity and cri
 - **Authorization**: Enforce at every endpoint. Check resource ownership, not just role membership.
 - **Sensitive data**: Never expose stack traces, internal paths, or database details in error responses.
 - **CORS**: Configure explicitly — never use `*` in production.
-- **Security headers**: Use Helmet (Node.js) or equivalent to set security headers (CSP, X-Frame-Options, etc.).
+- **Security headers**: Use framework-appropriate middleware to set security headers (CSP, X-Frame-Options, etc.).
 - **Dependencies**: Regularly audit and update dependencies. Use tools like `npm audit`, Snyk, or Dependabot.
 - **Rate limiting**: Apply on authentication and public endpoints.
 - **Secrets**: Store in environment variables or a secrets manager. Never commit to source control.
@@ -498,6 +496,27 @@ Add or update Swagger/OpenAPI documentation. Verify docs render correctly at `/a
 
 **Step 10: Verify logging and error handling**
 Ensure requests are logged, errors produce structured log entries, and no sensitive data leaks in logs or responses.
+
+## Technology-Specific Patterns
+
+The patterns above are language-agnostic. For technology-specific implementation guidance, load the appropriate reference:
+
+- **Node.js**: See `./references/nodejs-patterns.md` — NestJS/Express DI, Jest/Supertest testing, Pino/Winston logging, TypeORM/Prisma ORM, Swagger integration.
+- **PHP**: See `./references/php-patterns.md` — Symfony/Laravel DI, PHPUnit testing, Monolog logging, Doctrine/Eloquent ORM, Swagger integration.
+- **dotNET**: See `./references/dotnet-patterns.md` — built-in DI, xUnit testing, Serilog logging, Entity Framework ORM, Swashbuckle Swagger.
+- **Java**: See `./references/java-patterns.md` — Spring IoC, JUnit/REST Assured testing, SLF4J/Logback logging, Hibernate ORM, springdoc-openapi.
+- **Go**: See `./references/go-patterns.md` — Wire/Fx DI, Go testing, Zap logging, GORM ORM, swaggo Swagger.
+
+## Connected Skills
+
+- `tsh-sql-and-database-understanding` — for database schema design, query optimization, and ORM integration
+- `tsh-technical-context-discovering` — for understanding project conventions before implementing
+- `tsh-implementation-gap-analysing` — for verifying current state before making changes
+- `tsh-codebase-analysing` — for understanding existing architecture and patterns
+- `tsh-implementing-ci-cd` — for CI/CD pipeline setup and deployment strategies
+- `tsh-implementing-observability` — for logging, monitoring, and distributed tracing
+- `tsh-managing-secrets` — for secure credential storage and rotation
+- `tsh-e2e-testing` — for end-to-end testing with Playwright
 
 ## Connected Skills
 
