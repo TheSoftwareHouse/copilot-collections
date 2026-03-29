@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **12 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
+Copilot Collections provides **13 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -22,7 +22,8 @@ Each agent has:
 
 | Agent | File | Role | Key Tools |
 |---|---|---|---|
-| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Converts workshop materials into Jira-ready epics and stories | Atlassian, Figma, PDF Reader, Sequential Thinking |
+| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Converts workshop materials into epics and stories for task management tools (Jira, Shortcut) | Figma, PDF Reader, Sequential Thinking |
+| [Knowledge](./knowledge) | `tsh-knowledge.agent.md` | Provides task details and knowledge insights from task management and knowledge base tools | Atlassian, Shortcut, Sequential Thinking |
 
 ### 🛠 Development Agents
 

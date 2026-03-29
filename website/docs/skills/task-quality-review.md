@@ -79,4 +79,4 @@ Apply accepted suggestions to `extracted-tasks.md` and save the quality review r
 ## Connected Skills
 
 - `tsh-task-extracting` — Provides the extracted tasks used as primary input.
-- `tsh-jira-task-formatting` — Consumes the updated task list after quality review.
+- `tsh-task-formatting` — Consumes the updated task list after quality review.

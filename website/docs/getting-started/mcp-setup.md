@@ -5,7 +5,7 @@ title: MCP Setup
 
 # MCP Setup
 
-To unlock the full workflow (Jira, Figma, code search, browser automation), you need to configure the MCP (Model Context Protocol) servers. Copilot Collections provides a ready-to-use template in `.vscode/mcp.json`.
+To unlock the full workflow (Jira, Shortcut, Figma, code search, browser automation), you need to configure the MCP (Model Context Protocol) servers. Copilot Collections provides a ready-to-use template in `.vscode/mcp.json`.
 
 ## Installation Options
 
@@ -66,7 +66,8 @@ Each MCP server enables specific capabilities within the workflow:
 
 | MCP Server | Purpose | Used By |
 |---|---|---|
-| 🧩 **Atlassian** | Access Jira issues and Confluence pages for research, planning, implementation, and review | Business Analyst, Architect, Software Engineer, Code Reviewer |
+| 🧩 **Atlassian** | Access Jira issues and Confluence pages for research, planning, implementation, and review | Knowledge, Architect, Software Engineer, Code Reviewer |
+| 📌 **Shortcut** | Access Shortcut stories and projects for task management | Knowledge |
 | 🎨 **Figma MCP Server** | Pull design details, components, and variables for design-driven work | Software Engineer (UI), UI Reviewer |
 | 📚 **Context7** | Semantic search in external documentation and knowledge bases | All agents |
 | 🧪 **Playwright** | Run browser interactions and end-to-end style checks from Copilot | Software Engineer, E2E Engineer, UI Reviewer |
@@ -115,6 +116,7 @@ Some MCP servers require additional setup:
 
 - **Atlassian** — Requires Atlassian account authentication. The HTTP MCP endpoint handles OAuth automatically via your browser.
 - **Figma** — Requires Figma account access. The HTTP MCP endpoint handles authentication via your browser.
+- **Shortcut** — Requires a Shortcut API token. Set the `SHORTCUT_API_TOKEN` environment variable in the MCP configuration.
 - **Context7** — Works without an API key (with rate limits). Optional API key for higher limits.
 - **Playwright** — No authentication required. Runs locally via npx.
 - **Sequential Thinking** — No authentication required. Runs locally via npx.
@@ -126,3 +128,4 @@ Some MCP servers require additional setup:
 - [Playwright MCP](https://github.com/microsoft/playwright-mcp)
 - [Figma MCP](https://help.figma.com/hc/en-us/articles/32132100833559-Guide-to-the-Figma-MCP-server)
 - [Sequential Thinking MCP](https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking)
+- [Shortcut MCP](https://github.com/useshortcut/mcp)

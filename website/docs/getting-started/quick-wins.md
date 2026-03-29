@@ -13,11 +13,11 @@ This page shows how teams integrate Copilot Collections into their daily routine
 
 ## Product Managers & Business Analysts
 
-### 1. Converting Workshop Materials into a Jira Backlog
+### 1. Converting Workshop Materials into a Structured Backlog
 
-**When:** Your team just finished a discovery workshop. You have a raw transcript, Figma boards, and scattered notes — and you need to turn them into a structured, prioritized Jira backlog before the next sprint planning.
+**When:** Your team just finished a discovery workshop. You have a raw transcript, Figma boards, and scattered notes — and you need to turn them into a structured, prioritized backlog before the next sprint planning.
 
-**The old way:** Manually re-read the transcript, extract action items into a spreadsheet, copy-paste into Jira one by one, miss half the edge cases, and spend the next grooming session fixing vague stories.
+**The old way:** Manually re-read the transcript, extract action items into a spreadsheet, copy-paste into your task management tool one by one, miss half the edge cases, and spend the next grooming session fixing vague stories.
 
 **With Copilot Collections:**
 
@@ -33,12 +33,12 @@ This page shows how teams integrate Copilot Collections into their daily routine
 | **4. Gate 1 — Your review** | You review the extracted tasks. Split, merge, add, or remove stories until the breakdown matches what was discussed. |
 | **5. Quality review (10 passes)** | The `tsh-task-quality-reviewing` skill automatically runs 10 analysis passes — entity lifecycle completeness, error states, notification gaps, third-party boundaries, platform operations, and more. |
 | **6. Gate 1.5 — Accept/reject suggestions** | Each quality improvement is presented individually. You accept what makes sense and reject what doesn't apply. |
-| **7. Jira formatting & push** | Tasks are formatted per the Jira benchmark template. After your final approval (Gate 2), epics and stories are created in Jira with proper linking. |
+| **7. Task formatting & push** | Tasks are formatted per the benchmark template for the target tool. After your final approval (Gate 2), epics and stories are created in Jira or Shortcut with proper linking (via the Knowledge agent). |
 
-**Key prompts & agents:** `/tsh-analyze-materials` → Business Analyst  
-**Key skills:** `tsh-transcript-processing`, `tsh-task-extracting`, `tsh-task-quality-reviewing`, `tsh-jira-task-formatting`, `tsh-codebase-analysing`
+**Key prompts & agents:** `/tsh-analyze-materials` → Business Analyst (delegates to Knowledge for task management operations)  
+**Key skills:** `tsh-transcript-processing`, `tsh-task-extracting`, `tsh-task-quality-reviewing`, `tsh-task-formatting`, `tsh-codebase-analysing`
 
-**Value:** A full discovery workshop is converted into a validated, Jira-ready backlog in a single session instead of days of manual work. The 10-pass quality review catches edge cases and gaps that manual extraction routinely misses — missing error states, notification gaps, incomplete entity lifecycles, and platform operations. The three-gate review process ensures nothing reaches Jira without your approval.
+**Value:** A full discovery workshop is converted into a validated backlog in a single session instead of days of manual work. The 10-pass quality review catches edge cases and gaps that manual extraction routinely misses — missing error states, notification gaps, incomplete entity lifecycles, and platform operations. The three-gate review process ensures nothing reaches your task management tool without your approval.
 
 ---
 
@@ -51,17 +51,17 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-research PROJ-101
+/tsh-implement PROJ-101
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Multi-source aggregation** | The Context Engineer agent pulls context from Jira, Confluence, Figma, and the codebase simultaneously via MCP integrations. |
+| **1. Automatic research** | As part of the internal research phase, the Context Engineer agent pulls context from Jira, Confluence, Figma, and the codebase simultaneously via MCP integrations. |
 | **2. Contradiction detection** | The `tsh-task-analysing` skill cross-references requirements across sources and flags inconsistencies, missing details, and ambiguous language. |
 | **3. Open questions list** | The research document includes a structured list of open questions, assumptions that need validation, and risks — ready to send back to the PM. |
-| **4. Scope validation** | The output highlights what's covered by the ticket and what's missing, so you can request clarification before writing a single line of code. |
+| **4. Scope validation** | The output highlights what's covered by the ticket and what's missing, so you can request clarification before proceeding to implementation. |
 
-**Key prompts & agents:** `/tsh-research` → Context Engineer  
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer (research phase)
 **Key skills:** `tsh-task-analysing`, `tsh-codebase-analysing`
 
 **Value:** Ambiguities are surfaced in minutes instead of days. The structured open questions list becomes a communication tool with PMs, reducing back-and-forth by 60–80%.
@@ -79,16 +79,19 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-research PROJ-456
+/tsh-implement PROJ-456
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Automatic context gathering** | The Context Engineer agent pulls requirements from Jira, related Confluence docs, and Figma designs via MCP integrations. |
+| **1. Automatic context gathering** | During the internal research phase, the Context Engineer agent pulls requirements from Jira, related Confluence docs, and Figma designs via MCP integrations. |
 | **2. Codebase analysis** | The `tsh-codebase-analysing` skill traces dependencies, identifies business logic patterns, and maps the data flow across layers. |
 | **3. Structured output** | A `.research.md` document is generated with a task summary, identified components, assumptions, open questions, and risks. |
 
-**Key prompts & agents:** `/tsh-research` → Context Engineer   The research document becomes a reusable artifact that helps the entire team — not just you.
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer (research phase)
+**Key skills:** `tsh-task-analysing`, `tsh-codebase-analysing`
+
+**Value:** The research document becomes a reusable artifact that helps the entire team — not just you.
 
 ---
 
@@ -101,19 +104,20 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-research PROJ-789
-# Review the research doc, then:
-/tsh-plan PROJ-789
+/tsh-implement PROJ-789
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Research phase** | Context Engineer gathers all context — existing architecture, related features, constraints from Jira and Confluence. |
-| **2. Architecture design** | The Architect agent creates a phased implementation plan with CREATE/MODIFY/REUSE labels for every task. |
+| **1. Research phase** | The internal research phase gathers all context — existing architecture, related features, constraints from Jira and Confluence. |
+| **2. Architecture design** | During the internal planning phase, the Architect agent creates a phased implementation plan with CREATE/MODIFY/REUSE labels for every task. |
 | **3. Gap analysis** | The `tsh-architecture-designing` skill evaluates security considerations, scalability, and identifies risks before a single line of code is written. |
 | **4. Database planning** | If the feature involves data changes, the `tsh-sql-and-database-understanding` skill provides schema design patterns, indexing strategies, and migration safety checks. |
 
-**Key prompts & agents:** `/tsh-research` → Context Engineer, `/tsh-plan` → Architect  , reviewed, and agreed upon before implementation starts. Every task is clearly scoped with action labels (CREATE, MODIFY, REUSE), reducing mid-sprint surprises by 50–70%.
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer (research) → Architect (planning)
+**Key skills:** `tsh-architecture-designing`, `tsh-sql-and-database-understanding`, `tsh-codebase-analysing`
+
+**Value:** Architecture decisions are documented, reviewed, and agreed upon before implementation starts. Every task is clearly scoped with action labels (CREATE, MODIFY, REUSE), reducing mid-sprint surprises by 50–70%.
 
 ---
 
@@ -152,19 +156,17 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
-/tsh-research PROJ-555
-/tsh-plan PROJ-555
-/tsh-implement Add new tables and migrate existing data for PROJ-555
+/tsh-implement PROJ-555
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Schema analysis** | The research phase identifies existing tables, relationships, and constraints affected by the change. |
-| **2. Migration planning** | The Architect agent designs the migration with rollback strategies, following naming conventions and normalisation best practices. |
+| **1. Schema analysis** | The internal research phase identifies existing tables, relationships, and constraints affected by the change. |
+| **2. Migration planning** | During the internal planning phase, the Architect agent designs the migration with rollback strategies, following naming conventions and normalisation best practices. |
 | **3. Query optimization** | The `tsh-sql-and-database-understanding` skill enforces `EXPLAIN ANALYZE`, proper indexing, join optimization, and parameterized queries. |
 | **4. ORM integration** | Supports TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM — generating idiomatic code for your stack. |
 
-**Key prompts & agents:** `/tsh-research` → Context Engineer, `/tsh-plan` → Architect, `/tsh-implement` → Software Engineer  
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer (research) → Architect (planning) → Software Engineer (implementation)  
 **Key skills:** `tsh-sql-and-database-understanding`, `tsh-architecture-designing`, `tsh-technical-context-discovering`
 
 **Value:** Database performance issues are reduced by 40–60%. Migrations are planned with rollback strategies from the start. N+1 queries and missing indexes are caught during implementation, not in production.
@@ -261,17 +263,16 @@ This page shows how teams integrate Copilot Collections into their daily routine
 ```text
 /tsh-review-codebase
 # Then pick your first task:
-/tsh-research PROJ-001
-/tsh-plan PROJ-001
+/tsh-implement PROJ-001
 ```
 
 | Step | What Happens |
 |---|---|
 | **1. Codebase health snapshot** | `/tsh-review-codebase` gives you an immediate understanding of the codebase — its structure, patterns, tech stack, and quality issues. |
 | **2. Convention discovery** | The `tsh-technical-context-discovering` skill identifies project conventions, coding standards, and established patterns — you learn how this team works. |
-| **3. Guided first task** | `/tsh-research` and `/tsh-plan` on your first ticket produce a structured analysis and step-by-step implementation plan, so you deliver with confidence. |
+| **3. Guided first task** | `/tsh-implement` on your first ticket performs automatic research and planning, then produces a step-by-step implementation — so you deliver with confidence. |
 
-**Key prompts & agents:** `/tsh-review-codebase` → Architect, `/tsh-research` → Context Engineer, `/tsh-plan` → Architect  
+**Key prompts & agents:** `/tsh-review-codebase` → Architect, `/tsh-implement` → Engineering Manager → Context Engineer → Architect → Software Engineer  
 **Key skills:** `tsh-technical-context-discovering`, `tsh-codebase-analysing`, `tsh-architecture-designing`
 
 **Value:** Onboarding time is reduced by 40–60%. New developers deliver their first meaningful PR days earlier. They absorb project conventions automatically instead of learning them through review feedback.

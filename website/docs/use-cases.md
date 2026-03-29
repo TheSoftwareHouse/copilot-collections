@@ -11,11 +11,11 @@ Nine scenarios where Copilot Collections changes how work actually gets done.
 
 ## Product Ideation
 
-### Workshop transcripts → Jira backlog in 15 minutes
+### Workshop transcripts → structured backlog in 15 minutes
 
-You've just run a discovery workshop. The transcript is a mess of raw ideas, half-formed requirements, and branching conversations. Turning that into a well-structured, ticket-ready backlog normally takes a BA a day or two, if you have one. If you don't, it falls to a developer or PM, and it shows.
+You’ve just run a discovery workshop. The transcript is a mess of raw ideas, half-formed requirements, and branching conversations. Turning that into a well-structured, ticket-ready backlog normally takes a BA a day or two, if you have one. If you don’t, it falls to a developer or PM, and it shows.
 
-The Business Analyst agent processes the raw materials end-to-end. Transcripts are cleaned and structured. Epics and user stories are extracted with acceptance criteria, edge cases, and dependencies surfaced. A 10-pass quality review checks for missing entity lifecycles, error states, notification gaps, and off-happy-path scenarios. Nothing reaches Jira without passing a three-gate human review.
+The Business Analyst agent processes the raw materials end-to-end. Transcripts are cleaned and structured. Epics and user stories are extracted with acceptance criteria, edge cases, and dependencies surfaced. A 10-pass quality review checks for missing entity lifecycles, error states, notification gaps, and off-happy-path scenarios. Nothing reaches your task management tool (Jira or Shortcut) without passing a three-gate human review.
 
 **~15 min vs 1–2 days**
 
@@ -25,7 +25,7 @@ The Business Analyst agent processes the raw materials end-to-end. Transcripts a
 
 Backlogs accumulate debt. Stories that made sense six months ago are now vague. Acceptance criteria were never written. Dependencies were assumed, not documented. Grooming sessions spend half their time reconstructing intent rather than improving work.
 
-The Business Analyst agent's Import Mode fetches existing Jira issues, converts them to a local format, and runs the same quality review used for new workshop outputs. Each suggested improvement is presented individually for accept or reject. Approved changes push back to Jira automatically.
+The Business Analyst agent’s Import Mode fetches existing issues from Jira or Shortcut, converts them to a local format, and runs the same quality review used for new workshop outputs. Each suggested improvement is presented individually for accept or reject. Approved changes push back to the task management tool automatically.
 
 **~10 min per epic**
 
@@ -37,7 +37,7 @@ The Business Analyst agent's Import Mode fetches existing Jira issues, converts 
 
 A developer joins mid-sprint. The standard onboarding is: read the README, ask questions in Slack, try to figure out the conventions, come back in three days when you have something to show. The first week is expensive.
 
-The Context Engineer agent gathers context from Jira, Confluence, Figma, and the codebase automatically. The Architect agent turns that context into a step-by-step implementation plan scoped to the actual ticket. New developers get a structured picture of the task — what exists, what needs to change, where to start - in minutes, not days.
+The Context Engineer agent gathers context from Jira or Shortcut, Confluence, Figma, and the codebase automatically. The Architect agent turns that context into a step-by-step implementation plan scoped to the actual ticket. New developers get a structured picture of the task — what exists, what needs to change, where to start - in minutes, not days.
 
 **~5 min per task**
 
@@ -47,7 +47,7 @@ The Context Engineer agent gathers context from Jira, Confluence, Figma, and the
 
 The information needed to implement any feature lives across four tools at minimum. Developers spend 30–60 minutes per task reconstructing context that already exists — just in different places.
 
-MCP integrations (Atlassian, Figma, Context7, Playwright, PDF Reader) bring every source into a single Copilot chat session. The Context Engineer agent synthesises them into one research document. You start implementing with full context already assembled.
+MCP integrations (Atlassian, Shortcut, Figma, Context7, Playwright, PDF Reader) bring every source into a single Copilot chat session. The Context Engineer agent synthesises them into one research document. You start implementing with full context already assembled.
 
 **~3 min vs 30–60 min**
 
