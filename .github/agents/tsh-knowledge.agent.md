@@ -30,8 +30,7 @@ For Knowledge Base we support:
 
 ## Skills Usage Guidelines
 
-- `tsh-using-atlassian` - guidelines for interacting with Jira and Confluence via Atlassian MCP tools. Covers resource discovery, workspace selection, searching, reading, creating and updating issues and pages. Load when using `atlassian/*` tools.
-- `tsh-using-shortcut` - guidelines for interacting with Shortcut via Shortcut MCP tools. Covers workspace context discovery and common operations for stories, epics, iterations, and documents. Load when using `shortcut/*` tools.
+- `tsh-using-task-and-knowledge-management-tools` - guidelines for interacting with supported task management and knowledge base tools (Atlassian Jira and Confluence, Shortcut) to retrieve and update information related to tasks, projects, and documentation.
 
 ## Tool Usage Guidelines
 

@@ -58,7 +58,7 @@ Build a complete picture of the project scope, actors, and features before proce
 
 If Task Management tools are available and the user has indicated a project (either in their initial message or during the workflow):
 
-1. Check available resources using the appropriate tool interaction guidelines (`tsh-using-atlassian` or `tsh-using-shortcut`).
+1. Check available resources using the appropriate tool interaction guidelines (`tsh-using-task-and-knowledge-management-tools`).
 2. If multiple resources exist, ask the user which one to use.
 3. If the user provided a Task Management project key, use it. If not, ask once: "I have access to Task Management tools. Would you like me to check an existing board for additional context? If so, what is the project key?" If the user declines, skip this step entirely.
 4. Fetch existing epics and stories from the board.
@@ -325,5 +325,4 @@ The report serves as an audit trail documenting:
 ## Connected Skills
 
 - `tsh-task-extracting` — provides the extracted tasks used as primary input for the quality review
-- `tsh-jira-task-formatting` — consumes the updated task list after quality review when using Jira
-- `tsh-shortcut-task-formatting` — consumes the updated task list after quality review when using Shortcut
+- `tsh-task-formatting` — consumes the updated task list after quality review when using Jira or Shortcut

@@ -59,10 +59,9 @@ This policy is the **single source of truth** for the protected status list. All
 
 - `tsh-transcript-processing` - to clean raw workshop transcripts from small talk, structure by topics, and extract key decisions, action items, and open questions. Use at the beginning of the workflow when raw transcripts are provided.
 - `tsh-task-extracting` - to identify epics and user stories from all processed materials (cleaned transcript, Figma designs, codebase context). Use after transcript processing and material analysis are complete.
-- `tsh-jira-task-formatting` - to format extracted tasks into Jira-ready structure following the benchmark template, manage review gates, and guide Jira issue creation. Also provides the **Import Mode** for fetching existing Jira issues into local format. Use when **Jira** is the target task management tool.
-- `tsh-shortcut-task-formatting` - to format extracted tasks into Shortcut-ready structure following the benchmark template, manage review gates, and guide Shortcut story creation. Also provides the **Import Mode** for fetching existing Shortcut stories into local format. Use when **Shortcut** is the target task management tool.
-- `tsh-using-atlassian` - guidelines for interacting with Jira and Confluence via Atlassian MCP tools. Covers resource discovery, workspace selection, and common operations. Load when using Jira/Confluence.
-- `tsh-using-shortcut` - guidelines for interacting with Shortcut via Shortcut MCP tools. Covers workspace context discovery and common operations. Load when using Shortcut.
+
+- `tsh-task-formatting` - to format extracted tasks into the structure required by the target task management system (Jira or Shortcut). This skill orchestrates the formatting process and delegates to specific formatting skills based on the target tool. Use after quality review is complete and before pushing to the task management tool. Also use for the **Import Mode** when the user provides existing task IDs or a project key instead of workshop materials.
+- `tsh-using-task-and-knowledge-management-tools` - for guidelines on interacting with task management and knowledge base tools to retrieve and update information related to tasks, projects, and documentation Covers resource discovery, workspace selection, and common operations. Load when using any task management or knowledge base tool.
 - `tsh-task-quality-reviewing` - to analyze the Gate 1-approved task list for quality gaps, missing edge cases, and improvement opportunities. Runs automatically after Gate 1 approval. Produces structured suggestions the user can individually accept or reject at Gate 1.5, then applies accepted changes to `extracted-tasks.md`.
 - `tsh-codebase-analysing` - to analyze the existing codebase and understand what already exists, informing the scope of new tasks. Use during material analysis when codebase context is relevant.
 
@@ -164,7 +163,7 @@ You have access to the `tsh-knowledge` agent for interacting with Task Managemen
   - Fetching existing epics and stories from Task Management Tool when the user wants to iterate on an existing backlog.
   - Updating individual Task Management Tool issues when the user modifies a task that has a Task Management Tool key in `formatted-tasks.md`.
 - **IMPORTANT**:
-  - Always establish workspace context first using the appropriate tool interaction skill (`tsh-using-atlassian` or `tsh-using-shortcut`).
+  - Always establish workspace context first using the appropriate tool interaction skill (`tsh-using-task-and-knowledge-management-tools`).
   - If there is more than one accessible resource, ask the user which one to use before proceeding.
   - Create epics first to obtain their Task Management Tool IDs, then create stories linked to those epics.
   - Before batch-pushing, check each task's `Task Management Tool Key` field. Tasks with existing keys are **updated**, not recreated. Present a sync summary to the user showing: (a) tasks to be CREATED (no Task Management Tool key), (b) tasks to be UPDATED (existing key), (c) total counts. Get approval before proceeding.

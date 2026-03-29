@@ -18,17 +18,15 @@ Before starting, load and follow these skills in order:
 - `tsh-transcript-processing` - for cleaning and structuring raw transcripts
 - `tsh-task-extracting` - for identifying epics and user stories from all materials
 - `tsh-task-quality-reviewing` - for analyzing extracted tasks for gaps, edge cases, and improvements
-- `tsh-jira-task-formatting` (when target is Jira) - for formatting tasks per the benchmark template and managing Jira push
-- `tsh-shortcut-task-formatting` (when target is Shortcut) - for formatting tasks per the benchmark template and managing Shortcut push
-- `tsh-using-atlassian` - for accessing Jira and Confluence when target is Jira
-- `tsh-using-shortcut` - for accessing Shortcut when target is Shortcut
+- `tsh-task-formatting` - for orchestrating the formatting process and delegating to specific formatting skills based on the target tool
+- `tsh-using-task-and-knowledge-management-tools` - for guidelines on interacting with task management and knowledge base tools to retrieve and update information related to tasks, projects, and documentation
 - `tsh-codebase-analysing` - for understanding the existing codebase when relevant
 
 ## Workflow
 
 Determine the entry point based on what the user provides:
 
-**If the user provides existing task IDs (Jira issue keys or Shortcut story IDs) or a project key instead of workshop materials**, skip transcript processing and task extraction. Use the appropriate formatting skill (`tsh-jira-task-formatting` or `tsh-shortcut-task-formatting`) **Import Mode** to fetch and convert existing tasks into `formatted-tasks.md`. Then proceed to quality review (Step 5) and formatting.
+**If the user provides existing task IDs (Jira issue keys or Shortcut story IDs) or a project key instead of workshop materials**, skip transcript processing and task extraction. Use the appropriate formatting skill (`tsh-task-formatting`) **Import Mode** to fetch and convert existing tasks into `formatted-tasks.md`. Then proceed to quality review (Step 5) and formatting.
 
 **Standard workflow (workshop materials provided):**
 

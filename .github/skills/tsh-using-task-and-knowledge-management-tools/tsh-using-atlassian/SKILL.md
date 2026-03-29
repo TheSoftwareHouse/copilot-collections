@@ -99,5 +99,5 @@ If the agent does not define a Protected Status Policy, use the defaults above.
 
 ## Connected Skills
 
-- `tsh-jira-task-formatting` — uses Atlassian tools to push formatted tasks to Jira
+- `tsh-task-formatting` — uses Atlassian tools to push formatted tasks to Jira
 - `tsh-task-quality-reviewing` — may use Atlassian tools to check board context during quality review
