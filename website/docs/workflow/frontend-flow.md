@@ -10,14 +10,11 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 ## Command Sequence
 
 ```text
-1️⃣ /tsh-implement <JIRA_ID or task description>
-   ↳ 🔍 Engineering Manager delegates to Context Engineer for research
-   ↳ 📖 Review research doc – verify Figma links, requirements
-   ↳ ✅ Confirm to proceed to planning
-   ↳ 🧱 Engineering Manager delegates to Architect for planning
-   ↳ 📖 Review plan – check component breakdown, design references
-   ↳ ✅ Confirm phases align with Figma structure
-   ↳ 💻 Engineering Manager delegates UI tasks to Software Engineer
+1️⃣ /tsh-implement    <JIRA_ID or task description>
+   ↳ 📖 Internal research phase — Context Engineer gathers requirements, Figma links, codebase context
+   ↳ 📖 Internal planning phase — Architect creates component breakdown with design references
+   ↳ ✅ Review research doc and plan — verify Figma links, confirm phases align with Figma structure
+   ↳ 📖 Engineering Manager delegates UI tasks to Software Engineer
    ↳ 📖 Review code changes and UI Verification Summary
    ↳ ✅ Manually verify critical UI elements in browser
    ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until PASS or escalation

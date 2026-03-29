@@ -8,12 +8,12 @@ title: /tsh-analyze-materials
 **Agent:** Business Analyst  
 **File:** `.github/prompts/tsh-analyze-materials.prompt.md`
 
-Processes discovery workshop materials and converts them into structured, Jira-ready epics and user stories. Can also import an existing Jira backlog for local iteration.
+Processes discovery workshop materials and converts them into structured epics and user stories for your task management tool (Jira or Shortcut). Can also import an existing backlog for local iteration.
 
 ## Usage
 
 ```text
-/tsh-analyze-materials <workshop materials or Jira project key>
+/tsh-analyze-materials <workshop materials or project key>
 ```
 
 ## What It Does
@@ -26,20 +26,21 @@ Processes discovery workshop materials and converts them into structured, Jira-r
 4. **Gate 1 — Task Review** — Presents extracted tasks for user validation. Iterates until approved.
 5. **Quality review** — Runs analysis passes against the approved task list to find gaps, missing edge cases, and improvements.
 6. **Gate 1.5 — Suggestion Review** — Presents quality review suggestions individually for accept/reject.
-7. **Format for Jira** — Applies the benchmark template to all tasks using the `tsh-jira-task-formatting` skill.
-8. **Gate 2 — Push Approval** — Presents final formatted tasks for user review before Jira push.
-9. **Push to Jira** — Creates epics and stories in Jira with proper linking. Reports created issue keys.
+7. **Format for target tool** — Applies the benchmark template to all tasks using the `tsh-task-formatting` skill (delegates to Jira or Shortcut sub-skill).
+8. **Gate 2 — Push Approval** — Presents final formatted tasks for user review before push.
+9. **Push to task management tool** — Creates epics and stories with proper linking via the Knowledge agent. Reports created issue keys.
 
-### Import Mode (Jira project key provided)
+### Import Mode (project key or issue IDs provided)
 
-When the user provides existing Jira issue keys or a project key instead of workshop materials, the agent skips transcript processing and task extraction. It fetches existing tasks from Jira, converts them into the local format, then proceeds to quality review and formatting.
+When the user provides existing issue keys or a project key instead of workshop materials, the agent skips transcript processing and task extraction. It fetches existing tasks from the task management tool (via the Knowledge agent), converts them into the local format, then proceeds to quality review and formatting.
 
 ## Skills Loaded
 
 - `tsh-transcript-processing` — Clean and structure raw transcripts.
 - `tsh-task-extracting` — Identify epics and user stories from materials.
 - `tsh-task-quality-reviewing` — Analyze tasks for gaps and improvements.
-- `tsh-jira-task-formatting` — Format tasks for Jira and manage push.
+- `tsh-task-formatting` — Format tasks for the target tool and manage push.
+- `tsh-using-task-and-knowledge-management-tools` — Guidelines for interacting with task management tools.
 - `tsh-codebase-analysing` — Understand existing codebase when relevant.
 
 ## Output
@@ -52,7 +53,7 @@ specifications/
     cleaned-transcript.md       ← structured transcript
     extracted-tasks.md          ← epics and stories (updated after quality review)
     quality-review.md           ← quality review report
-    jira-tasks.md               ← final Jira-ready tasks
+    formatted-tasks.md          ← final formatted tasks for target tool
 ```
 
 ## Input Flexibility
@@ -64,9 +65,9 @@ The command accepts various input types:
 | Raw transcript text | Runs full workflow starting from transcript processing |
 | Structured notes | Skips transcript processing, starts from task extraction |
 | Figma links | Analyzes designs for functional requirements |
-| Jira project key | Imports existing backlog for local iteration |
+| Project key or issue IDs | Imports existing backlog for local iteration |
 | Combination | Processes all available materials together |
 
 :::tip
-The three review gates are mandatory. No data is pushed to Jira without your explicit approval at each gate. Review each output carefully — the agent produces business-oriented tasks that stakeholders should be able to understand without technical knowledge.
+The three review gates are mandatory. No data is pushed to your task management tool without your explicit approval at each gate. Review each output carefully — the agent produces business-oriented tasks that stakeholders should be able to understand without technical knowledge.
 :::

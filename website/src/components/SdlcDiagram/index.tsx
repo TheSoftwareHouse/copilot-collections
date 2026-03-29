@@ -32,10 +32,22 @@ export default function SdlcDiagram(): React.JSX.Element {
           <div className={styles.card}>
             <div className={styles.cardCmd}>
               <strong className={styles.cardCmdStrong}>/tsh-analyze-materials</strong>
+              <span style={{fontSize: '0.7rem', opacity: 0.7, marginLeft: '0.5rem'}}>Business Analyst</span>
             </div>
             <div className={styles.cardDesc}>
-              Clean transcript → extract tasks → produce Jira-ready stories with
+              Clean transcript → extract tasks → produce stories with
               full acceptance criteria
+            </div>
+          </div>
+          <div className={styles.parallelLabel}>↓ delegates to</div>
+          <div className={styles.grid2}>
+            <div className={styles.card}>
+              <div className={styles.cardCmd}>
+                <strong className={styles.cardCmdStrong}>Knowledge</strong>
+              </div>
+              <div className={styles.cardDesc}>
+                Task &amp; knowledge management
+              </div>
             </div>
           </div>
         </div>
@@ -104,6 +116,14 @@ export default function SdlcDiagram(): React.JSX.Element {
               </div>
               <div className={styles.cardDesc}>
                 LLM application prompts
+              </div>
+            </div>
+            <div className={styles.card}>
+              <div className={styles.cardCmd}>
+                <strong className={styles.cardCmdStrong}>Knowledge</strong>
+              </div>
+              <div className={styles.cardDesc}>
+                Task &amp; knowledge management
               </div>
             </div>
           </div>

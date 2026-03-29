@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in performing code review."
-tools: ['execute', 'read', 'atlassian/*', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
+tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs: 
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
@@ -40,14 +40,17 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-reviewing-frontend` - for frontend-specific review criteria: component quality, hooks correctness, rendering issues, accessibility and performance spot-checks.
 - `tsh-engineering-prompts` - when reviewing LLM prompt code: verify prompt injection defenses, proper delimiter separation, output format specification, no hardcoded role/persona in user prompts. To detect: search for prompt/template files (e.g., `prompts/` directory, `*.prompt.txt`) and LLM client usage in code (`openai`, `anthropic`, `bedrock`, `converse`, `langchain`).
 
+## Agents Delegation Guidelines
+
+You have access to the `tsh-knowledge` agent.
+- **MUST delegate to when**:
+  - Accessing structured knowledge from external systems like Jira, Shortcut, and Confluence to gather requirements, technical context, project conventions, and implementation guidelines for the project. This includes:
+    - Accessing task details from task management systems like Jira or Shortcut to gather requirements and context for implementation tasks.
+    - Accessing documentation from knowledge bases like Confluence to gather technical context, project conventions, and implementation guidelines for the project.
+- **IMPORTANT**:
+  - When asked about anything related to tasks or knowledge, always run the `tsh-knowledge` subagent first as this is the only agent with access to structured external knowledge. This ensures that your responses are informed by the most accurate and up-to-date information from the project management and documentation systems.
+
 ## Tool Usage Guidelines
-
-You have access to the `Atlassian` tool.
-
-- **MUST use when**:
-  - You need to verify requirements or context documented in Jira or Confluence.
-- **SHOULD NOT use for**:
-  - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
 You have access to the `context7` tool.
 

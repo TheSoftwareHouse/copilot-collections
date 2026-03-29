@@ -5,7 +5,7 @@ description: Identify and structure epics and user stories from workshop materia
 
 # Task Extraction
 
-This skill helps you identify discrete pieces of work (epics and user stories) from discovery workshop materials and structure them into a clear, business-oriented task breakdown. The output is intended for stakeholder review and eventual Jira creation — it is NOT a technical specification or implementation plan.
+This skill helps you identify discrete pieces of work (epics and user stories) from discovery workshop materials and structure them into a clear, business-oriented task breakdown. The output is intended for stakeholder review and eventual task management tool creation — it is NOT a technical specification or implementation plan.
 
 ## What This Skill Produces
 
@@ -113,7 +113,7 @@ After presenting all stories, ask one final workflow-level question: "Did I miss
 
 Iterate based on feedback until the user approves the task list.
 
-This is **Review Gate 1** — the user must approve the task list before proceeding to Jira formatting.
+This is **Review Gate 1** — the user must approve the task list before proceeding to task formatting.
 
 **Step 9: Save the extracted tasks document**
 

@@ -5,7 +5,7 @@ title: Workshop Analysis Flow
 
 # Workshop Analysis Flow
 
-For converting discovery workshop materials into structured, Jira-ready epics and user stories, use the Workshop Analysis workflow. This takes raw workshop outputs (transcripts, designs, notes) and produces a validated backlog ready for team refinement.
+For converting discovery workshop materials into structured epics and user stories for your task management tool (Jira or Shortcut), use the Workshop Analysis workflow. This takes raw workshop outputs (transcripts, designs, notes) and produces a validated backlog ready for team refinement.
 
 ## Command Sequence
 
@@ -25,10 +25,10 @@ For converting discovery workshop materials into structured, Jira-ready epics an
    ↳ 📖 Review each suggestion — accept or reject individually
    ↳ ✅ Agent applies accepted suggestions to the task list
 
-4️⃣ Gate 2 — Jira Push Approval
+4️⃣ Gate 2 — Push Approval
    ↳ 📖 Review final formatted tasks
-   ↳ ✅ Confirm target Jira project and approve push
-   ↳ 🚀 Agent creates/updates issues in Jira
+   ↳ ✅ Confirm target project and approve push
+   ↳ 🚀 Agent creates/updates issues via Knowledge agent
 ```
 
 ## Workflow Diagram
@@ -63,8 +63,8 @@ For converting discovery workshop materials into structured, Jira-ready epics an
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
-│  Jira Formatting            │
-│  → jira-tasks.md            │
+│  Task Formatting              │
+│  → formatted-tasks.md         │
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
@@ -72,8 +72,8 @@ For converting discovery workshop materials into structured, Jira-ready epics an
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
-│  Push to Jira               │
-│  (create epics → stories)   │
+│  Push to Task Mgmt Tool     │
+│  (via Knowledge agent)      │
 └─────────────────────────────┘
 ```
 
@@ -96,13 +96,13 @@ The quality review step runs 10 domain-agnostic analysis passes against the appr
 
 ## Import Mode
 
-To iterate on an existing Jira backlog instead of workshop materials:
+To iterate on an existing backlog instead of workshop materials:
 
 ```text
 /tsh-analyze-materials PROJ-123
 ```
 
-The agent fetches existing issues from Jira, converts them into the local format, then runs quality review and formatting. Changes can be pushed back to Jira individually or in batch.
+The agent fetches existing issues from the task management tool (via the Knowledge agent), converts them into the local format, then runs quality review and formatting. Changes can be pushed back individually or in batch.
 
 ## Connecting to the Standard Flow
 
