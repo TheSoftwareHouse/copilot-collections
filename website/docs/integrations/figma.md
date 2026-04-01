@@ -5,7 +5,7 @@ title: Figma
 
 # Figma MCP
 
-**Server key:** `figma-mcp-server`  
+**Server key:** `figma`  
 **Type:** HTTP  
 **URL:** `https://mcp.figma.com/mcp`
 
@@ -33,7 +33,7 @@ Provides access to Figma designs for extracting specifications, verifying UI imp
 
 ```json
 {
-  "figma-mcp-server": {
+  "figma": {
     "url": "https://mcp.figma.com/mcp",
     "type": "http"
   }

@@ -19,7 +19,7 @@ Your goal is to implement the feature according to the provided implementation p
 5. **Process each task in plan order.** For each task, based on its type:
    - **`[CREATE]` or `[MODIFY]`** → delegate to the appropriate agent (`tsh-software-engineer` for application code, `tsh-devops-engineer` for infrastructure, `tsh-prompt-engineer` for LLM prompts). After the agent completes, run quality checks (tsc, lint, build).
 
-   - **`[REUSE]`** → execute as described in the task definition — the task specifies which agent to delegate to and what context to pass. For UI verification tasks: use `vscode/askQuestions` to confirm the dev server URL before the first verification; after fixing reported differences, **always re-delegate verification** to confirm fixes worked (repeat up to 5 iterations, then escalate to user). You do NOT need `figma-mcp-server` or `playwright` tools yourself — the reviewer agent has them.
+   - **`[REUSE]`** → execute as described in the task definition — the task specifies which agent to delegate to and what context to pass. For UI verification tasks: use `vscode/askQuestions` to confirm the dev server URL before the first verification; after fixing reported differences, **always re-delegate verification** to confirm fixes worked (repeat up to 5 iterations, then escalate to user). You do NOT need `figma` or `playwright` tools yourself — the reviewer agent has them.
 
 6. **After each task**, update the relevant plan to reflect progress by checking the box for the completed task step and:
    - Review the implementation against the plan and feature context to ensure all requirements are met.

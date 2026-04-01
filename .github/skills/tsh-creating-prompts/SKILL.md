@@ -87,7 +87,7 @@ Select the agent and model best suited for the workflow:
 **Step 3: Determine tool requirements**
 
 Decide if the prompt needs tools beyond the agent's defaults:
-- If the workflow requires specific MCP servers (e.g., `figma-mcp-server/*`, `atlassian/*`), list them in the `tools` frontmatter
+- If the workflow requires specific MCP servers (e.g., `figma/*`, `atlassian/*`), list them in the `tools` frontmatter
 - If the workflow only needs the agent's default tools, omit the `tools` field entirely
 - Remember: prompt-level tools take priority over agent-level tools (see VS Code docs on tool list priority)
 - Use the `<server-name>/*` format to include all tools from an MCP server

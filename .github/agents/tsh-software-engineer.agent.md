@@ -5,7 +5,7 @@ tools:
     "execute",
     "read",
     "context7/*",
-    "figma-mcp-server/*",
+    "figma/*",
     "playwright/*",
     "sequential-thinking/*",
     "edit",
@@ -90,7 +90,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.

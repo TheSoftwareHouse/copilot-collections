@@ -49,7 +49,7 @@ All servers are configured in `.vscode/mcp.json`:
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
       "type": "stdio"
     },
-    "figma-mcp-server": {
+    "figma": {
       "url": "https://mcp.figma.com/mcp",
       "type": "http"
     },

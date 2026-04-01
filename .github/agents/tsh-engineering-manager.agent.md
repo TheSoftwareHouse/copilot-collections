@@ -117,7 +117,7 @@ You have access to the `tsh-ui-reviewer` agent.
   - Processing `[REUSE]` UI verification tasks defined in the implementation plan.
   - Re-verifying UI components after fixes are applied by `tsh-software-engineer`.
 - **IMPORTANT**:
-  - You do NOT need `figma-mcp-server` or `playwright` tools yourself. The `tsh-ui-reviewer` agent has these tools in its own definition. Use `runSubagent` to delegate — the subagent accesses its own tools independently. Never skip UI verification because you don't see these tools in your own tool list.
+  - You do NOT need `figma` or `playwright` tools yourself. The `tsh-ui-reviewer` agent has these tools in its own definition. Use `runSubagent` to delegate — the subagent accesses its own tools independently. Never skip UI verification because you don't see these tools in your own tool list.
   - Always run subagent with [tsh-review-ui.prompt.md](../prompts/tsh-review-ui.prompt.md) prompt, passing the Figma URL, dev server URL, and component/section name as context.
   - When the plan contains UI tasks with Figma references, read and follow the complete UI verification workflow defined in [tsh-implement-ui.prompt.md](../internal-prompts/tsh-implement-ui.prompt.md). It covers the verify-fix loop, confidence handling, verification gate, escalation rules, and dev server URL confirmation.
 - **SHOULD NOT delegate to**:

@@ -19,7 +19,7 @@ Before starting, load and follow these skills:
 Follow the 5-step verification process defined in the `tsh-ui-verifying` skill. The skill contains the complete workflow including:
 
 1. Validate inputs (Figma URL + running dev server)
-2. Get EXPECTED from Figma via `figma-mcp-server`
+2. Get EXPECTED from Figma via `figma`
 3. Get ACTUAL from implementation via `playwright` — structure, actual rendered dimensions, and visual screenshot
 4. Compare following the skill's verification categories and tolerances
 5. Generate structured report following the skill's report format
