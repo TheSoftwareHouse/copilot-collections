@@ -29,7 +29,7 @@ Always treat the **research** and **plan** files as the single source of truth f
   - Open the **plan file** (`*.plan.md`) and look for:
     - Figma URLs and design references in `Task details`.
     - If present, a structured "Design References" subsection mapping views/components to Figma URLs or node IDs.
-- Use these Figma URLs as the **default source** for all `figma-mcp-server` calls during implementation.
+- Use these Figma URLs as the **default source** for all `figma` calls during implementation.
 
 ### When Figma link is missing
 

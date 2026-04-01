@@ -5,7 +5,7 @@ tools:
     "execute",
     "atlassian/*",
     "context7/*",
-    "figma-mcp-server/*",
+    "figma/*",
     "pdf-reader/*",
     "sequential-thinking/*",
     "read",
@@ -100,7 +100,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching the local codebase (use `search` or `grep_search` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Designing the component hierarchy and data flow based on UI requirements.
