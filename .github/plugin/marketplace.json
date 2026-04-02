@@ -1,0 +1,25 @@
+{
+  "name": "tsh-copilot-collections",
+  "metadata": {
+    "description": "Opinionated GitHub Copilot setup by The Software House.",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "The Software House",
+    "email": "copilot@tsh.io"
+  },
+  "plugins": [
+    {
+      "name": "tsh-copilot-collections",
+      "source": ".",
+      "description": "Full product development lifecycle workflows for GitHub Copilot.",
+      "version": "1.0.0",
+      "homepage": "https://github.com/tsh/copilot-collections",
+      "repository": "https://github.com/tsh/copilot-collections",
+      "license": "MIT",
+      "keywords": ["copilot", "agents", "skills", "prompts", "mcp", "product-lifecycle", "product-ideation", "development", "quality-assurance", "jira", "figma", "playwright", "copilot-customization"],
+      "category": "developer-tools",
+      "tags": ["product-ideation", "development", "quality", "agents", "skills", "prompts", "mcp", "jira", "figma", "playwright"]
+    }
+  ]
+}

@@ -569,6 +569,71 @@ If you prefer the UI instead of editing JSON directly:
 
 ---
 
+## 🖥️ Installation via Copilot CLI
+
+If you use GitHub Copilot CLI, you can install this collection as a plugin with a single command.
+
+### Option 1: Direct Install (Recommended)
+
+```bash
+/plugin install tsh/copilot-collections
+```
+
+This clones the repository and registers all agents, skills, and MCP servers from `plugin.json`.
+
+### Option 2: Marketplace Install
+
+First, register the marketplace:
+
+```bash
+/plugin marketplace add tsh/copilot-collections
+```
+
+Then install the plugin from the marketplace:
+
+```bash
+/plugin install tsh-copilot-collections@tsh-copilot-collections
+```
+
+### Option 3: Install from a Local Path
+
+If you've already cloned the repository locally (e.g., during the [VS Code installation](#-installation-in-vs-code)), you can install it directly from disk:
+
+```bash
+/plugin install /path/to/copilot-collections
+```
+
+For example, if you cloned to `~/projects`:
+
+```bash
+/plugin install ~/projects/copilot-collections
+```
+
+This registers the local copy as a plugin without cloning it again. Useful when you want to use the same checkout for both VS Code and CLI.
+
+### Updating
+
+To update to the latest version:
+
+```bash
+/plugin update
+```
+
+> ⚠️ **Restart Required:** After installing or updating the plugin, restart your Copilot CLI session for changes to take effect.
+
+### Known CLI Limitations
+
+The collection was originally built for VS Code. When used via CLI, some features may have reduced functionality:
+
+- **`vscode/*` tools** — Agents that use `vscode/runCommand` or `vscode/askQuestions` may not have access to these tools in CLI context. The agents remain functional for their core capabilities.
+- **`handoffs` blocks** — Agent handoff declarations in YAML frontmatter are VS Code-specific. The CLI may ignore them silently or produce warnings.
+- **HTTP-based MCP servers** — The Figma and Atlassian MCP servers use `type: "http"`, which is a VS Code-specific server type. These may require additional CLI configuration or may not be available.
+- **Prompts** — `.prompt.md` file discovery in CLI is unconfirmed. Prompts may not be available as slash commands after CLI installation.
+
+For the full VS Code installation (recommended for maximum feature coverage), see the [Installation in VS Code](#-installation-in-vs-code) section above.
+
+---
+
 ## 🔌 MCP Server Configuration
 
 To unlock the full workflow (Jira, Figma, code search, browser automation), you need to configure the MCP servers. We provide a ready-to-use template in [`.vscode/mcp.json`](./.vscode/mcp.json).
