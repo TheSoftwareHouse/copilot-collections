@@ -47,7 +47,7 @@ Here is the full `mcp.json` configuration with all 5 servers:
       "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
       "type": "stdio"
     },
-    "figma-mcp-server": {
+    "figma": {
       "url": "https://mcp.figma.com/mcp",
       "type": "http"
     },
@@ -64,13 +64,13 @@ Here is the full `mcp.json` configuration with all 5 servers:
 
 Each MCP server enables specific capabilities within the workflow:
 
-| MCP Server | Purpose | Used By |
-|---|---|---|
-| 🧩 **Atlassian** | Access Jira issues and Confluence pages for research, planning, implementation, and review | Business Analyst, Architect, Software Engineer, Code Reviewer |
-| 🎨 **Figma MCP Server** | Pull design details, components, and variables for design-driven work | Software Engineer (UI), UI Reviewer |
-| 📚 **Context7** | Semantic search in external documentation and knowledge bases | All agents |
-| 🧪 **Playwright** | Run browser interactions and end-to-end style checks from Copilot | Software Engineer, E2E Engineer, UI Reviewer |
-| 🧠 **Sequential Thinking** | Advanced reasoning for complex problem analysis, revision, and branching | All agents (for complex tasks) |
+| MCP Server                 | Purpose                                                                                    | Used By                                                       |
+| -------------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------- |
+| 🧩 **Atlassian**           | Access Jira issues and Confluence pages for research, planning, implementation, and review | Business Analyst, Architect, Software Engineer, Code Reviewer |
+| 🎨 **Figma MCP**           | Pull design details, components, and variables for design-driven work                      | Software Engineer (UI), UI Reviewer                           |
+| 📚 **Context7**            | Semantic search in external documentation and knowledge bases                              | All agents                                                    |
+| 🧪 **Playwright**          | Run browser interactions and end-to-end style checks from Copilot                          | Software Engineer, E2E Engineer, UI Reviewer                  |
+| 🧠 **Sequential Thinking** | Advanced reasoning for complex problem analysis, revision, and branching                   | All agents (for complex tasks)                                |
 
 ## Configuring Context7 API Key
 
@@ -106,7 +106,7 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 ```
 
 :::note
-Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma-mcp-server`). If you copied an older template with different names, update your configuration to match the current template.
+Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma`). If you copied an older template with different names, update your configuration to match the current template.
 :::
 
 ## Authentication Requirements

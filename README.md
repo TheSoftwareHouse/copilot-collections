@@ -88,10 +88,10 @@ We support the **full product development lifecycle**, organized into three phas
 
 **Single flow: Implement → Review**
 
-| Step | Command | What happens |
-|---|---|---|
+| Step      | Command          | What happens                                                                                                                           |
+| --------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | Implement | `/tsh-implement` | Engineering Manager orchestrates the full cycle: research → plan → implementation. For UI tasks includes iterative Figma verification. |
-| Review | `/tsh-review` | Structured code review against acceptance criteria, security, and reliability |
+| Review    | `/tsh-review`    | Structured code review against acceptance criteria, security, and reliability                                                          |
 
 ### Phase 3: ✅ Quality – Review & Testing
 
@@ -256,7 +256,7 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 - Enforces separation of concerns between customization types (agent = WHO, skill = HOW, prompt = WHAT, instructions = RULES).
 - Optimizes token efficiency, context architecture, and signal-to-noise ratio within context windows.
 
-#### 🔀 Copilot Orchestrator *(experimental)*
+#### 🔀 Copilot Orchestrator _(experimental)_
 
 - Focus: **coordinating complex, multi-step Copilot customization tasks** using specialized sub-agents.
 - Decomposes work into focused subtasks and delegates to three workers: Researcher, Creator, and Reviewer — each running in an isolated context window.
@@ -635,12 +635,12 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 }
 ```
 
-> **Note:** Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma-mcp-server`). If you copied an older template with different names, update your configuration to match the current template.
+> **Note:** Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma`). If you copied an older template with different names, update your configuration to match the current template.
 
 ### What each MCP is used for
 
 - 🧩 **Atlassian MCP** – access Jira issues for `/tsh-implement` and `/tsh-review` (and internally during research and planning phases).
-- 🎨 **Figma MCP Server** – pull design details, components, and variables for design‑driven work.
+- 🎨 **Figma MCP** – pull design details, components, and variables for design‑driven work.
 - 📚 **Context7 MCP** – semantic search in external docs and knowledge bases.
 - 🧪 **Playwright MCP** – run browser interactions and end‑to‑end style checks from Copilot.
 - 🧠 **Sequential Thinking MCP** – advanced reasoning tool for complex problem analysis.
@@ -667,41 +667,41 @@ Once the repo is cloned and VS Code User Settings are configured:
 
 ### 📋 Product Ideation – Create requirements & plan work
 
-| Agent | Prompt | Purpose |
-|---|---|---|
+| Agent            | Prompt                               | Purpose                                         |
+| ---------------- | ------------------------------------ | ----------------------------------------------- |
 | Business Analyst | `/tsh-analyze-materials <materials>` | Clean transcript → extract tasks → push to Jira |
 
 ### 🛠 Development – Architect & implement
 
-| Agent | Prompt | Purpose |
-|---|---|---|
+| Agent               | Prompt                     | Purpose                                                                           |
+| ------------------- | -------------------------- | --------------------------------------------------------------------------------- |
 | Engineering Manager | `/tsh-implement <JIRA_ID>` | Orchestrates research → plan → implementation by delegating to specialized agents |
 
 The Engineering Manager automatically delegates to:
 
-| Delegated Agent | Phase | Purpose |
-|---|---|---|
-| Context Engineer | Research (internal) | Gather context, identify gaps & risks |
-| Architect | Planning (internal) | Create multi-step implementation plan |
-| Software Engineer | Implementation | Backend, frontend, and UI implementation |
-| DevOps Engineer | Implementation | Infrastructure, CI/CD, Kubernetes, Terraform |
-| E2E Engineer | Implementation | End-to-end tests with Playwright |
+| Delegated Agent   | Phase               | Purpose                                      |
+| ----------------- | ------------------- | -------------------------------------------- |
+| Context Engineer  | Research (internal) | Gather context, identify gaps & risks        |
+| Architect         | Planning (internal) | Create multi-step implementation plan        |
+| Software Engineer | Implementation      | Backend, frontend, and UI implementation     |
+| DevOps Engineer   | Implementation      | Infrastructure, CI/CD, Kubernetes, Terraform |
+| E2E Engineer      | Implementation      | End-to-end tests with Playwright             |
 
 ### ✅ Quality – Review & test
 
-| Agent | Prompt | Purpose |
-|---|---|---|
+| Agent         | Prompt                  | Purpose                                 |
+| ------------- | ----------------------- | --------------------------------------- |
 | Code Reviewer | `/tsh-review <JIRA_ID>` | Structured code review against criteria |
-| UI Reviewer | `/tsh-review-ui` | Single-pass UI vs Figma comparison |
-| Architect | `/tsh-review-codebase` | Full codebase quality analysis |
+| UI Reviewer   | `/tsh-review-ui`        | Single-pass UI vs Figma comparison      |
+| Architect     | `/tsh-review-codebase`  | Full codebase quality analysis          |
 
 ### ⚙️ Copilot Customization – Extend the toolchain
 
-| Agent | Prompt | Purpose |
-|---|---|---|
-| Copilot Engineer / Orchestrator | `/tsh-create-custom-agent` | Create a new custom agent |
-| Copilot Engineer / Orchestrator | `/tsh-create-custom-skill` | Create a new custom skill |
-| Copilot Engineer / Orchestrator | `/tsh-create-custom-prompt` | Create a new custom prompt |
+| Agent                           | Prompt                            | Purpose                         |
+| ------------------------------- | --------------------------------- | ------------------------------- |
+| Copilot Engineer / Orchestrator | `/tsh-create-custom-agent`        | Create a new custom agent       |
+| Copilot Engineer / Orchestrator | `/tsh-create-custom-skill`        | Create a new custom skill       |
+| Copilot Engineer / Orchestrator | `/tsh-create-custom-prompt`       | Create a new custom prompt      |
 | Copilot Engineer / Orchestrator | `/tsh-create-custom-instructions` | Create custom instruction files |
 
 All of these will leverage the shared configuration from `copilot-collections` while still respecting your project's own code and context.
