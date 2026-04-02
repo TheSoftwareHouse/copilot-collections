@@ -29,7 +29,7 @@ This repository supports the **full product development lifecycle** with AI-powe
 
 - 🧑‍💻 **Agents** – Engineering Manager, Context Engineer, Architect, Software Engineer.
 - 💬 **Prompts** – `/tsh-implement` (internally delegates to Context Engineer for research and Architect for planning).
-- 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
+- 🧰 **Skills** – Architecture Design, Technical Context Discovery, Frontend Implementation, Backend Implementation, Implementation Gap Analysis, SQL & Database Engineering, Codebase Analysis.
 
 ### ✅ Quality – Review & Testing
 
@@ -320,6 +320,12 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Prioritizes project instructions, existing codebase patterns, and external documentation — in that order.
 - Checks for Copilot instruction files, analyzes existing code conventions, and consults external docs as a fallback.
 - Ensures new code is consistent with established patterns and prevents conflicting conventions.
+
+#### 🔧 Backend Implementation
+- Focus: **backend service implementation** patterns, standards, and procedures.
+- Covers REST/GraphQL APIs, CRUD endpoints, database handling, authentication, and testing strategies.
+- Applies to Node.js, PHP, .NET, Java, and Go backends with technology-specific references.
+- Follows SRP, DRY, KISS, and YAGNI principles with modular architecture.
 
 #### 🎨 Frontend Implementation
 

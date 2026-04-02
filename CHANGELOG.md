@@ -10,6 +10,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - Renamed Figma MCP server key from `figma-mcp-server` to `figma` across all agents, prompts, skills, MCP configuration, and documentation — aligns with Figma's recommended server naming in their official docs
 
+## 2026-03-30
+
+### Added
+
+- Backend development skill `tsh-implementing-backend`
+
+### Changed
+
+- Updated `tsh-implementing-backend` skill reference in `tsh-software-engineer` agent
+- Updated `tsh-implementing-backend` as a conditional skill in `implement` prompt for backend API tasks
+
 ## 2026-03-20
 
 ### Changed
