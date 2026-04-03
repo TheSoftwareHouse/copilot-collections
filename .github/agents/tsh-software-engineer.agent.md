@@ -5,7 +5,7 @@ tools:
     "execute",
     "read",
     "context7/*",
-    "figma-mcp-server/*",
+    "figma/*",
     "playwright/*",
     "sequential-thinking/*",
     "edit",
@@ -13,7 +13,6 @@ tools:
     "todo",
     "agent",
     "vscode/runCommand",
-    "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
 agents: [tsh-ui-reviewer]
@@ -72,7 +71,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
-- `tsh-engineering-prompts` - for LLM prompt design: structure patterns, optimization, security, templates.
+- `tsh-implementing-backend` - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
 
 ## Tool Usage Guidelines
 
@@ -90,7 +89,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.

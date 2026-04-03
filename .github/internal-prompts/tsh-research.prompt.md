@@ -22,7 +22,7 @@ Before starting, load and follow these skills:
 2. Analyze the task thoroughly, including its parents and subtasks if applicable, to get the full picture of the requirements.
 3. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation.
 4. Check all external links added to the task. Make sure to check the confluence pages linked to the task to gather more information about requirements and processes. If any PDF documents are attached, referenced, or linked, use the `pdf-reader` tool to extract and review their content.
-5. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using `figma-mcp-server` (it's very important) and include relevant information in the context.
+5. Unless asked to research only non-frontend aspects, in case there are Figma designs linked to the task, review all of them using `figma` (it's very important) and include relevant information in the context.
 6. Analyze if there are any ambiguities or missing information in the task description. If there are any ask for clarification before finalizing the context.
 7. Don't provide implementation details, focus on gathering requirements, user stories, acceptance criteria and key flows.
 8. Save the gathered information following the `research.example.md` template from the `tsh-task-analysing` skill.

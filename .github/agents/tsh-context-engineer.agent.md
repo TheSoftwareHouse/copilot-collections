@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in building context for development tasks by gathering requirements, analyzing processes, and creating comprehensive task context."
-tools: ['figma-mcp-server/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+tools: ['figma/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
 handoffs: 
   - label: Start Implementation
     agent: tsh-engineering-manager
@@ -47,7 +47,7 @@ You have access to the `tsh-knowledge` agent.
 
 ## Tool Usage Guidelines
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 - **MUST use when**:
   - The task references Figma designs, mockups, or FigJam boards.
   - Analyzing user flows, process diagrams, or system interactions visualized in FigJam.

@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in creating, maintaining, and debugging end-to-end tests using Playwright."
-tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
+tools: ['execute', 'read', 'context7/*', 'figma/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs:
   - label: Report critical bug found during testing
     agent: tsh-software-engineer
@@ -88,7 +88,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 - **MUST use when**:
   - A Figma link is provided in the context or plan to understand the expected UI behavior.
   - Extracting element labels, button text, or UI structure to inform locator strategies.

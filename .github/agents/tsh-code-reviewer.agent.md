@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in performing code review."
-tools: ['execute', 'read', 'context7/*', 'figma-mcp-server/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
+tools: ['execute', 'read', 'context7/*', 'figma/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
 handoffs: 
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
@@ -68,7 +68,7 @@ You have access to the `context7` tool.
   - Include the version number in your search queries to ensure relevance (e.g., "React 16.8 hooks" instead of just "React hooks").
   - Prioritize official documentation and authoritative sources. Avoid relying on unverified blogs or forums to prevent context pollution.
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Reviewing frontend changes where Figma designs are referenced or relevant.
