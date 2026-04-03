@@ -1,0 +1,517 @@
+- generic [active] [ref=e1]:
+  - link "Skip to Content" [ref=e81] [cursor=pointer]:
+    - /url: "#main-content"
+  - generic [ref=e82]:
+    - alert [ref=e83]:
+      - paragraph [ref=e86]:
+        - strong [ref=e88]: Transnetyx Offices Will be Closed on Friday, April 3
+        - text: "- Our business offices will be closed on Friday, April 3 in observance of Good Friday. This closure will not impact our lab, so all processing and results will remain on schedule. If you have any questions during this time, please reach out to"
+        - link "help@transnetyx.com" [ref=e89] [cursor=pointer]:
+          - /url: help@transnetyx.com
+        - text: and we will reply promptly upon our return, on Monday, April 6.
+      - button "Close alert" [ref=e90] [cursor=pointer]:
+        - img [ref=e91]
+    - navigation "Main navigation" [ref=e95]:
+      - generic [ref=e99]:
+        - generic [ref=e100]:
+          - link "TransnetYX Home" [ref=e101] [cursor=pointer]:
+            - /url: /
+          - list [ref=e102]:
+            - listitem [ref=e103]:
+              - button "Services" [ref=e104] [cursor=pointer]:
+                - text: Services
+                - img [ref=e105]
+            - listitem [ref=e107]:
+              - button "Resources" [ref=e108] [cursor=pointer]:
+                - text: Resources
+                - img [ref=e109]
+            - listitem [ref=e111]:
+              - link "Citations" [ref=e112] [cursor=pointer]:
+                - /url: /citations
+            - listitem [ref=e113]:
+              - button "Company" [ref=e114] [cursor=pointer]:
+                - text: Company
+                - img [ref=e115]
+            - listitem [ref=e117]:
+              - link "Contact" [ref=e118] [cursor=pointer]:
+                - /url: /contact-us
+        - generic [ref=e119]:
+          - button "Log in" [ref=e120] [cursor=pointer]:
+            - text: Log in
+            - img [ref=e121]
+          - button "Register" [ref=e123] [cursor=pointer]:
+            - text: Register
+            - img [ref=e124]
+    - navigation [ref=e127]:
+      - generic [ref=e128]:
+        - button [ref=e129] [cursor=pointer]:
+          - heading [level=5] [ref=e132]:
+            - strong [ref=e134]: Home
+        - menubar [ref=e135]:
+          - menuitem [ref=e136] [cursor=pointer]: Select your focus
+          - menuitem [ref=e137] [cursor=pointer]: Free trial
+          - menuitem [ref=e138] [cursor=pointer]: Begin with your use case
+          - menuitem [ref=e139] [cursor=pointer]: Advancing research
+      - link [ref=e140] [cursor=pointer]:
+        - /url: "#"
+        - text: Get started
+  - generic [ref=e141]:
+    - main [ref=e142]:
+      - region "Hero" [ref=e143]:
+        - img
+        - generic [ref=e145]:
+          - generic [ref=e149]:
+            - generic [ref=e172]:
+              - heading [level=1] [ref=e657]:
+                - strong [ref=e175]: 50 million
+                - text: samples and counting
+              - heading [level=3] [ref=e658]: Proven at scale. Trusted worldwide.
+              - link [ref=e659] [cursor=pointer]:
+                - /url: /resources/blogs/50m-samples-celebration
+                - text: Thank you for your trust
+            - generic [ref=e179]:
+              - heading [level=1] [ref=e637]: Support that moves research forward
+              - heading [level=3] [ref=e638]: Guides. Training. Expert help.
+              - link [ref=e639] [cursor=pointer]:
+                - /url: /resources/support
+                - text: Get support
+              - link [ref=e640] [cursor=pointer]:
+                - /url: /resources/blogs/support-hub-process-changes
+                - text: Support Hub improvements
+            - generic [ref=e185]:
+              - heading [level=1] [ref=e641]:
+                - text: Turn big ideas into
+                - strong [ref=e188]: breakthroughs
+              - heading [level=3] [ref=e642]: One suite of services. Endless efficiency.
+              - link [ref=e643] [cursor=pointer]:
+                - /url: https://quickorder.transnetyx.com/MVC/Account/Register
+                - generic [ref=e191]: Get started
+              - link [ref=e644] [cursor=pointer]:
+                - /url: /services
+                - text: Explore solutions
+            - generic [ref=e151]:
+              - heading [level=1] [ref=e645]: The Next Generation of NbActiv1
+              - heading [level=3] [ref=e646]: Less prep. Stronger networks. Greater Confidence.
+              - link [ref=e647] [cursor=pointer]:
+                - /url: /f01abc0c-c4d7-43a0-b018-083f47872969/e9f29d80-9730-44c7-8f34-9c02d11ff0bb/f1b8e72d-83ba-465a-897f-85ad09e1376b/free-samples-tis-media
+                - text: Test it free
+              - link [ref=e648] [cursor=pointer]:
+                - /url: /resources/blogs/optimized-nbactiv1
+                - text: Learn more
+            - generic [ref=e157]:
+              - heading [level=1] [ref=e649]: Insights that drive discovery
+              - heading [level=3] [ref=e650]: Predict. Collaborate. Advance.
+              - link [ref=e651] [cursor=pointer]:
+                - /url: https://colony.transnetyx.com/Account/Register
+                - generic [ref=e161]: Get started
+              - link [ref=e652] [cursor=pointer]:
+                - /url: /services/colony
+                - text: Explore Colony
+            - generic [ref=e164]:
+              - heading "Build clarity for complex workflows" [level=1] [ref=e660]
+              - heading "Connect data. Simplify compliance." [level=3] [ref=e661]
+              - button "Request demo" [ref=e662] [cursor=pointer]
+              - link "Explore tick@lab" [ref=e663] [cursor=pointer]:
+                - /url: /services/ticklab
+          - generic [ref=e193]:
+            - generic [ref=e197]:
+              - img "Bottle of YX Tissue BrainBits NbActiv1growth media" [ref=e199]
+              - img "Laptop with layered help resources (a video card and browser window) and a graduation cap above it, on a blue background with the “Transnetyx Support Hub” logo." [ref=e204]
+            - generic [ref=e206]:
+              - button "Go to previous slide" [ref=e207] [cursor=pointer]:
+                - img [ref=e208]
+              - generic [ref=e210]:
+                - button "Go to slide 1" [ref=e211] [cursor=pointer]
+                - button "Go to slide 2" [ref=e212] [cursor=pointer]
+                - button "Go to slide 3" [ref=e213] [cursor=pointer]
+                - button "Go to slide 4" [ref=e214] [cursor=pointer]
+                - button "Go to slide 5" [ref=e215] [cursor=pointer]
+                - button "Go to slide 6" [ref=e216] [cursor=pointer]
+              - button "Go to next slide" [ref=e217] [cursor=pointer]:
+                - img [ref=e218]
+      - generic [ref=e220]:
+        - generic:
+          - heading [level=2]
+        - generic [ref=e221]:
+          - link "Automated Genotyping" [ref=e222] [cursor=pointer]:
+            - /url: /services/genotyping
+            - paragraph [ref=e223]: Automated Genotyping
+          - link "Genetic Monitoring" [ref=e224] [cursor=pointer]:
+            - /url: /services/monitoring
+            - paragraph [ref=e225]: Genetic Monitoring
+          - link "Microbiome" [ref=e226] [cursor=pointer]:
+            - /url: /services/microbiome
+            - paragraph [ref=e227]: Microbiome
+          - link "Tissue" [ref=e228] [cursor=pointer]:
+            - /url: /services/tissue
+            - paragraph [ref=e229]: Tissue
+          - link "Colony + AMI" [ref=e230] [cursor=pointer]:
+            - /url: /services/colony
+            - paragraph [ref=e231]: Colony + AMI
+          - link "tick@lab" [ref=e232] [cursor=pointer]:
+            - /url: /services/ticklab
+            - paragraph [ref=e233]: tick@lab
+          - link "TAGCenter" [ref=e234] [cursor=pointer]:
+            - /url: /services/tagcenter
+            - paragraph [ref=e235]: TAGCenter
+      - generic [ref=e237]:
+        - generic [ref=e238]:
+          - generic [ref=e239]:
+            - paragraph [ref=e242]: Explore by Category
+            - heading "Select your focus. Accelerate your impact." [level=2] [ref=e244]
+          - tablist [ref=e246]:
+            - tab "Diagnostics" [selected] [ref=e247] [cursor=pointer]
+            - tab "Products" [ref=e248] [cursor=pointer]
+            - tab "Software" [ref=e249] [cursor=pointer]
+            - tab "Hardware" [ref=e250] [cursor=pointer]
+        - region "QuickOrder Unified ordering that accelerates discovery. Simplify complex orders using a tool built for speed, clarity, and accuracy." [ref=e252]:
+          - generic [ref=e253]:
+            - generic [ref=e254]:
+              - heading "QuickOrder" [level=3] [ref=e255]
+              - paragraph
+              - heading "Unified ordering that accelerates discovery." [level=4] [ref=e256]
+              - paragraph
+              - heading "Simplify complex orders using a tool built for speed, clarity, and accuracy." [level=6] [ref=e257]
+            - list "Content cards" [ref=e258]:
+              - link "Eliminate human error" [ref=e259] [cursor=pointer]:
+                - /url: /services/genotyping
+                - region "Automated Genotyping" [ref=e260]:
+                  - generic [ref=e261]:
+                    - img "Category hero image" [ref=e263]
+                    - generic [ref=e264]:
+                      - generic [ref=e266]:
+                        - heading "Automated Genotyping" [level=4] [ref=e268]
+                        - heading "Automated Genotyping employs custom-designed TaqMan assays in real-time PCR with sequence-specific allele identification, featuring a fully automated proprietary DNA extraction method and touchless acoustic liquid handlers for duplicate reaction setup, delivering highly accurate results with 99.97% precision in 24 or 72 hours." [level=6] [ref=e270]
+                      - generic "Eliminate human error" [ref=e272]:
+                        - generic [ref=e273]: Eliminate human error
+                        - img [ref=e274]
+              - link "Stay on top of change" [ref=e276] [cursor=pointer]:
+                - /url: /services/monitoring
+                - region "Genetic Monitoring" [ref=e277]:
+                  - generic [ref=e278]:
+                    - img "Category hero image" [ref=e280]
+                    - generic [ref=e281]:
+                      - generic [ref=e283]:
+                        - heading "Genetic Monitoring" [level=4] [ref=e285]
+                        - heading "Genetic Monitoring screens against 10,000 SNPs in 241 inbred strains to safeguard your research quality. The MiniMUGA panel helps you pinpoint the full genetic background (or sub-strain) of your mice, eliminating unwanted variation from mixed backgrounds." [level=6] [ref=e287]
+                      - generic "Stay on top of change" [ref=e289]:
+                        - generic [ref=e290]: Stay on top of change
+                        - img [ref=e291]
+              - link "Understand microbial impact" [ref=e293] [cursor=pointer]:
+                - /url: /services/microbiome
+                - region "Microbiome Analysis" [ref=e294]:
+                  - generic [ref=e295]:
+                    - img "Category hero image" [ref=e297]
+                    - generic [ref=e298]:
+                      - generic [ref=e300]:
+                        - heading "Microbiome Analysis" [level=4] [ref=e302]
+                        - heading "Microbiome Analysis ensures rigor and data integrity by characterizing changes in the gut microbiome of animal models. Designed for both routine monitoring and experimental studies, it helps researchers optimize resources, ensure reproducibility, and make confident, data-driven decisions" [level=6] [ref=e304]
+                      - generic "Understand microbial impact" [ref=e306]:
+                        - generic [ref=e307]: Understand microbial impact
+                        - img [ref=e308]
+            - group "Section actions" [ref=e310]:
+              - link "Explore solutions" [ref=e311] [cursor=pointer]:
+                - /url: /services
+      - generic [ref=e312]:
+        - generic [ref=e313]:
+          - generic [ref=e315]:
+            - paragraph [ref=e318]: Try it Free
+            - generic [ref=e320]:
+              - heading "Process up to 10 genotyping samples at no cost!" [level=2] [ref=e321]
+              - paragraph
+              - heading "See how Automated Genotyping helps labs process more samples with less effort." [level=4] [ref=e322]
+              - paragraph
+              - paragraph
+              - generic [ref=e323]:
+                - img "Feature icon" [ref=e325]
+                - heading "Free up staff and lab resources by eliminating in-house genotyping." [level=5] [ref=e327]:
+                  - strong [ref=e328]: Free
+                  - text: up staff and lab resources by eliminating in-house genotyping.
+              - generic [ref=e329]:
+                - img "Feature icon" [ref=e331]
+                - heading "Eliminate repeat testing caused by inconsistent or unclear results." [level=5] [ref=e333]:
+                  - strong [ref=e334]: Eliminate
+                  - text: repeat testing caused by inconsistent or unclear results.
+              - generic [ref=e335]:
+                - img "Feature icon" [ref=e337]
+                - heading "Get accurate, reliable data you can act on with confidence." [level=5] [ref=e339]:
+                  - text: Get
+                  - strong [ref=e340]: accurate, reliable
+                  - text: data you can act on with confidence.
+              - generic [ref=e341]:
+                - img "Feature icon" [ref=e343]
+                - heading "Access to more than 60,000 real-time PCR assays in stock." [level=5] [ref=e345]:
+                  - text: Access to more than
+                  - strong [ref=e346]: 60,000
+                  - text: real-time PCR assays in stock.
+              - generic [ref=e347]:
+                - img "Feature icon" [ref=e349]
+                - heading "Choose from 10,000+ MGI and JAX lines available." [level=5] [ref=e351]:
+                  - text: Choose from
+                  - strong [ref=e352]: 10,000+
+                  - text: MGI and JAX lines available.
+              - generic [ref=e353]:
+                - img "Feature icon" [ref=e355]
+                - heading "Process samples from mice, zebrafish, rats, and more." [level=5] [ref=e357]:
+                  - text: Process samples from
+                  - strong [ref=e358]: mice, zebrafish, rats
+                  - text: ", and"
+                  - strong [ref=e359]: more
+                  - text: .
+              - paragraph [ref=e360]: No contract. No minimum. No obligation.
+          - generic [ref=e364]:
+            - img "Feature image" [ref=e366]
+            - generic [ref=e368]:
+              - heading "Convenient Shipping" [level=4] [ref=e369]
+              - paragraph
+              - heading "300+ TAGCenter locations around the world." [level=6] [ref=e370]
+        - link "Start free trial" [ref=e372] [cursor=pointer]:
+          - /url: https://quickorder.transnetyx.com/MVC/Account/Register
+      - generic [ref=e374]:
+        - generic [ref=e376]:
+          - paragraph [ref=e379]: User Scenario
+          - heading "Begin with your use case" [level=2] [ref=e381]
+        - generic [ref=e382]:
+          - generic [ref=e383]:
+            - button "Automated Genotyping Accelerate genotyping with fast, accurate, high-throughput results at scale." [ref=e384]:
+              - generic [ref=e385]:
+                - heading "Automated Genotyping" [level=5] [ref=e387]
+                - paragraph [ref=e389]: Accelerate genotyping with fast, accurate, high-throughput results at scale.
+            - button "Genetic Monitoring Track genetic integrity over time to detect drift, prevent contamination, and protect colonies." [ref=e390]:
+              - generic [ref=e391]:
+                - heading "Genetic Monitoring" [level=5] [ref=e393]
+                - paragraph [ref=e395]: Track genetic integrity over time to detect drift, prevent contamination, and protect colonies.
+            - button "Microbiome Analysis Monitor changes in the gut microbiome to optimize research and ensure data integrity." [ref=e396]:
+              - generic [ref=e397]:
+                - heading "Microbiome Analysis" [level=5] [ref=e399]
+                - paragraph [ref=e401]: Monitor changes in the gut microbiome to optimize research and ensure data integrity.
+            - button "Tissue Receive micro-surgically ethically sourced tissue or custom growth, storage, and cryopreservation media." [ref=e402]:
+              - generic [ref=e403]:
+                - heading "Tissue" [level=5] [ref=e405]
+                - paragraph [ref=e407]: Receive micro-surgically ethically sourced tissue or custom growth, storage, and cryopreservation media.
+            - button "Colony + AMI Improve breeding, build congenic strains, and get reproducible research results." [ref=e408]:
+              - generic [ref=e409]:
+                - heading "Colony + AMI" [level=5] [ref=e411]
+                - paragraph [ref=e413]: Improve breeding, build congenic strains, and get reproducible research results.
+            - button "tick@lab Centralize your data, strengthen compliance, and streamline lab operations." [ref=e414]:
+              - generic [ref=e415]:
+                - heading "tick@lab" [level=5] [ref=e417]
+                - paragraph [ref=e419]: Centralize your data, strengthen compliance, and streamline lab operations.
+            - button "TAGCenter A central hub for genotyping supplies and simplified sample shipping." [ref=e420]:
+              - generic [ref=e421]:
+                - heading "TAGCenter" [level=5] [ref=e423]
+                - paragraph [ref=e425]: A central hub for genotyping supplies and simplified sample shipping.
+          - generic [ref=e426]:
+            - generic [ref=e429]:
+              - heading "Results without bottlenecks" [level=3] [ref=e430]
+              - heading "Automated Genotyping" [level=5] [ref=e431]
+              - generic [ref=e432]:
+                - generic [ref=e433]:
+                  - heading "Supporting research timelines through early genotyping" [level=3] [ref=e434]:
+                    - button "Supporting research timelines through early genotyping" [expanded] [ref=e435]:
+                      - heading "Supporting research timelines through early genotyping" [level=5] [ref=e437]:
+                        - strong [ref=e438]: Supporting research timelines through early genotyping
+                      - img [ref=e439]
+                  - region "Supporting research timelines through early genotyping" [ref=e441]:
+                    - heading "A vivarium managing a large mouse breeding colony uses Automated Genotyping to identify desired genotypes pre-weaning. Early genotype confirmation enables colony managers to plan breeding, experimental, and housing assignments in advance, reduce unnecessary animal housing, and keep breeding programs aligned with the 3Rs and active research timelines." [level=6] [ref=e444]
+                - heading "Increase throughput in research labs" [level=3] [ref=e446]:
+                  - button "Increase throughput in research labs" [ref=e447]:
+                    - heading "Increase throughput in research labs" [level=5] [ref=e449]:
+                      - strong [ref=e451]: Increase throughput in research labs
+                    - img [ref=e452]
+                - heading "Support scalable preclinical studies" [level=3] [ref=e455]:
+                  - button "Support scalable preclinical studies" [ref=e456]:
+                    - heading "Support scalable preclinical studies" [level=5] [ref=e458]:
+                      - strong [ref=e459]: Support scalable preclinical studies
+                    - img [ref=e460]
+            - link "Explore solutions" [ref=e463] [cursor=pointer]:
+              - /url: /services
+      - region "Advancing Research Together" [ref=e464]:
+        - generic [ref=e466]:
+          - generic [ref=e467]:
+            - paragraph [ref=e470]: Powered by Data
+            - heading "Advancing research together" [level=2] [ref=e472]
+          - generic [ref=e473]:
+            - heading "Samples processed" [level=3] [ref=e475]
+            - generic [ref=e476]:
+              - generic [ref=e479]:
+                - generic:
+                  - paragraph
+                - generic [ref=e480]:
+                  - generic:
+                    - paragraph
+                  - text: "0"
+                  - generic:
+                    - paragraph
+                - heading "2025" [level=5] [ref=e482]
+              - generic [ref=e485]:
+                - generic:
+                  - paragraph
+                - generic [ref=e486]:
+                  - generic:
+                    - paragraph
+                  - text: "0"
+                  - generic:
+                    - paragraph
+                - heading "2026 (YTD)" [level=5] [ref=e488]
+          - generic [ref=e489]:
+            - heading "Time saved in 2025" [level=3] [ref=e491]
+            - generic [ref=e492]:
+              - generic [ref=e497]:
+                - generic [ref=e498]:
+                  - text: "0"
+                  - generic:
+                    - paragraph
+                - heading "Hours of research time saved" [level=5] [ref=e500]
+              - generic [ref=e504]:
+                - generic [ref=e505]:
+                  - generic [ref=e506]:
+                    - text: "0"
+                    - generic:
+                      - paragraph
+                  - heading "Years saved" [level=5] [ref=e508]
+                - link "Save hours now" [ref=e510] [cursor=pointer]:
+                  - /url: https://quickorder.transnetyx.com/MVC/Account/Register
+                  - generic [ref=e511]: Save hours now
+              - generic [ref=e516]:
+                - generic [ref=e517]:
+                  - text: "0"
+                  - generic:
+                    - paragraph
+                - heading "Research careers saved" [level=5] [ref=e519]
+          - generic [ref=e520]:
+            - heading "Trusted by the best in research worldwide." [level=3] [ref=e522]
+            - generic [ref=e523]:
+              - generic [ref=e526]:
+                - generic [ref=e527]:
+                  - text: "0"
+                  - heading "+" [level=1] [ref=e529]:
+                    - strong [ref=e530]: +
+                - heading "research organizations" [level=5] [ref=e532]
+              - generic [ref=e535]:
+                - generic [ref=e536]:
+                  - text: "0"
+                  - heading "+" [level=1] [ref=e538]:
+                    - strong [ref=e539]: +
+                - heading "laboratories" [level=5] [ref=e541]
+    - contentinfo [ref=e542]:
+      - img [ref=e546]
+      - generic [ref=e548]:
+        - generic [ref=e549]:
+          - generic [ref=e550]:
+            - generic [ref=e551]:
+              - img "Transnetyx Logo" [ref=e553]
+              - generic [ref=e554]:
+                - heading "Transnetyx, Inc. 8110 Cordova Rd. Suite 119 Cordova, TN 38016" [level=6] [ref=e556]:
+                  - text: Transnetyx, Inc.
+                  - text: 8110 Cordova Rd. Suite 119
+                  - text: Cordova, TN 38016
+                - heading "Need Help? Visit our Support Hub. Or contact Genetic Services via email or call +1.888.321.2113" [level=6] [ref=e558]:
+                  - text: Need Help?
+                  - text: Visit our
+                  - link "Support Hub" [ref=e559] [cursor=pointer]:
+                    - /url: /resources/support/
+                    - generic [ref=e560]: Support Hub
+                  - text: .
+                  - text: Or contact Genetic Services
+                  - text: via
+                  - link "email" [ref=e561] [cursor=pointer]:
+                    - /url: mailto:help@transnetyx.com
+                  - text: or call
+                  - link "+1.888.321.2113" [ref=e562] [cursor=pointer]:
+                    - /url: tel:+18883212113
+                    - generic [ref=e563]: +1.888.321.2113
+            - generic [ref=e564]:
+              - navigation "Footer first navigation" [ref=e566]:
+                - link "Services" [ref=e567] [cursor=pointer]:
+                  - /url: /services
+                  - heading "Services" [level=6] [ref=e568]:
+                    - strong [ref=e569]: Services
+                - link "Resources" [ref=e570] [cursor=pointer]:
+                  - /url: /resources
+                  - heading "Resources" [level=6] [ref=e571]:
+                    - strong [ref=e572]: Resources
+                - link "Citations" [ref=e573] [cursor=pointer]:
+                  - /url: /citations
+                  - heading "Citations" [level=6] [ref=e574]:
+                    - strong [ref=e575]: Citations
+                - link "Company" [ref=e576] [cursor=pointer]:
+                  - /url: /company/about-us
+                  - heading "Company" [level=6] [ref=e577]:
+                    - strong [ref=e578]: Company
+                - link "Contact" [ref=e579] [cursor=pointer]:
+                  - /url: /contact-us
+                  - heading "Contact" [level=6] [ref=e580]:
+                    - strong [ref=e581]: Contact
+              - navigation "Footer second navigation" [ref=e583]:
+                - link "TAGCenter Locations" [ref=e584] [cursor=pointer]:
+                  - /url: /resources/tagcenter-locations
+                  - heading "TAGCenter Locations" [level=6] [ref=e585]:
+                    - strong [ref=e586]: TAGCenter Locations
+                - link "Love Letter Series" [ref=e587] [cursor=pointer]:
+                  - /url: /company/our-impact/love-letters
+                  - heading "Love Letter Series" [level=6] [ref=e588]:
+                    - strong [ref=e589]: Love Letter Series
+                - link "Developers" [ref=e590] [cursor=pointer]:
+                  - /url: https://developers.transnetyx.com/
+                  - heading "Developers" [level=6] [ref=e591]:
+                    - strong [ref=e592]: Developers
+                - link "Genotyping Referral Program" [ref=e593] [cursor=pointer]:
+                  - /url: /f01abc0c-c4d7-43a0-b018-083f47872969/e9f29d80-9730-44c7-8f34-9c02d11ff0bb/f1b8e72d-83ba-465a-897f-85ad09e1376b/referral-ag
+                  - heading "Genotyping Referral Program" [level=6] [ref=e594]:
+                    - strong [ref=e595]: Genotyping Referral Program
+          - generic [ref=e597]:
+            - link "TransnetYX LinkedIn" [ref=e598] [cursor=pointer]:
+              - /url: https://www.linkedin.com/company/transnetyx
+              - img "TransnetYX LinkedIn" [ref=e599]
+            - link "TransnetYX TikTok" [ref=e600] [cursor=pointer]:
+              - /url: https://www.tiktok.com/@transnetyx
+              - img "TransnetYX TikTok" [ref=e601]
+            - link "TransnetYX Vimeo" [ref=e602] [cursor=pointer]:
+              - /url: https://vimeo.com/transnetyx
+              - img "TransnetYX Vimeo" [ref=e603]
+            - link "TransnetYX Youtube" [ref=e604] [cursor=pointer]:
+              - /url: https://www.youtube.com/@TransnetYXInc
+              - img "TransnetYX Youtube" [ref=e605]
+        - generic [ref=e606]:
+          - img [ref=e608]
+          - generic [ref=e613]:
+            - heading "Get the latest news and updates" [level=3] [ref=e614]
+            - heading "Join our newsletter to receive the latest news and product launches straight to your inbox." [level=6] [ref=e615]
+          - generic [ref=e617]:
+            - generic [ref=e618]:
+              - generic: Email address
+              - textbox "Your email address" [ref=e619]:
+                - /placeholder: Your email
+            - button "Subscribe" [ref=e620] [cursor=pointer]
+        - generic [ref=e621]:
+          - paragraph [ref=e623]: "© Copyright 2026: Transnetyx, Inc. All rights reserved."
+          - navigation "Footer legal navigation" [ref=e624]:
+            - link "View Privacy Policy" [ref=e625] [cursor=pointer]:
+              - /url: https://info.transnetyx.com/l/1109562/2025-12-29/5mrt6c/1109562/1767016919nqKAAEAa/TYX_Privacy_Policy.pdf
+              - paragraph [ref=e626]: View Privacy Policy
+            - link "Transnetyx Terms of Use" [ref=e627] [cursor=pointer]:
+              - /url: https://info.transnetyx.com/l/1109562/2025-11-23/5mp36k/1109562/17639514076CEZo3Zr/TYX_Terms_of_Use__Transnetyx_.pdf
+              - paragraph [ref=e628]: Transnetyx Terms of Use
+            - link "Colony Terms of Use" [ref=e629] [cursor=pointer]:
+              - /url: https://info.transnetyx.com/l/1109562/2025-11-23/5mp36c/1109562/1763951406DOY5eAWA/TYX_Terms_of_Use__ColonyAMI_.pdf
+              - paragraph [ref=e630]: Colony Terms of Use
+            - button "Your Cookie Settings" [ref=e631] [cursor=pointer]
+  - alert [ref=e632]
+  - iframe [ref=e633]:
+    
+  - iframe [ref=e636]:
+    - generic [ref=f3e2]:
+      - generic [ref=f3e5]:
+        - link "Privacy" [ref=f3e6] [cursor=pointer]:
+          - /url: https://www.google.com/intl/en/policies/privacy/
+        - text: "-"
+        - link "Terms" [ref=f3e7] [cursor=pointer]:
+          - /url: https://www.google.com/intl/en/policies/terms/
+      - generic [ref=f3e8]:
+        - generic [ref=f3e9]:
+          - text: protected by
+          - strong [ref=f3e10]: reCAPTCHA
+        - generic [ref=f3e11]: "-"
+  - button "Open CMP widget" [ref=e665] [cursor=pointer]:
+    - img [ref=e666]
