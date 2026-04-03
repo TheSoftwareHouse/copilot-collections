@@ -10,3 +10,7 @@ website/.cache-loader/
 website/node_modules/
 .vercel
 .env*.local
+
+# Local Playwright MCP workspace
+.playwright-mcp/
+playwright-mcp/
