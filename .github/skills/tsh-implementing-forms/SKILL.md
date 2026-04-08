@@ -143,6 +143,17 @@ Form:
 | Ignoring server-side errors               | Map API errors to specific form fields          |
 | Submit button without loading state       | Disable button + show spinner during submission |
 
+## Security
+
+1. **CSRF protection** — Every state-changing form submission must include CSRF protection. For cookie-based auth: include an anti-CSRF token as a hidden field or custom header. For SPAs with Bearer token auth: the token in the `Authorization` header provides inherent CSRF protection. Document which model the project uses in `copilot-instructions.md`.
+2. **Input sanitization beyond validation** — Schema validation (Zod, Yup) checks structure and types but does **not** sanitize content. If form values are rendered as HTML downstream (e.g., rich text editors, comment fields), sanitize with DOMPurify before storage or rendering. SQL injection is handled by the ORM — but HTML injection requires explicit sanitization.
+3. **File upload security** — Client-side validation is defense-in-depth only, not a security boundary:
+   - Validate file type by extension AND MIME type (client-side via `accept` attribute + schema validation).
+   - Validate file size (client-side via schema, server-side is the enforcement point).
+   - Sanitize filenames — strip path components, reject names with `../`, null bytes, or special characters.
+   - Display file metadata (name, size, type) to the user before upload for transparency.
+   - Never trust client-side validation alone — server must re-validate everything.
+
 ## Connected Skills
 
 - `tsh-implementing-frontend` — for component composition patterns and framework-specific references (form library integration, validation library choice)

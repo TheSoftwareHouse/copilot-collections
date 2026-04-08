@@ -189,12 +189,47 @@ public class UsersController {
 
 ## Security
 
-- Use Spring Security with JWT filter chain for authentication.
-- Use `@PreAuthorize` / `@Secured` for method-level authorization.
-- Use `@Valid` + Jakarta Bean Validation (`@NotNull`, `@Email`, `@Size`) for input validation.
-- Use BCrypt via `PasswordEncoder` for password hashing.
-- Use `mvn dependency:analyze` and OWASP Dependency Check for scanning.
-- Configure CORS via `WebMvcConfigurer.addCorsMappings()`.
+### Auth & Authorization
+
+- Configure `SecurityFilterChain` bean for route-level security. Use `@PreAuthorize("hasRole('ADMIN')")` for method-level authorization. Extract the current user with `@AuthenticationPrincipal UserDetails user`.
+- Apply security globally — all endpoints require authentication by default. Explicitly permit public routes:
+  ```java
+  http.authorizeHttpRequests(auth -> auth
+      .requestMatchers("/api/public/**", "/health").permitAll()
+      .anyRequest().authenticated());
+  ```
+
+### Input Validation
+
+- Use `@Valid` on controller `@RequestBody` parameters. Define constraints on DTO fields with Jakarta Bean Validation: `@NotNull`, `@Email`, `@Size(max = 255)`. Use `@Validated` on the class for method-level validation. Handle errors via `BindingResult` or global `@ControllerAdvice`.
+- Create custom validators with `ConstraintValidator<A, T>` for domain-specific rules.
+
+### File Uploads
+
+- Configure max size in `application.properties`: `spring.servlet.multipart.max-file-size=5MB`, `spring.servlet.multipart.max-request-size=10MB`.
+- Validate `MultipartFile`: check `file.getContentType()` against MIME allowlist, sanitize filename with `StringUtils.cleanPath(file.getOriginalFilename())` — reject names containing `..`.
+
+### Webhook HMAC Validation
+
+Verify webhook signatures using `MessageDigest.isEqual()` — **never** use `Arrays.equals()` or `String.equals()`:
+```java
+Mac mac = Mac.getInstance("HmacSHA256");
+mac.init(new SecretKeySpec(secret.getBytes(UTF_8), "HmacSHA256"));
+byte[] expected = mac.doFinal(rawBody);
+byte[] signature = HexFormat.of().parseHex(request.getHeader("X-Signature"));
+if (!MessageDigest.isEqual(expected, signature))
+    throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid signature");
+```
+
+### Rate Limiting
+
+- Use `Bucket4j` for rate limiting — integrates with Spring via `bucket4j-spring-boot-starter`. Configure per-route or per-user limits.
+- Monitor request rates with Spring Boot Actuator metrics.
+
+### HTTP Security Headers
+
+- Spring Security auto-configures HSTS, X-Content-Type-Options, X-Frame-Options, and cache control headers. Customize via `http.headers(h -> h.contentSecurityPolicy(csp -> csp.policyDirectives("default-src 'self'")))`.
+- Configure CORS via `CorsConfigurationSource` bean or `@CrossOrigin` per controller — never use `allowedOrigins("*")` in production.
 
 ## Docker
 

@@ -186,11 +186,44 @@ class User extends Model
 
 ## Security
 
-- Use `symfony/security-bundle` (Symfony) or built-in auth (Laravel) for authentication.
-- Use `symfony/validator` or Laravel `FormRequest` for input validation.
-- Use `password_hash()` / `password_verify()` (bcrypt by default).
-- Use `composer audit` for dependency scanning.
-- Symfony: Use voters for authorization. Laravel: Use policies and gates.
+### Auth & Authorization
+
+- **Symfony**: Configure firewall rules in `config/packages/security.yaml` with `access_control` for route-level restrictions. Use Voters for resource-level authorization:
+  ```php
+  $this->denyAccessUnlessGranted('EDIT', $post); // triggers PostVoter
+  ```
+- **Laravel**: Use `Gate::define()` for simple ability checks. Use `Policy` classes for resource authorization. Call `$this->authorize('update', $post)` in controllers.
+
+### Input Validation & CSRF
+
+- **Symfony**: Use `symfony/validator` constraints on DTOs. Forms include CSRF token by default — never disable it for state-changing forms.
+- **Laravel**: Use `FormRequest` classes for validation. The `VerifyCsrfToken` middleware is enabled by default — use `@csrf` directive in Blade templates.
+
+### File Uploads
+
+- **Symfony**: Validate `UploadedFile` using `getMimeType()` (allowlist), `getSize()` (enforce max), and sanitize `getClientOriginalName()` — strip path components.
+- **Laravel**: Use `FormRequest` rules: `'file' => 'required|mimes:pdf,jpg,png|max:2048'`. Access file via `$request->file('file')`. Store with `Storage::putFile()` — never use client-provided paths directly.
+
+### Webhook HMAC Validation
+
+Verify webhook signatures using `hash_equals()` — **never** use `===` for signature comparison:
+```php
+$expected = hash_hmac('sha256', $rawBody, $secret);
+$signature = $request->headers->get('X-Signature');
+if (!hash_equals($expected, $signature)) {
+    throw new AccessDeniedHttpException('Invalid signature');
+}
+```
+
+### Rate Limiting
+
+- **Symfony**: Use `RateLimiter` component — configure limiters in `config/packages/rate_limiter.yaml`. Apply via `#[IsGranted]` or custom event listener.
+- **Laravel**: Use `throttle` middleware — `Route::middleware('throttle:10,1')` for 10 requests per minute.
+
+### HTTP Security Headers
+
+- **Symfony**: Use `nelmio/cors-bundle` for CORS. Add security headers via `NelmioCorsBundle` configuration or custom `EventSubscriber` on `kernel.response`.
+- **Laravel**: Configure CORS in `config/cors.php`. Add security headers via middleware or `spatie/laravel-csp` for Content Security Policy.
 
 ## Docker
 

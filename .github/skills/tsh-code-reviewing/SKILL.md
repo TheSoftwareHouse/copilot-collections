@@ -75,7 +75,50 @@ Make sure to run linters, static code analysis tools and formatting tools.
 
 **Step 10: Validate the solution is secure**
 
-Focus on security. Check for potential OWASP TOP10 issues. Check for potential critical security issues that allows other users to take control over the system.
+Review the code for the following security concerns. Each item is a concrete check — not a category to "think about".
+
+1. **Authentication coverage**
+   - Are all sensitive endpoints protected by auth middleware/guards?
+   - Look for endpoints that should require authentication but don't — especially new endpoints added in this PR.
+   - Search for custom auth-bypass flags (`DISABLE_AUTH`, `skipAuth`, `isPublic` without safeguards) that could leak to production.
+
+2. **Authorization & ownership**
+   - Does the code verify that the authenticated user owns or has permission to access the resource they're requesting (IDOR prevention)?
+   - Check that role/permission checks are enforced — not just authentication.
+   - Look for direct database lookups by user-supplied ID without filtering by the current user's scope.
+   - Anti-pattern: `findById(req.params.id)` without verifying `userId` matches the authenticated user.
+
+3. **Input validation**
+   - Is user input validated at the API boundary (controller/handler level), not deep inside business logic?
+   - Are validation rules using an allowlist approach (`whitelist: true`, accept known-good fields) rather than a blocklist (reject known-bad)?
+   - Check for routes that bypass the global validation pipeline.
+
+4. **Secrets exposure**
+   - No hardcoded API keys, tokens, or passwords in source code.
+   - No secrets printed in log statements (`console.log`, `logger.debug`, `Log.d`).
+   - `.env` files are not committed to version control.
+   - Secrets come from environment variables or a secrets manager — not from config files with default values.
+
+5. **Response data leakage**
+   - Do API responses exclude internal fields (password hashes, internal IDs, infrastructure details, auth provider tokens)?
+   - Are dedicated response DTOs or serializers used instead of returning raw database entities?
+   - Anti-pattern: `res.json(user)` returning the full entity instead of a mapped response object.
+
+6. **Injection vectors**
+   - No string interpolation/concatenation in SQL queries — use parameterized queries or ORM methods.
+   - No `eval()`, `exec()`, `Function()`, or `child_process`/`subprocess` calls with user-supplied input.
+   - No unsanitized user content rendered as HTML (`dangerouslySetInnerHTML`, `v-html`, `bypassSecurityTrustHtml`).
+   - No OS command injection via user-controlled arguments to shell commands.
+
+7. **Dependency vulnerabilities**
+   - Are newly added dependencies free of known CVEs?
+   - Was the relevant audit tool run (`npm audit`, `composer audit`, `dotnet list package --vulnerable`, `pip audit`, `cargo audit`)?
+   - Flag end-of-life or unmaintained packages (no commits > 2 years).
+
+8. **CORS & security headers**
+   - No `Access-Control-Allow-Origin: *` in production configuration.
+   - Security headers are configured: `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Content-Security-Policy`.
+   - Verify the framework's security middleware (Helmet, SecurityMiddleware, etc.) is applied and not disabled.
 
 **Step 11: Validate the solution is scalable**
 

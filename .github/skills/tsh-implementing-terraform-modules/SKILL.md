@@ -186,6 +186,29 @@ output "vpc_cidr_block" {
 9. **Test modules** with Terratest
 10. **Tag all resources** consistently
 
+## Security
+
+Apply these security defaults to every module. These are non-negotiable baselines — not optional parameters.
+
+1. **Encryption at rest by default** — Every storage resource must have encryption enabled. S3: `server_side_encryption_configuration` with `aws_kms_key`. RDS: `storage_encrypted = true` + `kms_key_id`. EBS: `encrypted = true`. Azure Storage: `infrastructure_encryption_enabled = true`. GCS: `encryption` block with Cloud KMS key. Cloud SQL: `encryption_key_name` in `settings` block. Use KMS/Key Vault/Cloud KMS for key management. Make encryption a hardcoded default or a required variable with no opt-out.
+
+2. **Block public access** — Storage modules must default to private access:
+   - S3: `block_public_acls = true`, `block_public_policy = true`, `ignore_public_acls = true`, `restrict_public_buckets = true` via `aws_s3_bucket_public_access_block`
+   - Azure Storage: `allow_blob_public_access = false`
+   - GCS: `uniform_bucket_level_access = true`
+   These must be module defaults, not optional parameters.
+
+3. **IAM least privilege** — Never use `"*"` in IAM policy `actions` or `resources` in module examples. Define only the specific actions required for the module's purpose. Use `condition` blocks where applicable. Service accounts and roles created by modules must have the minimum permissions needed.
+
+4. **Network security defaults** — Security groups, NSGs, and firewall rules must default to deny-all ingress. Open only the required ports. Never default to `cidr_blocks = ["0.0.0.0/0"]` for ingress except on public-facing load balancers. Tag every security group with its purpose via the `tags` argument.
+
+5. **Logging and audit** — Enable access logging as a default, not an opt-in parameter:
+   - S3: `logging` block or `aws_s3_bucket_logging` resource
+   - VPC: `aws_flow_log` / `azurerm_network_watcher_flow_log` / `google_compute_subnetwork` with `log_config`
+   - RDS/Cloud SQL: `enabled_cloudwatch_logs_exports` / `database_flags` for audit logs
+
+6. **No secrets in variables** — Terraform variables for passwords, API keys, and tokens must use `sensitive = true`. Mark outputs containing sensitive data with `sensitive = true`. Never include `default` values for secret variables — force the caller to provide them.
+
 ## Reference Files
 
 - `references/aws-modules.md` - AWS module patterns

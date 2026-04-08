@@ -53,6 +53,19 @@
 - Never expose internal error details in production responses
 -->
 
+# Security
+
+<!-- Define the project's baseline security rules -->
+<!-- These rules apply to ALL code in the repository regardless of language or framework -->
+<!-- Example:
+- Never hardcode secrets (API keys, tokens, passwords) in source code — use environment variables or a secrets manager (e.g., AWS Secrets Manager, HashiCorp Vault, Azure Key Vault). Validate all required secrets at application startup.
+- Validate all input at system boundaries (API controllers, form handlers, CLI argument parsers). Use allowlist validation (accept known-good values and structure) over blocklist (reject known-bad). Never trust client-side validation alone.
+- All database queries must use parameterized queries or ORM methods. No string interpolation or concatenation in SQL. Raw queries require explicit review.
+- All endpoints except health checks (`/health`, `/ready`) and explicitly public resources require authentication. New endpoints default to authenticated — opt out with an explicit annotation and code review.
+- Production error responses must not expose stack traces, internal file paths, database details, or framework version information. Log full details server-side; return only safe error codes and messages to clients.
+- Run dependency audit (`npm audit`, `composer audit`, `pip audit`, `dotnet list package --vulnerable`) in CI. Block merging PRs that introduce dependencies with known Critical or High severity CVEs.
+-->
+
 # Testing Strategy
 
 <!-- Overview of testing approach, frameworks, and key patterns -->

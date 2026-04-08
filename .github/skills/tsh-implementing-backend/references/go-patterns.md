@@ -217,12 +217,44 @@ func (h *UsersHandler) Create(c *gin.Context) {
 
 ## Security
 
-- Use `golang.org/x/crypto/bcrypt` for password hashing.
-- Use `go-playground/validator` for struct validation.
-- Use `rs/cors` for CORS configuration.
-- Use `govulncheck` for dependency scanning.
-- Use middleware (Chi, Gin, Echo) for rate limiting and request ID propagation.
-- Use context propagation for request-scoped values (auth, tracing).
+### Auth Middleware
+
+- **Gin**: Apply auth middleware to route groups — `authorized := router.Group("/api"); authorized.Use(authMiddleware())`. Public routes go outside the group.
+- **Chi**: Apply middleware to subrouter — `r.Route("/api", func(r chi.Router) { r.Use(authMiddleware); ... })`.
+- **Echo**: Use `e.Use(middleware.KeyAuth(...))` or custom JWT middleware at the group level.
+
+### Input Validation
+
+- Use `go-playground/validator` struct tags: `binding:"required,email"` (Gin) or `validate:"required,email"`. Always validate request structs before processing — never trust client input.
+
+### File Uploads
+
+- Limit upload size with `http.MaxBytesReader(w, r.Body, maxSize)` before parsing. Validate MIME type via `http.DetectContentType(buf)` (reads first 512 bytes). Sanitize filenames with `filepath.Base()` — reject names containing `..`.
+- **Gin**: Use `c.ShouldBind()` with `binding:"required"` and set `MaxMultipartMemory` on the router.
+
+### Webhook HMAC Validation
+
+Verify webhook signatures using `subtle.ConstantTimeCompare()` — **never** use `==` or `bytes.Equal()`:
+```go
+mac := hmac.New(sha256.New, []byte(secret))
+mac.Write(rawBody)
+expected := mac.Sum(nil)
+signature, _ := hex.DecodeString(r.Header.Get("X-Signature"))
+if subtle.ConstantTimeCompare(expected, signature) != 1 {
+    http.Error(w, "invalid signature", http.StatusUnauthorized)
+    return
+}
+```
+
+### Rate Limiting
+
+- **In-process**: Use `golang.org/x/time/rate` — `rate.NewLimiter(rate.Every(time.Minute), 10)`. Apply as middleware.
+- **Distributed**: Use `ulule/limiter` with Redis store for multi-instance deployments.
+
+### HTTP Security Headers
+
+- Use `rs/cors` for CORS configuration — never use `AllowAllOrigins` in production.
+- Set security headers via middleware: `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Content-Security-Policy`.
 
 ## Docker
 

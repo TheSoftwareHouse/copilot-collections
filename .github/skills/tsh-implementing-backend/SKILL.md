@@ -429,18 +429,20 @@ See the technology-specific references below for recommended logging libraries p
 - Apply rate limiting on public endpoints.
 - Implement pagination on all list endpoints (never return unbounded result sets).
 
-### Security (OWASP TOP 10)
+### Security
 
-- **Input validation**: Validate and sanitize all user input at the API boundary (request body, query params, headers).
-- **SQL Injection**: Always use parameterized queries / ORM. Never concatenate user input into SQL.
-- **Authentication**: Use short-lived JWTs, validate signatures, handle token expiration.
-- **Authorization**: Enforce at every endpoint. Check resource ownership, not just role membership.
-- **Sensitive data**: Never expose stack traces, internal paths, or database details in error responses.
-- **CORS**: Configure explicitly — never use `*` in production.
-- **Security headers**: Use framework-appropriate middleware to set security headers (CSP, X-Frame-Options, etc.).
-- **Dependencies**: Regularly audit and update dependencies. Use tools like `npm audit`, Snyk, or Dependabot.
-- **Rate limiting**: Apply on authentication and public endpoints.
-- **Secrets**: Store in environment variables or a secrets manager. Never commit to source control.
+Verify these patterns during implementation. SQL injection prevention is covered by `tsh-sql-and-database-understanding`. For framework-specific APIs and code patterns, see `./references/<language>-patterns.md`.
+
+- **Input validation pipeline** — Verify global validation is configured and enforced (whitelist mode — reject unknown fields). Check for routes that bypass the validation pipeline.
+- **Auth guard/middleware coverage** — All sensitive endpoints must be protected by auth middleware or guards. Prefer global auth with explicit opt-out for public routes over per-route opt-in. Look for auth-bypass flags (`DISABLE_AUTH`, `skipAuth`) that could leak to production.
+- **File upload restrictions** — Enforce file size limits, MIME type validation (allowlist, not blocklist), filename sanitization (strip path components, reject `../`), and secure storage destination. Prevent path traversal in upload paths.
+- **Webhook signature validation** — Verify HMAC signatures on incoming webhooks using constant-time comparison functions (language-specific — see reference files). Never use `===`, `==`, or `String.equals()` for signature comparison.
+- **Background job security** — Sanitize inputs in job processors (malicious payloads persist in queues across restarts). Verify retry logic prevents double execution of sensitive operations (payments, notifications).
+- **Response data leakage** — API responses must not expose internal fields (password hashes, internal IDs, infrastructure details). Use dedicated response DTOs — never return raw entities/models.
+- **Rate limiting** — Apply on authentication endpoints, password reset, and public APIs. Enforce maximum page sizes on list endpoints to prevent full table dumps.
+- **HTTP security headers** — Use framework middleware (Helmet, SecurityMiddleware, etc.) to set `Strict-Transport-Security`, `X-Content-Type-Options`, `X-Frame-Options`, `Content-Security-Policy`. Never use `Access-Control-Allow-Origin: *` in production.
+- **Secrets** — Store in environment variables or a secrets manager. Never commit to source control. Validate all required secrets at application startup. See `tsh-managing-secrets` for rotation, vault patterns, and CI/CD secrets handling.
+- **Dependencies** — Run dependency audit (`npm audit`, `composer audit`, `dotnet list package --vulnerable`, `govulncheck`, `mvn dependency-check:check`) as part of CI. Block merging PRs with known Critical/High CVEs.
 
 ## Configuration & Environment
 

@@ -172,11 +172,45 @@ export class UsersController {
 
 ## Security
 
-- Use `helmet` middleware for security headers.
-- Use `@nestjs/throttler` (NestJS) or `express-rate-limit` (Express) for rate limiting.
-- Use `class-validator` + `class-transformer` (NestJS) or `zod`/`joi` for input validation.
-- Use `bcrypt` or `argon2` for password hashing.
-- Use `npm audit` and Snyk for dependency scanning.
+### Input Validation
+
+- **NestJS**: Configure `ValidationPipe` globally with strict settings:
+  ```typescript
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true }));
+  ```
+- **Express**: Use `zod` or `joi` middleware per route. Validate before the handler runs — never inside business logic.
+
+### Auth Guard Coverage
+
+- **NestJS**: Apply `JwtAuthGuard` globally via `APP_GUARD` provider, then use `@Public()` decorator to opt out individual routes:
+  ```typescript
+  providers: [{ provide: APP_GUARD, useClass: JwtAuthGuard }]
+  ```
+- **Express**: Apply `authMiddleware` at the router level, not per-route. Use `router.use(authMiddleware)` before route definitions.
+
+### File Uploads
+
+- **NestJS**: Use `@UseInterceptors(FileInterceptor('file', { limits: { fileSize: 5 * 1024 * 1024 }, fileFilter }))` with MIME type allowlist in `fileFilter`.
+- **Express**: Configure `multer({ limits: { fileSize: 5 * 1024 * 1024 }, fileFilter })`. Sanitize filenames with `path.basename()` — reject names containing `../`.
+
+### Webhook HMAC Validation
+
+Verify webhook signatures using `crypto.timingSafeEqual()` — **never** use `===` for signature comparison:
+```typescript
+const expected = crypto.createHmac('sha256', secret).update(rawBody).digest();
+const signature = Buffer.from(req.headers['x-signature'], 'hex');
+if (!crypto.timingSafeEqual(expected, signature)) throw new UnauthorizedException();
+```
+
+### Rate Limiting
+
+- **NestJS**: Use `@nestjs/throttler` — `ThrottlerModule.forRoot({ throttlers: [{ ttl: 60000, limit: 10 }] })`. Apply `ThrottlerGuard` globally via `APP_GUARD`.
+- **Express**: Use `express-rate-limit` middleware — `rateLimit({ windowMs: 60000, max: 10 })`.
+
+### HTTP Security Headers
+
+- Use `helmet` middleware: `app.use(helmet({ contentSecurityPolicy: { directives: { defaultSrc: ["'self'"], scriptSrc: ["'self'"] } } }))`.
+- Configure CSP directives explicitly — do not rely on Helmet defaults for production.
 
 ## Docker
 

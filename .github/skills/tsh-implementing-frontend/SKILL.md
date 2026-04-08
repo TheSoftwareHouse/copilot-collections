@@ -135,6 +135,16 @@ Component:
 | `any` type for props                         | Explicit type definitions                                          |
 | Barrel file for internal utils               | Direct imports for single-consumer folders                         |
 
+## Security
+
+1. **XSS prevention** — Never use framework unsafe rendering APIs (`dangerouslySetInnerHTML`, `v-html`, `bypassSecurityTrustHtml`) with unsanitized user input. If raw HTML rendering is unavoidable, sanitize with DOMPurify before rendering. This is the #1 frontend vulnerability.
+2. **Content Security Policy (CSP)** — Configure CSP headers to block inline script execution. Use `nonce` or `hash` for legitimate inline scripts. Restrict `script-src`, `style-src`, `img-src` to known origins. CSP is configured server-side or via `<meta http-equiv="Content-Security-Policy">` — coordinate with backend.
+3. **CSRF protection** — For cookie-based authentication: include anti-CSRF tokens in state-changing requests (as hidden fields or custom headers). Token-based auth (`Authorization: Bearer`) is inherently CSRF-resistant. Know which model the project uses.
+4. **Secure token storage** — Prefer auth tokens in `HttpOnly` cookies (inaccessible to JavaScript). Never store tokens in `localStorage` — any XSS exposes them. `sessionStorage` is slightly better but still XSS-vulnerable. For JWTs in memory, handle refresh via `HttpOnly` cookie.
+5. **Source map exposure** — Production builds must not ship `.map` files. Verify build config: Webpack `devtool: false`, Vite `build.sourcemap: false`, Next.js `productionBrowserSourceMaps: false`.
+6. **Third-party script integrity (SRI)** — External `<script>` and `<link>` tags must include `integrity` and `crossorigin` attributes. Generate hashes with `shasum` or use CDN-provided hashes.
+7. **Sensitive data in client state** — Never store PII, passwords, or secrets in client-side state (Redux, Zustand, Pinia stores). API keys must not be embedded in frontend bundles — use a backend proxy.
+
 ## Framework-Specific Patterns
 
 The patterns above are framework-agnostic. For framework-specific implementation guidance, load the appropriate reference:

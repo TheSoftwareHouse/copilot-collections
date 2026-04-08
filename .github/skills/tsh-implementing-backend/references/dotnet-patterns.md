@@ -164,12 +164,43 @@ builder.Services.AddSwaggerGen(c =>
 
 ## Security
 
-- Use `[Authorize]` attribute with policy-based authorization.
-- Use `FluentValidation` or `DataAnnotations` for input validation.
-- Use `ASP.NET Core Identity` or custom JWT middleware for authentication.
-- Use `BCrypt.Net-Next` or `Microsoft.AspNetCore.Identity` for password hashing.
-- Use `dotnet list package --vulnerable` for dependency scanning.
-- Configure CORS explicitly in `Program.cs`.
+### Auth & Authorization
+
+- Use `[Authorize]` attribute on controllers or actions. Use **policy-based authorization** for fine-grained access:
+  ```csharp
+  builder.Services.AddAuthorization(options =>
+      options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin")));
+  ```
+  Apply with `[Authorize(Policy = "AdminOnly")]`. For resource-based authorization, inject `IAuthorizationService` and call `AuthorizeAsync()`.
+
+### Input Validation
+
+- Use `FluentValidation` or `DataAnnotations` (`[Required]`, `[MaxLength]`, `[EmailAddress]`). Register `FluentValidation` validators globally via `AddFluentValidation()`.
+
+### File Uploads
+
+- Use `IFormFile` with `[RequestSizeLimit(5 * 1024 * 1024)]` attribute on the action. Validate MIME type via `file.ContentType` (allowlist). Sanitize filenames with `Path.GetFileName()` — reject names containing `..`. Never use client-provided paths for storage.
+
+### Webhook HMAC Validation
+
+Verify webhook signatures using `CryptographicOperations.FixedTimeEquals()` — **never** use `==` or `SequenceEqual()`:
+```csharp
+using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(secret));
+var expected = hmac.ComputeHash(rawBody);
+var signature = Convert.FromHexString(request.Headers["X-Signature"]);
+if (!CryptographicOperations.FixedTimeEquals(expected, signature))
+    return Results.Unauthorized();
+```
+
+### Rate Limiting
+
+- Use .NET 7+ built-in rate limiting: `builder.Services.AddRateLimiter(options => options.AddFixedWindowLimiter("fixed", o => { o.Window = TimeSpan.FromMinutes(1); o.PermitLimit = 10; }))`. Apply with `app.UseRateLimiter()` and `[EnableRateLimiting("fixed")]`.
+
+### Antiforgery & Security Headers
+
+- Use `[ValidateAntiForgeryToken]` on state-changing MVC endpoints. Register with `builder.Services.AddAntiforgery()`.
+- Use `app.UseHsts()` and `app.UseHttpsRedirection()` in production. For CSP and additional headers, use `NetEscapades.AspNetCore.SecurityHeaders` package.
+- Configure CORS explicitly in `Program.cs` — never use `AllowAnyOrigin()` in production.
 
 ## Docker
 
