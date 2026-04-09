@@ -1,20 +1,26 @@
 ---
-sidebar_position: 3
+sidebar_position: 10
 title: /tsh-plan
 ---
 
 # /tsh-plan
 
+:::info
+Not invoked directly by users. To trigger implementation planning, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [Architect](../../agents/architect) when a plan is needed.
+:::
+
 **Agent:** Architect  
-**File:** `.github/prompts/tsh-plan.prompt.md`
+**File:** `.github/internal-prompts/tsh-plan.prompt.md`
 
 Creates a detailed, phased implementation plan from the research context.
 
-## Usage
+## How It's Triggered
 
 ```text
-/tsh-plan <JIRA_ID or task description>
+/tsh-implement <JIRA_ID or task description>
 ```
+
+The Engineering Manager identifies that no implementation plan exists and delegates planning to the Architect automatically.
 
 ## What It Does
 

@@ -10,23 +10,27 @@ For features that need end-to-end test coverage, use the E2E testing workflow. T
 ## Command Sequence
 
 ```text
-1️⃣ /tsh-research <JIRA_ID or task description>
+1️⃣ /tsh-implement <JIRA_ID or task description>
+   ↳ 🔍 Engineering Manager delegates to Context Engineer for research
    ↳ 📖 Review research doc – understand feature scope and user journeys
    ↳ ✅ Identify critical paths that need E2E coverage
-
-2️⃣ /tsh-plan <JIRA_ID or task description>
+   ↳ 🧱 Engineering Manager delegates to Architect for planning
    ↳ 📖 Review plan – confirm test scenarios and acceptance criteria
    ↳ ✅ Ensure E2E testing is included in the plan
-
-3️⃣ /tsh-implement-e2e <JIRA_ID or task description>
+   ↳ 🧪 Engineering Manager delegates E2E tasks to the E2E Engineer agent
    ↳ 📖 Implements Page Objects, test files, and fixtures
    ↳ ✅ Run tests locally, verify they pass
    ↳ 🔄 Iterate on flaky or failing tests
 ```
 
-## What `/tsh-implement-e2e` Does
+:::tip
+E2E test implementation is handled by the Engineering Manager as part of the standard `/tsh-implement` workflow. When the plan contains E2E test tasks, the Engineering Manager automatically delegates them to the E2E Engineer agent using the internal `tsh-implement-e2e` prompt.
+:::
 
-- **Agent:** E2E Engineer
+## What the E2E Engineer Does
+
+When delegated to by the Engineering Manager, the E2E Engineer:
+
 - Analyzes the application, designs test scenarios, and implements Page Objects.
 - Uses **Playwright MCP** for real-time browser interaction and test verification.
 - Follows BDD-style scenarios with proper Arrange-Act-Assert structure.
@@ -53,5 +57,5 @@ The E2E Engineer agent enforces these standards:
 | **Naming** | `should [behavior] when [condition]` pattern. |
 
 :::warning Important
-The `/tsh-implement-e2e` command generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.
+The E2E Engineer agent generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.
 :::

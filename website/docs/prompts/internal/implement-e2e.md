@@ -5,16 +5,22 @@ title: /tsh-implement-e2e
 
 # /tsh-implement-e2e
 
+:::info
+Not invoked directly by users. To trigger E2E test implementation, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [E2E Engineer](../../agents/e2e-engineer).
+:::
+
 **Agent:** E2E Engineer  
-**File:** `.github/prompts/tsh-implement-e2e.prompt.md`
+**File:** `.github/internal-prompts/tsh-implement-e2e.prompt.md`
 
 Creates comprehensive end-to-end tests for a feature using Playwright.
 
-## Usage
+## How It’s Triggered
 
 ```text
-/tsh-implement-e2e <JIRA_ID or task description>
+/tsh-implement <JIRA_ID or task description>
 ```
+
+The Engineering Manager identifies E2E test tasks in the plan and delegates them to the E2E Engineer automatically.
 
 ## What It Does
 

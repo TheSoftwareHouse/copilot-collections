@@ -109,7 +109,7 @@ The agent fetches existing issues from Jira, converts them into the local format
 After workshop analysis, individual tasks can flow into the standard delivery workflow:
 
 ```text
-/tsh-analyze-materials  →  /tsh-research PROJ-123  →  /tsh-plan PROJ-123  →  /tsh-implement  →  /tsh-review
+/tsh-analyze-materials  →  /tsh-implement PROJ-123  →  /tsh-review
 ```
 
 Use the **Deep-dive Research per Task** handoff to transition a specific task to the Context Engineer for detailed requirements gathering, or the **Prepare Implementation Plan** handoff to send it to the Architect.

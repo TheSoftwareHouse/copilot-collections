@@ -34,7 +34,7 @@ The UI Reviewer agent performs read-only verification comparing implemented UI a
 4. Produces a **PASS/FAIL** report with a difference table showing exact values.
 
 :::info Read-Only
-The UI Reviewer never modifies code. It only reports differences so the Software Engineer (`/tsh-implement-ui`) can fix them. When called in a loop, each call is an independent verification pass.
+The UI Reviewer never modifies code. It only reports differences so the Software Engineer (via `/tsh-implement`) can fix them. When called in a loop, each call is an independent verification pass.
 :::
 
 ## Tool Access
@@ -59,6 +59,6 @@ The UI Reviewer never modifies code. It only reports differences so the Software
 
 After verification, the UI Reviewer can hand off to:
 
-- **Software Engineer** → `/tsh-implement-ui` (start UI implementation according to the plan)
-- **Software Engineer** → `/tsh-implement-ui` (implement UI fixes based on the verification report)
+- **Software Engineer** → `/tsh-implement` (start UI implementation according to the plan)
+- **Software Engineer** → `/tsh-implement` (implement UI fixes based on the verification report)
 - **Code Reviewer** → `/tsh-review` (proceed to code review if PASS)

@@ -10,30 +10,29 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 ## Command Sequence
 
 ```text
-1️⃣ /tsh-research     <JIRA_ID or task description>
+1️⃣ /tsh-implement <JIRA_ID or task description>
+   ↳ 🔍 Engineering Manager delegates to Context Engineer for research
    ↳ 📖 Review research doc – verify Figma links, requirements
-   ↳ ✅ Iterate until context is complete and accurate
-
-2️⃣ /tsh-plan         <JIRA_ID or task description>
+   ↳ ✅ Confirm to proceed to planning
+   ↳ 🧱 Engineering Manager delegates to Architect for planning
    ↳ 📖 Review plan – check component breakdown, design references
    ↳ ✅ Confirm phases align with Figma structure
-
-3️⃣ /tsh-implement-ui <JIRA_ID or task description>
+   ↳ 💻 Engineering Manager delegates UI tasks to Software Engineer
    ↳ 📖 Review code changes and UI Verification Summary
    ↳ ✅ Manually verify critical UI elements in browser
-   ↳ 🔄 Agent calls /tsh-review-ui in a loop until PASS or escalation
+   ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until PASS or escalation
 
-4️⃣ /tsh-review       <JIRA_ID or task description>
+2️⃣ /tsh-review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
    ↳ ✅ Address all blockers before merging
 ```
 
 ## How the Verification Loop Works
 
-1. `/tsh-implement-ui` implements a UI component.
-2. Calls `/tsh-review-ui` to perform **single-pass verification** (read-only).
+1. The Engineering Manager delegates a UI component implementation to the Software Engineer via the internal `/tsh-implement-ui` prompt.
+2. After the Software Engineer completes, the Engineering Manager calls `/tsh-review-ui` to perform **single-pass verification** (read-only).
 3. `/tsh-review-ui` uses **Figma MCP** (EXPECTED) + **Playwright MCP** (ACTUAL) → returns PASS or FAIL with diff table.
-4. If FAIL → `/tsh-implement-ui` fixes the code and calls `/tsh-review-ui` again.
+4. If FAIL → the Engineering Manager delegates the fix to the Software Engineer and calls `/tsh-review-ui` again.
 5. Repeats until PASS or max **5 iterations** (then escalates to the developer).
 
 ## What `/tsh-review-ui` Does
@@ -46,9 +45,14 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 
 ## What `/tsh-implement-ui` Does
 
+:::info Internal Prompt
+`/tsh-implement-ui` is an internal prompt — not invoked directly by users. It is triggered automatically by `/tsh-implement` when the plan contains UI tasks with Figma references.
+:::
+
+- Orchestrated by the **Engineering Manager** agent, which delegates to the Software Engineer and UI Reviewer.
 - Implements UI components following the plan.
 - Runs **iterative verification loop** delegating to the `tsh-ui-reviewer` subagent after each component.
-- **Fixes mismatches** based on subagent reports.
+- **Fixes mismatches** by delegating fixes back to the Software Engineer based on subagent reports.
 - Escalates after 5 failed iterations with a detailed report.
 - Produces a **UI Verification Summary** before handing off to code review.
 

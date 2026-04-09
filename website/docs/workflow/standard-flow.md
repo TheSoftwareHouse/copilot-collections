@@ -5,44 +5,44 @@ title: Standard Flow
 
 # Standard Flow
 
-The standard workflow is used for backend and fullstack tasks. It follows the full 4-phase cycle: Research → Plan → Implement → Review.
+The standard workflow is used for backend and fullstack tasks. The Engineering Manager orchestrates the full cycle: research → plan → implement → review.
 
 ## Step-by-Step Command Sequence
 
-### 1. Research
-
-```text
-/tsh-research <JIRA_ID or task description>
-```
-
-- **Agent:** Context Engineer
-- **What it does:** Gathers all available information about the task from the codebase, Jira, Confluence, Figma, and other sources.
-- **What it produces:** A `.research.md` file with task summary, assumptions, open questions, and suggested next steps.
-- **Your action:** Review the generated research document. Verify accuracy. Iterate if needed.
-
-### 2. Plan
-
-```text
-/tsh-plan <JIRA_ID or task description>
-```
-
-- **Agent:** Architect
-- **What it does:** Creates a multi-step implementation plan grouped into phases and tasks aligned with your repo structure.
-- **What it produces:** A `.plan.md` file with checklist-style phases that can be executed by the Software Engineer agent.
-- **Your action:** Review the implementation plan. Confirm scope, phases, and acceptance criteria.
-
-### 3. Implement
+### 1. Implement
 
 ```text
 /tsh-implement <JIRA_ID or task description>
 ```
 
-- **Agent:** Software Engineer
-- **What it does:** Implements the previously defined plan. Proposes file changes, refactors, and new code in a focused way.
-- **What it produces:** Concrete code modifications and guidance on how to apply/test them.
+The Engineering Manager automatically handles the full development cycle:
+
+#### Research Phase (internal)
+
+- **Delegated to:** Context Engineer
+- **What it does:** Gathers all available information about the task from the codebase, Jira, Confluence, Figma, and other sources.
+- **What it produces:** A `.research.md` file with task summary, assumptions, open questions, and suggested next steps.
+- **Your action:** Review the generated research document. Verify accuracy. The Engineering Manager asks for confirmation before proceeding.
+
+#### Planning Phase (internal)
+
+- **Delegated to:** Architect
+- **What it does:** Creates a multi-step implementation plan grouped into phases and tasks aligned with your repo structure.
+- **What it produces:** A `.plan.md` file with checklist-style phases that can be executed by specialized agents.
+- **Your action:** Review the implementation plan. Confirm scope, phases, and acceptance criteria.
+
+#### Implementation Phase
+
+- **Delegated to:** Software Engineer, Prompt Engineer, DevOps Engineer, E2E Engineer (based on task type)
+- **What it does:** Executes the plan by delegating to specialized agents. Tracks progress and runs quality checks after each task.
+- **What it produces:** Concrete code modifications applied by delegated agents.
 - **Your action:** Review code changes after each phase. Test functionality. Verify against the plan.
 
-### 4. Review
+:::tip
+If a `.research.md` or `.plan.md` file already exists for the task, the Engineering Manager skips that phase and proceeds directly to the next step.
+:::
+
+### 2. Review
 
 ```text
 /tsh-review <JIRA_ID or task description>
@@ -56,19 +56,18 @@ The standard workflow is used for backend and fullstack tasks. It follows the fu
 ## Example End-to-End Usage
 
 ```text
-1⃣️ /tsh-research <JIRA_ID or task description>
+1⃣️ /tsh-implement <JIRA_ID or task description>
+   ↳ 🔍 Engineering Manager delegates to Context Engineer for research
    ↳ 📖 Review the generated research document
-   ↳ ✅ Verify accuracy, iterate if needed
-
-2⃣️ /tsh-plan     <JIRA_ID or task description>
+   ↳ ✅ Confirm to proceed to planning
+   ↳ 🧱 Engineering Manager delegates to Architect for planning
    ↳ 📖 Review the implementation plan
    ↳ ✅ Confirm scope, phases, and acceptance criteria
-
-3⃣️ /tsh-implement <JIRA_ID or task description>
+   ↳ 💻 Engineering Manager delegates implementation to specialized agents
    ↳ 📖 Review code changes after each phase
    ↳ ✅ Test functionality, verify against plan
 
-4⃣️ /tsh-review   <JIRA_ID or task description>
+2⃣️ /tsh-review   <JIRA_ID or task description>
    ↳ 📖 Review findings and recommendations
    ↳ ✅ Address blockers before merging
 ```

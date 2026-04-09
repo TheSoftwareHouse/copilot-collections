@@ -1,20 +1,26 @@
 ---
-sidebar_position: 2
+sidebar_position: 9
 title: /tsh-research
 ---
 
 # /tsh-research
 
+:::info
+Not invoked directly by users. To trigger research, use [`/tsh-implement`](../public/implement) — the [Engineering Manager](../../agents/engineering-manager) will automatically delegate to the [Context Engineer](../../agents/context-engineer) when research is needed.
+:::
+
 **Agent:** Context Engineer  
-**File:** `.github/prompts/tsh-research.prompt.md`
+**File:** `.github/internal-prompts/tsh-research.prompt.md`
 
 Prepares a comprehensive context document for a task from a context engineering perspective.
 
-## Usage
+## How It's Triggered
 
 ```text
-/tsh-research <JIRA_ID or task description>
+/tsh-implement <JIRA_ID or task description>
 ```
+
+The Engineering Manager identifies that the task is missing necessary context and delegates research to the Context Engineer automatically.
 
 ## What It Does
 

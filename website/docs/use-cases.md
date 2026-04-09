@@ -81,7 +81,7 @@ Security reviews happen at the end of a sprint - when it's expensive to fix what
 
 Security considerations are built into every implementation plan, not reviewed after the fact. The Code Reviewer agent checks for vulnerabilities, exposed secrets, and missing validation on every review pass. The SQL & Database skill enforces least-privilege access, parameterised queries, and proper indexing as defaults.
 
-**Built into every** `/tsh-plan` **and** `/tsh-review`
+**Built into every** `/tsh-implement` **plan phase and** `/tsh-review`
 
 ---
 

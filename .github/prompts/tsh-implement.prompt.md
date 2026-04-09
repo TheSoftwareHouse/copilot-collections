@@ -1,40 +1,30 @@
 ---
-agent: "tsh-software-engineer"
+agent: "tsh-engineering-manager"
 model: "Claude Opus 4.6"
 description: "Implement feature according to the plan."
 ---
 
 Your goal is to implement the feature according to the provided implementation plan and feature context.
 
-Thoroughly review the implementation plan and feature context before starting the implementation. Ensure a clear understanding of the requirements and technical designs to deliver effective solutions.
-
-Use available tools to gather necessary information and document your findings.
-
-Don't deviate from the implementation plan. Follow it step by step to ensure all requirements are met.
-
-If you need to make changes to the original solution during implementation, wait for a confirmation before proceeding. Also, ensure to document those changes in the specified plan file in Changelog section. This helps maintain clarity and ensures that all modifications are tracked.
-
-## Required Skills
-
-Before starting, load and follow these skills:
-- `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns
-- `tsh-implementation-gap-analysing` - to verify current state before making changes
-- `tsh-sql-and-database-understanding` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking
-
 ## Workflow
 
-1. Review the implementation plan and feature context thoroughly.
-2. Review all project copilot instructions (`*.instructions.md`) and the codebase to understand the existing architecture, coding standards, and any relevant guidelines.
-3. Gather a list of commands you will need during implementation: running tests (unit, integration, E2E and others), linters, building the project, running and generating migrations, etc. Run tests and linters **before** starting implementation and **after** completing each phase.
-4. Focus only on the implementation plan. Don't implement anything not part of the plan unless explicitly instructed.
-5. Don't implement improvements from the plan's improvements section unless explicitly instructed.
-6. Start implementing the feature according to the plan, following each task step by step.
-7. After completing each task step, update the relevant plan to reflect progress by checking the box for the completed task step.
-8. After each phase:
+1. **Review the current state of the task** - Check what's already done and decide whether you have enough context and information to start the implementation or if you need to delegate to `tsh-context-engineer` agent to gather more context and requirements before starting the implementation. If the plan is missing, delegate to `tsh-architect` agent to create a detailed implementation plan based on the feature context and requirements.
+
+2. **Review the plan** — Read the implementation plan and feature context thoroughly. Identify every task, its type (`[CREATE]`, `[MODIFY]`, `[REUSE]`), and which agent should handle it. Create a **todo for every task** in the plan — not one per phase. Each task gets its own todo.
+
+3. Confirm with the user before proceeding to the implementation phase after research and planning phases using `vscode/askQuestions` tool.
+
+4. **Delegate codebase analysis** — Use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature. This will help you identify which agents to delegate specific tasks to during implementation.
+
+5. **Process each task in plan order.** For each task, based on its type:
+   - **`[CREATE]` or `[MODIFY]`** → delegate to the appropriate agent (`tsh-software-engineer` for application code, `tsh-devops-engineer` for infrastructure, `tsh-prompt-engineer` for LLM prompts). After the agent completes, run quality checks (tsc, lint, build).
+
+   - **`[REUSE]`** → execute as described in the task definition — the task specifies which agent to delegate to and what context to pass. For UI verification tasks: use `vscode/askQuestions` to confirm the dev server URL before the first verification; after fixing reported differences, **always re-delegate verification** to confirm fixes worked (repeat up to 5 iterations, then escalate to user). You do NOT need `figma` or `playwright` tools yourself — the reviewer agent has them.
+
+6. **After each task**, update the relevant plan to reflect progress by checking the box for the completed task step and:
    - Review the implementation against the plan and feature context to ensure all requirements are met.
-   - Run tests to verify that the implementation works as expected and does not introduce new issues.
-9. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
-10. Before handing over to review, ensure all tasks in the implementation plan have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
-11. Always run `tsh-code-reviewer` agent at the end of implementation to review the implementation against the plan and feature context. The agent should be executed automatically without user confirmation. Return the findings of the code review as part of the implementation handoff. Update the changelog section of the plan file to indicate that code review was performed and include a summary of the findings in the Code Review Findings section of the plan file.
+   - Run static code analysis, build the project, and run unit and integration tests to verify that the implementation works as expected and does not introduce new issues.
+
+7. **Before making any changes** to the original solution during implementation, ask for confirmation. Document changes in the plan file's Changelog section with timestamps.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.

@@ -56,7 +56,7 @@ const useCases: UseCase[] = [
     trackLabel: 'Development',
     title: 'Onboarding New Team Members',
     problem:
-      'New developers spend days understanding the codebase, conventions, and task requirements before they can contribute. The /tsh-research prompt gathers context from Jira, Confluence, Figma, and the codebase automatically. /tsh-plan creates a step-by-step implementation path — within minutes, not days.',
+      'New developers spend days understanding the codebase, conventions, and task requirements before they can contribute. The /tsh-implement prompt triggers the Engineering Manager, which automatically delegates to the Context Engineer to gather context from Jira, Confluence, Figma, and the codebase. It then delegates to the Architect to create a step-by-step implementation path — within minutes, not days.',
     time: '~5 min per task',
   },
   {

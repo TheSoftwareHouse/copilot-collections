@@ -212,6 +212,12 @@
   gap: 8px;
 }
 
+.grid3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
 .parallelLabel {
   text-align: center;
   font-size: 9px;
@@ -307,6 +313,10 @@
   }
 
   .grid2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid3 {
     grid-template-columns: 1fr;
   }
 

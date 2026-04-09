@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: Software Engineer
 ---
 
@@ -52,10 +52,11 @@ The Software Engineer agent implements software solutions based on provided requ
 - `tsh-optimizing-frontend` — Code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` — Tolerances and structure checklist for Figma verification.
 - `tsh-sql-and-database-understanding` — SQL queries, database schemas, migrations, ORM patterns.
+- `tsh-engineering-prompts` — LLM prompt design: structure patterns, optimization, security, templates.
 
 ## Handoffs
 
 After completing implementation, the Software Engineer can hand off to:
 
 - **Code Reviewer** → `/tsh-review` (review implementation against the plan)
-- **E2E Engineer** → `/tsh-implement-e2e` (create E2E tests for the implemented feature)
+- **E2E Engineer** → delegated by the Engineering Manager for E2E test creation

@@ -4,9 +4,8 @@ tools:
   [
     "execute",
     "read",
-    "atlassian/search",
     "context7/*",
-    "figma-mcp-server/*",
+    "figma/*",
     "playwright/*",
     "sequential-thinking/*",
     "edit",
@@ -14,7 +13,6 @@ tools:
     "todo",
     "agent",
     "vscode/runCommand",
-    "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
 agents: [tsh-ui-reviewer]
@@ -51,6 +49,16 @@ You ensure that your implementation is well-documented within the codebase, incl
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
+## Plan Progress and Definition of Done
+
+When working from a `*.plan.md` file — whether implementing the full plan or a delegated subset (e.g., a single phase or task) — you MUST:
+
+1. After completing each task, update the plan by checking the task's progress checkbox.
+2. After satisfying any item in the task's **Definition of Done** checklist, immediately check that checkbox in the plan document.
+3. After verifying any **acceptance criteria** item, check the corresponding checkbox.
+4. Only update checkboxes for the delegated scope. Do not touch tasks, DoD items, or acceptance criteria belonging to phases/tasks outside your current assignment.
+5. Do not modify the text of Definition of Done or acceptance criteria sections — only check boxes.
+
 ## Skills Usage Guidelines
 
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature.
@@ -64,6 +72,7 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` - when implementing UI with Figma verification: tolerances, structure checklist, severity definitions.
+- `tsh-implementing-backend` - to follow TSH backend standards when building REST/GraphQL APIs, implementing CRUD endpoints, DataGrid filtering/pagination, database handling, authentication (JWT), external service adapters, testing strategies, logging, and Docker setup. Applies to Node.js, PHP, .NET, Java, and Go backends.
 
 ## Tool Usage Guidelines
 
@@ -81,7 +90,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching for internal project logic (use `search` or `usages` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Working on frontend tasks where Figma designs are mentioned in the context.

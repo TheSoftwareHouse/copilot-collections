@@ -69,9 +69,7 @@ Once the repo is cloned and VS Code User Settings are configured:
 2. Open **GitHub Copilot Chat**.
 3. Switch to one of the configured **agents** (Architect, Business Analyst, Software Engineer, Code Reviewer).
 4. Use the workflow prompts:
-   - `/tsh-research <JIRA_ID or task description>`
-   - `/tsh-plan <JIRA_ID or task description>`
-   - `/tsh-implement <JIRA_ID or task description>`
+   - `/tsh-implement <JIRA_ID or task description>` (handles research, planning, and implementation)
    - `/tsh-review <JIRA_ID or task description>`
 
 All of these will leverage the shared configuration from Copilot Collections while still respecting your project's own code and context.

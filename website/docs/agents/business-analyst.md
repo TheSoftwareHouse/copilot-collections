@@ -69,5 +69,4 @@ The Business Analyst enforces a strict review process — no data is pushed to J
 
 After completing workshop analysis, the Business Analyst can hand off to:
 
-- **Context Engineer** → `/tsh-research` (deep-dive research per individual task)
-- **Architect** → `/tsh-plan` (create implementation plan for a specific task)
+- **Engineering Manager** → `/tsh-implement` (the Engineering Manager will automatically delegate to Context Engineer for research and Architect for planning)

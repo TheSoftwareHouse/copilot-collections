@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **10 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
+Copilot Collections provides **12 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -23,31 +23,26 @@ Each agent has:
 │  Business Analyst     │
 │  /tsh-analyze-materials│
 └──────┬───────────────┘
-       │ Deep-dive Research / Prepare Plan
+       │ Start Implementation
        ▼
-┌──────────────────┐
-│ Context Engineer  │
-│  /tsh-research    │
-└──────┬───────────┘
-       │ Prepare Implementation Plan
+┌─────────────────────────┐
+│   Engineering Manager    │  ← Orchestrates the full cycle
+│   /tsh-implement         │
+└──────┬──────────────────┘
+       │ Delegates to specialized agents
+       ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
+       ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│  Context     │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
+│  Engineer    │  │  (plan)      │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
+│  (research)  │  │              │  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+       │
        ▼
-┌──────────────────┐
-│    Architect      │
-│    /tsh-plan      │
-└──────┬───────────┘
-       │ Start Implementation / Start UI Implementation / Deploy Infrastructure
-       ▼
-┌──────────────────┐       ┌──────────────────┐       ┌──────────────────────┐
-│ Software Engineer │──────▶│   UI Reviewer     │       │  DevOps Engineer      │
-│ /tsh-implement    │◀──────│   /tsh-review-ui  │       │  /tsh-deploy-kubernetes│
-│ /tsh-implement-ui │       └──────────────────┘       │  /tsh-implement-terraform│
-└──────┬───────────┘                                   │  /tsh-implement-pipeline │
-       │ Run Code Review / Write E2E Tests              └──────────┬───────────────┘
-       ▼                                                           │ Review IaC
-┌──────────────────┐       ┌──────────────────┐                    ▼
-│  Code Reviewer    │       │  E2E Engineer     │       ┌──────────────────┐
-│  /tsh-review      │       │  /tsh-implement-e2e│       │  Code Reviewer    │
-└──────────────────┘       └──────────────────┘       └──────────────────┘
+┌──────────────┐
+│ Code Reviewer │
+│ /tsh-review   │
+└──────────────┘
 ```
 
 ## Agent Summary
@@ -64,7 +59,9 @@ Each agent has:
 |---|---|---|---|
 | [Context Engineer](./context-engineer) | `tsh-context-engineer.agent.md` | Gathers requirements, builds context, identifies gaps | Atlassian, Figma, PDF Reader, Sequential Thinking |
 | [Architect](./architect) | `tsh-architect.agent.md` | Designs solutions, creates implementation plans | Atlassian, Context7, Figma, PDF Reader, Sequential Thinking |
+| [Engineering Manager](./engineering-manager) | `tsh-engineering-manager.agent.md` | Orchestrates implementation by delegating to specialized agents | Atlassian, Sequential Thinking |
 | [Software Engineer](./software-engineer) | `tsh-software-engineer.agent.md` | Implements code against the plan | Context7, Figma, Playwright, Sequential Thinking |
+| [Prompt Engineer](./prompt-engineer) | `tsh-prompt-engineer.agent.md` | Designs, optimizes, and secures LLM application prompts | Context7, Sequential Thinking |
 
 ### 🏗 Infrastructure & DevOps Agents
 

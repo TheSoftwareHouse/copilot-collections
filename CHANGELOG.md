@@ -4,6 +4,70 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-04-01
+
+### Changed
+
+- Renamed Figma MCP server key from `figma-mcp-server` to `figma` across all agents, prompts, skills, MCP configuration, and documentation — aligns with Figma's recommended server naming in their official docs
+
+## 2026-03-30
+
+### Added
+
+- Backend development skill `tsh-implementing-backend`
+
+### Changed
+
+- Updated `tsh-implementing-backend` skill reference in `tsh-software-engineer` agent
+- Updated `tsh-implementing-backend` as a conditional skill in `implement` prompt for backend API tasks
+
+## 2026-03-20
+
+### Changed
+
+- `/tsh-implement` prompt — Now auto-detects missing context and missing plan; delegates to `tsh-context-engineer` for research and `tsh-architect` for planning before implementation, with user confirmation between phases
+- `/tsh-plan` prompt — Moved from public `.github/prompts/` to internal `.github/internal-prompts/`; no longer invoked directly by users — the Engineering Manager delegates to the Architect automatically when a plan is needed
+- `/tsh-research` prompt — Moved from public `.github/prompts/` to internal `.github/internal-prompts/`; no longer invoked directly by users — the Engineering Manager delegates to the Context Engineer automatically when research is needed
+- Engineering Manager agent (`tsh-engineering-manager`) — Added `tsh-context-engineer` to subagents; added structured workflow to decide between research, planning, and implementation phases; added delegation rules for `tsh-context-engineer` (missing context) and `tsh-architect` (missing plan); added Sequential Thinking usage for phase routing decisions
+- Business Analyst agent (`tsh-business-analyst`) — Replaced "Deep-dive Research per Task" and "Prepare Implementation Plan" handoff buttons with single "Start Implementation" handoff routing to Engineering Manager
+- Context Engineer agent (`tsh-context-engineer`) — Replaced "Prepare Implementation Plan" handoff button with "Start Implementation" handoff routing to Engineering Manager
+- Updated website documentation: moved `/tsh-plan` and `/tsh-research` prompt pages from public to internal section; updated agents overview, prompts overview, workflow docs, and getting started pages
+
+## 2026-03-17
+
+### Added
+
+- Engineering Manager agent (`tsh-engineering-manager`) — Orchestrates the implementation phase by delegating tasks to specialized agents (Software Engineer, E2E Engineer, DevOps Engineer, Architect, Code Reviewer, UI Reviewer) based on the implementation plan; uses Sequential Thinking for ambiguous routing; auto-triggers code review if no review phase is defined; tracks progress via plan checkboxes
+- Internal prompts directory (`.github/internal-prompts/`) — Agent-only prompts not visible in the slash command menu, used exclusively for sub-agent delegation by the Engineering Manager
+- Internal prompt `tsh-implement-common-task` — Base implementation workflow for Software Engineer delegated tasks (backend and non-Figma frontend)
+- Internal prompt `tsh-implement-ui-common-task` — Extends `tsh-implement-common-task` with UI-specific behaviors for Figma-based frontend tasks
+- Internal prompt `tsh-implement-ui` — Full UI implementation + verification loop orchestration for the Engineering Manager
+- Documentation page for the Engineering Manager agent on the website
+- Documentation pages for all new internal prompts on the website
+
+### Changed
+
+- `/tsh-implement` prompt — Rewritten to route through the Engineering Manager agent instead of Software Engineer; now delegates tasks to specialized agents based on plan task types (`[CREATE]`, `[MODIFY]`, `[REUSE]`)
+- Architect agent (`tsh-architect`) — Handoff now routes to Engineering Manager instead of Software Engineer; removed "Start UI Implementation" handoff button (consolidated into single "Start Implementation"); reformatted tools list YAML; updated plan template to include `[REUSE]` UI verification tasks delegated to `tsh-ui-reviewer`
+- Architecture Designing skill (`tsh-architecture-designing`) — Updated plan phases to run only fast tests/checks per phase (unit, integration, linters, build); added code review phase requirement using `tsh-code-reviewer` with `tsh-review.prompt.md`; added `[REUSE]` UI verification task pattern for Figma-based features
+- UI Reviewer agent (`tsh-ui-reviewer`) — Removed "Start UI Implementation" and "Implement UI Fixes" handoff buttons (Engineering Manager now owns the verify-fix loop); added explicit dev server URL confirmation requirement; added authentication/login screen detection and escalation; added "reading source code is NOT verification" guardrail
+- Code Reviewer agent (`tsh-code-reviewer`) — Added explicit mention of e2e tests alongside unit and integration tests in verification requirements
+- Software Engineer agent (`tsh-software-engineer`) — Removed `atlassian/search` from tool access (Atlassian context now gathered by Engineering Manager)
+- `/tsh-plan` prompt — Minor update
+- `/tsh-review-ui` prompt — Minor update
+- `/tsh-review` prompt — Minor update
+- Prompts reorganized into public and internal categories on the documentation website with separate sidebar sections
+- Moved 7 infrastructure/DevOps prompts from public `.github/prompts/` to internal `.github/internal-prompts/` (`tsh-deploy-kubernetes`, `tsh-implement-e2e`, `tsh-implement-observability`, `tsh-implement-pipeline`, `tsh-implement-terraform`)
+- Updated agents overview documentation with Engineering Manager in the handoff diagram and agent summary table
+- Updated prompts overview documentation with public/internal prompt distinction and delegation table
+- Updated workflow documentation (standard flow, frontend flow, e2e flow) to reflect Engineering Manager orchestration
+
+### Removed
+
+- `/tsh-implement-ui` public prompt — Consolidated into `/tsh-implement`; UI implementation is now handled internally by the Engineering Manager's delegation to Software Engineer + UI Reviewer
+- `/tsh-clean-transcript` prompt — Removed (functionality available through `/tsh-analyze-materials`)
+- `/tsh-create-jira-tasks` prompt — Removed (functionality available through `/tsh-analyze-materials`)
+
 ## 2026-03-08
 
 ### Added

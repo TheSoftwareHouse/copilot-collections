@@ -17,11 +17,13 @@ Analysis progress:
 - [ ] Step 2: Understand the plan to implement task
 - [ ] Step 3: Analyse the implemented solution and compare that to task description and implementation plan
 - [ ] Step 4: Verify that solution has implemented all necessary tests
-- [ ] Step 5: Run the available tests
-- [ ] Step 6: Verify that solution follows the best practices
-- [ ] Step 7: Run static code analysis tools and formatting tools
-- [ ] Step 8: Validate the solution is secure
-- [ ] Step 9: Validate the solution is scalable
+- [ ] Step 5: Run all unit tests
+- [ ] Step 6: Run all integrations tests
+- [ ] Step 7: Run all e2e tests
+- [ ] Step 8: Verify that solution follows the best practices
+- [ ] Step 9: Run static code analysis tools and formatting tools
+- [ ] Step 10: Validate the solution is secure
+- [ ] Step 11: Validate the solution is scalable
 ```
 
 **Step 1: Understand the task description**
@@ -47,11 +49,19 @@ Focus not only on files that were actually changed or added, but also those that
 
 Make sure that all critical paths of the solutions are fully tested by combination of different tests - e2e, unit, integration.
 
-**Step 5: Run the available tests**
+**Step 5: Run all unit tests**
 
-Make sure that all of the tests are working properly.
+Find unit tests and run them. Make sure they are passing. 
 
-**Step 6: Verify that solution follows the best practices**
+**Step 6: Run all integration tests**
+
+Find integration tests and run them. Make sure they are passing. 
+
+**Step 7: Run all e2e tests**
+
+Find end-to-end tests and run them. Make sure they are passing. 
+
+**Step 8: Verify that solution follows the best practices**
 
 Check the implemented solution. Make sure it follow the best development practices.
 
@@ -59,15 +69,15 @@ Take into account project standards and a practices like SOLID, SRP, DDD, DRY, K
 
 Make sure that solution is not over engineered. Keep the cognitive complexity on a lower side.
 
-**Step 7: Run static code analysis tools and formatting tools**
+**Step 9: Run static code analysis tools and formatting tools**
 
 Make sure to run linters, static code analysis tools and formatting tools.
 
-**Step 8: Validate the solution is secure**
+**Step 10: Validate the solution is secure**
 
 Focus on security. Check for potential OWASP TOP10 issues. Check for potential critical security issues that allows other users to take control over the system.
 
-**Step 9: Validate the solution is scalable**
+**Step 11: Validate the solution is scalable**
 
 Analyse if the implemented solution is scalable. Focus on areas like being able to scale it horizontally, not having a stateful components, not having code with high computational complexity.
 
@@ -76,3 +86,4 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 - `tsh-implementation-gap-analysing`
 - `tsh-technical-context-discovering` - for understanding project conventions and standards to review against
 - `tsh-sql-and-database-understanding` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns
+- `tsh-engineering-prompts` - for reviewing LLM prompt code: prompt structure, injection defenses, delimiter separation, output format, and anti-patterns

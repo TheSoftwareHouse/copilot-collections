@@ -25,16 +25,20 @@ Progress:
 Before starting verification, confirm:
 
 - Figma URL is available for the component/section being verified
-- Dev server URL is known:
+- Dev server URL is **confirmed by the user**:
   - Check the project configuration (`package.json` scripts, `.env`, `vite.config`, `next.config`, etc.) for the configured port
-  - On first verification in a session, **ask the user to confirm** the dev server URL (e.g., "I detected port 3001 from package.json — is the app running at http://localhost:3001?"). The user can correct it if needed.
-  - Use the confirmed URL for all subsequent verifications in the same session
-- Dev server is running and the page is accessible at that URL
-- If any input is missing, stop and ask the user — do not proceed without all three (Figma URL, confirmed dev server URL, accessible page)
+  - **MANDATORY**: On first verification in a session, ask the user to confirm the dev server URL (e.g., "I detected port 3001 from package.json — is the frontend app running at http://localhost:3001?"). **Do not guess** from running processes, `ps`, `netstat`, or `lsof` output — multiple services may run on different ports and you cannot reliably distinguish frontend from backend.
+  - Use the **user-confirmed** URL for all subsequent verifications in the same session
+- Dev server is running and the **target page** is accessible at that URL:
+  - Navigate to the specific page URL using `playwright`
+  - If the page **redirects to a login/authentication screen**: stop and ask the user — "The page redirected to [login URL]. How should I authenticate? Please provide credentials, a session token, or tell me how to bypass authentication for local development."
+  - If the page shows **unexpected content** (error page, blank page, different route): stop and ask the user — "The page at [URL] shows [description]. Is this the correct URL for [component name]?"
+  - **Do not proceed with verification if you cannot see the expected component.** Ask the user for help.
+- If any input is missing or any blocker is encountered, **stop and ask the user** — do not proceed, do not fall back to code-level review, do not skip the verification step
 
 **Step 2: Get EXPECTED from Figma**
 
-Use `figma-mcp-server` to extract the design specifications:
+Use `figma` to extract the design specifications:
 
 - Layer hierarchy and component structure
 - Layout direction, alignment, spacing
@@ -48,7 +52,7 @@ Use `playwright` to capture the running implementation. You MUST collect **all t
 
 1. **Structure & content** — element hierarchy, order, grouping (via accessibility snapshot)
 2. **Actual rendered dimensions** — computed widths, heights, paddings, margins, gaps of every major container (via JavaScript evaluation of computed styles). This is the most commonly missed step — without it you cannot detect sizing/layout differences.
-3. **Visual appearance** — full-page screenshot for side-by-side comparison with the design
+3. **Visual appearance** — full-page screenshot for side-by-side comparison with the design. Save screenshots to the task's specifications folder (e.g., `specifications/<task-id>/screenshots/`) with descriptive filenames including the component name and iteration number (e.g., `establishment-details-form-iteration-1.png`). This creates a visual audit trail for each verification cycle.
 
 > **CRITICAL**: The accessibility tree does NOT contain CSS dimensions. A full-width container and a narrow centered container produce identical accessibility trees. If you only collected structure without measuring actual rendered dimensions, your verification is INVALID — mark confidence as LOW and report what's missing.
 
@@ -56,13 +60,15 @@ Use `playwright` to capture the running implementation. You MUST collect **all t
 
 Compare EXPECTED (Figma) against ACTUAL (implementation) following the Verification Order and Categories below. The Figma design is the **source of truth** for every comparison. When in doubt, the design wins.
 
+**IMPORTANT**: Complete ALL verification categories in a single pass. Do not stop after finding differences in one category — continue through every category and collect every difference. The report must contain ALL differences found across all categories so the engineer can fix them all at once, minimizing verification iterations.
+
 **Step 5: Generate report**
 
 Produce a structured report following the Report Format below. Include exact values from both Figma and implementation for every difference found.
 
 ## Verification Order
 
-Always verify in this order — stop and report on first CRITICAL failure:
+Always verify in this order — **complete ALL categories regardless of findings**. Do not stop after finding differences in one category. The goal is to catch every difference in a single pass so all fixes can be applied at once.
 
 1. **Structure** (CRITICAL)
 2. **Layout** (CRITICAL)
@@ -172,6 +178,8 @@ Before reporting PASS:
 | Property | Expected (Figma) | Actual (Implementation) | Severity   |
 | -------- | ---------------- | ----------------------- | ---------- |
 | [prop]   | [expected]       | [actual]                | [severity] |
+
+> **List ALL differences found across ALL verification categories.** Do not omit lower-severity items when critical ones exist. The engineer needs the complete list to fix everything in one iteration.
 
 ### Recommended Fixes
 

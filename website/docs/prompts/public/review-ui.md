@@ -12,7 +12,7 @@ Performs a single-pass, read-only verification comparing the implemented UI agai
 
 ## Usage
 
-Called automatically by `/tsh-implement-ui` in a verification loop. Can also be invoked manually:
+Called automatically by `/tsh-implement` (via the internal UI prompt) in a verification loop. Can also be invoked manually:
 
 ```text
 /tsh-review-ui <component or page description>

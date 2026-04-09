@@ -55,6 +55,6 @@ A `.research.md` document containing:
 
 ## Handoffs
 
-After completing research, the Context Engineer can hand off to:
+After completing research, the Context Engineer hands back to the Engineering Manager, which delegates to:
 
-- **Architect** → `/tsh-plan` (create implementation plan for the current task)
+- **Architect** → implementation planning (via internal `/tsh-plan` prompt)
