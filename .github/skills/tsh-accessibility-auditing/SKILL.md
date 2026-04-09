@@ -97,6 +97,8 @@ Use the severity matrix to rate every issue:
 | 🟡 **Moderate** | Creates inconvenience — sub-optimal experience | Slows users or causes confusion |
 | 🔵 **Minor** | Small deviation — minimal user impact | Cosmetic or minor annoyance |
 
+> **Note**: Severity levels follow accessibility auditing conventions (aligned with axe-core). For functional bug severity, see `tsh-functional-testing`'s severity matrix which uses Critical/High/Medium/Low.
+
 When in doubt, classify **up** (more severe). De-duplicate findings across tools — report each unique issue once, noting which tools detected it.
 
 **Step 6: Generate audit report**
@@ -155,7 +157,6 @@ Run these searches automatically during internal audits:
 |---------|--------|
 | `/audit <url>` | Run external audit on a URL |
 | `/audit` | Run internal audit on current file/project |
-| `/fix` | Provide accessible code version with explanation (internal only) |
 | `/tools` | Recommend tools for a specific accessibility feature |
 | `/audit-summary` | Create business-facing audit summary |
 | `/checklist` | Print the full manual testing checklist |
@@ -196,7 +197,7 @@ Ask these **before** the audit begins to establish baseline parameters.
   - `Level AAA` — "Enhanced — highest conformance, often partially applied"
 - **When to ask**: Always, unless the user explicitly stated the target level.
 
-**Q4 — Priority Focus Areas**
+**Q3 — Priority Focus Areas**
 - **Header**: `Priority Focus`
 - **Question**: "Are there specific areas you want prioritized in this audit?"
 - **multiSelect**: true
@@ -212,7 +213,7 @@ Ask these **before** the audit begins to establish baseline parameters.
 
 Ask after automated tools complete, before manual testing begins.
 
-**Q5 — Manual Testing Method**
+**Q4 — Manual Testing Method**
 - **Header**: `Manual Testing Approach`
 - **Question**: "How should manual accessibility testing be performed?"
 - **Options**:
@@ -228,7 +229,7 @@ Ask after automated tools complete, before manual testing begins.
 
 Ask these **during** the audit when the agent encounters ambiguity. One question per call, most critical ambiguity first.
 
-**Q6 — Image Purpose**
+**Q5 — Image Purpose**
 - **Header**: `[SC 1.1.1] Image Purpose`
 - **Question**: "Is this image purely decorative or does it convey information? [image description/path]"
 - **Options**:
@@ -238,7 +239,7 @@ Ask these **during** the audit when the agent encounters ambiguity. One question
   - `Complex` — "Chart, diagram, or infographic — needs long description"
 - **When to ask**: When confidence in image purpose is < 80%.
 
-**Q7 — Link/Button Purpose**
+**Q6 — Link/Button Purpose**
 - **Header**: `[SC 2.4.4] Link Purpose`
 - **Question**: "What is the purpose of this link/button with text '[text]'? The surrounding context doesn't clarify it."
 - **allowFreeformInput**: true
@@ -249,7 +250,7 @@ Ask these **during** the audit when the agent encounters ambiguity. One question
   - `External` — "Opens a third-party site"
 - **When to ask**: When link/button text is ambiguous (e.g., "Click here", "Read more", icon-only buttons without labels).
 
-**Q8 — Custom Widget Keyboard Behavior**
+**Q7 — Custom Widget Keyboard Behavior**
 - **Header**: `[SC 2.1.1] Custom Widget Keyboard`
 - **Question**: "This custom [component type] has non-standard keyboard handling. What keys should activate/navigate it?"
 - **allowFreeformInput**: true
@@ -259,7 +260,7 @@ Ask these **during** the audit when the agent encounters ambiguity. One question
   - `Skip — verify manually` — "Mark as Needs Manual Verification"
 - **When to ask**: When code reveals custom `onKeyDown`/`onKeyPress` handlers on non-native interactive elements.
 
-**Q10 — Dynamic Content Purpose**
+**Q8 — Dynamic Content Purpose**
 - **Header**: `[SC 4.1.3] Status Messages`
 - **Question**: "This dynamic content update [description] — should it be announced to screen readers?"
 - **Options**:
@@ -269,7 +270,7 @@ Ask these **during** the audit when the agent encounters ambiguity. One question
   - `Unsure` — "Mark as Needs Manual Verification"
 - **When to ask**: When dynamic DOM changes are detected but no `aria-live` region or status role is present.
 
-**Q11 — Video/Audio Content Type**
+**Q9 — Video/Audio Content Type**
 - **Header**: `[SC 1.2.1] Media Content Type`
 - **Question**: "What type of content does this media element contain?"
 - **Options**:
@@ -283,7 +284,7 @@ Ask these **during** the audit when the agent encounters ambiguity. One question
 
 Ask during Step 5 (classification) when the agent needs human judgment.
 
-**Q12 — Severity Confirmation**
+**Q10 — Severity Confirmation**
 - **Header**: `[SC X.X.X] Severity Confirmation`
 - **Question**: "I found [issue description]. How severe is the impact on users?"
 - **Options**:
@@ -294,7 +295,7 @@ Ask during Step 5 (classification) when the agent needs human judgment.
   - `Not an issue` — "False positive, dismiss this finding"
 - **When to ask**: When the agent's severity confidence is below 80%, or when the issue is context-dependent.
 
-**Q13 — Finding Verification**
+**Q11 — Finding Verification**
 - **Header**: `[SC X.X.X] Finding Verification`
 - **Question**: "Can you verify this finding? [description with element reference]"
 - **Options**:
@@ -307,7 +308,7 @@ Ask during Step 5 (classification) when the agent needs human judgment.
 
 Ask after all findings are collected, before report generation.
 
-**Q15 — Remediation Guidance Depth**
+**Q12 — Remediation Guidance Depth**
 - **Header**: `Remediation Detail Level`
 - **Question**: "How detailed should the fix recommendations be?"
 - **Options**:
@@ -318,6 +319,6 @@ Ask after all findings are collected, before report generation.
 
 ## Connected Skills
 
-- `tsh-functional-testing` - for functional testing workflows that complement accessibility audits
-- `tsh-ensuring-accessibility` - for implementation-time accessibility patterns (semantic HTML, ARIA, focus management)
-- `tsh-e2e-testing` - for automated accessibility checks integrated into e2e test suites
+- `tsh-functional-testing` — for test planning, edge-case detection, and regression analysis that complement accessibility audits
+- `tsh-ensuring-accessibility` — for implementation-time WCAG 2.2 AA patterns (this skill audits existing implementations; that skill builds accessible components from scratch)
+- `tsh-e2e-testing` — for automated accessibility checks integrated into e2e test suites
