@@ -13,6 +13,7 @@ Implement the UI feature according to the **research context** and **implementat
 Before starting, load and follow these skills:
 
 - `tsh-implementing-frontend` - for component patterns, design system usage, composition, and performance guidelines
+- `tsh-implementing-filters` - for URL filter synchronization, bracket notation serialization, filter sync hooks, and navigation strategies when implementing filterable lists
 - `tsh-ui-verifying` - for understanding verification criteria, tolerances, and what constitutes PASS/FAIL
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance, semantic HTML, ARIA, and automated axe-core verification
 - `tsh-technical-context-discovering` - to establish project conventions before implementing

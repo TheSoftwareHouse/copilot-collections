@@ -222,3 +222,4 @@ The patterns above are framework-agnostic. For framework-specific hook/composabl
 - `tsh-optimizing-frontend` — for memoization strategies and performance patterns in hooks
 - `tsh-reviewing-frontend` — for hook-specific code review criteria
 - `tsh-implementing-forms` — for form-related custom hooks (field state, validation triggers)
+- `tsh-implementing-filters` — for the filter sync hook pattern (useFilters) that applies hook composition conventions

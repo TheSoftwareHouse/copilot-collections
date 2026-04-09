@@ -59,6 +59,7 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-sql-and-database-understanding` - when writing SQL queries, designing database schemas, creating migrations, implementing ORM-based data access, optimising query performance, or working with transactions and locking. Applies to PostgreSQL, MySQL, MariaDB, SQL Server, and Oracle.
 - `tsh-implementing-frontend` - for UI tasks: component patterns, composition, design tokens, barrel files, and Figma-to-code workflow.
 - `tsh-implementing-forms` - for form tasks: schema validation, field composition, error handling, multi-step form flows.
+- `tsh-implementing-filters` - for filter tasks: type-safe URL filter synchronization, bracket notation serialization, filter sync hooks, push/replace navigation strategies.
 - `tsh-writing-hooks` - for custom hooks: naming, composition, stable returns, effect cleanup, testing.
 - `tsh-ensuring-accessibility` - for WCAG 2.1 AA compliance: semantic HTML, ARIA, keyboard navigation, focus management, screen readers.
 - `tsh-optimizing-frontend` - for frontend performance: code splitting, memoization, bundle size, rendering optimization, memory management.

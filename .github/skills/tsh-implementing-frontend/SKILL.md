@@ -148,5 +148,6 @@ The patterns above are framework-agnostic. For framework-specific implementation
 - `tsh-ensuring-accessibility` — to ensure components meet WCAG 2.1 AA standards
 - `tsh-optimizing-frontend` — for performance considerations during component implementation
 - `tsh-implementing-forms` — for form-specific component patterns and validation
+- `tsh-implementing-filters` — for URL filter synchronization patterns consumed by list and search components
 - `tsh-writing-hooks` — for custom hook patterns used within components
 - `tsh-reviewing-frontend` — for frontend-specific code review of implemented components
