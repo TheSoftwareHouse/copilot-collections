@@ -150,6 +150,8 @@ Always verify in this order — **complete ALL categories regardless of findings
 | **Major**    | Dimensions off by >2px, wrong colors/typography    | Must fix before merge             |
 | **Minor**    | 1-2px browser rendering variance                   | Acceptable, document if recurring |
 
+> **Note**: Severity levels follow design-deviation conventions (Critical/Major/Minor). For functional bug severity, see `tsh-functional-testing` (Critical/High/Medium/Low). For accessibility severity, see `tsh-accessibility-auditing` (Critical/Serious/Moderate/Minor).
+
 ## Verification Checklist
 
 Before reporting PASS:
@@ -192,7 +194,16 @@ Before reporting PASS:
 - **MEDIUM** — Some values couldn't be extracted, manual review recommended
 - **LOW** — Tool errors occurred, manual verification required before making changes
 
+## Trigger Phrases
+
+| Trigger | Action |
+|---------|--------|
+| `/verify-ui` | Run full UI verification comparing implementation to Figma |
+| `/figma-compare` | Compare a specific component against its Figma design |
+| `/ui-check` | Quick UI structure and layout check |
+
 ## Connected Skills
 
-- `tsh-implementing-frontend` - for implementing fixes following design system patterns
-- `tsh-technical-context-discovering` - for understanding project's design token conventions
+- `tsh-implementing-frontend` — for implementing fixes following design system patterns
+- `tsh-technical-context-discovering` — for understanding project's design token conventions
+- `tsh-ensuring-accessibility` — for verifying accessibility alongside visual correctness during UI review
