@@ -4,9 +4,9 @@ model: "Claude Opus 4.6"
 description: "Prepare a context for a specific task or feature from a context engineering perspective."
 ---
 
-Research the task based on the provided Jira ID or task description.
+Research the task based on the provided task ID or task description.
 
-The file outcome should be a markdown file named after the task Jira ID in kebab-case format or after task name (if no Jira task provided) with `.research.md` suffix (e.g., `user-authentication.research.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
+The file outcome should be a markdown file named after the task ID in kebab-case format or after task name (if no Jira task provided) with `.research.md` suffix (e.g., `user-authentication.research.md`). The file should be placed in the `specifications` directory under a folder named after the issue ID or the shortened task name in kebab-case format.
 
 It should contain every relevant information needed to build a comprehensive context for the task or feature.
 
@@ -18,7 +18,7 @@ Before starting, load and follow these skills:
 
 ## Workflow
 
-1. Gather all information related to the task from the codebase, Atlassian tools (Jira, Confluence) and other relevant sources.
+1. Gather all information related to the task from the codebase, Task Management and Knowledge tools (Jira, Shortcut, Confluence) and other relevant sources.
 2. Analyze the task thoroughly, including its parents and subtasks if applicable, to get the full picture of the requirements.
 3. Analyse the tech stack, industry and domain of the project to understand best practices that should be applied during implementation.
 4. Check all external links added to the task. Make sure to check the confluence pages linked to the task to gather more information about requirements and processes. If any PDF documents are attached, referenced, or linked, use the `pdf-reader` tool to extract and review their content.

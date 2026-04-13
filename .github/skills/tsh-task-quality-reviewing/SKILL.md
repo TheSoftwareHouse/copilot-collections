@@ -1,11 +1,11 @@
 ---
 name: tsh-task-quality-reviewing
-description: Analyze extracted epics and user stories for quality gaps, missing edge cases, and improvement opportunities. Runs domain-agnostic analysis passes, optionally enriches findings with Jira board context, and produces accept/reject suggestions that refine the task list before Jira formatting.
+description: Analyze extracted epics and user stories for quality gaps, missing edge cases, and improvement opportunities. Runs domain-agnostic analysis passes, optionally enriches findings with existing task board context, and produces accept/reject suggestions that refine the task list before task formatting.
 ---
 
 # Task Quality Review
 
-This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs 10 domain-agnostic analysis passes, optionally enriches findings with existing Jira board context, and produces a structured list of suggestions the user can individually accept or reject.
+This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs 10 domain-agnostic analysis passes, optionally enriches findings with existing task board context, and produces a structured list of suggestions the user can individually accept or reject.
 
 The output is a **quality review report** documenting all suggestions, their dispositions, and any changes applied to the task list.
 
@@ -23,7 +23,7 @@ The output is a **quality review report** documenting all suggestions, their dis
 - Does not estimate effort or change priorities
 - Does not invent domain-specific requirements without research backing
 - Does not modify tasks without explicit user approval
-- Does not create, modify, or delete Jira issues (read-only access for enrichment)
+- Does not create, modify, or delete issues in task management tools (read-only access for enrichment)
 
 ## Task Quality Review Process
 
@@ -32,7 +32,7 @@ Use the checklist below and track your progress:
 ```
 Quality review progress:
 - [ ] Step 1: Load inputs and establish context
-- [ ] Step 2: Gather Jira board context (optional)
+- [ ] Step 2: Gather task board context (optional)
 - [ ] Step 3: Build domain model from the task list
 - [ ] Step 4: Run analysis passes
 - [ ] Step 5: Enrich with domain research
@@ -54,17 +54,17 @@ Collect and review all available materials:
 
 Build a complete picture of the project scope, actors, and features before proceeding to analysis.
 
-**Step 2: Gather Jira board context (optional)**
+**Step 2: Gather Task Management board context (optional)**
 
-If Atlassian tools are available and the user has indicated a Jira project (either in their initial message or during the workflow):
+If Task Management tools are available and the user has indicated a project (either in their initial message or during the workflow):
 
-1. Check available Atlassian resources by calling `List accessible Resources`.
+1. Check available resources using the appropriate tool interaction guidelines (`tsh-using-task-and-knowledge-management-tools`).
 2. If multiple resources exist, ask the user which one to use.
-3. If the user provided a Jira project key, use it. If not, ask once: "I have access to Jira. Would you like me to check an existing board for additional context? If so, what is the project key?" If the user declines, skip this step entirely.
+3. If the user provided a Task Management project key, use it. If not, ask once: "I have access to Task Management tools. Would you like me to check an existing board for additional context? If so, what is the project key?" If the user declines, skip this step entirely.
 4. Fetch existing epics and stories from the board.
 5. Note: naming conventions, label usage, priority patterns, and any existing work that relates to the extracted tasks.
 
-This enrichment is **entirely optional**. The skill works identically without Jira access. Do not block the review process if Jira is unavailable or the user declines.
+This enrichment is **entirely optional**. The skill works identically without Task Management access. Do not block the review process if Task Management tools are unavailable or the user declines.
 
 **Step 3: Build domain model from the task list**
 
@@ -260,7 +260,7 @@ Transform each finding from the analysis passes into a structured suggestion:
 
 4. **Deduplicate**: If multiple passes produce findings that overlap, merge them into a single suggestion and note all contributing categories.
 
-5. **Enrich with Jira context** (if available from Step 2): Cross-reference each suggestion with existing Jira issues. If a suggestion duplicates or overlaps with an existing issue, note the Jira issue key and adjust the suggestion (e.g., "This is already tracked as PROJ-123 — consider linking rather than creating a new story").
+5. **Enrich with task board context** (if available from Step 2): Cross-reference each suggestion with existing issues in the task management tool. If a suggestion duplicates or overlaps with an existing issue, note the issue key/ID and adjust the suggestion (e.g., "This is already tracked as [issue key/ID] — consider linking rather than creating a new story").
 
 **Step 7: Present suggestions for user review**
 
@@ -325,4 +325,4 @@ The report serves as an audit trail documenting:
 ## Connected Skills
 
 - `tsh-task-extracting` — provides the extracted tasks used as primary input for the quality review
-- `tsh-jira-task-formatting` — consumes the updated task list after quality review suggestions are applied
+- `tsh-task-formatting` — consumes the updated task list after quality review when using Jira or Shortcut

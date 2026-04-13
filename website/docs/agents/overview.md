@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **12 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
+Copilot Collections provides **13 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -16,42 +16,14 @@ Each agent has:
 - **Skill bindings** — Which skills it loads for domain-specific knowledge.
 - **Handoffs** — Buttons to seamlessly transition between workflow phases.
 
-## Agent Handoff Diagram
-
-```
-┌──────────────────────┐
-│  Business Analyst     │
-│  /tsh-analyze-materials│
-└──────┬───────────────┘
-       │ Start Implementation
-       ▼
-┌─────────────────────────┐
-│   Engineering Manager    │  ← Orchestrates the full cycle
-│   /tsh-implement         │
-└──────┬──────────────────┘
-       │ Delegates to specialized agents
-       ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
-       ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
-│  Engineer    │  │  (plan)      │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
-│  (research)  │  │              │  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
-       │
-       ▼
-┌──────────────┐
-│ Code Reviewer │
-│ /tsh-review   │
-└──────────────┘
-```
-
 ## Agent Summary
 
 ### 📋 Product Ideation Agents
 
 | Agent | File | Role | Key Tools |
 |---|---|---|---|
-| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Converts workshop materials into Jira-ready epics and stories | Atlassian, Figma, PDF Reader, Sequential Thinking |
+| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Converts workshop materials into epics and stories for task management tools (Jira, Shortcut) | Figma, PDF Reader, Sequential Thinking |
+| [Knowledge](./knowledge) | `tsh-knowledge.agent.md` | Provides task details and knowledge insights from task management and knowledge base tools | Atlassian, Shortcut, Sequential Thinking |
 
 ### 🛠 Development Agents
 

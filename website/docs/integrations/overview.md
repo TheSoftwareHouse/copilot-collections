@@ -5,7 +5,7 @@ title: Integrations Overview
 
 # Integrations Overview
 
-Copilot Collections integrates with **11 external services** via the **Model Context Protocol (MCP)**. These integrations bring Jira, Figma, documentation, browser automation, structured reasoning, document reading, and cloud provider APIs directly into your Copilot sessions — enabling the end-to-end product engineering workflow.
+Copilot Collections integrates with **12 external services** via the **Model Context Protocol (MCP)**. These integrations bring Jira, Shortcut, Figma, documentation, browser automation, structured reasoning, document reading, and cloud provider APIs directly into your Copilot sessions — enabling the end-to-end product engineering workflow.
 
 ## What is MCP?
 
@@ -15,7 +15,8 @@ The Model Context Protocol allows VS Code Copilot agents to call external tools 
 
 | Server | Type | Purpose | Used By |
 |---|---|---|---|
-| [Atlassian](./atlassian) | HTTP | Jira & Confluence integration | BA, Architect, CR, CE, E2E, SE |
+| [Atlassian](./atlassian) | HTTP | Jira & Confluence integration | Knowledge, Architect, CR, CE, E2E, SE |
+| [Shortcut](https://github.com/useshortcut/mcp) | stdio | Shortcut task management integration | Knowledge |
 | [Figma](./figma) | HTTP | Design extraction and verification | BA, Architect, SE, UI Reviewer, CR, E2E |
 | [Context7](./context7) | stdio | Library documentation search | Architect, SE, CR, UI Reviewer, E2E, Copilot Eng., DevOps |
 | [Playwright](./playwright) | stdio | Browser automation and UI testing | SE, UI Reviewer, E2E |

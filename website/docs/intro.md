@@ -20,17 +20,17 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 
 | Capability | Count | Description |
 |---|---|---|
-| 🧑‍💻 **Specialized Agents** | 12 | Business Analyst, Context Engineer, Architect, Engineering Manager, Software Engineer, Prompt Engineer, Code Reviewer, UI Reviewer, E2E Engineer, DevOps Engineer, Copilot Engineer, Copilot Orchestrator |
+| 🧑‍💻 **Specialized Agents** | 13 | Business Analyst, Knowledge, Context Engineer, Architect, Engineering Manager, Software Engineer, Prompt Engineer, Code Reviewer, UI Reviewer, E2E Engineer, DevOps Engineer, Copilot Engineer, Copilot Orchestrator |
 | 💬 **Public Prompts** | 12 | `/tsh-analyze-materials`, `/tsh-implement`, `/tsh-review`, `/tsh-review-ui`, `/tsh-review-codebase`, `/tsh-create-custom-agent`, `/tsh-create-custom-skill`, `/tsh-create-custom-prompt`, `/tsh-create-custom-instructions`, `/tsh-audit-infrastructure`, `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs` |
-| 🔧 **Automatic Delegation** | via `/tsh-implement` | The Engineering Manager automatically routes tasks to Software Engineer, Prompt Engineer, E2E Engineer, DevOps Engineer, and UI Reviewer based on the implementation plan |
-| 🧰 **Reusable Skills** | 31 | Transcript Processing, Task Extraction, Task Quality Review, Jira Task Formatting, Task Analysis, Architecture Design, Codebase Analysis, Code Review, Frontend Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Prompt Engineering, Frontend Implementation, Implementing Forms, Writing Hooks, Ensuring Accessibility, Optimizing Frontend, UI Verification, SQL & Database Engineering, CI/CD Implementation, Kubernetes Implementation, Terraform Modules, Observability Implementation, Secrets Management, Cloud Cost Optimization, Multi-Cloud Architecture Design, Creating Agents, Creating Skills, Creating Prompts, Creating Instructions |
-| 🔌 **MCP Integrations** | 11 | Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking, PDF Reader, AWS API, AWS Documentation, GCP Gcloud, GCP Observability, GCP Storage |
+| 🔧 **Automatic Delegation** | via `/tsh-implement` | The Engineering Manager automatically routes tasks to Software Engineer, Prompt Engineer, E2E Engineer, DevOps Engineer, Knowledge, and UI Reviewer based on the implementation plan |
+| 🧰 **Reusable Skills** | 33 | Transcript Processing, Task Extraction, Task Quality Review, Task Formatting, Using Task & Knowledge Management Tools, Task Analysis, Architecture Design, Codebase Analysis, Code Review, Frontend Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Prompt Engineering, Frontend Implementation, Implementing Forms, Writing Hooks, Ensuring Accessibility, Optimizing Frontend, UI Verification, SQL & Database Engineering, CI/CD Implementation, Kubernetes Implementation, Terraform Modules, Observability Implementation, Secrets Management, Cloud Cost Optimization, Multi-Cloud Architecture Design, Creating Agents, Creating Skills, Creating Prompts, Creating Instructions |
+| 🔌 **MCP Integrations** | 12 | Atlassian, Shortcut, Figma Dev Mode, Context7, Playwright, Sequential Thinking, PDF Reader, AWS API, AWS Documentation, GCP Gcloud, GCP Observability, GCP Storage |
 | 🧠 **Structured Workflows** | 5 | Standard Flow, UI Flow, E2E Testing Flow, Workshop Analysis Flow, Copilot Customization Flow |
 
 ## Key Benefits
 
 ### For Product Teams
-- **Workshop to Jira in minutes** — Process transcripts, Figma designs, and documents into structured epics and stories with a quality review gate. No more lost workshop outputs.
+- **Workshop to backlog in minutes** — Process transcripts, Figma designs, and documents into structured epics and stories with a quality review gate. Push to Jira or Shortcut. No more lost workshop outputs.
 - **Systematic backlog quality** — 10-pass quality analysis catches missing entity lifecycles, error states, notification gaps, and undocumented dependencies in both new and existing backlogs.
 
 ### For Developers
@@ -47,9 +47,8 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 
 | Problem | Solution | Time |
 |---|---|---|
-| Workshop notes sitting in notebooks | `/tsh-analyze-materials` — epics and stories in Jira | ~15 min |
-| New developer struggling with context | `/tsh-implement PROJ-123` — Engineering Manager gathers research automatically | ~3 min |
-| No implementation plan | `/tsh-implement PROJ-123` — Engineering Manager creates plan automatically | ~5 min |
+| Workshop notes sitting in notebooks | `/tsh-analyze-materials` — epics and stories in your task management tool | ~15 min |
+| New task with vague requirements | `/tsh-implement PROJ-123` — automatic research, planning, and implementation | ~20 min |
 | UI doesn't match Figma | `/tsh-implement` — automated Figma verification loop via internal UI prompt | ~20 min |
 | Inconsistent code reviews | `/tsh-review PROJ-123` — structured multi-dimensional review | ~5 min |
 | Flaky or missing E2E tests | `/tsh-implement` — Engineering Manager delegates to E2E Engineer | ~10 min |
@@ -63,8 +62,8 @@ Every task follows a structured lifecycle:
 
 > **Ideate → Implement → Review**
 
-1. **Ideate** — Convert workshop materials into Jira-ready epics and stories.
-2. **Implement** — Engineering Manager orchestrates research, planning, and implementation with specialized agents.
+1. **Ideate** — Convert workshop materials into structured epics and stories for your task management tool.
+2. **Implement** — A single `/tsh-implement` command triggers three internal phases: **Research** (gather context from Jira/Shortcut, Figma, and the codebase), **Plan** (create a step-by-step architecture plan), and **Build** (execute the plan with scoped, reviewable changes).
 3. **Review** — Verify against acceptance criteria, security, and quality standards.
 
 Each phase produces a documented artifact that feeds the next, ensuring nothing is lost between steps. Think of it as a **relay race** — every handoff is a reviewed artifact.

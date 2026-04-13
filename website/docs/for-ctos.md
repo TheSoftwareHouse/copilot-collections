@@ -32,7 +32,7 @@ This isn't a prompt library. It's a framework that restructures **how work moves
 
 The framework covers three delivery phases:
 
-**Product Ideation**: turning discovery workshops into structured, Jira-ready backlogs. Context gathering that used to take 30–60 minutes takes 3 minutes. Workshop transcripts become fully formed tickets with acceptance criteria, edge cases flagged, and backlog prioritised.
+**Product Ideation**: turning discovery workshops into structured backlogs for Jira or Shortcut. Context gathering that used to take 30–60 minutes takes 3 minutes. Workshop transcripts become fully formed tickets with acceptance criteria, edge cases flagged, and backlog prioritised.
 
 **Development**: implementation guided by agents that understand your codebase, your Figma designs, and your Jira context simultaneously. The context-switching that fragments developer focus is replaced by a structured research-then-plan-then-implement loop.
 

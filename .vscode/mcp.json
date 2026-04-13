@@ -55,6 +55,16 @@
       "command": "npx",
       "args": ["@sylphx/pdf-reader-mcp"],
       "type": "stdio"
+    },
+    "shortcut": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@shortcut/mcp@latest"
+      ],
+      "env": {
+        "SHORTCUT_API_TOKEN": "<YOUR_TOKEN_HERE>"
+      }
     }
   },
   "inputs": []
