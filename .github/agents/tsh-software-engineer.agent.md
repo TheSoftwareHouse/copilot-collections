@@ -25,6 +25,10 @@ handoffs:
     agent: tsh-e2e-engineer
     prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
     send: false
+  - label: Ask Designer
+    agent: tsh-product-designer
+    prompt: /tsh-design-prototype Need design clarification for the current implementation
+    send: false
 ---
 
 ## Agent Role and Responsibilities

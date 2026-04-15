@@ -220,3 +220,4 @@ Accessibility:
 - `tsh-implementing-forms` — for accessible form field patterns, labels, and error announcements
 - `tsh-reviewing-frontend` — for accessibility spot-checks during code review
 - `tsh-optimizing-frontend` — for performance optimizations that also impact accessibility (loading speed, interaction responsiveness)
+- `tsh-figma-designing` - for applying accessibility considerations (color contrast, touch targets) during Figma design creation

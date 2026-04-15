@@ -196,3 +196,4 @@ Before reporting PASS:
 
 - `tsh-implementing-frontend` - for implementing fixes following design system patterns
 - `tsh-technical-context-discovering` - for understanding project's design token conventions
+- `tsh-figma-designing` - for understanding team Figma conventions that inform design structure and naming during verification

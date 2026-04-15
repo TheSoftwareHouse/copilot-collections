@@ -23,6 +23,7 @@ agents:
     "tsh-ui-reviewer",
     "tsh-context-engineer",
     "tsh-prompt-engineer",
+    "tsh-product-designer",
   ]
 ---
 
