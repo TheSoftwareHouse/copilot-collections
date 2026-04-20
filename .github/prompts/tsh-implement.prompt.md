@@ -28,3 +28,5 @@ Your goal is to implement the feature according to the provided implementation p
 7. **Before making any changes** to the original solution during implementation, ask for confirmation. Document changes in the plan file's Changelog section with timestamps.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement:v1 -->

@@ -29,3 +29,5 @@ Structure every deliverable with these sections (omit sections that don't apply 
 **Integration Example** — Non-production example snippet or pseudocode showing how to use the prompt (e.g. with LangChain, OpenAI SDK, Anthropic SDK). Focus on integration guidance: expected inputs/outputs, where to plug in context formatting, input sanitization, and output validation. Leave full application logic and production-hardening to `tsh-software-engineer`.
 4. **Security Assessment** — For audits: vulnerability table with severity, CWE, location, impact, and fix. For creation/optimization: summary of security measures applied (three-layer defense).
 5. **Design Decisions** — Brief rationale for key architectural choices (delimiter strategy, temperature, few-shot vs zero-shot, output format, etc.).
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-engineer-prompt:v1 -->

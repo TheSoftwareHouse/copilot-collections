@@ -98,3 +98,5 @@ Skip for: adding tags, updating configurations, simple fixes.
 **Does NOT handle** (redirect to):
 - Implementing fixes → `/tsh-implement-terraform`, `/tsh-deploy-kubernetes`, `/tsh-implement-pipeline`, `/tsh-implement-observability`
 - Application code security → coordinate with software engineer
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-audit-infrastructure:v1 -->

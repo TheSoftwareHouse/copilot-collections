@@ -87,3 +87,5 @@ Update plan (if plan file exists): check acceptance criteria, add files to Chang
 ## 5. Code Review (automatic)
 
 After completing E2E tests implementation, always run `tsh-code-reviewer` agent to review the E2E tests against best practices and test quality standards. The agent should be executed automatically without user confirmation. Update the changelog section of the plan file to indicate that E2E code review was performed and include a summary of the findings.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-e2e:v1 -->

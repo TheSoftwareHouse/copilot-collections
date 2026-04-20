@@ -64,3 +64,5 @@ Before step 6 of the base workflow (starting implementation), ensure:
 ## UI Verification Note
 
 **UI verification against Figma is NOT your responsibility.** The `tsh-engineering-manager` handles the verify-fix loop by delegating to `tsh-ui-reviewer`. Focus only on implementing the UI according to the plan and design references. If you receive a verification report with issues to fix, apply the fixes and report back.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-ui-common-task:v1 -->

@@ -92,3 +92,5 @@ Skip for: HPA/PDB configuration, probes, resource limits, manifest fixes.
 - Cluster provisioning → `/tsh-implement-terraform`
 - CI/CD pipeline for deployment → `/tsh-implement-pipeline`
 - Monitoring and alerting → `/tsh-implement-observability`
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-deploy-kubernetes:v1 -->

@@ -228,3 +228,4 @@ You have access to the `vscode/askQuestions` tool.
   - Keep questions focused and specific. Batch related questions together.
 - **SHOULD NOT use for**:
   - Questions answerable from the codebase, existing IaC files, or available documentation.
+

@@ -51,3 +51,5 @@ Determine the entry point based on what the user provides:
 - If no transcript is provided (e.g., user provides structured notes or direct requirements), skip the transcript processing step and proceed directly to task extraction.
 
 Follow the template structures and naming conventions from each skill strictly to ensure clarity and consistency.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-analyze-materials:v1 -->

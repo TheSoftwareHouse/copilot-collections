@@ -105,3 +105,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Questions that can be answered from Jira, Confluence, or Figma.
   - Technical implementation details (out of scope for business analysis).
+

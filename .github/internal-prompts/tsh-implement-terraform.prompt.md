@@ -97,3 +97,5 @@ Skip for: adding resources to existing modules, updating versions, fixing bugs, 
 - CI/CD pipelines for Terraform → `/tsh-implement-pipeline`
 - Kubernetes workload configuration → `/tsh-deploy-kubernetes`
 - Monitoring infrastructure → `/tsh-implement-observability`
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-terraform:v1 -->

@@ -98,3 +98,5 @@ If `tsh-ui-reviewer` consistently returns LOW confidence or tool errors:
 2. Ask the user if they can verify manually (open Figma + app side-by-side)
 3. Document the issue in the plan's Changelog
 4. Continue with next component or escalate
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-ui:v1 -->

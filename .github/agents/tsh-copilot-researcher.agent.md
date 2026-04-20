@@ -45,3 +45,4 @@ Every research response must include these sections:
 **General:**
 - Prefer parallel tool calls when gathering independent pieces of information (e.g., reading multiple files simultaneously, or searching the codebase while fetching external docs)
 - Start with broad search/discovery, then narrow to specific file reads based on findings
+

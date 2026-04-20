@@ -164,3 +164,5 @@ The report must follow this structure:
 - For monorepos, clearly separate findings per layer/app — do not mix them.
 - Use subagents efficiently: delegate file-level scanning work to subagents and focus on architectural assessment yourself.
 - The final report must be self-contained and understandable without additional context.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-codebase:v1 -->

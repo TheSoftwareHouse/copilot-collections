@@ -94,3 +94,4 @@ You have access to the `vscode/askQuestions` tool.
   - Questions answerable from the codebase, skill content, or available documentation.
   - Prompt pattern choices that are clearly documented in `tsh-engineering-prompts`.
   - Implementation details that belong to the software engineer.
+

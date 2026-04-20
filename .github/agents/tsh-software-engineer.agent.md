@@ -159,3 +159,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Questions answerable from the codebase, plan, Figma, or documentation.
   - Architectural decisions (escalate to the architect instead).
+

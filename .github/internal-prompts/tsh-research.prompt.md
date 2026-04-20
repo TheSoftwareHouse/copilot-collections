@@ -33,3 +33,5 @@ Follow the template structure and naming conventions strictly to ensure clarity 
 In case of any ambiguities or missing information in the task description, ask for clarification before finalizing the context.
 
 Update the research file after each interaction if new information is gathered.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-research:v1 -->

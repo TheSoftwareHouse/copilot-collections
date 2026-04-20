@@ -87,3 +87,5 @@ Skip for: adding test stages, fixing pipeline bugs, updating versions, adding ca
 - Infrastructure provisioning → `/tsh-implement-terraform`
 - Kubernetes deployment configuration → `/tsh-deploy-kubernetes`
 - Monitoring and alerting → `/tsh-implement-observability`
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-pipeline:v1 -->

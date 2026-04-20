@@ -35,3 +35,5 @@ Before starting, load and follow these skills:
 9. Before handing over to review, ensure all tasks in the delegated scope have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v1 -->

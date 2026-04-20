@@ -43,3 +43,5 @@ Skills may require supporting files beyond SKILL.md — templates, examples, and
 If the user attaches files or provides a description, use them as input for skill design.
 
 When in doubt about design decisions, ask the user for clarification rather than guessing.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-create-custom-skill:v1 -->

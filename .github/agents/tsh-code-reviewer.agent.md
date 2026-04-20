@@ -107,3 +107,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Style or formatting issues that can be flagged directly.
   - Questions answerable from the codebase, plan, or documentation.
+

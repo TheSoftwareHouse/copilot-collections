@@ -172,3 +172,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Questions answerable from the codebase or available documentation.
   - Implementation details that are the software engineer's responsibility.
+

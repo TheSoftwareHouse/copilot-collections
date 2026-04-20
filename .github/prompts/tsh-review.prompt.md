@@ -29,3 +29,5 @@ Before starting, load and follow these skills:
 8. **Update changelog**: Add information that code review was performed to the changelog section of the plan file.
 
 When it comes to updating the definition of done and acceptance criteria checklist, you can only update those by checking the box for completed items. Do not modify the text of those sections.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review:v1 -->
