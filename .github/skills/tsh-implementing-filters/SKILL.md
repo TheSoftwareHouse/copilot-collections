@@ -1,11 +1,11 @@
 ---
 name: tsh-implementing-filters
-description: "Type-safe URL filter synchronization with clean path and query string routing for React Router. Headless filter logic — schema definition, bracket notation serialization, URL sync hooks, and navigation strategy patterns. Use when implementing filterable lists, search pages, faceted navigation, or any UI that persists filter state in the URL."
+description: "Type-safe URL filter synchronization with clean path and query string routing. Headless filter logic — schema definition, bracket notation serialization, URL sync hooks, and navigation strategy patterns. Use when implementing filterable lists, search pages, faceted navigation, or any UI that persists filter state in the URL."
 ---
 
 # Implementing Filters
 
-Provides headless patterns for type-safe URL filter synchronization — schema definition, bracket notation serialization/deserialization, router-bound hooks, and push/replace navigation strategies for React Router v6+.
+Provides patterns for type-safe URL filter synchronization — schema definition, bracket notation serialization/deserialization, router-bound hooks, and push/replace navigation strategies.
 
 <principles>
 
@@ -50,13 +50,13 @@ Supported filter parameter types:
 | -------------- | ------------------------------------ | ------------------------------------------------------ |
 | Single value   | `color: string`                      | `filter[color]=blue`                                   |
 | Multi-select   | `tags: string[]`                     | `filter[tags]=a&filter[tags]=b` (repeated bracket key) |
-| Range (flat)   | `priceMin: number; priceMax: number` | `filter[priceMin]=10&filter[priceMax]=50`              |
+| Range          | `priceMin: number; priceMax: number` | `filter[price_min]=10&filter[price_max]=50` (separate bracket keys) |
 | Boolean toggle | `inStock: boolean`                   | `filter[in_stock]=true`                                |
 | Numeric        | `page: number`                       | `page=2` (top-level, not bracketed)                    |
 
 Rules:
 
-- Filters use bracket notation: `filter[fieldName]=value`. Range filters use flat keys: `filter[priceMin]=10&filter[priceMax]=50`.
+- Filters use bracket notation: `filter[field_name]=value`. Range filters use separate bracket keys: `filter[price_min]=10&filter[price_max]=50`.
 - Use `snake_case` for bracket key names — readable in URLs.
 - Use `camelCase` for TypeScript property names.
 - Define defaults for every param — defaults are used when a param is absent from the URL.
@@ -67,8 +67,8 @@ Example schema shape:
 interface ProductFilters {
   color: string; // default: ""       → filter[color]=blue
   tags: string[]; // default: []       → filter[tags]=a&filter[tags]=b
-  priceMin: number; // default: 0        → filter[priceMin]=0
-  priceMax: number; // default: 10000    → filter[priceMax]=10000
+  priceMin: number; // default: 0        → filter[price_min]=0
+  priceMax: number; // default: 10000    → filter[price_max]=10000
   inStock: boolean; // default: false    → filter[in_stock]=true
   sort: string; // default: "relevance" → sort[relevance]=ASC
   page: number; // default: 1        → page=1
@@ -107,21 +107,20 @@ Build two functions tied to the filter schema: one to serialize the typed filter
 
 - Iterate over schema keys.
 - Skip params whose value matches the default — keeps the URL clean.
-- Wrap filter params in bracket notation: `filter[fieldName]=value`. Use `snake_case` inside brackets.
-- Ranges use flat keys: `filter[priceMin]=10&filter[priceMax]=50`.
+- Wrap filter params in bracket notation: `filter[field_name]=value`. Use `snake_case` inside brackets.
+- Ranges use separate bracket keys: `filter[price_min]=10&filter[price_max]=50`.
 - Arrays use repeated bracket keys: `filter[tags]=a&filter[tags]=b`.
 - Sort params use `sort[field]=direction` format.
 - Booleans serialize as `"true"` / `"false"`.
 
 **Deserialize** (`URLSearchParams` → typed object):
 
-- Parse `filter[...]` keys — extract field names from brackets.
-- For flat range keys (`filter[priceMin]`, `filter[priceMax]`), parse directly as bracket keys.
-- Coerce types: `Number()` for numerics, `=== 'true'` for booleans, `searchParams.getAll()` for repeated bracket keys.
-- Apply defaults for any missing or invalid param.
-- Reject out-of-range or malformed values by falling back to the schema default — never propagate garbage into application code.
+Deserialization is a two-phase pipeline:
 
-> **Prefer schema validation**: Use a library like [Zod](https://zod.dev) or [Valibot](https://valibot.dev) to parse, coerce, and validate URL parameters in one step. Define a schema that mirrors the filter interface, with `.default()` for fallbacks and `.coerce` for type conversions. Fall back to manual `Number()` / `=== 'true'` only when adding a validation library is not feasible.
+1. **Extract bracket keys** — parse `filter[...]` and `sort[...]` keys from `URLSearchParams`, producing a flat key-value object with `camelCase` property names. Handle repeated bracket keys (`getAll()`) for multi-value filters and separate range keys (`filter[price_min]`, `filter[price_max]`). This phase is URL-format-aware but type-unaware.
+2. **Validate and coerce** — pass the flat object through the filter schema. Coerce types (`Number()` for numerics, `=== 'true'` for booleans), apply defaults for missing params, and reject out-of-range or malformed values by falling back to schema defaults. Never propagate garbage into application code.
+
+> **Prefer schema validation**: Use a library like [Zod](https://zod.dev) or [Valibot](https://valibot.dev) for phase 2 — define a schema that mirrors the filter interface, with `.default()` for fallbacks and `.coerce` for type conversions. The schema validates domain types (`color: string`, `priceMin: number`) without knowing anything about URL serialization format. Fall back to manual `Number()` / `=== 'true'` only when adding a validation library is not feasible.
 
 Key rules:
 
@@ -189,16 +188,16 @@ For debounced inputs (range sliders, search fields), use `replace` during rapid 
 
 ## Serialization Quick Reference
 
-| TypeScript type                  | Serialized format                   | Deserialize with                |
-| -------------------------------- | ----------------------------------- | ------------------------------- |
-| `string`                         | `filter[key]=value`                 | Parse bracket key, `get()`      |
-| `number`                         | `filter[key]=123`                   | Parse bracket key, `Number()`   |
-| `boolean`                        | `filter[key]=true`                  | Parse bracket key, `=== 'true'` |
-| `string[]`                       | `filter[key]=a&filter[key]=b`       | Parse bracket key, `getAll()`   |
-| `keyMin: number; keyMax: number` | `filter[keyMin]=1&filter[keyMax]=9` | `Number()` for each key         |
-| sort                             | `sort[field]=ASC`                   | Parse bracket key               |
-| search                           | `search=text`                       | `get('search')`                 |
-| pagination                       | `page=1&limit=20`                   | `get('page')`, `get('limit')`   |
+| TypeScript type                  | Serialized format                     | Deserialize with                |
+| -------------------------------- | ------------------------------------- | ------------------------------- |
+| `string`                         | `filter[key]=value`                   | Parse bracket key, `get()`      |
+| `number`                         | `filter[key]=123`                     | Parse bracket key, `Number()`   |
+| `boolean`                        | `filter[key]=true`                    | Parse bracket key, `=== 'true'` |
+| `string[]`                       | `filter[key]=a&filter[key]=b`         | Parse bracket key, `getAll()`   |
+| `keyMin: number; keyMax: number` | `filter[key_min]=1&filter[key_max]=9` | `Number()` for each key         |
+| sort                             | `sort[field]=ASC`                     | Parse bracket key               |
+| search                           | `search=text`                         | `get('search')`                 |
+| pagination                       | `page=1&limit=20`                     | `get('page')`, `get('limit')`   |
 
 ## API Contract
 
@@ -206,21 +205,21 @@ The conventions below describe the **default TSH backend API contract**. When th
 
 ### Query Parameter Structure
 
-| Concern                 | Format                  | Example                                        |
-| ----------------------- | ----------------------- | ---------------------------------------------- |
-| Filters                 | `filter[field]=value`   | `filter[firstName]=Ewa`                        |
-| Multi-value filter (OR) | Repeated bracket key    | `filter[firstName]=Ewa&filter[firstName]=Adam` |
-| Range filter            | Flat keys               | `filter[priceMin]=10&filter[priceMax]=50`      |
-| Text search             | Partial match value     | `filter[firstName]=Nowak`                      |
-| Pagination              | Top-level keys          | `page=1&limit=100`                             |
-| Sort                    | `sort[field]=direction` | `sort[lastName]=ASC`                           |
-| Full-text search        | Top-level key           | `search=test`                                  |
+| Concern                 | Format                  | Example                                          |
+| ----------------------- | ----------------------- | ------------------------------------------------ |
+| Filters                 | `filter[field]=value`   | `filter[first_name]=Ewa`                         |
+| Multi-value filter (OR) | Repeated bracket key    | `filter[first_name]=Ewa&filter[first_name]=Adam` |
+| Range filter            | Separate bracket keys   | `filter[price_min]=10&filter[price_max]=50`      |
+| Text search             | Partial match value     | `filter[first_name]=Nowak`                       |
+| Pagination              | Top-level keys          | `page=1&limit=100`                               |
+| Sort                    | `sort[field]=direction` | `sort[last_name]=ASC`                            |
+| Full-text search        | Top-level key           | `search=test`                                    |
 
 ### Filter Logic
 
-- **Same field, multiple values → OR**: `filter[firstName]=Ewa&filter[firstName]=Adam` — same field with multiple values implies OR — the response includes items matching any of the values.
-- **Different fields → AND**: `filter[firstName]=Ewa&filter[lastName]=Kowalska` — different fields imply AND — the response includes only items matching all field conditions.
-- **Text search**: `filter[firstName]=Nowak` — backend determines the matching strategy (e.g., prefix, contains, fuzzy).
+- **Same field, multiple values → OR**: `filter[first_name]=Ewa&filter[first_name]=Adam` — same field with multiple values implies OR — the response includes items matching any of the values.
+- **Different fields → AND**: `filter[first_name]=Ewa&filter[last_name]=Kowalska` — different fields imply AND — the response includes only items matching all field conditions.
+- **Text search**: `filter[first_name]=Nowak` — backend determines the matching strategy (e.g., prefix, contains, fuzzy).
 
 ### Example API Response Envelope
 
@@ -262,7 +261,7 @@ Filter:
 - [ ] Sort uses bracket notation (sort[field]=ASC|DESC)
 - [ ] Serialization omits default values from URL
 - [ ] Deserialization validates and coerces types
-- [ ] Range filters use flat keys (filter[priceMin]=10&filter[priceMax]=50)
+- [ ] Range filters use separate bracket keys (filter[price_min]=10&filter[price_max]=50)
 - [ ] Multi-value filters use repeated bracket keys (OR logic)
 - [ ] If external API, serialization adapted to match API's expected format
 - [ ] Cross-field filters combine as AND
@@ -281,7 +280,7 @@ Filter:
 | Anti-Pattern                                                       | Instead Do                                                                                                            |
 | ------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
 | Storing filter state in `useState` and syncing to URL              | Derive filter state FROM the URL — URL is the source of truth                                                         |
-| Using flat keys for filters (`color=blue&price_min=10`)            | Use bracket notation (`filter[color]=blue&filter[priceMin]=10`)                                                       |
+| Using flat keys for filters (`color=blue&price_min=10`)            | Use bracket notation (`filter[color]=blue&filter[price_min]=10`)                                                      |
 | Hardcoding filter params as magic strings                          | Define a filter schema type and derive param names from it                                                            |
 | Using `push` for search-as-you-type                                | Use `replace` to avoid flooding browser history                                                                       |
 | Putting optional filters in path segments (`/products/color/blue`) | Put filters in query strings — path is for resource identity only                                                     |
