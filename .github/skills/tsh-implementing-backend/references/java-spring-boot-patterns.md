@@ -267,7 +267,7 @@ public class OrderEventsPublisher {
             .setHeader("occurredAt", Instant.now().toString())
             .build();
 
-        streamBridge.send("orders-out-0", message);
+        streamBridge.send("orderPublisher-out-0", message);
     }
 }
 ```
