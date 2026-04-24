@@ -79,14 +79,21 @@ Rules:
 Example schema shape:
 
 ```typescript
+type SortDirection = "ASC" | "DESC";
+
+interface ProductSort {
+  field: "relevance" | "price" | "createdAt";
+  direction: SortDirection;
+}
+
 interface ProductFilters {
-  color: string; // default: ""       → filter[color]=blue
-  tags: string[]; // default: []       → filter[tags]=a&filter[tags]=b
-  priceMin: number; // default: 0        → filter[price_min]=0
-  priceMax: number; // default: 10000    → filter[price_max]=10000
-  inStock: boolean; // default: false    → filter[in_stock]=true
-  sort: string; // default: "relevance" → sort[relevance]=ASC
-  page: number; // default: 1        → page=1
+  color: string; // default: ""                                  → filter[color]=blue
+  tags: string[]; // default: []                                 → filter[tags]=a&filter[tags]=b
+  priceMin: number; // default: 0                                → filter[price_min]=0
+  priceMax: number; // default: 10000                            → filter[price_max]=10000
+  inStock: boolean; // default: false                            → filter[in_stock]=true
+  sort: ProductSort; // default: { field: "relevance", direction: "ASC" } → sort[relevance]=ASC
+  page: number; // default: 1                                    → page=1
 }
 ```
 
