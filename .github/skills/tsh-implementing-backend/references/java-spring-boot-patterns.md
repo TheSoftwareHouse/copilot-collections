@@ -238,8 +238,12 @@ public class OrderEventConsumers {
 
             MDC.put("correlationId", correlationId);
             MDC.put("eventType", "OrderCreated");
-
-            orderService.handleOrderCreated(event);
+            try {
+                orderService.handleOrderCreated(event);
+            } finally {
+                MDC.remove("correlationId");
+                MDC.remove("eventType");
+            }
         };
     }
 }
