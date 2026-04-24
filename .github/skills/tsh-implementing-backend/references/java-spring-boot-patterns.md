@@ -280,13 +280,17 @@ public class OrderEventsPublisher {
 spring:
   cloud:
     function:
-      definition: orderCreated;orderPublisher    # semicolon-separated list of bean names
+      definition: orderCreated;orderCompleted    # semicolon-separated list of Consumer<>, Supplier<>, Function<> bean names
     stream:
       bindings:
         # Consumer binding: <beanName>-in-<index>
         orderCreated-in-0:
           destination: orders.created            # topic / exchange name
           group: order-service                   # consumer group (enables durable subscription)
+          content-type: application/json
+        orderCompleted-in-0:
+          destination: orders.completed
+          group: order-service
           content-type: application/json
         # Publisher binding: explicit name used in StreamBridge.send()
         # (Or Supplier<Message<OrderCreatedEvent>> bean if triggered on schedule/poll)
