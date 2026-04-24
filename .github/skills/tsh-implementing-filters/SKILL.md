@@ -7,6 +7,21 @@ description: "Type-safe URL filter synchronization with clean path and query str
 
 Provides patterns for type-safe URL filter synchronization — schema definition, bracket notation serialization/deserialization, router-bound hooks, and push/replace navigation strategies.
 
+## Table of Contents
+
+- [Principles](#principles)
+- [Filter Implementation Process](#filter-implementation-process)
+- [Serialization Quick Reference](#serialization-quick-reference)
+- [API Contract](#api-contract)
+  - [Query Parameter Structure](#query-parameter-structure)
+  - [Filter Logic](#filter-logic)
+  - [Example API Response Envelope](#example-api-response-envelope)
+  - [Backend Considerations](#backend-considerations)
+- [Filter Quality Checklist](#filter-quality-checklist)
+- [Anti-Patterns](#anti-patterns)
+- [Framework-Specific Patterns](#framework-specific-patterns)
+- [Connected Skills](#connected-skills)
+
 <principles>
 
 <url-is-the-source-of-truth>
@@ -46,13 +61,13 @@ Define a TypeScript type or interface for each filter set. Every filter paramete
 
 Supported filter parameter types:
 
-| Type           | Example                              | Serialized                                             |
-| -------------- | ------------------------------------ | ------------------------------------------------------ |
-| Single value   | `color: string`                      | `filter[color]=blue`                                   |
-| Multi-select   | `tags: string[]`                     | `filter[tags]=a&filter[tags]=b` (repeated bracket key) |
+| Type           | Example                              | Serialized                                                          |
+| -------------- | ------------------------------------ | ------------------------------------------------------------------- |
+| Single value   | `color: string`                      | `filter[color]=blue`                                                |
+| Multi-select   | `tags: string[]`                     | `filter[tags]=a&filter[tags]=b` (repeated bracket key)              |
 | Range          | `priceMin: number; priceMax: number` | `filter[price_min]=10&filter[price_max]=50` (separate bracket keys) |
-| Boolean toggle | `inStock: boolean`                   | `filter[in_stock]=true`                                |
-| Numeric        | `page: number`                       | `page=2` (top-level, not bracketed)                    |
+| Boolean toggle | `inStock: boolean`                   | `filter[in_stock]=true`                                             |
+| Numeric        | `page: number`                       | `page=2` (top-level, not bracketed)                                 |
 
 Rules:
 
@@ -205,21 +220,21 @@ The conventions below describe the **default TSH backend API contract**. When th
 
 ### Query Parameter Structure
 
-| Concern                 | Format                  | Example                                          |
-| ----------------------- | ----------------------- | ------------------------------------------------ |
-| Filters                 | `filter[field]=value`   | `filter[first_name]=Ewa`                         |
-| Multi-value filter (OR) | Repeated bracket key    | `filter[first_name]=Ewa&filter[first_name]=Adam` |
-| Range filter            | Separate bracket keys   | `filter[price_min]=10&filter[price_max]=50`      |
-| Text search             | Partial match value     | `filter[first_name]=Nowak`                       |
-| Pagination              | Top-level keys          | `page=1&limit=100`                               |
-| Sort                    | `sort[field]=direction` | `sort[last_name]=ASC`                            |
-| Full-text search        | Top-level key           | `search=test`                                    |
+| Concern                   | Format                  | Example                                          |
+| ------------------------- | ----------------------- | ------------------------------------------------ |
+| Filters                   | `filter[field]=value`   | `filter[first_name]=Ewa`                         |
+| Multi-value filter (OR)   | Repeated bracket key    | `filter[first_name]=Ewa&filter[first_name]=Adam` |
+| Range filter              | Separate bracket keys   | `filter[price_min]=10&filter[price_max]=50`      |
+| Partial-text match filter | Partial match value     | `filter[first_name]=Nowak`                       |
+| Pagination                | Top-level keys          | `page=1&limit=100`                               |
+| Sort                      | `sort[field]=direction` | `sort[last_name]=ASC`                            |
+| Full-text search          | Top-level key           | `search=test`                                    |
 
 ### Filter Logic
 
 - **Same field, multiple values → OR**: `filter[first_name]=Ewa&filter[first_name]=Adam` — same field with multiple values implies OR — the response includes items matching any of the values.
 - **Different fields → AND**: `filter[first_name]=Ewa&filter[last_name]=Kowalska` — different fields imply AND — the response includes only items matching all field conditions.
-- **Text search**: `filter[first_name]=Nowak` — backend determines the matching strategy (e.g., prefix, contains, fuzzy).
+- **Partial-text match filter**: `filter[first_name]=Nowak` — backend determines the matching strategy (e.g., prefix, contains, fuzzy).
 
 ### Example API Response Envelope
 

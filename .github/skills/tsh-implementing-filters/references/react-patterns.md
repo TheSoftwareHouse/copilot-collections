@@ -2,6 +2,14 @@
 
 React Router v6+-specific patterns for the `tsh-implementing-filters` skill. Load this reference when the project uses React Router.
 
+## Table of Contents
+
+- [Reading Search Params](#reading-search-params)
+- [Navigation (Push/Replace)](#navigation-pushreplace)
+- [Hook Binding](#hook-binding)
+- [Bracket Notation Parsing](#bracket-notation-parsing)
+- [Anti-Patterns](#anti-patterns)
+
 ## Reading Search Params
 
 | API                        | Usage                                     | Notes                                                                  |
