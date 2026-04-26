@@ -149,3 +149,4 @@ Form:
 - `tsh-ensuring-accessibility` — for WCAG compliance in form fields, labels, and error announcements
 - `tsh-writing-hooks` — for custom form-related hooks/composables (useFormField, useMultiStepForm)
 - `tsh-reviewing-frontend` — for form-specific review criteria during code review
+- `tsh-implementing-filters` — for filter UIs that wire form inputs into URL-synced filter hooks
