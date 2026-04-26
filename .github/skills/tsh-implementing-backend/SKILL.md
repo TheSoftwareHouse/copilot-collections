@@ -504,7 +504,7 @@ The patterns above are language-agnostic. For technology-specific implementation
 - **Node.js**: See `./references/nodejs-patterns.md` — NestJS/Express DI, Jest/Supertest testing, Pino/Winston logging, TypeORM/Prisma ORM, Swagger integration.
 - **PHP**: See `./references/php-patterns.md` — Symfony/Laravel DI, PHPUnit testing, Monolog logging, Doctrine/Eloquent ORM, Swagger integration.
 - **dotNET**: See `./references/dotnet-patterns.md` — built-in DI, xUnit testing, Serilog logging, Entity Framework ORM, Swashbuckle Swagger.
-- **Java**: See `./references/java-patterns.md` — Spring IoC, JUnit/REST Assured testing, SLF4J/Logback logging, Hibernate ORM, springdoc-openapi.
+- **Java**: See `./references/java-spring-boot-patterns.md` — Spring IoC, JUnit/REST Assured testing, SLF4J/Logback logging, Hibernate ORM, springdoc-openapi, Spring Cloud Stream async messaging.
 - **Go**: See `./references/go-patterns.md` — Wire/Fx DI, Go testing, Zap logging, GORM ORM, swaggo Swagger.
 
 ## Connected Skills
