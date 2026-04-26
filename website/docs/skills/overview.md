@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **31 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **32 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -44,6 +44,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-sql-and-database-understanding](./sql-and-database)           | Database engineering standards and ORM integration            | Architect, CR, SE          |
 | [tsh-codebase-analysing](./codebase-analysis)                      | Deep codebase analysis and dependency mapping                 | Architect, BA, CE, SE      |
 | [tsh-engineering-prompts](./prompt-engineering)                    | LLM prompt design, optimization, security, and evaluation     | PE, SE, Architect, CR  |
+| [tsh-committing-code](./committing-code)                          | Semantic commit messages, splitting, branch naming, push flow | SE                     |
 
 ### ☁️ Cloud & Infrastructure Skills
 
@@ -82,6 +83,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | tsh-architecture-designing             |     |     | ✅        |     |     |     |             |     |        |              |
 | tsh-code-reviewing                     |     |     |           |     | ✅  | ✅  |             |     |        |              |
 | tsh-codebase-analysing                 | ✅  | ✅  | ✅        | ✅  |     |     |             |     | ✅     | ✅           |
+| tsh-committing-code                    |     |     |           | ✅  |     |     |             |     |        |              |
 | tsh-creating-agents                    |     |     |           |     |     |     |             |     |        | ✅           |
 | tsh-creating-instructions              |     |     |           |     |     |     |             |     |        | ✅           |
 | tsh-creating-prompts                   |     |     |           |     |     |     |             |     |        | ✅           |
