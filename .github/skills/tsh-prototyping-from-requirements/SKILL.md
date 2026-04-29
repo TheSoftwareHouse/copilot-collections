@@ -99,6 +99,20 @@ Note available design tokens: colors, spacing scale, typography scale, elevation
 
 Create a new frame in Figma for each screen, following `tsh-figma-designing` layer naming conventions.
 
+Set frame dimensions to match the target breakpoint EXACTLY:
+
+- Desktop: 1440px wide (or project-specific breakpoint), auto-height or 900px minimum
+- Tablet: 768px wide, auto-height or 1024px minimum
+- Mobile: 375px wide, 812px minimum height (iPhone standard viewport)
+
+NEVER use HUG horizontal sizing on top-level screen frames — always set a fixed width.
+
+For sidebar + content layouts:
+
+- Sidebar: fixed width (e.g., 240px–280px)
+- Content area: `layoutSizingHorizontal: FILL` to stretch to remaining space
+- NEVER use HUG on main content containers
+
 Use auto-layout to establish the content hierarchy defined in Step 2.
 
 Place placeholder elements for content areas — grey rectangles, text placeholders, icon placeholders.
@@ -110,6 +124,7 @@ Verify the wireframe covers:
 - All screens identified in Step 2
 - All user flows (happy path + error paths)
 - Responsive breakpoints (if applicable)
+- Frame dimensions match target breakpoints (see above)
 
 Get user feedback and approval on the structure before proceeding to high-fidelity.
 
@@ -117,20 +132,53 @@ Get user feedback and approval on the structure before proceeding to high-fideli
 
 Replace placeholder elements with actual design system components from Step 3.
 
-Bind all visual properties to design system variables — no hardcoded color values, spacing, or typography.
+**5a: Bind visual properties to variables**
 
-Add real or realistic placeholder content (not "Lorem ipsum" — use contextually appropriate text).
+- Bind ALL fill colors to color variables. NEVER use hardcoded hex/rgba values.
+- Bind ALL stroke colors to color variables.
+- Use spacing variables for all padding and gap values.
+- Use radius variables for all border radius values.
+- After setting ANY visual property, immediately verify it is variable-bound before proceeding.
 
-Handle all states for each component and screen:
+**5b: Apply text styles to all text nodes**
 
-- Default, hover, active, disabled
-- Loading (skeleton screens or spinners)
-- Empty (helpful message with CTA)
-- Error (clear message with recovery action)
+- Page titles → Heading/H1-H2
+- Section titles → Heading/H3-H4
+- Body text → Body/Default
+- Labels → Label
+- Captions → Caption
+- After creating ANY text node, immediately apply the matching text style. Do NOT batch.
+- Text color MUST also be bound to a color variable, in addition to the text style.
 
-Ensure responsive behavior is configured where applicable.
+**5c: Use component instances for composition**
 
-Follow all `tsh-figma-designing` conventions: naming, sections, auto-layout, component usage.
+- When a component contains an element matching an existing component (button, input, link, icon), ALWAYS use an instance of the existing component.
+- Sidebar MUST use NavItem instances. CTA buttons in empty/error states MUST use Button instances. Form containers MUST use FormInput instances.
+- NEVER recreate sub-elements from scratch when a matching component exists.
+
+**5d: Handle icons correctly**
+
+- NEVER use emoji characters as icons (🏠, 📊, 🔔, etc.).
+- Use existing icon components from the design system, import SVGs via `upload_assets`, or create simple geometric placeholder shapes.
+
+**5e: Set component descriptions**
+
+- After creating each component, set its `description` field with: purpose (1 sentence), when to use, key variants. Never leave it empty.
+
+**5f: Add content and states**
+
+- Add real or realistic placeholder content (not "Lorem ipsum" — use contextually appropriate text).
+- Handle all states for each component and screen:
+  - Default, hover, active, disabled
+  - Loading (skeleton screens or spinners)
+  - Empty (helpful message with CTA)
+  - Error (clear message with recovery action)
+- Ensure interactive components include all required interaction states (see `tsh-figma-designing` Required Interaction States table).
+
+**5g: Configure responsive behavior**
+
+- Ensure responsive behavior is configured where applicable.
+- Follow all `tsh-figma-designing` conventions: naming, sections, auto-layout, component usage.
 
 **Step 6: Add interaction and flow**
 
