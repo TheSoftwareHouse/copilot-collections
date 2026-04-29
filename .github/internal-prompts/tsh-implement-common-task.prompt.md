@@ -25,8 +25,8 @@ Before starting, load and follow these skills:
 ## Workflow
 
 1. Review the implementation plan and feature context thoroughly.
-2. Review all project copilot instructions (`*.instructions.md`) and the codebase to understand the existing architecture, coding standards, and any relevant guidelines.
-3. Gather a list of commands you will need during implementation: running tests (unit, integration, E2E and others), linters, building the project, running and generating migrations, etc. Run tests and linters **before** starting implementation and **after** completing each phase.
+2. **Read the "Technical Context" section from the plan file** (`*.plan.md`). This section contains project conventions, coding standards, architecture patterns, tech stack details, testing patterns, and relevant `.instructions.md` rules already discovered during planning. Use it as your primary source of truth — do NOT re-scan the codebase or re-read instruction files for information already captured there. Only perform additional discovery for aspects not covered by the persisted context.
+3. Gather a list of commands you will need during implementation: running tests (unit, integration, E2E and others), linters, building the project, running and generating migrations, etc. These may already be documented in the plan's Technical Context section. Run tests and linters **before** starting implementation and **after** completing each phase.
 4. Focus only on the implementation plan. Don't implement anything not part of the plan unless explicitly instructed.
 5. Don't implement improvements from the plan's improvements section unless explicitly instructed.
 6. Start implementing the feature according to the plan, following each task step by step.

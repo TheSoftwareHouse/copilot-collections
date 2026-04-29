@@ -34,7 +34,7 @@ Do NOT skip verification or delegate without a Figma reference.
 
 1. **Review the plan** — Review the implementation plan and feature context thoroughly. Identify which tasks are UI implementation tasks (need Figma verification) and which are non-visual tasks. Extract all Figma URLs from the research/plan files.
 
-2. **Delegate codebase analysis** — Use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing.
+2. **Delegate codebase analysis (if needed)** — Check if the plan file (`*.plan.md`) contains a populated **"Technical Context"** section. If it does, skip this step — the context was already captured during planning. If the section is missing or empty, use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing.
 
 3. **Confirm dev server URL** — **Use `vscode/askQuestions` now** to ask the user for the dev server URL (e.g., "What URL is the frontend app running at? Is it http://localhost:3000?"). Do not defer this to later — you need the confirmed URL before any verification can start. Do not guess from running processes or port scans — multiple services may run on different ports. Use the confirmed URL for all subsequent verifications in this session.
 

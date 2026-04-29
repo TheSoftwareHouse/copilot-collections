@@ -14,7 +14,6 @@ In addition to the skills required by the base workflow, load and follow these s
 
 - `tsh-implementing-frontend` — for component patterns, design system usage, composition, and performance guidelines
 - `tsh-ensuring-accessibility` — for WCAG 2.1 AA compliance, semantic HTML, ARIA, and automated axe-core verification
-- `tsh-technical-context-discovering` — to establish project conventions before implementing
 
 ---
 

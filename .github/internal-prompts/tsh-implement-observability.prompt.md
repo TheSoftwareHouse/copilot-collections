@@ -23,7 +23,8 @@ Before starting, load and follow these skills:
 Follow the `tsh-technical-context-discovering` skill to identify existing observability setup.
 
 Additionally, always:
-- Check `*.instructions.md` → project-specific conventions
+- **Read the "Technical Context" section from the plan file** (`*.plan.md`) if it exists — it contains project conventions and patterns already discovered during planning. Use it as your primary source and skip re-discovery for aspects already covered.
+- Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
 - Analyze existing monitoring configurations (Prometheus, Grafana, CloudWatch, etc.)
 - Discover existing alerting rules and dashboards
 

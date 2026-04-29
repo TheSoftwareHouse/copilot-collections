@@ -20,11 +20,24 @@ Use the checklist below and track your progress:
 
 ```
 Discovery progress:
+- [ ] Step 0: Check plan file for persisted context
 - [ ] Step 1: Check Copilot instruction files
 - [ ] Step 2: Analyze existing codebase patterns
 - [ ] Step 3: Consult external documentation (if needed)
 - [ ] Step 4: Apply the implementation rule
 ```
+
+**Step 0: Check Plan File for Persisted Context**
+
+**ALWAYS check first** whether a plan file (`*.plan.md`) exists for the current task and contains a **"Technical Context"** section.
+
+If a "Technical Context" section exists and is populated:
+- **Use it as-is** — do not re-discover conventions, patterns, or standards that are already documented there.
+- Skip Steps 1-2 entirely. Proceed directly to Step 4 (Apply the implementation rule) using the persisted context.
+- Only perform targeted discovery (Steps 1-2) for aspects **not covered** by the persisted context.
+
+If no plan file exists, or the "Technical Context" section is missing/empty:
+- Proceed with Steps 1-4 as normal.
 
 **Step 1: Check Copilot Instruction Files**
 

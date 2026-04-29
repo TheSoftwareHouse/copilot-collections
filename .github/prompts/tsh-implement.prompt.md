@@ -14,7 +14,11 @@ Your goal is to implement the feature according to the provided implementation p
 
    **Inventory UI verification tasks** — Scan the entire plan for `[REUSE]` tasks that involve `tsh-ui-reviewer` or Figma verification. Also scan the plan — and the research file (`*.research.md`) if one exists — for all Figma URLs. Build an explicit list of UI components that require verification. You will use this inventory as a checklist — every item must be verified before code review.
 
+<<<<<<< Updated upstream
 3. **Confirm dev server URL** — If your UI verification inventory from step 2 contains ANY tasks, use `vscode/askQuestions` **now** to ask the user for the dev server URL (e.g., "What URL is the frontend app running at?"). Do not defer this — you need the confirmed URL before any UI verification can start. Do not guess from running processes or port scans. Store the confirmed URL for all subsequent verifications.
+=======
+4. **Delegate codebase analysis (if needed)** — Check if the plan file (`*.plan.md`) contains a populated **"Technical Context"** section. If it does, skip this step — the context was already captured during planning. If the section is missing or empty, use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature. This will help you identify which agents to delegate specific tasks to during implementation.
+>>>>>>> Stashed changes
 
 4. **Confirm with user before implementation** — Confirm with the user before proceeding to the implementation phase after research and planning phases using `vscode/askQuestions` tool.
 
