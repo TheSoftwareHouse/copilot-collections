@@ -49,6 +49,20 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-prototyping-from-requirements` - when creating a new design from scratch based on client requirements, user stories, or feature descriptions; follows the end-to-end flow from requirements analysis to Figma prototype
 - `tsh-ensuring-accessibility` - when verifying color contrast, touch target sizes, semantic structure, and WCAG compliance in designs
 
+## Hard Rules
+
+<!-- These rules mirror tsh-figma-designing enforcements. Keep in sync when updating either source. -->
+
+These rules are absolute — they override any conflicting guidance. Violating them is always a bug.
+
+- **NEVER** set a fill or stroke with a hardcoded hex/rgba value. ALWAYS bind to a design system color variable.
+- **NEVER** use emoji characters (🏠, 📊, 🔔, ⚙️, etc.) as icons. Use vector/SVG components, imported SVGs, or simple geometric placeholder shapes.
+- **NEVER** create a text node without immediately applying a text style. Text styles and variable bindings are different mechanisms — both MUST be applied.
+- **NEVER** use HUG horizontal sizing on top-level screen frames. Desktop frames = 1440px fixed width. Mobile frames = 375px fixed width, 812px minimum height.
+- **NEVER** recreate a sub-element (button, input, link, icon) from scratch inside a component when a matching component already exists. Use `createInstance()`.
+- **NEVER** leave a component `description` field empty. Set it immediately after creating the component.
+- **ALWAYS** verify all variable bindings and text styles per-component BEFORE moving to the next component. Do not batch validation to the end.
+
 ## Tool Usage Guidelines
 
 You have access to the `figma` tool.
