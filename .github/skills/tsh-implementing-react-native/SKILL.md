@@ -18,7 +18,7 @@ Build complex screens by composing small, focused components rather than creatin
 </composition-over-complexity>
 
 <design-system-first>
-Always use design tokens (colors, spacing, typography, radii) from the project's design system. Never hardcode visual values. Map Figma specs to existing tokens. If no exact token match exists, find the closest and document the deviation — do not invent tokens without approval. In React Native this means referencing a shared theme object or token constants — never inline raw numbers or hex colors in `StyleSheet.create()`.
+Always use design tokens (colors, spacing, typography, radii) from the project's design system. Never hardcode visual values. Map Figma specs to existing tokens. If no exact token match exists, find the closest and document the deviation — do not invent tokens without approval. In React Native this means referencing a shared theme object or token constants — never inline raw numbers or hex colors in style definitions, regardless of the styling approach used (StyleSheet, Unistyles, NativeWind, Styled Components, Tamagui, Restyle, etc.).
 </design-system-first>
 
 <platform-aware-not-platform-split>
@@ -73,7 +73,7 @@ Follow these patterns for every component:
 - **Composition**: Use composition patterns — content projection (`children`), render delegation, compound components — to keep components flexible. Avoid prop sprawl — if a component accepts more than ~7 props, it likely needs decomposition.
 - **Typed props**: Define explicit TypeScript types for all props. Never use `any`. Co-locate types in `ComponentName.types.ts`.
 - **Named exports only**: Use `export { ComponentName }` — no default exports. This ensures consistent imports and simplifies refactoring.
-- **StyleSheet.create()**: Always use `StyleSheet.create()` for styles. It validates style properties at creation time and enables native-side optimizations. Never pass raw style objects repeatedly.
+- **Consistent styling**: Follow the project's established styling approach (e.g., `StyleSheet.create()`, Unistyles, NativeWind/Tailwind, Styled Components, Tamagui, Restyle). Discover the styling pattern by checking existing components before writing new styles. Never mix multiple styling approaches in the same project unless there is a documented migration path. Avoid passing inline style object literals repeatedly — use the project's pattern for reusable style definitions.
 - **Three UI states**: Every data-dependent component must handle loading (skeleton or activity indicator), error (meaningful message + recovery action), and empty (helpful message when no data).
 - **Error boundaries**: Wrap screen-level or feature-level components with an error boundary to catch JS rendering errors gracefully. Use `react-native-error-boundary` or a custom `ErrorBoundary` class component. For Expo projects, `expo-error-recovery` can restore state after fatal JS errors. Note: error boundaries do NOT catch errors in event handlers, async code, or native crashes — handle those separately.
 - **Design tokens**: All visual values (colors, spacing, typography, shadows, radii) must come from the design system theme. Zero hardcoded values in style definitions.
@@ -94,10 +94,11 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 **Step 5: Verify implementation**
 
 - If a calling workflow provides a verification loop (e.g., the Engineering Manager runs `tsh-ui-reviewer` automatically during `/tsh-implement`), defer to that workflow — do not duplicate verification here.
-- If no verification workflow is active, use the `tsh-ui-verifying` skill directly to compare the implementation against the Figma design.
+- If no verification workflow is active, use `./references/react-native-ui-verification.md` to compare the implementation against the Figma design.
 - Walk through each interaction state (pressed, focused, disabled, error, loading, empty) and verify correctness on both platforms.
 - Test on both iOS and Android — styles that look correct on one platform may differ on the other (shadows, elevation, font rendering, status bar overlaps).
 - Verify touch targets meet minimum size requirements (44×44 pt iOS / 48×48 dp Android).
+- Verify accessibility using `./references/react-native-accessibility.md` — test with VoiceOver (iOS) and TalkBack (Android).
 - Check with platform-specific accessibility tools (VoiceOver on iOS, TalkBack on Android).
 
 ## State Decision Framework
@@ -133,7 +134,7 @@ Component:
 - [ ] Loading state — shows skeleton or activity indicator
 - [ ] Empty state — meaningful message when no data
 - [ ] Composition — uses children/slots, not prop sprawl
-- [ ] StyleSheet.create() — no inline style objects
+- [ ] Consistent styling — follows project's styling system, no ad-hoc inline literals
 - [ ] Pressable — uses Pressable, not deprecated Touchable*
 - [ ] Safe areas — respects notches and system bars
 - [ ] Touch targets — minimum 44×44 pt (iOS) / 48×48 dp (Android)
@@ -148,7 +149,7 @@ Component:
 | Monolithic screen component (300+ lines)         | Split into composed sub-components                                                  |
 | Props drilling through 4+ levels                 | Use context or composition pattern                                                  |
 | Duplicating existing component                   | Extend existing with variants                                                       |
-| Inline style objects (`style={{ padding: 16 }}`) | Use `StyleSheet.create()` and reference by key                                      |
+| Inline style object literals (`style={{ padding: 16 }}`) | Use the project's styling system (StyleSheet, Unistyles, NativeWind, etc.)           |
 | `export default`                                 | Named exports for consistency and refactoring                                       |
 | `any` type for props                             | Explicit type definitions                                                           |
 | Barrel file for internal utils                   | Direct imports for single-consumer folders                                          |
@@ -167,10 +168,10 @@ The patterns above are framework-agnostic. All projects use Expo — load the re
 
 ## Connected Skills
 
-- `tsh-ui-verifying` — for verifying implementation against Figma designs
-- `tsh-technical-context-discovering` — for understanding project conventions before implementing
-- `tsh-ensuring-accessibility` — to ensure components meet accessibility standards on both platforms
-- `tsh-optimizing-frontend` — for general performance considerations (memoization, code splitting concepts apply)
-- `tsh-implementing-forms` — for form-specific component patterns and validation (schema-first validation applies in RN)
-- `tsh-writing-hooks` — for custom hook patterns used within components
-- `tsh-reviewing-frontend` — for code review of implemented components
+- `tsh-technical-context-discovering` — fully applicable; for understanding project conventions before implementing
+- `tsh-writing-hooks` — fully applicable; hook patterns (naming, cleanup, dependency tracking, testing) work identically in React Native
+- `tsh-reviewing-frontend` — use Steps 1-3 only (component structure, hooks quality, rendering correctness); skip Steps 4-5 (web-specific accessibility/performance spot-checks) — use `./references/react-native-accessibility.md` and `./references/react-native-performance.md` instead
+- `tsh-implementing-forms` — schema-first validation, type inference, multi-step flow logic, and validation timing apply; ignore HTML-specific markup (`<form>`, `novalidate`, `for`/`id` labels, `role="alert"`, Enter-key submission)
+- `tsh-optimizing-frontend` — memoization, key stability, memory cleanup, and state granularity apply; ignore web metrics (LCP/CLS/INP, Lighthouse), DOM depth, CSS animations, `will-change`, font loading, SSR/SSG — use `./references/react-native-performance.md` instead
+- `tsh-ensuring-accessibility` — NOT applicable for React Native; the skill covers web-only patterns (semantic HTML, ARIA, axe-core, keyboard Tab navigation) — use `./references/react-native-accessibility.md` instead
+- `tsh-ui-verifying` — NOT applicable for React Native; the skill requires Playwright and browser dev server — use `./references/react-native-ui-verification.md` instead
