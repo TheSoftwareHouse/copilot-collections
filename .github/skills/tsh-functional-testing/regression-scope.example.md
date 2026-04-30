@@ -1,5 +1,7 @@
 # Regression Scope — Output Templates
 
+This template is the **planning artifact** — a concise risk analysis. The **execution artifact** (structured test case tables) uses `./regression-test-suite.example.md`.
+
 ## Risk Classification
 
 | Risk Level | Criteria |
@@ -10,24 +12,21 @@
 
 ## Regression Scope Table
 
-| Functional Area | Risk Level | Reason | Suggested Manual Scenarios |
-|----------------|-----------|--------|---------------------------|
-| [Area] | 🔴/🟡/🟢 | [Why this area is affected] | [Key manual scenarios to retest] |
+| Functional Area | Risk Level | Reason | Tickets |
+|----------------|-----------|--------|---------|
+| [Area] | 🔴/🟡/🟢 | [Why this area is affected] | [Ticket keys] |
 
-## Manual Regression Checklist
+## Risks Based on Existing Bugs
 
-**🔴 Critical — Must Retest**
-- [ ] [Scenario]: [Brief description] — [Why it's critical]
-- [ ] [Scenario]: [Brief description] — [Why it's critical]
+| Bug | Status | Risk | Notes |
+|-----|--------|------|-------|
+| [KEY — Title] | Done/Open | 🔴/🟡 | [How this bug relates to the current change] |
 
-**🟡 Important — Should Retest**
-- [ ] [Scenario]: [Brief description] — [Why it matters]
+## Summary
 
-**🟢 Low Risk — Retest If Time Permits**
-- [ ] [Scenario]: [Brief description]
-
-**Areas Impacted by Recent Changes**
-- [Area]: [What changed and why retesting is needed]
-
-**Risks Based on Existing Bugs**
-- [Bug ID/Title]: [How this bug relates to the current change and why regression is likely]
+| Risk Level | Areas | Test Cases |
+|---|---|---|
+| 🔴 Critical | [N] | [count] |
+| 🟡 Important | [N] | [count] |
+| 🟢 Low Risk | [N] | [count] |
+| **Total** | **[N]** | **[count]** |

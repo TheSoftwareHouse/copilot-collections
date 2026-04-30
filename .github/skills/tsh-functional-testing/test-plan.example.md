@@ -6,6 +6,8 @@ Use this template when generating test plans.
 
 # Test Plan - [Current Date]
 
+**Source:** [PROJ-123](https://your-domain.atlassian.net/browse/PROJ-123)
+
 **Navigation:**
 [Describe the breadcrumb or menu path to reach the feature]
 

@@ -73,8 +73,36 @@ If **navigation paths** or **environment/browser details** are missing, infer th
 
 **Step 2: Generate test plan**
 
-Generate a test plan using the template at `./test-plan.example.md`. Follow these rules:
-- Use bolded text, numbered lists, and bullet points for the general structure — do **not** use tables for the overall plan layout
+Generate a test plan using the template at `./test-plan.example.md`. The output MUST reproduce the exact structural format of the template — same heading levels, same bold labels, same bullet style, same section order. Do not restructure, rename sections, or change the formatting pattern.
+
+<template-enforcement>
+**Mandatory structure (in this exact order):**
+1. Title line: `# Test Plan - [date]`
+2. `**Navigation:**` followed by the path on a new line
+3. `**In Scope:**` followed by bullet list (`- item`)
+4. `**Out of Scope:**` followed by bullet list
+5. `**Preconditions:**` followed by bullet list
+6. `**Environment:**` followed by bullet list of devices
+7. Horizontal rule (`---`)
+8. `## Scenarios` heading
+9. Each scenario as: `**Scenario N: [Title]**` followed by action steps as bullets (`- step`) and verification as `- Verify that: [criteria]`
+10. Edge cases use format: `**Scenario N (Edge Case): [Title]**`
+11. Horizontal rule (`---`)
+12. Optional sections (Regression, Performance, Security, API) follow the same format as in the template
+
+**Formatting rules:**
+- Use `**bold**` for section labels and scenario titles — never use headings (`##`) for individual scenarios
+- Use `-` bullet lists for steps and items — never use numbered lists (`1.`) for scenario steps
+- Use `- Verify that:` prefix for all verification criteria
+- Separate major sections with `---`
+- Do NOT use tables anywhere in the test plan
+- Do NOT add emojis, icons, or decorative elements
+- Do NOT wrap the plan in a code block
+
+**When delivering to Jira** (sub-task or comment), use the Jira-formatted version at `./test-plan.jira-example.md` instead. This ensures proper rendering in Jira's editor.
+</template-enforcement>
+
+Follow these additional rules:
 - Include at least 2 negative/edge-case scenarios
 - Specify preconditions and environment
 - Explicitly list out-of-scope items
@@ -174,7 +202,11 @@ Analyze code changes, Jira context, and Confluence documentation to determine wh
 
 8. If performance or security areas are impacted, include focused risk notes (not exhaustive checklists — just the 2-3 highest risks specific to this change).
 
-**Output**: Regression scope table, manual regression checklist with prioritized scenarios, and risk analysis based on Jira/Confluence context.
+9. **Produce a Regression Test Suite** using the template at `./regression-test-suite.example.md`. Convert each scenario from the risk analysis into a structured test case row with `#`, `Test Case`, `Steps`, `Expected Result`, and `Status` columns. Group by functional area, ordered by risk level (🔴 first). Use sequential `R-001`, `R-002` numbering across the entire suite. Include a brief summary table at the end with risk level counts.
+
+**Output**: Two artifacts:
+1. **Regression scope analysis** — risk table + bug cross-reference (the planning view, delivered in chat or as a preamble)
+2. **Regression test suite** — structured test case tables per `./regression-test-suite.example.md` (the execution view, delivered to the chosen destination)
 
 ### Regression Test Cases
 

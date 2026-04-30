@@ -25,14 +25,15 @@ Before starting, load and follow these skills:
 
 Follow the workflow from the `tsh-analyzing-bugs` skill.
 
-The user can specify the output destination inline via flags appended to the argument:
-- `--chat` → Markdown dashboard in conversation
-- `--html` → Standalone HTML dashboard saved to workspace
-- `--confluence` → Published to a Confluence space (will ask for space key)
-- `--jira` → New Jira ticket with dashboard as description
-- `--with-confluence` → Cross-reference Jira data with Confluence regression docs
+**Delivery destination** — always use `vscode/askQuestions` to ask where the quality health report should be delivered. Do not assume a destination from flags alone; the user must explicitly confirm. Present these options:
+- **Chat only** — Markdown dashboard in conversation
+- **HTML file** — Standalone HTML dashboard with Chart.js visualizations saved to workspace
+- **Publish to Confluence** — Published to a Confluence space (ask for space key and optionally parent page title)
+- **Create Jira ticket** — New Jira ticket with dashboard as description (ask for project key and issue type)
 
-If no destination flag is provided, ask the user via `vscode/askQuestions`.
+The user may skip this step — if skipped, default to chat delivery. If the user provided a flag inline (e.g., `--html`, `--confluence`), use it as the pre-selected option but still present the question for confirmation. If the user selects Confluence or Jira but cannot provide the required identifiers (space key, project key, etc.), ask them to provide the missing information before proceeding — do not fall back silently to chat.
+
+The report must include visual classification of bugs into **🐛 Bugs** (standalone defects) and **📖 Story Bugs** (bugs tied to user stories). Follow the skill's Bug Classification Breakdown section. If the project has no Story Bug issue type and no bugs are linked to stories, note this finding and present all bugs as Bugs.
 
 Confluence cross-referencing is skipped by default. Only fetch Confluence context when the user passes `--with-confluence` or explicitly asks for it.
 
