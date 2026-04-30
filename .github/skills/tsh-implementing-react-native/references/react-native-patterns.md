@@ -93,9 +93,11 @@ export type { CardProps };
 
 ## Styling Patterns
 
+This section covers vanilla React Native styling with `StyleSheet.create()`. If the project uses a different styling system (Unistyles, NativeWind, Styled Components, Tamagui, Restyle), follow the project's established approach instead — the principles (design tokens, no hardcoded values, no inline style object literals) still apply regardless of the styling tool.
+
 ### StyleSheet.create()
 
-Always use `StyleSheet.create()`. It validates style keys at creation time and enables optimizations on the native side.
+`StyleSheet.create()` is the default vanilla React Native approach. It validates style keys at creation time and enables optimizations on the native side.
 
 ```typescript
 const styles = StyleSheet.create({
@@ -451,7 +453,7 @@ Expo modules use the New Architecture natively and are maintained as part of the
 
 | Anti-Pattern                                          | Why                                                 | Fix                                                                   |
 | ----------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------- |
-| Inline style objects `style={{ padding: 16 }}`        | New object every render, skips native optimizations  | Use `StyleSheet.create()`                                             |
+| Inline style objects `style={{ padding: 16 }}`        | New object every render, skips native optimizations  | Use the project's styling system (`StyleSheet.create()`, Unistyles, NativeWind, etc.) |
 | `TouchableOpacity` / `TouchableHighlight`             | Deprecated, inconsistent cross-platform              | Use `Pressable`                                                       |
 | Animated API from `react-native` core                 | Runs on JS thread, drops frames under load           | Use `react-native-reanimated`                                         |
 | `PanResponder` for gestures                           | JS thread gesture handling, laggy                    | Use `react-native-gesture-handler`                                    |

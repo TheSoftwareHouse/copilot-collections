@@ -34,7 +34,7 @@ Before starting verification, confirm:
 
 **Step 2: Get EXPECTED from Figma**
 
-Use `figma-mcp-server` to extract design specifications:
+Use `figma` to extract design specifications:
 
 - Component hierarchy and grouping
 - Layout direction, alignment, spacing
