@@ -50,3 +50,46 @@ Use this template when generating test plans.
 **Scenario 4 (Edge Case): [Short Title]**
 - [Action step simulating boundary condition]
 - Verify that: [Expected behavior at boundary]
+
+---
+
+## Regression Focus Areas
+_(Include when planning regression testing or when recent changes affect existing functionality)_
+
+**Areas Impacted by Current Changes:**
+- [Functional area]: [Why retesting is needed]
+
+**Related Bugs to Retest:**
+- [Bug ID/Title]: [Regression risk from this bug]
+
+---
+
+## Performance Considerations
+_(Include when the feature involves data loading, heavy operations, or user-facing latency. List only the 3-5 highest-risk items.)_
+
+- [ ] [Slow-loading page or heavy operation to verify]
+- [ ] [Large data set scenario to test]
+- [ ] [Long-running request or operation]
+- [ ] [Action that may trigger multiple backend calls]
+- [ ] [Area where users may experience delays]
+
+---
+
+## Security Considerations
+_(Include when the feature involves authentication, authorization, user data, or input handling. List only the 3-5 highest-risk items.)_
+
+- [ ] [Authorization / access control check]
+- [ ] [User permission or role-based access verification]
+- [ ] [Sensitive data visibility or exposure check]
+- [ ] [Input validation scenario]
+- [ ] [Error handling — no sensitive info leaked in error messages]
+
+---
+
+## API Testing Scenarios
+_(Include ONLY if the user confirmed that API testing is relevant for this project/feature. If not confirmed, omit this section entirely.)_
+
+- **Endpoint**: [API endpoint]
+  - Positive: [Valid request and expected response]
+  - Negative: [Invalid request and expected error handling]
+  - Edge case: [Boundary or unusual input]

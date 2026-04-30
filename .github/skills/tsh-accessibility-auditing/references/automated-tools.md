@@ -64,7 +64,19 @@ curl -s https://example.com | html-validate --stdin
 html-validate src/**/*.html
 ```
 
-### accessibility-checker (IBM)
+### accessibility-checker (IBM Equal Access)
 ```bash
+# Basic audit against a URL
 achecker https://example.com
+
+# JSON output for programmatic processing
+achecker https://example.com --outputFormat json
+
+# Against local dev server
+achecker http://localhost:3000
+
+# Scan a local HTML file
+achecker src/index.html
 ```
+
+IBM Equal Access uses a distinct rule set that complements axe-core. It detects issues around ARIA usage, widget roles, and content structure that other tools may miss. Always include it alongside axe and pa11y for broader coverage.

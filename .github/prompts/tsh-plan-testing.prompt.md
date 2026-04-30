@@ -17,11 +17,20 @@ Before starting, load and follow these skills:
 
 Follow the Functional Testing Process defined in the `tsh-functional-testing` skill. The skill contains the complete workflow including:
 
-1. Gather context — if a Jira ticket ID is provided, use the `atlassian` tool to fetch ticket details
-2. Validate AC completeness — apply the AC Completeness Gate. If AC are not test-ready, stop and redirect the user to the BA workflow (`/tsh-analyze-materials`) to complete them. Do not proceed until AC gaps are resolved upstream.
-3. Generate test plan using the `test-plan.example.md` template
-4. Detect edge cases — ensure at least 2 negative/edge-case scenarios
-5. Present next step options as defined in the skill's Step 4
+1. **Ask delivery destination** — before gathering context, use `vscode/askQuestions` to ask the user where the test plan should be delivered. Present these options:
+   - **Chat only** — display the test plan in the conversation (default)
+   - **Add to Jira ticket** — write the test plan as a comment on an existing Jira ticket. If chosen, ask the user for the target ticket ID.
+   - **Create Jira sub-task** — create a QA sub-task under the source ticket with the test plan as the description. This option is only available when a Jira ticket ID was provided as input.
+   Store the user's choice and apply it in step 6.
+2. Gather context — if a Jira ticket ID is provided, use the `atlassian` tool to fetch ticket details
+3. Validate AC completeness — apply the AC Completeness Gate. If AC are not test-ready, stop and redirect the user to the BA workflow (`/tsh-analyze-materials`) to complete them. Do not proceed until AC gaps are resolved upstream.
+4. Generate test plan using the `test-plan.example.md` template
+5. Detect edge cases — ensure at least 2 negative/edge-case scenarios
+6. **Deliver the test plan** — based on the destination chosen in step 1:
+   - **Chat only**: present the test plan in the conversation as-is.
+   - **Add to Jira ticket**: use the `atlassian` tool to add the test plan as a comment on the specified ticket, then confirm to the user with the ticket link.
+   - **Create Jira sub-task**: use the `atlassian` tool to create a sub-task titled "QA Task" under the source ticket with the test plan as the description, then confirm to the user with the sub-task link.
+7. Present next step options as defined in the skill's Step 4
 
 ## Constraints
 

@@ -36,16 +36,22 @@ Determine the audit type:
 - **External Audit** (URL provided, no code access): Use `execute` tool to run CLI tools against the URL. Fetch page HTML for manual analysis.
 - **Internal Audit** (codebase access): Use `read` and `search` tools to inspect source files. Run CLI tools against local dev server if available.
 
+**IMPORTANT**: Never use Playwright without explicit user permission. If a CLI tool fails (e.g. timeout on an SPA) and Playwright could help, ask the user first before launching any browser automation.
+
 **Step 2: Run automated tools**
 
-Run at least 2-3 tools for comprehensive coverage. See `./references/automated-tools.md` for the full tool list and usage commands.
+**Tool selection**: Run all tools by default for comprehensive coverage. If the user explicitly names specific tools in their request (e.g. "scan with achecker", "use pa11y and axe only"), run **only** those tools and note in the report that coverage may be partial since no single tool catches more than ~30-40% of issues.
 
-Minimum automated checks:
-```bash
-pa11y <url> --reporter cli --standard WCAG2AA
-axe <url> --tags wcag2a,wcag2aa
-lighthouse <url> --only-categories=accessibility --output=cli --chrome-flags="--headless --no-sandbox"
-```
+Available tools:
+| Tool | Command |
+|---|---|
+| pa11y | `pa11y <url> --reporter cli --standard WCAG2AA` |
+| axe-core | `axe <url> --tags wcag2a,wcag2aa` |
+| Lighthouse | `lighthouse <url> --only-categories=accessibility --output=cli --chrome-flags="--headless --no-sandbox"` |
+| IBM Equal Access | `achecker <url>` |
+| html-validate | `curl -s <url> \| html-validate --stdin` |
+
+See `./references/automated-tools.md` for full usage examples.
 
 If tools are not installed, run: `npm install -g pa11y @axe-core/cli lighthouse html-validate accessibility-checker`
 
