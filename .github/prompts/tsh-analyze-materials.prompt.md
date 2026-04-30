@@ -49,6 +49,7 @@ Determine the entry point based on what the user provides:
 - When working with imported Jira tasks, the quality review step still applies — it can identify gaps in existing backlogs just as with newly extracted tasks.
 - After import or initial creation, individual task changes trigger a "Push to Jira now?" prompt. Batch pushes follow the standard Gate 2 approval.
 - If no transcript is provided (e.g., user provides structured notes or direct requirements), skip the transcript processing step and proceed directly to task extraction.
+- **AC readiness for QA**: Ensure all acceptance criteria are test-ready before the workflow completes. Test-ready AC define clear expected outcomes, identifiable preconditions, and explicit boundaries per user-facing behavior. If QA redirects a task back due to incomplete AC, use `tsh-task-analysing` (Step 3b) to resolve the gaps.
 
 Follow the template structures and naming conventions from each skill strictly to ensure clarity and consistency.
 

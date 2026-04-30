@@ -1,11 +1,11 @@
 ---
 name: tsh-ensuring-accessibility
-description: WCAG 2.1 AA compliance, semantic HTML, ARIA patterns, keyboard navigation, focus management, screen reader support, and color contrast requirements. Use when implementing accessible components, auditing UI for accessibility issues, reviewing frontend code for a11y compliance, or building inclusive forms and interactive widgets.
+description: WCAG 2.2 AA compliance patterns for building accessible components — semantic HTML, ARIA patterns, keyboard navigation, focus management, screen reader support, and color contrast. Use when implementing accessible components, reviewing frontend code for a11y compliance, or building inclusive forms and interactive widgets.
 ---
 
 # Ensuring Accessibility
 
-Provides WCAG 2.1 AA compliance patterns for building inclusive frontend interfaces with proper semantic markup, keyboard navigation, focus management, and screen reader support.
+Provides WCAG 2.2 AA compliance patterns for building inclusive frontend interfaces with proper semantic markup, keyboard navigation, focus management, and screen reader support.
 
 <principles>
 
@@ -80,12 +80,16 @@ All interactive elements must be focusable. Native interactive elements (`<butto
   | Accordion      | Enter/Space to expand/collapse, Arrow keys between headers       |
   | Combobox       | Arrow keys to navigate options, Enter to select, Escape to close |
 
+- **Target Size Minimum (SC 2.5.8)** — interactive targets must be at least 24×24 CSS pixels, unless they are inline text links, have an equivalent larger target, or the target size is determined by the user agent. For best practice, aim for 44×44 CSS pixels for touch targets.
+
 - **Focus visibility** — never remove the focus outline (`outline: none`) without providing a visible replacement. Custom focus styles must have at least 3:1 contrast against adjacent colors.
 - **Programmatic focus management** — move focus when context changes:
   - Modal opens → focus the first focusable element inside
   - Modal closes → return focus to the element that triggered it
   - Route change → focus the new page heading or main content
   - Dynamic content added → focus the new content or announce it via `aria-live`
+  - **Focus Not Obscured (SC 2.4.11)** — when an element receives keyboard focus, it must not be entirely hidden by sticky headers, footers, or overlapping content. Ensure sticky/fixed-position elements don't cover focused items.
+  - **Dragging Movements (SC 2.5.7)** — every drag-and-drop interaction must have a single-pointer alternative (e.g., click-to-move, up/down buttons). Do not require path-based gestures.
 
 **Step 3: Add ARIA where HTML falls short**
 
@@ -104,6 +108,9 @@ Common patterns requiring ARIA:
 - **Loading states**: Container with `role="status"` for the loading message (e.g., "Loading results..."). Note: `role="status"` implicitly sets `aria-live="polite"` — no need to add both.
 - **Current page in navigation**: `aria-current="page"` on the active nav link.
 - **Progress indicators**: `role="progressbar"` with `aria-valuenow`, `aria-valuemin`, `aria-valuemax`.
+
+- **Redundant Entry (SC 3.3.7)** — when a multi-step process asks for the same information again, auto-populate the previously entered value. Do not force users to re-type information already provided in the session.
+- **Accessible Authentication (SC 3.3.8)** — login/authentication flows must not require cognitive function tests (memory, transcription, math). Allow password managers, copy-paste, and alternative auth methods (passkeys, OAuth).
 
 Never do:
 
@@ -176,15 +183,6 @@ Run through these verification steps:
 | Current page      | —                         | `aria-current="page"` on nav link               |
 | Progress          | `<progress>`              | `role="progressbar"` + `aria-valuenow`          |
 
-## Contrast Requirements
-
-| Element                                           | Minimum ratio | Example                        |
-| ------------------------------------------------- | ------------- | ------------------------------ |
-| Normal text (< 24px)                              | 4.5:1         | Body text, labels, captions    |
-| Large text (≥ 24px / 18pt, or ≥ 19px / 14pt bold) | 3:1           | Headings, large labels         |
-| Interactive component boundaries                  | 3:1           | Button borders, input outlines |
-| Non-text (icons conveying info)                   | 3:1           | Status icons, chart segments   |
-
 ## Accessibility Checklist
 
 ```
@@ -203,6 +201,11 @@ Accessibility:
 - [ ] ARIA landmarks present (header, main, nav, footer)
 - [ ] Text resizable to 200% without loss of content (SC 1.4.4)
 - [ ] Content reflows at 400% zoom / 320px width without horizontal scroll (SC 1.4.10)
+- [ ] Focus not obscured by sticky/fixed elements (SC 2.4.11)
+- [ ] Drag-and-drop has single-pointer alternative (SC 2.5.7)
+- [ ] Interactive targets ≥ 24×24 CSS px (SC 2.5.8)
+- [ ] Previously entered data auto-populated in multi-step flows (SC 3.3.7)
+- [ ] Authentication doesn't require cognitive function tests (SC 3.3.8)
 ```
 
 ## RTL / Bidirectional Text Support
@@ -214,8 +217,19 @@ Accessibility:
 | Icons may need flipping            | Directional icons (arrows, progress bars) may need `transform: scaleX(-1)` in RTL               |
 | Test both directions               | Verify layout, alignment, and text truncation in both LTR and RTL                               |
 
+## Trigger Phrases
+
+| Trigger | Action |
+|---------|--------|
+| `/a11y` | Apply accessibility patterns to the current component |
+| `/accessibility` | Full accessibility implementation review for the current file |
+| `/aria-help` | Guide on correct ARIA usage for a specific widget pattern |
+| `/keyboard` | Implement keyboard navigation for an interactive component |
+| `/contrast` | Check and fix color contrast issues |
+
 ## Connected Skills
 
+- `tsh-accessibility-auditing` — for WCAG 2.2 compliance auditing of existing implementations (this skill builds accessible components; that skill verifies them)
 - `tsh-implementing-frontend` — for component composition patterns that support accessible structure
 - `tsh-implementing-forms` — for accessible form field patterns, labels, and error announcements
 - `tsh-reviewing-frontend` — for accessibility spot-checks during code review
