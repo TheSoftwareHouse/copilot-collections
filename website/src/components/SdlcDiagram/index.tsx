@@ -98,6 +98,14 @@ export default function SdlcDiagram(): React.JSX.Element {
                 End-to-end tests
               </div>
             </div>
+            <div className={styles.card}>
+              <div className={styles.cardCmd}>
+                <strong className={styles.cardCmdStrong}>Prompt Engineer</strong>
+              </div>
+              <div className={styles.cardDesc}>
+                LLM application prompts
+              </div>
+            </div>
           </div>
         </div>
 

@@ -53,6 +53,7 @@ The Software Engineer agent implements software solutions based on provided requ
 - `tsh-optimizing-frontend` — Code splitting, memoization, bundle size, rendering optimization, memory management.
 - `tsh-ui-verifying` — Tolerances and structure checklist for Figma verification.
 - `tsh-sql-and-database-understanding` — SQL queries, database schemas, migrations, ORM patterns.
+- `tsh-engineering-prompts` — LLM prompt design: structure patterns, optimization, security, templates.
 
 ## Handoffs
 

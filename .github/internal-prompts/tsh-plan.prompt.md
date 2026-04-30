@@ -49,3 +49,5 @@ Follow the template structure and naming conventions strictly to ensure clarity 
 In case of any ambiguities or missing information for the planning, ask for clarification before finalizing the plan.
 
 Update the plan file after each interaction if new information is gathered.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-plan:v1 -->

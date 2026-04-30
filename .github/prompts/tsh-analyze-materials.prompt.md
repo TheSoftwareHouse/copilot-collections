@@ -30,7 +30,7 @@ Determine the entry point based on what the user provides:
 **Standard workflow (workshop materials provided):**
 
 1. **Process transcript**: If a raw transcript is provided, clean it using the `tsh-transcript-processing` skill. Remove small talk, structure by topics, extract decisions and action items. Save as `cleaned-transcript.md`.
-2. **Analyze additional materials**: Review Figma designs (using `figma-mcp-server` tool), read PDF documents (using `pdf-reader` tool), existing codebase (using `tsh-codebase-analysing` skill), and any other reference documents provided.
+2. **Analyze additional materials**: Review Figma designs (using `figma` tool), read PDF documents (using `pdf-reader` tool), existing codebase (using `tsh-codebase-analysing` skill), and any other reference documents provided.
 3. **Extract tasks**: Using the `tsh-task-extracting` skill, identify epics and user stories from all processed materials. Save as `extracted-tasks.md`.
 4. **Review Gate 1**: Present the extracted task list to the user for validation. Ask if any tasks were missed, should be split, merged, or removed. Iterate until the user approves.
 5. **Quality review**: Using the `tsh-task-quality-reviewing` skill, run all analysis passes against the approved task list. Build the domain model, identify gaps, and produce structured suggestions. This step runs automatically after Gate 1 approval — do not ask the user whether to run it.
@@ -51,3 +51,5 @@ Determine the entry point based on what the user provides:
 - If no transcript is provided (e.g., user provides structured notes or direct requirements), skip the transcript processing step and proceed directly to task extraction.
 
 Follow the template structures and naming conventions from each skill strictly to ensure clarity and consistency.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-analyze-materials:v1 -->

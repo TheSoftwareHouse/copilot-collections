@@ -86,3 +86,4 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 - `tsh-implementation-gap-analysing`
 - `tsh-technical-context-discovering` - for understanding project conventions and standards to review against
 - `tsh-sql-and-database-understanding` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns
+- `tsh-engineering-prompts` - for reviewing LLM prompt code: prompt structure, injection defenses, delimiter separation, output format, and anti-patterns

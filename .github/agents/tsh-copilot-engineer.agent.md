@@ -139,3 +139,4 @@ Keep the activation tier focused and concise. Move reference material, detailed 
 - When reviewing existing artifacts, provide actionable improvement suggestions rather than abstract recommendations
 - Escalate architectural decisions about multi-agent system design to the architect when the scope extends beyond Copilot customization
 </constraints>
+

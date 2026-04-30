@@ -59,3 +59,4 @@ Never review an artifact in isolation — always compare against existing worksp
 - When reviewing a prompt: read 1–2 existing prompts (if they exist) for formatting and structural comparison
 - Use `search` to check for references to the reviewed artifact elsewhere in the workspace (e.g., does any agent reference a skill being reviewed?)
 - Note all deviations from established patterns in findings, even if the deviation might be intentional — the orchestrator decides whether deviations are acceptable
+

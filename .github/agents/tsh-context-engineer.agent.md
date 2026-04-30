@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in building context for development tasks by gathering requirements, analyzing processes, and creating comprehensive task context."
-tools: ['atlassian/*', 'figma-mcp-server/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+tools: ['atlassian/*', 'figma/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
 handoffs: 
   - label: Start Implementation
     agent: tsh-engineering-manager
@@ -50,7 +50,7 @@ You have access to the `Atlassian` tool.
   - Non-Atlassian related research or documentation.
   - Lack of IDs or keys to reference specific Jira issues or Confluence pages.
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 - **MUST use when**:
   - The task references Figma designs, mockups, or FigJam boards.
   - Analyzing user flows, process diagrams, or system interactions visualized in FigJam.
@@ -105,3 +105,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Questions that can be answered from Jira, Confluence, or Figma.
   - Technical implementation details (out of scope for business analysis).
+

@@ -41,3 +41,5 @@ If the user attaches files or provides a description, use them as input for agen
 Follow the conventions established by existing agents in the workspace.
 
 When in doubt about design decisions, ask the user for clarification rather than guessing.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-create-custom-agent:v1 -->

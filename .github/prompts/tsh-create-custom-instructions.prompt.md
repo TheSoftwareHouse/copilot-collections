@@ -44,3 +44,5 @@ Before starting, load and follow these skills:
 If the user attaches files or provides a description, use them as input for instruction design.
 
 When in doubt about the instruction type or scope, ask the user for clarification rather than guessing.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-create-custom-instructions:v1 -->

@@ -33,7 +33,7 @@ The Engineering Manager identifies UI tasks in the plan and delegates them to th
 ### 2. Implementation
 
 - Follows the base workflow from `tsh-implement-common-task` plus UI-specific skills.
-- Uses `figma-mcp-server` to extract exact design specs — spacing, color tokens, typography, component variants.
+- Uses `figma` to extract exact design specs — spacing, color tokens, typography, component variants.
 - Implements semantic HTML, design system tokens, and WCAG 2.1 AA accessibility patterns.
 
 ### 3. Verification

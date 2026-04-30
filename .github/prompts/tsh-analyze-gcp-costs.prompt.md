@@ -203,3 +203,5 @@ All standard DevOps agent guardrails (Mutation Lock, Zero-Deletion Policy, FinOp
 - Always warn before suggesting modifications to resources labeled `environment:prod`.
 - All remediation output (gcloud CLI scripts, Terraform code) is for user review and manual execution only — never execute directly.
 - When modifying existing Terraform code, show a diff preview of proposed changes before writing to files.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-analyze-gcp-costs:v1 -->

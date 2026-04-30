@@ -70,6 +70,7 @@ When you run [`/tsh-implement`](./public/implement), the Engineering Manager aut
 | Backend / general code | Software Engineer |
 | Frontend with Figma | Software Engineer (via [internal UI prompt](./internal/implement-ui)) |
 | E2E tests | E2E Engineer |
+| LLM application prompts | Prompt Engineer (via [internal engineer-prompt](./internal/engineer-prompt)) |
 | Kubernetes, Terraform, CI/CD, observability | DevOps Engineer |
 | UI verification | UI Reviewer |
 

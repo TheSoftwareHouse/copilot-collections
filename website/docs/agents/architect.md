@@ -56,6 +56,7 @@ Each technical specification includes:
 - `tsh-managing-secrets` — Secrets management, credential rotation, vault integration.
 - `tsh-implementing-kubernetes` — K8s workload configurations, scaling strategies, Helm chart structure.
 - `tsh-implementing-observability` — Monitoring architecture, SLO frameworks, alerting, distributed tracing.
+- `tsh-engineering-prompts` — LLM prompt architecture: prompt template strategy, system prompt design, few-shot vs zero-shot decisions.
 
 ## Handoffs
 

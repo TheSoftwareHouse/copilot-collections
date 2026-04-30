@@ -33,7 +33,7 @@ The Engineering Manager automatically handles the full development cycle:
 
 #### Implementation Phase
 
-- **Delegated to:** Software Engineer, DevOps Engineer, E2E Engineer (based on task type)
+- **Delegated to:** Software Engineer, Prompt Engineer, DevOps Engineer, E2E Engineer (based on task type)
 - **What it does:** Executes the plan by delegating to specialized agents. Tracks progress and runs quality checks after each task.
 - **What it produces:** Concrete code modifications applied by delegated agents.
 - **Your action:** Review code changes after each phase. Test functionality. Verify against the plan.

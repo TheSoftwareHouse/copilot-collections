@@ -4,6 +4,31 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-04-10
+
+### Changed
+
+- `/tsh-implement` prompt — Fixed chronic UI verification skipping: added mandatory UI task inventory at plan review (step 2), proactive dev server URL collection before implementation (step 3), elevated `[REUSE]` UI verification to a prominent task type with explicit delegation instructions (step 6), added mandatory UI Verification Gate before code review (step 8), and explicit code review delegation step (step 9); references `tsh-implement-ui.prompt.md` for full verification workflow instead of duplicating it
+- Engineering Manager agent (`tsh-engineering-manager`) — Added "UI Verification Enforcement" subsection with 4-point checklist (inventory at plan review, early dev server URL collection, process in order, gate code review); strengthened `tsh-ui-reviewer` delegation with mandatory emphasis and "never skip" guardrail
+- UI Reviewer agent (`tsh-ui-reviewer`) — Added "Tool-to-URL mapping" rule clarifying that all Figma data (URLs, node IDs, file keys) must go through `figma` tool and Playwright is only for dev server navigation
+
+## 2026-04-01
+
+### Changed
+
+- Renamed Figma MCP server key from `figma-mcp-server` to `figma` across all agents, prompts, skills, MCP configuration, and documentation — aligns with Figma's recommended server naming in their official docs
+
+## 2026-03-30
+
+### Added
+
+- Backend development skill `tsh-implementing-backend`
+
+### Changed
+
+- Updated `tsh-implementing-backend` skill reference in `tsh-software-engineer` agent
+- Updated `tsh-implementing-backend` as a conditional skill in `implement` prompt for backend API tasks
+
 ## 2026-03-20
 
 ### Changed

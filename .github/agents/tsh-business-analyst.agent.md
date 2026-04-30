@@ -1,6 +1,6 @@
 ---
 description: "Agent specializing in converting discovery workshop materials (transcripts, designs, codebase context) into Jira-ready epics and user stories."
-tools: ['atlassian/*', 'figma-mcp-server/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/askQuestions']
+tools: ['atlassian/*', 'figma/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/askQuestions']
 handoffs: 
   - label: Start Implementation
     agent: tsh-engineering-manager
@@ -170,7 +170,7 @@ You have access to the `Atlassian` tool.
   - Creating duplicate issues when a Jira key already exists in `jira-tasks.md`.
   - Updating issues that have a protected status (Done, Cancelled, PO APPROVE).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Workshop materials include Figma or FigJam design links.
@@ -234,3 +234,4 @@ You have access to the `vscode/askQuestions` tool.
   - Questions answerable from the workshop materials, Figma, or codebase.
   - Technical implementation decisions (out of scope for this agent).
   - Batching multiple questions about different stories into a single call.
+

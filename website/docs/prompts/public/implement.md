@@ -40,6 +40,7 @@ The Engineering Manager automatically delegates each task to the right agent bas
 | E2E tests | E2E Engineer |
 | Infrastructure (Kubernetes, Terraform, CI/CD, observability) | DevOps Engineer |
 | UI verification | UI Reviewer |
+| LLM application prompts | Prompt Engineer |
 
 ## Key Behaviors
 

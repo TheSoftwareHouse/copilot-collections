@@ -5,7 +5,7 @@ tools:
     "execute",
     "atlassian/*",
     "context7/*",
-    "figma-mcp-server/*",
+    "figma/*",
     "pdf-reader/*",
     "sequential-thinking/*",
     "read",
@@ -74,6 +74,7 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 - `tsh-managing-secrets` - when designing secrets management, credential rotation, or vault integration as part of the solution.
 - `tsh-implementing-kubernetes` - when designing K8s workload configurations, scaling strategies, Helm chart structure, or cluster topology.
 - `tsh-implementing-observability` - when designing monitoring architecture, SLO frameworks, alerting strategies, or distributed tracing.
+- `tsh-engineering-prompts` - when designing LLM prompt architecture: prompt template strategy, system prompt design, few-shot vs zero-shot decisions, prompt versioning approach.
 
 ## Tool Usage Guidelines
 
@@ -99,7 +100,7 @@ You have access to the `context7` tool.
 - **SHOULD NOT use for**:
   - Searching the local codebase (use `search` or `grep_search` instead).
 
-You have access to the `figma-mcp-server` tool.
+You have access to the `figma` tool.
 
 - **MUST use when**:
   - Designing the component hierarchy and data flow based on UI requirements.
@@ -171,3 +172,4 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Questions answerable from the codebase or available documentation.
   - Implementation details that are the software engineer's responsibility.
+

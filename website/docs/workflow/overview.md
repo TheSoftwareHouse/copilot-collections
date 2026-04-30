@@ -32,7 +32,7 @@ Think of this workflow as a **relay race**. Each phase produces a deliverable �
 - Automatically handles the full development cycle:
   1. **Research** — Delegates to Context Engineer to gather context from Jira, Figma, and codebase. Asks for user confirmation before proceeding.
   2. **Plan** — Delegates to Architect to create a structured implementation plan. Asks for user confirmation before proceeding.
-  3. **Implement** — Delegates to Software Engineer, DevOps Engineer, or E2E Engineer based on task type.
+  3. **Implement** — Delegates to Software Engineer, Prompt Engineer, DevOps Engineer, or E2E Engineer based on task type.
 - Tracks progress, runs quality checks after each task, and auto-triggers code review.
 - **Produces:** Research document, implementation plan, and concrete code modifications.
 

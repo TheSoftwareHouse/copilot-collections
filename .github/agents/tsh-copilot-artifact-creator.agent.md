@@ -50,3 +50,4 @@ Before returning, validate every created file against these checks:
 - **`todo`** — Use when the specification requires creating multiple files (e.g., a skill with SKILL.md, template, and example). Track each file as a separate todo item.
 
 Always read existing workspace patterns before creating. Never create in isolation — the artifact must fit consistently into the workspace.
+

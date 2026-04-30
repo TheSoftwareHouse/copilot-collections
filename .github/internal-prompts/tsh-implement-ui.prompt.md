@@ -40,7 +40,7 @@ Do NOT skip verification or delegate without a Figma reference.
 
 4. **Delegate UI implementation** — For each UI implementation task, delegate to `tsh-software-engineer` using [tsh-implement-ui-common-task.prompt.md](../internal-prompts/tsh-implement-ui-common-task.prompt.md). Pass the relevant Figma URLs, component context, and plan section. For non-Figma frontend and backend tasks, use [tsh-implement-common-task.prompt.md](../internal-prompts/tsh-implement-common-task.prompt.md).
 
-5. **Delegate UI verification** — After each UI implementation task completes, delegate verification to `tsh-ui-reviewer` using `runSubagent` with [tsh-review-ui.prompt.md](tsh-review-ui.prompt.md). Pass: the Figma URL, the user-confirmed dev server URL from step 3, and the component/section name. The ui-reviewer will compare the Figma design against the running implementation and return a structured report. **Note:** You do NOT need `figma-mcp-server` or `playwright` tools yourself — the `tsh-ui-reviewer` agent has them. Just use `runSubagent` to delegate. Never skip verification because these tools aren't in your own tool list.
+5. **Delegate UI verification** — After each UI implementation task completes, delegate verification to `tsh-ui-reviewer` using `runSubagent` with [tsh-review-ui.prompt.md](tsh-review-ui.prompt.md). Pass: the Figma URL, the user-confirmed dev server URL from step 3, and the component/section name. The ui-reviewer will compare the Figma design against the running implementation and return a structured report. **Note:** You do NOT need `figma` or `playwright` tools yourself — the `tsh-ui-reviewer` agent has them. Just use `runSubagent` to delegate. Never skip verification because these tools aren't in your own tool list.
 
 6. **Handle verification results**:
    - If **PASS** → mark the task and its verification step as complete in the plan. Move to the next task.
@@ -77,7 +77,7 @@ Do NOT skip verification or delegate without a Figma reference.
 
 Before proceeding from a UI verification step to the next task or to code review, confirm that the `tsh-ui-reviewer` actually performed a **real Figma+Playwright comparison**. A valid verification report must contain:
 
-- Data extracted from Figma via `figma-mcp-server` (design specifications)
+- Data extracted from Figma via `figma` (design specifications)
 - Data captured from the running app via `playwright` (screenshots, computed styles, accessibility snapshot)
 - A structured comparison with EXPECTED vs ACTUAL values
 
@@ -98,3 +98,5 @@ If `tsh-ui-reviewer` consistently returns LOW confidence or tool errors:
 2. Ask the user if they can verify manually (open Figma + app side-by-side)
 3. Document the issue in the plan's Changelog
 4. Continue with next component or escalate
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-ui:v1 -->

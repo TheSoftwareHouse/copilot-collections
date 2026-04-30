@@ -91,3 +91,5 @@ Skip for: adding alerts, creating dashboards, configuring log retention, adding 
 - Application code instrumentation → coordinate with software engineer
 - Infrastructure provisioning → `/tsh-implement-terraform`
 - CI/CD pipelines → `/tsh-implement-pipeline`
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-observability:v1 -->

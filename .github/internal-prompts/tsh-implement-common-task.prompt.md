@@ -20,6 +20,7 @@ Before starting, load and follow these skills:
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns
 - `tsh-implementation-gap-analysing` - to verify current state before making changes
 - `tsh-sql-and-database-understanding` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking
+- `tsh-implementing-backend` - when implementing backend API features: REST/GraphQL endpoints, DataGrid filtering/pagination, database handling, JWT authentication, external service adapters, logging, and Docker setup
 
 ## Workflow
 
@@ -34,3 +35,5 @@ Before starting, load and follow these skills:
 9. Before handing over to review, ensure all tasks in the delegated scope have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
+
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v1 -->
