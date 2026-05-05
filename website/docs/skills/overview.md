@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **31 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **33 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -59,12 +59,14 @@ When an agent starts a task, it checks all available skills and decides which on
 
 ### ✅ Quality Skills
 
-| Skill                                          | Description                                                  | Used By         |
-| ---------------------------------------------- | ------------------------------------------------------------ | --------------- |
-| [tsh-code-reviewing](./code-review)            | Structured code review process                               | Code Reviewer   |
-| [tsh-reviewing-frontend](./reviewing-frontend) | Frontend-specific review: components, hooks, rendering, a11y | Code Reviewer   |
-| [tsh-ui-verifying](./ui-verification)          | Figma vs implementation verification criteria                | UI Reviewer, SE |
-| [tsh-e2e-testing](./e2e-testing)               | Playwright E2E testing patterns and verification             | E2E Engineer    |
+| Skill                                          | Description                                                        | Used By         |
+| ---------------------------------------------- | ------------------------------------------------------------------ | --------------- |
+| [tsh-code-reviewing](./code-review)            | Structured code review process with testability analysis           | Code Reviewer   |
+| [tsh-reviewing-frontend](./reviewing-frontend) | Frontend-specific review: components, hooks, rendering, a11y       | Code Reviewer   |
+| [tsh-functional-testing](./functional-testing)  | Test planning, edge-case detection, regression analysis, AC verify | QA Engineer     |
+| [tsh-accessibility-auditing](./accessibility-auditing) | WCAG 2.2 Level AA accessibility auditing using POUR methodology | QA Engineer     |
+| [tsh-ui-verifying](./ui-verification)          | Figma vs implementation verification criteria                      | UI Reviewer, SE |
+| [tsh-e2e-testing](./e2e-testing)               | Playwright E2E testing patterns and verification                   | E2E Engineer    |
 
 ### ⚙️ Copilot Customization Skills
 
@@ -77,39 +79,41 @@ When an agent starts a task, it checks all available skills and decides which on
 
 ## Agent–Skill Matrix
 
-| Skill                                  | BA  | CE  | Architect | SE  | PE  | CR  | UI Reviewer | E2E | DevOps | Copilot Eng. |
-| -------------------------------------- | --- | --- | --------- | --- | --- | --- | ----------- | --- | ------ | ------------ |
-| tsh-architecture-designing             |     |     | ✅        |     |     |     |             |     |        |              |
-| tsh-code-reviewing                     |     |     |           |     | ✅  | ✅  |             |     |        |              |
-| tsh-codebase-analysing                 | ✅  | ✅  | ✅        | ✅  |     |     |             |     | ✅     | ✅           |
-| tsh-creating-agents                    |     |     |           |     |     |     |             |     |        | ✅           |
-| tsh-creating-instructions              |     |     |           |     |     |     |             |     |        | ✅           |
-| tsh-creating-prompts                   |     |     |           |     |     |     |             |     |        | ✅           |
-| tsh-creating-skills                    |     |     |           |     |     |     |             |     |        | ✅           |
-| tsh-designing-multi-cloud-architecture |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-e2e-testing                        |     |     |           |     |     |     |             | ✅  |        |              |
-| tsh-engineering-prompts                |     |     | ✅        | ✅  | ✅  | ✅  |             |     |        |              |
-| tsh-ensuring-accessibility             |     |     |           | ✅  |     |     |             |     |        |              |
-| tsh-implementing-ci-cd                 |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-implementing-forms                 |     |     |           | ✅  |     |     |             |     |        |              |
-| tsh-implementing-frontend              |     |     |           | ✅  |     |     |             |     |        |              |
-| tsh-implementing-kubernetes            |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-implementing-observability         |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-implementing-terraform-modules     |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-implementation-gap-analysing       |     |     | ✅        | ✅  |     | ✅  |             |     |        |              |
-| tsh-jira-task-formatting               | ✅  |     |           |     |     |     |             |     |        |              |
-| tsh-managing-secrets                   |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-optimizing-cloud-cost              |     |     | ✅        |     |     |     |             |     | ✅     |              |
-| tsh-optimizing-frontend                |     |     |           | ✅  |     |     |             |     |        |              |
-| tsh-reviewing-frontend                 |     |     |           |     |     | ✅  |             |     |        |              |
-| tsh-sql-and-database-understanding     |     |     | ✅        | ✅  |     | ✅  |             |     |        |              |
-| tsh-task-analysing                     |     | ✅  |           |     |     |     |             | ✅  |        |              |
-| tsh-task-extracting                    | ✅  |     |           |     |     |     |             |     |        |              |
-| tsh-task-quality-reviewing             | ✅  |     |           |     |     |     |             |     |        |              |
-| tsh-technical-context-discovering      |     | ✅  | ✅        | ✅  | ✅  | ✅  |             | ✅  | ✅     | ✅           |
-| tsh-transcript-processing              | ✅  |     |           |     |     |     |             |     |        |              |
-| tsh-ui-verifying                       |     |     |           | ✅  |     |     | ✅          |     |        |              |
-| tsh-writing-hooks                      |     |     |           | ✅  |     |     |             |     |        |              |
+| Skill                                  | BA  | CE  | Architect | SE  | PE  | CR  | QA  | UI Reviewer | E2E | DevOps | Copilot Eng. |
+| -------------------------------------- | --- | --- | --------- | --- | --- | --- | --- | ----------- | --- | ------ | ------------ |
+| tsh-accessibility-auditing             |     |     |           |     |     |     | ✅  |             |     |        |              |
+| tsh-architecture-designing             |     |     | ✅        |     |     |     |     |             |     |        |              |
+| tsh-code-reviewing                     |     |     |           |     | ✅  | ✅  |     |             |     |        |              |
+| tsh-codebase-analysing                 | ✅  | ✅  | ✅        | ✅  |     |     |     |             |     | ✅     | ✅           |
+| tsh-creating-agents                    |     |     |           |     |     |     |     |             |     |        | ✅           |
+| tsh-creating-instructions              |     |     |           |     |     |     |     |             |     |        | ✅           |
+| tsh-creating-prompts                   |     |     |           |     |     |     |     |             |     |        | ✅           |
+| tsh-creating-skills                    |     |     |           |     |     |     |     |             |     |        | ✅           |
+| tsh-designing-multi-cloud-architecture |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-e2e-testing                        |     |     |           |     |     |     |     |             | ✅  |        |              |
+| tsh-engineering-prompts                |     |     | ✅        | ✅  | ✅  | ✅  |     |             |     |        |              |
+| tsh-ensuring-accessibility             |     |     |           | ✅  |     |     |     |             |     |        |              |
+| tsh-functional-testing                 |     |     |           |     |     |     | ✅  |             |     |        |              |
+| tsh-implementing-ci-cd                 |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-implementing-forms                 |     |     |           | ✅  |     |     |     |             |     |        |              |
+| tsh-implementing-frontend              |     |     |           | ✅  |     |     |     |             |     |        |              |
+| tsh-implementing-kubernetes            |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-implementing-observability         |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-implementing-terraform-modules     |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-implementation-gap-analysing       |     |     | ✅        | ✅  |     | ✅  |     |             |     |        |              |
+| tsh-jira-task-formatting               | ✅  |     |           |     |     |     |     |             |     |        |              |
+| tsh-managing-secrets                   |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-optimizing-cloud-cost              |     |     | ✅        |     |     |     |     |             |     | ✅     |              |
+| tsh-optimizing-frontend                |     |     |           | ✅  |     |     |     |             |     |        |              |
+| tsh-reviewing-frontend                 |     |     |           |     |     | ✅  |     |             |     |        |              |
+| tsh-sql-and-database-understanding     |     |     | ✅        | ✅  |     | ✅  |     |             |     |        |              |
+| tsh-task-analysing                     |     | ✅  |           |     |     |     |     |             | ✅  |        |              |
+| tsh-task-extracting                    | ✅  |     |           |     |     |     |     |             |     |        |              |
+| tsh-task-quality-reviewing             | ✅  |     |           |     |     |     |     |             |     |        |              |
+| tsh-technical-context-discovering      |     | ✅  | ✅        | ✅  | ✅  | ✅  |     |             | ✅  | ✅     | ✅           |
+| tsh-transcript-processing              | ✅  |     |           |     |     |     |     |             |     |        |              |
+| tsh-ui-verifying                       |     |     |           | ✅  |     |     |     | ✅          |     |        |              |
+| tsh-writing-hooks                      |     |     |           | ✅  |     |     |     |             |     |        |              |
 
 ## Loading Priority
 

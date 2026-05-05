@@ -10,3 +10,16 @@ website/.cache-loader/
 website/node_modules/
 .vercel
 .env*.local
+
+# Local Playwright MCP workspace
+.playwright-mcp/
+playwright-mcp/
+
+results/
+
+# Generated HTML files
+*.html
+
+# Jira admin related files
+.github/memories/repo/jira-environment.md
+.github/agents/tsh-jira-admin.agent.md

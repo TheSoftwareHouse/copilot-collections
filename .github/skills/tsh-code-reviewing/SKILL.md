@@ -69,6 +69,15 @@ Take into account project standards and a practices like SOLID, SRP, DDD, DRY, K
 
 Make sure that solution is not over engineered. Keep the cognitive complexity on a lower side.
 
+**Step 8b: Code Testability Review**
+
+Analyze the implemented code for testability. This ensures the solution can be effectively validated through manual and automated testing:
+1. Identify clear inputs/outputs — are functions and components predictable and deterministic?
+2. Check for separable units — can individual pieces be tested in isolation?
+3. Verify mockable dependencies — are external services, APIs, and data sources injectable or mockable?
+4. Flag areas that are hard to test (tightly coupled logic, hidden side effects, implicit state, non-deterministic behavior)
+5. Suggest specific functional test scenarios that cover the changed code paths
+
 **Step 9: Run static code analysis tools and formatting tools**
 
 Make sure to run linters, static code analysis tools and formatting tools.
@@ -87,3 +96,4 @@ Analyse if the implemented solution is scalable. Focus on areas like being able 
 - `tsh-technical-context-discovering` - for understanding project conventions and standards to review against
 - `tsh-sql-and-database-understanding` - for validating SQL quality, index coverage, query performance, schema design, and ORM usage patterns
 - `tsh-engineering-prompts` - for reviewing LLM prompt code: prompt structure, injection defenses, delimiter separation, output format, and anti-patterns
+- `tsh-functional-testing` - for functional test scenario suggestions that complement code testability findings

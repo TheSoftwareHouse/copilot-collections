@@ -1,11 +1,11 @@
 ---
 name: tsh-task-analysing
-description: Analyse task description, performs gap analysis, expand the context for the task, analyse the current state of the system in the context of the task, helps build PRD, creates a context for the task, gathers information about the task from different sources.
+description: "Analyse task description, perform gap analysis, expand the context for the task, analyse the current state of the system, help build PRD, create context for the task, gather information from different sources, and ensure acceptance criteria are test-ready before QA handoff. Use when analysing tasks, performing gap analysis, building PRD, or preparing acceptance criteria for testing."
 ---
 
 # Task Analysis
 
-This skill helps you gather and expand context about a specific task to be developed, looks for gaps in the task description and helps to understand the current state of the system.
+This skill helps you gather and expand context about a specific task to be developed, looks for gaps in the task description, helps to understand the current state of the system, and ensures acceptance criteria are complete and test-ready before handoff to QA workflows.
 
 ## Task analysis process
 
@@ -17,6 +17,7 @@ Analysis progress:
 - [ ] Step 1: Look for available external sources of information
 - [ ] Step 2: Gather information from all sources
 - [ ] Step 3: Identify gaps and ask clarification questions
+- [ ] Step 3b: Ensure AC are test-ready
 - [ ] Step 4: Based on the answers and gathered information finalize the research report
 ```
 
@@ -58,6 +59,21 @@ Find relevant information on knowledge base tools.
 
 Based on the gathered information and task description, look for ambiguities or missing information. Create the questions and ask them to the user. Don't proceed until all questions are answered or you are directly told to continue.
 
+**Step 3b: Ensure AC are test-ready**
+
+Before finalizing the research report, verify that the acceptance criteria meet the **test-readiness** standard required by QA workflows (`tsh-functional-testing`). AC are test-ready when every user-facing behavior has:
+
+- At least one clear expected outcome (what should happen)
+- Identifiable preconditions (user state, data state, system state)
+- Boundaries or constraints (max length, allowed roles, supported formats, error conditions)
+
+If AC are missing any of these elements:
+1. Identify the gaps
+2. Ask the user clarifying questions to fill them (`vscode/askQuestions`)
+3. Update the AC in the research report with the answers
+
+This step ensures QA receives complete input and does not need to redirect the user back to the BA workflow. Requirement completion and scope definition are BA responsibilities — they must be resolved here, not downstream in QA.
+
 **Step 4: Based on the answers and gathered information finalize the research report**
 
 Generate a report following the `./research.example.md` structure. Make sure to provide all necessary information that you gathered, all findings and all answered questions.
@@ -66,5 +82,6 @@ Don't add or remove any sections from the template. Follow the structure and nam
 
 ## Connected Skills
 
-- `tsh-codebase-analysing` - for analyzing the existing codebase in the context of task requirements
-- `tsh-implementation-gap-analysing` - for understanding what already exists vs what needs to be built
+- `tsh-codebase-analysing` — for analyzing the existing codebase in the context of task requirements
+- `tsh-implementation-gap-analysing` — for understanding what already exists vs what needs to be built
+- `tsh-functional-testing` — downstream consumer of the AC produced by this skill. AC must be test-ready (see Step 3b) before QA can generate test plans

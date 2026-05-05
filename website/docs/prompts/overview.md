@@ -5,7 +5,7 @@ title: Prompts Overview
 
 # Prompts Overview
 
-Copilot Collections includes **12 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
+Copilot Collections includes **14 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
 
 ## How Prompts Work
 
@@ -41,6 +41,8 @@ These are the user-facing commands available in VS Code chat.
 | [/tsh-review](./public/review) | Code Reviewer | Review implementation against plan and standards |
 | [/tsh-review-ui](./public/review-ui) | UI Reviewer | Single-pass Figma vs implementation comparison |
 | [/tsh-review-codebase](./public/review-codebase) | Architect | Comprehensive code quality analysis |
+| [/tsh-plan-testing](./public/plan-testing) | QA Engineer | Generate structured test plan with edge-case detection |
+| [/tsh-report-bug](./public/report-bug) | QA Engineer | Create professional bug report with severity classification |
 
 ### ⚙️ Copilot Customization Commands
 
