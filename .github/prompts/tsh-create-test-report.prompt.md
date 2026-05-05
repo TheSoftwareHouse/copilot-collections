@@ -15,11 +15,12 @@ Before starting, load and follow these skills:
 
 ## Workflow
 
-1. **Ask delivery destination** — use `vscode/askQuestions` to ask where the test report should be delivered:
-   - **Chat only** — display the report in the conversation (default)
+1. **Ask delivery destination** — always use `vscode/askQuestions` to ask where the test report should be delivered. Do not assume a destination; the user must choose:
+   - **Chat only** — display the report in the conversation
    - **Add to Jira ticket** — post as a comment on an existing Jira ticket. If chosen, ask for the target ticket ID.
    - **Create Jira sub-task** — create a "Test Report" sub-task under the source ticket with the report as description.
-   Store the choice and apply it in step 5.
+   - **Publish to Confluence** — create or update a Confluence page with the report. If chosen, ask for the Confluence space key and optionally a parent page title.
+   Store the choice and apply it in step 5. If the user selects a destination but cannot provide the required identifiers (ticket ID, space key, etc.), ask them to provide the missing information before proceeding — do not fall back silently to chat.
 2. **Gather results** — collect test execution data from the user:
    - If test cases with results are provided in the conversation (e.g., from a previous `/tsh-create-test-cases` run with manual annotations), use those directly.
    - If a Jira ticket ID is provided, use the `atlassian` tool to fetch the ticket and any QA sub-tasks with test results.
@@ -36,6 +37,8 @@ Before starting, load and follow these skills:
    - **Chat only**: present in the conversation.
    - **Add to Jira ticket**: post as a comment using the `atlassian` tool, confirm with link.
    - **Create Jira sub-task**: create a sub-task titled "Test Report" using the `atlassian` tool, confirm with link.
+   - **Publish to Confluence**: create a page titled "Test Report — [feature/ticket] — [date]" in the specified space using the `atlassian` tool. Confirm with link.
+   If delivery fails (e.g., invalid space key, permission error), inform the user of the error and ask them to provide a valid destination before retrying.
 6. **Present next steps**:
    - File bug reports for failed cases (`/tsh-report-bug`)
    - Plan regression for affected areas (`/tsh-plan-regression`)

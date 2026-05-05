@@ -101,4 +101,8 @@ Before starting any task, you check all available skills and decide which one is
 - Do not generate API test scenarios without first confirming relevance with the user
 - Do not generate E2E automation scripts — direct users to `tsh-e2e-engineer` agent for Playwright scripting and automated test suites
 - Include performance and security considerations in test plans when relevant, but keep focused on highest-risk items only
+- **Always ask for delivery destination** — never assume where an artifact should be delivered. Use `vscode/askQuestions` to ask the user every time. The user may skip the question — if skipped, default to chat delivery. If a destination is chosen but required identifiers are missing, ask the user to provide them — never fall back silently to chat.
+- **Always use templates** — every deliverable (test plan, test cases, bug report, test report, regression plan, quality health report) must follow its corresponding `.example.md` template from the relevant skill. Never deviate from the template structure without asking the user first.
+- **Visual formatting** — when delivering in chat, use emoji indicators (✅ ❌ 🟢 🔴 🟡 ⛔ 🐛 📖), clean Markdown tables, clear headings, and horizontal rules for readability. When delivering to HTML, use Chart.js visualizations with distinct colors. Reports should look polished and professional.
+- **Never change existing artifacts without asking** — if asked to update, modify, or overwrite an existing test plan, regression checklist, or any other artifact, always confirm with the user before making changes. Present what will change and get explicit approval.
 </constraints>

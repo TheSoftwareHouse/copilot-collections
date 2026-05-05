@@ -17,14 +17,27 @@ Before starting, load and follow these skills:
 
 Follow the Audit Process defined in the `tsh-accessibility-auditing` skill. The skill contains the complete workflow including:
 
-1. Detect audit mode — determine if this is an external audit (URL provided) or internal audit (codebase access). If unclear, ask the user
-2. Run automated tools — execute at least 2-3 CLI tools. The skill's `./references/automated-tools.md` has the full tool list and commands
-3. Perform manual testing — keyboard navigation, screen reader, and visual checks per the skill's manual testing section
-4. Check WCAG 2.2 new criteria — verify all 9 new success criteria from the skill's `./references/wcag22-new-criteria.md`
-5. Classify and de-duplicate findings using the skill's severity matrix
-6. Generate the technical audit report using the skill's `audit-report.example.md` template
+1. **Ask delivery destination** — always use `vscode/askQuestions` to ask where the audit report should be delivered. Do not assume a destination; the user must choose:
+   - **Chat only** — display the report in the conversation
+   - **Publish to Confluence** — create or update a Confluence page with the audit report. If chosen, ask for the Confluence space key and optionally a parent page title.
+   - **Add to Jira ticket** — post as a comment on an existing Jira ticket. If chosen, ask for the target ticket ID.
+   - **Create Jira sub-task** — create an "Accessibility Audit" sub-task under a source ticket. If chosen, ask for the parent ticket ID.
+   - **Save as HTML file** — save the report as a standalone HTML file in the workspace.
+   Store the choice and apply it in step 7. If the user selects a destination but cannot provide the required identifiers (space key, ticket ID, etc.), ask them to provide the missing information before proceeding — do not fall back silently to chat.
+2. Detect audit mode — determine if this is an external audit (URL provided) or internal audit (codebase access). If unclear, ask the user
+3. Run automated tools — execute at least 2-3 CLI tools. The skill's `./references/automated-tools.md` has the full tool list and commands
+4. Perform manual testing — keyboard navigation, screen reader, and visual checks per the skill's manual testing section
+5. Check WCAG 2.2 new criteria — verify all 9 new success criteria from the skill's `./references/wcag22-new-criteria.md`
+6. Classify and de-duplicate findings using the skill's severity matrix
+7. **Deliver the audit report** — generate the technical audit report using the skill's `audit-report.example.md` template, then deliver based on the destination chosen in step 1:
+   - **Chat only**: present in the conversation. Use the template's formatting (severity emoji, tables, WCAG criterion citations) to ensure readability.
+   - **Publish to Confluence**: create a page titled "Accessibility Audit — [URL/feature] — [date]" in the specified space using the `atlassian` tool. Confirm with link.
+   - **Add to Jira ticket**: post as a comment using the `atlassian` tool, confirm with link.
+   - **Create Jira sub-task**: create a sub-task titled "Accessibility Audit" using the `atlassian` tool, confirm with link.
+   - **Save as HTML file**: save to the workspace root. Confirm with file path.
+   If delivery fails (e.g., invalid space key, permission error), inform the user of the error and ask them to provide a valid destination before retrying.
 
-After delivering the report, ask the user if they want a business-facing summary. If yes, generate it using the `business-summary.example.md` template from the skill.
+After delivering the report, ask the user if they want a business-facing summary. If yes, generate it using the `business-summary.example.md` template from the skill and deliver to the same destination.
 
 ## Constraints
 

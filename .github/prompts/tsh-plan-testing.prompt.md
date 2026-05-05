@@ -17,19 +17,22 @@ Before starting, load and follow these skills:
 
 Follow the Functional Testing Process defined in the `tsh-functional-testing` skill. The skill contains the complete workflow including:
 
-1. **Ask delivery destination** — before gathering context, use `vscode/askQuestions` to ask the user where the test plan should be delivered. Present these options:
-   - **Chat only** — display the test plan in the conversation (default)
+1. **Ask delivery destination** — before gathering context, always use `vscode/askQuestions` to ask the user where the test plan should be delivered. Do not assume a destination; the user must choose:
+   - **Chat only** — display the test plan in the conversation
    - **Add to Jira ticket** — write the test plan as a comment on an existing Jira ticket. If chosen, ask the user for the target ticket ID.
    - **Create Jira sub-task** — create a QA sub-task under the source ticket with the test plan as the description. This option is only available when a Jira ticket ID was provided as input.
-   Store the user's choice and apply it in step 6.
+   - **Publish to Confluence** — create or update a Confluence page with the test plan. If chosen, ask for the Confluence space key and optionally a parent page title.
+   Store the user's choice and apply it in step 6. If the user selects a destination but cannot provide the required identifiers (ticket ID, space key, etc.), ask them to provide the missing information before proceeding — do not fall back silently to chat.
 2. Gather context — if a Jira ticket ID is provided, use the `atlassian` tool to fetch ticket details
 3. Validate AC completeness — apply the AC Completeness Gate. If AC are not test-ready, stop and redirect the user to the BA workflow (`/tsh-analyze-materials`) to complete them. Do not proceed until AC gaps are resolved upstream.
 4. Generate test plan using the `test-plan.example.md` template
 5. Detect edge cases — ensure at least 2 negative/edge-case scenarios
 6. **Deliver the test plan** — based on the destination chosen in step 1:
-   - **Chat only**: present the test plan in the conversation as-is.
+   - **Chat only**: present the test plan in the conversation. Use the template's formatting (emoji, tables, headings) to ensure readability.
    - **Add to Jira ticket**: use the `atlassian` tool to add the test plan as a comment on the specified ticket, then confirm to the user with the ticket link.
    - **Create Jira sub-task**: use the `atlassian` tool to create a sub-task titled "QA Task" under the source ticket with the test plan as the description, then confirm to the user with the sub-task link.
+   - **Publish to Confluence**: create a page titled "Test Plan — [feature/ticket] — [date]" in the specified space using the `atlassian` tool. Confirm with link.
+   If delivery fails (e.g., invalid space key, permission error, wrong ticket ID), inform the user of the error and ask them to provide a valid destination before retrying.
 7. Present next step options as defined in the skill's Step 4
 
 ## Constraints

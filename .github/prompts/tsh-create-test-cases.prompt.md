@@ -15,19 +15,22 @@ Before starting, load and follow these skills:
 
 ## Workflow
 
-1. **Ask delivery destination** — use `vscode/askQuestions` to ask where the test cases should be delivered:
-   - **Chat only** — display in the conversation (default)
+1. **Ask delivery destination** — always use `vscode/askQuestions` to ask where the test cases should be delivered. Do not assume a destination; the user must choose:
+   - **Chat only** — display in the conversation
    - **Add to Jira ticket** — post as a comment on an existing Jira ticket. If chosen, ask for the target ticket ID.
    - **Create Jira sub-task** — create a "QA Test Cases" sub-task under the source ticket with the test cases as description.
-   Store the choice and apply it in step 6.
+   - **Publish to Confluence** — create or update a Confluence page with the test cases. If chosen, ask for the Confluence space key and optionally a parent page title.
+   Store the choice and apply it in step 6. If the user selects a destination but cannot provide the required identifiers (ticket ID, space key, etc.), ask them to provide the missing information before proceeding — do not fall back silently to chat.
 2. Gather context — if a Jira ticket ID is provided, use the `atlassian` tool to fetch ticket details. If a test plan was already generated (e.g., via `/tsh-plan-testing`), use its scenarios as input.
 3. Validate AC completeness — apply the AC Completeness Gate from `tsh-functional-testing`. If AC are not test-ready, redirect the user to the BA workflow (`/tsh-analyze-materials`) to complete them first.
 4. Generate test cases using the template at `tsh-functional-testing/test-cases.example.md`. Follow the template's structure, formatting rules, and numbering conventions exactly. Columns: **#**, **Test Case**, **Steps**, **Expected Result**, **Status** (blank — for manual fill).
 5. Cover every acceptance criterion with at least one test case. Include at least 2 negative/edge-case test cases per scenario. Group test cases by scenario or functional area. Always include an "Edge Cases & Negative Scenarios" group at the end.
 6. **Deliver the test cases** — based on the destination chosen in step 1:
-   - **Chat only**: present in the conversation as-is.
+   - **Chat only**: present in the conversation. Use the template's formatting (tables, numbering, emoji status markers) to ensure readability.
    - **Add to Jira ticket**: post as a comment using the `atlassian` tool, confirm with link.
    - **Create Jira sub-task**: create a sub-task titled "QA Test Cases" using the `atlassian` tool, confirm with link.
+   - **Publish to Confluence**: create a page titled "Test Cases — [feature/ticket] — [date]" in the specified space using the `atlassian` tool. Confirm with link.
+   If delivery fails (e.g., invalid space key, permission error, wrong ticket ID), inform the user of the error and ask them to provide a valid destination before retrying.
 7. **Present next steps**:
    - Generate a test execution report after running the cases (`/tsh-create-test-report`)
    - Generate complex test data for the scenarios (`/tsh-plan-testing` → test data option)
