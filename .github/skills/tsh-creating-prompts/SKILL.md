@@ -1,7 +1,7 @@
 ---
 name: tsh-creating-prompts
 description: "Create custom prompt files (.prompt.md) for GitHub Copilot in VS Code. Provides templates, guidelines, and a structured process for building prompt files that trigger specific workflows routed to the right custom agent and AI model. Use when creating, reviewing, or updating .prompt.md files."
-user-invokable: false
+user-invocable: false
 ---
 
 # Creating Prompts

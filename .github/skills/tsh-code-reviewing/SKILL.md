@@ -1,6 +1,7 @@
 ---
 name: tsh-code-reviewing
 description: Perform code review. Quality analysis. Acceptance criteria verification. Best practices review.
+user-invocable: false
 ---
 
 # Code review

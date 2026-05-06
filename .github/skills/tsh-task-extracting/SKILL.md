@@ -1,6 +1,7 @@
 ---
 name: tsh-task-extracting
 description: Identify and structure epics and user stories from workshop materials (cleaned transcripts, Figma designs, codebase analysis, and other documents). Produces a business-oriented task breakdown with dependencies, assumptions, and open questions.
+user-invocable: false
 ---
 
 # Task Extraction

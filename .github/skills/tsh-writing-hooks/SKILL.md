@@ -1,6 +1,7 @@
 ---
 name: tsh-writing-hooks
 description: "Custom hook and composable patterns — naming, composition, stable return shapes, lifecycle cleanup, and testing strategies. Use when writing reusable logic units (React hooks, Vue composables), refactoring logic into hooks, debugging hook behavior, or reviewing hook implementations."
+user-invocable: false
 ---
 
 # Writing Hooks

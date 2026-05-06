@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-terraform-modules
 description: Build reusable Terraform modules for AWS, Azure, and GCP infrastructure following infrastructure-as-code best practices. Use when creating infrastructure modules, standardizing cloud provisioning, or implementing reusable IaC components.
+user-invocable: false
 ---
 
 # Terraform Module Library

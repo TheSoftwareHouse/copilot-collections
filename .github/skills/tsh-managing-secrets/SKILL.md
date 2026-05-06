@@ -1,6 +1,7 @@
 ---
 name: tsh-managing-secrets
 description: 'Secrets management patterns for cloud and Kubernetes environments. Use when implementing secure credential storage, rotation, or CI/CD authentication.'
+user-invocable: false
 ---
 
 # Secrets Management

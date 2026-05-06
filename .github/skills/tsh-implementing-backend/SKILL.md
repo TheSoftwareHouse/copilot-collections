@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-backend
 description: Backend service implementation patterns, standards, and procedures. Use for building REST/GraphQL APIs, implementing CRUD endpoints, database handling, authentication, testing strategies, external service integrations, filtering/pagination (DataGrid), logging, Docker setup, and modular architecture. Applies to Node.js, PHP, .NET, Java, and Go backends.
+user-invocable: false
 ---
 
 # Implementing Backend

@@ -1,6 +1,7 @@
 ---
 name: tsh-engineering-prompts
 description: "LLM prompt engineering patterns: structure, optimization, security, templates, evaluation, and anti-patterns. Use when designing, writing, optimizing, or reviewing prompts for LLM applications (system prompts, user prompts, RAG templates, agent instructions, chatbot personas). NOT for Copilot customization — use tsh-creating-prompts for that."
+user-invocable: false
 ---
 
 # Prompt Engineering Patterns

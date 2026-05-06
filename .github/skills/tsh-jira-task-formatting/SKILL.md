@@ -1,6 +1,7 @@
 ---
 name: tsh-jira-task-formatting
 description: Transform extracted epics and user stories into Jira-ready format following a benchmark template. Handles field mapping, formatting for Jira markdown compatibility, two-gate user review, and guidance for Jira issue creation via Atlassian tools.
+user-invocable: false
 ---
 
 # Jira Task Formatting

@@ -1,7 +1,7 @@
 ---
 name: tsh-creating-agents
 description: "Create custom agents (.agent.md) for GitHub Copilot in VS Code. Provides templates, guidelines, and a structured process for building agent definitions that describe behavior, personality, responsibilities, and problem-solving approaches. Use when creating, reviewing, or updating .agent.md files."
-user-invokable: false
+user-invocable: false
 ---
 
 # Creating Agents

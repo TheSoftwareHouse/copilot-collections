@@ -1,6 +1,7 @@
 ---
 name: tsh-transcript-processing
 description: Clean raw workshop or meeting transcripts from small talk, filler words, and off-topic tangents. Extract and structure business-relevant content into a standardized format with discussion topics, key decisions, action items, and open questions.
+user-invocable: false
 ---
 
 # Transcript Processing

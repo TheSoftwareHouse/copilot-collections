@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-observability
 description: 'Observability patterns for logging, monitoring, alerting, and distributed tracing. Use when implementing metrics collection, log aggregation, alerting rules, or distributed tracing across services.'
+user-invocable: false
 ---
 
 # Observability Patterns

@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-kubernetes
 description: 'Kubernetes deployment patterns, Helm charts, and cluster management. Use when deploying applications to K8s, designing workload configurations, implementing scaling strategies, or managing cluster resources.'
+user-invocable: false
 ---
 
 # Kubernetes Patterns

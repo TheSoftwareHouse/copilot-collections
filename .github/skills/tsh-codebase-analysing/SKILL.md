@@ -1,6 +1,7 @@
 ---
 name: tsh-codebase-analysing
 description: Analyse the codebase of the system. Look for dependencies. Understand how the business logic is implemented. Look for duplications.
+user-invocable: false
 ---
 
 # Codebase Analysis

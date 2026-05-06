@@ -1,6 +1,7 @@
 ---
 name: tsh-reviewing-frontend
 description: Frontend-specific code review criteria, component anti-patterns, hooks quality, rendering correctness, accessibility and performance spot-checks, and module organization issues. Use when reviewing frontend pull requests, auditing component quality, or identifying UI-specific code smells beyond general code review.
+user-invocable: false
 ---
 
 # Reviewing Frontend

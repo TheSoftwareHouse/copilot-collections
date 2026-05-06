@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-ci-cd
 description: 'CI/CD pipeline design patterns and deployment strategies. Use when designing pipelines, implementing deployment strategies, or setting up automated delivery.'
+user-invocable: false
 ---
 
 # CI/CD Pipeline Patterns

@@ -1,6 +1,7 @@
 ---
 name: tsh-implementation-gap-analysing
 description: Implementation gap analysis. Verify what has to be implemented. Verify what was implemented. Compare plan to current state.
+user-invocable: false
 ---
 
 # Implementation Gap Analysis

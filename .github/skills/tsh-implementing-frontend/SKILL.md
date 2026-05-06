@@ -1,6 +1,7 @@
 ---
 name: tsh-implementing-frontend
 description: Frontend component patterns, composition, design token integration, barrel file organization, error handling, and Figma-to-code workflow. Use when implementing UI components, translating Figma designs into code, managing component state, or integrating with a design system.
+user-invocable: false
 ---
 
 # Implementing Frontend

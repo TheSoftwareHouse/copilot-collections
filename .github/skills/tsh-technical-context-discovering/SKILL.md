@@ -1,6 +1,7 @@
 ---
 name: tsh-technical-context-discovering
 description: Discover and establish technical context before implementing any feature. Prioritize project instructions, existing codebase patterns, and external documentation in that order. Use for any task requiring understanding of project conventions, coding standards, architecture patterns, and established practices before writing code.
+user-invocable: false
 ---
 
 # Technical Context Discovery

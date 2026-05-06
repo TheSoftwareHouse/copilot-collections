@@ -1,7 +1,7 @@
 ---
 name: tsh-creating-skills
 description: "Create new skills (SKILL.md) for GitHub Copilot. Provides naming conventions (gerund form), description guidelines, body structure, progressive disclosure patterns, templates, and validation checklists. Use when creating, reviewing, or updating SKILL.md files, or when discussing skill design and organization."
-user-invokable: false
+user-invocable: false
 ---
 
 # Creating Skills

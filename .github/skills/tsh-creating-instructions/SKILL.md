@@ -1,7 +1,7 @@
 ---
 name: tsh-creating-instructions
 description: "Creates custom instruction files (.instructions.md) for GitHub Copilot in VS Code. Covers repository-level instructions (copilot-instructions.md) and granular file-based instructions with applyTo glob patterns. Provides templates and decision framework for instruction vs. skill placement. Use when creating, reviewing, or updating .instructions.md files."
-user-invokable: false
+user-invocable: false
 ---
 
 # Creating Instructions

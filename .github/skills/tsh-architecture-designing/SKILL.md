@@ -1,6 +1,7 @@
 ---
 name: tsh-architecture-designing
 description: Design the architecture to solve a given task. Propose the solutions to be used to deliver the task following the best practices and standards.
+user-invocable: false
 ---
 
 # Architecture Design

@@ -1,6 +1,7 @@
 ---
 name: tsh-task-analysing
 description: Analyse task description, performs gap analysis, expand the context for the task, analyse the current state of the system in the context of the task, helps build PRD, creates a context for the task, gathers information about the task from different sources.
+user-invocable: false
 ---
 
 # Task Analysis
