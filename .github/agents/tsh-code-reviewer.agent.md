@@ -1,7 +1,23 @@
 ---
+model: "Claude Sonnet 4.6"
 description: "Agent specializing in performing code review."
-tools: ['execute', 'read', 'atlassian/*', 'context7/*', 'figma/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
-handoffs: 
+tools:
+  [
+    "execute",
+    "read",
+    "atlassian/*",
+    "context7/*",
+    "figma/*",
+    "sequential-thinking/*",
+    "edit",
+    "search",
+    "todo",
+    "agent",
+    "vscode/runCommand",
+    "vscode/openSimpleBrowser",
+    "vscode/askQuestions",
+  ]
+handoffs:
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
     prompt: /tsh-implement Implement changes requested after code review
@@ -107,4 +123,3 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Style or formatting issues that can be flagged directly.
   - Questions answerable from the codebase, plan, or documentation.
-

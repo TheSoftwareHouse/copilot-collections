@@ -1,6 +1,6 @@
 ---
 agent: "tsh-ui-reviewer"
-model: "Claude Opus 4.6"
+model: "Gemini 3.1 Pro (Preview)"
 description: "Single-pass UI verification: compare implementation against Figma and report differences."
 ---
 
