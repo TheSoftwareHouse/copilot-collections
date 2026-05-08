@@ -1,6 +1,6 @@
 ---
 agent: "tsh-software-engineer"
-model: "Claude Opus 4.6"
+model: "Gemini 3.1 Pro (Preview)"
 description: "Implement common feature according to the plan."
 ---
 
@@ -17,6 +17,7 @@ If you need to make changes to the original solution during implementation, wait
 ## Required Skills
 
 Before starting, load and follow these skills:
+
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns
 - `tsh-implementation-gap-analysing` - to verify current state before making changes
 - `tsh-sql-and-database-understanding` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking

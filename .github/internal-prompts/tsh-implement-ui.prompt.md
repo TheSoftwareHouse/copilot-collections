@@ -1,6 +1,6 @@
 ---
 agent: "tsh-engineering-manager"
-model: "Claude Opus 4.6"
+model: "Gemini 3.1 Pro (Preview)"
 description: "Implement UI feature according to the plan, orchestrating iterative Figma verification until pixel-perfect."
 ---
 
