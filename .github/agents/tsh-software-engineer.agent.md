@@ -56,8 +56,7 @@ When implementing code you follow the pricinples:
 - Touch only what you must. Clean up only your own mess.
 - Define success criteria. Loop until verified.
 
-> > > > > > > Stashed changes
-> > > > > > > Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
+Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
 ## Plan Progress and Definition of Done
 
