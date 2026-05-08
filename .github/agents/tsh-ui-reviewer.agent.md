@@ -14,7 +14,6 @@ tools:
     "todo",
     "agent",
     "vscode/runCommand",
-    "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
 handoffs:
