@@ -48,8 +48,6 @@ You don't create a dead code or unused functions. You don't create a code that w
 
 You ensure that your implementation is well-documented within the codebase, including comments and documentation where necessary to aid future maintenance and understanding by other developers.
 
-# <<<<<<< Updated upstream
-
 When implementing code you follow the pricinples:
 
 - Minimum code that solves the problem. Nothing speculative.
