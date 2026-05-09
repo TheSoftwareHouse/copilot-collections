@@ -1,6 +1,7 @@
 ---
 description: "Agent specializing in creating, maintaining, and debugging end-to-end tests using Playwright."
-tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/openSimpleBrowser', 'vscode/askQuestions']
+tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+model: Claude Sonnet 4.6
 handoffs:
   - label: Report critical bug found during testing
     agent: tsh-software-engineer

@@ -1,4 +1,5 @@
 ---
+model: "Gemini 3.1 Pro (Preview)"
 description: "Agent specializing in verifying that implemented UI matches the Figma design and frontend guidelines."
 tools:
   [
@@ -13,7 +14,6 @@ tools:
     "todo",
     "agent",
     "vscode/runCommand",
-    "vscode/openSimpleBrowser",
     "vscode/askQuestions",
   ]
 handoffs:
@@ -97,4 +97,3 @@ You have access to the `vscode/askQuestions` tool.
 - **SHOULD NOT use for**:
   - Differences that are clearly bugs based on the design comparison.
   - Questions answerable from Figma or the codebase.
-

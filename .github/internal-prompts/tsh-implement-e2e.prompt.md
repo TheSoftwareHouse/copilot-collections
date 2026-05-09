@@ -22,7 +22,8 @@ Before starting, load and follow these skills:
 Follow the `tsh-task-analysing` skill's **Step 0 (Determine input source)** to identify whether context comes from research/plan files, a Jira ID, or directly from the prompt message.
 
 Additionally, always:
-- Check `*.instructions.md` → project-specific conventions
+- **Read the "Technical Context" section from the plan file** (`*.plan.md`) if it exists — it contains project conventions, test patterns, and commands already discovered during planning. Use it as your primary source and skip re-discovery for aspects already covered.
+- Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
 - Analyze `playwright.config.ts` + existing Page Objects
 - Discover existing test patterns and locator strategies in the codebase
 

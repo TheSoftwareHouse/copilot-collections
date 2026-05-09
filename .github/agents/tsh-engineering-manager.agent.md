@@ -1,4 +1,5 @@
 ---
+model: "Claude Opus 4.6"
 description: "Agent specializing delegating implementation tasks to specialized agents based on specified requirements and technical designs."
 tools:
   [
@@ -162,4 +163,3 @@ You have access to the `sequential-thinking` tool.
   - Deciding which agent to delegate a specific implementation task to, especially when the choice is not obvious.
   - Planning the overall implementation process and determining the sequence of tasks and agent involvement.
   - Deciding between research, plan and implementation phases when the requirements and technical designs are not clear enough to determine the next steps.
-

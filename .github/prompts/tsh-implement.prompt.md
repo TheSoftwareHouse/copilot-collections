@@ -4,9 +4,46 @@ model: "Claude Opus 4.6"
 description: "Implement feature according to the plan."
 ---
 
-Your goal is to implement the feature according to the provided implementation plan and feature context.
+Your goal is to implement the feature according to the provided task description or implementation plan.
 
 ## Workflow
+
+### Step 0: Assess Complexity & Select Flow
+
+Before starting any work, perform a quick assessment of the task:
+
+1. **Scan the task** — Read the task description, any linked issues, or user instructions. Consider:
+   - How many files are likely affected?
+   - Is it a well-understood change (bug fix, small feature, config change) or something ambiguous/cross-cutting?
+   - Are there unknowns that require research or architectural decisions?
+   - Does it involve UI changes requiring Figma verification?
+
+2. **Recommend a flow** — Based on your assessment, use `vscode/askQuestions` to present your recommendation:
+
+   - **Full Implementation Flow** (recommended for: multi-component features, unclear requirements, architectural changes, UI work with Figma designs, tasks touching >3 files across different domains)
+   - **Quick Implementation Flow** (recommended for: bug fixes, small self-contained features, config changes, adding tests, straightforward CRUD, tasks where the solution is obvious)
+
+   Present your reasoning briefly (1-2 sentences) and let the user confirm or override your recommendation.
+
+---
+
+### Quick Implementation Flow
+
+If the Quick flow is selected, follow these streamlined steps:
+
+1. **Delegate implementation** — Delegate directly to `tsh-software-engineer` agent with the task description and any available context. The software engineer implements the solution following project conventions.
+
+2. **Run quality checks** — After implementation, run static code analysis, build the project, and run tests to verify correctness.
+
+3. **Delegate code review** — Delegate to `tsh-code-reviewer` agent via [tsh-review.prompt.md](tsh-review.prompt.md). The code reviewer runs all quality gates (unit, integration, E2E tests, linting, build).
+
+4. **Before making any changes** to the original solution during review fixes, ask for confirmation.
+
+---
+
+### Full Implementation Flow
+
+If the Full flow is selected, follow the complete workflow below:
 
 1. **Review the current state of the task** - Check what's already done and decide whether you have enough context and information to start the implementation or if you need to delegate to `tsh-context-engineer` agent to gather more context and requirements before starting the implementation. If the plan is missing, delegate to `tsh-architect` agent to create a detailed implementation plan based on the feature context and requirements.
 
@@ -16,9 +53,9 @@ Your goal is to implement the feature according to the provided implementation p
 
 3. **Confirm dev server URL** — If your UI verification inventory from step 2 contains ANY tasks, use `vscode/askQuestions` **now** to ask the user for the dev server URL (e.g., "What URL is the frontend app running at?"). Do not defer this — you need the confirmed URL before any UI verification can start. Do not guess from running processes or port scans. Store the confirmed URL for all subsequent verifications.
 
-4. **Confirm with user before implementation** — Confirm with the user before proceeding to the implementation phase after research and planning phases using `vscode/askQuestions` tool.
+4. **Delegate codebase analysis (if needed)** — Check if the plan file (`*.plan.md`) contains a populated **"Technical Context"** section. If it does, skip this step — the context was already captured during planning. If the section is missing or empty, use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature. This will help you identify which agents to delegate specific tasks to during implementation.
 
-5. **Delegate codebase analysis** — Use `tsh-architect` agent to perform codebase analysis and technical context discovery to establish project conventions, coding standards, architecture patterns, and existing codebase patterns before implementing any feature. This will help you identify which agents to delegate specific tasks to during implementation.
+5. **Confirm with user before implementation** — Confirm with the user before proceeding to the implementation phase after research and planning phases using `vscode/askQuestions` tool.
 
 6. **Process each task in plan order.** For each task, based on its type:
    - **`[CREATE]` or `[MODIFY]`** → delegate to the appropriate agent (`tsh-software-engineer` for application code, `tsh-devops-engineer` for infrastructure, `tsh-prompt-engineer` for LLM prompts). After the agent completes, run quality checks (tsc, lint, build).

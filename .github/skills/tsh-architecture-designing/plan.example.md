@@ -42,6 +42,42 @@ List of new components, functions, utilities that need to be built from scratch:
 | --- | ---------- | -------- | --------------------- |
 | 1   | <question> | <answer> | ✅ Resolved / ❓ Open |
 
+## Technical Context
+
+Project conventions, coding standards, and patterns discovered during planning. Downstream agents MUST read this section instead of re-discovering the same context.
+
+### Project Instructions
+
+- <summary of relevant `.instructions.md` rules — file path + key rules>
+
+### Architecture & Patterns
+
+- <framework, layering, module organization, folder structure conventions>
+- <naming conventions, file naming patterns>
+
+### Tech Stack
+
+- <language, framework, key libraries with versions>
+- <package manager, build tool, test runner>
+
+### Code Style & Standards
+
+- <formatting, linting rules, import conventions>
+- <error handling patterns, validation approach>
+
+### Testing Patterns
+
+- <test framework, test file naming, mocking strategy>
+- <test commands: unit, integration, e2e, lint, build>
+
+### Database Patterns
+
+- <ORM, migration tool, entity conventions (if applicable)>
+
+### Additional Context
+
+- <any other project-specific conventions relevant to implementation>
+
 ## Implementation Plan
 
 ### Phase 1: <phase-name>

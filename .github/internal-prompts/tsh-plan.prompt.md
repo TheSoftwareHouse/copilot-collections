@@ -28,19 +28,20 @@ Before starting, load and follow these skills:
    - Identify what exists but needs modification or extension.
    - Identify what needs to be created from scratch.
    - Document findings in the "Current Implementation Analysis" section.
-4. **Understand project standards**: Review project best practices and quality standards (check `*.instructions.md` files).
-5. **Prepare implementation plan**: Create detailed code changes broken down into phases.
-6. **Define tasks**: For each phase, identify specific tasks with:
+4. **Persist technical context**: During steps 2-3, capture all discovered project conventions, coding standards, architecture patterns, tech stack details, testing patterns, and relevant `.instructions.md` rules. Save them in the **"Technical Context"** section of the plan file. This section is critical — downstream implementation agents will read it to avoid redundant codebase analysis. Be thorough: include framework conventions, naming patterns, test commands, linting rules, and any project-specific standards.
+5. **Understand project standards**: Review project best practices and quality standards (check `*.instructions.md` files). Incorporate findings into the "Technical Context" section.
+6. **Prepare implementation plan**: Create detailed code changes broken down into phases.
+7. **Define tasks**: For each phase, identify specific tasks with:
    - Clear title
    - Description of what the task entails
    - Action type: `[CREATE]`, `[MODIFY]`, or `[REUSE]`
    - Definition of done as a checkbox list for each task
-7. **Address security**: Include security considerations relevant to the implementation.
-8. **UI verification tasks**: For features with UI components based on Figma designs, add a `[REUSE]` UI verification task immediately after each implementation task that produces visible UI. The verification task should reference `tsh-ui-reviewer` agent, include the Figma URL, and describe the verify-fix loop (max 5 iterations). Non-visual tasks (data fetching, state management, API integration) do not need verification tasks.
-9. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
-10. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
-11. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
-12. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
+8. **Address security**: Include security considerations relevant to the implementation.
+9. **UI verification tasks**: For features with UI components based on Figma designs, add a `[REUSE]` UI verification task immediately after each implementation task that produces visible UI. The verification task should reference `tsh-ui-reviewer` agent, include the Figma URL, and describe the verify-fix loop (max 5 iterations). Non-visual tasks (data fetching, state management, API integration) do not need verification tasks.
+10. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
+11. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
+12. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
+13. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
 
 Don't provide deployment plans, code pushing instructions, or code review instructions in the repository.
 

@@ -1,6 +1,6 @@
 ---
 agent: "tsh-software-engineer"
-model: "Claude Opus 4.6"
+model: "Gemini 3.1 Pro (Preview)"
 description: "Implement UI feature according to the plan with frontend-specific setup and design reference handling."
 ---
 
@@ -14,7 +14,6 @@ In addition to the skills required by the base workflow, load and follow these s
 
 - `tsh-implementing-frontend` — for component patterns, design system usage, composition, and performance guidelines
 - `tsh-ensuring-accessibility` — for WCAG 2.1 AA compliance, semantic HTML, ARIA, and automated axe-core verification
-- `tsh-technical-context-discovering` — to establish project conventions before implementing
 
 ---
 
