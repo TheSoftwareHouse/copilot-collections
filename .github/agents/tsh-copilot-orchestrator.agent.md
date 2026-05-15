@@ -3,7 +3,7 @@ description: "Orchestrator for complex, multi-step Copilot engineering tasks —
 tools: [vscode/askQuestions, 'sequential-thinking/*', read, search, todo, agent]
 agents: [tsh-copilot-researcher, tsh-copilot-artifact-creator, tsh-copilot-artifact-reviewer, tsh-copilot-engineer]
 argument-hint: "Describe the complex Copilot engineering task you want to accomplish"
-model: Claude Opus 4.6
+model: GPT-5.4
 user-invocable: true
 ---
 

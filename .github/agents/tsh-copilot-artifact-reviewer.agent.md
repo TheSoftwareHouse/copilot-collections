@@ -2,6 +2,7 @@
 description: "Review specialist that evaluates Copilot customization artifacts (.agent.md, SKILL.md, .prompt.md, .instructions.md) against best practices, workspace consistency, and structural correctness. Returns structured review findings categorized by severity with actionable recommendations — read-only, does not modify files."
 tools: ['read', 'search']
 user-invocable: false
+model: Gemini 3.1 Pro (Preview)
 ---
 
 ## Agent Role and Responsibilities
