@@ -1,6 +1,5 @@
 ---
 agent: "tsh-copilot-orchestrator"
-model: "Claude Opus 4.6"
 description: "Create a new custom agent (.agent.md) for VS Code Copilot. Analyzes existing agents for patterns, guides through design decisions, creates the agent file, and validates against best practices."
 ---
 

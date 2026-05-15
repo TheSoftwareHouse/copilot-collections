@@ -2,6 +2,7 @@
 description: "Research specialist that gathers, analyzes, and summarizes information from codebases and documentation for Copilot engineering tasks. Returns structured research summaries — read-only, does not create or modify files."
 tools: ['read', 'search', 'web/fetch', 'context7/*']
 user-invocable: false
+model: Claude Sonnet 4.6
 ---
 
 ## Agent Role and Responsibilities

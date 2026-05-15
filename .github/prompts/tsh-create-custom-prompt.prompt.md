@@ -1,6 +1,5 @@
 ---
 agent: "tsh-copilot-orchestrator"
-model: "Claude Opus 4.6"
 description: "Create a new custom prompt (.prompt.md) for VS Code Copilot. Analyzes existing prompts for patterns, identifies the right agent to route to, creates the prompt file, and validates the workflow end-to-end."
 ---
 

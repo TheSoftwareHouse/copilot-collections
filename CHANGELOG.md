@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-05-15
+
+### Changed
+
+- Copilot customization agents — Updated model assignments: `tsh-copilot-engineer` and `tsh-copilot-orchestrator` switched from Claude Opus 4.6 to GPT-5.4; added explicit model to `tsh-copilot-artifact-creator` (GPT-5.4 mini), `tsh-copilot-artifact-reviewer` (Gemini 3.1 Pro), and `tsh-copilot-researcher` (Claude Sonnet 4.6)
+- Copilot customization prompts (`/tsh-create-custom-agent`, `/tsh-create-custom-instructions`, `/tsh-create-custom-prompt`, `/tsh-create-custom-skill`) — Removed `model` field from frontmatter; prompts now inherit the model from the routed agent (`tsh-copilot-orchestrator`) instead of overriding it
+
 ## 2026-04-10
 
 ### Changed

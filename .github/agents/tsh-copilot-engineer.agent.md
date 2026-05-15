@@ -2,7 +2,7 @@
 description: "Agent specializing in prompt engineering, context engineering, and AI engineering for GitHub Copilot customization — creating, reviewing, and improving agents, skills, prompts, and instructions."
 tools: [vscode/runCommand, vscode/askQuestions, read, agent, edit, search, web/fetch, 'context7/*', 'sequential-thinking/*', vscode.mermaid-chat-features/renderMermaidDiagram, todo]
 argument-hint: "Describe the Copilot customization you want to create, review, or improve"
-model: Claude Opus 4.6
+model: GPT-5.4
 ---
 
 <agent-role>

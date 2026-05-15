@@ -1,6 +1,5 @@
 ---
 agent: "tsh-copilot-orchestrator"
-model: "Claude Opus 4.6"
 description: "Create a new custom skill (SKILL.md) for VS Code Copilot. Analyzes existing skills for patterns, guides through design decisions, creates the skill file with supporting resources, and validates against best practices."
 ---
 

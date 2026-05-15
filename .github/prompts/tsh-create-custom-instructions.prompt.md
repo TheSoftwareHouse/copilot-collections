@@ -1,6 +1,5 @@
 ---
 agent: "tsh-copilot-orchestrator"
-model: "Claude Opus 4.6"
 description: "Create custom instructions (.instructions.md or copilot-instructions.md) for VS Code Copilot. Analyzes existing project conventions, determines the appropriate instruction type and scope, creates the instructions file, and validates against best practices."
 ---
 
