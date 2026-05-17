@@ -28,7 +28,7 @@ Provides templates, guidelines, and a structured process for building custom pro
 ## Key Guidelines
 
 - Every prompt must specify an `agent` field routing to a `tsh-` prefixed agent name
-- Every prompt must specify a `model` field (e.g., `Claude Opus 4.6`)
+- Every prompt must specify a `model` field (e.g., `GPT-5.4`)
 - Prompt filenames follow `tsh-<action>.prompt.md` convention
 - Prompts should not redefine, override, or contradict the agent's identity
 

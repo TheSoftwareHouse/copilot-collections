@@ -12,6 +12,21 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-05-17
+
+### Changed
+
+- Cost optimization — Switched default model from Claude Opus 4.6 to GPT-5.4 across implementation and infrastructure agents (`tsh-architect`, `tsh-engineering-manager`) and public prompts (`/tsh-implement`, `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs`, `/tsh-audit-infrastructure`, `/tsh-review-codebase`)
+- `tsh-e2e-engineer` agent — Changed model from Claude Sonnet 4.6 to GPT-5.4 mini
+- Internal prompts — Removed YAML frontmatter (agent, model, description) from all internal prompts (`tsh-deploy-kubernetes`, `tsh-implement-common-task`, `tsh-implement-e2e`, `tsh-implement-observability`, `tsh-implement-pipeline`, `tsh-implement-terraform`, `tsh-implement-ui-common-task`, `tsh-implement-ui`, `tsh-plan`, `tsh-research`); internal prompts now fully inherit context from the delegating agent
+
+## 2026-05-15
+
+### Changed
+
+- Copilot customization agents — Updated model assignments: `tsh-copilot-engineer` and `tsh-copilot-orchestrator` switched from Claude Opus 4.6 to GPT-5.4; added explicit model to `tsh-copilot-artifact-creator` (GPT-5.4 mini), `tsh-copilot-artifact-reviewer` (Gemini 3.1 Pro), and `tsh-copilot-researcher` (Claude Sonnet 4.6)
+- Copilot customization prompts (`/tsh-create-custom-agent`, `/tsh-create-custom-instructions`, `/tsh-create-custom-prompt`, `/tsh-create-custom-skill`) — Removed `model` field from frontmatter; prompts now inherit the model from the routed agent (`tsh-copilot-orchestrator`) instead of overriding it
+
 ## 2026-04-10
 
 ### Changed
@@ -25,6 +40,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Renamed Figma MCP server key from `figma-mcp-server` to `figma` across all agents, prompts, skills, MCP configuration, and documentation — aligns with Figma's recommended server naming in their official docs
+
+## 2026-03-30
+
+### Added
+
+- Backend development skill `tsh-implementing-backend`
+
+### Changed
+
+- Updated `tsh-implementing-backend` skill reference in `tsh-software-engineer` agent
+- Updated `tsh-implementing-backend` as a conditional skill in `implement` prompt for backend API tasks
 
 ## 2026-03-20
 
