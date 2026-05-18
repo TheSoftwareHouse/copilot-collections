@@ -67,6 +67,7 @@ When you run [`/tsh-implement`](./public/implement), the Engineering Manager aut
 |---|---|
 | Research (context gathering) | Context Engineer (via [internal research prompt](./internal/research)) |
 | Planning (architecture) | Architect (via [internal plan prompt](./internal/plan)) |
+| Plan validation | Architect Reviewer (via [internal review-plan prompt](./internal/review-plan)) |
 | Backend / general code | Software Engineer |
 | Frontend with Figma | Software Engineer (via [internal UI prompt](./internal/implement-ui)) |
 | E2E tests | E2E Engineer |

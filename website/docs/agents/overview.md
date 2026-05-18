@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **12 specialized agents** (plus 3 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
+Copilot Collections provides **12 specialized agents** (plus 4 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, architecture review, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -33,10 +33,10 @@ Each agent has:
        ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
        ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
-│  Engineer    │  │  (plan)      │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
-│  (research)  │  │              │  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+│  Context     │  │  Architect   │  │ Architect    │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
+│  Engineer    │  │  (plan)      │  │ Reviewer     │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
+│  (research)  │  │              │  │ (plan review)│  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
        │
        ▼
 ┌──────────────┐
@@ -93,3 +93,4 @@ These agents are not invoked directly by users. They are delegated to by the Cop
 | [Copilot Researcher](./copilot-researcher) | `tsh-copilot-researcher.agent.md` | Analyzes codebases and documentation, extracts patterns |
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
+| [Architect Reviewer](./architect-reviewer) | `tsh-architect-reviewer.agent.md` | Validates implementation plans before implementation starts |

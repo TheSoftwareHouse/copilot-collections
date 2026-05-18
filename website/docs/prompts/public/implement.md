@@ -18,7 +18,7 @@ Orchestrates the implementation of a feature by delegating tasks from the plan t
 
 ## What It Does
 
-1. Reviews the implementation plan and feature context thoroughly.
+1. In the Full Implementation Flow, reviews the implementation plan and feature context thoroughly and validates the plan with the Architect Reviewer before implementation begins. Quick flow skips this because no `.plan.md` is produced.
 2. Creates a **todo for every task** in the plan — each task gets its own tracked item.
 3. Delegates codebase analysis to the **Architect** agent to establish project conventions and patterns.
 4. Processes each task in plan order, delegating based on task type:
@@ -35,6 +35,7 @@ The Engineering Manager automatically delegates each task to the right agent bas
 
 | Task Type | Agent |
 |---|---|
+| Plan validation | Architect Reviewer (via internal [review-plan prompt](../internal/review-plan)) |
 | Backend / general code | Software Engineer |
 | Frontend with Figma | Software Engineer |
 | E2E tests | E2E Engineer |
