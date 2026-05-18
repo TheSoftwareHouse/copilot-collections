@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **31 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **32 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -31,19 +31,20 @@ When an agent starts a task, it checks all available skills and decides which on
 
 ### 🛠 Development Skills
 
-| Skill                                                              | Description                                                   | Used By                    |
-| ------------------------------------------------------------------ | ------------------------------------------------------------- | -------------------------- |
-| [tsh-architecture-designing](./architecture-design)                | Solution architecture design and implementation plan creation | Architect                  |
-| [tsh-technical-context-discovering](./technical-context-discovery) | Project conventions and pattern discovery                     | Architect, CR, SE, E2E, CE |
-| [tsh-implementing-frontend](./frontend-implementation)             | UI component patterns, composition, design tokens             | Software Engineer          |
-| [tsh-implementing-forms](./implementing-forms)                     | Form architecture, schema validation, multi-step flows        | Software Engineer          |
-| [tsh-writing-hooks](./writing-hooks)                               | Custom hook/composable patterns, lifecycle, testing           | Software Engineer          |
-| [tsh-ensuring-accessibility](./ensuring-accessibility)             | WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard nav     | Software Engineer          |
-| [tsh-optimizing-frontend](./optimizing-frontend)                   | Rendering optimization, code splitting, bundle size           | Software Engineer          |
-| [tsh-implementation-gap-analysing](./implementation-gap-analysis)  | Gap analysis between plan and current state                   | Architect, CR, SE          |
-| [tsh-sql-and-database-understanding](./sql-and-database)           | Database engineering standards and ORM integration            | Architect, CR, SE          |
-| [tsh-codebase-analysing](./codebase-analysis)                      | Deep codebase analysis and dependency mapping                 | Architect, BA, CE, SE      |
-| [tsh-engineering-prompts](./prompt-engineering)                    | LLM prompt design, optimization, security, and evaluation     | PE, SE, Architect, CR  |
+| Skill                                                              | Description                                                        | Used By                    |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | -------------------------- |
+| [tsh-architecture-designing](./architecture-design)                | Solution architecture design and implementation plan creation      | Architect                  |
+| [tsh-technical-context-discovering](./technical-context-discovery) | Project conventions and pattern discovery                          | Architect, CR, SE, E2E, CE |
+| [tsh-implementing-frontend](./frontend-implementation)             | UI component patterns, composition, design tokens                  | Software Engineer          |
+| [tsh-implementing-forms](./implementing-forms)                     | Form architecture, schema validation, multi-step flows             | Software Engineer          |
+| [tsh-implementing-filters](./implementing-filters)                 | Type-safe URL filter sync, bracket notation, navigation strategies | Software Engineer          |
+| [tsh-writing-hooks](./writing-hooks)                               | Custom hook/composable patterns, lifecycle, testing                | Software Engineer          |
+| [tsh-ensuring-accessibility](./ensuring-accessibility)             | WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard nav          | Software Engineer          |
+| [tsh-optimizing-frontend](./optimizing-frontend)                   | Rendering optimization, code splitting, bundle size                | Software Engineer          |
+| [tsh-implementation-gap-analysing](./implementation-gap-analysis)  | Gap analysis between plan and current state                        | Architect, CR, SE          |
+| [tsh-sql-and-database-understanding](./sql-and-database)           | Database engineering standards and ORM integration                 | Architect, CR, SE          |
+| [tsh-codebase-analysing](./codebase-analysis)                      | Deep codebase analysis and dependency mapping                      | Architect, BA, CE, SE      |
+| [tsh-engineering-prompts](./prompt-engineering)                    | LLM prompt design, optimization, security, and evaluation          | PE, SE, Architect, CR      |
 
 ### ☁️ Cloud & Infrastructure Skills
 
@@ -92,6 +93,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | tsh-ensuring-accessibility             |     |     |           | ✅  |     |     |             |     |        |              |
 | tsh-implementing-ci-cd                 |     |     | ✅        |     |     |     |             |     | ✅     |              |
 | tsh-implementing-forms                 |     |     |           | ✅  |     |     |             |     |        |              |
+| tsh-implementing-filters               |     |     |           | ✅  |     |     |             |     |        |              |
 | tsh-implementing-frontend              |     |     |           | ✅  |     |     |             |     |        |              |
 | tsh-implementing-kubernetes            |     |     | ✅        |     |     |     |             |     | ✅     |              |
 | tsh-implementing-observability         |     |     | ✅        |     |     |     |             |     | ✅     |              |

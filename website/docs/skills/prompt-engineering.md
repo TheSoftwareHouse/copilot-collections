@@ -1,5 +1,5 @@
 ---
-sidebar_position: 32
+sidebar_position: 33
 title: Prompt Engineering
 ---
 
@@ -16,14 +16,14 @@ Reliable prompt structure separates concerns into distinct sections: system prom
 
 ## Optimization Techniques
 
-| Technique | Purpose |
-|---|---|
-| **Clarity and specificity** | Replace vague instructions with exact behavior, constraints, and output format |
-| **Constraint specification** | Explicit MUST / MUST NOT rules for model behavior |
-| **Output format control** | JSON schemas, structured output modes, explicit format instructions |
-| **Token efficiency** | Remove filler, use tables over paragraphs, cache static content in system prompts |
-| **Negative prompting** | Tell the model what NOT to do for better compliance |
-| **Temperature guidance** | Match temperature to task type (0.0–0.2 for extraction, 0.7–1.0 for creative) |
+| Technique                    | Purpose                                                                           |
+| ---------------------------- | --------------------------------------------------------------------------------- |
+| **Clarity and specificity**  | Replace vague instructions with exact behavior, constraints, and output format    |
+| **Constraint specification** | Explicit MUST / MUST NOT rules for model behavior                                 |
+| **Output format control**    | JSON schemas, structured output modes, explicit format instructions               |
+| **Token efficiency**         | Remove filler, use tables over paragraphs, cache static content in system prompts |
+| **Negative prompting**       | Tell the model what NOT to do for better compliance                               |
+| **Temperature guidance**     | Match temperature to task type (0.0–0.2 for extraction, 0.7–1.0 for creative)     |
 
 ## Security Patterns
 
@@ -54,14 +54,14 @@ Reusable templates for common patterns:
 
 ## Anti-Patterns
 
-| Anti-Pattern | Instead Do |
-|---|---|
-| Vague instructions ("be helpful") | Specify exact behavior and output format |
-| User input in system prompt | Separate with delimiters in dedicated section |
-| No output format specification | Define explicit schema or structure |
-| Prompt-only validation | Parse into typed models, validate schemas |
-| Hardcoded secrets in templates | Use environment variables or secret managers |
-| Testing only happy paths | Include adversarial, empty, long, and multilingual inputs |
+| Anti-Pattern                      | Instead Do                                                |
+| --------------------------------- | --------------------------------------------------------- |
+| Vague instructions ("be helpful") | Specify exact behavior and output format                  |
+| User input in system prompt       | Separate with delimiters in dedicated section             |
+| No output format specification    | Define explicit schema or structure                       |
+| Prompt-only validation            | Parse into typed models, validate schemas                 |
+| Hardcoded secrets in templates    | Use environment variables or secret managers              |
+| Testing only happy paths          | Include adversarial, empty, long, and multilingual inputs |
 
 ## Connected Skills
 
