@@ -5,7 +5,7 @@ title: Prompts Overview
 
 # Prompts Overview
 
-Copilot Collections includes **12 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
+Copilot Collections includes **13 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
 
 ## How Prompts Work
 
@@ -33,6 +33,7 @@ These are the user-facing commands available in VS Code chat.
 | Command | Agent | Description |
 |---|---|---|
 | [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate the full cycle: research → plan → implementation |
+| [/tsh-commit](./public/commit) | Software Engineer | Commit with semantic messages, split, branch, and push |
 
 ### ✅ Quality Commands
 
