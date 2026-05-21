@@ -1,8 +1,7 @@
 ---
-model: "Claude Opus 4.6"
+model: "GPT-5.4"
 description: "Reviews architect's implementation plans (.plan.md) for correctness, feasibility, and alignment with project patterns. Returns APPROVED or REVISIONS NEEDED verdict with actionable feedback."
 tools: ["read", "search", "sequential-thinking/*", "context7/*", "todo"]
-user-invokable: false
 ---
 
 <agent-role>
