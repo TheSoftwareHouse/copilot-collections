@@ -36,7 +36,7 @@ Determine the audit type:
 - **External Audit** (URL provided, no code access): Use `execute` tool to run CLI tools against the URL. Fetch page HTML for manual analysis.
 - **Internal Audit** (codebase access): Use `read` and `search` tools to inspect source files. Run CLI tools against local dev server if available.
 
-**IMPORTANT**: Never use Playwright without explicit user permission. If a CLI tool fails (e.g. timeout on an SPA) and Playwright could help, ask the user first before launching any browser automation.
+**IMPORTANT**: For browser-based verification (keyboard navigation, focus order, page state capture), prefer the VS Code built-in browser tools (`open_browser_page`, `click_element`, etc.) over Playwright MCP. These are lighter-weight, require no user permission, and work inline within the editor. Only fall back to Playwright MCP if the built-in browser is insufficient (e.g., complex multi-tab flows).
 
 **Step 2: Run automated tools**
 
@@ -109,13 +109,13 @@ When in doubt, classify **up** (more severe). De-duplicate findings across tools
 
 **Step 6: Generate audit report**
 
-Generate the technical audit report using the template at `./audit-report.example.md`.
+Generate the technical audit report using the template at `./examples/audit-report.example.md`.
 
 For interactive component patterns (modals, tabs, accordions, carousels, etc.), reference `./references/interactive-components.md`.
 
 ## Business Summary Mode
 
-When the user writes any of: `audit summary`, `create audit summary`, `/audit-summary`, `/create-audit-summary` — generate a business-facing report using the template at `./business-summary.example.md`.
+When the user writes any of: `audit summary`, `create audit summary`, `/audit-summary`, `/create-audit-summary` — generate a business-facing report using the template at `./examples/business-summary.example.md`.
 
 ## Multi-Page Audit Strategy
 
@@ -223,12 +223,12 @@ Ask after automated tools complete, before manual testing begins.
 - **Header**: `Manual Testing Approach`
 - **Question**: "How should manual accessibility testing be performed?"
 - **Options**:
-  - `Automated with Playwright` *(recommended)* — "Run Playwright scripts for keyboard nav, focus order, and screen reader simulation"
+  - `Automated with built-in browser` *(recommended)* — "Use VS Code built-in browser to test keyboard nav, focus order, and interactive component behavior"
   - `Manual by me` — "Provide a step-by-step checklist and I'll test manually"
-  - `Hybrid` — "Run Playwright for what can be automated, give me a checklist for the rest"
+  - `Hybrid` — "Automate what's possible with the built-in browser, give me a checklist for the rest"
 - **When to ask**: Always at the start of Step 3 (manual testing).
 - **Follow-up behavior**:
-  - If `Automated with Playwright` or `Hybrid`: generate Playwright test scripts targeting the audit URL.
+  - If `Automated with built-in browser` or `Hybrid`: use VS Code built-in browser tools to navigate the audit URL, test keyboard flows, and capture page state.
   - If `Manual by me` or `Hybrid`: generate a printable manual testing checklist with pass/fail columns.
 
 ### During-Audit — Clarifications

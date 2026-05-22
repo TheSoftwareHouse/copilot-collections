@@ -17,6 +17,26 @@ mcp_atlassian_getAccessibleAtlassianResources()
 
 If multiple resources are returned, ask the user which one to use.
 
+## Fetching Known Tickets — Never Use Rovo Search
+
+When the input matches a Jira issue key pattern (`[A-Z]+-\d+`), **always** use `getJiraIssue` directly. Never use `mcp_atlassian_search` (Rovo) to retrieve a known ticket — Rovo returns only titles and text snippets, not structured fields (description, AC, status, type).
+
+**Correct path for a known ticket:**
+1. `getAccessibleAtlassianResources` → `cloudId` (skip if already cached)
+2. `getJiraIssue(cloudId, issueKey)` → full structured fields
+
+**Fallback when `getJiraIssue` is unavailable or disabled:**
+If `getJiraIssue` cannot be called, use `mcp_atlassian_fetch` with the REST API URL directly:
+```
+mcp_atlassian_fetch(url: "https://{instance}.atlassian.net/rest/api/3/issue/{issueKey}")
+```
+This returns the same full JSON payload (description, status, type, etc.) as `getJiraIssue`.
+
+**Use `mcp_atlassian_search` (Rovo) only when:**
+- You need to discover related content across Jira + Confluence (e.g., "find bugs related to firmware")
+- The user provides a natural-language query, not a ticket key
+- You need to find Confluence pages linked to a topic
+
 ## Creating Jira Issues and Sub-Tasks
 
 Use `mcp_atlassian_createJiraIssue` with these **exact parameter names**:
@@ -24,11 +44,11 @@ Use `mcp_atlassian_createJiraIssue` with these **exact parameter names**:
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | `cloudId` | Yes | From `getAccessibleAtlassianResources` |
-| `projectKey` | Yes | e.g., `"HIB"` |
+| `projectKey` | Yes | e.g., `"PROJ"` |
 | `issueTypeName` | Yes | Exact name from project metadata, e.g., `"Sub task"`, `"Task"`, `"Bug"` |
 | `summary` | Yes | Issue title |
 | `description` | No | Issue body (markdown). Put the **full content** here — do not use a placeholder and add content later as a comment. |
-| `parent` | For sub-tasks | Parent issue key, e.g., `"HIB-186"` |
+| `parent` | For sub-tasks | Parent issue key, e.g., `"PROJ-123"` |
 
 ### Common mistakes to avoid
 
@@ -79,16 +99,39 @@ The search tool returns a **limited number of results per call** (typically 10-2
 
 **Pagination technique:** Add `AND key < "{lastKeyFromPreviousPage}"` to the JQL to fetch the next page:
 
-1. First call: `project = HIB AND type = Bug ORDER BY key DESC`
-2. If result shows more items exist, note the last key returned (e.g., `HIB-208`)
-3. Next call: `project = HIB AND type = Bug AND key < "HIB-208" ORDER BY key DESC`
+1. First call: `project = PROJ AND type = Bug ORDER BY key DESC`
+2. If result shows more items exist, note the last key returned (e.g., `PROJ-50`)
+3. Next call: `project = PROJ AND type = Bug AND key < "PROJ-50" ORDER BY key DESC`
 4. Repeat until no more results are returned
 
 **Always check if results are complete.** If the response indicates a `total` higher than the number of returned issues, paginate. Do NOT generate reports or analysis from partial data — fetch all pages first.
 
+### Setting `maxResults` for Reports and Bulk Analysis
+
+The default `maxResults` is **10**, which is insufficient for quality reports, dashboards, or any analysis that needs complete data. When fetching data for reports:
+
+- Set `maxResults: 50` (or up to `100`) for any query where you need all results
+- If the `total` in the response exceeds `maxResults`, paginate immediately — do NOT proceed with partial data
+- For quality health reports: always verify the returned count matches the `total` before generating visualizations
+
+### Include All Defect-Related Issue Types
+
+Projects often define multiple defect-tracking issue types beyond just `"Bug"`. Common patterns:
+
+- `Bug` — standalone defects (standard Jira type)
+- `Story bug` — defects found during story implementation (subtask-level)
+- `Defect`, `Production Bug`, etc. — project-specific types
+
+**Before generating quality reports:**
+1. Check available issue types with `getJiraProjectIssueTypesMetadata`
+2. Identify ALL defect-related types (look at `hierarchyLevel: 0` for standard and `hierarchyLevel: -1` for subtask types)
+3. Include all of them in the JQL: `type in (Bug, "Story bug")` — not just `type = Bug`
+
+**Common mistake:** Querying only `type = Bug` and missing subtask-level defects like `"Story bug"`. This produces incomplete reports that undercount defects significantly.
+
 ## Constructing Jira URLs for Links
 
-When generating reports (HTML, Confluence, Jira ticket descriptions), always link to Jira rather than showing plain text. Derive the base URL from the `getAccessibleAtlassianResources` response (the `url` field, e.g., `https://headstart.atlassian.net`).
+When generating reports (HTML, Confluence, Jira ticket descriptions), always link to Jira rather than showing plain text. Derive the base URL from the `getAccessibleAtlassianResources` response (the `url` field, e.g., `https://your-instance.atlassian.net`).
 
 | Link target | URL pattern |
 |-------------|-------------|
@@ -130,16 +173,31 @@ Use `mcp_atlassian_createConfluencePage` with these **exact parameter names**:
 | Parameter | Required | Description |
 |-----------|----------|-------------|
 | `cloudId` | Yes | From `getAccessibleAtlassianResources` |
-| `spaceId` | Yes | **Numeric** space ID (e.g., `"5294817321"`). NOT the space key. |
+| `spaceId` | Yes | **Numeric** space ID (e.g., `"1234567890"`). NOT the space key. |
 | `parentId` | No | Numeric page ID of the parent page (for subpages) |
 | `title` | Yes | Page title |
 | `body` | Yes | Page body in **ADF JSON** format (not markdown, not storage/XHTML) |
 
+### Handling the creation response — Extracting the page URL
+
+The `createConfluencePage` response is often large and written to a file. You **MUST** read that file to extract the correct `id` field before presenting a link to the user.
+
+**Correct URL construction after creation:**
+```
+1. Read the response file returned by the tool
+2. Extract the `id` field (e.g., "6113361923")
+3. Extract the `_links.webui` field (e.g., "/spaces/Hiber/pages/6113361923/My+Page")
+4. Construct the full URL: https://{instance}.atlassian.net/wiki{webui}
+```
+
+**Common mistake:** Guessing or fabricating the page ID without reading the creation response. This produces broken links. NEVER assume a page ID — always read it from the API response.
+
 ### Common mistakes to avoid
 
-- Do NOT use the space **key** (e.g., `"Hiber"`) as `spaceId` — it must be a **numeric** ID
+- Do NOT use the space **key** (e.g., `"MYSPACE"`) as `spaceId` — it must be a **numeric** ID
 - Do NOT use markdown or XHTML for `body` — Confluence Cloud API requires **ADF (Atlassian Document Format)** JSON
 - Do NOT skip `parentId` when creating subpages — without it the page lands at the space root
+- Do NOT guess page IDs for confirmation links — always extract from the creation response
 
 ### Resolving a Confluence Space's Numeric `spaceId`
 
@@ -168,8 +226,8 @@ When a user provides a Confluence URL, extract the **numeric page ID** from it:
 https://{instance}.atlassian.net/wiki/spaces/{spaceKey}/pages/{pageId}/{title}
 ```
 
-Example: `https://headstart.atlassian.net/wiki/spaces/Hiber/pages/5950242829/Regression`
-→ pageId = `5950242829`
+Example: `https://your-instance.atlassian.net/wiki/spaces/MYSPACE/pages/1234567890/My+Page`
+→ pageId = `1234567890`
 
 Use the extracted `pageId` as:
 - `parentId` when creating subpages
@@ -226,11 +284,11 @@ Use `mcp_atlassian_searchConfluenceUsingCql` with:
 | `cql` | Yes | Confluence Query Language string |
 
 Useful CQL patterns:
-- `space = "Hiber" AND title = "Regression"` — find pages by title in a space
-- `space = "Hiber" AND ancestor = 5521768451` — find all descendants of a page
-- `space = "Hiber" AND type = page AND label = "qa"` — find pages with a label
+- `space = "MYSPACE" AND title = "Regression"` — find pages by title in a space
+- `space = "MYSPACE" AND ancestor = 1234567890` — find all descendants of a page
+- `space = "MYSPACE" AND type = page AND label = "qa"` — find pages with a label
 
-Note: CQL uses the **space key** (e.g., `"Hiber"`) — this is one of the few places where the space key (not numeric ID) is correct.
+Note: CQL uses the **space key** (e.g., `"MYSPACE"`) — this is one of the few places where the space key (not numeric ID) is correct.
 
 ## Format Differences — Jira vs Confluence
 

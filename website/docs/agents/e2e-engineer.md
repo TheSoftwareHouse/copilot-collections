@@ -1,13 +1,13 @@
 ---
 sidebar_position: 7
-title: E2E Engineer
+title: QA Engineer
 ---
 
-# E2E Engineer Agent
+# QA Engineer Agent
 
-**File:** `.github/agents/tsh-e2e-engineer.agent.md`
+**File:** `.github/agents/tsh-qa-engineer.agent.md`
 
-The E2E Engineer agent creates, maintains, and debugs end-to-end tests using Playwright. It produces reliable, maintainable, and meaningful test suites.
+The QA Engineer agent handles end-to-end quality — from test planning and manual test case design through E2E automation with Playwright, regression risk analysis, bug reporting, and accessibility auditing.
 
 ## Responsibilities
 

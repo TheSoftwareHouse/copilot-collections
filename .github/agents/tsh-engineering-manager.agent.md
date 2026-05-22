@@ -15,7 +15,7 @@ tools:
   ]
 agents:
   [
-    "tsh-e2e-engineer",
+    "tsh-qa-engineer",
     "tsh-software-engineer",
     "tsh-devops-engineer",
     "tsh-architect",
@@ -48,7 +48,7 @@ If there is no code review or verification phase defined in the plan, you ensure
 
 ## Agents Delegation Guidelines
 
-You have access to the `tsh-e2e-engineer` agent.
+You have access to the `tsh-qa-engineer` agent.
 
 - **MUST delegate to when**:
   - Implementing end-to-end tests for features that require comprehensive testing of user flows and interactions across the entire application.
@@ -69,7 +69,7 @@ You have access to the `tsh-software-engineer` agent.
   - Always run subagent with [tsh-implement-ui-common-task.prompt.md](../internal-prompts/tsh-implement-ui-common-task.prompt.md) prompt when implementing frontend features based on Figma designs. This prompt handles implementation only — UI verification against Figma is orchestrated separately by you (the manager) via `tsh-ui-reviewer`.
   - Always run subagent with [tsh-implement-common-task.prompt.md](../internal-prompts/tsh-implement-common-task.prompt.md) prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt.
 - **SHOULD NOT delegate to**:
-  - Implementing e2e tests - delegate those to `tsh-e2e-engineer` agent for better test design and implementation.
+  - Implementing e2e tests - delegate those to `tsh-qa-engineer` agent for better test design and implementation.
   - Implementing infrastructure and DevOps tasks - delegate those to `tsh-devops-engineer` agent for better expertise in cloud and infrastructure automation.
 
 You have access to the `tsh-devops-engineer` agent.

@@ -53,7 +53,7 @@ Use this template when generating the regression test suite. Follow this exact s
 ## Formatting Rules
 
 - **# column**: Sequential `R-001`, `R-002`, ... across the entire document. Numbering does NOT reset per section.
-- **Test Case**: Short descriptive name. Include Jira ticket reference inline when applicable: `Login with MFA (HIB-189)`.
+- **Test Case**: Short descriptive name. Include Jira ticket reference inline when applicable: `Login with MFA (PROJ-189)`.
 - **Steps**: Numbered inline with ` · ` (space-dot-space) separator. Keep concise — split complex flows into separate test cases rather than listing 10+ steps.
 - **Expected Result**: Specific and verifiable — never "works correctly." State exactly what the tester should observe.
 - **Status**: Leave blank — filled during execution. Use `P` (Pass), `F` (Fail), `B` (Blocked), `N/A`, or emoji (✅ / ❌ / ❓).

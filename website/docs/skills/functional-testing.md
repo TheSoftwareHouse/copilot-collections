@@ -8,7 +8,7 @@ title: Functional Testing
 **Folder:** `.github/skills/tsh-functional-testing/`  
 **Used by:** QA Engineer
 
-Strategic quality engineering skill focused on test planning, edge-case detection, regression scope analysis, implementation vs. AC verification, complex test data generation, and Jira QA integration.
+Strategic quality engineering skill focused on test planning, edge-case detection, regression scope analysis, implementation vs. AC verification, and complex test data generation.
 
 ## Process
 
@@ -51,10 +51,6 @@ Compares actual implementation against stated Acceptance Criteria. Classifies ea
 ### Complex Test Data Generation
 
 Generates realistic, edge-covering test data sets: happy path, boundary values, format edge cases, state combinations, and temporal data. Output as categorized Markdown tables with dependency notes.
-
-### Jira Integration
-
-When a Jira ticket ID is provided, fetches ticket details, validates AC, generates a test plan, and (on approval) creates a QA sub-task under the original ticket.
 
 ### Desktop Environment Extension
 

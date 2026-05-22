@@ -15,6 +15,9 @@ website/node_modules/
 .playwright-mcp/
 playwright-mcp/
 
+# Private staging (for transfer to tsh-private-collections)
+_private-staging/
+
 results/
 
 # Generated HTML files

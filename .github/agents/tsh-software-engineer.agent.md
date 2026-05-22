@@ -23,7 +23,7 @@ handoffs:
     prompt: /tsh-review Review the implementation against the plan and feature context
     send: false
   - label: Write E2E Tests
-    agent: tsh-e2e-engineer
+    agent: tsh-qa-engineer
     prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
     send: false
 ---

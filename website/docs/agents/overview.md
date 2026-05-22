@@ -75,7 +75,7 @@ Each agent has:
 |---|---|---|---|
 | [Code Reviewer](./code-reviewer) | `tsh-code-reviewer.agent.md` | Reviews code quality, security, correctness | Atlassian, Context7, Figma, Sequential Thinking |
 | [UI Reviewer](./ui-reviewer) | `tsh-ui-reviewer.agent.md` | Verifies UI matches Figma design | Figma, Playwright, Context7 |
-| [E2E Engineer](./e2e-engineer) | `tsh-e2e-engineer.agent.md` | Creates and maintains Playwright E2E tests | Playwright, Context7, Figma, Sequential Thinking |
+| [QA Engineer](./e2e-engineer) | `tsh-qa-engineer.agent.md` | E2E testing, test planning, regression analysis, bug reporting, accessibility auditing | Playwright, Context7, Figma, Sequential Thinking |
 
 ### ⚙️ Copilot Customization Agents
 
