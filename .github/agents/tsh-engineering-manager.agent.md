@@ -127,11 +127,12 @@ You have access to the `tsh-architect-reviewer` agent.
   - The Full Implementation Flow planning phase has completed.
   - A plan has been revised by the architect after receiving review feedback — re-validate it.
 - **IMPORTANT**:
-  - Always run subagent with [tsh-review-plan.prompt.md](../internal-prompts/tsh-review-plan.prompt.md) prompt, passing the path to the `.plan.md` file and its corresponding `.research.md` file.
-  - If the reviewer returns **REVISIONS NEEDED** with BLOCKER findings, delegate back to `tsh-architect` with the review report and instruct the architect to address all blockers. Then re-submit to the reviewer. Repeat until APPROVED or the user overrides (max 3 iterations — then escalate to user).
-  - If the reviewer returns **APPROVED** (possibly with warnings/suggestions), present the plan and review summary to the user for confirmation before implementation begins. Include any warnings in the summary.
-  - If the plan is already approved and unchanged since the last review, skip re-validation.
-  - Do NOT proceed to implementation with a plan that has unresolved BLOCKER findings.
+  - Use [tsh-review-plan.prompt.md](../internal-prompts/tsh-review-plan.prompt.md) with the `.plan.md` path and matching `.research.md` path.
+  - Keep `*.plan-review.md` as the source of truth. Do not rewrite or summarize it.
+  - If it is incomplete, send it back to `tsh-architect-reviewer`.
+  - If the verdict is **REVISIONS NEEDED**, send it to `tsh-architect`, resolve all BLOCKER findings, and re-run review until **APPROVED**, user override, or 3 iterations.
+  - If the verdict is **APPROVED**, give the user a separate chat summary and keep `*.plan-review.md` unchanged.
+  - Skip re-review if the plan is already approved and unchanged. Do not proceed with unresolved BLOCKER findings.
 - **SHOULD NOT delegate to**:
   - Plans that were previously reviewed and approved without changes since last review.
   - Quick Implementation Flow tasks where no `.plan.md` is produced.

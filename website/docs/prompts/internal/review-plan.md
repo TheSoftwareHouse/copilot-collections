@@ -10,7 +10,7 @@ Not invoked directly by users. To trigger plan validation, use [`/tsh-implement`
 **Agent:** Architect Reviewer  
 **File:** `.github/internal-prompts/tsh-review-plan.prompt.md`
 
-Validates architect implementation plans before implementation begins and persists the review report alongside the plan.
+Stress-tests architect implementation plans before implementation begins and persists the review report alongside the plan.
 
 ## How It's Triggered
 
@@ -24,10 +24,11 @@ The Engineering Manager uses this internal prompt after the Architect creates or
 
 1. Reads the research file first so the review is grounded in the original requirements.
 2. Reads the plan file and checks every task, phase, and definition of done.
-3. Runs the requirements, over-engineering, codebase alignment, feasibility, pattern consistency, and quality passes.
-4. Produces a structured review report with verdict, findings, coverage, verification, simplicity, and pattern-consistency sections.
-5. Saves the report as `{task-name}.plan-review.md` in the same `specifications/<task-name>/` directory as the plan.
-6. If the verdict is `REVISIONS NEEDED`, the Engineering Manager sends the findings back to the Architect and reruns the review until the plan is approved or the escalation limit is reached.
+3. Runs failure-mode, assumption, codebase-reality, and sequencing-and-feasibility passes.
+4. Tries to surface 5-10 substantive risks when the plan is broad or uncertain, while allowing unusually robust plans to produce fewer findings.
+5. Produces a failure-oriented review report with a binary verdict and the highest-risk issues, assumptions, rework triggers, and blocking gaps.
+6. Saves the report as `{task-name}.plan-review.md` in the same `specifications/<task-name>/` directory as the plan.
+7. If the verdict is `REVISIONS NEEDED`, the Engineering Manager sends the findings back to the Architect and reruns the review until the plan is approved or the escalation limit is reached.
 
 ## Skills Loaded
 
@@ -39,4 +40,4 @@ The Engineering Manager uses this internal prompt after the Architect creates or
 
 ## Output
 
-A `.plan-review.md` file placed in `specifications/<task-name>/` alongside the plan, containing the structured review report and verdict.
+A `.plan-review.md` file placed in `specifications/<task-name>/` alongside the plan, containing the failure-oriented review report and binary verdict.

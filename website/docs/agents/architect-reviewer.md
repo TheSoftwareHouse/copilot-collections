@@ -7,19 +7,19 @@ title: Architect Reviewer
 
 **File:** `.github/agents/tsh-architect-reviewer.agent.md`
 
-The Architect Reviewer is an internal sub-agent that validates implementation plans before code is written. It reviews the architect's plan for correctness, feasibility, simplicity, and pattern consistency, catching phantom references, over-engineering, missing requirements, and incompatible assumptions.
+The Architect Reviewer is an internal sub-agent that stress-tests implementation plans before code is written. It challenges the plan for likely failure modes, hidden assumptions, sequencing traps, integration mismatches, migration and data risks, and false confidence in testing.
 
 ## Responsibilities
 
-- Verifying that the plan covers every requirement from the research context.
-- Checking that referenced files, functions, classes, and patterns actually exist in the codebase.
-- Spotting over-engineering, speculative abstractions, and unnecessary phases.
-- Ensuring the plan is feasible, ordered well, and testable.
+- Stress-testing the plan against the research context to expose likely failure modes.
+- Checking that referenced files, functions, classes, integrations, and patterns actually exist in the codebase.
+- Surfacing hidden assumptions, sequencing traps, dependency order issues, and migration or data risks.
+- Challenging integration boundaries, rework risk, and false confidence in test coverage.
 - Producing a structured approval or revision report for the Engineering Manager.
 
 ## What It Produces
 
-- A structured review report with verdict, findings, requirements coverage, codebase verification, simplicity assessment, and pattern consistency sections.
+- A failure-oriented review report with a binary verdict, top risks, assumptions, rework triggers, and any blocking gaps.
 - The report is saved as `{task-name}.plan-review.md` alongside the plan in `specifications/<task-name>/`.
 
 ## Tool Access
