@@ -21,9 +21,9 @@ This repository supports the **full product development lifecycle** with AI-powe
 
 ### 📋 Product Ideation – Requirements & Planning
 
-- 🧑‍💻 **Agents** – Business Analyst.
-- 💬 **Prompts** – `/tsh-analyze-materials`, `/tsh-clean-transcript`, `/tsh-create-jira-tasks`.
-- 🧰 **Skills** – Task Analysis, Transcript Processing, Task Extraction, Jira Task Formatting.
+- 🧑‍💻 **Agents** – Business Analyst orchestrator.
+- 💬 **Prompts** – `/tsh-explore-materials`, `/tsh-analyze-materials`, `/tsh-clean-transcript`, `/tsh-create-jira-tasks`.
+- 🧰 **Skills** – Task Analysis, Transcript Processing, Task Extraction, Task Quality Review, Jira Task Formatting.
 
 ### 🛠 Development – Architecture & Implementation
 
@@ -75,9 +75,9 @@ We support the **full product development lifecycle**, organized into three phas
 ### Phase 1: 📋 Product Ideation – Requirements & Planning
 
 - Converts raw inputs (workshop transcripts, Figma designs, documents) into structured, actionable work items.
-- Builds context around tasks using Jira, Figma, and other integrated tools.
-- Identifies missing information, risks, and open questions.
-- Produces Jira-ready epics and stories with a two-gate review process.
+- Supports optional exploration before backlog commitment.
+- Drafts and reviews an intent brief before extraction, then runs Lite or Full quality review before Jira formatting.
+- Uses Gate 0, Gate 1, Gate 1.5, and Gate 2 before Jira sync, then verifies Jira and refreshes the backlog baseline.
 
 ### Phase 2: 🛠 Development – Architecture & Implementation
 
@@ -107,8 +107,8 @@ We support the **full product development lifecycle**, organized into three phas
 ```text
 📋 PRODUCT IDEATION
 1️⃣ /tsh-analyze-materials <transcript + workshop materials>
-   ↳ 📖 Review cleaned transcript, extracted tasks, Jira-formatted output
-   ↳ ✅ Approve at each gate before proceeding
+  ↳ 📖 Review intent brief, extracted tasks, quality review, Jira-formatted output
+  ↳ ✅ Approve Gate 0, Gate 1, Gate 1.5, and Gate 2 before Jira sync
 
 🛠 DEVELOPMENT
 2️⃣ /tsh-implement <JIRA_ID or task description>
@@ -133,8 +133,8 @@ We support the **full product development lifecycle**, organized into three phas
 ```text
 📋 PRODUCT IDEATION
 1️⃣ /tsh-analyze-materials <transcript + workshop materials>
-   ↳ 📖 Review cleaned transcript, extracted tasks, Jira-formatted output
-   ↳ ✅ Approve at each gate before proceeding
+  ↳ 📖 Review intent brief, extracted tasks, quality review, Jira-formatted output
+  ↳ ✅ Approve Gate 0, Gate 1, Gate 1.5, and Gate 2 before Jira sync
 
 🛠 DEVELOPMENT
 2️⃣ /tsh-implement <JIRA_ID or task description>
@@ -173,18 +173,16 @@ For converting discovery workshop recordings into Jira-ready tasks without conti
 
 ```text
 📋 PRODUCT IDEATION
+0️⃣ /tsh-explore-materials <transcript + workshop materials> (optional)
+  ↳ 📖 Review business context, likely epics, overlaps, and ambiguities
+  ↳ ✅ Decide whether to continue into backlog extraction
+
 1️⃣ /tsh-analyze-materials <transcript + workshop materials>
-   ↳ 📖 Review cleaned transcript – verify topics, decisions, action items
-   ↳ ✅ Confirm nothing important was removed during cleaning
-
-   ↳ 📖 Review extracted epics and user stories
-   ↳ ✅ Verify scope, dependencies, and acceptance criteria (Gate 1)
-
-   ↳ 📖 Review Jira-formatted tasks before push
-   ↳ ✅ Approve creation of Jira issues (Gate 2)
+  ↳ 📖 Review intent brief, extracted tasks, quality review, Jira-formatted output
+  ↳ ✅ Approve Gate 0, Gate 1, Gate 1.5, and Gate 2 before Jira sync
 ```
 
-> ⚠️ **Important:** The business analyst produces three artifacts in sequence: cleaned transcript, extracted tasks, and Jira-formatted tasks. Each artifact has a mandatory review gate – you must approve the output before the agent proceeds to the next step.
+> ⚠️ **Important:** Depending on the entry point, the business analyst can produce `cleaned-transcript.md`, `workshop-context-summary.md`, `intent-brief.md`, `extracted-tasks.md`, `quality-review.md`, and `jira-tasks.md`. Gate 0, Gate 1, Gate 1.5, and Gate 2 remain mandatory before Jira sync.
 
 ---
 
@@ -196,12 +194,11 @@ These are configured as Copilot **agents / sub-agents**, organized by lifecycle 
 
 #### 📋 Business Analyst
 
-- Focus: **converting discovery workshop materials into Jira-ready epics and stories**.
-- Processes raw inputs: call transcripts, Figma designs, codebase context, and reference documents.
-- Cleans transcripts from small talk, structures content by topics, and extracts actionable work items.
-- Produces business-oriented output – no technical implementation details.
-- Manages a two-gate review process before pushing tasks to Jira.
-- Hands off to Context Engineer for deeper research and Architect for implementation planning.
+- Focus: **orchestrating discovery workshop materials into Jira-ready epics and stories**, or iterating on an existing Jira backlog.
+- Can start in optional Explore Mode, then drafts an intent brief before extraction begins.
+- Delegates transcript cleanup, context synthesis, extraction, quality review, and formatting to internal BA workers while keeping all user-facing gates and Jira mutations.
+- Preserves source traceability and concise GIVEN/WHEN/THEN acceptance scenarios.
+- Verifies Jira after sync and refreshes the session archive and backlog baseline for future workshops.
 
 ### 🛠 Development Agents
 
@@ -279,10 +276,10 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 
 #### 🔍 Task Analysis
 
-- Focus: **gathering and expanding context** for a development task.
+- Focus: **gathering and expanding context** for a business or development task.
 - Pulls information from Jira, Confluence, GitHub, and other integrated tools.
 - Identifies gaps in task descriptions and asks clarification questions.
-- Produces a finalized research report with all findings.
+- Produces a finalized context summary or research report with all findings.
 
 #### 📝 Transcript Processing
 
@@ -298,11 +295,18 @@ Skills are stored in `.github/skills/` and are picked up automatically by Copilo
 - Produces business-oriented task breakdowns with dependencies and assumptions.
 - Flags ambiguous items for user clarification before finalizing.
 
+#### ✅ Task Quality Review
+
+- Focus: **auditing approved extracted tasks** before Jira formatting.
+- Runs Lite or Full review passes to find gaps, overlaps, missing acceptance criteria, and refinement opportunities.
+- Produces structured suggestions for Gate 1.5 instead of rewriting the backlog blindly.
+- Saves an audit trail in `quality-review.md`.
+
 #### 🎫 Jira Task Formatting
 
 - Focus: **transforming extracted tasks into Jira-ready format**.
 - Applies a benchmark template to ensure consistent field mapping across all tasks.
-- Handles Jira markdown compatibility and two-gate review before push.
+- Handles Jira markdown compatibility, Gate 2 review, post-push verification, and baseline refresh.
 - Guides the agent on creating epics and linked stories via Atlassian tools.
 
 ### 🛠 Development Skills
@@ -419,12 +423,18 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 
 ### 📋 Product Ideation Commands
 
+#### `/tsh-explore-materials <workshop materials>`
+
+- Optional discovery-first mode for ambiguous or incomplete workshop inputs.
+- Produces `workshop-context-summary.md` with likely epics, overlaps, ambiguities, and readiness.
+- Does not create backlog items until you decide to continue into `/tsh-analyze-materials`.
+
 #### `/tsh-analyze-materials <workshop materials>`
 
-- Processes discovery workshop materials end-to-end: clean transcript → extract tasks → format for Jira → push.
+- Processes discovery workshop materials end-to-end: clean transcript → intent brief → extract tasks → quality review → format for Jira → push.
 - Accepts raw transcripts, Figma design links, codebase references, and other documents.
-- Produces three artifacts: `cleaned-transcript.md`, `extracted-tasks.md`, `jira-tasks.md`.
-- Includes two mandatory review gates before Jira creation.
+- Produces `cleaned-transcript.md`, `intent-brief.md`, `extracted-tasks.md`, `quality-review.md`, and `jira-tasks.md`, with `workshop-context-summary.md` available in Explore Mode.
+- Includes Gate 0, Gate 1, Gate 1.5, and Gate 2 before Jira creation.
 - Outputs: Jira-ready epics and stories, created in your Jira project after approval.
 
 #### `/tsh-clean-transcript <transcript>`
@@ -436,8 +446,9 @@ All commands work with either a **Jira ID** or a **plain-text description**.
 #### `/tsh-create-jira-tasks <extracted-tasks reference>`
 
 - Formats an existing `extracted-tasks.md` into Jira-ready structure and pushes to Jira.
-- Applies the benchmark template, validates completeness, and manages review gates.
-- Outputs: `jira-tasks.md` + created Jira issues with linked epics and stories.
+- Applies the benchmark template, validates completeness, and manages Gate 2 approval before sync.
+- Supports post-push verification of created or updated Jira issues.
+- Outputs: `jira-tasks.md` + synced Jira issues with linked epics and stories.
 
 ### 🛠 Development Commands
 
@@ -669,7 +680,8 @@ Once the repo is cloned and VS Code User Settings are configured:
 
 | Agent            | Prompt                               | Purpose                                         |
 | ---------------- | ------------------------------------ | ----------------------------------------------- |
-| Business Analyst | `/tsh-analyze-materials <materials>` | Clean transcript → extract tasks → push to Jira |
+| Business Analyst | `/tsh-explore-materials <materials>` | Explore workshop context before backlog commitment |
+| Business Analyst | `/tsh-analyze-materials <materials>` | Intent brief → extract tasks → quality review → Jira sync |
 
 ### 🛠 Development – Architect & implement
 
