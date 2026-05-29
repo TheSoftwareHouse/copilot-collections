@@ -20,7 +20,13 @@ Before starting, load and follow these skills:
 ## Workflow
 
 1. Review the implementation plan and feature context thoroughly.
-2. **Read the "Technical Context" section from the plan file** (`*.plan.md`). This section contains project conventions, coding standards, architecture patterns, tech stack details, testing patterns, and relevant `.instructions.md` rules already discovered during planning. Use it as your primary source of truth — do NOT re-scan the codebase or re-read instruction files for information already captured there. Only perform additional discovery for aspects not covered by the persisted context.
+2. **Read the execution-support package from the plan file** (`*.plan.md`):
+	- `Glossary / Ubiquitous Language`
+	- `Technical Context`
+	- `Traps and Warnings`
+	- the relevant phase preamble(s): `Purpose`, `State Before`, `State After`, `Dependencies / Risks`
+
+	Use these sections together as your primary source of truth. Do NOT re-scan the codebase or re-read instruction files for information already captured there. Only perform additional discovery for aspects not covered by the persisted context.
 3. Gather a list of commands you will need during implementation: running tests (unit, integration, E2E and others), linters, building the project, running and generating migrations, etc. These may already be documented in the plan's Technical Context section. Run tests and linters **before** starting implementation and **after** completing each phase.
 4. Focus only on the implementation plan. Don't implement anything not part of the plan unless explicitly instructed.
 5. Don't implement improvements from the plan's improvements section unless explicitly instructed.
@@ -29,6 +35,8 @@ Before starting, load and follow these skills:
 8. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
 9. Before handing over to review, ensure all tasks in the delegated scope have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
 
+Treat labeled pseudocode, tables, diagrams, and contracts in the plan as illustrative guidance only. They are not production code and must not be copied verbatim into source files without translating them into project-appropriate implementation.
+
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v2 -->

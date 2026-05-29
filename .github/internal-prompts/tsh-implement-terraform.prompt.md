@@ -16,10 +16,12 @@ Before starting, load and follow these skills:
 Follow the `tsh-technical-context-discovering` skill to identify existing Terraform setup.
 
 Additionally, always:
-- **Read the "Technical Context" section from the plan file** (`*.plan.md`) if it exists — it contains project conventions and patterns already discovered during planning. Use it as your primary source and skip re-discovery for aspects already covered.
+- **Read the plan's execution-support package** from the plan file (`*.plan.md`) if it exists — `Glossary / Ubiquitous Language`, `Technical Context`, `Traps and Warnings`, and the relevant phase preamble(s). These sections contain project conventions, constraints, and sequencing cues already discovered during planning. Use them as your primary source and skip re-discovery for aspects already covered.
 - Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
 - Analyze existing Terraform modules and state configuration
 - Discover environment organization (workspaces, Terragrunt)
+
+Treat labeled pseudocode, tables, diagrams, and contracts in the plan as illustrative guidance only. They are not production Terraform configuration to copy verbatim.
 
 ---
 
@@ -92,4 +94,4 @@ Skip for: adding resources to existing modules, updating versions, fixing bugs, 
 - Kubernetes workload configuration → `/tsh-deploy-kubernetes`
 - Monitoring infrastructure → `/tsh-implement-observability`
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-terraform:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-terraform:v2 -->

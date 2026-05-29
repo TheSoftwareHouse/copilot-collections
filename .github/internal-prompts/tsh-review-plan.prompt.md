@@ -20,20 +20,24 @@ Before starting, load and follow these skills:
 
 4. **Failure-modes pass** — Find the strongest reasons the plan may fail during implementation or cause major rework. Prioritize substantive risks such as integration mismatches, unsafe migrations, coordination traps, weak rollout strategies, and brittle task breakdowns.
 
-5. **Hidden-assumptions pass** — Identify assumptions that are unproven in this repository. Flag beliefs about files, abstractions, contracts, environment behavior, team coordination, or data shape that the plan depends on but does not verify.
+5. **Self-containedness-for-execution pass** — Explicitly evaluate whether a lower-tier implementor can begin execution from the plan without reopening the research file for basic context recovery. Check whether the `Glossary / Ubiquitous Language`, `Technical Context`, `Traps and Warnings`, and each phase preamble provide enough terminology, rules, constraints, and sequencing context to start work safely.
 
-6. **Codebase-reality pass** — For every critical file, component, function, class, abstraction, or dependency the plan relies on:
+6. **Hidden-assumptions pass** — Identify assumptions that are unproven in this repository. Flag beliefs about files, abstractions, contracts, environment behavior, team coordination, or data shape that the plan depends on but does not verify.
+
+7. **Codebase-reality pass** — For every critical file, component, function, class, abstraction, or dependency the plan relies on:
    - Search the codebase to verify it exists
    - Read the file to verify it has the expected interface/behavior
    - Flag any reference that doesn't match reality or is weaker/more constrained than the plan assumes
 
-7. **Sequencing-and-feasibility pass** — Identify order-of-operations traps, risky migrations, rollback gaps, coordination issues, and test or rollout blind spots. Focus on how the plan could break when executed step by step.
+8. **Sequencing-and-feasibility pass** — Identify order-of-operations traps, risky migrations, rollback gaps, coordination issues, and test or rollout blind spots. Focus on how the plan could break when executed step by step. Verify that every phase uses the reusable preamble structure (`Purpose`, `State Before`, `State After`, `Dependencies / Risks`) and that the phase sequence is still coherent.
 
-8. **Execution-critical decision gate** — Before final verdict, explicitly check for unresolved provider, vendor, stack, framework, auth, privacy, security, integration-contract, or migration-prerequisite decisions that sit on the critical path or lock in downstream work. These cannot be waved through as harmless notes.
+9. **Execution-critical decision gate** — Before final verdict, explicitly check for unresolved provider, vendor, stack, framework, auth, privacy, security, integration-contract, or migration-prerequisite decisions that sit on the critical path or lock in downstream work. These cannot be waved through as harmless notes.
 
-9. **Decision-and-revision-history handling** — Always build and maintain a `Decision and Revision History` section as a compact chronological Markdown table, ordered from oldest to newest, including on the first review iteration. On iteration 1, capture the initial plan-shaping decisions the reviewer challenged, why they matter, the current architect position, and the current status. On later iterations, read the existing `.plan-review.md` first and update the same table to show what changed since the prior review, whether the reviewer's concerns were resolved, and which issues remain open. Prefer appending new rows for new developments; update an existing row only when that keeps the table clearer and more maintainable. Keep entries as short summaries with phrase-length cells, not prose blocks, transcripts, or exhaustive changelogs. Explicitly classify prior high-signal issues with compact statuses such as `open`, `changed`, `resolved`, `kept`, or `dropped`. If an issue is downgraded or dropped, explain why briefly in the row. Do not reduce challenge intensity because one issue was fixed. The architect fixing one thing does not mean new issues should not be found.
+10. **Decision-and-revision-history handling** — Always build and maintain a `Decision and Revision History` section as a compact chronological Markdown table, ordered from oldest to newest, including on the first review iteration. On iteration 1, capture the initial plan-shaping decisions the reviewer challenged, why they matter, the current architect position, and the current status. On later iterations, read the existing `.plan-review.md` first and update the same table to show what changed since the prior review, whether the reviewer's concerns were resolved, and which issues remain open. Prefer appending new rows for new developments; update an existing row only when that keeps the table clearer and more maintainable. Keep entries as short summaries with phrase-length cells, not prose blocks, transcripts, or exhaustive changelogs. Explicitly classify prior high-signal issues with compact statuses such as `open`, `changed`, `resolved`, `kept`, or `dropped`. If an issue is downgraded or dropped, explain why briefly in the row. Do not reduce challenge intensity because one issue was fixed. The architect fixing one thing does not mean new issues should not be found.
 
-10. **Produce the report and binary verdict** — Save the full failure-oriented review report with final verdict (`APPROVED` or `REVISIONS NEEDED`) as `{task-name}.plan-review.md` in the same specifications directory as the plan. Do not reduce the persisted artifact to a short verdict memo or manager-style synthesis.
+11. **Non-code-boundary pass** — Flag plans that include real / production code, copy-paste-ready implementation snippets, or language-specific source fragments presented as authoritative implementation. Allow Mermaid diagrams, tables, contracts, and clearly labeled non-executable pseudocode.
+
+12. **Produce the report and binary verdict** — Save the full failure-oriented review report with final verdict (`APPROVED` or `REVISIONS NEEDED`) as `{task-name}.plan-review.md` in the same specifications directory as the plan. Do not reduce the persisted artifact to a short verdict memo or manager-style synthesis.
 
 ## Review Requirements
 
@@ -50,6 +54,7 @@ The full structured review report is the primary deliverable. Save it as `{task-
 - Reviewed plan path, research file path, review date, and verdict (`APPROVED` or `REVISIONS NEEDED`)
 - Summary counts for blockers, warnings, and suggestions
 - `Challenge Domains` — One entry per domain with finding or explicit `no issue` note
+- `Self-Containedness for Execution` — explicitly report whether glossary, embedded technical rules, traps, phase preambles, and task-level guidance are sufficient for lower-tier execution without reopening research
 - `Decision and Revision History` — Always present, including on the first review. It is concise evidence of reviewer impact on the plan and must preserve the high-signal, non-transcript standard. Format it as a compact Markdown table sorted chronologically from oldest to newest with these columns: `Date`, `Iteration`, `Decision / Topic`, `Problem / Challenge`, `Plan Decision / Change`, `Status`. Keep cells phrase-length where possible, not paragraph prose. Use compact `Status` values such as `open`, `changed`, `resolved`, `kept`, or `dropped`.
 - `Top Failure Modes` — the strongest reasons this plan may fail or create expensive rework
 - `Unproven Assumptions` — assumptions the architect must verify or tighten
@@ -63,9 +68,11 @@ The full structured review report is the primary deliverable. Save it as `{task-
 
 - **Failure orientation** — look first for why the plan may break, stall, or trigger major rework.
 - **Verify, don't assume** — always search the codebase before flagging phantom references. The architect may have found something you haven't.
+- **Execution-ready, not just well-shaped** — reject plans that look structurally complete but still force the implementor to reopen research for vocabulary, rules, or hidden traps.
 - **Compressed decision history over completeness** — keep the `Decision and Revision History` section concise and decision-oriented on every iteration as a compact chronological table, preserving only the decisions, reviewer challenges, plan changes, and outcomes that still matter for the current verdict.
 - **Pragmatism over permissiveness** — issues can exist and the verdict can still be `APPROVED`, but not when execution-critical open decisions remain unresolved. In those cases, default to `REVISIONS NEEDED`.
 - **Scope discipline** — never suggest adding features or requirements not in the research file.
 - **Carry critical issues forward** — unresolved execution-critical issues stay live across iterations until genuinely closed; repeated survival is a reason to escalate, not soften.
+- **No production code in plans** — treat real / production code in the plan as a substantive review issue; acceptable guidance artifacts are Mermaid diagrams, tables, contracts, and clearly labeled pseudocode.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v2 -->

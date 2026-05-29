@@ -16,10 +16,12 @@ Before starting, load and follow these skills:
 Follow the `tsh-task-analysing` skill's **Step 0 (Determine input source)** to identify whether context comes from research/plan files, a Jira ID, or directly from the prompt message.
 
 Additionally, always:
-- **Read the "Technical Context" section from the plan file** (`*.plan.md`) if it exists — it contains project conventions, test patterns, and commands already discovered during planning. Use it as your primary source and skip re-discovery for aspects already covered.
+- **Read the plan's execution-support package** from the plan file (`*.plan.md`) if it exists — `Glossary / Ubiquitous Language`, `Technical Context`, `Traps and Warnings`, and the relevant phase preamble(s). These sections contain project conventions, test patterns, constraints, terminology, and commands already discovered during planning. Use them as your primary source and skip re-discovery for aspects already covered.
 - Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
 - Analyze `playwright.config.ts` + existing Page Objects
 - Discover existing test patterns and locator strategies in the codebase
+
+Treat labeled pseudocode, tables, diagrams, and contracts in the plan as illustrative guidance only. They must not be copied as production test code without translating them into the repository's actual patterns.
 
 ---
 
@@ -83,4 +85,4 @@ Update plan (if plan file exists): check acceptance criteria, add files to Chang
 
 After completing E2E tests implementation, always run `tsh-code-reviewer` agent to review the E2E tests against best practices and test quality standards. The agent should be executed automatically without user confirmation. Update the changelog section of the plan file to indicate that E2E code review was performed and include a summary of the findings.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-e2e:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-e2e:v2 -->
