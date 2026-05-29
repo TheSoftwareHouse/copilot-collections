@@ -1,7 +1,7 @@
 ---
 model: "GPT-5.4"
 description: "Adversarially challenges architect implementation plans (.plan.md) to find likely failure modes, hidden assumptions, and costly rework risks before coding begins. Returns APPROVED or REVISIONS NEEDED."
-tools: ["read", "search", "sequential-thinking/*", "context7/*", "todo"]
+tools: ["read", "edit", "search", "sequential-thinking/*", "context7/*", "todo"]
 handoffs:
   - label: Revise plan based on review report
     agent: tsh-architect
