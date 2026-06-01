@@ -70,6 +70,10 @@ h2. Context
 
 This story is part of the [<Epic Title>] epic. <1 sentence connecting this story to the epic's goal.>
 
+h2. Source Context
+
+<Short traceability note pointing back to the workshop material, intent brief, or baseline entry that produced this story.>
+
 h2. User Story
 
 As a <role>, I want <capability> so that <benefit>.
@@ -93,6 +97,8 @@ h2. Technical Notes
 (/) <Verifiable condition 3>
 ```
 
+Scenario-style criteria are also valid when written as `(/) GIVEN ... WHEN ... THEN ...`.
+
 ---
 
 ## Formatting Guidelines
@@ -103,6 +109,7 @@ h2. Technical Notes
 - **No implementation details**: Do not specify technologies, frameworks, or code patterns in stories — that is the architect's responsibility
 - **Consistent tone**: Use active voice and present tense ("User can create…" not "User should be able to create…")
 - **Verifiable acceptance criteria**: Every criterion must be testable with a clear pass/fail condition
+- **Traceability**: Keep source context concise but present so the Jira issue can be compared back to the extracted task during post-push verification
 
 ### Priority Mapping
 

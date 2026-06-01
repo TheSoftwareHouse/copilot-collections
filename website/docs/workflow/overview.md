@@ -20,10 +20,11 @@ Think of this workflow as a **relay race**. Each phase produces a deliverable �
 ### 1. Ideate
 
 - **Agent:** Business Analyst
-- **Command:** `/tsh-analyze-materials <workshop materials>`
-- Processes raw workshop materials (transcripts, Figma designs, documents) into structured epics and stories.
-- Runs 10-pass quality review with three mandatory human review gates.
-- **Produces:** Jira-ready epics and stories with acceptance criteria, dependencies, and priorities.
+- **Commands:** `/tsh-explore-materials <workshop materials>` or `/tsh-analyze-materials <workshop materials>`
+- Can start with exploration-only business/context synthesis before backlog extraction.
+- Processes workshop materials through intent brief, extraction, quality review, Jira formatting, and verified Jira sync.
+- Uses Gate 0, Gate 1, Gate 1.5, and Gate 2 as mandatory human review points.
+- **Produces:** Exploration summaries, intent briefs, Jira-ready epics and stories, and refreshed backlog continuity artifacts.
 
 ### 2. Implement
 
@@ -59,7 +60,7 @@ Each step requires your review and verification. Open the generated documents, g
 
 The full lifecycle has specialized variants for different task types:
 
-- **[Workshop Analysis Flow](./workshop-flow)** — Convert discovery workshop materials into Jira-ready epics and stories using `/tsh-analyze-materials`.
+- **[Workshop Analysis Flow](./workshop-flow)** — Explore workshop context with `/tsh-explore-materials` or convert materials into Jira-ready epics and stories with `/tsh-analyze-materials`.
 - **[Standard Flow](./standard-flow)** — Backend/fullstack tasks using `/tsh-implement` → `/tsh-review` (research and planning happen internally).
 - **[Frontend Flow](./frontend-flow)** — UI tasks with Figma verification using `/tsh-implement` (which internally uses `/tsh-implement-ui`) and `/tsh-review-ui`.
 - **[E2E Testing Flow](./e2e-flow)** — End-to-end test creation delegated by the Engineering Manager to the E2E Engineer via `/tsh-implement`.

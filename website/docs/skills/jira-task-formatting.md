@@ -8,7 +8,7 @@ title: Jira Task Formatting
 **Folder:** `.github/skills/tsh-jira-task-formatting/`  
 **Used by:** Business Analyst
 
-Transforms extracted epics and user stories into Jira-ready format following a benchmark template. Handles field mapping, Jira markdown compatibility, two-gate user review, and Jira issue creation via Atlassian tools. Also supports importing existing Jira issues for local iteration.
+Transforms extracted epics and user stories into Jira-ready format following a benchmark template. Handles field mapping, Jira markdown compatibility, Gate 2 review, Jira issue creation via Atlassian tools, post-push verification, and baseline refresh support. Also supports importing existing Jira issues for local iteration.
 
 ## Process
 
@@ -59,7 +59,7 @@ An alternative entry point for working with existing Jira backlogs:
 4. **Generate local file** — Create `jira-tasks.md` with Jira keys pre-populated.
 5. **User review** — Present imported tasks for validation.
 
-After import, changes can be pushed back to Jira individually or in batch.
+After import, changes can be pushed back to Jira individually or in batch, then verified against the live Jira state.
 
 ## Jira Markdown Compatibility
 

@@ -7,6 +7,8 @@
 | Workshop Date | <workshop-date> |
 | Participants | <list-of-participants> |
 | Source Materials | <list-of-materials-used: cleaned transcript, Figma, codebase, etc.> |
+| Intent Brief | <intent-brief.md or linked summary> |
+| Project Baseline Used | <task-baseline.md or "None"> |
 | Total Epics | <number> |
 | Total Stories | <number> |
 
@@ -28,10 +30,15 @@
 
 **User Story**: As a <role>, I want <capability> so that <benefit>.
 
+**Source**: <transcript section / design reference / baseline note>
+
 **Acceptance Criteria**:
-- [ ] <verifiable condition from a business/user perspective>
-- [ ] <verifiable condition>
-- [ ] <verifiable condition>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+
+**Additional Acceptance Checks**:
+- <optional non-scenario check>
 
 **High-Level Technical Notes**: <brief notes ONLY if technical considerations were explicitly discussed during the workshop; otherwise write "None">
 
@@ -41,9 +48,11 @@
 
 **User Story**: As a <role>, I want <capability> so that <benefit>.
 
+**Source**: <transcript section / design reference / baseline note>
+
 **Acceptance Criteria**:
-- [ ] <verifiable condition>
-- [ ] <verifiable condition>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
 
 **High-Level Technical Notes**: <notes or "None">
 
@@ -60,8 +69,10 @@
 
 **User Story**: As a <role>, I want <capability> so that <benefit>.
 
+**Source**: <transcript section / design reference / baseline note>
+
 **Acceptance Criteria**:
-- [ ] <verifiable condition>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
 
 **High-Level Technical Notes**: <notes or "None">
 

@@ -7,6 +7,8 @@
 | Review Date | <date> |
 | Source Task List | `extracted-tasks.md` (Gate 1 approved) |
 | Additional Sources | <cleaned-transcript.md, Figma designs, Jira board PROJ, etc. — or "None"> |
+| Review Mode | <Lite / Full> |
+| Passes Run | <A, B, E, H, I or A-J> |
 | Epics Reviewed | <number> |
 | Stories Reviewed | <number> |
 | Total Suggestions | <number> |
@@ -70,9 +72,14 @@ Add new story under Epic 1:
 
 **User Story**: As a <role>, I want <capability> so that <benefit>.
 
+**Source**: <workshop reference / baseline note>
+
 **Acceptance Criteria**:
-- [ ] <verifiable condition>
-- [ ] <verifiable condition>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+- [ ] GIVEN <business condition> WHEN <trigger> THEN <expected outcome>
+
+**Additional Acceptance Checks**:
+- <optional non-scenario check>
 
 **High-Level Technical Notes**: None
 
@@ -93,6 +100,8 @@ Add new story under Epic 1:
 
 **Proposed Change**:
 Update Story 2.1 description to include: <proposed text change>
+
+**Source**: <workshop reference / baseline note>
 
 **Decision**: ✅ Accepted
 

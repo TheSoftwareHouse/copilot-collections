@@ -15,7 +15,7 @@ Nine scenarios where Copilot Collections changes how work actually gets done.
 
 You've just run a discovery workshop. The transcript is a mess of raw ideas, half-formed requirements, and branching conversations. Turning that into a well-structured, ticket-ready backlog normally takes a BA a day or two, if you have one. If you don't, it falls to a developer or PM, and it shows.
 
-The Business Analyst agent processes the raw materials end-to-end. Transcripts are cleaned and structured. Epics and user stories are extracted with acceptance criteria, edge cases, and dependencies surfaced. A 10-pass quality review checks for missing entity lifecycles, error states, notification gaps, and off-happy-path scenarios. Nothing reaches Jira without passing a three-gate human review.
+The Business Analyst agent processes the raw materials end-to-end. It can start with exploration, then drafts an intent brief before extraction begins. Epics and user stories are extracted with acceptance criteria, edge cases, and dependencies surfaced. A 10-pass quality review checks for missing entity lifecycles, error states, notification gaps, and off-happy-path scenarios. Nothing reaches Jira without passing Gate 0, Gate 1, Gate 1.5, and Gate 2, and the synced issues are verified afterward.
 
 **~15 min vs 1–2 days**
 
@@ -25,7 +25,7 @@ The Business Analyst agent processes the raw materials end-to-end. Transcripts a
 
 Backlogs accumulate debt. Stories that made sense six months ago are now vague. Acceptance criteria were never written. Dependencies were assumed, not documented. Grooming sessions spend half their time reconstructing intent rather than improving work.
 
-The Business Analyst agent's Import Mode fetches existing Jira issues, converts them to a local format, and runs the same quality review used for new workshop outputs. Each suggested improvement is presented individually for accept or reject. Approved changes push back to Jira automatically.
+The Business Analyst agent's Import Mode fetches existing Jira issues, converts them to a local format, and runs the same quality review used for new workshop outputs. Each suggested improvement is presented individually for accept or reject. Approved changes can then be pushed back to Jira and verified against the live issues before the baseline is refreshed.
 
 **~10 min per epic**
 

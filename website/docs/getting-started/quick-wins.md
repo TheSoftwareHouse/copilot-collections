@@ -22,23 +22,25 @@ This page shows how teams integrate Copilot Collections into their daily routine
 **With Copilot Collections:**
 
 ```text
+/tsh-explore-materials <paste transcript or attach materials>   # optional
 /tsh-analyze-materials <paste transcript or attach materials>
 ```
 
 | Step | What Happens |
 |---|---|
-| **1. Transcript processing** | The Business Analyst agent cleans the raw transcript — removes small talk, structures content by discussion topics, and extracts key decisions, action items, and open questions. |
-| **2. Material analysis** | Figma designs are analyzed via Figma MCP for functional requirements. The codebase is scanned to understand what already exists. |
-| **3. Task extraction** | Epics and user stories are identified with business-oriented descriptions, acceptance criteria, dependencies, and priority suggestions. |
-| **4. Gate 1 — Your review** | You review the extracted tasks. Split, merge, add, or remove stories until the breakdown matches what was discussed. |
-| **5. Quality review (10 passes)** | The `tsh-task-quality-reviewing` skill automatically runs 10 analysis passes — entity lifecycle completeness, error states, notification gaps, third-party boundaries, platform operations, and more. |
+| **1. Explore Mode (optional)** | The Business Analyst can first produce `workshop-context-summary.md` when the materials are still ambiguous and you want to validate likely scope before extraction. |
+| **2. Transcript processing & analysis** | The raw transcript is cleaned, supporting materials are analyzed, and the existing codebase or backlog baseline is checked when relevant. |
+| **3. Intent brief + Gate 0** | The agent drafts `intent-brief.md`. You review scope, exclusions, and candidate epics before extraction begins. |
+| **4. Task extraction + Gate 1** | Epics and user stories are identified with business-oriented descriptions, acceptance criteria, dependencies, and source traceability. You review the breakdown before it proceeds. |
+| **5. Quality review** | The `tsh-task-quality-reviewing` skill automatically runs Lite or Full review. Full mode covers 10 analysis passes — entity lifecycle completeness, error states, notification gaps, third-party boundaries, platform operations, and more. |
 | **6. Gate 1.5 — Accept/reject suggestions** | Each quality improvement is presented individually. You accept what makes sense and reject what doesn't apply. |
-| **7. Jira formatting & push** | Tasks are formatted per the Jira benchmark template. After your final approval (Gate 2), epics and stories are created in Jira with proper linking. |
+| **7. Jira formatting + Gate 2** | Tasks are formatted per the Jira benchmark template, then reviewed one final time before Jira sync. |
+| **8. Jira sync verification** | After push, the agent reads the issues back, verifies the key fields, and refreshes the continuity baseline for future workshops. |
 
-**Key prompts & agents:** `/tsh-analyze-materials` → Business Analyst  
+**Key prompts & agents:** `/tsh-explore-materials` or `/tsh-analyze-materials` → Business Analyst  
 **Key skills:** `tsh-transcript-processing`, `tsh-task-extracting`, `tsh-task-quality-reviewing`, `tsh-jira-task-formatting`, `tsh-codebase-analysing`
 
-**Value:** A full discovery workshop is converted into a validated, Jira-ready backlog in a single session instead of days of manual work. The 10-pass quality review catches edge cases and gaps that manual extraction routinely misses — missing error states, notification gaps, incomplete entity lifecycles, and platform operations. The three-gate review process ensures nothing reaches Jira without your approval.
+**Value:** A full discovery workshop is converted into a validated, Jira-ready backlog in a single session instead of days of manual work. The 10-pass quality review catches edge cases and gaps that manual extraction routinely misses — missing error states, notification gaps, incomplete entity lifecycles, and platform operations. Gate 0, Gate 1, Gate 1.5, and Gate 2 keep the backlog reviewable, and the verified Jira sync preserves continuity for later workshops.
 
 ---
 

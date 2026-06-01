@@ -12,6 +12,18 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-01
+
+### Added
+
+- `/tsh-explore-materials` prompt — Added a Business Analyst exploration mode for ambiguous workshop inputs; produces `workshop-context-summary.md` before backlog extraction begins
+
+### Changed
+
+- Business Analyst agent (`tsh-business-analyst`) — Reworked into an orchestrator that delegates transcript cleanup, context synthesis, extraction, quality review, and Jira formatting to internal BA workers while retaining all user-facing gates and Jira mutations
+- `/tsh-analyze-materials` prompt — Added Gate 0 intent-brief approval, Explore Mode support, Lite/Full quality review with Gate 1.5, post-push Jira verification, and project baseline refresh after verified sync
+- Product ideation documentation — Updated README, changelog, and website docs to reflect the new BA orchestration flow, optional exploration, expanded artifact set, and verified Jira sync process
+
 ## 2026-05-17
 
 ### Changed

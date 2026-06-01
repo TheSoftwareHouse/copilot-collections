@@ -5,30 +5,40 @@ title: Workshop Analysis Flow
 
 # Workshop Analysis Flow
 
-For converting discovery workshop materials into structured, Jira-ready epics and user stories, use the Workshop Analysis workflow. This takes raw workshop outputs (transcripts, designs, notes) and produces a validated backlog ready for team refinement.
+For converting discovery workshop materials into structured, Jira-ready epics and user stories, use the Workshop Analysis workflow. This flow can start with exploration when the source material is still ambiguous, then moves through intent brief approval, extraction, quality review, Jira formatting, and verified Jira sync.
 
 ## Command Sequence
 
 ```text
-1️⃣ /tsh-analyze-materials <workshop materials>
-   ↳ 📝 Agent processes transcript — cleans, structures, extracts decisions
-   ↳ 📖 Review cleaned transcript for accuracy
-   ↳ 🔍 Agent analyzes Figma designs and codebase context
-   ↳ 📋 Agent extracts epics and user stories
+0️⃣ /tsh-explore-materials <workshop materials> (optional)
+   ↳ 📖 Review business context, likely epics, overlap, and ambiguities
+   ↳ ✅ Decide whether the materials are ready for extraction
 
-2️⃣ Gate 1 — Task Review
+1️⃣ /tsh-analyze-materials <workshop materials>
+   ↳ 📝 Agent processes transcript and supporting materials
+   ↳ 📄 Agent drafts `intent-brief.md`
+
+2️⃣ Gate 0 — Intent Brief Review
+   ↳ 📖 Review scope, exclusions, and candidate epics
+   ↳ ✅ Approve before extraction starts
+
+3️⃣ Gate 1 — Task Review
    ↳ 📖 Review extracted tasks — check epic/story breakdown
    ↳ ✅ Approve, or request splits/merges/removals
 
-3️⃣ Gate 1.5 — Quality Review (automatic)
-   ↳ 🔍 Agent runs 10 analysis passes for gaps and edge cases
+4️⃣ Gate 1.5 — Quality Review (automatic)
+   ↳ 🔍 Agent runs Lite or Full quality review; Full mode runs 10 analysis passes
    ↳ 📖 Review each suggestion — accept or reject individually
    ↳ ✅ Agent applies accepted suggestions to the task list
 
-4️⃣ Gate 2 — Jira Push Approval
+5️⃣ Gate 2 — Jira Push Approval
    ↳ 📖 Review final formatted tasks
    ↳ ✅ Confirm target Jira project and approve push
    ↳ 🚀 Agent creates/updates issues in Jira
+
+6️⃣ Verification & Continuity
+   ↳ 🔎 Agent reads Jira back and verifies key fields
+   ↳ ♻️ Agent refreshes session archive and project baseline after verified sync
 ```
 
 ## Workflow Diagram
@@ -40,8 +50,23 @@ For converting discovery workshop materials into structured, Jira-ready epics an
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
-│  Transcript Processing      │
+│  Optional Explore Mode      │
+│  → workshop-context-summary │
+└──────────┬──────────────────┘
+           ▼
+┌─────────────────────────────┐
+│  Transcript + Material      │
+│  Analysis                   │
 │  → cleaned-transcript.md    │
+└──────────┬──────────────────┘
+           ▼
+┌─────────────────────────────┐
+│  Intent Brief               │
+│  → intent-brief.md          │
+└──────────┬──────────────────┘
+           ▼
+┌─────────────────────────────┐
+│  ★ Gate 0: User Review      │
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
@@ -54,7 +79,7 @@ For converting discovery workshop materials into structured, Jira-ready epics an
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
-│  Quality Review (10 passes) │
+│  Quality Review (Lite/Full) │
 │  → quality-review.md        │
 └──────────┬──────────────────┘
            ▼
@@ -72,14 +97,23 @@ For converting discovery workshop materials into structured, Jira-ready epics an
 └──────────┬──────────────────┘
            ▼
 ┌─────────────────────────────┐
-│  Push to Jira               │
-│  (create epics → stories)   │
+│  Push + Verify in Jira      │
+│  → baseline refresh         │
 └─────────────────────────────┘
 ```
 
+## Quality Review Modes
+
+The quality review step runs in one of two modes:
+
+| Mode | Default Use | Passes |
+|---|---|---|
+| Lite | Smaller, lower-risk workshops | A, B, E, H, I |
+| Full | Larger workshops, regulated domains, or higher-risk scope | A through J |
+
 ## Quality Review Passes
 
-The quality review step runs 10 domain-agnostic analysis passes against the approved task list:
+Full mode runs 10 domain-agnostic analysis passes against the approved task list:
 
 | Pass | Category | What It Checks |
 |---|---|---|
@@ -102,7 +136,7 @@ To iterate on an existing Jira backlog instead of workshop materials:
 /tsh-analyze-materials PROJ-123
 ```
 
-The agent fetches existing issues from Jira, converts them into the local format, then runs quality review and formatting. Changes can be pushed back to Jira individually or in batch.
+The agent fetches existing issues from Jira, converts them into the local format, then runs quality review and formatting. Approved changes can be pushed back to Jira individually or in batch and verified after sync.
 
 ## Connecting to the Standard Flow
 
@@ -112,7 +146,7 @@ After workshop analysis, individual tasks can flow into the standard delivery wo
 /tsh-analyze-materials  →  /tsh-implement PROJ-123  →  /tsh-review
 ```
 
-Use the **Deep-dive Research per Task** handoff to transition a specific task to the Context Engineer for detailed requirements gathering, or the **Prepare Implementation Plan** handoff to send it to the Architect.
+Use the **Start Implementation** handoff to transition the current task to the Engineering Manager for research, planning, and implementation.
 
 :::warning Important
 Each gate requires your review and approval. The Business Analyst produces business-oriented outputs — validate that the extracted tasks accurately reflect workshop discussions and that no critical topics were missed. AI assistance does not replace stakeholder judgment.

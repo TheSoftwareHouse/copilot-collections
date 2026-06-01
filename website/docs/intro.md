@@ -21,7 +21,7 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 | Capability | Count | Description |
 |---|---|---|
 | 🧑‍💻 **Specialized Agents** | 12 | Business Analyst, Context Engineer, Architect, Engineering Manager, Software Engineer, Prompt Engineer, Code Reviewer, UI Reviewer, E2E Engineer, DevOps Engineer, Copilot Engineer, Copilot Orchestrator |
-| 💬 **Public Prompts** | 12 | `/tsh-analyze-materials`, `/tsh-implement`, `/tsh-review`, `/tsh-review-ui`, `/tsh-review-codebase`, `/tsh-create-custom-agent`, `/tsh-create-custom-skill`, `/tsh-create-custom-prompt`, `/tsh-create-custom-instructions`, `/tsh-audit-infrastructure`, `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs` |
+| 💬 **Public Prompts** | 13 | `/tsh-explore-materials`, `/tsh-analyze-materials`, `/tsh-implement`, `/tsh-review`, `/tsh-review-ui`, `/tsh-review-codebase`, `/tsh-create-custom-agent`, `/tsh-create-custom-skill`, `/tsh-create-custom-prompt`, `/tsh-create-custom-instructions`, `/tsh-audit-infrastructure`, `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs` |
 | 🔧 **Automatic Delegation** | via `/tsh-implement` | The Engineering Manager automatically routes tasks to Software Engineer, Prompt Engineer, E2E Engineer, DevOps Engineer, and UI Reviewer based on the implementation plan |
 | 🧰 **Reusable Skills** | 31 | Transcript Processing, Task Extraction, Task Quality Review, Jira Task Formatting, Task Analysis, Architecture Design, Codebase Analysis, Code Review, Frontend Review, Implementation Gap Analysis, E2E Testing, Technical Context Discovery, Prompt Engineering, Frontend Implementation, Implementing Forms, Writing Hooks, Ensuring Accessibility, Optimizing Frontend, UI Verification, SQL & Database Engineering, CI/CD Implementation, Kubernetes Implementation, Terraform Modules, Observability Implementation, Secrets Management, Cloud Cost Optimization, Multi-Cloud Architecture Design, Creating Agents, Creating Skills, Creating Prompts, Creating Instructions |
 | 🔌 **MCP Integrations** | 11 | Atlassian, Figma Dev Mode, Context7, Playwright, Sequential Thinking, PDF Reader, AWS API, AWS Documentation, GCP Gcloud, GCP Observability, GCP Storage |
@@ -30,7 +30,7 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 ## Key Benefits
 
 ### For Product Teams
-- **Workshop to Jira in minutes** — Process transcripts, Figma designs, and documents into structured epics and stories with a quality review gate. No more lost workshop outputs.
+- **Workshop to Jira in minutes** — Explore materials when needed, approve an intent brief, then turn transcripts, Figma designs, and documents into structured epics and stories with verified Jira sync.
 - **Systematic backlog quality** — 10-pass quality analysis catches missing entity lifecycles, error states, notification gaps, and undocumented dependencies in both new and existing backlogs.
 
 ### For Developers
@@ -47,7 +47,7 @@ Most teams use AI for code completion. **Copilot Collections turns AI into an en
 
 | Problem | Solution | Time |
 |---|---|---|
-| Workshop notes sitting in notebooks | `/tsh-analyze-materials` — epics and stories in Jira | ~15 min |
+| Workshop notes sitting in notebooks | `/tsh-explore-materials` or `/tsh-analyze-materials` — explore context or turn it into epics and stories in Jira | ~15 min |
 | New developer struggling with context | `/tsh-implement PROJ-123` — Engineering Manager gathers research automatically | ~3 min |
 | No implementation plan | `/tsh-implement PROJ-123` — Engineering Manager creates plan automatically | ~5 min |
 | UI doesn't match Figma | `/tsh-implement` — automated Figma verification loop via internal UI prompt | ~20 min |
@@ -63,7 +63,7 @@ Every task follows a structured lifecycle:
 
 > **Ideate → Implement → Review**
 
-1. **Ideate** — Convert workshop materials into Jira-ready epics and stories.
+1. **Ideate** — Explore workshop materials or convert them into Jira-ready epics and stories, moving through intent brief approval, extraction, quality review, and Jira sync.
 2. **Implement** — Engineering Manager orchestrates research, planning, and implementation with specialized agents.
 3. **Review** — Verify against acceptance criteria, security, and quality standards.
 

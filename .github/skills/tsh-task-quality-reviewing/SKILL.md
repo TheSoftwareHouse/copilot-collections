@@ -6,7 +6,7 @@ user-invocable: false
 
 # Task Quality Review
 
-This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs 10 domain-agnostic analysis passes, optionally enriches findings with existing Jira board context, and produces a structured list of suggestions the user can individually accept or reject.
+This skill performs a systematic quality analysis on an approved task list (epics and user stories) to identify gaps, missing edge cases, and improvement opportunities. It runs Lite or Full review mode, optionally enriches findings with existing Jira board context, and produces a structured list of suggestions the user can individually accept or reject.
 
 The output is a **quality review report** documenting all suggestions, their dispositions, and any changes applied to the task list.
 
@@ -32,10 +32,10 @@ Use the checklist below and track your progress:
 
 ```
 Quality review progress:
-- [ ] Step 1: Load inputs and establish context
+- [ ] Step 1: Load inputs, establish context, and select review mode
 - [ ] Step 2: Gather Jira board context (optional)
 - [ ] Step 3: Build domain model from the task list
-- [ ] Step 4: Run analysis passes
+- [ ] Step 4: Run the active analysis passes for the selected mode
 - [ ] Step 5: Enrich with domain research
 - [ ] Step 6: Classify and structure suggestions
 - [ ] Step 7: Present suggestions for user review
@@ -43,17 +43,29 @@ Quality review progress:
 - [ ] Step 9: Save quality review report
 ```
 
+**Review Modes**
+
+Choose the review mode early in Step 1 and record it in the review context.
+
+| Mode | Use When | Active Passes |
+|---|---|---|
+| Lite | Default for small, low-risk workshops (roughly 3 or fewer epics and 12 or fewer stories) unless the user requests Full | A, B, E, H, I |
+| Full | Larger workshops, regulated domains, high-risk scope, or when the user requests a deeper pass | A, B, C, D, E, F, G, H, I, J |
+
 ---
 
-**Step 1: Load inputs and establish context**
+**Step 1: Load inputs, establish context, and select review mode**
 
 Collect and review all available materials:
 
 - **`extracted-tasks.md`** (mandatory): The Gate 1-approved epic and story list. This is the primary input.
 - **`cleaned-transcript.md`** (if available): Cross-reference for details that may have been lost or simplified during task extraction.
 - **Other source materials**: Figma designs, codebase analysis, Confluence pages, or any other documents referenced during extraction.
+- **`intent-brief.md`** and **`workshop-context-summary.md`** (if available): Use these to keep the review aligned with the approved scope and any exploration notes.
 
 Build a complete picture of the project scope, actors, and features before proceeding to analysis.
+
+Select Lite or Full mode based on task size, risk, and user direction. Record the chosen mode in the review output before running passes.
 
 **Step 2: Gather Jira board context (optional)**
 
@@ -93,7 +105,11 @@ This model is derived entirely from the task list content. It is not a technical
 
 > **Protected Status Filter**: Before running analysis passes, filter out all tasks (epics and stories) whose Status field is Done, Cancelled, or PO APPROVE. These tasks are considered immutable and must not generate findings or suggestions. They may still be referenced as dependencies by other tasks, but they themselves are excluded from all analysis.
 
-Execute each of the following analysis passes against the domain model and task list. Each pass is independent and produces zero or more findings. A finding is a potential gap or improvement that will become a suggestion.
+Execute only the analysis passes active for the selected review mode. Each pass is independent and produces zero or more findings. A finding is a potential gap or improvement that will become a suggestion.
+
+Lite mode runs Passes A, B, E, H, and I.
+
+Full mode runs Passes A through J.
 
 ---
 
@@ -257,7 +273,7 @@ Transform each finding from the analysis passes into a structured suggestion:
    - `NEW_STORY`: The gap represents entirely new functionality that does not fit in any existing story.
    - `NEW_EPIC`: The gap represents a new capability area that warrants its own epic (rare — typically only for platform operations or major compliance requirements).
 
-3. **Write the proposed change**: Draft the exact text to be added or modified. For new stories, follow the format established in `extracted-tasks.md`. For acceptance criteria, follow the checklist format. This ensures that accepting a suggestion immediately produces valid task list content.
+3. **Write the proposed change**: Draft the exact text to be added or modified. For new stories, follow the format established in `extracted-tasks.md`, including a `Source` field and scenario-style acceptance criteria. For acceptance criteria, follow the checklist format and prefer concise `GIVEN / WHEN / THEN` scenarios. Use an `Additional Acceptance Checks` subsection only when scenario format is not enough.
 
 4. **Deduplicate**: If multiple passes produce findings that overlap, merge them into a single suggestion and note all contributing categories.
 

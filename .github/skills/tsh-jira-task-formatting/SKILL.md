@@ -6,7 +6,7 @@ user-invocable: false
 
 # Jira Task Formatting
 
-This skill helps you transform an extracted task list (epics and user stories) into a Jira-ready format that can be directly pushed to Jira. It applies a consistent benchmark template to every task, validates completeness, and manages a two-gate review process before any issues are created.
+This skill helps you transform an extracted task list (epics and user stories) into a Jira-ready format that can be directly pushed to Jira. It applies a consistent benchmark template to every task, preserves source traceability, validates completeness, and manages a two-gate review process before any issues are created.
 
 ## Jira Task Formatting Process
 
@@ -22,7 +22,9 @@ Formatting progress:
 - [ ] Step 6: Formatting Review — User reviews formatted markdown
 - [ ] Step 7: Save the Jira-ready tasks document
 - [ ] Step 8: Push Approval — User approves Jira push
-- [ ] Step 9: Create issues in Jira
+- [ ] Step 9: Create or update issues in Jira
+- [ ] Step 10: Post-push verification against Jira
+- [ ] Step 11: Archive session artifacts and refresh the project baseline
 ```
 
 **Step 1: Load the benchmark template and extracted tasks**
@@ -61,10 +63,11 @@ For each user story, create a Jira-ready story entry with:
 - **Summary** (title): Follow the naming convention from the benchmark template
 - **Description**: Structured using the benchmark story description format, including:
   - Context paragraph linking to the parent epic
+  - Source Context section that preserves traceability from extracted tasks
   - User story in "As a… I want… So that…" format
   - Requirements as a numbered list
   - High-level technical notes (only if present in extracted tasks)
-- **Acceptance criteria**: Formatted as a checklist compatible with Jira markdown
+- **Acceptance criteria**: Formatted as a checklist compatible with Jira markdown; scenario-style `GIVEN / WHEN / THEN` criteria are valid and should remain readable after formatting
 - **Story points guidance**: Include a sizing suggestion (e.g., Small / Medium / Large) based on scope complexity — but note this is a suggestion, not an estimate. The team should estimate during refinement.
 - **Labels**: Consistent with the parent epic's labels plus any story-specific labels
 - **Parent epic**: Reference to the parent epic by title (will be linked by ID after creation)
@@ -147,6 +150,28 @@ Using the Atlassian tools, process issues based on their Jira Key:
 
 After all issues are processed, report the final state back to the user — showing all Jira keys in `jira-tasks.md` and confirming which were created, updated, and skipped (with their statuses).
 
+**Step 10: Post-push verification against Jira**
+
+After the Jira sync succeeds, read back the created or updated issues and verify at least the following for each task:
+- Summary/title
+- Parent epic linkage for stories
+- Acceptance criteria presence
+- Relevant description sections
+- Current status capture
+
+If verification finds mismatches, surface them clearly and do not claim the push is fully verified until the differences are resolved or explicitly acknowledged by the user.
+
+**Step 11: Archive session artifacts and refresh the project baseline**
+
+When verification succeeds, archive the current session artifacts under `specifications/projects/<project-name>/sessions/<YYYY-MM-DD>-<workshop-name>/`.
+
+- Use the workshop name as the fallback project key when no explicit project name exists
+- Refresh `specifications/projects/<project-name>/task-baseline.md`
+- Treat `Jira Key` as the primary identity when merging baseline entries
+- Replace same-key entries with the latest synced content and status
+- Add new entries for newly pushed tasks
+- Preserve Jira as the external source of truth
+
 If any issue creation or update fails, inform the user immediately and ask how to proceed.
 
 ## Per-Change Modification Flow
@@ -169,6 +194,7 @@ When formatting descriptions and acceptance criteria for Jira:
 - Use `# item` for numbered lists
 - Use `{noformat}` or `{code}` blocks for preformatted text
 - Acceptance criteria should use `(/) criterion` for checklist items (Jira checkbox format)
+- Scenario-style acceptance criteria remain valid when expressed as `(/) GIVEN ... WHEN ... THEN ...`
 
 Note: The markdown file saved locally uses standard markdown. The Jira-specific formatting is applied only when creating the actual issues.
 

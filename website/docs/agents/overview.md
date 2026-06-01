@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **12 specialized agents** (plus 4 internal sub-agents) that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, architecture review, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads these automatically when the corresponding mode is selected.
+Copilot Collections provides **12 user-facing specialized agents** plus internal worker agents that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads the user-facing agents automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -51,7 +51,7 @@ Each agent has:
 
 | Agent | File | Role | Key Tools |
 |---|---|---|---|
-| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Converts workshop materials into Jira-ready epics and stories | Atlassian, Figma, PDF Reader, Sequential Thinking |
+| [Business Analyst](./business-analyst) | `tsh-business-analyst.agent.md` | Orchestrates workshop analysis into Jira-ready epics and stories | Atlassian, Figma, PDF Reader, Sequential Thinking |
 
 ### 🛠 Development Agents
 
@@ -84,9 +84,9 @@ Each agent has:
 | [Copilot Engineer](./copilot-engineer) | `tsh-copilot-engineer.agent.md` | Designs, creates, reviews Copilot customization artifacts | Context7, Sequential Thinking |
 | [Copilot Orchestrator](./copilot-orchestrator) | `tsh-copilot-orchestrator.agent.md` | Coordinates complex multi-step Copilot customization tasks | Sequential Thinking |
 
-### 🔧 Internal Sub-Agents
+### 🔧 Internal Worker Agents
 
-These agents are not invoked directly by users. They are delegated to by the Copilot Orchestrator.
+These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, while the Copilot Orchestrator delegates to the customization workers below.
 
 | Agent | File | Role |
 |---|---|---|
