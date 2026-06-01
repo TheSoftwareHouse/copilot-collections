@@ -33,10 +33,10 @@ Each agent has:
        ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
        ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
 ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
-│  Engineer    │  │  (plan)      │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
-│  (research)  │  │              │  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+│  Context     │  │  Architect   │  │ Architect    │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
+│  Engineer    │  │  (plan)      │  │ Reviewer     │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
+│  (research)  │  │              │  │ (plan review)│  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
        │
        ▼
 ┌──────────────┐
@@ -93,3 +93,4 @@ These agents are not invoked directly by users. The Business Analyst internally 
 | [Copilot Researcher](./copilot-researcher) | `tsh-copilot-researcher.agent.md` | Analyzes codebases and documentation, extracts patterns |
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
+| [Architect Reviewer](./architect-reviewer) | `tsh-architect-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |

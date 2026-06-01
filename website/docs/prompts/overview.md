@@ -33,7 +33,7 @@ These are the user-facing commands available in VS Code chat.
 
 | Command | Agent | Description |
 |---|---|---|
-| [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate the full cycle: research → plan → implementation |
+| [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate the full cycle: research/context gathering if needed → plan → implementation |
 
 ### ✅ Quality Commands
 
@@ -68,6 +68,7 @@ When you run [`/tsh-implement`](./public/implement), the Engineering Manager aut
 |---|---|
 | Research (context gathering) | Context Engineer (via [internal research prompt](./internal/research)) |
 | Planning (architecture) | Architect (via [internal plan prompt](./internal/plan)) |
+| Plan validation | Architect Reviewer stress-test (via [internal review-plan prompt](./internal/review-plan)) |
 | Backend / general code | Software Engineer |
 | Frontend with Figma | Software Engineer (via [internal UI prompt](./internal/implement-ui)) |
 | E2E tests | E2E Engineer |

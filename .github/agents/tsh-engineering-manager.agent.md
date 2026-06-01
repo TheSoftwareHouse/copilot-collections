@@ -20,6 +20,7 @@ agents:
     "tsh-software-engineer",
     "tsh-devops-engineer",
     "tsh-architect",
+    "tsh-architect-reviewer",
     "tsh-code-reviewer",
     "tsh-ui-reviewer",
     "tsh-context-engineer",
@@ -117,7 +118,24 @@ You have access to the `tsh-architect` agent.
 - **Important**:
   - Always run subagent with the relevant architectural or codebase analysis prompt (e.g., [tsh-review-codebase.prompt.md](../prompts/tsh-review-codebase.prompt.md), [tsh-plan.prompt.md](../internal-prompts/tsh-plan.prompt.md)) to ensure that the architectural guidance, plan creation and codebase analysis are integrated into the implementation process effectively.
 - **SHOULD NOT delegate to**:
-  - The `*.plan.md` exists and is complete - in such cases, delegate implementation tasks directly to `tsh-software-engineer` or `tsh-devops-engineer` agents based on the nature of the task.
+  - The `*.plan.md` exists, is complete, and has already been reviewed without changes since the last approval - in such cases, skip plan review and proceed with implementation tasks to `tsh-software-engineer` or `tsh-devops-engineer` agents based on the nature of the task.
+
+You have access to the `tsh-architect-reviewer` agent.
+
+- **MUST delegate to when**:
+  - The `tsh-architect` agent has just produced or updated a `.plan.md` file and it has not yet been reviewed — ALWAYS validate it before proceeding to implementation.
+  - The Full Implementation Flow planning phase has completed.
+  - A plan has been revised by the architect after receiving review feedback — re-validate it.
+- **IMPORTANT**:
+  - Use [tsh-review-plan.prompt.md](../internal-prompts/tsh-review-plan.prompt.md) with the `.plan.md` path and matching `.research.md` path.
+  - Keep `*.plan-review.md` as the source of truth. Do not rewrite or summarize it.
+  - If it is incomplete, send it back to `tsh-architect-reviewer`.
+  - If the verdict is **REVISIONS NEEDED**, send it to `tsh-architect`, resolve all BLOCKER findings, and re-run review until **APPROVED**, user override, or 3 iterations.
+  - If the verdict is **APPROVED**, give the user a separate chat summary and keep `*.plan-review.md` unchanged.
+  - Skip re-review if the plan is already approved and unchanged. Do not proceed with unresolved BLOCKER findings.
+- **SHOULD NOT delegate to**:
+  - Plans that were previously reviewed and approved without changes since last review.
+  - Quick Implementation Flow tasks where no `.plan.md` is produced.
 
 You have access to the `tsh-ui-reviewer` agent.
 

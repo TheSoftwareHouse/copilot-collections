@@ -16,14 +16,14 @@ This enables the MCP tools globally across all your projects.
 1. Open the **Command Palette**: `CMD` + `Shift` + `P` (macOS) or `Ctrl` + `Shift` + `P` (Windows/Linux).
 2. Type and select **"MCP: Open User Configuration"**.
 3. This will open your global `mcp.json` file.
-4. Copy the contents of `.vscode/mcp.json` from this repository and paste them into your user configuration file.
+4. Copy the contents of the `mcp.json` configuration [below](#mcp-configuration) and paste them into your user configuration file.
 
 ### Option 2: Workspace Configuration
 
 Use this if you want to enable these tools only for a specific project.
 
-1. Copy the `.vscode/mcp.json` file from this repository.
-2. Paste it into the `.vscode` folder of your target project (e.g., `my-project/.vscode/mcp.json`).
+1. Copy the `mcp.json` configuration [below](#mcp-configuration).
+2. Save it as `.vscode/mcp.json` in your target project (e.g., `my-project/.vscode/mcp.json`).
 
 ## MCP Configuration
 
@@ -108,6 +108,28 @@ To enable this, modify your `mcp.json` configuration (User or Workspace) to use 
 :::note
 Server IDs in `mcp.json` are lowercase (e.g., `context7`, `figma`). If you copied an older template with different names, update your configuration to match the current template.
 :::
+
+## After Installation
+
+Once you've copied the configuration, here's what to do:
+
+1. **Start using Copilot** — simply send a message in Copilot Chat. VS Code will start the MCP servers automatically.
+2. **Authenticate when prompted** — for **Atlassian** and **Figma**, your browser will open asking you to log in and authorize access. Just follow the prompts.
+3. **(Optional) Add a Context7 API key** — Context7 works out of the box with rate limits. For higher limits, see [Configuring Context7 API Key](#configuring-context7-api-key) below.
+
+That's it — no extra commands or manual wiring needed.
+
+## Verify Your Setup
+
+To confirm all MCP servers are running correctly:
+
+1. Open the **Command Palette**: `CMD` + `Shift` + `P` (macOS) or `Ctrl` + `Shift` + `P` (Windows/Linux).
+2. Type and select **"MCP: List Servers"**.
+3. You should see all servers listed with a **Running** status:
+
+![MCP List Servers showing all servers running](/img/mcp-list-servers.png)
+
+If any server shows a different status, try restarting VS Code or check the [Authentication Requirements](#authentication-requirements) section below.
 
 ## Authentication Requirements
 

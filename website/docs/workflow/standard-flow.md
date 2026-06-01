@@ -5,7 +5,7 @@ title: Standard Flow
 
 # Standard Flow
 
-The standard workflow is used for backend and fullstack tasks. The Engineering Manager orchestrates the full cycle: research → plan → implement → review.
+The standard workflow is used for backend and fullstack tasks. The Engineering Manager orchestrates the full cycle: research → plan → plan validation → implement → review.
 
 ## Step-by-Step Command Sequence
 
@@ -31,6 +31,13 @@ The Engineering Manager automatically handles the full development cycle:
 - **What it produces:** A `.plan.md` file with checklist-style phases that can be executed by specialized agents.
 - **Your action:** Review the implementation plan. Confirm scope, phases, and acceptance criteria.
 
+#### Plan Validation Phase (internal)
+
+- **Delegated to:** Architect Reviewer
+- **What it does:** Validates the plan against the research file, codebase assumptions, feasibility, simplicity, and project patterns before implementation begins.
+- **What it produces:** A `.plan-review.md` file saved alongside the plan in the same `specifications/<task-name>/` directory.
+- **Your action:** Review the implementation plan and review summary together. Confirm the approved plan before implementation begins.
+
 #### Implementation Phase
 
 - **Delegated to:** Software Engineer, Prompt Engineer, DevOps Engineer, E2E Engineer (based on task type)
@@ -39,7 +46,7 @@ The Engineering Manager automatically handles the full development cycle:
 - **Your action:** Review code changes after each phase. Test functionality. Verify against the plan.
 
 :::tip
-If a `.research.md` or `.plan.md` file already exists for the task, the Engineering Manager skips that phase and proceeds directly to the next step.
+If a `.research.md` or `.plan.md` file already exists for the task, the Engineering Manager skips that phase and proceeds directly to the next step. If a `.plan.md` is already approved and unchanged since the last review, the plan validation step is skipped.
 :::
 
 ### 2. Review
@@ -61,8 +68,9 @@ If a `.research.md` or `.plan.md` file already exists for the task, the Engineer
    ↳ 📖 Review the generated research document
    ↳ ✅ Confirm to proceed to planning
    ↳ 🧱 Engineering Manager delegates to Architect for planning
-   ↳ 📖 Review the implementation plan
-   ↳ ✅ Confirm scope, phases, and acceptance criteria
+   ↳ 🧪 Engineering Manager delegates to Architect Reviewer via /tsh-review-plan for plan validation
+   ↳ 📖 Review the implementation plan and review summary
+   ↳ ✅ Confirm the approved plan before implementation begins
    ↳ 💻 Engineering Manager delegates implementation to specialized agents
    ↳ 📖 Review code changes after each phase
    ↳ ✅ Test functionality, verify against plan
