@@ -3,7 +3,7 @@ sidebar_position: 2
 title: Architecture Design
 ---
 
-# Architecture Design
+## Architecture Design
 
 **Folder:** `.github/skills/tsh-architecture-designing/`  
 **Used by:** Architect
@@ -35,7 +35,7 @@ Produce a structured implementation plan (`plan.example.md` template) with phase
 ## Enforced Patterns
 
 | Category | Patterns |
-|---|---|
+| --- | --- |
 | **Software Design** | DRY, KISS, DDD, TDD, CQRS, SOLID |
 | **Architecture** | Hexagonal, Layered, Modular |
 | **UI/UX** | Atomic Design, WCAG |
@@ -43,14 +43,14 @@ Produce a structured implementation plan (`plan.example.md` template) with phase
 
 ## Plan Requirements
 
-- Each phase is independently runnable with quality gates.
-- Every plan always includes `Glossary / Ubiquitous Language`, `Technical Context`, and `Traps and Warnings`.
-- Every phase includes a reusable preamble: `Purpose`, `State Before`, `State After`, `Dependencies / Risks`.
-- Tasks have `[CREATE]`, `[MODIFY]`, or `[REUSE]` action types.
-- Every task includes `Context`, `Approach`, `References`, `Traps`, and a clear definition of done.
+- Each phase is independently runnable and has clear quality gates.
+- Every phase includes the reusable `Purpose` / `State Before` / `State After` / `Dependencies / Risks` preamble.
+- Every task is scoped to one file with exact file scope only.
+- Tasks use the lean field set from the canonical `plan.example.md` template: `Files in Scope`, `Read First`, `Preconditions / Dependencies`, `Changes Required`, `Expected Artifacts`, `Definition of Done`, `Verification`, and `Out of Scope / Do NOT`.
+- Plans are guidance artifacts only — no real / production code. Use prose, tables, contracts, and clearly labeled non-executable pseudocode instead.
+- The canonical output contract is `.github/skills/tsh-architecture-designing/plan.example.md`.
 - A code review phase is mandatory at the end.
 - No deployment plans or manual QA steps.
-- Plans are guidance artifacts only — no real / production code. Use prose, tables, diagrams, contracts, and labeled non-executable pseudocode instead.
 
 ## Connected Skills
 

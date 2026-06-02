@@ -16,12 +16,12 @@ Before starting, load and follow these skills:
 Follow the `tsh-technical-context-discovering` skill to identify existing Terraform setup.
 
 Additionally, always:
-- **Read the plan's execution-support package** from the plan file (`*.plan.md`) if it exists — `Glossary / Ubiquitous Language`, `Technical Context`, `Traps and Warnings`, and the relevant phase preamble(s). These sections contain project conventions, constraints, and sequencing cues already discovered during planning. Use them as your primary source and skip re-discovery for aspects already covered.
-- Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
+- **Read the delegated task block first** — Read the delegated task block in the plan and only the files/resources named in its `Read First` list. Use that task block as the primary source of truth for module names, state backend notes, provider versions, apply preconditions, and other infrastructure-specific facts. Do not rely on global plan sections or broader execution-support packages.
+- Check `*.instructions.md` only for aspects **not covered** by the task block or its named reading
 - Analyze existing Terraform modules and state configuration
 - Discover environment organization (workspaces, Terragrunt)
 
-Treat labeled pseudocode, tables, diagrams, and contracts in the plan as illustrative guidance only. They are not production Terraform configuration to copy verbatim.
+Treat labeled pseudocode, tables, diagrams, and contracts in the task block as illustrative guidance only. They are not production Terraform configuration to copy verbatim.
 
 ---
 

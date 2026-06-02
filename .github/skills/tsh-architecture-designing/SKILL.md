@@ -79,14 +79,14 @@ Don't provide deployment plans, code pushing instructions, code review instructi
 
 Save the plan as a document following the current `./plan.example.md` template.
 
-Treat that template as the canonical output contract. The final plan must stay self-contained for lower-tier execution and include the always-present `Glossary / Ubiquitous Language`, `Technical Context`, and `Traps and Warnings` sections from the template.
+Treat that template as the canonical output contract. The final plan must stay self-contained at task-block level, file-bounded, and non-executable. Each task block must be sufficient for a lower-tier implementor together with its named `Read First` items; do not rely on always-on global sections or external research/spec docs for execution facts.
 
 Use the plan to carry forward the context that an implementor would otherwise have to rediscover:
 
-- Define key domain and workflow terminology in the glossary
-- Embed the important technical rules inline in `Technical Context` instead of relying on file pointers only
-- Capture non-obvious failure modes and "do not do this" guidance in `Traps and Warnings`
-- Structure every task with `Context`, `Approach`, `References`, `Traps`, and `Definition of Done`
+- Define key domain and workflow terminology only where needed in the relevant task block
+- Embed the important technical rules inline in the relevant task block instead of relying on file pointers only
+- Capture non-obvious failure modes and "do not do this" guidance in the task block instead of global sections
+- Structure every task with the lean field set from the template, including `Files in Scope`, `Read First`, `Preconditions / Dependencies`, `Changes Required`, `Expected Artifacts`, `Definition of Done`, `Verification`, and `Out of Scope / Do NOT`
 
 Plans are guidance artifacts only. Do not include real / production code in them. Use prose, tables, diagrams, contracts, and clearly labeled non-executable pseudocode when illustrative detail is needed.
 

@@ -20,7 +20,7 @@ Before starting, load and follow these skills:
 
 4. **Failure-modes pass** — Find the strongest reasons the plan may fail during implementation or cause major rework. Prioritize substantive risks such as integration mismatches, unsafe migrations, coordination traps, weak rollout strategies, and brittle task breakdowns.
 
-5. **Self-containedness-for-execution pass** — Explicitly evaluate whether a lower-tier implementor can begin execution from the plan without reopening the research file for basic context recovery. Check whether the `Glossary / Ubiquitous Language`, `Technical Context`, `Traps and Warnings`, and each phase preamble provide enough terminology, rules, constraints, and sequencing context to start work safely.
+5. **Self-containedness-for-execution pass** — Explicitly evaluate whether a lower-tier implementor can begin execution from a single delegated task block plus its named `Read First` items without reopening the research file or any out-of-plan docs for basic context recovery. Check whether the task block itself provides enough file-bounded scope, exact task / phase order, non-code boundary guidance, terminology, rules, and constraints to start work safely. Flag any task block that points at external research or out-of-plan documentation.
 
 6. **Hidden-assumptions pass** — Identify assumptions that are unproven in this repository. Flag beliefs about files, abstractions, contracts, environment behavior, team coordination, or data shape that the plan depends on but does not verify.
 
@@ -54,7 +54,7 @@ The full structured review report is the primary deliverable. Save it as `{task-
 - Reviewed plan path, research file path, review date, and verdict (`APPROVED` or `REVISIONS NEEDED`)
 - Summary counts for blockers, warnings, and suggestions
 - `Challenge Domains` — One entry per domain with finding or explicit `no issue` note
-- `Self-Containedness for Execution` — explicitly report whether glossary, embedded technical rules, traps, phase preambles, and task-level guidance are sufficient for lower-tier execution without reopening research
+- `Self-Containedness for Execution` — explicitly report whether the delegated task block and its named `Read First` items are sufficient for lower-tier execution, including file-bounded scope, exact task / phase order, and the non-code boundary, without reopening research or out-of-plan docs
 - `Decision and Revision History` — Always present, including on the first review. It is concise evidence of reviewer impact on the plan and must preserve the high-signal, non-transcript standard. Format it as a compact Markdown table sorted chronologically from oldest to newest with these columns: `Date`, `Iteration`, `Decision / Topic`, `Problem / Challenge`, `Plan Decision / Change`, `Status`. Keep cells phrase-length where possible, not paragraph prose. Use compact `Status` values such as `open`, `changed`, `resolved`, `kept`, or `dropped`.
 - `Top Failure Modes` — the strongest reasons this plan may fail or create expensive rework
 - `Unproven Assumptions` — assumptions the architect must verify or tighten
