@@ -5,7 +5,7 @@ title: Architect Reviewer
 
 # Architect Reviewer Agent
 
-**File:** `.github/agents/tsh-architect-reviewer.agent.md`
+**File:** `.github/agents/tsh-plan-reviewer.agent.md`
 
 The Architect Reviewer is an internal sub-agent that stress-tests implementation plans before code is written. It challenges the plan for likely failure modes, hidden assumptions, sequencing traps, integration mismatches, migration and data risks, and false confidence in testing.
 

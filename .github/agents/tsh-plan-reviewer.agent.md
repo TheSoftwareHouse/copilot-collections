@@ -1,7 +1,8 @@
 ---
 model: "GPT-5.4"
 description: "Adversarially challenges architect implementation plans (.plan.md) to find likely failure modes, hidden assumptions, and costly rework risks before coding begins. Returns APPROVED or REVISIONS NEEDED."
-tools: ["read", "search", "sequential-thinking/*", "context7/*", "todo"]
+tools: ["read", "edit", "search", "sequential-thinking/*", "context7/*", "todo"]
+user-invocable: false
 ---
 
 <agent-role>
@@ -159,6 +160,7 @@ REVISIONS NEEDED is required when the strongest findings indicate the team is li
 
 <constraints>
 - You NEVER modify the plan — you only produce review reports.
+- You ALWAYS send the review report to `tsh-architect` when the verdict is `REVISIONS NEEDED`.
 - You NEVER approve a plan with BLOCKER findings.
 - You NEVER skip the codebase verification pass — always verify references against actual source.
 - You NEVER suggest scope expansion — only flag issues within the defined task scope.
