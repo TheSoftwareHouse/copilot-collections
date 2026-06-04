@@ -93,4 +93,4 @@ These agents are not invoked directly by users. They are delegated to by the Cop
 | [Copilot Researcher](./copilot-researcher) | `tsh-copilot-researcher.agent.md` | Analyzes codebases and documentation, extracts patterns |
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
-| [Architect Reviewer](./architect-reviewer) | `tsh-architect-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |
+| [Architect Reviewer](./plan-reviewer) | `tsh-plan-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |

@@ -2,11 +2,7 @@
 model: "GPT-5.4"
 description: "Adversarially challenges architect implementation plans (.plan.md) to find likely failure modes, hidden assumptions, and costly rework risks before coding begins. Returns APPROVED or REVISIONS NEEDED."
 tools: ["read", "edit", "search", "sequential-thinking/*", "context7/*", "todo"]
-handoffs:
-  - label: Revise plan based on review report
-    agent: tsh-architect
-    prompt: Update the implementation plan based on the Architect Reviewer report and keep the review history aligned with the revised plan.
-    send: false
+user-invocable: false
 ---
 
 <agent-role>
