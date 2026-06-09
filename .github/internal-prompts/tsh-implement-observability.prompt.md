@@ -16,10 +16,12 @@ Before starting, load and follow these skills:
 Follow the `tsh-technical-context-discovering` skill to identify existing observability setup.
 
 Additionally, always:
-- **Read the "Technical Context" section from the plan file** (`*.plan.md`) if it exists — it contains project conventions and patterns already discovered during planning. Use it as your primary source and skip re-discovery for aspects already covered.
-- Check `*.instructions.md` only for aspects **not covered** by the plan's Technical Context
+- **Read the delegated task block first** — Read the delegated task block in the plan and only the files/resources named in its `Read First` list. Use that task block as the primary source of truth for metric names, log fields, trace spans, alert thresholds, and any rollout or verification notes. Do not rely on global plan sections or broader execution-support packages.
+- Check `*.instructions.md` only for aspects **not covered** by the task block or its named reading
 - Analyze existing monitoring configurations (Prometheus, Grafana, CloudWatch, etc.)
 - Discover existing alerting rules and dashboards
+
+Treat labeled pseudocode, tables, diagrams, and contracts in the task block as illustrative guidance only. They are not production configuration to copy verbatim.
 
 ---
 
@@ -86,4 +88,4 @@ Skip for: adding alerts, creating dashboards, configuring log retention, adding 
 - Infrastructure provisioning → `/tsh-implement-terraform`
 - CI/CD pipelines → `/tsh-implement-pipeline`
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-observability:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-observability:v2 -->

@@ -1,34 +1,39 @@
-Your goal is to implement the feature according to the provided implementation plan and feature context.
+Implement the delegated task exactly as written.
 
-Thoroughly review the implementation plan and feature context before starting the implementation. Ensure a clear understanding of the requirements and technical designs to deliver effective solutions.
+Read the delegated task block in the plan and only the files/resources named in its `Read First` list. Do not reopen the research file or any external spec notes while executing the task.
 
-Use available tools to gather necessary information and document your findings.
+Use the task block’s `Preconditions / Dependencies`, `Changes Required`, `Expected Artifacts`, `Definition of Done`, `Verification`, and `Out of Scope / Do NOT` fields to guide the work. Treat the plan as a non-executable guidance artifact: prose, tables, contracts, and clearly labeled pseudocode are illustrative only and must be translated into project-appropriate implementation.
 
-Don't deviate from the implementation plan. Follow it step by step to ensure all requirements are met.
+Stay within the task’s exact file scope. If needed information is missing from the task block or its named reading, stop and ask for clarification rather than widening the scope.
+Your goal is to implement the delegated task according to the provided implementation plan.
 
-If you need to make changes to the original solution during implementation, wait for a confirmation before proceeding. Also, ensure to document those changes in the specified plan file in Changelog section. This helps maintain clarity and ensures that all modifications are tracked.
+Read the delegated task block carefully before starting. Open only the files and resources explicitly named in its `Read First` section, plus the exact file listed in `Files in Scope` when you are ready to edit. Treat that task block as the source of truth for scope, dependencies, required changes, verification, and guardrails.
+
+Do not reopen the research file or external spec notes while executing the task. If the task block is missing critical information, stop and ask for clarification or request a plan update instead of running a broader research pass.
+
+Don't deviate from the implementation plan. Follow the delegated task step by step to ensure all requirements are met.
+
+If you need to make changes to the original solution during implementation, wait for confirmation before proceeding.
 
 ## Required Skills
 
-Before starting, load and follow these skills:
+Before starting, load and follow these skills when relevant:
 
-- `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns
 - `tsh-implementation-gap-analysing` - to verify current state before making changes
+- `tsh-technical-context-discovering` - only for gaps not covered by the delegated task block or its `Read First` items
 - `tsh-sql-and-database-understanding` - when implementing database schemas, migrations, SQL queries, ORM-based data access, or working with transactions and locking
-- `tsh-implementing-backend` - when implementing backend API features: REST/GraphQL endpoints, DataGrid filtering/pagination, database handling, JWT authentication, external service adapters, logging, and Docker setup
+- any domain-specific implementation skill named by the wrapper prompt or delegated task
 
 ## Workflow
 
-1. Review the implementation plan and feature context thoroughly.
-2. **Read the "Technical Context" section from the plan file** (`*.plan.md`). This section contains project conventions, coding standards, architecture patterns, tech stack details, testing patterns, and relevant `.instructions.md` rules already discovered during planning. Use it as your primary source of truth — do NOT re-scan the codebase or re-read instruction files for information already captured there. Only perform additional discovery for aspects not covered by the persisted context.
-3. Gather a list of commands you will need during implementation: running tests (unit, integration, E2E and others), linters, building the project, running and generating migrations, etc. These may already be documented in the plan's Technical Context section. Run tests and linters **before** starting implementation and **after** completing each phase.
-4. Focus only on the implementation plan. Don't implement anything not part of the plan unless explicitly instructed.
-5. Don't implement improvements from the plan's improvements section unless explicitly instructed.
-6. Start implementing the feature according to the plan, following each task step by step.
-7. After completing each task step, update the relevant plan to reflect progress by checking the box for the completed task step.
-8. Before making any changes to the original solution during implementation, ask for confirmation. Document those changes in the plan file's Changelog section with timestamps.
-9. Before handing over to review, ensure all tasks in the delegated scope have been completed and the feature meets the defined requirements. Update the acceptance criteria checklist after every verified item.
+1. Read the delegated task block and the files or resources named in `Read First`.
+2. Keep the scope exact. Do not expand the task beyond the single file listed in `Files in Scope`.
+3. Run the relevant checks before and after the change when they are available for the scoped work.
+4. Implement only what the delegated task requires.
+5. After completing the scoped change, update the relevant `Definition of Done` items and any verified `Quality Assurance` items in the plan.
+6. Before making any change to the planned solution, ask for confirmation before proceeding.
+7. Treat labeled pseudocode, tables, and contracts in the plan as illustrative guidance only. They are not production code and must not be copied verbatim into source files.
 
-Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
+Ensure the implementation stays clean, efficient, and maintainable while following the project patterns surfaced by the delegated task and its named reading.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-common-task:v2 -->
