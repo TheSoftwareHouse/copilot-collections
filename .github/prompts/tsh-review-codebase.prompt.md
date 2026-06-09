@@ -1,6 +1,6 @@
 ---
 agent: "tsh-architect"
-model: "GPT-5.4"
+model: ["moonshotai.kimi-k2.5 (customendpoint)", "GPT-5.4"]
 description: "Perform a comprehensive code quality analysis: dead code, duplications, and improvement opportunities."
 ---
 

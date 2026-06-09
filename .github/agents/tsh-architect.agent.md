@@ -1,5 +1,5 @@
 ---
-model: "GPT-5.4"
+model: ["moonshotai.kimi-k2.5 (customendpoint)", "GPT-5.4"]
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools:
   [
