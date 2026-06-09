@@ -48,10 +48,10 @@ Before starting any task, you check all available skills and decide which one is
 
 ## Skills Usage Guidelines
 
-- `tsh-code-reviewing` - to follow the structured code review process covering correctness, quality, security, testing, best practices, and scalability.
+- `tsh-code-reviewing` - to follow the structured code review process and the concrete anti-pattern checklist that must be applied during every review, including verification of test coverage and implementation quality risks.
 - `tsh-implementation-gap-analysing` - to compare the implemented solution against the plan and verify completeness of all required changes.
 - `tsh-technical-context-discovering` - to understand project conventions, coding standards, and established patterns to review against.
-- `tsh-sql-and-database-understanding` - when reviewing database-related code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, and transaction/locking strategies.
+- `tsh-sql-and-database-understanding` - when reviewing persistence, querying, or external integration code: validating SQL quality, index coverage, query performance, schema design, migration safety, ORM usage patterns, transaction/locking strategies, and database-related scalability risks such as N+1 access patterns or in-memory data processing.
 - `tsh-reviewing-frontend` - for frontend-specific review criteria: component quality, hooks correctness, rendering issues, accessibility and performance spot-checks.
 - `tsh-engineering-prompts` - when reviewing LLM prompt code: verify prompt injection defenses, proper delimiter separation, output format specification, no hardcoded role/persona in user prompts. To detect: search for prompt/template files (e.g., `prompts/` directory, `*.prompt.txt`) and LLM client usage in code (`openai`, `anthropic`, `bedrock`, `converse`, `langchain`).
 

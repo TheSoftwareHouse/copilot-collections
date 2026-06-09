@@ -50,6 +50,8 @@ Focus not only on files that were actually changed or added, but also those that
 
 Make sure that all critical paths of the solutions are fully tested by combination of different tests - e2e, unit, integration.
 
+Treat missing integration coverage as a substantive finding when correctness depends on a real database, transaction boundaries, SQL semantics, migrations, queues, or external services. In those cases, unit tests alone are not sufficient.
+
 **Step 5: Run all unit tests**
 
 Find unit tests and run them. Make sure they are passing. 
@@ -69,6 +71,12 @@ Check the implemented solution. Make sure it follow the best development practic
 Take into account project standards and a practices like SOLID, SRP, DDD, DRY, KISS, Atomic Design.
 
 Make sure that solution is not over engineered. Keep the cognitive complexity on a lower side.
+
+Always check for these high-risk implementation anti-patterns and treat them as substantive findings unless the task context contains a clear and justified tradeoff:
+
+- N+1 database access patterns, including queries executed inside loops, per-item lazy loading, or repeated external fetches caused by iterating over entities one by one.
+- Pagination, filtering, sorting, or aggregation performed in memory after loading large datasets instead of pushing that work down to the database or upstream service.
+- Missing integration tests for behavior that depends on a real database or external service boundary.
 
 **Step 9: Run static code analysis tools and formatting tools**
 

@@ -1,10 +1,16 @@
 ---
 agent: "tsh-engineering-manager"
-model: "GPT-5.4"
+model: "GPT-5.4 mini"
 description: "Implement feature according to the plan."
 ---
 
 Your goal is to implement the feature according to the provided task description or implementation plan.
+
+No matter what you always follow the implementation workflow defined in the prompt, including all steps and quality gates. You do not skip any steps or gates, and you do not proceed to the next step until the current one is fully completed and verified.
+
+This prompt is orchestration-only when used with `tsh-engineering-manager`. The engineering manager must not implement product code directly when a suitable specialized agent exists.
+
+Before any source-code modification is performed by the current agent, the current agent must first delegate implementation to the appropriate specialized agent, review the result, and continue only with orchestration-scoped follow-up work. If delegation does not happen, stop and explain why before proceeding.
 
 ## Workflow
 
@@ -30,7 +36,7 @@ Before starting any work, perform a quick assessment of the task:
 
 If the Quick flow is selected, follow these streamlined steps:
 
-1. **Delegate implementation** — Delegate directly to `tsh-software-engineer` agent with the task description and any available context. The software engineer implements the solution following project conventions.
+1. **Delegate implementation** — Delegate directly to `tsh-software-engineer` agent with the task description and any available context. The software engineer implements the solution following project conventions. The engineering manager must not write product code directly in the Quick flow.
 
 2. **Run quality checks** — After implementation, run static code analysis, build the project, and run tests to verify correctness.
 
@@ -65,6 +71,8 @@ If the Full flow is selected, follow the complete workflow below:
 
    - **`[REUSE]` — other tasks** → execute as described in the task definition — the task specifies which agent to delegate to and what context to pass.
 
+   The engineering manager must not be the first writer of product code for any `[CREATE]` or `[MODIFY]` task when one of the specialized implementation agents above is applicable.
+
 8. **After each task**, update the relevant plan to reflect progress by checking the box for the completed task step and:
    - Review the implementation against the plan and feature context to ensure all requirements are met.
    - Run static code analysis, build the project, and run unit and integration tests to verify that the implementation works as expected and does not introduce new issues.
@@ -78,6 +86,8 @@ If the Full flow is selected, follow the complete workflow below:
 10. **Delegate code review** — Delegate to `tsh-code-reviewer` agent via [tsh-review.prompt.md](tsh-review.prompt.md). Include E2E test execution as part of the review. The code reviewer runs all quality gates (unit, integration, E2E tests, linting, build).
 
 11. **Before making any changes** to the original solution during implementation, ask for confirmation. Document changes in the plan file's Changelog section with timestamps.
+
+If the engineering manager starts implementing product code directly instead of delegating, treat that as a workflow violation. Stop further direct implementation, delegate the remaining work to the correct agent, and record the deviation in the chat summary.
 
 Ensure to write clean, efficient, and maintainable code following best practices and coding standards for the project.
 
