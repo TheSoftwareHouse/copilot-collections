@@ -1,5 +1,5 @@
 ---
-model: "Gemini 3.1 Pro (Preview)"
+model: "Gemini 3.5 Flash"
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
 tools:
   [
