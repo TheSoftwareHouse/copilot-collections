@@ -1,6 +1,6 @@
 ---
 agent: "tsh-engineering-manager"
-model: "GPT-5.4 mini"
+model: ["minimax.minimax-m2.5 (customendpoint)", "GPT-5.4 mini"]
 description: "Implement feature according to the plan."
 ---
 
