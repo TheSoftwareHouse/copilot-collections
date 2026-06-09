@@ -1,5 +1,5 @@
 ---
-model: "Gemini 3.1 Pro (Preview)"
+model: ["qwen.qwen3-coder-30b-a3b-instruct (customendpoint)", "zai.glm-4.7-flash (customendpoint)"]
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
 tools:
   [

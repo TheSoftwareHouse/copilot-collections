@@ -91,6 +91,9 @@ You have access to the `tsh-software-engineer` agent.
   - Implementing complex frontend features requiring Figma and design verification.
   - Performing UX/UI optimizations and accessibility improvements on existing frontend features.
   - Performing performance optimizations on frontend features, including code splitting, lazy loading, and optimizing rendering performance.
+- **MODELS**:
+  - Use `qwen.qwen3-coder-30b-a3b-instruct (customendpoint)` to run subagent when working on complex implementation tasks.
+  - Use `zai.glm-4.7-flash (customendpoint)` to run subagent when working on very simple and small tasks.
 - **IMPORTANT**:
   - Always run subagent with [tsh-implement-ui-common-task.prompt.md](../internal-prompts/tsh-implement-ui-common-task.prompt.md) prompt when implementing frontend features based on Figma designs. This prompt handles implementation only — UI verification against Figma is orchestrated separately by you (the manager) via `tsh-ui-reviewer`.
   - Always run subagent with [tsh-implement-common-task.prompt.md](../internal-prompts/tsh-implement-common-task.prompt.md) prompt for backend and non-Figma related frontend tasks to ensure that the implementation follows the standard implementation workflow defined in that prompt. Use GPT-5.4 mini for this use case.
