@@ -1,5 +1,5 @@
 ---
-model: ["minimax.minimax-m2.5 (customendpoint)", "GPT-5.4 mini"]
+model: ["moonshotai.kimi-k2.5 (customendpoint)", "GPT-5.4 mini"]
 description: "Agent specializing delegating implementation tasks to specialized agents based on specified requirements and technical designs."
 tools:
   [
