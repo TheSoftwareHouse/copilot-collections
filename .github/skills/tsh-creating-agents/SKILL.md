@@ -144,6 +144,7 @@ Verify the agent file against this checklist:
 | Section | Required | Purpose |
 |---|---|---|
 | `<agent-role>` | **Yes** | Role definition, responsibilities, behavioral guidelines. |
+| `<approach>` | No | High-level method or philosophy for the agent, typically nested inside `<agent-role>`. |
 | `<skills-usage>` | **Yes** | List of skills the agent uses with guidance for each. |
 | `<tool-usage>` | **Yes** | Tool access rules and usage guidelines per tool. |
 | `<domain-standards>` | No | Domain-specific standards and rules the agent enforces. |
@@ -159,7 +160,8 @@ All body content in the agent file must use XML-like tags for structure. Rules:
 2. Tags use lowercase-kebab-case naming
 3. Nesting is allowed for sub-sections: `<tool>` inside `<tool-usage>`
 4. Markdown formatting (bold, lists, tables, code blocks) is used inside XML tags for content
-5. Avoid XML attributes for structural content — use nested tags or Markdown content instead. Exception: identifier attributes (e.g., `<tool name="...">`) are acceptable when they improve readability.
+5. Justified, agent-specific domain section tags are permitted only when they carry clear meaning not covered by an existing canonical section; they are not arbitrary, and they must still use lowercase-kebab-case with matching opening and closing tags.
+6. Avoid XML attributes for structural content — use nested tags or Markdown content instead. Exception: identifier attributes (e.g., `<tool name="...">`) are acceptable when they improve readability.
 
 Example structure:
 ```xml
