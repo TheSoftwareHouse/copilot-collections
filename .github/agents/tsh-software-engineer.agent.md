@@ -1,5 +1,5 @@
 ---
-model: "Gemini 3.5 Flash"
+model: "GPT-5.3-Codex"
 description: "Agent specializing in implementing software solutions based on specified requirements and technical designs."
 tools:
   [
