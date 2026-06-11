@@ -142,6 +142,7 @@ Process tasks in plan order. Consult the todo list before each task and update t
 | observability | `tsh-devops-engineer` | `tsh-implement-observability.prompt.md` | The internal prompt should be used for logging, metrics, or tracing work |
 | LLM prompts | `tsh-prompt-engineer` | `tsh-engineer-prompt.prompt.md` | The internal prompt should be used for prompt-engineering tasks |
 | `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
+| `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
 
 ### Execution rules and gates
 
@@ -160,6 +161,7 @@ Process tasks in plan order. Consult the todo list before each task and update t
 8. **Confirm before changing a reviewed solution** - If code review finds issues that require changes, ask for confirmation before changing the reviewed solution.
 9. **Route review fixes back through the correct implementer** - After confirmation, delegate fixes through the same routing rules, run affected checks again, and re-run review when needed.
 10. **Treat direct implementation as a workflow violation** - If the orchestrator starts writing product code directly, stop that path, return to delegated execution, and continue only through the correct owner.
+11. **Record solution changes in the plan Changelog** - When the approved solution changes during implementation, or when a workflow deviation occurs, document it in the plan file's Changelog section with timestamps after the change is confirmed.
 
 ### Preservation coverage
 
