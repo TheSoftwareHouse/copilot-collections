@@ -107,25 +107,19 @@ Check the current state before creating or executing any plan.
 | `*.research.md` | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links | Route to `tsh-context-engineer` with `tsh-research.prompt.md` |
 | `*.plan.md` | It exists for the current task and contains ordered, actionable tasks that can be delegated | Route to `tsh-architect` with `tsh-plan.prompt.md` |
 | Technical Context | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md` |
-| Plan approval state | The current plan is already approved and unchanged since approval | Skip re-review |
+| Plan approval state | The current plan is already reviewed, approved, and unchanged since approval | Route to `tsh-architect` with `tsh-plan.prompt.md` to return a finished reviewed plan |
 
 ### Planning sequence
 
 1. **Check for existing research and plan files** - Inspect current `*.research.md` and `*.plan.md` state first.
 2. **Fill missing context when needed** - If research is missing or incomplete, delegate to `tsh-context-engineer` with `tsh-research.prompt.md`.
-3. **Create or refresh the plan when needed** - If the plan is missing, stale, or not actionable, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules.
-4. **Review the plan before execution** - Delegate to `tsh-plan-reviewer` with `tsh-review-plan.prompt.md`.
-5. **Run the review loop with hard limits:**
-   - `*.plan-review.md` remains the source of truth.
-   - If the plan is approved and unchanged, skip re-review.
-   - If the verdict is revisions needed, send the review back to `tsh-architect` and re-run review.
-   - Stop after a maximum of 3 plan-review iterations and escalate to the user if blockers remain.
-6. **Create execution todos from the plan** - Create todos per plan task, not just per phase.
-7. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files.
-8. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the dev server URL before execution starts.
-9. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
-10. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
-11. **Rewrite the upfront execution plan after approval** - Expand the ordered agent + prompt call sequence from the approved plan before the first implementation task starts.
+3. **Create or refresh the reviewed plan when needed** - If the plan is missing, stale, not actionable, or not already reviewed and approved, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The architect owns producing a finished reviewed plan, including any nested `tsh-plan-reviewer` loop and its maximum of 3 review iterations. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules.
+4. **Create execution todos from the plan** - Create todos per plan task, not just per phase.
+5. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files.
+6. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the dev server URL before execution starts.
+7. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
+8. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
+9. **Rewrite the upfront execution plan after approval** - Expand the ordered agent + prompt call sequence from the approved plan before the first implementation task starts.
 
 ### Execution routing
 
@@ -171,7 +165,7 @@ Keep the workflow traceable to the plan's preserved branches:
 | --- | --- |
 | Step 0 flow selection | 1-4 |
 | Quick Flow delegation and review | 5-8 |
-| Full Flow planning, plan review, and context handling | 9-14 |
+| Full Flow planning, reviewed-plan handoff, and context handling | 9-14 |
 | Execution routing and quality gates | 15-26 |
 | UI verification enforcement loop | 40-44 |
 
