@@ -33,6 +33,7 @@ The Engineering Manager uses this internal prompt after the Architect creates or
 ## Skills Loaded
 
 - `tsh-architecture-designing` — Evaluate architectural shape, phase coherence, and trade-offs.
+- `tsh-creating-implementation-plans` — Verify plan template, structure, and definition-of-done rules.
 - `tsh-codebase-analysing` — Verify the plan's references against actual codebase state.
 - `tsh-technical-context-discovering` — Check pattern consistency against established conventions.
 - `tsh-implementation-gap-analysing` — Validate what exists vs. what the plan proposes to build.

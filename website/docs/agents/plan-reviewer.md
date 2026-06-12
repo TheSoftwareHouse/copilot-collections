@@ -25,7 +25,7 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 ## Tool Access
 
 | Tool | Usage |
-|---|---|
+| --- | --- |
 | Context7 | Verify framework or library assumptions when the plan references them |
 | Sequential Thinking | Evaluate trade-offs, phase ordering, and over-engineering risk |
 | File Read/Search | Inspect the plan, research file, instructions, and referenced code |
@@ -34,8 +34,9 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 ## Skills Loaded
 
 - `tsh-architecture-designing` — Evaluate architectural shape, phase coherence, and trade-offs.
+- `tsh-creating-implementation-plans` — Verify plan template, structure, and definition-of-done compliance.
 - `tsh-codebase-analysing` — Verify plan references against the actual codebase.
-- `tsh-technical-context-discovering` — Check project conventions and existing patterns.
+- `tsh-technical-context-discovering` — Check pattern consistency against established conventions.
 - `tsh-implementation-gap-analysing` — Compare what exists with what the plan proposes.
 - `tsh-sql-and-database-understanding` — When the plan includes database schema, migration, or query changes.
 

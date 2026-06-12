@@ -44,7 +44,8 @@ Each technical specification includes:
 
 ## Skills Loaded
 
-- `tsh-architecture-designing` — Solution design, components, data flows, implementation plan creation.
+- `tsh-architecture-designing` — Solution design, components, data flows.
+- `tsh-creating-implementation-plans` — Implementation plan template, structure, and DoD rules.
 - `tsh-codebase-analysing` — Analyze current architecture, components, and patterns.
 - `tsh-implementation-gap-analysing` — Focus the plan on necessary changes without duplicating existing work.
 - `tsh-technical-context-discovering` — Establish project conventions and patterns before designing.
