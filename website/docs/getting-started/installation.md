@@ -39,6 +39,7 @@ You can configure this once at the **user level** and reuse it across all worksp
   "github.copilot.chat.searchSubagent.enabled": true,
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.customAgentInSubagent.enabled": true,
+  "chat.subagents.allowInvocationsFromSubagents": true,
   "github.copilot.chat.agentCustomizationSkill.enabled": true
 }
 ```
@@ -59,7 +60,8 @@ If you prefer the UI instead of editing JSON directly:
 6. Search for **"chat.customAgentInSubagent.enabled"** and enable it — allows custom agents in subagents.
 7. Search for **"github.copilot.chat.searchSubagent.enabled"** and enable it — enables the search subagent for better codebase analysis.
 8. Search for **"chat.experimental.useSkillAdherencePrompt"** and enable it — forces Copilot to use Skills more often.
-9. Search for **"github.copilot.chat.agentCustomizationSkill.enabled"** and enable it — enables the agent customization skill.
+9. Search for **"chat.subagents.allowInvocationsFromSubagents"** and enable it — allows nested subagent invocation for the architect↔reviewer loop.
+10. Search for **"github.copilot.chat.agentCustomizationSkill.enabled"** and enable it — enables the agent customization skill.
 
 ## Using in Your Projects
 
