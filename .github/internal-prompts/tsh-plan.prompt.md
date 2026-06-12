@@ -6,7 +6,8 @@ The file outcome should be a markdown file named after the task Jira ID in kebab
 
 Before starting, load and follow these skills:
 
-- `tsh-architecture-designing` - for the architecture design process and output template (`plan.example.md`)
+- `tsh-architecture-designing` - for the architecture design process
+- `tsh-creating-implementation-plans` - for the plan structure, definition-of-done rules, and output template (`plan.example.md`)
 - `tsh-codebase-analysing` - for analyzing the existing codebase
 - `tsh-implementation-gap-analysing` - for verifying what exists vs what needs to be built
 - `tsh-technical-context-discovering` - for understanding project conventions and patterns
@@ -24,18 +25,19 @@ Before starting, load and follow these skills:
    - Document findings in the "Current Implementation Analysis" section.
 4. **Persist technical context**: During steps 2-3, capture all discovered project conventions, coding standards, architecture patterns, tech stack details, testing patterns, and relevant `.instructions.md` rules. Save them in the **"Technical Context"** section of the plan file. This section is critical — downstream implementation agents will read it to avoid redundant codebase analysis. Be thorough: include framework conventions, naming patterns, test commands, linting rules, and any project-specific standards.
 5. **Understand project standards**: Review project best practices and quality standards (check `*.instructions.md` files). Incorporate findings into the "Technical Context" section.
-6. **Prepare implementation plan**: Create detailed code changes broken down into phases.
-7. **Define tasks**: For each phase, identify specific tasks with:
+6. **Design the solution architecture**: Using `tsh-architecture-designing`, design the solution architecture (components, interactions, data flows, trade-offs) BEFORE structuring it into a plan. Only once the solution is designed do you author the plan with `tsh-creating-implementation-plans`.
+7. **Prepare implementation plan**: Using `tsh-creating-implementation-plans`, turn the designed solution into detailed code changes broken down into phases.
+8. **Define tasks**: For each phase, identify specific tasks with:
    - Clear title
    - Description of what the task entails
    - Action type: `[CREATE]`, `[MODIFY]`, or `[REUSE]`
    - Definition of done as a checkbox list for each task
-8. **Address security**: Include security considerations relevant to the implementation.
-9. **UI verification tasks**: For features with UI components based on Figma designs, add a `[REUSE]` UI verification task immediately after each implementation task that produces visible UI. The verification task should reference `tsh-ui-reviewer` agent, include the Figma URL, and describe the verify-fix loop (max 5 iterations). Non-visual tasks (data fetching, state management, API integration) do not need verification tasks.
-10. **Save the plan**: Follow the `plan.example.md` template from the `tsh-architecture-designing` skill strictly.
-11. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume those are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
-12. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
-13. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
+9. **Address security**: Include security considerations relevant to the implementation.
+10. **UI verification tasks**: For features with UI components based on Figma designs, add a `[REUSE]` UI verification task immediately after each implementation task that produces visible UI. The verification task should reference `tsh-ui-reviewer` agent, include the Figma URL, and describe the verify-fix loop (max 5 iterations). Non-visual tasks (data fetching, state management, API integration) do not need verification tasks.
+11. **Save the plan**: Follow the `plan.example.md` template from the `tsh-creating-implementation-plans` skill strictly.
+12. **Scope control**: Focus ONLY on changes specific to THIS task. Do not include prerequisite work or dependencies - assume they are already done. Do not plan features not in the original requirements (document them separately in an Improvements section).
+13. **Avoid duplication**: Never plan to create components, functions, or utilities that already exist. Use the "Current Implementation Analysis" section and plan to reuse or modify existing code.
+14. **Bug fixes**: When planning bug fixes, include steps to reproduce the issue, root cause analysis, and implementation of a fix verified by tests.
 
 Don't provide deployment plans, code pushing instructions, or code review instructions in the repository.
 
@@ -45,4 +47,4 @@ In case of any ambiguities or missing information for the planning, ask for clar
 
 Update the plan file after each interaction if new information is gathered.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-plan:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-plan:v2 -->

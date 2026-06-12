@@ -69,7 +69,8 @@ Before finalizing the technical specifications, ensure to review them thoroughly
 
 ## Skills Usage Guidelines
 
-- `tsh-architecture-designing` - to design the overall architecture of the solution, including components, interactions, data flows and to prepare the implementation plan.
+- `tsh-architecture-designing` - to design the overall architecture of the solution, including components, interactions and data flows.
+- `tsh-creating-implementation-plans` - MUST be loaded and followed when authoring or revising an implementation plan; it owns the plan template, structure, and definition-of-done rules.
 - `tsh-codebase-analysing` - to analyze the current codebase and understand the existing architecture, components, and patterns.
 - `tsh-implementation-gap-analysing` - to analyze the gap between the current implementation and the proposed solution, ensuring that the plan focuses only on the necessary changes without duplicating existing work.
 - `tsh-technical-context-discovering` - to establish project conventions, coding standards, and existing patterns before designing the solution.

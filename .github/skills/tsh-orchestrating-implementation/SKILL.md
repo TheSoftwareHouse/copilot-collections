@@ -113,7 +113,7 @@ Check the current state before creating or executing any plan.
 
 1. **Check for existing research and plan files** - Inspect current `*.research.md` and `*.plan.md` state first.
 2. **Fill missing context when needed** - If research is missing or incomplete, delegate to `tsh-context-engineer` with `tsh-research.prompt.md`.
-3. **Create or refresh the plan when needed** - If the plan is missing, stale, or not actionable, delegate to `tsh-architect` with `tsh-plan.prompt.md`.
+3. **Create or refresh the plan when needed** - If the plan is missing, stale, or not actionable, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules.
 4. **Review the plan before execution** - Delegate to `tsh-plan-reviewer` with `tsh-review-plan.prompt.md`.
 5. **Run the review loop with hard limits:**
    - `*.plan-review.md` remains the source of truth.
@@ -182,3 +182,4 @@ Keep the workflow traceable to the plan's preserved branches:
 - `tsh-ui-verifying` - provides the verification standard behind the per-item UI review gate.
 - `tsh-task-analysing` - helps determine whether research context is complete before planning starts.
 - `tsh-task-quality-reviewing` - complements planning quality by reinforcing explicit gaps, edge cases, and task completeness.
+- `tsh-creating-implementation-plans` - owns the plan template and plan-structure rules used in the planning sequence.

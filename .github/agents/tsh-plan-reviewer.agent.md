@@ -31,6 +31,7 @@ Before starting any task, you check all available skills and decide which one is
 
 <skills-usage>
 - `tsh-architecture-designing` — Use to test whether the proposed shape, phasing, and trade-offs are likely to fail in execution or create rework.
+- `tsh-creating-implementation-plans` — Use to verify the plan follows the owned template, plan structure, and definition-of-done rules.
 - `tsh-codebase-analysing` — Use during the codebase-reality pass to verify that critical references, dependencies, and abstractions actually exist as assumed.
 - `tsh-technical-context-discovering` — Use when repo conventions or established abstractions matter to execution risk, integration fit, or migration safety.
 - `tsh-implementation-gap-analysing` — Use to expose gaps between what the plan assumes exists and what actually must be built, migrated, or coordinated.
