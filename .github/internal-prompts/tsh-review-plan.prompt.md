@@ -5,6 +5,7 @@ Stress-test the implementation plan for the provided task. Assume the architect 
 Before starting, load and follow these skills:
 
 - `tsh-architecture-designing` - evaluate whether the proposed shape, phasing, and trade-offs are likely to fail in execution or create costly rework
+- `tsh-creating-implementation-plans` - verify the plan complies with the owned plan template, structure, and definition-of-done rules
 - `tsh-codebase-analysing` - verify critical references, dependencies, and abstractions against actual codebase state
 - `tsh-technical-context-discovering` - check repo conventions or established abstractions only when they materially affect execution risk
 - `tsh-implementation-gap-analysing` - validate what exists vs what the plan assumes must already be available
@@ -68,4 +69,4 @@ The full structured review report is the primary deliverable. Save it as `{task-
 - **Scope discipline** — never suggest adding features or requirements not in the research file.
 - **Carry critical issues forward** — unresolved execution-critical issues stay live across iterations until genuinely closed; repeated survival is a reason to escalate, not soften.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v2 -->
