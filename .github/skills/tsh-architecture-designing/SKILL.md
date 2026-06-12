@@ -1,6 +1,6 @@
 ---
 name: tsh-architecture-designing
-description: Design the architecture to solve a given task. Propose the solutions to be used to deliver the task following the best practices and standards.
+description: "Design the architecture to solve a given task: analyse the codebase, resolve ambiguities, and propose a solution following best practices and standards. Produces the solution design that tsh-creating-implementation-plans turns into an implementation plan."
 user-invocable: false
 ---
 
@@ -65,25 +65,14 @@ Don't duplicate any work.
 
 Make sure to use `tsh-implementation-gap-analysing` skill to verify what was already implemented from your plan and what should be added. Make sure to include the result in final plan.
 
-Make sure to divide the plan into a small phases.Each phase should have a list of tasks with special place to mark the finished tasks later on. After phase is finished only the fast running tests and quality checks should be run to verify that the implementation is on the right track - unit tests, integration tests, static code analysis, linters, formatting check and project build.
+**Step 5: Hand off to plan creation**
 
-The plan has to include code review phase at the end, fully done by `tsh-code-reviewer` agent using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Make sure to pass e2e execution to that agent as a part of the prompt and do not run those tests by yourself.
-
-For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` agent using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop.
-
-For features involving LLM application prompts (system prompts, RAG templates, tool-calling instructions, classification/extraction prompts), add a `[REUSE]` prompt engineering task delegated to `tsh-prompt-engineer` agent using [`tsh-engineer-prompt.prompt.md`](../../internal-prompts/tsh-engineer-prompt.prompt.md). Separate prompt design from application code — the software engineer implements the integration code, the prompt engineer designs the prompt content. Include the use case, target model, and any existing prompt drafts in the task description.
-
-Don't provide deployment plans, code pushing instructions, code review instructions on repository.
-
-**Step 5: Create a implementation plan document**
-
-Save the plan as a document following the `./plan.example.md` template.
-
-Don't add or remove any sections from the template. Follow the structure and naming conventions strictly to ensure clarity and consistency.
+Turn the designed solution into an implementation plan document using the `tsh-creating-implementation-plans` skill. That skill owns the plan template (`plan.example.md`), the plan structure, and the definition-of-done rules — you MUST load and follow it when authoring the plan.
 
 ## Connected Skills
 
 - `tsh-codebase-analysing` - for analyzing the existing architecture, components, and patterns
 - `tsh-implementation-gap-analysing` - for verifying what was already implemented and what should be added
 - `tsh-technical-context-discovering` - for establishing project conventions and existing patterns before designing
+- `tsh-creating-implementation-plans` - for turning the designed solution into a phased implementation plan document
 - `tsh-sql-and-database-understanding` - for designing database schemas, data models, normalisation strategies, and indexing as part of the solution architecture
