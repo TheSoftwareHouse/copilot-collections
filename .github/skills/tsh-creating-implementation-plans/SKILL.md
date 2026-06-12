@@ -38,6 +38,14 @@ Example: do not require checking whether tests were failing before the change, b
 - Do not provide deployment plans, code pushing instructions, or repository code review instructions.
 </mandatory-plan-content>
 
+<plan-content-rules>
+- The plan must capture security considerations relevant to the implementation.
+- Save the plan as `specifications/{task-name-or-id}/{task-name}.plan.md`.
+- For bug-fix work, the plan must include issue reproduction, root-cause analysis, and a fix verified by tests.
+- Plan only the current task. Record prerequisite work, follow-up work, and out-of-scope items in `Improvements` instead of expanding the implementation scope.
+- Reuse or modify existing code whenever possible. Consult `Current Implementation Analysis` before planning new components, functions, or utilities.
+</plan-content-rules>
+
 ## Connected Skills
 
 - `tsh-architecture-designing` - designs the solution this skill turns into a plan
