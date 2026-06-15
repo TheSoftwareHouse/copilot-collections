@@ -14,6 +14,10 @@
 
 <one-sentence-statement-of-the-single-most-important-outcome-this-plan-must-achieve>
 
+**Success Measure**: <one-sentence-stating-the-condition-that-proves-the-goal-is-achieved>
+
+**Do NOT touch / do NOT add**: <compact-clause-list-or-short-bullet-list-of-out-of-scope-items>
+
 ## Proposed Solution
 
 <description-of-proposed-solution-explaining-the-approach-and-the-why-for-reviewers-and-implementors>
@@ -92,6 +96,10 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
 
+**Verification:** `tsc --noEmit`; `npm run test:unit -- <spec>`
+
+<!-- Phase Description states the broader why for reviewers and implementors. Task Description uses a near-imperative form that names the files and the behavior. -->
+
 #### Task 1.1 - [CREATE/MODIFY/REUSE] <task-name>
 
 **Description**: <brief description of what the task entails>
@@ -127,6 +135,8 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Goal**: <how-this-phase-advances-the-wildly-important-goal>
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
+
+**Verification:** `npm run test:unit -- <ui-spec>`; `npm run lint`
 
 #### Task 2.1 - [CREATE/MODIFY] <ui-component-name>
 
@@ -169,6 +179,8 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
 
+**Verification:** `npm run lint`; `npm run build`
+
 #### Task 3.1 - [CREATE/MODIFY/REUSE] <task-name>
 
 **Description**: <brief description>
@@ -189,6 +201,8 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Goal**: <how-verified-quality-of-the-delivered-changes-secures-the-wildly-important-goal>
 
 **Description**: Final verification of the full implementation. This phase is mandatory and always comes last.
+
+**Verification:** `npm run lint`; `npm run build`
 
 #### Task 4.1 - [REUSE] Code review by `tsh-code-reviewer` agent
 
