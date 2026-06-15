@@ -30,7 +30,7 @@ Use the checklist below and keep it synchronized with the todo list:
 Implementation orchestration progress:
 - [ ] Step 0: Create flow-start todos
 - [ ] Step 1: Select Quick Flow or Full Flow
-- [ ] Step 2: Write the upfront execution plan
+- [ ] Step 2: Plan the task order
 - [ ] Step 3: Run the selected flow
 - [ ] Step 4: Close validation and review gates
 ```
@@ -74,14 +74,16 @@ Use the following decision rules before any delegation.
 
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
 
-### Step 2 - Write the upfront execution plan
+### Step 2 - Plan the task order
 
-Write the full ordered agent + prompt call sequence before the first delegation.
+Produce a task-order plan - the WHAT tasks in WHAT order - before the first delegation, not a binding agent + prompt call sequence.
 
 - Do this immediately after flow selection.
 - In Full Flow, do it again after plan approval and before execution starts.
-- The sequence must cover every planned delegation, review, validation checkpoint, and UI verification item.
-- Keep the execution plan synchronized with the todo list whenever order or scope changes.
+- List every planned task in order, covering each delegation, review, validation checkpoint, and UI verification item.
+- Do not bind an agent or prompt to each task here; the agent + prompt per task is implied at execution time by the Execution routing table.
+- Share the intended flow on chat with an explicit note that it may change as execution proceeds.
+- Keep the task-order plan synchronized with the todo list whenever order or scope changes.
 
 ## Task-to-Owner Routing
 
@@ -138,7 +140,7 @@ Check the current state before creating or executing any plan.
 6. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the dev server URL before execution starts.
 7. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
 8. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
-9. **Rewrite the upfront execution plan after approval** - Expand the ordered agent + prompt call sequence from the approved plan before the first implementation task starts.
+9. **Rewrite the task-order plan after approval** - Refresh the ordered task list from the approved plan before the first implementation task starts; the agent + prompt for each task is resolved at execution time by the Execution routing table.
 
 ### Execution routing
 
