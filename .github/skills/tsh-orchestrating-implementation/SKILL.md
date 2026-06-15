@@ -58,33 +58,31 @@ Use the following decision rules before any delegation.
 
 **Quick Flow is allowed only when every check below passes:**
 
-| Check | Quick Flow pass condition |
-| --- | --- |
-| Scope width | Narrow, single-domain change with one clear implementation owner (any domain qualifies — app code, CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM prompts, E2E, etc.) |
-| Solution clarity | Solution path is obvious from the task, approved plan, or existing context |
-| File impact | Likely to touch 3 files or fewer |
-| Ambiguity | No major ambiguity, contradiction, or unresolved tradeoff |
-| Planning readiness | No missing research gap and no missing plan gap for the work being attempted |
-| UI/Figma involvement | No Figma reference, no `[REUSE]` UI verification task, and no UI-verification requirement |
+| Check                | Quick Flow pass condition                                                                                                                                                            |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Scope width          | Narrow, single-domain change with one clear implementation owner (any domain qualifies — app code, CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM prompts, E2E, etc.) |
+| Solution clarity     | Solution path is obvious from the task, approved plan, or existing context                                                                                                           |
+| File impact          | Likely to touch 3 files or fewer                                                                                                                                                     |
+| Ambiguity            | No major ambiguity, contradiction, or unresolved tradeoff                                                                                                                            |
+| Planning readiness   | No missing research gap and no missing plan gap for the work being attempted                                                                                                         |
+| UI/Figma involvement | No Figma reference, no `[REUSE]` UI verification task, and no UI-verification requirement                                                                                            |
 
 **Full Flow is required when any check below is true:**
 
-| Trigger | Full Flow condition |
-| --- | --- |
-| Cross-domain work | Work spans multiple domains, multiple agents, or architectural boundaries |
-| Ambiguity | Requirements, constraints, or acceptance criteria are incomplete or unclear |
-| Research gap | Required context is missing or no complete `*.research.md` exists |
-| Plan gap | No actionable `*.plan.md` exists for the current task |
-| Larger scope | Likely to touch more than 3 files or requires phased execution |
-| UI/Figma involvement | Any Figma involvement or UI-verification involvement exists |
+| Trigger              | Full Flow condition                                                         |
+| -------------------- | --------------------------------------------------------------------------- |
+| Cross-domain work    | Work spans multiple domains, multiple agents, or architectural boundaries   |
+| Ambiguity            | Requirements, constraints, or acceptance criteria are incomplete or unclear |
+| Research gap         | Required context is missing or no complete `*.research.md` exists           |
+| Plan gap             | No actionable `*.plan.md` exists for the current task                       |
+| Larger scope         | Likely to touch more than 3 files or requires phased execution              |
+| UI/Figma involvement | Any Figma involvement or UI-verification involvement exists                 |
 
 **Hard exclusion:** any Figma or UI-verification involvement immediately disqualifies Quick Flow.
 
 **Repository-documentation requests** — when the work only touches repository documentation (README, CHANGELOG, in-repo `/docs`, or the published documentation site) — are recognized as a first-class documentation work type and routed to `tsh-technical-writer` via the Execution routing table, never improvised or self-executed.
 
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
-
-If the selected execution path would proceed without an approved plan, use `vscode/askQuestions` to confirm the user wants no-plan execution before delegating any implementation work.
 
 ### Step 2 - Plan the task order
 
@@ -101,20 +99,20 @@ Produce a task-order plan - the WHAT tasks in WHAT order - before the first dele
 
 This table is the single source of truth for selecting a delegate agent and prompt for any task, by task type or tag. Both Quick Flow and Full Flow consult this table — it is not duplicated elsewhere in this skill.
 
-| Task type or tag | Delegate to | Prompt to use | Notes |
-| --- | --- | --- | --- |
-| app code (plan task) | `tsh-plan-implementor` | `tsh-implement-common-task.prompt.md` | DEFAULT route in both Quick Flow and Full Flow for approved, actionable, low-risk plan seams that must be executed exactly as written |
-| app code (complex or no-plan) | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | EXCEPTION route for complex non-UI work, or for no-plan non-UI execution after the no-plan confirmation gate; choose `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.5 Flash` for fast, low-cost, large-context analysis |
-| UI with Figma | `tsh-ui-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
-| E2E | `tsh-e2e-engineer` | `tsh-implement-e2e.prompt.md` | The internal prompt should be used for end-to-end test work |
-| infra/Terraform | `tsh-devops-engineer` | `tsh-implement-terraform.prompt.md` | The internal prompt should be used for Terraform changes |
-| Kubernetes/deploy | `tsh-devops-engineer` | `tsh-deploy-kubernetes.prompt.md` | The internal prompt should be used for deployment or Kubernetes work |
-| CI/CD | `tsh-devops-engineer` | `tsh-implement-pipeline.prompt.md` | The internal prompt should be used for pipeline work |
-| observability | `tsh-devops-engineer` | `tsh-implement-observability.prompt.md` | The internal prompt should be used for logging, metrics, or tracing work |
-| LLM prompts | `tsh-prompt-engineer` | `tsh-engineer-prompt.prompt.md` | The internal prompt should be used for prompt-engineering tasks |
-| documentation | `tsh-technical-writer` | `tsh-write-documentation.prompt.md` | The internal prompt should be used for repository documentation work across all targets — README, CHANGELOG, `/docs`, and the published documentation site |
-| `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
-| `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
+| Task type or tag              | Delegate to             | Prompt to use                            | Notes                                                                                                                                                                                                                                                 |
+| ----------------------------- | ----------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| app code (plan task)          | `tsh-plan-implementor`  | `tsh-implement-common-task.prompt.md`    | DEFAULT route in both Quick Flow and Full Flow for approved, actionable, low-risk plan seams that must be executed exactly as written                                                                                                                 |
+| app code (complex or no-plan) | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md`    | EXCEPTION route for complex non-UI work, or for no-plan non-UI execution after the no-plan confirmation gate; choose `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.5 Flash` for fast, low-cost, large-context analysis |
+| UI with Figma                 | `tsh-ui-engineer`       | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation                                                                                                                                                                                  |
+| E2E                           | `tsh-e2e-engineer`      | `tsh-implement-e2e.prompt.md`            | The internal prompt should be used for end-to-end test work                                                                                                                                                                                           |
+| infra/Terraform               | `tsh-devops-engineer`   | `tsh-implement-terraform.prompt.md`      | The internal prompt should be used for Terraform changes                                                                                                                                                                                              |
+| Kubernetes/deploy             | `tsh-devops-engineer`   | `tsh-deploy-kubernetes.prompt.md`        | The internal prompt should be used for deployment or Kubernetes work                                                                                                                                                                                  |
+| CI/CD                         | `tsh-devops-engineer`   | `tsh-implement-pipeline.prompt.md`       | The internal prompt should be used for pipeline work                                                                                                                                                                                                  |
+| observability                 | `tsh-devops-engineer`   | `tsh-implement-observability.prompt.md`  | The internal prompt should be used for logging, metrics, or tracing work                                                                                                                                                                              |
+| LLM prompts                   | `tsh-prompt-engineer`   | `tsh-engineer-prompt.prompt.md`          | The internal prompt should be used for prompt-engineering tasks                                                                                                                                                                                       |
+| documentation                 | `tsh-technical-writer`  | `tsh-write-documentation.prompt.md`      | The internal prompt should be used for repository documentation work across all targets — README, CHANGELOG, `/docs`, and the published documentation site                                                                                            |
+| `[REUSE]` UI verification     | `tsh-ui-reviewer`       | `tsh-review-ui.prompt.md`                | Review each UI item individually; do not batch                                                                                                                                                                                                        |
+| `[REUSE]` other               | per the task definition | —                                        | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required                                                                                                                                |
 
 Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow. Apply the app-code decision rule consistently in both flows: `tsh-plan-implementor` is the DEFAULT route for approved, actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work or no-plan non-UI execution after the no-plan confirmation gate.
 
@@ -137,13 +135,13 @@ Use Quick Flow only if Step 1 passed every Quick criterion and the user selected
 
 Check the current state before creating or executing any plan.
 
-| Artifact or signal | Treat as ready when | If not ready |
-| --- | --- | --- |
-| `*.research.md` | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links | Route to `tsh-context-engineer` with `tsh-research.prompt.md` |
-| `*.plan.md` | It exists for the current task and contains ordered, actionable tasks that can be delegated | Route to `tsh-architect` with `tsh-plan.prompt.md` |
-| Open questions gate | It exists and contains no `❓ Open` rows in `## Open Questions`, so unresolved questions are not blocking execution readiness | Route to `tsh-architect` with `tsh-plan.prompt.md` |
-| Technical Context | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md` |
-| Plan approval state | The current plan is already reviewed, approved, and unchanged since approval | Route to `tsh-architect` with `tsh-plan.prompt.md` to return a finished reviewed plan |
+| Artifact or signal  | Treat as ready when                                                                                                                     | If not ready                                                                          |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `*.research.md`     | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links  | Route to `tsh-context-engineer` with `tsh-research.prompt.md`                         |
+| `*.plan.md`         | It exists for the current task and contains ordered, actionable tasks that can be delegated                                             | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
+| Open questions gate | It exists and contains no `❓ Open` rows in `## Open Questions`, so unresolved questions are not blocking execution readiness           | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
+| Technical Context   | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md`                         |
+| Plan approval state | The current plan is already reviewed, approved, and unchanged since approval                                                            | Route to `tsh-architect` with `tsh-plan.prompt.md` to return a finished reviewed plan |
 
 ### Planning sequence
 
@@ -185,13 +183,13 @@ Process tasks in plan order. Consult the todo list before each task and update t
 
 Keep the workflow traceable to the plan's preserved branches:
 
-| Coverage area | Preserved checklist items |
-| --- | --- |
-| Step 0 flow selection | 1-4 |
-| Quick Flow delegation and review | 5-8 |
-| Full Flow planning, reviewed-plan handoff, and context handling | 9-14 |
-| Execution routing and quality gates | 15-26 |
-| UI verification enforcement loop | 40-44 |
+| Coverage area                                                   | Preserved checklist items |
+| --------------------------------------------------------------- | ------------------------- |
+| Step 0 flow selection                                           | 1-4                       |
+| Quick Flow delegation and review                                | 5-8                       |
+| Full Flow planning, reviewed-plan handoff, and context handling | 9-14                      |
+| Execution routing and quality gates                             | 15-26                     |
+| UI verification enforcement loop                                | 40-44                     |
 
 ## Connected Skills
 
