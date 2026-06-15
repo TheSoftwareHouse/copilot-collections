@@ -9,12 +9,20 @@ user-invocable: false
 This skill turns a designed solution into a phased, verifiable implementation plan document.
 
 <principles>
-<plan-structure-ownership>This skill is the single owner of the plan template (`./plan.example.md`), the plan-structure procedure, and the definition-of-done rules for implementation plans. Other skills and agents MUST reference this skill instead of duplicating plan-structure rules.</plan-structure-ownership>
-<goal-hierarchy>Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.</goal-hierarchy>
-<no-real-code>The plan must not contain real implementation code. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.</no-real-code>
+<plan-structure-ownership>
+This skill is the single owner of the plan template (`./plan.example.md`), the plan-structure procedure, and the definition-of-done rules for implementation plans. Other skills and agents MUST reference this skill instead of duplicating plan-structure rules.
+</plan-structure-ownership>
+<goal-hierarchy>
+Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.
+</goal-hierarchy>
+<no-real-code>
+The plan must not contain real implementation code. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
+</no-real-code>
 </principles>
 
 ## Plan Creation Process
+
+Before drafting, read [`./plan.example.md`](./plan.example.md) in full first — it is the canonical structure every plan must follow. Knowing the required sections up front tells you which fields you must research, discover, or design (for example Technical Context, Current Implementation Analysis, and Security Considerations) before you begin, so you gather the right information deliberately rather than backfilling it later.
 
 1. Confirm inputs: a designed solution, typically from `tsh-architecture-designing`, plus task research and context. Do not design the solution here; this skill structures an already-designed solution into a plan.
 2. Define the Wildly Important Goal and the plan description.
