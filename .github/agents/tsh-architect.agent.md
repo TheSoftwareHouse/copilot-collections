@@ -61,6 +61,12 @@ When working on implementation-plan artifacts, use these exact paths:
 - `specifications/{task-name}/{task-name}.research.md`
 - `specifications/{task-name}/{task-name}.plan-review.md`
 
+`tsh-plan-reviewer` returns its assessment to you using this exact schema:
+
+`<plan-review-report verdict="APPROVED | REVISIONS NEEDED" architect-action-required="yes|no" report-file="specifications/{task-name}/{task-name}.plan-review.md">short summary</plan-review-report>`
+
+Derive your next action strictly from the `verdict` and `architect-action-required` attributes, never from the free-text summary.
+
 After creating, verifying, improving, or updating a plan, you MUST invoke `tsh-plan-reviewer` by default. You may skip review only when you can explicitly state in the handoff back to `tsh-engineering-manager` that the plan meets ALL of these low-risk conditions:
 
 1. It is a single phase with very few tasks.
