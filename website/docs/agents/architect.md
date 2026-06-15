@@ -63,6 +63,6 @@ Each technical specification includes:
 
 After creating the plan, the Architect can hand off to:
 
-- **Architect Reviewer** → internal `/tsh-review-plan` validation before implementation
-- **Software Engineer** → `/tsh-implement` (standard implementation)
-- **Software Engineer** → `/tsh-implement` (frontend implementation with Figma verification via internal UI prompt)
+- **Internal plan review loop** → the Architect invokes `tsh-plan-reviewer` as a nested subagent after creating or revising a plan, addresses all BLOCKER findings, and owns the review loop for up to 3 iterations before escalating.
+- **Engineering Manager** → `/tsh-implement` (`Start Implementation`) once the plan is approved/finalized
+- **DevOps Engineer** → `Start Infrastructure Implementation` for infrastructure work per the architectural plan

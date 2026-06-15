@@ -15,7 +15,7 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 - Checking that referenced files, functions, classes, integrations, and patterns actually exist in the codebase.
 - Surfacing hidden assumptions, sequencing traps, dependency order issues, and migration or data risks.
 - Challenging integration boundaries, rework risk, and false confidence in test coverage.
-- Producing a structured approval or revision report for the Engineering Manager.
+- Producing a structured approval or revision report for the Architect.
 
 ## What It Produces
 
@@ -29,7 +29,6 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 | Context7 | Verify framework or library assumptions when the plan references them |
 | Sequential Thinking | Evaluate trade-offs, phase ordering, and over-engineering risk |
 | File Read/Search | Inspect the plan, research file, instructions, and referenced code |
-| Todo | Track review checklist progress |
 
 ## Skills Loaded
 
@@ -43,5 +42,5 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 ## How It Is Used
 
 - It is not invoked directly by users.
-- The Engineering Manager runs it through the internal `/tsh-review-plan` prompt after the Architect produces or updates a plan.
+- The Architect directly invokes the Plan Reviewer as a nested subagent after creating or revising a plan; the Engineering Manager is not part of the review loop.
 - If the reviewer returns revisions, the plan goes back to the Architect and is re-reviewed until approved or escalated.

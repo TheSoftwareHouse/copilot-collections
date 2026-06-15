@@ -7,7 +7,7 @@ title: Engineering Manager
 
 The Engineering Manager is the orchestration seat for implementation delivery. It defines **WHO** does the work — persona, delegation boundaries, ambiguity handling, and tool discipline — and never writes product code itself. The actual workflow mechanics (flow selection, planning readiness, execution routing, and quality gates) live in the `tsh-orchestrating-implementation` skill, not in the agent.
 
-It runs on the lower-tier **GPT-5.4 mini** model, keeping the orchestration seat cost-efficient while high-leverage decisions are escalated to top-tier advisors (Architect and Plan Reviewer).
+It runs on the lower-tier **GPT-5.4 mini** model, keeping the orchestration seat cost-efficient while high-leverage decisions are escalated to the **Architect**.
 
 ## How to Use
 
@@ -53,7 +53,6 @@ The agent escalates to the **Architect** when:
 | **E2E Engineer** | End-to-end test design, mocking strategy, or CI-ready test suites |
 | **DevOps Engineer** | Infrastructure, Terraform, Kubernetes, CI/CD pipelines, or observability |
 | **Architect** | Architectural guidance, codebase analysis, or a missing/incomplete plan |
-| **Plan Reviewer** | Validating a `.plan.md` before implementation, or re-validating after changes |
 | **Code Reviewer** | Reviewing implemented changes against the plan, tests, and acceptance criteria |
 | **UI Reviewer** | Verifying implemented UI against Figma, including `[REUSE]` UI verification tasks |
 | **Context Engineer** | Gathering requirements and context before the Architect can plan |
