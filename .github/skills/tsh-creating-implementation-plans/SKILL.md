@@ -16,7 +16,7 @@ This skill is the single owner of the plan template (`./plan.example.md`), the p
 Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.
 </goal-hierarchy>
 <no-real-code>
-The plan must not contain real implementation code. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
+The plan must not contain real implementation code or full implementation bodies/function logic. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas, and task-boundary seam artifacts such as type definitions, function signatures, DTOs, interfaces, and API shapes are allowed when they clarify the contract without supplying implementation bodies. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
 </no-real-code>
 </principles>
 
@@ -27,12 +27,13 @@ Before drafting, read [`./plan.example.md`](./plan.example.md) in full first —
 1. Confirm inputs: a designed solution, typically from `tsh-architecture-designing`, plus task research and context. Do not design the solution here; this skill structures an already-designed solution into a plan.
 2. Define the Wildly Important Goal and the plan description.
 3. Divide the work into small phases. Each phase must have a Goal, a Description, and a list of tasks with checkboxes to mark finished tasks later. After each phase is finished, only fast-running tests and quality checks should be run to verify the implementation is on track: unit tests, integration tests, static code analysis, linters, formatting checks, and project build.
-4. Define each task. Each task must have a Description, a Definition of Done as a checkbox list, and optional Clues that help the implementor (file paths, line ranges, reference patterns, gotchas).
+4. Define each task. Each task must have a Description, a `**Files:**` field, and a Definition of Done as a checkbox list. The `**Files:**` field must name every file the task will touch and label each one with `create`, `modify`, or `reuse`. If a file was produced or last touched by an earlier task in the same plan, include an inline back-reference such as `(modify — created in Task 1.1)`; if a file is created and consumed within the same task, no back-reference is needed. Tasks may also include an optional `**Stop Rule:**` sentence near `Clues` that tells the implementor to stop, report, and avoid improvising if the task cannot proceed safely or an expected seam is missing; do not turn this into a formal dependency graph or a `Depends on:` field. Optional Clues should still help the implementor with file paths, line ranges, reference patterns, and gotchas.
 5. Add the mandatory cross-cutting tasks required by the plan rules.
 6. Save the plan as a document following the `./plan.example.md` template. Do not add or remove any sections from the template. Follow the structure and naming conventions strictly.
 
 <definition-of-done-rules>
 Each task must include a definition of done as a checkbox list.
+Each task's Definition of Done must include at least one runnable command that a reviewer can verify during review, such as `tsc --noEmit` or `npm run test:unit -- <spec>`.
 Definition of done must not include deployment steps.
 Definition of done must not include manual QA steps.
 Definition of done must not include steps that cannot be verified by a code reviewer during code review.
