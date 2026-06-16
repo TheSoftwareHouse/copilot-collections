@@ -12,7 +12,7 @@
 
 ## Wildly Important Goal
 
-<one-sentence-statement-of-the-single-most-important-outcome-this-plan-must-achieve>
+**Goal**: <one-sentence-statement-of-the-single-most-important-outcome-this-plan-must-achieve>
 
 **Success Measure**: <one-sentence-stating-the-condition-that-proves-the-goal-is-achieved>
 
@@ -116,7 +116,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion in the listed files>
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -131,7 +131,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion in the listed files>
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -146,7 +146,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion in the listed files>
 - [ ] `docs/<file>.md contains an "## Usage" section` _(deterministic reviewer check — a docs-only task has no runnable command)_
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -171,7 +171,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion in the listed files>
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -186,10 +186,10 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
-- [ ] UI verification passes or escalated to user after 5 iterations
+- [ ] UI verification passes via `tsh-ui-reviewer` or escalated to user after 5 iterations
 - [ ] Verification report documented in Changelog
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -212,7 +212,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion in the listed files>
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
 
@@ -234,10 +234,9 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 - [ ] Code review passes with no blocking findings
-- [ ] E2e tests executed by the reviewer pass
 - [ ] Review outcome documented in Changelog
 
-**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+**Stop Rule:** <stop condition, or omit>
 
 **Clues**: <optional-pointers-to-review-scope-or-risk-areas>
 
