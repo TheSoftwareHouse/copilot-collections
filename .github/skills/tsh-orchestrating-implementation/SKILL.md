@@ -127,6 +127,7 @@ Check the current state before creating or executing any plan.
 | --- | --- | --- |
 | `*.research.md` | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links | Route to `tsh-context-engineer` with `tsh-research.prompt.md` |
 | `*.plan.md` | It exists for the current task and contains ordered, actionable tasks that can be delegated | Route to `tsh-architect` with `tsh-plan.prompt.md` |
+| Open questions gate | It exists and contains no `❓ Open` rows in `## Open Questions`, so unresolved questions are not blocking execution readiness | Route to `tsh-architect` with `tsh-plan.prompt.md` |
 | Technical Context | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md` |
 | Plan approval state | The current plan is already reviewed, approved, and unchanged since approval | Route to `tsh-architect` with `tsh-plan.prompt.md` to return a finished reviewed plan |
 

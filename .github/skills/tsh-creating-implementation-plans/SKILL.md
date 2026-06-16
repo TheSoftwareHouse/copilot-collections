@@ -15,6 +15,9 @@ This skill is the single owner of the plan template (`./plan.example.md`), the p
 <goal-hierarchy>
 Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. The Wildly Important Goal section must keep that main goal as one sentence and also include an explicit Success Measure plus a Do NOT touch / do NOT add list to reduce scope creep. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.
 </goal-hierarchy>
+<open-questions-dispatch-gate>
+Plans must not be dispatched to an implementor while any Open Questions row has Status = ❓ Open; unresolved questions must be routed back to `tsh-architect` before execution.
+</open-questions-dispatch-gate>
 <no-real-code>
 The plan must not contain real implementation code or full implementation bodies/function logic. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas, and task-boundary seam artifacts such as type definitions, function signatures, DTOs, interfaces, and API shapes are allowed when they clarify the contract without supplying implementation bodies. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
 </no-real-code>
