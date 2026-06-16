@@ -18,6 +18,9 @@ Every plan defines one Wildly Important Goal, stated explicitly as the single mo
 <open-questions-dispatch-gate>
 Plans must not be dispatched to an implementor while any Open Questions row has Status = ❓ Open; unresolved questions must be routed back to `tsh-architect` before execution.
 </open-questions-dispatch-gate>
+<executable-slots-dispatch-gate>
+Plans must not be dispatched to an implementor while any executable slot still contains an angle-bracket placeholder or any assumed-default command. Verification fields, DoD command items, and file/spec path arguments must be resolved from Technical Context or the task's app stack before dispatch. This gate is intentionally narrow: it applies only to executable slots, and instructional angle-bracket placeholders elsewhere in the template are allowed.
+</executable-slots-dispatch-gate>
 <no-real-code>
 The plan must not contain real implementation code or full implementation bodies/function logic. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas, and task-boundary seam artifacts such as type definitions, function signatures, DTOs, interfaces, and API shapes are allowed when they clarify the contract without supplying implementation bodies. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
 </no-real-code>
