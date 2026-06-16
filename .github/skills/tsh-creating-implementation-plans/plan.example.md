@@ -96,7 +96,12 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
 
-**Verification:** `tsc --noEmit`; `npm run test:unit -- <spec>`
+**Verification:** <fast checks from Technical Context → Tech Stack / Testing Patterns; never assumed from Node/npm>
+
+<!-- Source every Verification and DoD command from Technical Context → Tech Stack / Testing Patterns. Examples by stack:
+	Node:   pnpm test:unit -- <spec>; tsc --noEmit
+	Python: uv run pytest <path>; uv run ruff check
+-->
 
 <!-- Phase Description states the broader why for reviewers and implementors. Task Description uses a near-imperative form that names the files and the behavior. -->
 
@@ -109,7 +114,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] <specific verifiable criterion in the listed files>
-- [ ] Run `tsc --noEmit`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
 **Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
 
@@ -124,7 +129,22 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] <specific verifiable criterion in the listed files>
-- [ ] Run `npm run test:unit -- <spec>`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
+
+**Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
+
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
+#### Task 1.3 - [CREATE/MODIFY] <docs-or-config-task-name>
+
+**Description**: <brief description of a docs, config, content, or asset change that has no runnable command>
+
+**Files:** `docs/<file>.md` (modify)
+
+**Definition of Done**:
+
+- [ ] <specific verifiable criterion in the listed files>
+- [ ] `docs/<file>.md contains an "## Usage" section` _(deterministic reviewer check — a docs-only task has no runnable command)_
 
 **Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
 
@@ -136,7 +156,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
 
-**Verification:** `npm run test:unit -- <ui-spec>`; `npm run lint`
+**Verification:** <fast checks from Technical Context → Tech Stack / Testing Patterns; never assumed from Node/npm>
 
 #### Task 2.1 - [CREATE/MODIFY] <ui-component-name>
 
@@ -149,7 +169,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] <specific verifiable criterion in the listed files>
-- [ ] Run `npm run test:unit -- <ui-spec>`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
 **Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
 
@@ -165,7 +185,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Definition of Done**:
 
-- [ ] Run `npm run test:e2e -- <ui-spec>`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
 - [ ] UI verification passes or escalated to user after 5 iterations
 - [ ] Verification report documented in Changelog
 
@@ -179,7 +199,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: <broader-explanation-of-what-should-be-done-and-why>
 
-**Verification:** `npm run lint`; `npm run build`
+**Verification:** <fast checks from Technical Context → Tech Stack / Testing Patterns; never assumed from Node/npm>
 
 #### Task 3.1 - [CREATE/MODIFY/REUSE] <task-name>
 
@@ -190,7 +210,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] <specific verifiable criterion in the listed files>
-- [ ] Run `npm run lint`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
 
 **Stop Rule:** <optional one-sentence condition telling the implementor to stop, report, and not improvise if the task cannot proceed safely or an expected seam is missing>
 
@@ -202,7 +222,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Description**: Final verification of the full implementation. This phase is mandatory and always comes last.
 
-**Verification:** `npm run lint`; `npm run build`
+**Verification:** <fast checks from Technical Context → Tech Stack / Testing Patterns; never assumed from Node/npm>
 
 #### Task 4.1 - [REUSE] Code review by `tsh-code-reviewer` agent
 
@@ -212,7 +232,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Definition of Done**:
 
-- [ ] Run `npm run lint`
+- [ ] Run `<verification command from Technical Context → Testing Patterns>`
 - [ ] Code review passes with no blocking findings
 - [ ] E2e tests executed by the reviewer pass
 - [ ] Review outcome documented in Changelog
