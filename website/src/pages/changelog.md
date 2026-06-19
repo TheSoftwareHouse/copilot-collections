@@ -12,6 +12,22 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-11
+
+### Added
+
+- `tsh-orchestrating-implementation` skill — Added the canonical implementation orchestration workflow with flow selection, delegation routing, todo control, and review gates.
+
+### Changed
+
+- `tsh-engineering-manager` agent — Reworked into a WHO-only orchestrator that delegates implementation work through `tsh-orchestrating-implementation`.
+- `/tsh-implement` prompt — Reduced to a thin trigger that hands off to the orchestration skill.
+- Website documentation — Updated the Engineering Manager and `/tsh-implement` docs to reflect the new orchestration flow.
+
+### Fixed
+
+- `tsh-orchestrating-implementation` skill — Added the missing fallback policy for unsupported tasks and the rule to record solution changes in the plan changelog.
+
 ## 2026-06-01
 
 ### Added
