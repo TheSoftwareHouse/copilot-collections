@@ -13,9 +13,17 @@ This skill is the canonical workflow owner for implementation orchestration in t
 This skill is the single canonical source of truth for the implementation-orchestration workflow. Keep flow selection, planning readiness, task routing, todo protocol, execution-plan steps, and review gates here rather than duplicating them in agents or prompts.
 </canonical-source-of-truth>
 
-<never-writes-product-code>
-This skill never writes product code itself. It orchestrates delegation, validation, review, and escalation.
-</never-writes-product-code>
+<never-edits-files-directly>
+This skill never edits any file directly; it always delegates every file change to the owning specialist. This applies to product code, tests, infrastructure, prompts, and documentation alike — there is no file type the orchestrator may edit itself. It orchestrates delegation, validation, review, and escalation only.
+</never-edits-files-directly>
+
+<read-search-routing-only>
+The `read` and `search` tools are used only to validate routing and delegation decisions, never to research or solve the task directly. Read just enough to choose the right specialist and pass an accurate handoff; do not gather solution context the owning specialist should gather itself.
+</read-search-routing-only>
+
+<last-resort-stop-or-ask>
+If no suitable specialist agent exists for a required file change, stop and ask the user instead of self-executing the edit. Self-execution is never the fallback.
+</last-resort-stop-or-ask>
 
 <todo-role>
 The todo list is the progress-control surface. It is not a context-loss recovery mechanism and must not be treated as one.
@@ -72,6 +80,8 @@ Use the following decision rules before any delegation.
 
 **Hard exclusion:** any Figma or UI-verification involvement immediately disqualifies Quick Flow.
 
+**Repository-documentation requests** — when the work only touches repository documentation (README, CHANGELOG, in-repo `/docs`, or the published documentation site) — are recognized as a first-class documentation work type and routed to `tsh-technical-writer` via the Execution routing table, never improvised or self-executed.
+
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
 
 ### Step 2 - Plan the task order
@@ -99,6 +109,7 @@ This table is the single source of truth for selecting a delegate agent and prom
 | CI/CD | `tsh-devops-engineer` | `tsh-implement-pipeline.prompt.md` | The internal prompt should be used for pipeline work |
 | observability | `tsh-devops-engineer` | `tsh-implement-observability.prompt.md` | The internal prompt should be used for logging, metrics, or tracing work |
 | LLM prompts | `tsh-prompt-engineer` | `tsh-engineer-prompt.prompt.md` | The internal prompt should be used for prompt-engineering tasks |
+| documentation | `tsh-technical-writer` | `tsh-write-documentation.prompt.md` | The internal prompt should be used for repository documentation work across all targets — README, CHANGELOG, `/docs`, and the published documentation site |
 | `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
 | `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
 
@@ -150,7 +161,7 @@ Process tasks in plan order. Consult the todo list before each task and update t
 ### Execution rules and gates
 
 1. **Stay inside the approved plan** - If execution requires a material deviation from the approved plan, stop and get confirmation before changing direction.
-2. **Delegate by route, not by instinct** - Use the Task-to-Owner Routing table for each task and pass the plan section, technical context, and latest outputs.
+2. **Delegate by route with an explicit handoff contract** - Use the routing table for each task and hand off a bounded task slice, the relevant technical context, and a targeted summary of the prior worker's actionable output. Do not dump raw prior output or unscoped context; give the specialist exactly the slice they own plus the context they need to execute it.
 3. **Update after every task** - After each task, update the plan status, update the matching todo, and run the appropriate checks for that task type.
 4. **Run checks after every task** - Use the validation set that matches the changed area, such as lint, build, unit tests, integration tests, E2E checks, or infrastructure validation.
 5. **Handle `[REUSE]` UI verification as a per-item loop:**
@@ -162,8 +173,8 @@ Process tasks in plan order. Consult the todo list before each task and update t
 6. **Enforce the UI verification gate** - Do not start code review until every `[REUSE]` UI verification item has been individually passed or individually escalated.
 7. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item.
 8. **Confirm before changing a reviewed solution** - If code review finds issues that require changes, ask for confirmation before changing the reviewed solution.
-9. **Route review fixes back through the correct implementer** - After confirmation, delegate fixes through the same routing rules, run affected checks again, and re-run review when needed.
-10. **Treat direct implementation as a workflow violation** - If the orchestrator starts writing product code directly, stop that path, return to delegated execution, and continue only through the correct owner.
+9. **Route review fixes back through the correct implementer** - After confirmation, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and re-run review when needed.
+10. **Treat any direct file edit as a workflow violation** - The orchestrator never edits any file directly; always delegates every file change to the owning specialist. If the orchestrator starts editing any file itself, stop that path, return to delegated execution, and continue only through the correct owner. If no suitable specialist exists, stop and ask the user.
 11. **Record solution changes in the plan Changelog** - When the approved solution changes during implementation, or when a workflow deviation occurs, document it in the plan file's Changelog section with timestamps after the change is confirmed.
 
 ### Preservation coverage
