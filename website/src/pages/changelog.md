@@ -12,6 +12,21 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-19
+
+### Added
+
+- `tsh-technical-writer` agent — Internal worker agent that owns repository documentation, authoring and updating README, CHANGELOG, in-repo `/docs`, and published documentation-site pages. Delegated to by the Engineering Manager for documentation-only work; never writes or edits product code.
+- `tsh-writing-documentation` skill — Canonical documentation-writing skill covering README, CHANGELOG, in-repo `/docs`, and the published documentation site. Includes documentation scope rules, accuracy-over-volume principle, structure-mirrors-neighbors convention, broken-link policy, and reader-centered craft guidelines from *Writing for Busy Readers*.
+- Internal prompt `tsh-write-documentation` — Worker prompt that hands off a bounded documentation task to `tsh-technical-writer`; loads `tsh-writing-documentation` and `tsh-technical-context-discovering` skills before authoring begins.
+- Documentation pages for the Technical Writer agent and Writing Documentation skill on the website.
+
+### Changed
+
+- `tsh-engineering-manager` agent — Added `tsh-technical-writer` to the subagents list; added delegation rules (when to delegate documentation-only work and when not to); tightened the "never writes product code" constraint to "never edits any file directly"; added read/search tool guardrails (routing decisions only, never for research or solving).
+- `tsh-orchestrating-implementation` skill — Renamed `never-writes-product-code` principle to `never-edits-files-directly` (now covers all file types, not just product code); added `read-search-routing-only` and `last-resort-stop-or-ask` principles; added repository documentation as a first-class work type routed to `tsh-technical-writer` via `tsh-write-documentation.prompt.md`; tightened delegation handoff contract (bounded task slice, no raw context dumping); tightened fix routing rule (structured per-finding list before re-delegating).
+- Website agents overview — Added Technical Writer to the Engineering Manager delegation diagram and to the Internal Worker Agents table.
+
 ## 2026-06-18
 
 ### Added
