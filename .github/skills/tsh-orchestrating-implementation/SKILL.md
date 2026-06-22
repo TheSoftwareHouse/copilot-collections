@@ -84,6 +84,8 @@ Use the following decision rules before any delegation.
 
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
 
+If the selected execution path would proceed without an approved plan, use `vscode/askQuestions` to confirm the user wants no-plan execution before delegating any implementation work.
+
 ### Step 2 - Plan the task order
 
 Produce a task-order plan - the WHAT tasks in WHAT order - before the first delegation, not a binding agent + prompt call sequence.
