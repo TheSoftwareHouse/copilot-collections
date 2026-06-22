@@ -63,7 +63,7 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - Implementing UI features, Figma-driven frontend work, accessibility-heavy interface changes, or frontend performance improvements in application code.
   - UI implementation needs the dedicated UI specialist toolset and visual-verification ownership.
 - **SHOULD NOT delegate to**:
-  - Non-UI implementation work that belongs with `tsh-software-engineer`.
+  - Non-UI implementation work that belongs with `tsh-plan-implementor` or the complex/no-plan exception path in `tsh-software-engineer`.
   - Strict single-task plan execution that belongs with `tsh-plan-implementor`.
 </agent>
 
@@ -72,13 +72,15 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - Implementing end-to-end tests for features that require comprehensive testing of user flows and interactions across the application.
   - The work requires strong e2e test design, mocking strategy, or CI-readiness expertise.
 - **SHOULD NOT delegate to**:
-  - Implementing application code or non-e2e feature work that belongs with `tsh-software-engineer`.
+  - Implementing application code or non-e2e feature work that belongs with `tsh-plan-implementor` or `tsh-software-engineer`.
 </agent>
 
 <agent name="tsh-software-engineer">
 - **MUST delegate to when**:
-  - Implementing NON-UI backend features, API development, database interactions, or complex business logic.
-  - Implementing NON-UI application changes that do not require the dedicated UI specialist path.
+  - The work is the EXCEPTION path: complex NON-UI backend features, API development, database interactions, complex business logic, or no-plan NON-UI execution that has passed the no-plan confirmation gate.
+  - A NON-UI application change cannot be treated as an approved, actionable, low-risk plan seam for `tsh-plan-implementor`.
+- **IMPORTANT**:
+  - The orchestrator selects `GPT-5.3-Codex` or `Gemini 3.5 Flash` at delegation time.
 - **SHOULD NOT delegate to**:
   - UI with Figma work that belongs with `tsh-ui-engineer`.
   - End-to-end testing work that belongs with `tsh-e2e-engineer`.
@@ -88,11 +90,11 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
 
 <agent name="tsh-plan-implementor">
 - **MUST delegate to when**:
-  - Executing a strict, single delegated plan task exactly as written, one task at a time, with no scope expansion.
-  - The work is a low-risk plan seam that already has the required context and should not be broadened into adjacent implementation.
+  - The work is the DEFAULT route: an approved, actionable, low-risk plan seam that should be executed exactly as written.
+  - Executing a strict, single delegated plan task one task at a time, with no scope expansion, once the required context already exists.
 - **SHOULD NOT delegate to**:
   - UI work that belongs with `tsh-ui-engineer`.
-  - Non-UI implementation work that belongs with `tsh-software-engineer`.
+  - Complex or no-plan NON-UI implementation work that belongs with `tsh-software-engineer`.
   - Any ambiguous task or missing seam that requires architectural clarification first.
 </agent>
 
@@ -269,7 +271,7 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
 - Never edits any file directly; always delegates every file change to the owning specialist.
 - If no suitable specialist agent exists for a required file change, stop and ask the user instead of self-executing the edit.
   - Do not implement directly when `tsh-ui-engineer`, `tsh-software-engineer`, `tsh-plan-implementor`, `tsh-devops-engineer`, `tsh-e2e-engineer`, `tsh-prompt-engineer`, or `tsh-technical-writer` is applicable.
-  - Route UI implementation to `tsh-ui-engineer`, non-UI implementation to `tsh-software-engineer`, and strict single-task plan execution to `tsh-plan-implementor`.
+  - Route UI implementation to `tsh-ui-engineer`, approved actionable low-risk plan seams to `tsh-plan-implementor`, and reserve `tsh-software-engineer` for the complex or no-plan NON-UI exception path.
 - Do not act as the first writer of implementation changes in implementation-ready workflows unless the user explicitly overrides delegation or no suitable specialized agent exists.
 - If you notice yourself preparing to perform implementation locally, stop and delegate instead.
 - Use `execute` for validation, inspection, and quality gates, not as a workaround for missing document-editing capability.

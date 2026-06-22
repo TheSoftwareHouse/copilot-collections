@@ -103,8 +103,8 @@ This table is the single source of truth for selecting a delegate agent and prom
 
 | Task type or tag | Delegate to | Prompt to use | Notes |
 | --- | --- | --- | --- |
-| app code (plan task) | `tsh-plan-implementor` | `tsh-implement-common-task.prompt.md` | Full Flow only — use for strict, low-risk plan tasks that must be executed exactly as written; never used in Quick Flow |
-| app code (standard or complex) | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | Use for standard implementation work in Quick Flow, and for complex or no-plan non-UI implementation in Full Flow after the no-plan confirmation gate; choose `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.5 Flash` for fast, low-cost, large-context analysis |
+| app code (plan task) | `tsh-plan-implementor` | `tsh-implement-common-task.prompt.md` | DEFAULT route in both Quick Flow and Full Flow for approved, actionable, low-risk plan seams that must be executed exactly as written |
+| app code (complex or no-plan) | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | EXCEPTION route for complex non-UI work, or for no-plan non-UI execution after the no-plan confirmation gate; choose `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.5 Flash` for fast, low-cost, large-context analysis |
 | UI with Figma | `tsh-ui-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
 | E2E | `tsh-e2e-engineer` | `tsh-implement-e2e.prompt.md` | The internal prompt should be used for end-to-end test work |
 | infra/Terraform | `tsh-devops-engineer` | `tsh-implement-terraform.prompt.md` | The internal prompt should be used for Terraform changes |
@@ -116,20 +116,19 @@ This table is the single source of truth for selecting a delegate agent and prom
 | `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
 | `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
 
-Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow. Quick Flow also never uses `tsh-plan-implementor`; that worker is reserved for explicit plan-task seams inside Full Flow.
+Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow. Apply the app-code decision rule consistently in both flows: `tsh-plan-implementor` is the DEFAULT route for approved, actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work or no-plan non-UI execution after the no-plan confirmation gate.
 
 ## Quick Flow
 
 Use Quick Flow only if Step 1 passed every Quick criterion and the user selected or accepted it.
 
-1. **Delegate implementation** - Identify the task's type or tag and delegate using the Task-to-Owner Routing table above. For a plain app-code task this is `tsh-software-engineer` with `tsh-implement-common-task.prompt.md`; for CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM-prompt, or E2E tasks, delegate to the matching owner and prompt from the table instead.
-   - Do not use `tsh-plan-implementor` in Quick Flow; reserve that worker for explicit plan-task seams in Full Flow.
+1. **Delegate implementation** - Identify the task's type or tag and delegate using the Task-to-Owner Routing table above. For a plain app-code task, use `tsh-plan-implementor` with `tsh-implement-common-task.prompt.md` when an approved, actionable, low-risk plan seam already exists; otherwise route to `tsh-software-engineer` with the same prompt after the no-plan confirmation gate. For CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM-prompt, or E2E tasks, delegate to the matching owner and prompt from the table instead.
 2. **Run validation checks** - After implementation, run the appropriate checks for the affected area.
 3. **Delegate code review** - Delegate review to `tsh-code-reviewer` via `tsh-review.prompt.md`.
 4. **Handle review results explicitly:**
    - If review passes with no required changes, complete the flow.
    - If review requests changes, ask for confirmation before changing the reviewed solution.
-   - After confirmation, route fixes back to the same owner selected in Step 1, run affected validation again, and re-run review when the fix is material.
+   - After confirmation, route fixes back through the same app-code decision rule used in Step 1, run affected validation again, and re-run review when the fix is material.
 5. **Abort Quick Flow if hidden complexity appears** - If ambiguity, cross-domain work, plan gaps, or any Figma/UI-verification need appears during execution, stop Quick Flow, rewrite the execution plan, and restart in Full Flow.
 
 ## Full Flow
@@ -160,7 +159,7 @@ Check the current state before creating or executing any plan.
 
 ### Execution routing
 
-Process tasks in plan order. Consult the todo list before each task and update the plan and todo list after each completed task. Use the Task-to-Owner Routing table above to select the delegate agent and prompt for each task — it is not repeated here.
+Process tasks in plan order. Consult the todo list before each task and update the plan and todo list after each completed task. Use the Task-to-Owner Routing table above to select the delegate agent and prompt for each task — it is not repeated here. Apply the app-code decision rule consistently during execution and follow-up fixes: `tsh-plan-implementor` is the DEFAULT route for approved, actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work or no-plan non-UI execution after the no-plan confirmation gate.
 
 ### Execution rules and gates
 
