@@ -12,6 +12,22 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-22
+
+### Added
+
+- `tsh-ui-engineer` agent — New UI-specialized implementor (model `Claude Sonnet 4.6`) that owns frontend and user-interface implementation. Carries the full UI toolset (Figma, Playwright, Context7, Sequential Thinking), the frontend skill bundle (`tsh-implementing-frontend`, `tsh-implementing-forms`, `tsh-writing-hooks`, `tsh-ensuring-accessibility`, `tsh-optimizing-frontend`, `tsh-ui-verifying`), delegates verification to `tsh-ui-reviewer`, and confirms scope via `vscode/askQuestions` before proceeding without a plan.
+- `tsh-plan-implementor` agent — New internal-only (`user-invocable: false`) strict implementor that executes one plan task at a time exactly as written, with a minimal toolset and a stop-and-report path for missing seams or ambiguous plans. Reuses the shared `tsh-implement-common-task.prompt.md` rather than adding a dedicated prompt; first in-repo use of a multi-model array with a `customendpoint` availability fallback.
+- Documentation pages for the UI Engineer and Plan Implementor agents on the website.
+
+### Changed
+
+- `tsh-software-engineer` agent — Refactored into the standard non-UI implementor: removed the Figma and Playwright tools and the UI skill bundle, dropped the `tsh-ui-reviewer` subagent, switched to a `GPT-5.3-Codex` / `Gemini 3.5 Flash` model array with selection guidance, and added an explicit `vscode/askQuestions` no-plan confirmation step. UI work now routes to `tsh-ui-engineer`.
+- `tsh-orchestrating-implementation` skill — Split the single implementor route into three: UI with Figma to `tsh-ui-engineer`, strict low-risk plan tasks to `tsh-plan-implementor`, and complex/no-plan non-UI work to `tsh-software-engineer`; added the no-plan `vscode/askQuestions` confirmation gate, the software-engineer model-selection note, and excluded `tsh-plan-implementor` from Quick Flow.
+- `tsh-engineering-manager` agent — Registered `tsh-ui-engineer` and `tsh-plan-implementor` in the subagents list and delegation roster, narrowed the `tsh-software-engineer` entry to non-UI implementation, and reconciled the constraints so no single implementor is treated as owning every implementation path.
+- Reference reconciliation — Repointed UI ownership to `tsh-ui-engineer` across `tsh-ui-reviewer`, `plan.example.md`, and the `tsh-implement-ui` internal prompt, while keeping `tsh-software-engineer` as the default non-UI fix target in `tsh-code-reviewer` and `tsh-e2e-engineer` with an explicit UI exception.
+- Website docs — Reframed the Software Engineer page as non-UI, updated the agents overview table and handoff diagram to include the three implementors, and added the new agent pages.
+
 ## 2026-06-19
 
 ### Added
