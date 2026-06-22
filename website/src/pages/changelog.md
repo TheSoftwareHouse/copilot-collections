@@ -27,6 +27,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `tsh-engineering-manager` agent — Registered `tsh-ui-engineer` and `tsh-plan-implementor` in the subagents list and delegation roster, narrowed the `tsh-software-engineer` entry to non-UI implementation, and reconciled the constraints so no single implementor is treated as owning every implementation path.
 - Reference reconciliation — Repointed UI ownership to `tsh-ui-engineer` across `tsh-ui-reviewer`, `plan.example.md`, and the `tsh-implement-ui` internal prompt, while keeping `tsh-software-engineer` as the default non-UI fix target in `tsh-code-reviewer` and `tsh-e2e-engineer` with an explicit UI exception.
 - Website docs — Reframed the Software Engineer page as non-UI, updated the agents overview table and handoff diagram to include the three implementors, and added the new agent pages.
+- Follow-up hardening — Normalized the `tsh-software-engineer`, `tsh-ui-engineer`, and `tsh-plan-implementor` bodies to the canonical XML-tag structure, nested plan-progress guidance inside `<agent-role>`, and removed the in-body software-engineer model-selection prose while keeping its frontmatter model array intact.
+- Follow-up hardening — Made `tsh-plan-implementor` the default route for approved, actionable, low-risk plan seams across `tsh-orchestrating-implementation` and `tsh-engineering-manager`, with `tsh-software-engineer` as the explicit exception for complex or no-plan non-UI work; orchestration now owns delegation-time model selection between `GPT-5.3-Codex` and `Gemini 3.5 Flash`, and Quick Flow allows `tsh-plan-implementor` when an approved plan seam already exists.
+- Follow-up hardening — Aligned the published Software Engineer docs page with the orchestrator selecting the model at delegation time and matched its wording to the hardened three-implementor routing contract.
 
 ## 2026-06-19
 
