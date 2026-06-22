@@ -84,6 +84,8 @@ Use the following decision rules before any delegation.
 
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
 
+If the selected execution path would proceed without an approved plan, use `vscode/askQuestions` to confirm the user wants no-plan execution before delegating any implementation work.
+
 ### Step 2 - Plan the task order
 
 Produce a task-order plan - the WHAT tasks in WHAT order - before the first delegation, not a binding agent + prompt call sequence.
@@ -101,8 +103,9 @@ This table is the single source of truth for selecting a delegate agent and prom
 
 | Task type or tag | Delegate to | Prompt to use | Notes |
 | --- | --- | --- | --- |
-| app code | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | The internal prompt should be used for standard implementation work |
-| UI with Figma | `tsh-software-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
+| app code (plan task) | `tsh-plan-implementor` | `tsh-implement-common-task.prompt.md` | Full Flow only — use for strict, low-risk plan tasks that must be executed exactly as written; never used in Quick Flow |
+| app code (standard or complex) | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | Use for standard implementation work in Quick Flow, and for complex or no-plan non-UI implementation in Full Flow after the no-plan confirmation gate; choose `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.5 Flash` for fast, low-cost, large-context analysis |
+| UI with Figma | `tsh-ui-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
 | E2E | `tsh-e2e-engineer` | `tsh-implement-e2e.prompt.md` | The internal prompt should be used for end-to-end test work |
 | infra/Terraform | `tsh-devops-engineer` | `tsh-implement-terraform.prompt.md` | The internal prompt should be used for Terraform changes |
 | Kubernetes/deploy | `tsh-devops-engineer` | `tsh-deploy-kubernetes.prompt.md` | The internal prompt should be used for deployment or Kubernetes work |
@@ -113,13 +116,14 @@ This table is the single source of truth for selecting a delegate agent and prom
 | `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
 | `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
 
-Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow.
+Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow. Quick Flow also never uses `tsh-plan-implementor`; that worker is reserved for explicit plan-task seams inside Full Flow.
 
 ## Quick Flow
 
 Use Quick Flow only if Step 1 passed every Quick criterion and the user selected or accepted it.
 
 1. **Delegate implementation** - Identify the task's type or tag and delegate using the Task-to-Owner Routing table above. For a plain app-code task this is `tsh-software-engineer` with `tsh-implement-common-task.prompt.md`; for CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM-prompt, or E2E tasks, delegate to the matching owner and prompt from the table instead.
+   - Do not use `tsh-plan-implementor` in Quick Flow; reserve that worker for explicit plan-task seams in Full Flow.
 2. **Run validation checks** - After implementation, run the appropriate checks for the affected area.
 3. **Delegate code review** - Delegate review to `tsh-code-reviewer` via `tsh-review.prompt.md`.
 4. **Handle review results explicitly:**
@@ -161,21 +165,22 @@ Process tasks in plan order. Consult the todo list before each task and update t
 ### Execution rules and gates
 
 1. **Stay inside the approved plan** - If execution requires a material deviation from the approved plan, stop and get confirmation before changing direction.
-2. **Delegate by route with an explicit handoff contract** - Use the routing table for each task and hand off a bounded task slice, the relevant technical context, and a targeted summary of the prior worker's actionable output. Do not dump raw prior output or unscoped context; give the specialist exactly the slice they own plus the context they need to execute it.
-3. **Update after every task** - After each task, update the plan status, update the matching todo, and run the appropriate checks for that task type.
-4. **Run checks after every task** - Use the validation set that matches the changed area, such as lint, build, unit tests, integration tests, E2E checks, or infrastructure validation.
-5. **Handle `[REUSE]` UI verification as a per-item loop:**
+2. **Gate no-plan execution explicitly** - If the selected route would proceed without an approved plan, confirm the user wants no-plan execution with `vscode/askQuestions` before delegating the work.
+3. **Delegate by route with an explicit handoff contract** - Use the routing table for each task and hand off a bounded task slice, the relevant technical context, and a targeted summary of the prior worker's actionable output. Do not dump raw prior output or unscoped context; give the specialist exactly the slice they own plus the context they need to execute it.
+4. **Update after every task** - After each task, update the plan status, update the matching todo, and run the appropriate checks for that task type.
+5. **Run checks after every task** - Use the validation set that matches the changed area, such as lint, build, unit tests, integration tests, E2E checks, or infrastructure validation.
+6. **Handle `[REUSE]` UI verification as a per-item loop:**
    - Process each `[REUSE]` UI verification task one item at a time in plan order.
    - Delegate each item to `tsh-ui-reviewer` with `tsh-review-ui.prompt.md`, passing the Figma URL, dev server URL, and component or section name.
    - Use `tsh-implement-ui.prompt.md` as the workflow reference for the verify-fix loop rather than duplicating that loop here.
    - Mark each item individually as **PASSED** or **ESCALATED**.
    - Never batch multiple UI verification items into one review step.
-6. **Enforce the UI verification gate** - Do not start code review until every `[REUSE]` UI verification item has been individually passed or individually escalated.
-7. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item.
-8. **Confirm before changing a reviewed solution** - If code review finds issues that require changes, ask for confirmation before changing the reviewed solution.
-9. **Route review fixes back through the correct implementer** - After confirmation, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and re-run review when needed.
-10. **Treat any direct file edit as a workflow violation** - The orchestrator never edits any file directly; always delegates every file change to the owning specialist. If the orchestrator starts editing any file itself, stop that path, return to delegated execution, and continue only through the correct owner. If no suitable specialist exists, stop and ask the user.
-11. **Record solution changes in the plan Changelog** - When the approved solution changes during implementation, or when a workflow deviation occurs, document it in the plan file's Changelog section with timestamps after the change is confirmed.
+7. **Enforce the UI verification gate** - Do not start code review until every `[REUSE]` UI verification item has been individually passed or individually escalated.
+8. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item.
+9. **Confirm before changing a reviewed solution** - If code review finds issues that require changes, ask for confirmation before changing the reviewed solution.
+10. **Route review fixes back through the correct implementer** - After confirmation, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and re-run review when needed.
+11. **Treat any direct file edit as a workflow violation** - The orchestrator never edits any file directly; always delegates every file change to the owning specialist. If the orchestrator starts editing any file itself, stop that path, return to delegated execution, and continue only through the correct owner. If no suitable specialist exists, stop and ask the user.
+12. **Record solution changes in the plan Changelog** - When the approved solution changes during implementation, or when a workflow deviation occurs, document it in the plan file's Changelog section with timestamps after the change is confirmed.
 
 ### Preservation coverage
 
