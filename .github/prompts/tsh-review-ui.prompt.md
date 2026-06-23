@@ -18,11 +18,14 @@ Before starting, load and follow these skills:
 
 Follow the 5-step verification process defined in the `tsh-ui-verifying` skill. The skill contains the complete workflow including:
 
-1. Validate inputs (Figma URL + running dev server)
+1. Validate inputs (Figma URL + user-confirmed full dev server URL, or confirm one first for standalone runs)
 2. Get EXPECTED from Figma via `figma`
-3. Get ACTUAL from implementation via `playwright` — structure, actual rendered dimensions, and visual screenshot
+3. Get ACTUAL from implementation through `tsh-ui-capture-worker` CLI artifacts — structure, actual rendered dimensions, and visual screenshot
 4. Compare following the skill's verification categories and tolerances
 5. Generate structured report following the skill's report format
+6. If capture is blocked by auth redirect, missing confirmed URL, wrong page state, unreachable page, or incomplete artifacts, the immediate next action MUST be `vscode/askQuestions` to resolve the blocker before any further reply
+
+If the caller supplies a user-confirmed full URL, use that exact URL unchanged. If no URL is supplied in a standalone run, confirm one with the user before capture. Missing or blocked capture must report `VERIFICATION NOT RUN` with blocker-resolution guidance. Do not ask for credentials, session details, or blocker-resolution input in plain assistant text before invoking `vscode/askQuestions`.
 
 The Figma design is the **source of truth** for every comparison. When in doubt, the design wins.
 
