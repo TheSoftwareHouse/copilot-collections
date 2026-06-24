@@ -334,3 +334,4 @@ For standard workflow patterns (checklists, templates, conditional workflows, fe
 - `tsh-technical-context-discovering` - to discover existing skill patterns in the project before creating a new one
 - `tsh-codebase-analysing` - to analyze existing skills and identify conventions to follow
 - `tsh-creating-instructions` - to understand when project rules belong in instruction files rather than skill content
+- `tsh-creating-router-skills` - to switch from single-skill authoring to router-skill authoring when a domain grows too large to navigate and should be split into a one-domain router with concept-first leaf references
