@@ -51,6 +51,7 @@ If a blocker occurs, report the blocker and escalation notes back to the caller 
 - Never infer, normalize, or replace the caller-provided full URL.
 - Never inspect project config to discover another URL or port.
 - Never launch, start, or switch to another local app/server.
+- Write every artifact into the caller-provided iteration directory (`specifications/<task-id>/ui-verification/iteration-<N>/`) using explicit paths; never leave artifacts in `.playwright-cli/` or the working directory.
 - If the confirmed full URL is missing from the delegated task, return a blocker immediately.
 - Always escalate auth mismatches, login redirects, open/goto failures, and missing target content back to the caller.
 - Keep the role limited to mechanical CLI capture and tripwire evidence collection.

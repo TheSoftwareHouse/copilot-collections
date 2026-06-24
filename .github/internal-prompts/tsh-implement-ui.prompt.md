@@ -34,13 +34,21 @@ Do NOT skip verification or delegate without a Figma reference.
 
 4. **Delegate UI implementation** — For each UI implementation task, delegate to `tsh-ui-engineer` using [tsh-implement-ui-common-task.prompt.md](./tsh-implement-ui-common-task.prompt.md). Pass the relevant Figma URLs, component context, and plan section. For non-Figma frontend and backend tasks, use [tsh-implement-common-task.prompt.md](./tsh-implement-common-task.prompt.md).
 
-5. **Delegate UI verification** — After each UI implementation task completes, delegate verification to `tsh-ui-reviewer` using `runSubagent` with [tsh-review-ui.prompt.md](../prompts/tsh-review-ui.prompt.md). Pass: the Figma URL, the pinned user-confirmed full dev server URL from step 3, and the component/section name. Forward that exact URL unchanged through every delegate, retry, and capture pass. The ui-reviewer will compare the Figma design against the running implementation and return a structured report. **Note:** The reviewer uses `figma` for EXPECTED and relies on `tsh-ui-capture-worker` for the ACTUAL live-capture artifacts (`actual.png`, `computed-styles.json`, `a11y-snapshot.yml`). No agent in this loop may launch, start, or switch to another local app/server or port once the URL is confirmed.
+5. **Delegate UI verification** — After each UI implementation task completes, first delegate capture to `tsh-ui-capture-worker` using the pinned user-confirmed full dev server URL from step 3 and the current iteration artifact directory. Then delegate verification to `tsh-ui-reviewer` using `runSubagent` with [tsh-review-ui.prompt.md](../prompts/tsh-review-ui.prompt.md). Pass: the Figma URL, the same pinned full dev server URL, the component/section name, and the exact artifact directory produced by `tsh-ui-capture-worker`. Forward that exact URL unchanged through every delegate, retry, and capture pass. The ui-reviewer will compare the Figma design against the running implementation and return a structured report. **Note:** The reviewer uses `figma` for EXPECTED and consumes caller-provided ACTUAL live-capture artifacts (`actual.png`, `computed-styles.json`, `a11y-snapshot.yml`) produced earlier by `tsh-ui-capture-worker`. No agent in this loop may launch, start, or switch to another local app/server or port once the URL is confirmed.
+
+- In every delegation, explicitly require the reviewer response to include: `Verification Result`, `Component`, exact `Artifact Directory`, per-file artifact status, and blocker-resolution guidance. Treat an empty response or a response missing any of those fields as an invalid verification result and re-run the reviewer once with the same pinned URL, the same fresh artifact directory, and a stricter handoff.
+- The caller/orchestrator must not treat its own lack of `figma` tool access as a Figma blocker for UI verification. If a Figma URL is available, delegate review first and let `tsh-ui-reviewer` determine whether `figma` MCP is actually unavailable in its own runtime.
+
+- This step is **delegate-only**. The main/orchestrating agent must not perform UI verification itself and must not substitute code review, type checks, or browser inspection for the delegated `tsh-ui-capture-worker` + `tsh-ui-reviewer` flow.
+- If `tsh-ui-reviewer` cannot be invoked, if `figma` is unavailable to the reviewer, or if `tsh-ui-capture-worker` cannot be invoked by the caller, treat that as a blocker in the UI gate and report `VERIFICATION NOT RUN`. Do not self-execute a fallback verification path in the caller.
 
 6. **Handle verification results**:
    - If **PASS** → mark the task and its verification step as complete in the plan. Move to the next task.
 
-- If **FAIL** → delegate fix to `tsh-ui-engineer` — pass the **complete** verification report and explicitly instruct the engineer to fix **ALL** listed differences, not just the first one. After the fix, delegate a **fresh capture** to `tsh-ui-capture-worker` using the same pinned full URL to regenerate `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml`, and only then re-delegate verification to `tsh-ui-reviewer` on those new artifacts. Re-verification must never run on stale artifacts. Repeat up to **5 iterations per component**.
+- If **FAIL** → this is NOT a stopping point. Delegate the fix to `tsh-ui-engineer` — pass the **complete** verification report and explicitly instruct the engineer to fix **ALL** listed differences, not just the first one. After the fix, delegate a **fresh capture** to `tsh-ui-capture-worker` using the same pinned full URL to regenerate `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml`, and only then re-delegate verification to `tsh-ui-reviewer` on those new artifacts. Re-verification must never run on stale artifacts. Then loop again: a single FAIL pass never ends the loop — keep running fix → fresh capture → re-verify until the result is PASS or you have completed **5 full iterations** for this component. Only after 5 completed iterations with remaining mismatches do you open the structured gate below.
 - If **VERIFICATION NOT RUN** → treat it as a **pre-verification blocker**, not as a failed verification iteration. Resolve the blocker with the user through `vscode/askQuestions` if needed (missing confirmed URL, auth, wrong page state, unreachable page, incomplete artifacts); do not use a freeform text request as a substitute. Regenerate capture via `tsh-ui-capture-worker` using the same pinned full URL, and re-run verification. This state does **not** consume the 5-iteration budget and does **not** enter the post-5-iteration continue/stop/custom gate. Only treat it as `ESCALATED` if the user explicitly acknowledges an unresolved blocker.
+- If **VERIFICATION NOT RUN** because `tsh-ui-reviewer` reported `figma` MCP unavailability, only then may the caller ask the user to enable Figma MCP or provide an exported reference image. The caller must not raise that blocker based on its own tool availability.
+- If **VERIFICATION NOT RUN** because the reviewer step itself was not delegated or could not access its required tools/subagents, that is an orchestration blocker. Resolve it through `vscode/askQuestions`; do not let the main agent attempt the verification step directly.
 - After 5 failed iterations with remaining mismatches → pause behind a **structured** `vscode/askQuestions` gate. Present a structured summary containing exactly these fields: component or section name, Figma URL, remaining mismatches, what was attempted in each iteration, suspected root cause.
 - The `vscode/askQuestions` gate must offer exactly 3 choices: `continue-with` an explicit additional iteration count, stop and accept the current state as acknowledged `ESCALATED`, or provide a custom instruction.
 - Record the user's decision and the resulting outcome in the plan's Changelog.
@@ -65,6 +73,31 @@ Do NOT skip verification or delegate without a Figma reference.
 
 11. **Delegate code review** — Delegate to `tsh-code-reviewer` agent via [tsh-review.prompt.md](../prompts/tsh-review.prompt.md). Include E2E test execution as part of the review. The code reviewer runs all quality gates (unit, integration, E2E tests, linting, build).
 
+## Verification Loop (MANDATORY — never stop after one pass)
+
+For each UI component, run this loop explicitly:
+
+```text
+iteration = 0
+while iteration < 5:
+    iteration += 1
+    fix ALL differences from the latest report (skip on the very first pass)
+    fresh capture via tsh-ui-capture-worker -> figma-expected.png + actual.png + computed-styles.json + a11y-snapshot.yml
+    fresh verification via tsh-ui-reviewer on those new artifacts
+    if PASS: component done, exit loop
+    if FAIL: continue loop (do NOT stop, do NOT accept the current state)
+    if VERIFICATION NOT RUN: resolve the blocker via vscode/askQuestions; this does NOT count as one of the 5 iterations
+after 5 completed FAIL iterations with remaining mismatches:
+    open the structured vscode/askQuestions gate (continue-with-N / stop-as-ESCALATED / custom)
+```
+
+Hard rules for weaker models:
+
+- A single FAIL is never terminal and never "good enough" — keep iterating.
+- Never report the component complete while the latest result is FAIL.
+- Every iteration regenerates a fresh `figma-expected.png` and fresh ACTUAL artifacts; never reuse pre-fix evidence.
+- `VERIFICATION NOT RUN` (capture / auth / URL blocker) does not consume the 5-iteration budget.
+
 ## Verification Rules
 
 1. Every UI component must be verified by `tsh-ui-reviewer` — minimum once per component, no exceptions
@@ -74,6 +107,8 @@ Do NOT skip verification or delegate without a Figma reference.
 5. Check confidence level — LOW confidence means tool data may be incomplete
 
 ## Verification Gate — Do Not Proceed Without Real Verification
+
+**Default to asking (judgment rule, not a checklist):** the blocker cases named in this prompt are only examples. Whenever anything is missing, broken, ambiguous, inconsistent, or unexpected — including situations not listed here — and you cannot complete a real verification with the full artifact base, stop and resolve it through `vscode/askQuestions`. Do not guess, improvise, fabricate, or proceed on partial evidence. Think about whether the evidence actually supports the verdict before continuing.
 
 Before proceeding from a UI verification step to the next task or to code review, confirm that the `tsh-ui-reviewer` actually performed a **real Figma comparison with live-capture artifacts**. A valid verification report must contain:
 
@@ -88,7 +123,11 @@ Before proceeding from a UI verification step to the next task or to code review
 3. Re-delegate capture to `tsh-ui-capture-worker`, then re-delegate verification to `tsh-ui-reviewer` once the blocker is resolved
 4. Only proceed when you have a valid verification report or the user explicitly instructs you to skip
 
-**Never proceed to code review with unverified UI components.** UI verification is a separate gate that must clear first, and it must be reported separately from code review. If verification cannot be completed for a component, document it in the plan's Changelog and get explicit user approval before moving to code review.
+If `tsh-ui-reviewer` was never actually invoked, if `tsh-ui-capture-worker` was never actually invoked for the current pass, or if the caller attempted to approximate either step itself, treat that exactly like an invalid verification report: the UI gate did not run.
+
+If `tsh-ui-reviewer` returns an empty response, or omits the explicit verdict or artifact-directory contract, treat that exactly like an invalid verification report: rerun once with the same pinned URL and a stricter handoff demanding those fields; if it still fails, keep the item at `VERIFICATION NOT RUN` and resolve the orchestration blocker through `vscode/askQuestions`.
+
+**Never proceed to code review with unverified UI components.** UI verification is a separate gate that must clear first, and it must be reported separately from code review. If verification cannot be completed for a component, document it in the plan's Changelog and get explicit user approval before moving to code review. Type checks, build, unit/integration tests, and code review are NOT UI verification and never substitute for the live-capture + Figma comparison — a layout/CSS/sizing change is not "done" just because it compiles or because code review found the code clean.
 
 After every UI fix, repeat the capture and reviewer pass on fresh artifacts before treating the item as done. Do not reuse stale evidence, and do not merge the UI gate into the code-review step.
 

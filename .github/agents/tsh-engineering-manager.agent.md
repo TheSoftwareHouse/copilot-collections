@@ -128,6 +128,8 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - Implemented UI components must be verified against Figma designs.
   - UI verification or re-verification is required after UI fixes.
   - The plan includes `[REUSE]` UI verification tasks.
+- **IMPORTANT**:
+  - Once a valid Figma URL exists, do not treat your own lack of `figma` tool access as a blocker. Delegate to `tsh-ui-reviewer`; Figma MCP availability for verification is determined by the reviewer runtime, not by the orchestrator.
 - **SHOULD NOT delegate to**:
   - Non-visual tasks with no user-facing UI output.
   - Tasks where no Figma design reference exists and none has been provided.

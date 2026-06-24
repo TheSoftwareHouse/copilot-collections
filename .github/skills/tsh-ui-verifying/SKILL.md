@@ -8,6 +8,8 @@ user-invocable: false
 
 Verification process, criteria, and tolerances for comparing UI implementations against Figma designs.
 
+> **Default to asking when anything is off — this is a judgment rule, not a checklist.** Every specific blocker named in this skill (missing Figma, auth redirect, wrong page, missing or partial artifacts, unconfirmed URL, tool error, …) is only an EXAMPLE of one underlying rule: whenever you cannot run a real, complete verification against the full artifact base — because something is missing, broken, ambiguous, inconsistent, or simply unexpected, **including situations not listed anywhere here** — stop and raise it through `vscode/askQuestions` (when that tool is available to you). Do not guess, do not improvise a workaround, do not fabricate values, and do not proceed on partial evidence. Think about whether the evidence you actually have supports a verdict; if it does not, ask instead of pushing forward.
+
 ## Verification Process
 
 Use the checklist below and track your progress:
@@ -32,20 +34,25 @@ Before starting verification, confirm:
   - Once the user has confirmed the URL, every downstream verification and capture pass must treat it as pinned session state.
 - Dev server is running and the **target page** is reachable through the CLI capture flow using that confirmed URL:
   - Use the CLI capture flow to open the page at the full target URL before verification begins
-  - If the capture flow reports a **redirect to a login/authentication screen**: if the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call such as: "The page redirected to [login URL]. How should I authenticate? Please provide credentials, a session token, or tell me how to bypass authentication for local development." Do not ask for credentials in plain assistant text first.
+  - If the capture flow reports a **redirect to a login/authentication screen**: if the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call asking the user to log in, e.g.: "The page redirected to [login URL]. Please log in to the dev app in the captured browser session (or provide an already-authenticated session/state) and tell me when it is ready, so I can capture [component name]." Do not ask in plain assistant text first. Do NOT bypass, seed, inject, or fake authentication yourself — no `sessionStorage`/`localStorage`/cookie/token seeding and no faked identity or assumed role, even if you can see how the auth check works. Wait for the user to authenticate, then re-run capture on the same pinned URL.
   - If the capture flow reports **unexpected content** (error page, blank page, different route): if the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call such as: "The page at [URL] shows [description]. Is this the correct URL for [component name]?" Do not ask in plain assistant text first.
   - If the capture flow cannot find the expected component on the confirmed page: if the verifying agent has `vscode/askQuestions`, raise the blocker through that tool immediately rather than a freeform reply.
 - If any input is missing or any blocker is encountered, stop and resolve it through `vscode/askQuestions` when that tool is available to the verifying agent — do not proceed, do not fall back to code-level review, and do not skip the verification step
 
-**Step 2: Get EXPECTED from Figma**
+**Step 2: Get EXPECTED from Figma — MANDATORY, runs BEFORE capture**
 
-Use `figma` to extract the design specifications:
+This step is mandatory and always runs before capturing the implementation. A verification without fresh Figma EXPECTED data is INVALID. **EXPECTED comes ONLY from the `figma` MCP tools** — never open a `figma.com` URL (or any Figma link) in the Playwright/CLI browser to "fetch" the design, and never screenshot the Figma web app, its login page, or an error page as the reference. The browser is for the running app (ACTUAL) only. Do these in order:
 
-- Layer hierarchy and component structure
-- Layout direction, alignment, spacing
-- Frame widths relative to page — these determine whether containers should be narrow/centered or full-width
-- Typography, colors, radii, shadows
-- Component variants and states
+1. **Resolve the Figma node** from the supplied Figma URL (extract `fileKey` + `nodeId`). If the URL or node cannot be resolved, raise it through `vscode/askQuestions` (when that tool is available), report `VERIFICATION NOT RUN`, and stop. Never continue without a resolved node.
+2. **Export the Figma node image via the `figma` MCP and SAVE it** to the iteration artifact directory as `figma-expected.png` (the directory is defined in Step 3). Use the `figma` MCP's node-image / screenshot export — not a browser screenshot. This file is REQUIRED on every pass and must be the real design export; it is the visual reference the comparison is judged against. Do not keep it only in memory or a tool response; it must exist on disk in the iteration directory. If the `figma` MCP is not available in this workspace, that is a blocker: do NOT fall back to the browser and do NOT save any non-design image as `figma-expected.png` — report `VERIFICATION NOT RUN` and use `vscode/askQuestions` to ask the user to enable the Figma MCP or provide an exported reference image.
+3. **Extract the design specifications** to compare against:
+   - Layer hierarchy and component structure
+   - Layout direction, alignment, spacing
+   - Frame width (use it as the capture viewport width in Step 3)
+   - Typography, colors, radii, shadows
+   - Component variants and states
+
+> **ENSURE-OR-FETCH**: At the start of every pass, check whether a valid `figma-expected.png` (a real design export) already exists in the current iteration directory. If it is missing, that is NOT a reason to stop — export it now via the `figma` MCP (steps 1–2 above). Only after a genuine export failure (the `figma` MCP is unavailable, Figma cannot be reached, the node cannot be resolved, or the file cannot be written) do you report `VERIFICATION NOT RUN`, surface the blocker through `vscode/askQuestions`, and stop. Never browser-scrape Figma, never save a browser/login/error screenshot as `figma-expected.png`, and never proceed to compare against memory, source code, or the running app while a valid `figma-expected.png` is absent.
 
 **Step 3: Get ACTUAL from implementation**
 
@@ -63,21 +70,26 @@ If the three live-capture artifacts are not all present (`actual.png`, `computed
 
 ### CLI-first capture flow
 
-Use a named session and keep the flow explicit:
+Write EVERY artifact into the task's iteration directory, never into `.playwright-cli/` or the current working directory. `playwright-cli` writes to `.playwright-cli/` by default — that default location is WRONG for these artifacts, so always pass an explicit path. Use a named session and keep the flow explicit:
 
+0. **Define and create the artifact directory FIRST**:
+   - `ARTIFACT_DIR="specifications/<task-id>/ui-verification/iteration-<N>"` (use the caller-provided task directory; if no task-id exists, use a stable slug for the component/page, e.g. `specifications/<page-slug>/ui-verification/iteration-<N>`).
+   - `mkdir -p "$ARTIFACT_DIR"`.
+   - Every command below writes into `"$ARTIFACT_DIR/<file>"`. Never rely on default output locations.
 1. **Open named session** — `playwright-cli open -s <session-name>`.
-2. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> -s <session-name>`.
+2. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> 1080 -s <session-name>`.
 3. **Navigate to the full target URL** including query params — `playwright-cli goto <full-url> -s <session-name>`.
 4. **Stabilize render** before collecting evidence:
    - `playwright-cli run-code -s <session-name> "async page => { await page.emulateMedia({ reducedMotion: 'reduce' }); await page.waitForLoadState('networkidle'); }"`
    - Add route mocks only when the task explicitly requires deterministic mocked data.
    - Mask dynamic regions when unavoidable so transient timestamps, avatars, ads, or animations do not dominate the evidence.
-5. **Capture screenshot**:
-   - Preferred: `playwright-cli screenshot --filename actual.png -s <session-name>` when the CLI invocation supports `fullPage: true` for the current environment.
-   - Required fallback: `playwright-cli run-code -s <session-name> "async page => { await page.screenshot({ path: 'actual.png', fullPage: true }); }"`.
-6. **Capture accessibility snapshot** — `playwright-cli --raw snapshot -s <session-name> > a11y-snapshot.yml`.
-7. **Capture computed styles and measurements** — `playwright-cli --raw eval -s <session-name> "JSON.stringify(...)" > computed-styles.json`.
-8. **Clean up** — `playwright-cli close -s <session-name>` or equivalent session cleanup if the capture flow aborts.
+5. **Capture screenshot into the artifact directory**:
+   - Preferred: `playwright-cli screenshot --filename="$ARTIFACT_DIR/actual.png" -s <session-name>` (full page when supported).
+   - Required fallback: `playwright-cli run-code -s <session-name> "async page => { await page.screenshot({ path: '$ARTIFACT_DIR/actual.png', fullPage: true }); }"`.
+6. **Capture accessibility snapshot** — `playwright-cli --raw snapshot -s <session-name> > "$ARTIFACT_DIR/a11y-snapshot.yml"`.
+7. **Capture computed styles and measurements** — `playwright-cli --raw eval -s <session-name> "JSON.stringify(...)" > "$ARTIFACT_DIR/computed-styles.json"`.
+8. **Confirm artifacts landed in the right place** — run `ls -la "$ARTIFACT_DIR"` and verify `actual.png`, `a11y-snapshot.yml`, `computed-styles.json`, and `figma-expected.png` all exist there. If a capture artifact (`actual.png`, `a11y-snapshot.yml`, `computed-styles.json`) is missing or landed in `.playwright-cli/` or the working directory, move it into `$ARTIFACT_DIR` or re-run that command with the explicit path. If `figma-expected.png` is missing, go back to Step 2 and export it before continuing — a missing reference image is fixed by fetching it, not by reporting a blocker.
+9. **Clean up** — `playwright-cli close -s <session-name>` or equivalent session cleanup if the capture flow aborts.
 
 The `JSON.stringify(...)` payload should cover the major containers and controls being verified: bounding boxes, computed width/height, max-width, min-height, padding, margin, gap, alignment-relevant properties, and any targeted style values needed to explain differences.
 
@@ -108,7 +120,7 @@ specifications/<task-id>/ui-verification/iteration-<N>/
   report.md
 ```
 
-Required files for the core flow are `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`, `figma-expected.png`, and `report.md`. `pixel-gate/` is optional and only exists when the phase-2 tripwire runs.
+Required files for the core flow are `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`, `figma-expected.png`, and `report.md`. `pixel-gate/` is optional and only exists when the phase-2 tripwire runs. Never leave any of these artifacts in `.playwright-cli/` or the working directory — pass the explicit `$ARTIFACT_DIR/...` path to every capture command and confirm the files exist there.
 
 ### Exit codes and escalation rules
 
@@ -125,7 +137,7 @@ If open/goto/auth fails, if the page state is wrong, or if required artifacts ar
 
 Compare EXPECTED (Figma) against ACTUAL (implementation) following the Verification Order and Categories below. The Figma design is the **source of truth** for every comparison. When in doubt, the design wins.
 
-**IMPORTANT**: Complete ALL verification categories in a single pass. Do not stop after finding differences in one category — continue through every category and collect every difference. The report must contain ALL differences found across all categories so the engineer can fix them all at once, minimizing verification iterations.
+**IMPORTANT**: Complete ALL verification categories in a single pass. Do not stop after finding differences in one category — continue through every category and collect every difference. Go category by category (Structure → Layout → Dimensions → Visual → Components) and explicitly record, for each category, either the concrete differences found or an evidence-backed "no differences". A report that lists a single issue when more exist is an INCOMPLETE review: it wastes an iteration and forces extra loops. The report must contain ALL differences found across all categories so the engineer can fix them all at once, minimizing verification iterations.
 
 **Step 5: Generate report**
 
@@ -238,6 +250,25 @@ In that branch:
 4. Only convert them into actionable fixes after the user confirms they should be corrected.
 
 If the content/data mismatch also changes structure, layout, or visual fidelity in a real way, report that underlying UI defect normally.
+
+## PASS Gate (strict)
+
+A pass is only allowed when the evidence proves it. Do NOT report `PASS` on "looks close", on a partial review, or to end the loop early.
+
+Report `PASS` only when ALL of these hold:
+
+- `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for THIS pass all exist in the current iteration directory.
+- Every CRITICAL category — Structure, Layout, Dimensions — has ZERO differences beyond the allowed 1–2px rendering tolerance, each backed by a cited measured value from `computed-styles.json` or a cited structural fact from `a11y-snapshot.yml`, not by impression.
+- The full-page `actual.png` has been compared side by side against `figma-expected.png`.
+
+If ANY of the following is true, the result is `FAIL` (or `VERIFICATION NOT RUN` when evidence is missing), never `PASS`:
+
+- Any structural difference (missing, extra, or reordered elements; wrong nesting or grouping).
+- Any layout difference (wrong flex/grid direction, wrong alignment, wrong centering, wrong distribution).
+- Any dimension difference greater than the 1–2px rendering tolerance.
+- The layout "looks roughly right" but you have not measured it against `computed-styles.json`.
+
+Layout and structure mismatches are CRITICAL and can never be waived as "acceptable" or "close enough". Only genuine 1–2px rendering variance is Minor.
 
 ## Verification Checklist
 

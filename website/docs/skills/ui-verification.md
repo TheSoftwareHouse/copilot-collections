@@ -13,7 +13,7 @@ Provides detailed criteria for comparing UI implementations against Figma design
 The current verification flow has five steps:
 
 1. **Validate inputs**: confirm the Figma URL, confirm the exact full dev server URL with the user for standalone runs or reuse the caller-provided confirmed URL unchanged for delegated runs, and make sure the target page is reachable through the CLI capture flow using that pinned URL.
-2. **Get EXPECTED from Figma**: extract structure, layout, dimensions, and visual specifications from the design.
+2. **Get EXPECTED from Figma**: MANDATORY before capture — export the Figma node image and save it as `figma-expected.png` into the iteration directory, then extract structure, layout, dimensions, and visual specifications. If Figma cannot be fetched or `figma-expected.png` cannot be saved, the result is `VERIFICATION NOT RUN`.
 3. **Get ACTUAL from implementation**: the capture worker owns viewport sizing, page loading, render stabilization, and evidence collection through the CLI-first capture flow.
 4. **Compare using verification categories**: review EXPECTED versus ACTUAL across structure, layout, dimensions, visual, and component categories.
 5. **Generate the report**: summarize all differences with exact expected and actual values plus severity.
@@ -24,7 +24,7 @@ The current verification flow is CLI-first for ACTUAL evidence collection. Figma
 
 - **Ownership boundary:** the capture worker handles viewport/page-loading mechanics and produces the ACTUAL artifacts; the reviewer consumes those artifacts and judges differences against Figma.
 - **Pinned URL contract:** once the user confirms the full dev server URL, that exact URL is pinned for the session and must be forwarded unchanged to every capture and review pass.
-- **Capture contract:** collect fresh `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for each verification pass. Code reading is not a substitute for live capture.
+- **Capture contract:** collect fresh `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for each verification pass, writing every file into the iteration directory with explicit paths. Never leave artifacts in `.playwright-cli/` or the working directory. Code reading is not a substitute for live capture.
 - **Artifact directory:** store each pass under `specifications/<task-id>/ui-verification/iteration-<N>/`, alongside `figma-expected.png`, `report.md`, and optional `pixel-gate/` outputs.
 - **Render stabilization:** use the pinned app URL only, resize to the Figma frame width, wait for `networkidle`, and emulate reduced motion before capture.
 - **Optional tripwire:** `toHaveScreenshot` can add loose, non-blocking evidence under `pixel-gate/`, but it never replaces reviewer judgment.
@@ -38,6 +38,12 @@ UI verification is a separate gate from code review. Code review does not start 
 - If capture is blocked or incomplete, the result is `VERIFICATION NOT RUN`, not PASS, FAIL, or a partial pass.
 - `VERIFICATION NOT RUN` is a blocker-resolution path and does not consume the 5-iteration verification budget.
 - Tripwire exit codes from optional screenshot assertions are evidence, not verdicts: exit `0` suggests loose visual alignment, exit `1` shows visual difference to review.
+
+## Iteration Loop and PASS Gate
+
+- **Multi-pass loop:** a single FAIL is never terminal. The engineer fixes all reported differences, recaptures fresh artifacts, and re-verifies, looping until PASS or 5 completed iterations. After 5 iterations with remaining mismatches, a structured `vscode/askQuestions` gate offers continue-with-N, stop-as-ESCALATED, or a custom instruction.
+- **Enumerate everything per pass:** each verification pass reports every difference across all categories, not just the first one, so fixes batch into fewer iterations.
+- **Strict PASS gate:** PASS requires `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for the pass to exist, and zero structure/layout differences with dimensions within 1–2px, each backed by cited measured evidence. Layout and structure mismatches are CRITICAL and can never be accepted as "close enough".
 
 ## Verification Categories
 
