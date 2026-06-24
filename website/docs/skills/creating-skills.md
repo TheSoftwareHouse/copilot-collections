@@ -44,3 +44,4 @@ tsh-<gerund-subject>/
 
 - `tsh-creating-agents` — For creating agents that load this skill.
 - `tsh-creating-prompts` — For creating prompts that trigger workflows using this skill.
+- `tsh-creating-router-skills` — For creating router-style skills when a domain grows too large for a single-skill body.
