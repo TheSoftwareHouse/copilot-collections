@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-24
+
+### Added
+
+- `tsh-creating-router-skills` skill — Creates the canonical authoring skill for one-domain router skills, with templates and a worked example that show the lean router shape, select-one versus combine-as-needed routing, and concept-first leaves.
+
 ## 2026-06-01
 
 ### Added
