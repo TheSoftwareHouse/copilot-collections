@@ -1,7 +1,7 @@
 ---
 model:
   [
-    "qwen.qwen3-coder-30b-a3b-instruct (customendpoint)",
+    "qwen3-coder-30b-a3b-instruct (customendpoint)",
     "GPT-5.4 mini"
   ]
 description: "Internal implementor that executes one plan task at a time exactly as written."
