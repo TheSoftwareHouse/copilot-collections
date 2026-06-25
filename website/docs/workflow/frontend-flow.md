@@ -5,6 +5,8 @@ title: Frontend Flow
 
 For UI-heavy tasks with Figma designs, use the specialized frontend workflow. This extends the standard flow with iterative Figma verification to ensure the implementation matches the design within tolerance.
 
+For a full end-to-end breakdown of the post-implementation verify-fix loop, see **[UI Verification Flow](./ui-verification-flow)**.
+
 ## Command Sequence
 
 ```text
