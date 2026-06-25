@@ -27,6 +27,7 @@ Before starting any creation task, determine the artifact type from the specific
 
 - `tsh-creating-agents` — when creating or modifying a `.agent.md` file. Provides the agent file template, structural conventions, and validation checklist.
 - `tsh-creating-skills` — when creating or modifying a `SKILL.md` file, including associated templates and examples. Provides naming conventions, body structure guidelines, and progressive disclosure patterns.
+- `tsh-creating-router-skills` — when creating or modifying router-style `SKILL.md` artifacts and their associated router resources or examples. Use it when the specification explicitly calls for a router-style skill, or when the target artifact is a routing layer for a broad domain. Do not use it for standard single-domain skill artifacts that should follow `tsh-creating-skills` alone.
 - `tsh-creating-prompts` — when creating or modifying a `.prompt.md` file. Provides the prompt file template, workflow focus guidelines, and validation checklist.
 - `tsh-creating-instructions` — when creating or modifying `.instructions.md` files or `copilot-instructions.md`. Provides templates for both repository-level and granular instruction files, decision framework for instruction vs. skill placement, and validation checklist.
 
