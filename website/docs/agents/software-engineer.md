@@ -26,6 +26,7 @@ The orchestrator (via the orchestration skill) selects the model at delegation t
 - **No dead code** — Does not create unused functions or future-only code.
 - **No unnecessary files** — Focus on delivering required changes efficiently.
 - **Well-documented** — Includes comments and documentation for future maintainability.
+- **Never wipes the working tree** — Does not discard, revert, stash, or clean uncommitted changes outside the delegated task; treats them as intentional and reports blockers instead.
 
 ## Tool Access
 

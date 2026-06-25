@@ -29,6 +29,7 @@ The Plan Implementor agent is an internal-only, strict single-task worker. It ex
 - No dedicated prompt file; it reuses `tsh-implement-common-task.prompt.md`.
 - No plan rewriting, task expansion, or adjacent follow-on fixes.
 - Does not take on UI work or broader implementation orchestration.
+- Does not discard, revert, stash, or clean uncommitted changes outside the delegated task — it treats the working tree as intentional and reports blockers instead of wiping them.
 
 ## Tool Access
 
