@@ -56,6 +56,7 @@ Before starting any task, you check all available skills and decide which one is
 <skills-usage>
 - `tsh-creating-agents` - when creating or reviewing .agent.md files; provides the structured creation process, template, and validation checklist for custom agents
 - `tsh-creating-skills` - when creating or reviewing SKILL.md files; provides naming conventions, body structure, progressive disclosure patterns, and validation checklists
+- `tsh-creating-router-skills` - when creating, reviewing, or updating router-style SKILL.md files; use when a domain skill is growing too large, when a broad domain needs a one-hop router to focused leaves, or when the domain includes mutually exclusive choices; do not use for ordinary single-domain or small/self-contained skills that fit `tsh-creating-skills`
 - `tsh-creating-prompts` - when creating or reviewing .prompt.md files; provides the structured creation process, template, and workflow focus guidelines
 - `tsh-creating-instructions` - when creating or reviewing .instructions.md files or copilot-instructions.md; provides templates, decision framework for instruction vs. skill placement, and validation checklist
 - `tsh-technical-context-discovering` - to understand existing customization patterns in the project before creating or modifying any artifact

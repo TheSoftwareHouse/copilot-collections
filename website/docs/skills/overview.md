@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **31 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **32 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -71,6 +71,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | Skill                                                | Description                                     | Used By          |
 | ---------------------------------------------------- | ----------------------------------------------- | ---------------- |
 | [tsh-creating-agents](./creating-agents)             | Creating custom agents (.agent.md)              | Copilot Engineer |
+| [tsh-creating-router-skills](./creating-router-skills) | Creating router skills (one-domain SKILL.md routers) | Copilot Engineer |
 | [tsh-creating-skills](./creating-skills)             | Creating custom skills (SKILL.md)               | Copilot Engineer |
 | [tsh-creating-prompts](./creating-prompts)           | Creating custom prompts (.prompt.md)            | Copilot Engineer |
 | [tsh-creating-instructions](./creating-instructions) | Creating custom instructions (.instructions.md) | Copilot Engineer |
@@ -83,6 +84,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | tsh-code-reviewing                     |     |     |           |     | ✅  | ✅  |             |     |        |              |
 | tsh-codebase-analysing                 | ✅  | ✅  | ✅        | ✅  |     |     |             |     | ✅     | ✅           |
 | tsh-creating-agents                    |     |     |           |     |     |     |             |     |        | ✅           |
+| tsh-creating-router-skills             |     |     |           |     |     |     |             |     |        | ✅           |
 | tsh-creating-instructions              |     |     |           |     |     |     |             |     |        | ✅           |
 | tsh-creating-prompts                   |     |     |           |     |     |     |             |     |        | ✅           |
 | tsh-creating-skills                    |     |     |           |     |     |     |             |     |        | ✅           |
