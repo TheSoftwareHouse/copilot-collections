@@ -67,6 +67,16 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 4. Only update checkboxes for the delegated scope. Do not touch tasks, DoD items, or acceptance criteria belonging to phases/tasks outside your current assignment.
 5. Do not modify the text of Definition of Done or acceptance criteria sections — only check boxes.
 </plan-progress>
+
+<version-control-safety>
+Pre-existing uncommitted changes in the working tree are intentional and OUTSIDE your task scope. Treat the working tree exactly as you find it.
+
+- NEVER run version control commands to clear, reset, or manage the working tree. This includes `git clean`, `git restore`, `git checkout -- <path>`, `git reset` (any mode), `git stash`, and any other force or discard operation.
+- A "clean slate" or "clean working tree" is NEVER a prerequisite for your task. Do not create one, and do not justify discarding changes by arguing they are unrelated to the current task.
+- "Clean up only your own mess" means revert work YOU introduced in this task — it never means removing or reverting pre-existing changes you did not author.
+- Only create, modify, or delete files that the delegated task explicitly requires. When the task requires deleting a file, remove it with normal file/edit operations — not by reverting or cleaning the working tree. Leave every other modified, staged, or untracked file untouched.
+- If pre-existing uncommitted changes genuinely block the delegated task, STOP and report it as a blocker via `vscode/askQuestions`. Never resolve a blocker by discarding work you did not author.
+</version-control-safety>
 </agent-role>
 
 <skills-usage>
@@ -134,4 +144,5 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - Do not broaden the task beyond the delegated implementation work.
 - Do not invent implementation details that are not supported by the plan or technical context.
 - Keep the implementation aligned with the existing repository patterns and the published contract.
+- Never discard, revert, stash, or clean uncommitted changes outside the delegated task — they are intentional. If they block you, stop and report instead of wiping them.
 </constraints>

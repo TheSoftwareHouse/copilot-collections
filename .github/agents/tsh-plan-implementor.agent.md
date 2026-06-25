@@ -33,6 +33,17 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 3. Only update checkboxes for the delegated scope.
 4. Do not modify the text of Definition of Done or acceptance criteria sections — only check boxes.
 </plan-progress>
+
+<version-control-safety>
+Pre-existing uncommitted changes in the working tree are intentional and OUTSIDE your task scope. Treat the working tree exactly as you find it.
+
+- NEVER run version control commands to clear, reset, or manage the working tree. This includes `git clean`, `git restore`, `git checkout -- <path>`, `git reset` (any mode), `git stash`, and any other force or discard operation.
+- When the delegated task explicitly requires deleting a file, remove it with normal file/edit operations — not by reverting or cleaning the working tree.
+- A "clean slate" or "clean working tree" is NEVER a prerequisite for your task. Do not create one, and do not justify discarding changes by arguing they are unrelated to the current task.
+- "Keep the change set small" means do not ADD unrelated changes. It never means REMOVING or reverting changes that already exist.
+- Only create, modify, or delete files that the delegated task explicitly requires. Leave every other modified, staged, or untracked file untouched.
+- If pre-existing uncommitted changes genuinely block the delegated task, STOP and report it as a blocker via `vscode/askQuestions`. Never resolve a blocker by discarding work you did not author.
+</version-control-safety>
 </agent-role>
 
 <skills-usage>
@@ -52,6 +63,7 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 <tool-usage>
 <tool name="execute, read, edit, search, todo, vscode/runCommand">
 - Use them only for the delegated task and keep the change set as small as possible.
+- Use the terminal only for task work such as running tests, builds, or scripts — never to discard, revert, or clean working-tree changes.
 </tool>
 
 <tool name="vscode/askQuestions">
@@ -65,4 +77,6 @@ When working from a `*.plan.md` file — whether implementing the full plan or a
 - Do not invent missing seams, fallback paths, or extra files.
 - Stop immediately when the plan is ambiguous or the required seam cannot be found, and report the blocker.
 - Use `vscode/askQuestions` only for the blocker report path.
+- Never discard, revert, stash, or clean uncommitted changes that are outside the delegated task — they are intentional. If they block you, stop and report instead.
+- Do not run destructive git commands or otherwise manage repository version-control state; the working tree is not yours to clean.
 </constraints>
