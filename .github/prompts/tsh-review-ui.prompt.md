@@ -29,18 +29,18 @@ This prompt can run standalone or as the delegated reviewer step from `/tsh-impl
 Before starting, load and follow these skills:
 
 - `tsh-ui-verifying` - verification process, criteria, tolerances, severity definitions, report format
-</required-skills>
+  </required-skills>
 
 <workflow>
 Follow the 5-step verification process defined in the `tsh-ui-verifying` skill. The skill contains the complete workflow. For this prompt, enforce these additional rules:
 
 1. Validate inputs first: Figma URL, user-confirmed full dev server URL, component name, and artifact-directory context.
 2. Get EXPECTED from Figma via `figma`.
-	- MANDATORY: export the node image and save it as `figma-expected.png` into the current iteration artifact directory before comparison.
-	- If Figma cannot be fetched or saved, report `VERIFICATION NOT RUN`.
+   - MANDATORY: export the node image and save it as the shared `specifications/<task-id>/ui-verification/figma-expected.png` reference before comparison, or reuse that shared file when the Figma URL/node is unchanged.
+   - If Figma cannot be fetched or saved, report `VERIFICATION NOT RUN`.
 3. Get ACTUAL from implementation through caller-provided `tsh-ui-capture-worker` CLI artifacts written into `specifications/<task-id>/ui-verification/iteration-<N>/`.
-	- Required artifact set: `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`.
-	- If the caller did not provide the artifact directory or the artifact set is incomplete, return `VERIFICATION NOT RUN` and instruct the caller to run `tsh-ui-capture-worker` first for the same pinned URL.
+   - Required artifact set: `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`.
+   - If the caller did not provide the artifact directory or the artifact set is incomplete, return `VERIFICATION NOT RUN` and instruct the caller to run `tsh-ui-capture-worker` first for the same pinned URL.
 4. Compare following the skill's verification categories and tolerances.
 5. Generate a structured report following the output contract below.
 6. If capture is blocked by auth redirect, missing confirmed URL, wrong page state, unreachable page, incomplete artifacts, or any other blocker, the immediate next action MUST be `vscode/askQuestions` before any further reply.
@@ -61,37 +61,44 @@ Return a Markdown report that always contains every section below in this order,
 ## Verification Result: [PASS | FAIL | VERIFICATION NOT RUN]
 
 ### Component
+
 [component or section name]
 
 **Confidence:** [HIGH | MEDIUM | LOW]
 
 ### Sources
+
 - Figma URL: [exact URL or UNKNOWN]
 - Verified page URL: [exact full URL or UNKNOWN]
 
 ### Artifact Directory
+
 - Path: [exact `specifications/.../iteration-<N>/` path or UNKNOWN]
 
 ### Artifact Status
-| Artifact | Status | Path or blocker |
-| -------- | ------ | --------------- |
-| figma-expected.png | [present/missing/blocked] | [path or blocker] |
-| actual.png | [present/missing/blocked] | [path or blocker] |
-| computed-styles.json | [present/missing/blocked] | [path or blocker] |
-| a11y-snapshot.yml | [present/missing/blocked] | [path or blocker] |
+
+| Artifact             | Status                    | Path or blocker          |
+| -------------------- | ------------------------- | ------------------------ |
+| figma-expected.png   | [present/missing/blocked] | [shared path or blocker] |
+| actual.png           | [present/missing/blocked] | [path or blocker]        |
+| computed-styles.json | [present/missing/blocked] | [path or blocker]        |
+| a11y-snapshot.yml    | [present/missing/blocked] | [path or blocker]        |
 
 ### Differences
-| Property | Expected (Figma) | Actual (Implementation) | Severity |
-| -------- | ---------------- | ----------------------- | -------- |
-| [prop or `NONE`] | [expected or `N/A`] | [actual or `N/A`] | [severity or `N/A`] |
+
+| Property         | Expected (Figma)    | Actual (Implementation) | Severity            |
+| ---------------- | ------------------- | ----------------------- | ------------------- |
+| [prop or `NONE`] | [expected or `N/A`] | [actual or `N/A`]       | [severity or `N/A`] |
 
 ### Blocker Resolution
+
 - Blocker Type: [none or specific blocker]
 - Blocking Step: [workflow step number or `NONE`]
 - `vscode/askQuestions` used: [yes/no]
 - Next Required Action: [specific next step]
 
 ### Recommended Fixes
+
 - [specific fix]
 ```
 

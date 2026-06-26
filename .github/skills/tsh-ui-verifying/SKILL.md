@@ -75,6 +75,8 @@ This step is mandatory and always runs before capturing the implementation. A ve
 
 Use the `tsh-ui-capture-worker` capture flow to collect ACTUAL evidence from the running implementation. CLI capture is mechanical evidence collection only. The visual judge remains the reviewer brain comparing Figma EXPECTED against CLI ACTUAL using multimodal reasoning plus computed styles.
 
+When the caller provides a Figma URL to `tsh-ui-capture-worker`, that worker may also export or ensure the shared `figma-expected.png` before opening the app page, purely as evidence preparation. This does not transfer design judgment from the reviewer; it only guarantees the EXPECTED artifact exists even when later ACTUAL capture is blocked by auth or page reachability.
+
 The capture worker must use only the caller-provided full URL for the current pass. It never discovers its own URL, never replaces the caller-provided URL, never inspects project config to pick another port, and never launches or switches to another local app/server. If the delegated task does not include the confirmed full URL, treat that as a blocker and return immediately.
 
 You MUST collect **all three** ACTUAL evidence types — a verification that skips any type is incomplete:
@@ -98,20 +100,21 @@ Write every ACTUAL capture artifact into the task's iteration directory, never i
 - `mkdir -p "$ARTIFACT_DIR"`.
 - Every command below writes into `"$ARTIFACT_DIR/<file>"`. Never rely on default output locations.
 
-1. **Open named session** — `playwright-cli open -s <session-name>`.
-2. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> 1080 -s <session-name>`.
-3. **Navigate to the full target URL** including query params — `playwright-cli goto <full-url> -s <session-name>`.
-4. **Stabilize render** before collecting evidence:
+1. **Ensure shared Figma reference when the caller provided a Figma URL** — export or verify `"$FIGMA_EXPECTED"` before browser capture begins. If the shared reference export fails, stop as `VERIFICATION NOT RUN` before opening the app page.
+2. **Open named session** — `playwright-cli open -s <session-name>`.
+3. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> 1080 -s <session-name>`.
+4. **Navigate to the full target URL** including query params — `playwright-cli goto <full-url> -s <session-name>`.
+5. **Stabilize render** before collecting evidence:
    - `playwright-cli run-code -s <session-name> "async page => { await page.emulateMedia({ reducedMotion: 'reduce' }); await page.waitForLoadState('networkidle'); }"`
    - Add route mocks only when the task explicitly requires deterministic mocked data.
    - Mask dynamic regions when unavoidable so transient timestamps, avatars, ads, or animations do not dominate the evidence.
-5. **Capture screenshot into the artifact directory**:
+6. **Capture screenshot into the artifact directory**:
    - Preferred: `playwright-cli screenshot --filename="$ARTIFACT_DIR/actual.png" -s <session-name>` (full page when supported).
    - Required fallback: `playwright-cli run-code -s <session-name> "async page => { await page.screenshot({ path: '$ARTIFACT_DIR/actual.png', fullPage: true }); }"`.
-6. **Capture accessibility snapshot** — `playwright-cli --raw snapshot -s <session-name> > "$ARTIFACT_DIR/a11y-snapshot.yml"`.
-7. **Capture computed styles and measurements** — `playwright-cli --raw eval -s <session-name> "JSON.stringify(...)" > "$ARTIFACT_DIR/computed-styles.json"`.
-8. **Confirm artifacts landed in the right place** — run `ls -la "$ARTIFACT_DIR"` and verify `actual.png`, `a11y-snapshot.yml`, and `computed-styles.json` exist there, then verify the shared `figma-expected.png` exists at `"$FIGMA_EXPECTED"`. If a capture artifact (`actual.png`, `a11y-snapshot.yml`, `computed-styles.json`) is missing or landed in `.playwright-cli/` or the working directory, move it into `$ARTIFACT_DIR` or re-run that command with the explicit path. If the shared `figma-expected.png` is missing, go back to Step 2 and export it before continuing — a missing reference image is fixed by fetching it, not by reporting a blocker.
-9. **Clean up** — `playwright-cli close -s <session-name>` or equivalent session cleanup if the capture flow aborts.
+7. **Capture accessibility snapshot** — `playwright-cli --raw snapshot -s <session-name> > "$ARTIFACT_DIR/a11y-snapshot.yml"`.
+8. **Capture computed styles and measurements** — `playwright-cli --raw eval -s <session-name> "JSON.stringify(...)" > "$ARTIFACT_DIR/computed-styles.json"`.
+9. **Confirm artifacts landed in the right place** — run `ls -la "$ARTIFACT_DIR"` and verify `actual.png`, `a11y-snapshot.yml`, and `computed-styles.json` exist there, then verify the shared `figma-expected.png` exists at `"$FIGMA_EXPECTED"`. If a capture artifact (`actual.png`, `a11y-snapshot.yml`, `computed-styles.json`) is missing or landed in `.playwright-cli/` or the working directory, move it into `$ARTIFACT_DIR` or re-run that command with the explicit path. If the shared `figma-expected.png` is missing, go back to Step 2 and export it before continuing — a missing reference image is fixed by fetching it, not by reporting a blocker.
+10. **Clean up** — `playwright-cli close -s <session-name>` or equivalent session cleanup if the capture flow aborts.
 
 The `JSON.stringify(...)` payload should cover the major containers and controls being verified: bounding boxes, computed width/height, max-width, min-height, padding, margin, gap, alignment-relevant properties, and any targeted style values needed to explain differences.
 
