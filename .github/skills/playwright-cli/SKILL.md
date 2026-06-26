@@ -138,6 +138,61 @@ playwright-cli sessionstorage-delete step
 playwright-cli sessionstorage-clear
 ```
 
+## Authenticated capture (real login + session reuse)
+
+Use this flow when the user has explicitly authorized a genuine login through the application's real sign-in UI. This is legitimate authentication, not cookie or token injection.
+
+Preferred automated path for test credentials: store them in the target repo repo-root `.env` file using env var names derived from the actual required login fields. Derive each env var as `TSH_UI_LOGIN_<NORMALIZED_FIELD_KEY>`, where `NORMALIZED_FIELD_KEY` comes from `name` -> `autocomplete` -> `id` -> visible label text and is normalized to uppercase snake case. Examples: `email` -> `TSH_UI_LOGIN_EMAIL`, `userName` -> `TSH_UI_LOGIN_USER_NAME`, `company-code` -> `TSH_UI_LOGIN_COMPANY_CODE`. Reload `.env` before the auth attempt so values saved by the user during the same flow are picked up immediately without being echoed back through chat.
+
+If the pinned page redirects to login and those derived env vars are not already prepared, inspect the form, derive the exact env var names, ask the user to add them to repo-root `.env`, and confirm when the file is saved, then rerun the auth attempt with `.env` reloaded. Keep fallback guidance for non-standard auth only; do not start with a broader questionnaire.
+
+Standard caller message template:
+
+```text
+The page redirected to login. Add these exact vars to repo-root `.env` and tell me when the file is saved:
+- [DERIVED_ENV_VAR_1]=...
+- [DERIVED_ENV_VAR_2]=...
+After you save the file, I will rerun capture and reload `.env` automatically.
+```
+
+```bash
+# load the local .env contract for this repo without printing values
+set -a
+source .env
+set +a
+
+# 1. open a named session
+playwright-cli open -s ui-verify
+
+# 2. navigate to the real login page
+playwright-cli goto "https://example.com/sign-in" -s ui-verify
+
+# 3. inspect the page to get field refs
+playwright-cli snapshot -s ui-verify
+
+# 4. fill the real login form with env-backed test credentials
+# Example for a common email/password form; replace with the env vars derived from the actual fields
+playwright-cli fill <emailRef> "$TSH_UI_LOGIN_EMAIL" -s ui-verify
+playwright-cli fill <passwordRef> "$TSH_UI_LOGIN_PASSWORD" --submit -s ui-verify
+
+# 5. confirm login succeeded by checking the URL or page state
+playwright-cli --raw eval "window.location.href" -s ui-verify
+
+# 6. save the real authenticated session to a secret path
+playwright-cli state-save /tmp/ui-auth.json -s ui-verify
+
+# 7. for later iterations, load the saved session instead of logging in again
+playwright-cli state-load /tmp/ui-auth.json -s ui-verify
+playwright-cli goto "https://example.com/protected-screen" -s ui-verify
+```
+
+Rules:
+
+- Use only credentials the user explicitly provided for this task through local repo env configuration or another allowed local secret mechanism.
+- Keep the storage-state file out of version control and outside committed artifact directories such as `specifications/**`.
+- Never print the values of derived `TSH_UI_LOGIN_*` env vars in terminal output.
+- Never inject cookies, tokens, `localStorage`, or `sessionStorage` by hand to fake a signed-in state. Use the real login form or a storage-state file created from a real login.
+
 ### Network
 
 ```bash
@@ -197,11 +252,13 @@ playwright-cli --raw localstorage-get theme
 ```
 
 For structured output wrapping every reply as JSON, pass --json
+
 ```bash
 playwright-cli list --json
 ```
 
 ## Open parameters
+
 ```bash
 # Use specific browser when creating session
 playwright-cli open --browser=chrome
@@ -392,13 +449,13 @@ playwright-cli show --annotate
 
 ## Specific tasks
 
-* **Running and Debugging Playwright tests** [references/playwright-tests.md](references/playwright-tests.md)
-* **Request mocking** [references/request-mocking.md](references/request-mocking.md)
-* **Running Playwright code** [references/running-code.md](references/running-code.md)
-* **Browser session management** [references/session-management.md](references/session-management.md)
-* **Spec-driven testing (plan / generate / heal)** [references/spec-driven-testing.md](references/spec-driven-testing.md)
-* **Storage state (cookies, localStorage)** [references/storage-state.md](references/storage-state.md)
-* **Test generation** [references/test-generation.md](references/test-generation.md)
-* **Tracing** [references/tracing.md](references/tracing.md)
-* **Video recording** [references/video-recording.md](references/video-recording.md)
-* **Inspecting element attributes** [references/element-attributes.md](references/element-attributes.md)
+- **Running and Debugging Playwright tests** [references/playwright-tests.md](references/playwright-tests.md)
+- **Request mocking** [references/request-mocking.md](references/request-mocking.md)
+- **Running Playwright code** [references/running-code.md](references/running-code.md)
+- **Browser session management** [references/session-management.md](references/session-management.md)
+- **Spec-driven testing (plan / generate / heal)** [references/spec-driven-testing.md](references/spec-driven-testing.md)
+- **Storage state (cookies, localStorage)** [references/storage-state.md](references/storage-state.md)
+- **Test generation** [references/test-generation.md](references/test-generation.md)
+- **Tracing** [references/tracing.md](references/tracing.md)
+- **Video recording** [references/video-recording.md](references/video-recording.md)
+- **Inspecting element attributes** [references/element-attributes.md](references/element-attributes.md)

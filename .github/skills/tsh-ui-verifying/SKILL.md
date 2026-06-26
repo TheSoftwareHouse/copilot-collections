@@ -33,19 +33,35 @@ Before starting verification, confirm:
   - **Delegated verification with a caller-provided user-confirmed URL**: use that exact full URL unchanged for the entire session. Do not rediscover it, normalize it, swap ports, inspect config to suggest another URL, or launch a different local app/server.
   - Once the user has confirmed the URL, every downstream verification and capture pass must treat it as pinned session state.
 - Dev server is running and the **target page** is reachable through the CLI capture flow using that confirmed URL:
-  - **Never circumvent an authentication, login, or access/permission gate by any means or technique — proactively or reactively.** Navigate to the pinned URL only as an ordinary user would. If the app requires the user to be signed in or to hold a particular access level, that is a hard blocker you do not resolve yourself: the user must specify how authentication should be performed and supply whatever it needs (credentials, an already-authenticated session, or a manual login). Do not assume, fabricate, simulate, or manufacture any signed-in or authorized state, no matter how simple the mechanism looks and regardless of whether a redirect has occurred yet. If you notice the gate is trivially bypassable (for example it can be satisfied entirely client-side), report it as a potential security vulnerability when you raise the blocker, so the user is made aware and can plan a fix — flag the concern, never exploit it.
+  - **Never circumvent an authentication, login, or access/permission gate by any means or technique — proactively or reactively.** Legitimate authentication through the app's real login UI is allowed only when the user has explicitly authorized it and supplied the exact inputs required to perform it through a local env-based contract derived from the real login form, direct in-browser entry, or a real storage-state path created from a prior login. Navigate to the pinned URL only as an ordinary user would. Do not assume, fabricate, simulate, seed, inject, or manufacture any signed-in or authorized state. If you notice the gate is trivially bypassable (for example it can be satisfied entirely client-side), report it as a potential security vulnerability when you raise the blocker, so the user is made aware and can plan a fix — flag the concern, never exploit it.
   - Use the CLI capture flow to open the page at the full target URL before verification begins
-  - If the capture flow reports a **redirect to a login/authentication screen**: if the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call asking the user to log in, e.g.: "The page redirected to [login URL]. Please log in to the dev app in the captured browser session (or provide an already-authenticated session/state) and tell me when it is ready, so I can capture [component name]." Do not ask in plain assistant text first. Do NOT bypass, seed, inject, or fake authentication yourself by any means or technique, and never fake an identity or assume a role, even if you can see how the auth check works. Wait for the user to authenticate, then re-run capture on the same pinned URL.
+  - If the capture flow reports a **redirect to a login/authentication screen** and the required login inputs were not already provided: first determine whether the redirected screen is a standard credential form. If it is, derive one repo-root `.env` var per required field from the live form using this order of precedence for the field key: `name` -> `autocomplete` -> `id` -> visible label text. Normalize the chosen key to uppercase snake case and prefix it with `TSH_UI_LOGIN_`. Examples: `email` -> `TSH_UI_LOGIN_EMAIL`, `userName` -> `TSH_UI_LOGIN_USER_NAME`, `company-code` -> `TSH_UI_LOGIN_COMPANY_CODE`. If the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call telling the user to add those exact derived env vars to repo-root `.env` and confirm when the file is saved. On the next capture pass, reload `.env` and reuse those env vars without printing their values. Use a prepared storage-state path or direct manual login only when the redirected screen is not a standard credential form (for example SSO chooser, MFA challenge, or captcha), the runtime cannot derive the field keys reliably, or the user explicitly prefers one of those fallbacks. Do NOT bypass, seed, inject, or fake authentication yourself by any means or technique, and never fake an identity or assume a role, even if you can see how the auth check works.
+    Use this wording pattern for the user message:
+    "The page redirected to login. Add these exact vars to repo-root `.env` and tell me when the file is saved:
+    - [DERIVED_ENV_VAR_1]=...
+    - [DERIVED_ENV_VAR_2]=...
+      After you save the file, I will rerun capture and reload `.env` automatically."
+  - If the capture flow reports a **redirect to a login/authentication screen** and the required login inputs were already provided, continue through the authenticated capture pre-step below instead of treating the redirect as a manual-only blocker.
   - If the capture flow reports **unexpected content** (error page, blank page, different route): if the verifying agent has `vscode/askQuestions`, the immediate next action MUST be a `vscode/askQuestions` call such as: "The page at [URL] shows [description]. Is this the correct URL for [component name]?" Do not ask in plain assistant text first.
   - If the capture flow cannot find the expected component on the confirmed page: if the verifying agent has `vscode/askQuestions`, raise the blocker through that tool immediately rather than a freeform reply.
 - If any input is missing or any blocker is encountered, stop and resolve it through `vscode/askQuestions` when that tool is available to the verifying agent — do not proceed, do not fall back to code-level review, and do not skip the verification step
+
+### Authenticated capture pre-step
+
+- Use this only when the user has explicitly authorized a genuine login and either populated the local `.env` contract derived from the real login form, completed the redirected real login form in the open browser session, or supplied an already-authenticated storage-state path.
+- A genuine login means using the application's real sign-in UI exactly as an ordinary user would. It is allowed. Bypass is not.
+- Standard local env contract: in the target repo `.env` file, set one env var per required login field using the derived naming rule `TSH_UI_LOGIN_<NORMALIZED_FIELD_KEY>`, where `NORMALIZED_FIELD_KEY` comes from `name` -> `autocomplete` -> `id` -> visible label text, normalized to uppercase snake case.
+- Default path: if the redirect lands on a standard credential form, ask the user to populate the exact derived `.env` vars and confirm when the file is saved, then rerun capture with `.env` reloaded before filling the login form. Use direct in-browser login or a prepared storage-state path only for non-standard auth flows such as SSO, MFA, or captcha or when `.env` automation is not workable.
+- Never ask the user to paste the password into chat. Read the env vars only at runtime and do not echo their values back into artifacts, reports, or tool output.
+- Preferred pattern: perform the real login once, `state-save` to a secret path outside `specifications/**`, then `state-load` that path for each later capture iteration so the authenticated session is reused instead of recreated.
+- Never write credentials into task specs, reports, artifacts, or committed files. Never seed cookies, tokens, `localStorage`, or `sessionStorage` by hand.
 
 **Step 2: Get EXPECTED from Figma — MANDATORY, runs BEFORE capture**
 
 This step is mandatory and always runs before capturing the implementation. A verification without fresh Figma EXPECTED data is INVALID. **EXPECTED comes ONLY from the `figma` MCP tools** — never open a `figma.com` URL (or any Figma link) in the Playwright/CLI browser to "fetch" the design, and never screenshot the Figma web app, its login page, or an error page as the reference. The browser is for the running app (ACTUAL) only. Do these in order:
 
 1. **Resolve the Figma node** from the supplied Figma URL (extract `fileKey` + `nodeId`). If the URL or node cannot be resolved, raise it through `vscode/askQuestions` (when that tool is available), report `VERIFICATION NOT RUN`, and stop. Never continue without a resolved node.
-2. **Export the Figma node image via the `figma` MCP and SAVE it** to the iteration artifact directory as `figma-expected.png` (the directory is defined in Step 3). Use the `figma` MCP's node-image / screenshot export — not a browser screenshot. This file is REQUIRED on every pass and must be the real design export; it is the visual reference the comparison is judged against. Do not keep it only in memory or a tool response; it must exist on disk in the iteration directory. If the `figma` MCP is not available in this workspace, that is a blocker: do NOT fall back to the browser and do NOT save any non-design image as `figma-expected.png` — report `VERIFICATION NOT RUN` and use `vscode/askQuestions` to ask the user to enable the Figma MCP or provide an exported reference image.
+2. **Export the Figma node image via the `figma` MCP and SAVE it** to the shared verification directory as `specifications/<task-id>/ui-verification/figma-expected.png` (the parent directory of the iteration directories defined in Step 3). Use the `figma` MCP's node-image / screenshot export — not a browser screenshot. This file is REQUIRED for the verification item and must be the real design export; it is the visual reference the comparison is judged against. Do not keep it only in memory or a tool response; it must exist on disk in the shared verification directory. If the `figma` MCP is not available in this workspace, that is a blocker: do NOT fall back to the browser and do NOT save any non-design image as `figma-expected.png` — report `VERIFICATION NOT RUN` and use `vscode/askQuestions` to ask the user to enable the Figma MCP or provide an exported reference image.
 3. **Extract the design specifications** to compare against:
    - Layer hierarchy and component structure
    - Layout direction, alignment, spacing
@@ -53,7 +69,7 @@ This step is mandatory and always runs before capturing the implementation. A ve
    - Typography, colors, radii, shadows
    - Component variants and states
 
-> **ENSURE-OR-FETCH**: At the start of every pass, check whether a valid `figma-expected.png` (a real design export) already exists in the current iteration directory. If it is missing, that is NOT a reason to stop — export it now via the `figma` MCP (steps 1–2 above). Only after a genuine export failure (the `figma` MCP is unavailable, Figma cannot be reached, the node cannot be resolved, or the file cannot be written) do you report `VERIFICATION NOT RUN`, surface the blocker through `vscode/askQuestions`, and stop. Never browser-scrape Figma, never save a browser/login/error screenshot as `figma-expected.png`, and never proceed to compare against memory, source code, or the running app while a valid `figma-expected.png` is absent.
+> **ENSURE-OR-FETCH**: At the start of every pass, check whether a valid shared `figma-expected.png` (a real design export) already exists at `specifications/<task-id>/ui-verification/figma-expected.png` for the current verification item. If it is missing, export it now via the `figma` MCP (steps 1–2 above). If it already exists and the Figma URL/node is unchanged, reuse it — do not re-export it for each iteration. Only after a genuine export failure (the `figma` MCP is unavailable, Figma cannot be reached, the node cannot be resolved, or the file cannot be written) do you report `VERIFICATION NOT RUN`, surface the blocker through `vscode/askQuestions`, and stop. Never browser-scrape Figma, never save a browser/login/error screenshot as `figma-expected.png`, and never proceed to compare against memory, source code, or the running app while a valid shared `figma-expected.png` is absent.
 
 **Step 3: Get ACTUAL from implementation**
 
@@ -71,12 +87,17 @@ If the three live-capture artifacts are not all present (`actual.png`, `computed
 
 ### CLI-first capture flow
 
-Write EVERY artifact into the task's iteration directory, never into `.playwright-cli/` or the current working directory. `playwright-cli` writes to `.playwright-cli/` by default — that default location is WRONG for these artifacts, so always pass an explicit path. Use a named session and keep the flow explicit:
+Write every ACTUAL capture artifact into the task's iteration directory, never into `.playwright-cli/` or the current working directory. `playwright-cli` writes to `.playwright-cli/` by default — that default location is WRONG for these artifacts, so always pass an explicit path. The shared Figma reference remains at `specifications/<task-id>/ui-verification/figma-expected.png`. Use a named session and keep the flow explicit:
 
 0. **Define and create the artifact directory FIRST**:
-   - `ARTIFACT_DIR="specifications/<task-id>/ui-verification/iteration-<N>"` (use the caller-provided task directory; if no task-id exists, use a stable slug for the component/page, e.g. `specifications/<page-slug>/ui-verification/iteration-<N>`).
-   - `mkdir -p "$ARTIFACT_DIR"`.
-   - Every command below writes into `"$ARTIFACT_DIR/<file>"`. Never rely on default output locations.
+
+- `UI_VERIFICATION_DIR="specifications/<task-id>/ui-verification"` (or `specifications/<page-slug>/ui-verification` when no task-id exists).
+- `ARTIFACT_DIR="$UI_VERIFICATION_DIR/iteration-<N>"`.
+- `FIGMA_EXPECTED="$UI_VERIFICATION_DIR/figma-expected.png"`.
+- Keep any `state-save` file outside `specifications/**`, for example in a git-ignored temp path supplied by the caller.
+- `mkdir -p "$ARTIFACT_DIR"`.
+- Every command below writes into `"$ARTIFACT_DIR/<file>"`. Never rely on default output locations.
+
 1. **Open named session** — `playwright-cli open -s <session-name>`.
 2. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> 1080 -s <session-name>`.
 3. **Navigate to the full target URL** including query params — `playwright-cli goto <full-url> -s <session-name>`.
@@ -89,7 +110,7 @@ Write EVERY artifact into the task's iteration directory, never into `.playwrigh
    - Required fallback: `playwright-cli run-code -s <session-name> "async page => { await page.screenshot({ path: '$ARTIFACT_DIR/actual.png', fullPage: true }); }"`.
 6. **Capture accessibility snapshot** — `playwright-cli --raw snapshot -s <session-name> > "$ARTIFACT_DIR/a11y-snapshot.yml"`.
 7. **Capture computed styles and measurements** — `playwright-cli --raw eval -s <session-name> "JSON.stringify(...)" > "$ARTIFACT_DIR/computed-styles.json"`.
-8. **Confirm artifacts landed in the right place** — run `ls -la "$ARTIFACT_DIR"` and verify `actual.png`, `a11y-snapshot.yml`, `computed-styles.json`, and `figma-expected.png` all exist there. If a capture artifact (`actual.png`, `a11y-snapshot.yml`, `computed-styles.json`) is missing or landed in `.playwright-cli/` or the working directory, move it into `$ARTIFACT_DIR` or re-run that command with the explicit path. If `figma-expected.png` is missing, go back to Step 2 and export it before continuing — a missing reference image is fixed by fetching it, not by reporting a blocker.
+8. **Confirm artifacts landed in the right place** — run `ls -la "$ARTIFACT_DIR"` and verify `actual.png`, `a11y-snapshot.yml`, and `computed-styles.json` exist there, then verify the shared `figma-expected.png` exists at `"$FIGMA_EXPECTED"`. If a capture artifact (`actual.png`, `a11y-snapshot.yml`, `computed-styles.json`) is missing or landed in `.playwright-cli/` or the working directory, move it into `$ARTIFACT_DIR` or re-run that command with the explicit path. If the shared `figma-expected.png` is missing, go back to Step 2 and export it before continuing — a missing reference image is fixed by fetching it, not by reporting a blocker.
 9. **Clean up** — `playwright-cli close -s <session-name>` or equivalent session cleanup if the capture flow aborts.
 
 The `JSON.stringify(...)` payload should cover the major containers and controls being verified: bounding boxes, computed width/height, max-width, min-height, padding, margin, gap, alignment-relevant properties, and any targeted style values needed to explain differences.
@@ -109,19 +130,20 @@ The `JSON.stringify(...)` payload should cover the major containers and controls
 Store each verification pass under:
 
 ```text
-specifications/<task-id>/ui-verification/iteration-<N>/
-  actual.png
-  computed-styles.json
-  a11y-snapshot.yml
+specifications/<task-id>/ui-verification/
   figma-expected.png
-  pixel-gate/               # optional, phase 2 only
-    report.json
-    exit-code.txt
-    *-diff.png
-  report.md
+  iteration-<N>/
+    actual.png
+    computed-styles.json
+    a11y-snapshot.yml
+    pixel-gate/               # optional, phase 2 only
+      report.json
+      exit-code.txt
+      *-diff.png
+    report.md
 ```
 
-Required files for the core flow are `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`, `figma-expected.png`, and `report.md`. `pixel-gate/` is optional and only exists when the phase-2 tripwire runs. Never leave any of these artifacts in `.playwright-cli/` or the working directory — pass the explicit `$ARTIFACT_DIR/...` path to every capture command and confirm the files exist there.
+Required files for the core flow are the shared `figma-expected.png`, plus `actual.png`, `computed-styles.json`, `a11y-snapshot.yml`, and `report.md` for the current iteration. `pixel-gate/` is optional and only exists when the phase-2 tripwire runs. Never leave any ACTUAL capture artifacts in `.playwright-cli/` or the working directory — pass the explicit `$ARTIFACT_DIR/...` path to every capture command and confirm the files exist there.
 
 ### Exit codes and escalation rules
 
@@ -258,9 +280,9 @@ A pass is only allowed when the evidence proves it. Do NOT report `PASS` on "loo
 
 Report `PASS` only when ALL of these hold:
 
-- `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for THIS pass all exist in the current iteration directory.
+- The shared `figma-expected.png` exists at `specifications/<task-id>/ui-verification/figma-expected.png`, and `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for THIS pass all exist in the current iteration directory.
 - Every CRITICAL category — Structure, Layout, Dimensions — has ZERO differences beyond the allowed 1–2px rendering tolerance, each backed by a cited measured value from `computed-styles.json` or a cited structural fact from `a11y-snapshot.yml`, not by impression.
-- The full-page `actual.png` has been compared side by side against `figma-expected.png`.
+- The full-page `actual.png` has been compared side by side against the shared `figma-expected.png`.
 
 If ANY of the following is true, the result is `FAIL` (or `VERIFICATION NOT RUN` when evidence is missing), never `PASS`:
 
