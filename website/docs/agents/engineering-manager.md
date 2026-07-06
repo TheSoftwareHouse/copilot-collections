@@ -16,17 +16,21 @@ The Engineering Manager works from two entry points:
 - **Directly** — invoke the agent in chat with a task description, Jira ID, or implementation plan.
 - **Via [`/tsh-implement`](../prompts/public/implement)** — the public prompt routes to the agent on the same model.
 
-For any request whose intent is to deliver implementation changes, the agent loads the `tsh-orchestrating-implementation` skill and starts at **Step 0**. Information-only, advisory-only, and standalone review- or research-only requests do not trigger the workflow.
+For any request whose intent is to deliver implementation changes, the agent loads the `tsh-orchestrating-implementation` skill and starts at **Step 0** (creating flow-start todos). Information-only, advisory-only, and standalone review- or research-only requests do not trigger the workflow.
 
 ## Workflow Skill
 
 All workflow mechanics are owned by a single canonical skill:
 
-- `tsh-orchestrating-implementation` — flow selection (Step 0), Quick vs Full Flow, planning readiness, todo protocol, upfront execution plan, delegated execution routing, and review/UI-verification gates.
+- `tsh-orchestrating-implementation` — flow-start todos (Step 0), flow selection (Step 1), Quick vs Full Flow, planning readiness, todo protocol, upfront execution plan, delegated execution routing, and review/UI-verification gates.
 
-### Step 0 — Quick vs Full Flow
+### Step 0 — Start with Todos
 
-The skill begins by assessing complexity and recommending a flow (the user can override):
+The skill begins by creating the todos needed for the selected flow: one todo per orchestration action in Quick Flow, or one todo per plan task, review loop, `[REUSE]` UI verification item, and final gate in Full Flow.
+
+### Step 1 — Assess Complexity and Recommend a Flow
+
+The skill then assesses complexity and recommends a flow (the user can override):
 
 - **Quick Flow** — narrow, single-domain change with an obvious solution, ~3 files or fewer, no ambiguity, no missing research/plan, and **no Figma/UI-verification involvement**.
 - **Full Flow** — cross-domain work, unclear requirements, architectural change, missing research or plan, larger scope, or **any Figma/UI-verification involvement** (a hard exclusion from Quick Flow).
