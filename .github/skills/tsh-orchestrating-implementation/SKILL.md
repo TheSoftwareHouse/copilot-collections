@@ -52,7 +52,7 @@ Use the following decision rules before any delegation.
 
 | Check | Quick Flow pass condition |
 | --- | --- |
-| Scope width | Narrow, single-domain change with one clear implementation owner |
+| Scope width | Narrow, single-domain change with one clear implementation owner (any domain qualifies — app code, CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM prompts, E2E, etc.) |
 | Solution clarity | Solution path is obvious from the task, approved plan, or existing context |
 | File impact | Likely to touch 3 files or fewer |
 | Ambiguity | No major ambiguity, contradiction, or unresolved tradeoff |
@@ -83,17 +83,36 @@ Write the full ordered agent + prompt call sequence before the first delegation.
 - The sequence must cover every planned delegation, review, validation checkpoint, and UI verification item.
 - Keep the execution plan synchronized with the todo list whenever order or scope changes.
 
+## Task-to-Owner Routing
+
+This table is the single source of truth for selecting a delegate agent and prompt for any task, by task type or tag. Both Quick Flow and Full Flow consult this table — it is not duplicated elsewhere in this skill.
+
+| Task type or tag | Delegate to | Prompt to use | Notes |
+| --- | --- | --- | --- |
+| app code | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | The internal prompt should be used for standard implementation work |
+| UI with Figma | `tsh-software-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
+| E2E | `tsh-e2e-engineer` | `tsh-implement-e2e.prompt.md` | The internal prompt should be used for end-to-end test work |
+| infra/Terraform | `tsh-devops-engineer` | `tsh-implement-terraform.prompt.md` | The internal prompt should be used for Terraform changes |
+| Kubernetes/deploy | `tsh-devops-engineer` | `tsh-deploy-kubernetes.prompt.md` | The internal prompt should be used for deployment or Kubernetes work |
+| CI/CD | `tsh-devops-engineer` | `tsh-implement-pipeline.prompt.md` | The internal prompt should be used for pipeline work |
+| observability | `tsh-devops-engineer` | `tsh-implement-observability.prompt.md` | The internal prompt should be used for logging, metrics, or tracing work |
+| LLM prompts | `tsh-prompt-engineer` | `tsh-engineer-prompt.prompt.md` | The internal prompt should be used for prompt-engineering tasks |
+| `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
+| `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
+
+Note: Quick Flow's hard UI/Figma exclusion (Step 1) means the "UI with Figma" and "`[REUSE]` UI verification" rows never apply inside Quick Flow — they are reachable only from Full Flow.
+
 ## Quick Flow
 
 Use Quick Flow only if Step 1 passed every Quick criterion and the user selected or accepted it.
 
-1. **Delegate implementation** - Delegate the task to `tsh-software-engineer`. The implementation prompt should be `tsh-implement-common-task.prompt.md`.
+1. **Delegate implementation** - Identify the task's type or tag and delegate using the Task-to-Owner Routing table above. For a plain app-code task this is `tsh-software-engineer` with `tsh-implement-common-task.prompt.md`; for CI/CD, infra/Terraform, Kubernetes/deploy, observability, LLM-prompt, or E2E tasks, delegate to the matching owner and prompt from the table instead.
 2. **Run validation checks** - After implementation, run the appropriate checks for the affected area.
 3. **Delegate code review** - Delegate review to `tsh-code-reviewer` via `tsh-review.prompt.md`.
 4. **Handle review results explicitly:**
    - If review passes with no required changes, complete the flow.
    - If review requests changes, ask for confirmation before changing the reviewed solution.
-   - After confirmation, route fixes back to `tsh-software-engineer`, run affected validation again, and re-run review when the fix is material.
+   - After confirmation, route fixes back to the same owner selected in Step 1, run affected validation again, and re-run review when the fix is material.
 5. **Abort Quick Flow if hidden complexity appears** - If ambiguity, cross-domain work, plan gaps, or any Figma/UI-verification need appears during execution, stop Quick Flow, rewrite the execution plan, and restart in Full Flow.
 
 ## Full Flow
@@ -129,25 +148,12 @@ Check the current state before creating or executing any plan.
 
 ### Execution routing
 
-Process tasks in plan order. Consult the todo list before each task and update the plan and todo list after each completed task.
-
-| Task type or tag | Delegate to | Prompt to use | Notes |
-| --- | --- | --- | --- |
-| app code | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md` | The internal prompt should be used for standard implementation work |
-| UI with Figma | `tsh-software-engineer` | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation |
-| E2E | `tsh-e2e-engineer` | `tsh-implement-e2e.prompt.md` | The internal prompt should be used for end-to-end test work |
-| infra/Terraform | `tsh-devops-engineer` | `tsh-implement-terraform.prompt.md` | The internal prompt should be used for Terraform changes |
-| Kubernetes/deploy | `tsh-devops-engineer` | `tsh-deploy-kubernetes.prompt.md` | The internal prompt should be used for deployment or Kubernetes work |
-| CI/CD | `tsh-devops-engineer` | `tsh-implement-pipeline.prompt.md` | The internal prompt should be used for pipeline work |
-| observability | `tsh-devops-engineer` | `tsh-implement-observability.prompt.md` | The internal prompt should be used for logging, metrics, or tracing work |
-| LLM prompts | `tsh-prompt-engineer` | `tsh-engineer-prompt.prompt.md` | The internal prompt should be used for prompt-engineering tasks |
-| `[REUSE]` UI verification | `tsh-ui-reviewer` | `tsh-review-ui.prompt.md` | Review each UI item individually; do not batch |
-| `[REUSE]` other | per the task definition | — | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required |
+Process tasks in plan order. Consult the todo list before each task and update the plan and todo list after each completed task. Use the Task-to-Owner Routing table above to select the delegate agent and prompt for each task — it is not repeated here.
 
 ### Execution rules and gates
 
 1. **Stay inside the approved plan** - If execution requires a material deviation from the approved plan, stop and get confirmation before changing direction.
-2. **Delegate by route, not by instinct** - Use the routing table for each task and pass the plan section, technical context, and latest outputs.
+2. **Delegate by route, not by instinct** - Use the Task-to-Owner Routing table for each task and pass the plan section, technical context, and latest outputs.
 3. **Update after every task** - After each task, update the plan status, update the matching todo, and run the appropriate checks for that task type.
 4. **Run checks after every task** - Use the validation set that matches the changed area, such as lint, build, unit tests, integration tests, E2E checks, or infrastructure validation.
 5. **Handle `[REUSE]` UI verification as a per-item loop:**
