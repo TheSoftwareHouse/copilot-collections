@@ -27,6 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 
 - `tsh-orchestrating-implementation` skill — Added the missing fallback policy for unsupported tasks and the rule to record solution changes in the plan changelog.
+- `tsh-orchestrating-implementation` skill — Fixed Quick Flow always delegating to `tsh-software-engineer` regardless of task domain; added a shared `Task-to-Owner Routing` table so Quick Flow (and its review fix-loop) routes CI/CD, infra/Terraform, Kubernetes/deploy, observability, and LLM-prompt tasks to their correct owner and prompt instead of the wrong one.
 
 ## 2026-06-01
 
