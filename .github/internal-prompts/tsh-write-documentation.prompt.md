@@ -4,7 +4,7 @@ Thoroughly review the delegated task slice, the relevant technical context, and 
 
 Stay strictly within the documentation files named in the delegated task. Do not expand scope, redesign unrelated pages, or change product code, tests, or infrastructure.
 
-If you need to deviate from the delegated task, stop and ask for confirmation before proceeding, and record the change in the plan file's Changelog section when a plan is in play.
+If you need to deviate from the delegated task, stop and report the deviation to the delegating orchestrator with the exact reason instead of proceeding on your own; record the change in the plan file's Changelog section only once the orchestrator confirms it, when a plan is in play.
 
 ## Required Skills
 
