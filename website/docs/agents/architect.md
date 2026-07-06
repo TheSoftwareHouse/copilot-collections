@@ -63,6 +63,6 @@ Each technical specification includes:
 
 After creating the plan, the Architect can hand off to:
 
-- **Internal plan review loop** → the Architect invokes `tsh-plan-reviewer` as a nested subagent after creating or revising a plan, addresses all BLOCKER findings, and owns the review loop for up to 3 iterations before escalating.
+- **Internal plan review loop** → the Architect invokes `tsh-plan-reviewer` as a nested subagent after creating or revising a plan and addresses all BLOCKER findings. After 3 iterations, if BLOCKERs remain, the Architect asks the user a structured question (try one more iteration, stop here, or give custom guidance) bundled with the remaining findings and iteration history — repeating after every further iteration until the plan is approved or the user chooses to stop.
 - **Engineering Manager** → `/tsh-implement` (`Start Implementation`) once the plan is approved/finalized
 - **DevOps Engineer** → `Start Infrastructure Implementation` for infrastructure work per the architectural plan
