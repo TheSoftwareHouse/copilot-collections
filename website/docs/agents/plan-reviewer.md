@@ -20,7 +20,7 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 ## What It Produces
 
 - A failure-oriented review report with a binary verdict, top risks, assumptions, rework triggers, and any blocking gaps.
-- The report is saved as `{task-name}.plan-review.md` alongside the plan in `specifications/<task-name>/`.
+- The report is saved as `{task-name}.plan-review.md` alongside the plan in `specifications/<task-name-or-id>/`.
 
 ## Tool Access
 

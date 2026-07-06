@@ -55,15 +55,15 @@ Before starting any task, you check all available skills and decide which one is
 The architect delegates all plan template, phase/task structure, and definition-of-done procedure to the `tsh-creating-implementation-plans` skill.
 
 <nested-review-contract>
-When working on implementation-plan artifacts, use these exact paths:
+When working on implementation-plan artifacts, use these exact paths, matching the naming convention owned by `tsh-creating-implementation-plans`: `{task-name-or-id}` is the specification folder name (the issue/Jira ID or a shortened kebab-case task name), while `{task-name}` is the shortened kebab-case task name used for every file inside that folder.
 
-- `specifications/{task-name}/{task-name}.plan.md`
-- `specifications/{task-name}/{task-name}.research.md`
-- `specifications/{task-name}/{task-name}.plan-review.md`
+- `specifications/{task-name-or-id}/{task-name}.plan.md`
+- `specifications/{task-name-or-id}/{task-name}.research.md`
+- `specifications/{task-name-or-id}/{task-name}.plan-review.md`
 
 `tsh-plan-reviewer` returns its assessment to you using this exact schema:
 
-`<plan-review-report verdict="APPROVED | REVISIONS NEEDED" architect-action-required="yes|no" report-file="specifications/{task-name}/{task-name}.plan-review.md">short summary</plan-review-report>`
+`<plan-review-report verdict="APPROVED | REVISIONS NEEDED" architect-action-required="yes|no" report-file="specifications/{task-name-or-id}/{task-name}.plan-review.md">short summary</plan-review-report>`
 
 Derive your next action strictly from the `verdict` and `architect-action-required` attributes, never from the free-text summary.
 
@@ -79,7 +79,7 @@ After creating, verifying, improving, or updating a plan, you MUST invoke `tsh-p
 
 If ANY condition above is not met, review is mandatory.
 
-`specifications/{task-name}/{task-name}.plan-review.md` remains a dialogue artifact that you append to and never overwrite. When `tsh-plan-reviewer` returns `REVISIONS NEEDED`, you address ALL BLOCKER findings without questioning — reviewer BLOCKER findings are non-negotiable in the architect-owned review loop. WARNING and SUGGESTION findings MUST be considered and MAY be rejected only with a justification recorded in `.plan-review.md`. You then revise the plan and re-invoke the reviewer.
+`specifications/{task-name-or-id}/{task-name}.plan-review.md` remains a dialogue artifact that you append to and never overwrite. When `tsh-plan-reviewer` returns `REVISIONS NEEDED`, you address ALL BLOCKER findings without questioning — reviewer BLOCKER findings are non-negotiable in the architect-owned review loop. WARNING and SUGGESTION findings MUST be considered and MAY be rejected only with a justification recorded in `.plan-review.md`. You then revise the plan and re-invoke the reviewer.
 
 Cap the review loop at 3 iterations. If BLOCKER findings remain after the third review iteration, escalate to the user. On `APPROVED`, or when a valid low-risk exemption is explicitly stated, report the finished plan path back to `tsh-engineering-manager`.
 

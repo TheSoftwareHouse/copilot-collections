@@ -1,4 +1,4 @@
-Stress-test the implementation plan for the provided task. Assume the architect likely produced a basically correct plan, then look for the strongest reasons it could still fail in implementation, create expensive rework, or give false confidence. The primary deliverable is the full structured review document saved as `{task-name}.plan-review.md` alongside the plan in the same specifications directory.
+Stress-test the implementation plan for the provided task. Assume the architect likely produced a basically correct plan, then look for the strongest reasons it could still fail in implementation, create expensive rework, or give false confidence. The primary deliverable is the full structured review document saved as `specifications/{task-name-or-id}/{task-name}.plan-review.md`, alongside the plan in the same directory.
 
 ## Required Skills
 
@@ -34,7 +34,7 @@ Before starting, load and follow these skills:
 
 9. **Decision-and-revision-history handling** — Always build and maintain a `Decision and Revision History` section as a compact chronological Markdown table, ordered from oldest to newest, including on the first review iteration. On iteration 1, capture the initial plan-shaping decisions the reviewer challenged, why they matter, the current architect position, and the current status. On later iterations, read the existing `.plan-review.md` first and update the same table to show what changed since the prior review, whether the reviewer's concerns were resolved, and which issues remain open. Prefer appending new rows for new developments; update an existing row only when that keeps the table clearer and more maintainable. Keep entries as short summaries with phrase-length cells, not prose blocks, transcripts, or exhaustive changelogs. Explicitly classify prior high-signal issues with compact statuses such as `open`, `changed`, `resolved`, `kept`, or `dropped`. If an issue is downgraded or dropped, explain why briefly in the row. Do not reduce challenge intensity because one issue was fixed. The architect fixing one thing does not mean new issues should not be found.
 
-10. **Produce the report and binary verdict** — Save the full failure-oriented review report with final verdict (`APPROVED` or `REVISIONS NEEDED`) as `{task-name}.plan-review.md` in the same specifications directory as the plan. Do not reduce the persisted artifact to a short verdict memo or manager-style synthesis.
+10. **Produce the report and binary verdict** — Save the full failure-oriented review report with final verdict (`APPROVED` or `REVISIONS NEEDED`) as `specifications/{task-name-or-id}/{task-name}.plan-review.md`, in the same directory as the plan. Do not reduce the persisted artifact to a short verdict memo or manager-style synthesis.
 
 ## Review Requirements
 
@@ -45,7 +45,7 @@ Before starting, load and follow these skills:
 - Treat unexplained deviations from research context or prior established direction as likely `BLOCKERS` until justified.
 
 <output-specification>
-The full structured review report is the primary deliverable. Save it as `{task-name}.plan-review.md` alongside the plan in the same `specifications` directory and structure it as follows:
+The full structured review report is the primary deliverable. Save it as `specifications/{task-name-or-id}/{task-name}.plan-review.md`, alongside the plan in the same directory, and structure it as follows:
 
 - `# Plan Review: {plan-file-name}`
 - Reviewed plan path, research file path, review date, and verdict (`APPROVED` or `REVISIONS NEEDED`)
@@ -69,4 +69,4 @@ The full structured review report is the primary deliverable. Save it as `{task-
 - **Scope discipline** — never suggest adding features or requirements not in the research file.
 - **Carry critical issues forward** — unresolved execution-critical issues stay live across iterations until genuinely closed; repeated survival is a reason to escalate, not soften.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v2 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review-plan:v3 -->

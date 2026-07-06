@@ -39,7 +39,7 @@ The Engineering Manager identifies that the task is missing necessary context an
 
 ## Output
 
-A `.research.md` file placed in `specifications/<task-name>/`:
+A `.research.md` file placed in `specifications/<task-name-or-id>/`:
 
 ```text
 specifications/

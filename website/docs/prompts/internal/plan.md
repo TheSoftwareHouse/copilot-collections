@@ -46,7 +46,7 @@ The Engineering Manager identifies that no implementation plan exists and delega
 
 ## Output
 
-A `.plan.md` file placed in `specifications/<task-name>/`:
+A `.plan.md` file placed in `specifications/<task-name-or-id>/`:
 
 ```text
 specifications/

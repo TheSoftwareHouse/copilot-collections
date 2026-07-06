@@ -35,7 +35,7 @@ The Engineering Manager automatically handles the full development cycle:
 
 - **Delegated to:** Architect Reviewer
 - **What it does:** Validates the plan against the research file, codebase assumptions, feasibility, simplicity, and project patterns before implementation begins.
-- **What it produces:** A `.plan-review.md` file saved alongside the plan in the same `specifications/<task-name>/` directory.
+- **What it produces:** A `.plan-review.md` file saved alongside the plan in the same `specifications/<task-name-or-id>/` directory.
 - **Your action:** Review the implementation plan and review summary together. Confirm the approved plan before implementation begins.
 
 #### Implementation Phase
