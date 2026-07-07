@@ -15,7 +15,7 @@ Before starting, load and follow these skills:
 
 1. **Read the research file** (`.research.md`) — understand the full set of requirements, acceptance criteria, and constraints that the plan must address.
 
-2. **Read the plan file** (`.plan.md`) — understand the proposed architecture, phases, tasks, and definitions of done.
+2. **Read the plan file** (`.plan.md`) — understand the proposed architecture, phases, tasks, and definitions of done. Stop immediately if any row in `## Open Questions` has Status = `❓ Open`; this is a blocker and review cannot proceed until the architect resolves it.
 
 3. **Challenge-domains pass** — Before diving into general failure modes, systematically attack the plan's most consequential decisions using the challenge domains defined in the agent. For each domain, explicitly state whether an issue was found or not. Pay special attention to technology/stack choices that deviate from research context or prior iterations — these are the highest-value challenges.
 
@@ -42,6 +42,7 @@ Before starting, load and follow these skills:
 - Attribute at least 2-3 findings to the challenge-domains pass when the evidence supports them.
 - Do not pad the report with cosmetic, wording, or style-only notes.
 - Do not fall back to generic quality audits or pattern-consistency checks.
+- Flag any `❓ Open` item in the plan's `## Open Questions` table as a blocker requiring resolution before approval.
 - Treat unexplained deviations from research context or prior established direction as likely `BLOCKERS` until justified.
 
 <output-specification>

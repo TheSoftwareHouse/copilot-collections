@@ -13,10 +13,16 @@ This skill turns a designed solution into a phased, verifiable implementation pl
 This skill is the single owner of the plan template (`./plan.example.md`), the plan-structure procedure, and the definition-of-done rules for implementation plans. Other skills and agents MUST reference this skill instead of duplicating plan-structure rules.
 </plan-structure-ownership>
 <goal-hierarchy>
-Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.
+Every plan defines one Wildly Important Goal, stated explicitly as the single most important outcome the whole plan must achieve. The Wildly Important Goal section must keep that main goal as one sentence on a labeled `**Goal**:` line, and also include an explicit Success Measure plus a Do NOT touch / do NOT add list to reduce scope creep. Every phase defines a Goal that clearly advances the Wildly Important Goal, followed by a Description that explains the broader why for reviewers and implementors. The plan itself, after the Wildly Important Goal, also includes a description of the overall approach.
 </goal-hierarchy>
+<open-questions-dispatch-gate>
+Plans must not be dispatched to an implementor while any Open Questions row has Status = ❓ Open; unresolved questions must be routed back to `tsh-architect` before execution.
+</open-questions-dispatch-gate>
+<executable-slots-dispatch-gate>
+Plans must not be dispatched to an implementor while any executable slot still contains an angle-bracket placeholder or any assumed-default command. Verification fields, DoD command items, and file/spec path arguments must be resolved from Technical Context or the task's app stack before dispatch. This gate is intentionally narrow: it applies only to executable slots, and instructional angle-bracket placeholders elsewhere in the template are allowed.
+</executable-slots-dispatch-gate>
 <no-real-code>
-The plan must not contain real implementation code. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
+The plan must not contain real implementation code or full implementation bodies/function logic. Pseudo-code is allowed only to explain genuinely complicated algorithms or ideas, and task-boundary seam artifacts such as type definitions, function signatures, DTOs, interfaces, and API shapes are allowed when they clarify the contract without supplying implementation bodies. Diagrams, explanations, and the Technical Context chapter content are allowed and encouraged.
 </no-real-code>
 </principles>
 
@@ -26,13 +32,16 @@ Before drafting, read [`./plan.example.md`](./plan.example.md) in full first —
 
 1. Confirm inputs: a designed solution, typically from `tsh-architecture-designing`, plus task research and context. Do not design the solution here; this skill structures an already-designed solution into a plan.
 2. Define the Wildly Important Goal and the plan description.
-3. Divide the work into small phases. Each phase must have a Goal, a Description, and a list of tasks with checkboxes to mark finished tasks later. After each phase is finished, only fast-running tests and quality checks should be run to verify the implementation is on track: unit tests, integration tests, static code analysis, linters, formatting checks, and project build.
-4. Define each task. Each task must have a Description, a Definition of Done as a checkbox list, and optional Clues that help the implementor (file paths, line ranges, reference patterns, gotchas).
+3. Divide the work into small phases. Each phase must have a Goal, a Description, a `**Verification:**` field listing the exact fast-running checks to run after the phase completes, and a list of tasks with checkboxes to mark finished tasks later. Keep phase verification reviewer-verifiable and limited to fast checks such as unit tests, integration tests, static code analysis, linters, formatting checks, and project build. Source these checks from the plan's Technical Context → Tech Stack / Testing Patterns rather than assuming Node/npm.
+4. Define each task. Each task must have a Description, a `**Files:**` field, and a Definition of Done as a checkbox list. Phase Description states the broader why for reviewers and implementors. Task Description should use a near-imperative form that names the files and the behavior to change. The `**Files:**` field must name every file the task will touch and label each one with `create`, `modify`, or `reuse`. If a file was produced or last touched by an earlier task in the same plan, include an inline back-reference such as `(modify — created in Task 1.1)`; if a file is created and consumed within the same task, no back-reference is needed. Tasks may also include an optional `**Stop Rule:**` sentence near `Clues` that tells the implementor to stop, report, and avoid improvising if the task cannot proceed safely or an expected seam is missing; do not turn this into a formal dependency graph or a `Depends on:` field. Optional Clues should still help the implementor with file paths, line ranges, reference patterns, and gotchas.
 5. Add the mandatory cross-cutting tasks required by the plan rules.
 6. Save the plan as a document following the `./plan.example.md` template. Do not add or remove any sections from the template. Follow the structure and naming conventions strictly.
 
 <definition-of-done-rules>
 Each task must include a definition of done as a checkbox list.
+Each task's Definition of Done must include at least one objectively reviewer-verifiable check.
+When a task changes code, that check must include at least one runnable command taken verbatim from the task's app stack as recorded in Technical Context → Tech Stack / Testing Patterns, matched to the app the task's Files belong to, never assumed from Node/npm (for example `tsc --noEmit` for a Node app, or `uv run pytest <path>` for a Python app).
+For a docs, config, content, or asset task that has no runnable command, the Definition of Done may instead use a deterministic check a reviewer can confirm by inspecting the changed file, such as a grep-style content assertion (for example `docs/<file>.md contains an "## Usage" section`).
 Definition of done must not include deployment steps.
 Definition of done must not include manual QA steps.
 Definition of done must not include steps that cannot be verified by a code reviewer during code review.
@@ -41,7 +50,7 @@ Example: do not require checking whether tests were failing before the change, b
 
 <mandatory-plan-content>
 - The plan must include a code review phase at the end, fully done by `tsh-code-reviewer` using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Pass e2e execution to that agent as part of the prompt; do not run those tests from the plan author level.
-- For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop.
+- For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop. This scoped UI-verification is distinct from full e2e: the UI-verification outcome is owned by `tsh-ui-reviewer`, while full e2e remains owned by `tsh-code-reviewer`.
 - For features involving LLM application prompts (system prompts, RAG templates, tool-calling instructions, classification/extraction prompts), add a `[REUSE]` prompt engineering task delegated to `tsh-prompt-engineer` using [`tsh-engineer-prompt.prompt.md`](../../internal-prompts/tsh-engineer-prompt.prompt.md). Separate prompt design from application code — the software engineer implements the integration code, the prompt engineer designs the prompt content. Include the use case, target model, and any existing prompt drafts in the task description.
 - Do not provide deployment plans, code pushing instructions, or repository code review instructions.
 </mandatory-plan-content>

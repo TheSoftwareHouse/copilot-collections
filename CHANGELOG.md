@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-18
+
+### Added
+
+- Open-questions dispatch gate for implementation plans — plans with any `❓ Open` rows now block execution until `tsh-architect` resolves them.
+- Executable-slot dispatch gate — plans can’t be dispatched if any verification field, DoD command, or file path still contains placeholder/default values.
+- Planning-readiness gate in `tsh-orchestrating-implementation` — execution now checks that open questions are cleared before proceeding.
+
+### Changed
+
+- `tsh-creating-implementation-plans` skill — hardened the plan contract:
+	- Wildly Important Goal now explicitly requires `Goal`, `Success Measure`, and `Do NOT touch / do NOT add`
+	- phases now require a `Verification` field with exact fast-running checks
+	- tasks now require `Files:` entries with `create` / `modify` / `reuse` labels
+	- DoD now distinguishes code tasks from docs/config tasks and requires stack-specific runnable checks or deterministic file assertions
+	- UI verification is clarified as distinct from full e2e
+- `plan.example.md` template — updated the canonical template to match the stricter plan contract, including the new goal hierarchy, verification fields, docs-only task pattern, and comment-wrapped implementation note.
+- `tsh-review-plan.prompt.md` — now blocks review when `## Open Questions` still contains `❓ Open`, and it requires a compact `Decision and Revision History` section.
+- Website docs for `Creating Implementation Plans` — synced to the new template and workflow rules.
+
 ## 2026-06-15
 
 ### Added
