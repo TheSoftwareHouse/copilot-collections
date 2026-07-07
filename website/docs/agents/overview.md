@@ -5,7 +5,7 @@ title: Agents Overview
 
 # Agents Overview
 
-Copilot Collections provides **12 user-facing specialized agents** plus internal worker agents that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads the user-facing agents automatically when the corresponding mode is selected.
+Copilot Collections provides **13 user-facing specialized agents** plus internal worker agents that together form an AI product engineering team covering the full delivery lifecycle — from product ideation through development, infrastructure, and quality assurance. Agents are stored in `.github/agents/` as `.agent.md` files. VS Code loads the user-facing agents automatically when the corresponding mode is selected.
 
 ## How Agents Work
 
@@ -30,13 +30,13 @@ Each agent has:
 │   /tsh-implement         │
 └──────┬──────────────────┘
        │ Delegates to specialized agents
-       ├─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┐
-       ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer │  │  Technical   │
-│  Engineer    │  │  (plan)      │  │  Reviewer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review-│  │  Writer      │
-│  (research)  │  │              │  │ (plan review)│  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui          │  │  (docs)      │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+       ├─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┐
+       ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│  Context     │  │  Architect   │  │  Architect   │  │  UI          │  │  Software    │  │  Plan        │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer │
+│  Engineer    │  │  (plan)      │  │  Reviewer    │  │  Engineer    │  │  Engineer    │  │  Implementor │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review-│
+│  (research)  │  │              │  │ (plan review)│  │  (UI)        │  │  (non-UI)    │  │  (strict     │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui          │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
        │
        ▼
 ┌──────────────┐
@@ -60,7 +60,8 @@ Each agent has:
 | [Context Engineer](./context-engineer) | `tsh-context-engineer.agent.md` | Gathers requirements, builds context, identifies gaps | Atlassian, Figma, PDF Reader, Sequential Thinking |
 | [Architect](./architect) | `tsh-architect.agent.md` | Designs solutions, creates implementation plans | Atlassian, Context7, Figma, PDF Reader, Sequential Thinking |
 | [Engineering Manager](./engineering-manager) | `tsh-engineering-manager.agent.md` | Orchestrates implementation by delegating to specialized agents | Atlassian, Sequential Thinking |
-| [Software Engineer](./software-engineer) | `tsh-software-engineer.agent.md` | Implements code against the plan | Context7, Figma, Playwright, Sequential Thinking |
+| [UI Engineer](./ui-engineer) | `tsh-ui-engineer.agent.md` | Implements UI and frontend solutions | Context7, Figma, Playwright, Sequential Thinking |
+| [Software Engineer](./software-engineer) | `tsh-software-engineer.agent.md` | Implements non-UI code against the plan | Context7, Sequential Thinking |
 | [Prompt Engineer](./prompt-engineer) | `tsh-prompt-engineer.agent.md` | Designs, optimizes, and secures LLM application prompts | Context7, Sequential Thinking |
 
 ### 🏗 Infrastructure & DevOps Agents
@@ -86,7 +87,7 @@ Each agent has:
 
 ### 🔧 Internal Worker Agents
 
-These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, the Copilot Orchestrator delegates to the customization workers below, and the Engineering Manager delegates documentation-only work to the Technical Writer.
+These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, the Copilot Orchestrator delegates to the customization workers below, and the Engineering Manager delegates implementation-specialist and documentation-only work to the workers below.
 
 | Agent | File | Role |
 |---|---|---|
@@ -94,4 +95,5 @@ These agents are not invoked directly by users. The Business Analyst internally 
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
 | [Architect Reviewer](./plan-reviewer) | `tsh-plan-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |
+| [Plan Implementor](./plan-implementor) | `tsh-plan-implementor.agent.md` | Internal strict single-task implementor for one plan step at a time |
 | [Technical Writer](./technical-writer) | `tsh-technical-writer.agent.md` | Authors and updates README, CHANGELOG, `/docs`, and published documentation-site pages |

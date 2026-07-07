@@ -177,7 +177,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 #### Task 2.2 - [REUSE] UI Verification of <ui-component-name> by `tsh-ui-reviewer` agent
 
-**Description**: Run `tsh-ui-reviewer` agent via `tsh-review-ui.prompt.md` to verify <ui-component-name> against Figma design. Pass the Figma URL and dev server URL. If verification fails, delegate fix to `tsh-software-engineer` and re-verify (max 5 iterations per component).
+**Description**: Run `tsh-ui-reviewer` agent via `tsh-review-ui.prompt.md` to verify <ui-component-name> against Figma design. Pass the Figma URL and dev server URL. If verification fails, delegate fix to `tsh-ui-engineer` and re-verify (max 5 iterations per component).
 
 **Files:** `src/components/<ui-component-name>.tsx` (reuse), `src/components/<ui-component-name>.test.tsx` (reuse)
 
