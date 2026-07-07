@@ -12,6 +12,22 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-06-15
+
+### Added
+
+- `tsh-creating-implementation-plans` skill — centralized plan structure ownership, phase/task ordering, definition-of-done rules, and the canonical plan template/example.
+- Direct architect/plan-reviewer nesting — `tsh-architect` can now hand off plan review directly to `tsh-plan-reviewer` with a strict review-report schema.
+
+### Changed
+
+- `tsh-architect` agent — tightened into a WHO-only architecture role and delegated plan structure ownership to `tsh-creating-implementation-plans`.
+- `tsh-plan-reviewer` agent — improved tool-usage guidance and aligned it with the architect-owned review loop.
+- `tsh-orchestrating-implementation` skill — now explicitly plans task order and coordinates the updated architect → plan-reviewer flow.
+- `tsh-plan` / `tsh-review-plan` prompts and `tsh-architecture-designing` skill — removed duplicated plan-authoring rules and moved them into `tsh-creating-implementation-plans`.
+- Engineering Manager / website docs — updated docs for the refactored architect, plan reviewer, and engineering manager flow.
+- Installation guide — added the VS Code setting required to allow nested agents.
+
 ## 2026-06-11
 
 ### Added

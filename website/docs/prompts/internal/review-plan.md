@@ -27,12 +27,13 @@ The Engineering Manager uses this internal prompt after the Architect creates or
 3. Runs failure-mode, assumption, codebase-reality, and sequencing-and-feasibility passes.
 4. Tries to surface 5-10 substantive risks when the plan is broad or uncertain, while allowing unusually robust plans to produce fewer findings.
 5. Produces a failure-oriented review report with a binary verdict and the highest-risk issues, assumptions, rework triggers, and blocking gaps.
-6. Saves the report as `{task-name}.plan-review.md` in the same `specifications/<task-name>/` directory as the plan.
+6. Saves the report as `{task-name}.plan-review.md` in the same `specifications/<task-name-or-id>/` directory as the plan.
 7. If the verdict is `REVISIONS NEEDED`, the Engineering Manager sends the findings back to the Architect and reruns the review until the plan is approved or the escalation limit is reached.
 
 ## Skills Loaded
 
 - `tsh-architecture-designing` — Evaluate architectural shape, phase coherence, and trade-offs.
+- `tsh-creating-implementation-plans` — Verify plan template, structure, and definition-of-done rules.
 - `tsh-codebase-analysing` — Verify the plan's references against actual codebase state.
 - `tsh-technical-context-discovering` — Check pattern consistency against established conventions.
 - `tsh-implementation-gap-analysing` — Validate what exists vs. what the plan proposes to build.
@@ -40,4 +41,4 @@ The Engineering Manager uses this internal prompt after the Architect creates or
 
 ## Output
 
-A `.plan-review.md` file placed in `specifications/<task-name>/` alongside the plan, containing the failure-oriented review report and binary verdict.
+A `.plan-review.md` file placed in `specifications/<task-name-or-id>/` alongside the plan, containing the failure-oriented review report and binary verdict.

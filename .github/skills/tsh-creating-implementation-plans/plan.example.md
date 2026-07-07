@@ -10,11 +10,17 @@
 | Priority         | <priority>              |
 | Related Research | <link-to-research-file> |
 
+## Wildly Important Goal
+
+<one-sentence-statement-of-the-single-most-important-outcome-this-plan-must-achieve>
+
 ## Proposed Solution
 
-<description-of-proposed-solution>
+<description-of-proposed-solution-explaining-the-approach-and-the-why-for-reviewers-and-implementors>
 
 <necessary-diagrams>
+
+> Note: The plan must not contain real implementation code. Pseudo-code is allowed only for genuinely complicated algorithms or ideas. Diagrams and explanations are encouraged.
 
 ## Current Implementation Analysis
 
@@ -82,6 +88,10 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 ### Phase 1: <phase-name>
 
+**Goal**: <how-this-phase-advances-the-wildly-important-goal>
+
+**Description**: <broader-explanation-of-what-should-be-done-and-why>
+
 #### Task 1.1 - [CREATE/MODIFY/REUSE] <task-name>
 
 **Description**: <brief description of what the task entails>
@@ -91,6 +101,8 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion>
 - [ ] <specific verifiable criterion>
 
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
 #### Task 1.2 - [CREATE/MODIFY/REUSE] <task-name>
 
 **Description**: <brief description>
@@ -99,7 +111,13 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 - [ ] <specific verifiable criterion>
 
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
 ### Phase 2: <ui-phase-name>
+
+**Goal**: <how-this-phase-advances-the-wildly-important-goal>
+
+**Description**: <broader-explanation-of-what-should-be-done-and-why>
 
 #### Task 2.1 - [CREATE/MODIFY] <ui-component-name>
 
@@ -112,6 +130,8 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] <specific verifiable criterion>
 - [ ] <specific verifiable criterion>
 
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
 #### Task 2.2 - [REUSE] UI Verification of <ui-component-name> by `tsh-ui-reviewer` agent
 
 **Description**: Run `tsh-ui-reviewer` agent via `tsh-review-ui.prompt.md` to verify <ui-component-name> against Figma design. Pass the Figma URL and dev server URL. If verification fails, delegate fix to `tsh-software-engineer` and re-verify (max 5 iterations per component).
@@ -123,7 +143,13 @@ Project conventions, coding standards, and patterns discovered during planning. 
 - [ ] UI verification passes or escalated to user after 5 iterations
 - [ ] Verification report documented in Changelog
 
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
 ### Phase 3: <phase-name>
+
+**Goal**: <how-this-phase-advances-the-wildly-important-goal>
+
+**Description**: <broader-explanation-of-what-should-be-done-and-why>
 
 #### Task 3.1 - [CREATE/MODIFY/REUSE] <task-name>
 
@@ -132,6 +158,26 @@ Project conventions, coding standards, and patterns discovered during planning. 
 **Definition of Done**:
 
 - [ ] <specific verifiable criterion>
+
+**Clues**: <optional-hints-for-the-implementor-file-paths-reference-patterns-gotchas>
+
+### Phase 4: Code Review
+
+**Goal**: <how-verified-quality-of-the-delivered-changes-secures-the-wildly-important-goal>
+
+**Description**: Final verification of the full implementation. This phase is mandatory and always comes last.
+
+#### Task 4.1 - [REUSE] Code review by `tsh-code-reviewer` agent
+
+**Description**: Run `tsh-code-reviewer` agent via `tsh-review.prompt.md` to review the complete implementation. Pass e2e test execution to that agent as part of the prompt — do not run e2e tests outside this review.
+
+**Definition of Done**:
+
+- [ ] Code review passes with no blocking findings
+- [ ] E2e tests executed by the reviewer pass
+- [ ] Review outcome documented in Changelog
+
+**Clues**: <optional-pointers-to-review-scope-or-risk-areas>
 
 ## Security Considerations
 

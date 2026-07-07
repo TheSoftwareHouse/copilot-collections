@@ -30,7 +30,7 @@ Use the checklist below and keep it synchronized with the todo list:
 Implementation orchestration progress:
 - [ ] Step 0: Create flow-start todos
 - [ ] Step 1: Select Quick Flow or Full Flow
-- [ ] Step 2: Write the upfront execution plan
+- [ ] Step 2: Plan the task order
 - [ ] Step 3: Run the selected flow
 - [ ] Step 4: Close validation and review gates
 ```
@@ -74,14 +74,16 @@ Use the following decision rules before any delegation.
 
 Use `vscode/askQuestions` to recommend Quick Flow or Full Flow, give a short reason, and allow the user to override the recommendation.
 
-### Step 2 - Write the upfront execution plan
+### Step 2 - Plan the task order
 
-Write the full ordered agent + prompt call sequence before the first delegation.
+Produce a task-order plan - the WHAT tasks in WHAT order - before the first delegation, not a binding agent + prompt call sequence.
 
 - Do this immediately after flow selection.
 - In Full Flow, do it again after plan approval and before execution starts.
-- The sequence must cover every planned delegation, review, validation checkpoint, and UI verification item.
-- Keep the execution plan synchronized with the todo list whenever order or scope changes.
+- List every planned task in order, covering each delegation, review, validation checkpoint, and UI verification item.
+- Do not bind an agent or prompt to each task here; the agent + prompt per task is implied at execution time by the Execution routing table.
+- Share the intended flow on chat with an explicit note that it may change as execution proceeds.
+- Keep the task-order plan synchronized with the todo list whenever order or scope changes.
 
 ## Task-to-Owner Routing
 
@@ -126,25 +128,19 @@ Check the current state before creating or executing any plan.
 | `*.research.md` | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links | Route to `tsh-context-engineer` with `tsh-research.prompt.md` |
 | `*.plan.md` | It exists for the current task and contains ordered, actionable tasks that can be delegated | Route to `tsh-architect` with `tsh-plan.prompt.md` |
 | Technical Context | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md` |
-| Plan approval state | The current plan is already approved and unchanged since approval | Skip re-review |
+| Plan approval state | The current plan is already reviewed, approved, and unchanged since approval | Route to `tsh-architect` with `tsh-plan.prompt.md` to return a finished reviewed plan |
 
 ### Planning sequence
 
 1. **Check for existing research and plan files** - Inspect current `*.research.md` and `*.plan.md` state first.
 2. **Fill missing context when needed** - If research is missing or incomplete, delegate to `tsh-context-engineer` with `tsh-research.prompt.md`.
-3. **Create or refresh the plan when needed** - If the plan is missing, stale, or not actionable, delegate to `tsh-architect` with `tsh-plan.prompt.md`.
-4. **Review the plan before execution** - Delegate to `tsh-plan-reviewer` with `tsh-review-plan.prompt.md`.
-5. **Run the review loop with hard limits:**
-   - `*.plan-review.md` remains the source of truth.
-   - If the plan is approved and unchanged, skip re-review.
-   - If the verdict is revisions needed, send the review back to `tsh-architect` and re-run review.
-   - Stop after a maximum of 3 plan-review iterations and escalate to the user if blockers remain.
-6. **Create execution todos from the plan** - Create todos per plan task, not just per phase.
-7. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files.
-8. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the dev server URL before execution starts.
-9. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
-10. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
-11. **Rewrite the upfront execution plan after approval** - Expand the ordered agent + prompt call sequence from the approved plan before the first implementation task starts.
+3. **Create or refresh the reviewed plan when needed** - If the plan is missing, stale, not actionable, or not already reviewed and approved, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The architect owns producing a finished reviewed plan, including any nested `tsh-plan-reviewer` loop and its maximum of 3 review iterations. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules.
+4. **Create execution todos from the plan** - Create todos per plan task, not just per phase.
+5. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files.
+6. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the dev server URL before execution starts.
+7. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
+8. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
+9. **Rewrite the task-order plan after approval** - Refresh the ordered task list from the approved plan before the first implementation task starts; the agent + prompt for each task is resolved at execution time by the Execution routing table.
 
 ### Execution routing
 
@@ -177,7 +173,7 @@ Keep the workflow traceable to the plan's preserved branches:
 | --- | --- |
 | Step 0 flow selection | 1-4 |
 | Quick Flow delegation and review | 5-8 |
-| Full Flow planning, plan review, and context handling | 9-14 |
+| Full Flow planning, reviewed-plan handoff, and context handling | 9-14 |
 | Execution routing and quality gates | 15-26 |
 | UI verification enforcement loop | 40-44 |
 
@@ -188,3 +184,4 @@ Keep the workflow traceable to the plan's preserved branches:
 - `tsh-ui-verifying` - provides the verification standard behind the per-item UI review gate.
 - `tsh-task-analysing` - helps determine whether research context is complete before planning starts.
 - `tsh-task-quality-reviewing` - complements planning quality by reinforcing explicit gaps, edge cases, and task completeness.
+- `tsh-creating-implementation-plans` - owns the plan template and plan-structure rules used in the planning sequence.

@@ -8,7 +8,7 @@ title: Architecture Design
 **Folder:** `.github/skills/tsh-architecture-designing/`  
 **Used by:** Architect
 
-Provides a structured 5-step process for designing solution architecture and creating detailed implementation plans.
+Provides a structured 5-step process for designing solution architecture.
 
 ## Process
 
@@ -30,28 +30,25 @@ Create the architecture following established patterns and principles.
 
 ### Step 5: Document the Plan
 
-Produce a structured implementation plan (`plan.example.md` template) with phased, checklist-style tasks.
+Hand off to [Creating Implementation Plans](./creating-implementation-plans.md) so the plan can be authored with the owned `plan.example.md` template and plan-structure rules.
 
 ## Enforced Patterns
 
 | Category | Patterns |
-|---|---|
+| --- | --- |
 | **Software Design** | DRY, KISS, DDD, TDD, CQRS, SOLID |
 | **Architecture** | Hexagonal, Layered, Modular |
 | **UI/UX** | Atomic Design, WCAG |
 | **Security** | OWASP TOP10 |
 
-## Plan Requirements
+## Implementation Plan Handoff
 
-- Each phase is independently runnable with quality gates.
-- Tasks have `[CREATE]`, `[MODIFY]`, or `[REUSE]` action types.
-- Every task has a clear definition of done.
-- A code review phase is mandatory at the end.
-- No deployment plans or manual QA steps.
+Implementation plan authoring rules, template ownership, and task definition-of-done constraints live in [Creating Implementation Plans](./creating-implementation-plans.md).
 
 ## Connected Skills
 
 - `tsh-codebase-analysing` — Understand existing architecture.
 - `tsh-implementation-gap-analysing` — Focus on necessary changes only.
 - `tsh-technical-context-discovering` — Establish project conventions.
+- `tsh-creating-implementation-plans` — Author the phased implementation plan.
 - `tsh-sql-and-database-understanding` — Database schema and data model design.
