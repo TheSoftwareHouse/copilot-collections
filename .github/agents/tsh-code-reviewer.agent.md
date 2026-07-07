@@ -1,5 +1,5 @@
 ---
-model: "Claude Sonnet 4.6"
+model: "Claude Sonnet 5"
 description: "Agent specializing in performing code review."
 tools:
   [

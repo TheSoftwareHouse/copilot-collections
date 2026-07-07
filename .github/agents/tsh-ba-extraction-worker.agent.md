@@ -2,7 +2,7 @@
 description: "Internal worker that drafts intent briefs and extracts epics and stories for the BA orchestrator."
 tools: ['read', 'search', 'sequential-thinking/*']
 user-invocable: false
-model: "Claude Sonnet 4.6"
+model: "Claude Sonnet 5"
 ---
 
 <agent-role>
