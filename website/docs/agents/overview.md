@@ -30,13 +30,13 @@ Each agent has:
 │   /tsh-implement         │
 └──────┬──────────────────┘
        │ Delegates to specialized agents
-       ├──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┬──────────────────┐
-       ▼                  ▼                  ▼                  ▼                  ▼                  ▼                  ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │ Architect    │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer  │
-│  Engineer    │  │  (plan)      │  │ Reviewer     │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review- │
-│  (research)  │  │              │  │ (plan review)│  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui           │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+       ├─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┐
+       ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│  Context     │  │  Architect   │  │  Architect   │  │  Software    │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer │  │  Technical   │
+│  Engineer    │  │  (plan)      │  │  Reviewer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review-│  │  Writer      │
+│  (research)  │  │              │  │ (plan review)│  │  (app code)  │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui          │  │  (docs)      │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
        │
        ▼
 ┌──────────────┐
@@ -86,7 +86,7 @@ Each agent has:
 
 ### 🔧 Internal Worker Agents
 
-These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, while the Copilot Orchestrator delegates to the customization workers below.
+These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, the Copilot Orchestrator delegates to the customization workers below, and the Engineering Manager delegates documentation-only work to the Technical Writer.
 
 | Agent | File | Role |
 |---|---|---|
@@ -94,3 +94,4 @@ These agents are not invoked directly by users. The Business Analyst internally 
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
 | [Architect Reviewer](./plan-reviewer) | `tsh-plan-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |
+| [Technical Writer](./technical-writer) | `tsh-technical-writer.agent.md` | Authors and updates README, CHANGELOG, `/docs`, and published documentation-site pages |
