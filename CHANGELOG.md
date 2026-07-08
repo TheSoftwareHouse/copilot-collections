@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-07-07
+
+### Changed
+
+- Model updates across Copilot customization agents and prompts:
+  - `tsh-copilot-orchestrator`, `tsh-copilot-engineer`, `tsh-copilot-researcher` agents — switched to `Claude Sonnet 5` (the orchestrator keeps `GPT-5.4` as a secondary model option in its array).
+  - `tsh-ui-engineer` agent — switched from `Claude Sonnet 4.6` to `Claude Sonnet 5`.
+  - `tsh-engineering-manager` agent and the `/tsh-implement` prompt — switched from `GPT-5.4 mini` to `Claude Sonnet 5`.
+  - `tsh-code-reviewer` agent and the `/tsh-review` prompt — switched to `Claude Sonnet 5`.
+  - `tsh-copilot-artifact-reviewer` agent — switched from `Gemini 3.1 Pro` to `GPT-5.5`.
+  - `tsh-software-engineer` agent — added `Kimi K2.7 Code` to its model array (alongside `GPT-5.3-Codex` and `Gemini 3.5 Flash`).
+  - `tsh-plan-implementor` agent — added `MAI-Code-1-Flash` to its model array (alongside `qwen3-coder-30b-a3b-instruct (customendpoint)` and `GPT-5.4 mini`).
+- Website docs — Updated the Engineering Manager and `/tsh-implement` prompt pages to reflect the `Claude Sonnet 5` model, and the Software Engineer page to list `Kimi K2.7 Code` as an available model option.
+
 ## 2026-06-22
 
 ### Added
