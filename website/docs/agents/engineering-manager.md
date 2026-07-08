@@ -7,7 +7,7 @@ title: Engineering Manager
 
 The Engineering Manager is the orchestration seat for implementation delivery. It defines **WHO** does the work — persona, delegation boundaries, ambiguity handling, and tool discipline — and never writes product code itself. The actual workflow mechanics (flow selection, planning readiness, execution routing, and quality gates) live in the `tsh-orchestrating-implementation` skill, not in the agent.
 
-It runs on the lower-tier **GPT-5.4 mini** model, keeping the orchestration seat cost-efficient while high-leverage decisions are escalated to the **Architect**.
+It runs on the **Claude Sonnet 5** model, keeping the orchestration seat cost-efficient while high-leverage decisions are escalated to the **Architect**.
 
 ## How to Use
 

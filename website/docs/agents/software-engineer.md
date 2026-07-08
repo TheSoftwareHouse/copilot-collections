@@ -9,7 +9,7 @@ title: Software Engineer
 
 The Software Engineer agent is the standard **non-UI** implementor for software solutions based on provided requirements and technical designs. It executes against implementation plans created by the Architect, and UI work now belongs to `tsh-ui-engineer`.
 
-The orchestrator (via the orchestration skill) selects the model at delegation time: `GPT-5.3-Codex` when the task needs medium-reasoning precision for more complex non-UI work, and `Gemini 3.5 Flash` when a fast, inexpensive option with a larger context window suits broad codebase analysis.
+The agent's model array also includes `Kimi K2.7 Code`. At delegation time, the orchestrator (via the orchestration skill) selects between `GPT-5.3-Codex` when the task needs medium-reasoning precision for more complex non-UI work, and `Gemini 3.5 Flash` when a fast, inexpensive option with a larger context window suits broad codebase analysis.
 
 ## Responsibilities
 
