@@ -12,19 +12,18 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## 2026-07-07
+## 2026-07-10
 
 ### Changed
 
-- Model updates across Copilot customization agents and prompts:
-  - `tsh-copilot-orchestrator`, `tsh-copilot-engineer`, `tsh-copilot-researcher` agents — switched to `Claude Sonnet 5` (the orchestrator keeps `GPT-5.4` as a secondary model option in its array).
-  - `tsh-ui-engineer` agent — switched from `Claude Sonnet 4.6` to `Claude Sonnet 5`.
-  - `tsh-engineering-manager` agent and the `/tsh-implement` prompt — switched from `GPT-5.4 mini` to `Claude Sonnet 5`.
-  - `tsh-code-reviewer` agent and the `/tsh-review` prompt — switched to `Claude Sonnet 5`.
-  - `tsh-copilot-artifact-reviewer` agent — switched from `Gemini 3.1 Pro` to `GPT-5.5`.
-  - `tsh-software-engineer` agent — added `Kimi K2.7 Code` to its model array (alongside `GPT-5.3-Codex` and `Gemini 3.5 Flash`).
-  - `tsh-plan-implementor` agent — added `MAI-Code-1-Flash` to its model array (alongside `qwen3-coder-30b-a3b-instruct (customendpoint)` and `GPT-5.4 mini`).
-- Website docs — Updated the Engineering Manager and `/tsh-implement` prompt pages to reflect the `Claude Sonnet 5` model, and the Software Engineer page to list `Kimi K2.7 Code` as an available model option.
+- Model arrays updated across Copilot customization agents and public prompts:
+  - `tsh-architect`, `tsh-business-analyst`, `tsh-context-engineer`, `tsh-prompt-engineer`, and `tsh-ba-quality-worker` now use `GPT-5.6 Terra` with `GPT-5.4`.
+  - `tsh-ba-formatting-worker`, `tsh-ba-transcript-worker`, `tsh-copilot-artifact-creator`, and `tsh-technical-writer` now use `GPT-5.6 Luna` with `GPT-5.4 mini`.
+  - `tsh-copilot-artifact-reviewer` and `tsh-plan-reviewer` now use `GPT-5.6 Sol` with `GPT-5.5`.
+  - `tsh-copilot-orchestrator` now uses `GPT-5.6 Terra` with `Claude Sonnet 5`; `tsh-engineering-manager` and `/tsh-implement` now use `GPT-5.6 Luna` with `Claude Sonnet 5`.
+  - Public `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs`, `/tsh-analyze-materials`, `/tsh-explore-materials`, `/tsh-audit-infrastructure`, and `/tsh-review-codebase` prompts now use `GPT-5.6 Terra` with `GPT-5.4`.
+  - `tsh-software-engineer` retains `Kimi K2.7 Code`, `GPT-5.3-Codex`, and `Gemini 3.5 Flash`; `tsh-plan-implementor` retains `qwen3-coder-30b-a3b-instruct (customendpoint)`, `MAI-Code-1-Flash`, and `GPT-5.4 mini`.
+- Website docs — Synced the Engineering Manager agent page, Software Engineer agent page, and `/tsh-implement` prompt page to reflect the current model arrays rather than a Claude-only model.
 
 ## 2026-06-22
 
