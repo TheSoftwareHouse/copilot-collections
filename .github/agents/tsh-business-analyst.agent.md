@@ -7,7 +7,7 @@ handoffs:
     agent: tsh-engineering-manager
     prompt: /tsh-implement Start implementation for the current task
     send: false
-model: "GPT-5.4"
+model: ["GPT-5.6 Terra", "GPT-5.4"]
 ---
 
 ## Agent Role and Responsibilities

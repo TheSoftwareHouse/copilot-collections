@@ -2,6 +2,7 @@
 model:
   [
     "qwen3-coder-30b-a3b-instruct (customendpoint)",
+    "MAI-Code-1-Flash",
     "GPT-5.4 mini"
   ]
 description: "Internal implementor that executes one plan task at a time exactly as written."

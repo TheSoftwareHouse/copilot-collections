@@ -1,6 +1,6 @@
 ---
 agent: "tsh-engineering-manager"
-model: "Claude Sonnet 5"
+model: ["GPT-5.6 Luna", "Claude Sonnet 5"]
 description: "Implement feature according to the plan."
 ---
 

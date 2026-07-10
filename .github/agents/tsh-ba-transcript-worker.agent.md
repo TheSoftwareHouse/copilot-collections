@@ -2,7 +2,7 @@
 description: "Internal worker that cleans and structures raw workshop transcripts for the BA orchestrator."
 tools: ['read', 'search', 'pdf-reader/*']
 user-invocable: false
-model: "GPT-5.4 mini"
+model: ["GPT-5.6 Luna", "GPT-5.4 mini"]
 ---
 
 <agent-role>

@@ -7,14 +7,14 @@ title: Engineering Manager
 
 The Engineering Manager is the orchestration seat for implementation delivery. It defines **WHO** does the work — persona, delegation boundaries, ambiguity handling, and tool discipline — and never writes product code itself. The actual workflow mechanics (flow selection, planning readiness, execution routing, and quality gates) live in the `tsh-orchestrating-implementation` skill, not in the agent.
 
-It runs on the lower-tier **GPT-5.4 mini** model, keeping the orchestration seat cost-efficient while high-leverage decisions are escalated to the **Architect**.
+The agent declares a shared model array of **GPT-5.6 Luna** and **Claude Sonnet 5**. High-leverage decisions are escalated to the **Architect**.
 
 ## How to Use
 
 The Engineering Manager works from two entry points:
 
 - **Directly** — invoke the agent in chat with a task description, Jira ID, or implementation plan.
-- **Via [`/tsh-implement`](../prompts/public/implement)** — the public prompt routes to the agent on the same model.
+- **Via [`/tsh-implement`](../prompts/public/implement)** — the public prompt routes to the agent using the same shared model array.
 
 For any request whose intent is to deliver implementation changes, the agent loads the `tsh-orchestrating-implementation` skill and starts at **Step 0** (creating flow-start todos). Information-only, advisory-only, and standalone review- or research-only requests do not trigger the workflow.
 

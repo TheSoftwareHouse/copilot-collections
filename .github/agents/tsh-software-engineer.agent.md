@@ -1,6 +1,7 @@
 ---
 model:
   [
+    "Kimi K2.7 Code",
     "GPT-5.3-Codex",
     "Gemini 3.5 Flash"
   ]

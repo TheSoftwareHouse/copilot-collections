@@ -2,7 +2,7 @@
 description: "Internal worker that prepares Jira-ready BA formatting and read-back verification support."
 tools: ['read', 'search']
 user-invocable: false
-model: "GPT-5.4 mini"
+model: ["GPT-5.6 Luna", "GPT-5.4 mini"]
 ---
 
 <agent-role>
