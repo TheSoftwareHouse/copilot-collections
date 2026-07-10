@@ -32,3 +32,11 @@ Features used by Copilot Collections (such as agent skills, prompt file location
 3. Verify the version is **1.109** or higher.
 
 If you need to update, download the latest version from [code.visualstudio.com](https://code.visualstudio.com).
+
+## Additional Requirement for Figma-backed UI Verification
+
+If you plan to use `/tsh-implement` or `/tsh-review-ui` on UI work backed by Figma, make sure the machine running VS Code can execute `playwright-cli`. The UI capture step uses Playwright CLI to collect the ACTUAL artifacts that the reviewer compares against Figma.
+
+- Preferred: `npx playwright-cli`
+- Fallback: `npm install -g @playwright/cli@latest`
+- You also need the target app running locally and must be able to provide the exact full dev server URL when the workflow asks for it.

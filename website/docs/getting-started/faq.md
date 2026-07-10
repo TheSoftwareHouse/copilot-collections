@@ -12,11 +12,12 @@ It is not a rigid protocol. Think of it as a set of defaults from the people who
 If you are new to the framework, start with the [Workflow Overview](../workflow/overview), then come back here for the operating advice teams usually ask about after the first few sessions.
 
 :::tip The Short Version
+
 - Default to `/tsh-analyze-materials` when you need to shape or expand a task.
 - Default to `/tsh-implement` when you need to build, fix, or change something.
 - Use one session for one meaningful slice of work, not one tiny story at a time.
 - Review `research.md` and `plan.md` carefully, but keep durable human documentation separate.
-:::
+  :::
 
 ## Which prompts should I use most of the time?
 
@@ -32,6 +33,8 @@ In practice, TSH teams try to keep the workflow simple. The common default is:
 1. Shape the task with `/tsh-analyze-materials` if needed.
 2. Deliver it with `/tsh-implement`.
 3. Run `/tsh-review` or `/tsh-review-ui` when the task needs an explicit quality check.
+
+For Figma-backed UI tasks, `/tsh-implement` usually triggers the verification loop automatically. What you need to provide is a running app, the exact full dev server URL, and access to the Figma design.
 
 You do not need to keep switching agents manually for every step. The framework is designed so the main prompts route work to the right agents for you.
 
