@@ -16,6 +16,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   - Public `/tsh-analyze-aws-costs`, `/tsh-analyze-gcp-costs`, `/tsh-analyze-materials`, `/tsh-explore-materials`, `/tsh-audit-infrastructure`, and `/tsh-review-codebase` prompts now use `GPT-5.6 Terra` with `GPT-5.4`.
   - `tsh-software-engineer` retains `Kimi K2.7 Code`, `GPT-5.3-Codex`, and `Gemini 3.5 Flash`; `tsh-plan-implementor` retains `qwen3-coder-30b-a3b-instruct (customendpoint)`, `MAI-Code-1-Flash`, and `GPT-5.4 mini`.
 - Website docs — Synced the Engineering Manager agent page, Software Engineer agent page, and `/tsh-implement` prompt page to reflect the current model arrays rather than a Claude-only model.
+- README guidance — Added recommendations for manually configuring thinking effort for each model in the VS Code Copilot Chat UI; the configuration becomes active for the current VS Code profile:
+  - `GPT-5.6 Sol` — medium (default)
+  - `GPT-5.6 Terra` — medium/high
+  - `GPT-5.6 Luna` — high/xhigh
+  - `Sonnet 5` — high (default)
+  - `MAI-Code-1-Flash` — high
 
 ## 2026-06-22
 

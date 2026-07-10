@@ -31,6 +31,18 @@ Everything else is supporting structure. Use the website for the full catalog, d
 - VS Code 1.109 or later
 - This repository available on disk so VS Code can read `.github/prompts`, `.github/agents`, `.github/skills`, and `.vscode/mcp.json`
 
+## Recommended Thinking Effort Settings
+
+In the VS Code Copilot Chat UI, manually select each model below, choose its recommended thinking effort, and repeat for every model. Once configured, the setting is active for that model in your current VS Code profile.
+
+| Model | Recommended thinking effort |
+| --- | --- |
+| GPT-5.6 Sol | medium (default) |
+| GPT-5.6 Terra | medium/high |
+| GPT-5.6 Luna | high/xhigh |
+| Sonnet 5 | high (default) |
+| MAI-Code-1-Flash | high |
+
 ## Recommended Installation: Ask Copilot To Configure Itself
 
 The preferred setup is to let GitHub Copilot update the required user-level configuration for you.
