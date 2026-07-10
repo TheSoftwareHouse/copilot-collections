@@ -13,19 +13,19 @@ The Model Context Protocol allows VS Code Copilot agents to call external tools 
 
 ## Configured Servers
 
-| Server | Type | Purpose | Used By |
-|---|---|---|---|
-| [Atlassian](./atlassian) | HTTP | Jira & Confluence integration | BA, Architect, CR, CE, E2E, SE |
-| [Figma](./figma) | HTTP | Design extraction and verification | BA, Architect, SE, UI Reviewer, CR, E2E |
-| [Context7](./context7) | stdio | Library documentation search | Architect, SE, CR, UI Reviewer, E2E, Copilot Eng., DevOps |
-| [Playwright](./playwright) | stdio | Browser automation and UI testing | SE, UI Reviewer, E2E |
-| [Sequential Thinking](./sequential-thinking) | stdio | Structured reasoning for complex problems | BA, Architect, SE, CR, E2E, UI Reviewer, Copilot Eng., Orchestrator, DevOps |
-| [PDF Reader](./pdf-reader) | stdio | PDF document extraction | BA, CE, Architect |
-| [AWS API](./aws-api) | stdio | AWS infrastructure automation and resource management | DevOps |
-| [AWS Documentation](./aws-documentation) | stdio | AWS service documentation and reference | DevOps |
-| [GCP Gcloud](./gcp-gcloud) | stdio | Google Cloud operations and management | DevOps |
-| [GCP Observability](./gcp-observability) | stdio | Google Cloud monitoring and observability | DevOps |
-| [GCP Storage](./gcp-storage) | stdio | Google Cloud Storage integration | DevOps |
+| Server                                       | Type  | Purpose                                               | Used By                                                                     |
+| -------------------------------------------- | ----- | ----------------------------------------------------- | --------------------------------------------------------------------------- |
+| [Atlassian](./atlassian)                     | HTTP  | Jira & Confluence integration                         | BA, Architect, CR, CE, E2E, SE                                              |
+| [Figma](./figma)                             | HTTP  | Design extraction and verification                    | BA, Architect, SE, UI Reviewer, CR, E2E                                     |
+| [Context7](./context7)                       | stdio | Library documentation search                          | Architect, SE, CR, UI Reviewer, E2E, Copilot Eng., DevOps                   |
+| [Playwright](./playwright)                   | stdio | Interactive browser automation and UI debugging       | SE, E2E                                                                     |
+| [Sequential Thinking](./sequential-thinking) | stdio | Structured reasoning for complex problems             | BA, Architect, SE, CR, E2E, UI Reviewer, Copilot Eng., Orchestrator, DevOps |
+| [PDF Reader](./pdf-reader)                   | stdio | PDF document extraction                               | BA, CE, Architect                                                           |
+| [AWS API](./aws-api)                         | stdio | AWS infrastructure automation and resource management | DevOps                                                                      |
+| [AWS Documentation](./aws-documentation)     | stdio | AWS service documentation and reference               | DevOps                                                                      |
+| [GCP Gcloud](./gcp-gcloud)                   | stdio | Google Cloud operations and management                | DevOps                                                                      |
+| [GCP Observability](./gcp-observability)     | stdio | Google Cloud monitoring and observability             | DevOps                                                                      |
+| [GCP Storage](./gcp-storage)                 | stdio | Google Cloud Storage integration                      | DevOps                                                                      |
 
 ## Configuration
 
@@ -89,6 +89,8 @@ All servers are configured in `.vscode/mcp.json`:
   }
 }
 ```
+
+For Figma-backed UI verification, this MCP template is necessary but not sufficient on its own. EXPECTED comes from Figma MCP, while ACTUAL is collected by `tsh-ui-capture-worker` through Playwright CLI artifacts against a running app and an exact user-confirmed full dev server URL.
 
 ## Server Types
 

@@ -7,6 +7,8 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 
 For a full end-to-end breakdown of the post-implementation verify-fix loop, see **[UI Verification Flow](./ui-verification-flow)**.
 
+Before you start, make sure the target app is already running, be ready to confirm the exact full dev server URL, and ensure `playwright-cli` is available to the UI capture worker (`npx playwright-cli` or a global install).
+
 ## Command Sequence
 
 ```text
@@ -46,6 +48,7 @@ For a full end-to-end breakdown of the post-implementation verify-fix loop, see 
 - Single-pass, **read-only** verification — does not modify code.
 - Uses **Figma MCP** to extract design specifications (spacing, typography, colors, dimensions).
 - Uses **`tsh-ui-capture-worker` + Playwright CLI artifacts** to capture the current implementation state.
+- Does **not** rely on direct Playwright MCP capture for the ACTUAL side of the comparison.
 - Returns a structured report: **PASS/FAIL/VERIFICATION NOT RUN** + difference table or blocker guidance.
 - Covers: structure (containers, nesting), dimensions (width, height, spacing), visual (typography, colors, radii), and components (variants, tokens, states).
 
