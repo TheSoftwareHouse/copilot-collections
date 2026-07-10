@@ -2,7 +2,7 @@
 description: "Creation specialist that builds and modifies Copilot customization artifacts (.agent.md, SKILL.md, .prompt.md, .instructions.md) based on detailed specifications from the orchestrator. Applies creation skills (tsh-creating-agents, tsh-creating-skills, tsh-creating-prompts) autonomously — executes creation tasks only, does not research or review."
 tools: ['read', 'search', 'edit', 'todo']
 user-invocable: false
-model: GPT-5.4 mini
+model: ["GPT-5.6 Luna", "GPT-5.4 mini"]
 ---
 
 ## Agent Role and Responsibilities

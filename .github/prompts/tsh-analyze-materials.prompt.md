@@ -1,6 +1,6 @@
 ---
 agent: "tsh-business-analyst"
-model: "GPT-5.4"
+model: ["GPT-5.6 Terra", "GPT-5.4"]
 description: "Process discovery workshop materials and create Jira-ready epics and user stories, or iterate on an existing Jira backlog."
 ---
 

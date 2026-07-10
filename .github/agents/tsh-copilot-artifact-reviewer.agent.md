@@ -2,7 +2,7 @@
 description: "Review specialist that evaluates Copilot customization artifacts (.agent.md, SKILL.md, .prompt.md, .instructions.md) against best practices, workspace consistency, and structural correctness. Returns structured review findings categorized by severity with actionable recommendations — read-only, does not modify files."
 tools: ['read', 'search']
 user-invocable: false
-model: GPT-5.5
+model: ["GPT-5.6 Sol", "GPT-5.5"]
 ---
 
 ## Agent Role and Responsibilities

@@ -2,7 +2,7 @@
 description: "Internal worker that runs Lite or Full BA quality review passes and returns structured findings."
 tools: ['read', 'search']
 user-invocable: false
-model: "GPT-5.4"
+model: ["GPT-5.6 Terra", "GPT-5.4"]
 ---
 
 <agent-role>

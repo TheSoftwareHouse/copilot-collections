@@ -1,5 +1,5 @@
 ---
-model: "GPT-5.4"
+model: ["GPT-5.6 Terra", "GPT-5.4"]
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools:
   [

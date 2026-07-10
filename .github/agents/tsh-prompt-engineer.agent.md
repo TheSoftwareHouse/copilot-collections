@@ -1,7 +1,7 @@
 ---
 description: "Agent specializing in designing, writing, optimizing, and securing LLM application prompts."
 tools: ['read', 'edit', 'search', 'context7/*', 'sequential-thinking/*', 'todo', 'vscode/askQuestions']
-model: GPT-5.4
+model: ["GPT-5.6 Terra", "GPT-5.4"]
 ---
 
 ## Agent Role and Responsibilities

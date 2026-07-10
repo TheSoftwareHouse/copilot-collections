@@ -1,5 +1,5 @@
 ---
-model: "GPT-5.5"
+model: ["GPT-5.6 Sol", "GPT-5.5"]
 description: "Adversarially challenges architect implementation plans (.plan.md) to find likely failure modes, hidden assumptions, and costly rework risks before coding begins. Returns APPROVED or REVISIONS NEEDED."
 tools: ["read", "edit", "search", "sequential-thinking/*", "context7/*"]
 user-invocable: false
