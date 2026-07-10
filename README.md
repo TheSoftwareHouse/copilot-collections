@@ -51,7 +51,7 @@ The preferred setup is to let GitHub Copilot update the required user-level conf
 
 ```bash
 cd ~/projects
-git clone <this-repo-url> copilot-configuration
+git clone https://github.com/TheSoftwareHouse/copilot-collections.git
 ```
 
 If you clone it somewhere else, replace the path in the prompt below.
@@ -61,16 +61,16 @@ If you clone it somewhere else, replace the path in the prompt below.
 Open any VS Code workspace, open Copilot Chat, and paste this prompt:
 
 ```text
-Configure GitHub Copilot on this machine to use the Copilot Collections repository at /Users/adampolak/projects/copilot-configuration.
+Configure GitHub Copilot on this machine to use the Copilot Collections repository at ~/projects/copilot-collections/.
 
 Update my VS Code User Settings so Copilot loads:
-- prompts from /Users/adampolak/projects/copilot-configuration/.github/prompts
-- agents from /Users/adampolak/projects/copilot-configuration/.github/agents
-- skills from /Users/adampolak/projects/copilot-configuration/.github/skills
+- prompts from ~/projects/copilot-collections/.github/prompts
+- agents from ~/projects/copilot-collections/.github/agents
+- skills from ~/projects/copilot-collections/.github/skills
 
 Enable the required Copilot settings for custom agents and skills.
 
-Then open my user MCP configuration and copy in the MCP server template from /Users/adampolak/projects/copilot-configuration/.vscode/mcp.json.
+Then open my user MCP configuration and copy in the MCP server template from ~/projects/copilot-collections/.vscode/mcp.json.
 
 Do not change project source files. Only modify user-level Copilot and MCP configuration.
 ```
@@ -82,24 +82,26 @@ These are the minimum VS Code user settings this repository expects:
 ```jsonc
 {
   "chat.promptFilesLocations": {
-    "/Users/adampolak/projects/copilot-configuration/.github/prompts": true,
+    "~/projects/copilot-collections/.github/prompts": true,
   },
   "chat.agentFilesLocations": {
-    "/Users/adampolak/projects/copilot-configuration/.github/agents": true,
+    "~/projects/copilot-collections/.github/agents": true,
   },
   "chat.agentSkillsLocations": {
-    "/Users/adampolak/projects/copilot-configuration/.github/skills": true,
+    "~/projects/copilot-collections/.github/skills": true,
   },
   "chat.useAgentSkills": true,
   "github.copilot.chat.searchSubagent.enabled": true,
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.customAgentInSubagent.enabled": true,
   "chat.subagents.allowInvocationsFromSubagents": true,
-  "github.copilot.chat.agentCustomizationSkill.enabled": true,
+  "github.copilot.chat.agentCustomizationSkill.enabled": true
 }
 ```
 
-For MCP, copy the template from [`.vscode/mcp.json`](/Users/adampolak/projects/copilot-configuration/.vscode/mcp.json) into your user MCP configuration using `MCP: Open User Configuration`.
+Adjust the path `(~/projects/copilot-collections/...)` if your folder layout differs. Once set, these locations are available in all VS Code workspaces.
+
+For MCP, copy the template from [`.vscode/mcp.json`](.vscode/mcp.json) into your user MCP configuration using `MCP: Open User Configuration`.
 
 ## Manual Fallback
 
@@ -107,7 +109,7 @@ If Copilot cannot complete the setup automatically:
 
 1. Open `Preferences: Open User Settings (JSON)` and add the settings shown above.
 2. Run `MCP: Open User Configuration`.
-3. Copy the contents of [`.vscode/mcp.json`](/Users/adampolak/projects/copilot-configuration/.vscode/mcp.json) into your user MCP config.
+3. Copy the contents of [`.vscode/mcp.json`](.vscode/mcp.json) into your user MCP config.
 
 ## First Commands To Try
 
@@ -130,7 +132,7 @@ If you want to extend the system itself, use:
 ## Learn More
 
 - Full documentation: [copilot-collections.tsh.io](https://copilot-collections.tsh.io/)
-- MCP template used by this repo: [`.vscode/mcp.json`](/Users/adampolak/projects/copilot-configuration/.vscode/mcp.json)
+- MCP template used by this repo: [`.vscode/mcp.json`](.vscode/mcp.json)
 
 ## License
 
