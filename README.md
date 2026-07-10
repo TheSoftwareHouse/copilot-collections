@@ -83,7 +83,7 @@ These are the minimum VS Code user settings this repository expects:
   "chat.experimental.useSkillAdherencePrompt": true,
   "chat.customAgentInSubagent.enabled": true,
   "chat.subagents.allowInvocationsFromSubagents": true,
-  "github.copilot.chat.agentCustomizationSkill.enabled": true,
+  "github.copilot.chat.agentCustomizationSkill.enabled": true
 }
 ```
 
