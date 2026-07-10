@@ -26,16 +26,16 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-analyze-materials <paste transcript or attach materials>
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Explore Mode (optional)** | The Business Analyst can first produce `workshop-context-summary.md` when the materials are still ambiguous and you want to validate likely scope before extraction. |
-| **2. Transcript processing & analysis** | The raw transcript is cleaned, supporting materials are analyzed, and the existing codebase or backlog baseline is checked when relevant. |
-| **3. Intent brief + Gate 0** | The agent drafts `intent-brief.md`. You review scope, exclusions, and candidate epics before extraction begins. |
-| **4. Task extraction + Gate 1** | Epics and user stories are identified with business-oriented descriptions, acceptance criteria, dependencies, and source traceability. You review the breakdown before it proceeds. |
-| **5. Quality review** | The `tsh-task-quality-reviewing` skill automatically runs Lite or Full review. Full mode covers 10 analysis passes — entity lifecycle completeness, error states, notification gaps, third-party boundaries, platform operations, and more. |
-| **6. Gate 1.5 — Accept/reject suggestions** | Each quality improvement is presented individually. You accept what makes sense and reject what doesn't apply. |
-| **7. Jira formatting + Gate 2** | Tasks are formatted per the Jira benchmark template, then reviewed one final time before Jira sync. |
-| **8. Jira sync verification** | After push, the agent reads the issues back, verifies the key fields, and refreshes the continuity baseline for future workshops. |
+| Step                                        | What Happens                                                                                                                                                                                                                                |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Explore Mode (optional)**              | The Business Analyst can first produce `workshop-context-summary.md` when the materials are still ambiguous and you want to validate likely scope before extraction.                                                                        |
+| **2. Transcript processing & analysis**     | The raw transcript is cleaned, supporting materials are analyzed, and the existing codebase or backlog baseline is checked when relevant.                                                                                                   |
+| **3. Intent brief + Gate 0**                | The agent drafts `intent-brief.md`. You review scope, exclusions, and candidate epics before extraction begins.                                                                                                                             |
+| **4. Task extraction + Gate 1**             | Epics and user stories are identified with business-oriented descriptions, acceptance criteria, dependencies, and source traceability. You review the breakdown before it proceeds.                                                         |
+| **5. Quality review**                       | The `tsh-task-quality-reviewing` skill automatically runs Lite or Full review. Full mode covers 10 analysis passes — entity lifecycle completeness, error states, notification gaps, third-party boundaries, platform operations, and more. |
+| **6. Gate 1.5 — Accept/reject suggestions** | Each quality improvement is presented individually. You accept what makes sense and reject what doesn't apply.                                                                                                                              |
+| **7. Jira formatting + Gate 2**             | Tasks are formatted per the Jira benchmark template, then reviewed one final time before Jira sync.                                                                                                                                         |
+| **8. Jira sync verification**               | After push, the agent reads the issues back, verifies the key fields, and refreshes the continuity baseline for future workshops.                                                                                                           |
 
 **Key prompts & agents:** `/tsh-explore-materials` or `/tsh-analyze-materials` → Business Analyst  
 **Key skills:** `tsh-transcript-processing`, `tsh-task-extracting`, `tsh-task-quality-reviewing`, `tsh-jira-task-formatting`, `tsh-codebase-analysing`
@@ -56,12 +56,12 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-101
 ```
 
-| Step | What Happens |
-|---|---|
+| Step                            | What Happens                                                                                                                                                       |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **1. Multi-source aggregation** | The Engineering Manager delegates to the Context Engineer, which pulls context from Jira, Confluence, Figma, and the codebase simultaneously via MCP integrations. |
-| **2. Contradiction detection** | The `tsh-task-analysing` skill cross-references requirements across sources and flags inconsistencies, missing details, and ambiguous language. |
-| **3. Open questions list** | The research document includes a structured list of open questions, assumptions that need validation, and risks — ready to send back to the PM. |
-| **4. Scope validation** | The output highlights what’s covered by the ticket and what’s missing, so you can request clarification before writing a single line of code. |
+| **2. Contradiction detection**  | The `tsh-task-analysing` skill cross-references requirements across sources and flags inconsistencies, missing details, and ambiguous language.                    |
+| **3. Open questions list**      | The research document includes a structured list of open questions, assumptions that need validation, and risks — ready to send back to the PM.                    |
+| **4. Scope validation**         | The output highlights what’s covered by the ticket and what’s missing, so you can request clarification before writing a single line of code.                      |
 
 **Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer  
 **Key skills:** `tsh-task-analysing`, `tsh-codebase-analysing`
@@ -84,13 +84,13 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-456
 ```
 
-| Step | What Happens |
-|---|---|
+| Step                               | What Happens                                                                                                                                                    |
+| ---------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1. Automatic context gathering** | The Engineering Manager delegates to the Context Engineer, which pulls requirements from Jira, related Confluence docs, and Figma designs via MCP integrations. |
-| **2. Codebase analysis** | The `tsh-codebase-analysing` skill traces dependencies, identifies business logic patterns, and maps the data flow across layers. |
-| **3. Structured output** | A `.research.md` document is generated with a task summary, identified components, assumptions, open questions, and risks. |
+| **2. Codebase analysis**           | The `tsh-codebase-analysing` skill traces dependencies, identifies business logic patterns, and maps the data flow across layers.                               |
+| **3. Structured output**           | A `.research.md` document is generated with a task summary, identified components, assumptions, open questions, and risks.                                      |
 
-**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer   The research document becomes a reusable artifact that helps the entire team — not just you.
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer The research document becomes a reusable artifact that helps the entire team — not just you.
 
 ---
 
@@ -106,14 +106,14 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-789
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Research phase** | The Engineering Manager delegates to the Context Engineer, which gathers all context — existing architecture, related features, constraints from Jira and Confluence. |
-| **2. Architecture design** | The Engineering Manager delegates to the Architect, which creates a phased implementation plan with CREATE/MODIFY/REUSE labels for every task. |
-| **3. Gap analysis** | The `tsh-architecture-designing` skill evaluates security considerations, scalability, and identifies risks before a single line of code is written. |
-| **4. Database planning** | If the feature involves data changes, the `tsh-sql-and-database-understanding` skill provides schema design patterns, indexing strategies, and migration safety checks. |
+| Step                       | What Happens                                                                                                                                                            |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Research phase**      | The Engineering Manager delegates to the Context Engineer, which gathers all context — existing architecture, related features, constraints from Jira and Confluence.   |
+| **2. Architecture design** | The Engineering Manager delegates to the Architect, which creates a phased implementation plan with CREATE/MODIFY/REUSE labels for every task.                          |
+| **3. Gap analysis**        | The `tsh-architecture-designing` skill evaluates security considerations, scalability, and identifies risks before a single line of code is written.                    |
+| **4. Database planning**   | If the feature involves data changes, the `tsh-sql-and-database-understanding` skill provides schema design patterns, indexing strategies, and migration safety checks. |
 
-**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer + Architect  , reviewed, and agreed upon before implementation starts. Every task is clearly scoped with action labels (CREATE, MODIFY, REUSE), reducing mid-sprint surprises by 50–70%.
+**Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer + Architect , reviewed, and agreed upon before implementation starts. Every task is clearly scoped with action labels (CREATE, MODIFY, REUSE), reducing mid-sprint surprises by 50–70%.
 
 ---
 
@@ -129,15 +129,17 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-321
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Figma extraction** | The agent reads exact design specs from Figma MCP — spacing values, color tokens, typography, component variants. |
-| **2. Implementation** | Code is written following the `tsh-implementing-frontend` skill — semantic HTML, design system tokens, a11y patterns. |
-| **3. Automated verification loop** | `/tsh-review-ui` is called automatically. Playwright captures the running app; Figma MCP provides expected values. A structured PASS/FAIL diff table is generated. |
-| **4. Auto-fix cycle** | If FAIL, the agent fixes mismatches and re-verifies — up to 5 iterations — until the component passes or escalates. |
+| Step                               | What Happens                                                                                                                                                                                                                                     |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. Figma extraction**            | The agent reads exact design specs from Figma MCP — spacing values, color tokens, typography, component variants.                                                                                                                                |
+| **2. Implementation**              | Code is written following the `tsh-implementing-frontend` skill — semantic HTML, design system tokens, a11y patterns.                                                                                                                            |
+| **3. Automated verification loop** | `/tsh-review-ui` is called automatically. `tsh-ui-capture-worker` collects Playwright CLI artifacts from the running app using the confirmed full URL, while Figma MCP provides expected values. A structured PASS/FAIL diff table is generated. |
+| **4. Auto-fix cycle**              | If FAIL, the agent fixes mismatches and re-verifies — up to 5 iterations — until the component passes or escalates.                                                                                                                              |
 
 **Key prompts & agents:** `/tsh-implement` → Engineering Manager → Software Engineer, `/tsh-review-ui` → UI Reviewer  
 **Key skills:** `tsh-implementing-frontend`, `tsh-ui-verifying`, `tsh-technical-context-discovering`
+
+**Setup note:** For this workflow, the app must already be running locally, you must confirm the exact full dev server URL, and `playwright-cli` must be available to the capture worker.
 
 **Value:** Design-to-code accuracy reaches 95–99%. Design QA feedback rounds are reduced by 60–80%. Accessibility compliance is built in from the start, not bolted on after review.
 
@@ -155,12 +157,12 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-555
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Schema analysis** | The research phase identifies existing tables, relationships, and constraints affected by the change. |
-| **2. Migration planning** | The Architect agent designs the migration with rollback strategies, following naming conventions and normalisation best practices. |
+| Step                      | What Happens                                                                                                                              |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Schema analysis**    | The research phase identifies existing tables, relationships, and constraints affected by the change.                                     |
+| **2. Migration planning** | The Architect agent designs the migration with rollback strategies, following naming conventions and normalisation best practices.        |
 | **3. Query optimization** | The `tsh-sql-and-database-understanding` skill enforces `EXPLAIN ANALYZE`, proper indexing, join optimization, and parameterized queries. |
-| **4. ORM integration** | Supports TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM — generating idiomatic code for your stack. |
+| **4. ORM integration**    | Supports TypeORM, Prisma, Doctrine, Eloquent, Entity Framework, Hibernate, and GORM — generating idiomatic code for your stack.           |
 
 **Key prompts & agents:** `/tsh-implement` → Engineering Manager → Context Engineer + Architect + Software Engineer  
 **Key skills:** `tsh-sql-and-database-understanding`, `tsh-architecture-designing`, `tsh-technical-context-discovering`
@@ -183,12 +185,12 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-review PROJ-789
 ```
 
-| Step | What Happens |
-|---|---|
+| Step                              | What Happens                                                                                                                                   |
+| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | **1. Multi-dimensional analysis** | The Code Reviewer agent checks acceptance criteria, security vulnerabilities, reliability, performance, maintainability, and coding standards. |
-| **2. Security scanning** | Missing input validation, exposed secrets, improper error handling, and SQL injection vectors are flagged explicitly. |
-| **3. Database review** | The `tsh-sql-and-database-understanding` skill checks for missing indexes, N+1 queries, improper locking, and migration safety. |
-| **4. Structured verdict** | Findings are categorized as PASS, BLOCKER, or SUGGESTION — with clear explanations and remediation guidance. |
+| **2. Security scanning**          | Missing input validation, exposed secrets, improper error handling, and SQL injection vectors are flagged explicitly.                          |
+| **3. Database review**            | The `tsh-sql-and-database-understanding` skill checks for missing indexes, N+1 queries, improper locking, and migration safety.                |
+| **4. Structured verdict**         | Findings are categorized as PASS, BLOCKER, or SUGGESTION — with clear explanations and remediation guidance.                                   |
 
 **Key prompts & agents:** `/tsh-review` → Code Reviewer  
 **Key skills:** `tsh-code-reviewing`, `tsh-sql-and-database-understanding`, `tsh-technical-context-discovering`
@@ -209,11 +211,11 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-review PROJ-456
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Plan-to-code comparison** | The Code Reviewer agent compares the implementation against the original plan, checking every phase and acceptance criterion. |
-| **2. Gap detection** | The `tsh-implementation-gap-analysing` skill identifies what was planned but not implemented, what was implemented but not planned, and what was partially done. |
-| **3. Structured findings** | A review report lists blockers (must fix), suggestions (should fix), and passes — with specific file and line references. |
+| Step                           | What Happens                                                                                                                                                     |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Plan-to-code comparison** | The Code Reviewer agent compares the implementation against the original plan, checking every phase and acceptance criterion.                                    |
+| **2. Gap detection**           | The `tsh-implementation-gap-analysing` skill identifies what was planned but not implemented, what was implemented but not planned, and what was partially done. |
+| **3. Structured findings**     | A review report lists blockers (must fix), suggestions (should fix), and passes — with specific file and line references.                                        |
 
 **Key prompts & agents:** `/tsh-review` → Code Reviewer  
 **Key skills:** `tsh-implementation-gap-analysing`, `tsh-code-reviewing`, `tsh-technical-context-discovering`
@@ -234,11 +236,11 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-review-codebase
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Full codebase scan** | The Architect agent runs parallel analysis across all layers — frontend, backend, shared libraries. |
-| **2. Dead code detection** | Identifies unused imports, unreachable code paths, deprecated functions, and files not imported anywhere. |
-| **3. Duplication mapping** | Finds duplicated functions, validation logic, UI components, and copy-pasted blocks that differ only in variable names. |
+| Step                       | What Happens                                                                                                                              |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Full codebase scan**  | The Architect agent runs parallel analysis across all layers — frontend, backend, shared libraries.                                       |
+| **2. Dead code detection** | Identifies unused imports, unreachable code paths, deprecated functions, and files not imported anywhere.                                 |
+| **3. Duplication mapping** | Finds duplicated functions, validation logic, UI components, and copy-pasted blocks that differ only in variable names.                   |
 | **4. Improvement roadmap** | Generates a prioritized list of improvements — high cyclomatic complexity, SRP violations, excessive `any` types, missing error handling. |
 
 **Key prompts & agents:** `/tsh-review-codebase` → Architect  
@@ -262,11 +264,11 @@ This page shows how teams integrate Copilot Collections into their daily routine
 /tsh-implement PROJ-001
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Codebase health snapshot** | `/tsh-review-codebase` gives you an immediate understanding of the codebase — its structure, patterns, tech stack, and quality issues. |
-| **2. Convention discovery** | The `tsh-technical-context-discovering` skill identifies project conventions, coding standards, and established patterns — you learn how this team works. |
-| **3. Guided first task** | `/tsh-implement` on your first ticket produces a structured research document and step-by-step implementation plan automatically, so you deliver with confidence. |
+| Step                            | What Happens                                                                                                                                                      |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Codebase health snapshot** | `/tsh-review-codebase` gives you an immediate understanding of the codebase — its structure, patterns, tech stack, and quality issues.                            |
+| **2. Convention discovery**     | The `tsh-technical-context-discovering` skill identifies project conventions, coding standards, and established patterns — you learn how this team works.         |
+| **3. Guided first task**        | `/tsh-implement` on your first ticket produces a structured research document and step-by-step implementation plan automatically, so you deliver with confidence. |
 
 **Key prompts & agents:** `/tsh-review-codebase` → Architect, `/tsh-implement` → Engineering Manager → Context Engineer + Architect  
 **Key skills:** `tsh-technical-context-discovering`, `tsh-codebase-analysing`, `tsh-architecture-designing`
@@ -293,11 +295,11 @@ This page shows how teams integrate Copilot Collections into their daily routine
 When the implementation plan contains E2E test tasks, the Engineering Manager automatically delegates them to the E2E Engineer agent. You don't need to invoke E2E testing separately — just use `/tsh-implement`.
 :::
 
-| Step | What Happens |
-|---|---|
-| **1. Test scenario design** | The E2E Engineer agent analyzes the feature, maps acceptance criteria to test scenarios, and identifies critical user journeys. |
-| **2. Page Object creation** | Reusable page abstractions are created with accessibility-first locators (`getByRole`, `getByLabel`, `getByText`). |
-| **3. Test implementation** | Tests follow BDD-style Arrange-Act-Assert structure with dynamic test data (timestamps/UUIDs) — no shared state between tests. |
+| Step                          | What Happens                                                                                                                           |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Test scenario design**   | The E2E Engineer agent analyzes the feature, maps acceptance criteria to test scenarios, and identifies critical user journeys.        |
+| **2. Page Object creation**   | Reusable page abstractions are created with accessibility-first locators (`getByRole`, `getByLabel`, `getByText`).                     |
+| **3. Test implementation**    | Tests follow BDD-style Arrange-Act-Assert structure with dynamic test data (timestamps/UUIDs) — no shared state between tests.         |
 | **4. Stability verification** | Tests must pass **3+ consecutive times** in headless mode before being committed. Flaky detection is built into the verification loop. |
 
 **Key prompts & agents:** `/tsh-implement` → Engineering Manager → E2E Engineer  
@@ -321,11 +323,11 @@ When the implementation plan contains E2E test tasks, the Engineering Manager au
 /tsh-analyze-aws-costs us-east-1 everything
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. IaC analysis** | The DevOps Engineer agent scans Terraform and CloudFormation templates for over-provisioned resources, missing savings plan opportunities, and tagging gaps. |
-| **2. Live infrastructure validation** | AWS API MCP queries actual resource usage — identifying orphaned EBS volumes, idle load balancers, and underutilized instances. |
-| **3. Cost report** | A prioritized optimization report is generated with estimated monthly savings and specific CLI or Terraform changes for each recommendation. |
+| Step                                  | What Happens                                                                                                                                                 |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **1. IaC analysis**                   | The DevOps Engineer agent scans Terraform and CloudFormation templates for over-provisioned resources, missing savings plan opportunities, and tagging gaps. |
+| **2. Live infrastructure validation** | AWS API MCP queries actual resource usage — identifying orphaned EBS volumes, idle load balancers, and underutilized instances.                              |
+| **3. Cost report**                    | A prioritized optimization report is generated with estimated monthly savings and specific CLI or Terraform changes for each recommendation.                 |
 
 **Key prompts & agents:** `/tsh-analyze-aws-costs` or `/tsh-analyze-gcp-costs` → DevOps Engineer
 **Key skills:** `tsh-optimizing-cloud-cost`
@@ -348,16 +350,14 @@ When the implementation plan contains E2E test tasks, the Engineering Manager au
 /tsh-implement Create GitHub Actions CI/CD for the monorepo
 ```
 
-| Step | What Happens |
-|---|---|
-| **1. Delegation** | The Engineering Manager reads the plan and delegates infrastructure tasks to the DevOps Engineer. |
-| **2. Context discovery** | The DevOps Engineer discovers existing IaC patterns, naming conventions, tagging policies, and CI/CD platform. |
-| **3. Implementation** | Infrastructure code is written following project conventions with proper naming, tagging, cost estimation, and safety guardrails. |
-| **4. Safety checks** | `terraform plan`, `--dry-run`, or `validate` is run before any changes. Destructive operations require explicit authorization. |
+| Step                     | What Happens                                                                                                                      |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Delegation**        | The Engineering Manager reads the plan and delegates infrastructure tasks to the DevOps Engineer.                                 |
+| **2. Context discovery** | The DevOps Engineer discovers existing IaC patterns, naming conventions, tagging policies, and CI/CD platform.                    |
+| **3. Implementation**    | Infrastructure code is written following project conventions with proper naming, tagging, cost estimation, and safety guardrails. |
+| **4. Safety checks**     | `terraform plan`, `--dry-run`, or `validate` is run before any changes. Destructive operations require explicit authorization.    |
 
 **Key prompt:** `/tsh-implement` → Engineering Manager delegates to DevOps Engineer
 **Key skills:** `tsh-implementing-terraform-modules`, `tsh-implementing-kubernetes`, `tsh-implementing-ci-cd`, `tsh-managing-secrets`
 
 **Value:** Infrastructure follows production patterns from day one. Cost estimation is built into every proposal. Safety guardrails prevent accidental destruction. Reusable modules reduce duplication across projects.
-
-

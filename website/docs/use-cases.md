@@ -57,7 +57,7 @@ MCP integrations (Atlassian, Figma, Context7, Playwright, PDF Reader) bring ever
 
 Frontend implementations drift from Figma. Wrong spacing, wrong colour variants, wrong component state. The defects are caught in QA - which means a developer context-switches back to a ticket they thought was done, fixes it, and waits for another review cycle.
 
-The UI Reviewer agent runs an automated verification loop (up to 5 iterations) that compares the running app against Figma specs via Playwright. You get a structured PASS/FAIL report with exact pixel deltas before the code ever reaches a human reviewer.
+The UI Reviewer agent runs an automated verification loop (up to 5 iterations) that compares Figma MCP output against Playwright CLI capture artifacts collected from the running app. You get a structured PASS/FAIL report with exact pixel deltas before the code ever reaches a human reviewer.
 
 **~20 min per component · 95–99% design accuracy**
 

@@ -3,8 +3,6 @@ sidebar_position: 7
 title: /tsh-review-ui
 ---
 
-# /tsh-review-ui
-
 **Agent:** UI Reviewer  
 **File:** `.github/prompts/tsh-review-ui.prompt.md`
 
@@ -20,11 +18,11 @@ Called automatically by `/tsh-implement` (via the internal UI prompt) in a verif
 
 ## What It Does
 
-1. **Validates inputs** — Ensures Figma URL is available and dev server is running.
+1. **Validates inputs** — Ensures the Figma URL is available and that UI verification has the exact user-confirmed full dev server URL. Standalone runs must confirm the URL first.
 2. **Gets EXPECTED** — Calls Figma MCP to extract design specifications (layer hierarchy, layout, spacing, typography, colors, dimensions).
-3. **Gets ACTUAL** — Uses Playwright MCP to capture the running app (scrolls through entire page, captures accessibility tree).
-4. **Compares** — Follows `tsh-ui-verifying` skill criteria: structure FIRST, then dimensions, then visual.
-5. **Reports** — Generates a structured PASS/FAIL report with difference table.
+3. **Gets ACTUAL** — Uses `tsh-ui-capture-worker` to collect fresh Playwright CLI artifacts for the running app.
+4. **Compares** — Follows `tsh-ui-verifying` skill criteria: structure, layout, dimensions, visual, and components.
+5. **Reports** — Generates a structured PASS/FAIL/VERIFICATION NOT RUN report with differences or blocker guidance.
 
 ## Skills Loaded
 
@@ -33,32 +31,37 @@ Called automatically by `/tsh-implement` (via the internal UI prompt) in a verif
 ## Output Format
 
 ```markdown
-## Verification Result: [PASS | FAIL]
+## Verification Result: [PASS | FAIL | VERIFICATION NOT RUN]
 
 ### Component: [name]
 
 **Confidence:** [HIGH | MEDIUM | LOW]
 
-### Structural Issues (CRITICAL)
-
-| Issue | Expected (Figma) | Actual (Implementation) |
-
-### Dimension/Visual Differences
+### Differences
 
 | Property | Expected (Figma) | Actual (Implementation) | Severity |
+
+### Clarification Needed
+
+- [content/data/state differences that may be intentional]
 
 ### Recommended Fixes
 
 - [specific fix with exact values]
+
+### Blocker Resolution
+
+- [next step when verification did not run]
 ```
 
 ## Key Rules
 
 - **Read-only** — Does not modify code. Only reports differences.
-- **Both tools required** — Uses Figma MCP (EXPECTED) and Playwright MCP (ACTUAL).
+- **Both sides required** — Uses Figma MCP (EXPECTED) and `tsh-ui-capture-worker` Playwright CLI artifacts (ACTUAL).
 - **Structure mismatches = automatic FAIL** — Layout/hierarchy issues are never ignored.
 - **1-2px tolerance** — Only for browser rendering variance, not for structure/layout.
-- **Reports differences per verification order** — Structure, layout, dimensions, visual — stops on first CRITICAL failure as defined by the skill.
+- **Reports differences per verification order** — Structure, layout, dimensions, visual, and components. It does not stop on the first critical finding.
+- **Capture blockers are pre-verification blockers** — Missing URL, auth blockers, wrong page state, or incomplete artifacts must return `VERIFICATION NOT RUN`; they do not consume the 5-iteration fix budget.
 
 ## Confidence Levels
 

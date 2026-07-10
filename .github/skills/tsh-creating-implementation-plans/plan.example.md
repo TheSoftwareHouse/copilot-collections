@@ -183,10 +183,18 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Figma URL**: <figma-url-for-this-component>
 
+**UI Verification Status**: For Figma-based UI features only. Track this separately from code review.
+
+- **Component Name**: <ui-component-name>
+- **Iteration Count**: <number-of-verification-iterations>
+- **Final Status**: <PASSED / ESCALATED / VERIFICATION NOT RUN>
+- **Figma URL**: <figma-url-for-this-component>
+
 **Definition of Done**:
 
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 - [ ] UI verification passes via `tsh-ui-reviewer` or escalated to user after 5 iterations
+- [ ] UI Verification Status is recorded separately from code review in the `UI Verification Status` element
 - [ ] Verification report documented in Changelog
 
 **Stop Rule:** <stop condition, or omit>

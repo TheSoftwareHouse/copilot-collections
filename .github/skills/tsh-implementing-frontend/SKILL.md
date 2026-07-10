@@ -34,6 +34,7 @@ Use the checklist below and track progress:
 
 ```
 Progress:
+- [ ] Step 0: Fetch and review Figma design (Figma-backed tasks only)
 - [ ] Step 1: Gather design context
 - [ ] Step 2: Plan component structure
 - [ ] Step 3: Implement components
@@ -41,9 +42,16 @@ Progress:
 - [ ] Step 5: Verify implementation
 ```
 
+**Step 0: Fetch and review Figma design (Figma-backed tasks only)**
+
+- This is a hard gate for any Figma-backed task. Before planning component structure or writing code, resolve the Figma node, export the node image via the `figma` MCP, and extract the relevant specs: layout, spacing, typography, colors, dimensions, variants, and states.
+- If the task is Figma-backed but the Figma reference is missing, the node cannot be resolved, or the `figma` MCP cannot export the design, stop and ask the user through the calling agent's `vscode/askQuestions`. Do not implement from assumptions.
+- Treat this pre-implementation design review as distinct from the later UI verification loop. Looking at the design before coding is mandatory; verifying after coding is mandatory too.
+
 **Step 1: Gather design context**
 
-- Extract specs from Figma (via MCP tool if available). Identify components, spacing, typography, colors, and interaction states.
+- For Figma-backed tasks, Step 1 begins only after Step 0 is complete. Use the design already fetched through the `figma` MCP to identify components, spacing, typography, colors, and interaction states.
+- If the task is not Figma-backed, gather design context from the user-provided source of truth before proceeding.
 - Map every Figma value to an existing design token in the codebase:
   1. Extract the raw value from Figma (e.g., `#3B82F6`, `16px`).
   2. Search the codebase for a matching token.

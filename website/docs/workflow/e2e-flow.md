@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 title: E2E Testing Flow
 ---
 
@@ -48,13 +48,13 @@ When delegated to by the Engineering Manager, the E2E Engineer:
 
 The E2E Engineer agent enforces these standards:
 
-| Standard | Approach |
-|---|---|
-| **Locators** | Use `getByRole`, `getByLabel`, `getByText`. Avoid CSS selectors. Use `getByTestId` only as fallback. |
-| **Synchronization** | Built-in auto-waiting assertions. No `waitForTimeout()`. No `waitForLoadState('networkidle')`. |
-| **Test data** | Dynamic data for every run (timestamps/UUIDs). Tests must not depend on state from other tests. |
-| **Security** | Never hardcode credentials. Use environment variables. |
-| **Naming** | `should [behavior] when [condition]` pattern. |
+| Standard            | Approach                                                                                             |
+| ------------------- | ---------------------------------------------------------------------------------------------------- |
+| **Locators**        | Use `getByRole`, `getByLabel`, `getByText`. Avoid CSS selectors. Use `getByTestId` only as fallback. |
+| **Synchronization** | Built-in auto-waiting assertions. No `waitForTimeout()`. No `waitForLoadState('networkidle')`.       |
+| **Test data**       | Dynamic data for every run (timestamps/UUIDs). Tests must not depend on state from other tests.      |
+| **Security**        | Never hardcode credentials. Use environment variables.                                               |
+| **Naming**          | `should [behavior] when [condition]` pattern.                                                        |
 
 :::warning Important
 The E2E Engineer agent generates tests using Playwright MCP for real-time browser interaction. Always run the generated tests locally, review test scenarios for completeness, and verify they cover the critical user journeys identified during research.

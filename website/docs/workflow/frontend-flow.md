@@ -3,9 +3,11 @@ sidebar_position: 3
 title: Frontend Flow
 ---
 
-# Frontend Flow
-
 For UI-heavy tasks with Figma designs, use the specialized frontend workflow. This extends the standard flow with iterative Figma verification to ensure the implementation matches the design within tolerance.
+
+For a full end-to-end breakdown of the post-implementation verify-fix loop, see **[UI Verification Flow](./ui-verification-flow)**.
+
+Before you start, make sure the target app is already running, be ready to confirm the exact full dev server URL, and ensure `playwright-cli` is available to the UI capture worker (`npx playwright-cli` or a global install).
 
 ## Command Sequence
 
@@ -18,10 +20,12 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
    ↳ 🧪 Engineering Manager delegates to Architect Reviewer via /tsh-review-plan for plan validation
    ↳ 📖 Review plan and review summary – check component breakdown, design references
    ↳ ✅ Confirm the approved plan aligns with Figma structure
-   ↳ 💻 Engineering Manager delegates UI tasks to Software Engineer
-   ↳ 📖 Review code changes and UI Verification Summary
+   ↳ 🌐 Confirm the exact full dev server URL once and pin it for the session
+   ↳ 💻 Engineering Manager delegates UI tasks to UI Engineer
+   ↳ 📖 Review UI Verification Summary separately from code review
    ↳ ✅ Manually verify critical UI elements in browser
-   ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until PASS or escalation
+   ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until the UI gate is PASS or reaches the structured post-5-iteration user gate
+   ↳ 🚫 Do not start /tsh-review until the UI gate is closed
 
 2️⃣ /tsh-review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
@@ -30,18 +34,22 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 
 ## How the Verification Loop Works
 
-1. The Engineering Manager delegates a UI component implementation to the Software Engineer via the internal `/tsh-implement-ui` prompt.
-2. After the Software Engineer completes, the Engineering Manager calls `/tsh-review-ui` to perform **single-pass verification** (read-only).
-3. `/tsh-review-ui` uses **Figma MCP** (EXPECTED) + **Playwright MCP** (ACTUAL) → returns PASS or FAIL with diff table.
-4. If FAIL → the Engineering Manager delegates the fix to the Software Engineer and calls `/tsh-review-ui` again.
-5. Repeats until PASS or max **5 iterations** (then escalates to the developer).
+1. The Engineering Manager delegates a UI component implementation to the UI Engineer via the internal `/tsh-implement-ui` prompt.
+2. After the UI Engineer completes, the Engineering Manager calls `/tsh-review-ui` to perform **single-pass verification** (read-only) on fresh live-capture artifacts.
+3. `/tsh-review-ui` uses **Figma MCP** (EXPECTED) + CLI capture artifacts produced through `tsh-ui-capture-worker` (ACTUAL) → returns PASS, FAIL, or VERIFICATION NOT RUN with a diff table or blocker report.
+4. If FAIL → the Engineering Manager delegates the fix to the UI Engineer, then re-captures and re-verifies on the new artifacts before considering the item closed.
+5. Repeats until PASS or max **5 iterations**.
+6. If mismatches remain after 5 iterations, the flow pauses behind a structured user gate with exactly 3 options: continue with an explicit extra iteration count, stop and accept the current state as `ESCALATED`, or provide a custom instruction.
+7. If extra iterations are exhausted and gaps remain, the same structured gate runs again before anything can move to code review.
+8. If capture is blocked by missing URL, auth, unreachable page, wrong page state, or incomplete artifacts, the result is `VERIFICATION NOT RUN`; resolve the blocker and rerun capture without consuming the 5-iteration budget.
 
 ## What `/tsh-review-ui` Does
 
 - Single-pass, **read-only** verification — does not modify code.
 - Uses **Figma MCP** to extract design specifications (spacing, typography, colors, dimensions).
-- Uses **Playwright MCP** to capture the current implementation state.
-- Returns a structured report: **PASS/FAIL** + difference table with exact values.
+- Uses **`tsh-ui-capture-worker` + Playwright CLI artifacts** to capture the current implementation state.
+- Does **not** rely on direct Playwright MCP capture for the ACTUAL side of the comparison.
+- Returns a structured report: **PASS/FAIL/VERIFICATION NOT RUN** + difference table or blocker guidance.
 - Covers: structure (containers, nesting), dimensions (width, height, spacing), visual (typography, colors, radii), and components (variants, tokens, states).
 
 ## What `/tsh-implement-ui` Does
@@ -50,12 +58,12 @@ For UI-heavy tasks with Figma designs, use the specialized frontend workflow. Th
 `/tsh-implement-ui` is an internal prompt — not invoked directly by users. It is triggered automatically by `/tsh-implement` when the plan contains UI tasks with Figma references.
 :::
 
-- Orchestrated by the **Engineering Manager** agent, which delegates to the Software Engineer and UI Reviewer.
+- Orchestrated by the **Engineering Manager** agent, which delegates to the UI Engineer, UI Capture Worker, and UI Reviewer.
 - Implements UI components following the plan.
 - Runs **iterative verification loop** delegating to the `tsh-ui-reviewer` subagent after each component.
-- **Fixes mismatches** by delegating fixes back to the Software Engineer based on subagent reports.
-- Escalates after 5 failed iterations with a detailed report.
-- Produces a **UI Verification Summary** before handing off to code review.
+- **Fixes mismatches** by delegating fixes back to the UI Engineer based on subagent reports, then re-captures and re-verifies on fresh artifacts using the same pinned user-confirmed full URL.
+- After 5 failed iterations, pauses behind a structured user gate with a detailed summary and exactly 3 options: continue with explicit extra iterations, stop and accept as `ESCALATED`, or provide a custom instruction.
+- Produces a **UI Verification Summary** before handoff to code review, but keeps the UI gate separate from code review.
 
 ## Required Skills
 

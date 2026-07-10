@@ -69,8 +69,12 @@ Each MCP server enables specific capabilities within the workflow:
 | 🧩 **Atlassian**           | Access Jira issues and Confluence pages for research, planning, implementation, and review | Business Analyst, Architect, Software Engineer, Code Reviewer |
 | 🎨 **Figma MCP**           | Pull design details, components, and variables for design-driven work                      | Software Engineer (UI), UI Reviewer                           |
 | 📚 **Context7**            | Semantic search in external documentation and knowledge bases                              | All agents                                                    |
-| 🧪 **Playwright**          | Run browser interactions and end-to-end style checks from Copilot                          | Software Engineer, E2E Engineer, UI Reviewer                  |
+| 🧪 **Playwright**          | Interactive browser automation and UI debugging from Copilot                               | Software Engineer, E2E Engineer                               |
 | 🧠 **Sequential Thinking** | Advanced reasoning for complex problem analysis, revision, and branching                   | All agents (for complex tasks)                                |
+
+:::note UI Verification Setup
+MCP setup is only part of the Figma-backed UI verification workflow. EXPECTED still comes from Figma MCP, but ACTUAL capture is produced by `tsh-ui-capture-worker` through Playwright CLI artifacts. To use that flow, keep the target app running, confirm the exact full dev server URL when asked, and make sure `playwright-cli` is available (`npx playwright-cli` or a global install).
+:::
 
 ## Configuring Context7 API Key
 

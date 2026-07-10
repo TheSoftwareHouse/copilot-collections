@@ -2,7 +2,7 @@
 
 Opinionated GitHub Copilot setup for product discovery, implementation, and review.
 
-Full documentation: https://copilot-collections.tsh.io/
+Full documentation: [copilot-collections.tsh.io](https://copilot-collections.tsh.io/)
 
 This README is intentionally short. It covers the main workflows and the minimum setup needed so GitHub Copilot can use this repository effectively.
 
@@ -108,6 +108,8 @@ Once configured, open your target project and start with one of these:
 - `/tsh-review-ui`
 - `/tsh-analyze-materials <transcript, notes, links, or workshop assets>`
 
+For Figma-backed UI work, keep the target app running and be ready to confirm the exact full dev server URL. The UI verification loop uses Figma MCP for EXPECTED and `tsh-ui-capture-worker` Playwright CLI artifacts for ACTUAL, so `playwright-cli` must also be available on the machine running VS Code (`npx playwright-cli` or a global install).
+
 If you want to extend the system itself, use:
 
 - `/tsh-create-custom-agent`
@@ -117,7 +119,7 @@ If you want to extend the system itself, use:
 
 ## Learn More
 
-- Full documentation: https://copilot-collections.tsh.io/
+- Full documentation: [copilot-collections.tsh.io](https://copilot-collections.tsh.io/)
 - MCP template used by this repo: [`.vscode/mcp.json`](.vscode/mcp.json)
 
 ## License
