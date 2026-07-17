@@ -221,9 +221,9 @@ These rules are never optional:
 
 This page summarizes the flow defined in these canonical files:
 
-- [.github/prompts/tsh-implement.prompt.md](../../../.github/prompts/tsh-implement.prompt.md)
-- [.github/skills/tsh-orchestrating-implementation/SKILL.md](../../../.github/skills/tsh-orchestrating-implementation/SKILL.md)
-- [.github/skills/tsh-ui-verifying/SKILL.md](../../../.github/skills/tsh-ui-verifying/SKILL.md)
-- [.github/agents/tsh-ui-engineer.agent.md](../../../.github/agents/tsh-ui-engineer.agent.md)
-- [.github/agents/tsh-ui-capture-worker.agent.md](../../../.github/agents/tsh-ui-capture-worker.agent.md)
-- [.github/agents/tsh-ui-reviewer.agent.md](../../../.github/agents/tsh-ui-reviewer.agent.md)
+- [.github/prompts/tsh-implement.prompt.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/prompts/tsh-implement.prompt.md)
+- [.github/skills/tsh-orchestrating-implementation/SKILL.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/skills/tsh-orchestrating-implementation/SKILL.md)
+- [.github/skills/tsh-ui-verifying/SKILL.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/skills/tsh-ui-verifying/SKILL.md)
+- [.github/agents/tsh-ui-engineer.agent.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/agents/tsh-ui-engineer.agent.md)
+- [.github/agents/tsh-ui-capture-worker.agent.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/agents/tsh-ui-capture-worker.agent.md)
+- [.github/agents/tsh-ui-reviewer.agent.md](https://github.com/TheSoftwareHouse/copilot-collections/blob/main/.github/agents/tsh-ui-reviewer.agent.md)
