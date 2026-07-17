@@ -27,7 +27,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - README guidance — Added recommendations for manually configuring thinking effort for each model in the VS Code Copilot Chat UI; the configuration becomes active for the current VS Code profile:
   - `GPT-5.6 Sol` — medium (default)
   - `GPT-5.6 Terra` — medium/high
-  - `GPT-5.6 Luna` — high/xhigh
+  - `GPT-5.6 Luna` — medium/high
   - `Sonnet 5` — high (default)
   - `MAI-Code-1-Flash` — high
 

@@ -154,7 +154,7 @@ Check the current state before creating or executing any plan.
 5. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files. If a Figma-backed UI task does not have a Figma reference, stop and get it from the user before execution starts.
 6. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the exact user-confirmed full dev server URL before execution starts. Treat it as a pinned session input and forward it unchanged through every reviewer and capture delegation.
 7. **Apply the Technical Context rule** - If the plan already contains populated Technical Context, use it and skip rediscovery; otherwise delegate to `tsh-architect` with `tsh-review-codebase.prompt.md`.
-8. **Use a conditional confirmation gate before execution** - Ask for confirmation before moving from planning to execution only when the plan was newly created, materially changed, escalated, or not yet approved for execution in the current thread.
+8. **Use a conditional confirmation gate before execution** - Always ask for confirmation before moving from planning to execution. Use `vscode/askQuestions` to confirm the user wants to start execution with the current plan.
 9. **Rewrite the task-order plan after approval** - Refresh the ordered task list from the approved plan before the first implementation task starts; the agent + prompt for each task is resolved at execution time by the Execution routing table.
 
 ### Execution routing

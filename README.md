@@ -39,7 +39,7 @@ In the VS Code Copilot Chat UI, manually select each model below, choose its rec
 | --- | --- |
 | GPT-5.6 Sol | medium (default) |
 | GPT-5.6 Terra | medium/high |
-| GPT-5.6 Luna | high/xhigh |
+| GPT-5.6 Luna | medium/high |
 | Sonnet 5 | high (default) |
 | MAI-Code-1-Flash | high |
 
