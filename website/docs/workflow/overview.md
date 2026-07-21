@@ -50,6 +50,14 @@ When the Architect records plan-authoring Human approval, the authoring discussi
 - Performs a structured code review against acceptance criteria, security, reliability, and maintainability.
 - **Produces:** Structured review with clear pass/blockers/suggestions.
 
+## Platform Boundaries
+
+`/tsh-implement` remains the canonical public implementation entry point. Platform classification and routing stay in the canonical orchestrator; this documentation does not add a second trigger or a mobile worker.
+
+- Web/Figma UI uses the pinned browser URL and the web capture contract. Playwright artifacts such as `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` verify the browser implementation only.
+- Rendered React Native UI follows the existing UI Engineer route but does not enter browser/Figma verification. Native simulator or device behavior, accessibility, and end-to-end evidence are owned by the target project. Without an explicit target-project evidence contract, native verification remains a prerequisite or limitation.
+- Playwright E2E is for web flows only. Native E2E is outside this collection's promise and remains target-project-owned.
+
 ## Workflow Diagram
 
 import SdlcDiagram from '@site/src/components/SdlcDiagram';

@@ -11,168 +11,141 @@ Performance-specific patterns for the `tsh-implementing-react-native` skill. Loa
 - [JS Bundle Optimization](#js-bundle-optimization)
 - [Memoization Patterns](#memoization-patterns)
 - [Memory Management](#memory-management)
-- [Hermes Engine](#hermes-engine)
+- [JavaScript Engine](#javascript-engine)
 - [Performance Checklist](#performance-checklist)
 - [Anti-Patterns](#anti-patterns)
 
 ## Measure Before Optimizing
 
-Never optimize without data. Profile first:
+Never optimize without data. Before changing code, record:
+
+- a baseline for the affected behavior, such as startup time, interaction latency, JS/UI frame pacing, memory, bundle size, or screen render time
+- a representative workload, including realistic data volume, item variability, navigation path, image sizes, and interaction sequence
+- the target device or device class, build mode, platform, engine, architecture setting, and other relevant target-project profile details
+- a target measurement and an acceptable regression boundary agreed with the target project
+
+Use the baseline to diagnose the limiting resource first. Tuning is optional: apply a change only when it addresses the diagnosed bottleneck, is compatible with the target manifest and exact installed versions, and has a measurable reason to exist. Re-run the same representative workload after each material change, compare against the baseline and target, and retain or revert the change based on the result. Validate both the optimized path and nearby behavior such as scrolling, navigation, memory pressure, startup error handling, and accessibility-relevant interactions when they are affected.
+
+The tools below are examples of profiling approaches, not dependencies of this repository. Use the tools already available in the target project and follow their official documentation:
 
 | Tool                           | What it measures                          | Platform |
 | ------------------------------ | ------------------------------------------ | -------- |
 | React DevTools Profiler        | Component render times, re-render reasons  | Both     |
 | React Native DevTools          | JS/UI thread frame rates, component tree   | Both     |
-| Expo Dev Tools                 | Performance monitoring, network inspector  | Both     |
+| Expo Dev Tools                 | Performance monitoring, network inspector  | Expo projects when available |
 | Xcode Instruments              | CPU, memory, energy, UI hangs              | iOS      |
 | Android Studio Profiler        | CPU, memory, network, energy               | Android  |
-| `react-native-performance`     | TTI, component render marks                | Both     |
-| `performance.mark()/.measure()`| Custom operation timing in Hermes          | Both     |
-| React Native DevMenu → Perf Monitor | Real-time JS/UI frame rate overlay   | Both     |
+| `react-native-performance`     | TTI, component render marks                | When installed and compatible |
+| `performance.mark()/.measure()`| Custom operation timing                    | When supported by the target engine |
+| React Native DevMenu performance monitor | Real-time JS/UI frame rate overlay | When available in the target build |
 
-Enable the Performance Monitor overlay (shake → "Perf Monitor") as a first check. Both JS and UI threads should consistently hit 60 fps (or 120 fps on ProMotion/high-refresh devices).
+Do not claim device or native performance validation from this reference. Native profiling and device evidence must come from the target project's supported build and profiling setup.
 
 ## List Rendering
 
 Long lists are the most common performance bottleneck in React Native apps.
 
-### FlashList (recommended)
+### FlashList (conditional option)
 
-`@shopify/flash-list` is the recommended replacement for `FlatList`. It recycles views (like native `RecyclerView` / `UICollectionView`) instead of unmounting and remounting them.
+Consider `@shopify/flash-list` only when profiling shows that the current list implementation is a bottleneck, the package is already installed or its addition is approved, and the exact installed version is compatible with the target React Native, renderer, architecture, and build profile. Check the package's official compatibility documentation before using it. `FlatList` remains the appropriate choice when it meets the target, when FlashList is unavailable, or when compatibility and migration cost outweigh a measured benefit.
+
+If the target profile supports the selected FlashList version, measure a representative item and provide `estimatedItemSize` from that evidence. It is not a universal number or a reason to add FlashList by default. Re-measure variable-height items, headers, empty states, nested lists, and scrolling behavior after the change.
 
 ```typescript
 import { FlashList } from '@shopify/flash-list';
 
-const ProductList = ({ products }: { products: Product[] }) => (
+const ProductList = ({ products, estimatedItemSize }: ProductListProps) => (
   <FlashList
     data={products}
     renderItem={({ item }) => <ProductCard product={item} />}
-    estimatedItemSize={120}      // Required — approximate height of each item
+    estimatedItemSize={estimatedItemSize}
     keyExtractor={(item) => item.id}
   />
 );
 ```
 
-Key FlashList rules:
-- Always provide `estimatedItemSize`. Measure a representative item height and use that value.
-- `renderItem` components must have a deterministic height (or use `estimatedItemSize` + `overrideItemLayout` for variable heights).
-- Items must fill the full width of the list. If items don't fill the width, FlashList recycling calculations break.
-- Use `FlashList`'s built-in `ListHeaderComponent`, `ListFooterComponent`, `ListEmptyComponent` instead of wrapping in extra views.
+For a compatible FlashList version, follow its official guidance for item measurement, variable-height layouts, width, headers, footers, and empty states. Do not copy an API or prop recommendation across FlashList versions without checking that documentation.
 
-### FlatList optimization
+### FlatList tuning (conditional option)
 
-If using `FlatList` (legacy or when FlashList isn't available):
+Use `FlatList` when it is sufficient or when a third-party list is unavailable or incompatible. Tune it only after profiling identifies list rendering, layout measurement, mount work, or memory as the limiting resource. Every prop below is a decision option, not a default:
 
 ```typescript
 <FlatList
   data={items}
   renderItem={renderItem}
   keyExtractor={(item) => item.id}
-  // Performance tuning
-  removeClippedSubviews={true}           // Unmount offscreen items (Android significant, iOS modest)
-  maxToRenderPerBatch={10}               // Items per render batch (default: 10)
-  windowSize={5}                         // Render window: 5 * visible area (default: 21 — reduce it)
-  initialNumToRender={10}                // Items to render on first mount
-  getItemLayout={(data, index) => ({     // Skip layout measurement if items are fixed height
-    length: ITEM_HEIGHT,
-    offset: ITEM_HEIGHT * index,
-    index,
-  })}
+  removeClippedSubviews={profileSupportsClipping && measuredClippingBenefit}
+  maxToRenderPerBatch={profiledBatchSize}
+  windowSize={profiledWindowSize}
+  initialNumToRender={profiledInitialCount}
+  getItemLayout={knownFixedLayout ? getItemLayout : undefined}
 />
 ```
+
+Choose values from the representative workload and target device profile. Check the exact React Native version's documentation because clipping and render-window behavior can differ by platform and version. Verify blanking, responsiveness, memory, initial content, accessibility, and pagination after tuning. Use `getItemLayout` only when the layout is actually predictable; otherwise retain normal measurement.
 
 ### List rendering rules
 
 | Rule                                  | Why                                                          |
 | ------------------------------------- | ------------------------------------------------------------ |
-| Extract `renderItem` to a component   | Prevents new function reference on every render              |
-| Memoize list items (`React.memo`)     | Prevents re-rendering unchanged items during list scrolls    |
+| Extract `renderItem` to a component   | Makes render work easier to measure and reason about         |
+| Consider `React.memo` for item components | Use only when profiling shows repeated unchanged renders and props can remain stable; confirm comparison cost is lower than the saved work |
 | Use stable keys (IDs, not indices)    | Prevents unnecessary unmount/remount on data changes         |
-| Avoid inline functions in `renderItem`| New closure reference defeats item memoization               |
-| Minimize item component depth         | Fewer views = faster native layout                           |
+| Avoid avoidable work in `renderItem`  | Reduces per-item render and layout cost when the workload shows it matters |
+| Minimize item component depth         | Can reduce native layout work when the measured hierarchy is costly |
+
+`React.memo`, `useMemo`, and `useCallback` are measured options. Do not add them to every list or component: compare render savings, dependency complexity, comparison cost, and memory behavior against the baseline.
 
 ## Image Optimization
 
-### expo-image (recommended)
+### Image library (conditional option)
 
-`expo-image` provides a high-performance image component with disk/memory caching, blurhash placeholders, and format negotiation:
+Consider `expo-image` or another image library only when the target manifest includes a compatible package, official documentation supports the exact installed versions and platform profile, and profiling shows that the current image path needs its capabilities. A library is not required for every project. Use the target project's core `Image` when it is sufficient or when a third-party image library is unavailable or incompatible.
+
+For a compatible library, follow its exact installed-version API and measure image decode time, cache behavior, memory, layout stability, and scrolling. A core `Image` fallback can still use explicit dimensions and an appropriate loading or error state:
 
 ```typescript
-import { Image } from 'expo-image';
+import { Image } from 'react-native';
 
-const Avatar = ({ uri, blurhash }: AvatarProps) => (
+const Avatar = ({ uri }: AvatarProps) => (
   <Image
     source={{ uri }}
-    placeholder={{ blurhash }}
-    contentFit="cover"
-    transition={200}
+    resizeMode="cover"
     style={styles.avatar}
-    recyclingKey={uri}          // Helps with recycling in lists
   />
 );
 ```
 
-Key rules:
-- Always provide `placeholder` (blurhash or thumbhash) for network images to prevent layout shift and improve perceived performance.
-- Set `recyclingKey` when images are used in recycled list items (FlashList / FlatList) to prevent stale image flashes.
-- Use `contentFit` instead of `resizeMode` (Expo Image uses CSS-standard naming).
-- Prefer WebP format for remote images — smaller file size with equivalent quality.
+Use placeholder, recycling, content-fit, format, and cache options only when supported by the selected image API and when measurement or product requirements justify them. Reserve the intended image space when the selected API and layout contract support it, size assets for the target density, and validate loading, error, memory, and recycled-list behavior.
 
 ### Image sizing
 
-- Always specify explicit `width` and `height` on images. Without dimensions, the layout engine cannot allocate space until the image loads, causing layout shifts.
+- Specify explicit `width` and `height` when the selected image API and layout contract do not otherwise provide dimensions; validate layout stability when dimensions are deferred.
 - Serve images at the correct resolution for the device pixel density. A 100×100 pt image on a 3× display needs a 300×300 px source.
 - For large images (hero banners, backgrounds), use progressive loading: show a low-resolution placeholder → load full resolution.
 
 ## Startup Time
 
-### Cold start optimization
+### Cold start (diagnosis first)
 
-| Technique                                 | Impact    | Details                                                    |
-| ----------------------------------------- | --------- | ---------------------------------------------------------- |
-| Hermes bytecode compilation               | High      | Default in all Expo projects. Hermes compiles JS to bytecode at build time, eliminating parse cost at startup. |
-| Reduce root-level imports                 | High      | Only import what's needed for the first screen. Heavy modules (charts, editors) should be lazy-loaded. |
-| Inline `require()` for heavy modules     | Medium    | Use `require()` inside functions instead of top-level `import` for modules not needed at startup. |
-| Splash screen management                  | Medium    | Use `expo-splash-screen` to keep the splash visible until the first screen is rendered and data is ready. |
-| Minimize provider nesting in root         | Low-Med   | Each context provider is a component — excessive nesting at root adds render overhead at startup. |
+Measure cold and warm startup separately, with the same build mode, device profile, initial route, data state, and readiness definition. Inspect the actual startup trace before changing imports, providers, splash behavior, or engine settings.
 
-### expo-splash-screen pattern
+| Decision option                         | Apply when                                                                 | Fallback or validation                                      |
+| --------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| Reduce root-level imports               | The trace shows startup work from modules not needed by the first route    | Keep ordinary imports when they are small or needed; re-measure startup and error behavior |
+| Inline `require()` for a heavy module   | The target bundler/module system supports it, the module is rarely needed, and deferred loading improves the measured path | Use simple static module loading when it is clearer, compatible, or not measurably slower |
+| Router-provided lazy loading            | The selected router and exact installed version document and support it, and route loading is a measured bottleneck | Use the router's normal loading path or a supported project pattern; do not claim that a router lazy-loads routes without evidence |
+| Splash-screen coordination              | The target profile includes a compatible splash API and the startup contract requires it | Use the existing platform/startup behavior when sufficient; validate readiness and failure paths |
+| Reduce provider nesting                 | Profiling shows provider initialization or root renders contribute to startup | Preserve required providers; re-measure before and after |
 
-In Expo Router projects, manage the splash screen in the root layout:
-
-```typescript
-// app/_layout.tsx
-import * as SplashScreen from 'expo-splash-screen';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { useEffect } from 'react';
-
-SplashScreen.preventAutoHideAsync();
-
-const RootLayout = () => {
-  const [fontsLoaded] = useFonts({
-    'Inter-Regular': require('../assets/fonts/Inter-Regular.ttf'),
-  });
-
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
-
-  return <Stack />;
-};
-
-export default RootLayout;
-```
+Check the target manifest and official compatibility documentation before applying any router, splash, module-loading, or engine-specific recommendation.
 
 ## JS Bundle Optimization
 
 ### Bundle analysis
 
-Use `react-native-bundle-visualizer` to analyze the JS bundle:
+Analyze the bundle when startup, memory, or update size is a measured concern. Use an analyzer already supported by the target project, such as `react-native-bundle-visualizer` when its exact version and build profile are compatible. Profiling tools remain optional examples, not repository dependencies.
 
 ```bash
 npx react-native-bundle-visualizer
@@ -183,39 +156,26 @@ This generates a treemap showing module sizes. Look for:
 - Duplicate packages (different versions of the same library)
 - Unused code that's imported transitively
 
+Do not run a package command merely because it appears here; follow the target project's package manager and approved tooling.
+
 ### Code splitting with lazy imports
 
-**Expo Router handles screen-level lazy loading automatically** — each route file is only loaded when the user navigates to it. This is the primary code splitting mechanism in Expo projects and requires no extra work.
+Use code splitting only when the selected router, bundler, and exact installed versions document support for the chosen mechanism and the baseline identifies startup or bundle cost. Do not assume a router loads each route lazily or that a route split is free; verify the generated bundle and runtime loading behavior.
 
-For non-screen heavy modules, use inline `require()` to defer loading:
+For a compatible target profile, a heavy rarely used module may be deferred with the project's supported mechanism:
 
 ```typescript
-// Heavy module loaded only when needed
 const openChart = () => {
   const { ChartView } = require('./HeavyChartView');
-  // Use ChartView
+  return ChartView;
 };
 ```
 
-With React Navigation (legacy projects), screens are not lazy by default. Use `React.lazy()` for screens that are rarely accessed:
-
-```typescript
-const RareScreen = React.lazy(() => import('./screens/RareScreen'));
-
-<Stack.Screen name="Rare">
-  {() => (
-    <Suspense fallback={<LoadingScreen />}>
-      <RareScreen />
-    </Suspense>
-  )}
-</Stack.Screen>
-```
+Use simple static module loading when inline `require()` is not supported, complicates typing or error handling, or does not improve the target measurement. For a router-specific screen mechanism, follow the selected router's official docs instead of copying an Expo Router or React Navigation claim across profiles.
 
 ### Tree shaking
 
-- Use named imports: `import { format } from 'date-fns'` — not `import * as dateFns from 'date-fns'`.
-- Check that `metro.config.js` has tree shaking enabled (enabled by default in modern Expo SDK / Metro 0.81+).
-- Avoid barrel files that re-export large modules. Import directly from the source file when specific components are needed.
+Use named imports and avoid unnecessary broad re-exports when bundle analysis shows they matter, but do not claim that this alone enables tree shaking. Check the target manifest, Metro configuration, exact Metro/RN/Expo versions, and official documentation before relying on tree shaking or changing a barrel. Preserve a simple direct import when it is clearer or when analysis shows no benefit.
 
 ## Memoization Patterns
 
@@ -223,11 +183,11 @@ Same React memoization APIs as web, but with mobile-specific considerations:
 
 | Technique       | API                              | When to use in RN                                           |
 | --------------- | -------------------------------- | ----------------------------------------------------------- |
-| Component memo  | `React.memo(Component)`          | List item components rendered in `FlatList` / `FlashList`   |
-| Compute cache   | `useMemo(() => ..., [deps])`     | Filtering/sorting large arrays, derived data                |
-| Stable callback | `useCallback(fn, [deps])`        | Callbacks passed to memoized list items                     |
+| Component memo  | `React.memo(Component)`          | When profiling shows repeated unchanged renders and comparison cost is justified |
+| Compute cache   | `useMemo(() => ..., [deps])`     | When expensive derived work dominates the measured path     |
+| Stable callback | `useCallback(fn, [deps])`        | When callback identity causes measured downstream work      |
 
-**Critical for lists**: Every `renderItem` component in a list should be wrapped in `React.memo`. Without it, all visible items re-render when the parent state changes — this is the #1 cause of scrolling jank.
+These APIs are optional. Compare the change with the baseline, including dependency maintenance, comparison cost, stale-value risk, and memory behavior. Do not wrap every list item or callback by default.
 
 ```typescript
 type ItemProps = { item: Product; onPress: (id: string) => void };
@@ -246,7 +206,7 @@ const handlePress = useCallback((id: string) => {
 <FlashList
   data={products}
   renderItem={({ item }) => <ProductCard item={item} onPress={handlePress} />}
-  estimatedItemSize={80}
+  estimatedItemSize={measuredItemSize}
 />
 ```
 
@@ -261,71 +221,64 @@ Mobile devices have constrained memory. Memory leaks cause OS-level kills (OOM).
 | Event listeners not cleaned up  | Return cleanup in `useEffect`: `return () => sub.remove()`  |
 | Timers not cleared              | `clearTimeout` / `clearInterval` in effect cleanup          |
 | In-flight network requests      | `AbortController` in effect cleanup                         |
-| Large images cached in state    | Use `expo-image` disk cache, don't store base64 in state    |
-| Reanimated shared values        | Shared values are GC'd with the component — no leak risk    |
+| Large images cached in state    | Use the compatible image/cache path, or core `Image` and file paths; don't store base64 in state |
+| Animation shared values          | Follow the selected animation API's lifecycle guidance and profile retained work |
 | Closures capturing screen state | Avoid long-lived closures referencing screen-level vars     |
 
-### Image memory
+### Image and animation memory
 
-- Use `expo-image` — it manages memory caches with eviction policies and is actively maintained.
-- Never store base64-encoded images in React state or AsyncStorage. Use file system paths and disk caching.
-- For image-heavy screens (galleries, feeds), verify memory doesn't grow unbounded during scrolling — recycled list items should release image memory.
+- Avoid storing base64-encoded images in React state or persistent storage; use file system paths and the target project's supported cache path when they are available and appropriate.
+- For image-heavy screens, measure memory during repeated navigation and scrolling. Use a compatible image library only when its cache behavior is appropriate for the target; otherwise use core `Image` and the project's existing asset/cache path.
+- For animations, consider Reanimated only when it is installed or approved, compatible with the target React Native/architecture profile, and profiling shows JS-thread work is limiting animation. Core `Animated` is a valid fallback when it meets the target behavior or Reanimated is unavailable or incompatible. Check official documentation for the exact installed version.
 
 ### Monitoring
 
-Use Xcode Memory Graph Debugger (iOS) or Android Studio Memory Profiler to detect leaks. Look for:
+Use target-project tools such as Xcode Memory Graph Debugger or Android Studio Memory Profiler when available and supported. Look for:
 - Retained components that should have unmounted
 - Growing heap size during repeated navigation (push → pop → push cycles)
 - Large image data held in JS memory
 
-## Hermes Engine
+## JavaScript Engine
 
-Hermes is the default JS engine for all modern React Native and Expo projects. Key characteristics:
+Treat Hermes as a profile-dependent engine choice, not a universal default or requirement. Check the target manifest, native configuration, exact installed engine, React Native, and Expo versions, build mode, and official compatibility documentation. If Hermes is enabled, use its supported profiling and build outputs when they help explain the baseline. If another supported engine is configured, profile that engine instead; do not migrate engines solely because this reference mentions Hermes.
 
-- **Bytecode compilation**: JS is compiled to Hermes bytecode (`.hbc`) at build time. No parsing at runtime → faster startup.
-- **Garbage collection**: Hermes uses a generational GC. Short-lived objects (typical in React renders) are collected efficiently.
-- **ES2015+ support**: Supports most modern JS features natively. `Proxy`, `Reflect`, `WeakRef`, and other advanced features are fully supported in current Hermes versions.
-- **Debugging**: Use React Native DevTools (Chrome-based) for runtime debugging and profiling. The `hermes-profile-transformer` converts Hermes profiler output to Chrome trace format for deeper analysis.
+Engine-specific profiling or bytecode analysis is an optional diagnostic path. Use tools such as a compatible Hermes profiler only when they are already available or approved by the target project. Do not infer startup, garbage collection, syntax support, or memory behavior from a different engine or version.
 
-Hermes-specific considerations:
-- Avoid `eval()` and `new Function()` — Hermes does not support dynamic code evaluation (this is also a security best practice).
-- Large string concatenation is more expensive in Hermes than V8. Use `Array.join()` for building large strings.
-- `JSON.parse()` is optimized in Hermes — prefer it over manual object construction for large data payloads.
+Avoid dynamic code evaluation as a general security and compatibility practice. Treat engine-specific claims about parsing, garbage collection, string operations, JSON, and syntax support as version-dependent and verify them against the configured target engine.
 
 ## Performance Checklist
 
 ```
 Performance:
-- [ ] Measured baseline (JS/UI frame rates, startup time)
-- [ ] FlashList used for long lists (with estimatedItemSize)
-- [ ] List item components wrapped in React.memo
-- [ ] Callbacks to list items stabilized with useCallback
-- [ ] expo-image used with placeholders and recyclingKey
-- [ ] Image dimensions explicitly set (no layout shift)
-- [ ] Startup: only first-screen imports at top level
-- [ ] Splash screen held until initial data ready
-- [ ] Animations use Reanimated (UI thread, not JS thread)
-- [ ] No inline style objects — StyleSheet.create() or Reanimated
-- [ ] Effects clean up: timers, listeners, abort controllers
-- [ ] No base64 images stored in state — use disk cache
-- [ ] Bundle analyzed — no unexpected large dependencies
-- [ ] Named imports only — no wildcard imports
-- [ ] Verified on low-end devices (not just latest flagship)
+- [ ] Baseline recorded for the affected metric and representative workload
+- [ ] Target device/profile, build mode, engine, architecture, and measurement target recorded
+- [ ] Bottleneck diagnosed before optional tuning was selected
+- [ ] Selected list implementation is compatible with the target manifest and exact installed versions
+- [ ] FlashList and `estimatedItemSize` used only when supported and justified by measurement; otherwise FlatList remains sufficient
+- [ ] FlatList props and values tuned only when the target profile and baseline justify them
+- [ ] `React.memo`, `useMemo`, and `useCallback` used only when measured savings justify their cost
+- [ ] Image library options such as `expo-image` used only when compatible and beneficial; core `Image` remains a valid fallback
+- [ ] Image dimensions, loading, error, cache, and memory behavior validated for the target workload
+- [ ] Startup imports, inline `require()`, router lazy loading, and splash behavior checked against the target tooling and measured
+- [ ] Bundle analysis and Metro tree shaking claims checked against the target manifest, configuration, versions, and official documentation
+- [ ] Hermes or another engine-specific option checked against the target engine profile and compatibility documentation
+- [ ] Reanimated or core `Animated` selected based on compatibility, behavior, and measurement
+- [ ] Effects, timers, listeners, requests, and retained image/animation state have appropriate cleanup
+- [ ] No base64 images stored in state or persistent storage without a measured, justified exception
+- [ ] The same representative workload was rerun after the change and regressions were checked against the baseline and target
+- [ ] Native/device evidence is supplied by the target project when required; this collection does not claim to have executed it
 ```
 
 ## Anti-Patterns
 
 | Anti-Pattern                                        | Why                                                  | Fix                                                        |
 | --------------------------------------------------- | ---------------------------------------------------- | ---------------------------------------------------------- |
-| `ScrollView` for dynamic lists                      | Renders all items, memory explosion                   | `FlashList` or `FlatList`                                  |
-| `FlatList` without `React.memo` on items            | All visible items re-render on any state change       | Wrap `renderItem` component in `React.memo`                |
-| Missing `estimatedItemSize` on FlashList             | Recycling calculations wrong, layout jumps           | Measure and provide item height estimate                   |
-| Inline function in `renderItem`                     | New function ref every render, defeats memo           | Extract to `useCallback` or component                      |
-| Storing base64 images in state                      | Bloats JS heap, causes OOM on image-heavy screens    | Use `expo-image` with disk caching                         |
-| `Animated` API from `react-native` core             | JS thread animations, frame drops under load         | Use `react-native-reanimated`                              |
-| Top-level import of heavy libraries                 | Blocks startup — all code parsed before first render | Inline `require()` for rarely-used heavy modules           |
-| No `getItemLayout` on fixed-height FlatList         | Layout measurement on each item during scroll        | Provide `getItemLayout` when item height is known          |
-| Optimizing without profiling                        | Adds complexity without proven benefit               | Measure first — Perf Monitor, DevTools, Instruments        |
-| Testing only on high-end devices                    | Hides perf issues that affect most users             | Profile on mid-range and low-end devices                   |
-| `windowSize={21}` (FlatList default)                | Renders 21× visible area — wasteful on large lists   | Reduce to `5` (renders 5× visible area)                    |
-| `removeClippedSubviews={false}` on Android          | Keeps offscreen views in memory                      | Set to `true` for long lists on Android                    |
+| `ScrollView` for a measured dynamic-list bottleneck | Renders all items; can increase work and memory      | Compare a compatible FlashList or FlatList against the baseline |
+| Adding FlashList or a fixed `estimatedItemSize` without measurement | Can add dependency or incorrect layout assumptions | Measure first; use FlatList when sufficient               |
+| Adding `React.memo` or callback memoization everywhere | Adds comparison and maintenance cost                 | Apply only to measured repeated work                       |
+| Storing base64 images in state                      | Bloats JS heap and can increase memory pressure      | Use core `Image` or a compatible image/cache path and file references |
+| Choosing Reanimated or core `Animated` by rule      | May be incompatible or unnecessary                  | Check the target profile, official docs, behavior, and measurements |
+| Top-level import of a heavy library                 | May increase startup work                            | Use the target-supported loading mechanism only when measured |
+| Adding `getItemLayout` without predictable layout   | Produces incorrect offsets                            | Use it only for a verified fixed or predictable layout     |
+| Optimizing without profiling                        | Adds complexity without proven benefit               | Record a baseline and target, then re-measure              |
+| Testing only on an unrepresentative device/workload | Hides target-specific regressions                   | Use the target project's representative profile and evidence |

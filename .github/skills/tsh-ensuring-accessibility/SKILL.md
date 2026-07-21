@@ -8,10 +8,14 @@ user-invocable: false
 
 Provides WCAG 2.1 AA compliance patterns for building inclusive frontend interfaces with proper semantic markup, keyboard navigation, focus management, and screen reader support.
 
+<platform-boundary>
+The concrete semantic HTML, ARIA, DOM focus, CSS contrast, browser zoom/reflow, browser devtools, and axe-core checks in this skill are web-file guidance. Apply platform-neutral principles where valid, but skip or adapt those web-only checks for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Browser artifacts cannot close native accessibility verification, and packages, versions, and tooling remain target-profile dependent.
+</platform-boundary>
+
 <principles>
 
 <semantic-html-first>
-Start with the correct HTML element. `<button>` for actions, `<a>` for navigation, `<nav>` for navigation regions, `<main>` for primary content. Native semantics are free, reliable, and require zero ARIA. Only reach for ARIA when HTML alone cannot convey the meaning.
+For web files, start with the correct HTML element. `<button>` for actions, `<a>` for navigation, `<nav>` for navigation regions, `<main>` for primary content. Native semantics are free, reliable, and require zero ARIA. Only reach for ARIA when HTML alone cannot convey the meaning.
 </semantic-html-first>
 
 <keyboard-is-mandatory>
@@ -38,6 +42,8 @@ Progress:
 ```
 
 **Step 1: Choose semantic elements**
+
+This process is the web accessibility contract. For RN files, skip the HTML, ARIA, DOM, CSS, browser zoom, and browser assistive-technology checks below and use the RN skill's native accessibility guidance.
 
 Select the correct HTML element for each piece of UI:
 

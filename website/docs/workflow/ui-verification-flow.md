@@ -23,11 +23,17 @@ Build, lint, unit tests, and code review do **not** prove that the UI matches Fi
 
 The item is done only when the UI gate returns `PASS`, or when the user explicitly acknowledges a blocker and the item is marked `ESCALATED`.
 
+## Platform Boundary
+
+This page documents the collection's web/Figma browser verification contract only. The browser artifacts `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` are evidence about a web implementation. They cannot verify native React Native safe areas or status bars, platform navigation, device behavior, touch or gesture behavior, VoiceOver or TalkBack, simulator or device accessibility, or native end-to-end behavior.
+
+Rendered React Native UI remains with the existing UI Engineer route, but it does not enter this browser verification flow. Native simulator or device, accessibility, and end-to-end evidence is target-project-owned. When the target project does not provide an explicit native evidence contract, record native verification as `VERIFICATION NOT RUN` or as an explicit prerequisite or limitation. This collection does not provide a native verification worker or automation promise.
+
 ## User-Friendly Graph
 
 ```mermaid
 flowchart TD
-    A[User runs /tsh-implement] --> B[Engineering Manager starts the implementation workflow]
+    A[User runs /tsh-implement for web/Figma UI] --> B[Engineering Manager starts the implementation workflow]
     B --> C[Research and planning happen if needed]
     C --> C2[UI inventory captured and Figma reference readiness confirmed]
     C2 --> D[User confirms the exact full dev server URL]
@@ -60,9 +66,9 @@ flowchart TD
 
 ## Step-by-Step Flow
 
-### 1. The Workflow Starts in `/tsh-implement`
+### 1. The Web Workflow Starts in `/tsh-implement`
 
-The entrypoint is `/tsh-implement`, which runs the Engineering Manager through the canonical orchestration skill.
+The public entry point is `/tsh-implement`, which runs the Engineering Manager through the canonical orchestration skill. This page covers the web/Figma branch only; the canonical orchestrator keeps platform classification and routing in one place.
 
 The orchestrator:
 
@@ -75,9 +81,9 @@ The orchestrator:
 
 The URL is a **pinned session input**. Once confirmed, it must be forwarded unchanged through every capture and review pass.
 
-### 2. UI Engineer Implements the UI Slice
+### 2. UI Engineer Implements the Web UI Slice
 
-The UI Engineer owns implementation work only. It can:
+The UI Engineer owns web implementation work only in this flow. It can:
 
 - implement the requested UI changes
 - run local code validation such as lint, build, or tests
@@ -93,7 +99,7 @@ This step only establishes the shared path. It does not capture ACTUAL evidence 
 
 ### 4. Capture Worker Collects ACTUAL Evidence Only
 
-`tsh-ui-capture-worker` is delegated first, for every iteration. It is a mechanical evidence collector: it never judges visual correctness, and it does not produce or touch `figma-expected.png`.
+`tsh-ui-capture-worker` is delegated first, for every iteration. It is a mechanical browser evidence collector: it never judges visual correctness, does not produce or touch `figma-expected.png`, and its output is not native React Native evidence.
 
 It must collect all three ACTUAL artifacts into the current iteration directory:
 
@@ -226,12 +232,12 @@ specifications/<task-id>/ui-verification/
 | --- | --- | --- |
 | Engineering Manager | task description, Jira ID, standalone `*.research.md`, or `*.plan.md` | routing, gates, user questions, and — once per item, before iteration 1 — the shared verification root and `figma-expected.png` path |
 | UI Engineer | plan + UI task slice | code changes |
-| UI Capture Worker | pinned full URL + iteration dir | `actual.png`, `computed-styles.json`, `a11y-snapshot.yml` for this iteration only — never `figma-expected.png` |
-| UI Reviewer | Figma URL + shared `figma-expected.png` path + current iteration's ACTUAL artifacts | reuses or exports `figma-expected.png` when needed, then `PASS`, `FAIL`, or `VERIFICATION NOT RUN` |
+| UI Capture Worker | pinned full URL + iteration dir | browser `actual.png`, `computed-styles.json`, `a11y-snapshot.yml` for this iteration only — never `figma-expected.png` |
+| UI Reviewer | Figma URL + shared `figma-expected.png` path + current iteration's ACTUAL artifacts | reuses or exports `figma-expected.png` when needed, then web `PASS`, `FAIL`, or `VERIFICATION NOT RUN` |
 
-## Invariants
+## Web/Figma Invariants
 
-These rules are never optional:
+These rules are never optional for this web/Figma flow:
 
 - The pinned full dev server URL never changes during the loop.
 - The shared verification root and `figma-expected.png` path are defined once, before iteration 1 for an item, and never redefined mid-loop.
@@ -241,6 +247,8 @@ These rules are never optional:
 - Auth and access gates are never bypassed; the default resolution path is repo-root `.env`.
 - `VERIFICATION NOT RUN` never counts as `PASS`.
 - Code review never starts before the UI gate clears.
+
+These invariants do not create a native React Native verification contract. Native evidence remains the target project's responsibility.
 
 ## Source of Truth
 

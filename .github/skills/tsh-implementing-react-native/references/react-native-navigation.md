@@ -1,35 +1,47 @@
 # React Native Navigation Patterns
 
-Navigation-specific patterns for the `tsh-implementing-react-native` skill. Load this reference when implementing screen navigation, deep linking, or route structure in React Native.
+Navigation-specific patterns for the `tsh-implementing-react-native` skill. Load this reference when implementing screen navigation, deep linking, or route structure in React Native. Select the router from the consuming project's manifest, configuration, entry points, and existing conventions before applying any example.
 
 ## Table of Contents
 
+- [Target-project router profile](#target-project-router-profile)
 - [Navigation Libraries](#navigation-libraries)
 - [Screen Organization](#screen-organization)
 - [React Navigation Patterns](#react-navigation-patterns)
 - [Expo Router Patterns](#expo-router-patterns)
 - [Deep Linking](#deep-linking)
 - [Navigation State and TypeScript](#navigation-state-and-typescript)
+- [Verification Boundary](#verification-boundary)
 - [Anti-Patterns](#anti-patterns)
+
+## Target-project router profile
+
+Before choosing a pattern, inspect the target project's `package.json`, app configuration, entry points, route directories, native directories, package-manager scripts, and installed tooling. Record:
+
+- whether the project is Expo managed, Expo prebuild/dev client, or bare React Native;
+- the installed React Native, React, Expo SDK, Expo Router, and React Navigation package versions, when present;
+- the configured entry point and whether the project uses an `app/` or configured Expo Router directory, a `src/navigation/` tree, or another established convention;
+- the JavaScript engine, New Architecture setting, iOS/Android targets, and available simulators, emulators, or web tooling; and
+- the installed deep-link, sheet, analytics, and type-generation tooling.
+
+Use the detected profile and the official documentation for those exact installed versions as the authority. If the manifest and source conventions identify one router, preserve it. If both routers appear, inspect the actual entry point and rendered navigation tree; do not infer the active router from a dependency alone. If the router is absent or the evidence is ambiguous, stop for a target-project decision rather than selecting a router, adding a package, or migrating navigation implicitly.
+
+Do not mix Expo Router and an independently configured React Navigation root in one navigation tree unless the target project's documented architecture explicitly supports that arrangement. This reference supports both router paths; neither is a universal default.
 
 ## Navigation Libraries
 
-**Expo Router is the standard** for all Expo projects. It provides file-based routing (like Next.js), automatic deep linking, typed routes, and web parity with zero configuration.
+| Router path | Routing model | Apply when |
+| --- | --- | --- |
+| Expo Router | File-based routes and layouts | The target profile contains a compatible Expo Router installation and its configured route entry/conventions. |
+| React Navigation | Navigator composition with dynamic or, when supported by the installed version, static configuration | The target profile uses React Navigation as its active navigation tree, including existing bare React Native projects. |
 
-| Library              | Routing Model | When to use                                                |
-| -------------------- | ------------- | ---------------------------------------------------------- |
-| Expo Router 4+       | File-based    | **Default** — all new Expo projects                        |
-| React Navigation 7+  | Imperative    | Legacy projects already using it (do not migrate mid-project) |
-
-Expo Router is built on top of React Navigation, so all React Navigation primitives (native-stack, tabs, drawers) work under the hood. The patterns below for React Navigation are included for projects that already use it — for new code, always use Expo Router.
-
-Do not mix both in the same project.
-
-> **React Navigation 7 note**: React Navigation 7 introduced a **static API** alongside the existing dynamic API. The static API uses `createNativeStackNavigator({ screens: { ... } })` with screen configuration objects instead of JSX `<Stack.Screen>` elements. Both APIs are supported — match the project's existing pattern. The examples in this reference use the dynamic (JSX) API as it's more widely adopted. If the project uses the static API, adapt accordingly.
+Keep the project's current router and API style. A new screen should follow the selected router's structure and installed package versions; do not introduce a second router or convert dynamic configuration to static configuration as part of unrelated work.
 
 ## Screen Organization
 
 ### File-based routing (Expo Router)
+
+Use this structure only when the target profile selects Expo Router and the directory is configured accordingly:
 
 ```
 app/
@@ -48,15 +60,17 @@ app/
 │   ├── index.tsx            # /settings
 │   ├── notifications.tsx    # /settings/notifications
 │   └── [id].tsx             # /settings/:id (dynamic segment)
-└── +not-found.tsx           # 404 catch-all
+└── +not-found.tsx           # 404 catch-all, when supported by the installed version
 ```
 
-### Imperative routing (React Navigation)
+### Navigator composition (React Navigation)
+
+Use this structure only when React Navigation is the active router and matches the project's existing conventions:
 
 ```
 src/
 ├── navigation/
-│   ├── RootNavigator.tsx     # Entry: auth check → AuthStack or MainTabs
+│   ├── RootNavigator.tsx     # Entry: auth check -> AuthStack or MainTabs
 │   ├── AuthStack.tsx         # Sign in, sign up, forgot password
 │   ├── MainTabs.tsx          # Bottom tab navigator
 │   ├── HomeStack.tsx         # Stack within the Home tab
@@ -74,20 +88,35 @@ src/
 │       └── SettingsScreen.tsx
 ```
 
+### Export contract by file role
+
+- **Expo Router route files and layout files:** follow the route-module contract documented for the installed Expo Router version and configured route directory. If that version requires a default-exported route or layout component, use that default export. Do not apply this rule to ordinary components imported by the route.
+- **React Navigation route screen files and navigator/layout composition files:** React Navigation does not impose a file-based route export contract. Follow the target project's established module convention; in this collection, ordinary screen, navigator, and layout components use named exports unless the target project explicitly requires another contract.
+- **Ordinary React Native components in either path:** retain the collection's named-export convention. A route or layout file is an exception only when the selected router's installed version requires it, not because it is a UI component or because the project targets web.
+
+Verify the contract against the consuming project's installed router and official version-specific documentation before changing an export. If it cannot be verified, stop under the Task 1.3 stop rule.
+
 ## React Navigation Patterns
+
+Apply these examples only when the target profile selects React Navigation and the referenced packages and APIs are installed and compatible with one another.
 
 ### Navigator composition
 
-React Navigation uses a nested navigator model. Common structure:
+Use the project's installed native-stack package and existing navigator style. The package name and options below must be checked against the exact installed version:
 
 ```typescript
-// RootNavigator.tsx
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+type RootStackParamList = {
+  Main: undefined;
+  Auth: undefined;
+  CreatePost: undefined;
+};
+
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const RootNavigator = () => (
+export const RootNavigator = () => (
   <NavigationContainer>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isAuthenticated ? (
@@ -95,7 +124,6 @@ const RootNavigator = () => (
       ) : (
         <Stack.Screen name="Auth" component={AuthStack} />
       )}
-      {/* Modal screens accessible from anywhere */}
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="CreatePost" component={CreatePostScreen} />
       </Stack.Group>
@@ -104,36 +132,54 @@ const RootNavigator = () => (
 );
 ```
 
-### Native stack
+If the target profile does not have a compatible native-stack package, use the navigator already supported by that project and its official migration guidance. Do not replace an existing navigator solely because this example uses native stack.
 
-Always use `@react-navigation/native-stack` (not `@react-navigation/stack`). Native stack uses platform-native navigation transitions (UINavigationController on iOS, Fragment on Android) for better performance and native feel.
+### Dynamic and static configuration
+
+The dynamic JSX API and the static configuration API are separate React Navigation API paths. Use the one already used by the target project. Use the static form only when the installed React Navigation packages expose it and the exact installed-version documentation confirms the signature:
+
+```typescript
+// Dynamic API: use when the target project uses JSX navigator elements.
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+export const MainStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="Home" component={HomeScreen} />
+    <Stack.Screen name="Detail" component={DetailScreen} />
+  </Stack.Navigator>
+);
+```
+
+```typescript
+// Static API: use only when the installed version supports this API and syntax.
+const RootStack = createNativeStackNavigator({
+  screens: {
+    Home: HomeScreen,
+    Detail: DetailScreen,
+  },
+});
+```
+
+The static example is intentionally not a version guarantee. Check the target manifest and official React Navigation documentation before using it; otherwise keep the project's dynamic configuration.
 
 ### Typed navigation
 
-Define param types for all routes and pass them as generics to navigators and hooks:
+Define route parameters for the selected navigator and use the type helpers exported by the installed React Navigation packages:
 
 ```typescript
-// navigation/types.ts
-type RootStackParamList = {
-  Main: undefined;
-  Auth: undefined;
-  CreatePost: undefined;
-};
-
 type HomeStackParamList = {
   Home: undefined;
   Detail: { id: string; title: string };
   Search: { query?: string };
 };
 
-// In screens — typed navigation hook
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-type HomeScreenNavProp = NativeStackNavigationProp<HomeStackParamList, 'Home'>;
+type HomeScreenNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'Home'>;
 
-const HomeScreen = () => {
-  const navigation = useNavigation<HomeScreenNavProp>();
+export const HomeScreen = () => {
+  const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const handlePress = (item: Item) => {
     navigation.navigate('Detail', { id: item.id, title: item.title });
@@ -141,38 +187,17 @@ const HomeScreen = () => {
 };
 ```
 
-### Screen options
-
-Configure headers and tabs declaratively via `screenOptions`:
-
-```typescript
-const MainTabs = () => (
-  <Tab.Navigator
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ focused, color, size }) => {
-        const icon = tabIcons[route.name];
-        return <Icon name={icon} size={size} color={color} />;
-      },
-      tabBarActiveTintColor: theme.colors.primary500,
-      tabBarInactiveTintColor: theme.colors.textSecondary,
-      headerShown: false,
-    })}
-  >
-    <Tab.Screen name="Home" component={HomeStack} />
-    <Tab.Screen name="Search" component={SearchStack} />
-    <Tab.Screen name="Profile" component={ProfileStack} />
-  </Tab.Navigator>
-);
-```
+Use the type helpers and navigator package actually installed. If the project uses the static API or a different navigator, adapt the types to that API's official contract rather than copying this generic.
 
 ## Expo Router Patterns
 
-### Layouts
+Apply these examples only when the target profile selects Expo Router, the project has a compatible Expo installation, and the configured route directory matches the project convention.
 
-Layouts define the navigation structure for a route group:
+### Layouts and route exports
+
+Expo Router route files and layout files must follow the route-module export contract documented for the installed version. Where that contract requires a default-exported route component, this example uses a default export; verify route screens and layouts individually:
 
 ```typescript
-// app/(tabs)/_layout.tsx
 import { Tabs } from 'expo-router';
 
 const TabLayout = () => (
@@ -182,86 +207,75 @@ const TabLayout = () => (
       headerShown: false,
     }}
   >
-    <Tabs.Screen
-      name="home"
-      options={{
-        title: 'Home',
-        tabBarIcon: ({ color, size }) => <Icon name="home" size={size} color={color} />,
-      }}
-    />
-    <Tabs.Screen
-      name="profile"
-      options={{
-        title: 'Profile',
-        tabBarIcon: ({ color, size }) => <Icon name="user" size={size} color={color} />,
-      }}
-    />
+    <Tabs.Screen name="home" options={{ title: 'Home' }} />
+    <Tabs.Screen name="profile" options={{ title: 'Profile' }} />
   </Tabs>
 );
 
 export default TabLayout;
 ```
 
-Note: Expo Router layout files use `export default` — this is the one exception to the "named exports only" rule, as the file-based router requires default exports.
+If the installed version or project configuration specifies another contract, follow that contract. Route files and layouts are router modules; ordinary components imported by them remain named exports.
 
-### Typed routes
+### Typed and dynamic routes
 
-Expo Router generates route types from the file structure automatically. Enable typed routes in `tsconfig.json`:
-
-```json
-{
-  "compilerOptions": {
-    "strict": true
-  },
-  "include": [".expo/types/**/*.ts", "**/*.ts", "**/*.tsx"]
-}
-```
-
-This gives you compile-time route validation — `router.push()` and `<Link href>` only accept valid routes:
+File-based static and dynamic segments are available only when supported by the installed Expo Router version and enabled by the project configuration. A route such as `settings/[id].tsx` represents a dynamic segment only under that configured file-based router:
 
 ```typescript
-import { useRouter, useLocalSearchParams, Link } from 'expo-router';
+import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 
-const DetailScreen = () => {
+export default function DetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const router = useRouter();
 
-  const handleBack = () => router.back();
-  // Typed — TypeScript errors if route doesn't exist
-  const handleNavigate = () => router.push('/settings/notifications');
-
-  // In JSX — href is also type-checked
-  return <Link href={{ pathname: '/detail/[id]', params: { id: '123' } }}>Go</Link>;
-};
+  return (
+    <>
+      <Text>{id}</Text>
+      <Button title="Back" onPress={() => router.back()} />
+      <Link href={{ pathname: '/settings/[id]', params: { id: '123' } }}>
+        Open detail
+      </Link>
+    </>
+  );
+}
 ```
+
+Enable generated typed routes only when the target project's installed Expo Router version supports them and its documented configuration is present. Confirm the generated type location and `Link`/`router` signatures against that version; otherwise use the project's supported route types and runtime validation.
 
 ### Route groups
 
-Group routes with parentheses `(groupName)` to organize without affecting the URL:
+Group routes with parentheses `(groupName)` to organize without affecting the URL when that behavior is supported by the installed file-based router:
 
-- `(auth)/` — Authentication screens grouped together, using a stack layout
-- `(tabs)/` — Tab-based screens grouped together, using a tab layout
-- `(settings)/` — Settings-related screens grouped, sharing a common header
+- `(auth)/` - authentication screens grouped together, using a stack layout;
+- `(tabs)/` - tab-based screens grouped together, using a tab layout; and
+- `(settings)/` - settings-related screens grouped together, sharing a common header.
 
-### Modal routes
+### Modal routes and sheets
 
-Present screens as modals by configuring the layout:
+For an Expo Router project, configure a modal route through its layout only when the installed router and native navigator support the `presentation` option:
 
 ```typescript
-// app/_layout.tsx
-<Stack>
-  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-  <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-</Stack>
+import { Stack } from 'expo-router';
+
+export default function RootLayout() {
+  return (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+    </Stack>
+  );
+}
 ```
+
+For a draggable bottom sheet, use a sheet package only if it is already installed and its Reanimated, gesture-handler, React Native, platform, and New Architecture compatibility is confirmed in the target profile. Otherwise use the router's supported modal presentation or the project's existing sheet abstraction; do not add `@gorhom/bottom-sheet` from this reference.
 
 ## Deep Linking
 
+Deep linking is a target-project configuration concern. First confirm the selected router, URL scheme or universal/app-link configuration, platform targets, and installed development tools. A browser URL or web route does not prove native deep-link behavior.
+
 ### Expo Router
 
-Deep linking is automatic. The file path IS the URL. A file at `app/settings/[id].tsx` responds to `myapp://settings/123` with zero configuration.
-
-Configure the URL scheme in `app.json`:
+Use file paths as deep-link paths only when the target project has a compatible Expo Router file-based setup and the route is present in its configured route directory. Configure a scheme in the target project's app configuration only when its installed Expo tooling supports that field:
 
 ```json
 {
@@ -271,15 +285,15 @@ Configure the URL scheme in `app.json`:
 }
 ```
 
-For universal links (HTTPS links that open the app), configure `intentFilters` (Android) and `associatedDomains` (iOS) in `app.json`.
+Universal links or Android app links also require the target project's installed-version platform configuration, associated-domain/intent-filter setup, and native credentials or hosting where applicable. Follow the official Expo and platform documentation for that profile.
 
 ### React Navigation
 
-Configure linking in the `NavigationContainer`:
+Use `linking` on the target project's `NavigationContainer` only when React Navigation is the active router and the installed packages support the configured linking type:
 
 ```typescript
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: ['myapp://', 'https://myapp.com'],
+  prefixes: ['myapp://', 'https://myapp.example'],
   config: {
     screens: {
       Main: {
@@ -302,35 +316,39 @@ const linking: LinkingOptions<RootStackParamList> = {
 </NavigationContainer>
 ```
 
-### Deep link testing
+Match the `config` tree to the actual nested navigator and use only schemes and domains configured by the target project. Do not add linking configuration or a native URL scheme as part of a collection-only change.
 
-Test deep links during development:
+### Platform-specific deep-link commands
+
+Run a deep-link command only when the target profile provides all of the following: the selected router's configuration, a built or running target app, the named platform, and the command-line tool. These are target-project commands, not collection validation:
 
 ```bash
-# iOS Simulator
+# iOS Simulator: requires a booted simulator and an installed uri-scheme tool.
 npx uri-scheme open "myapp://detail/123" --ios
 
-# Android Emulator
+# Android Emulator: requires a booted emulator, adb, and an installed app.
 adb shell am start -a android.intent.action.VIEW -d "myapp://detail/123"
 
-# Expo Go
-npx uri-scheme open "exp://127.0.0.1:8081/--/detail/123"
+# Expo development client or Go: use only when the installed Expo workflow
+# documents the exp:// URL shape and the target dev server is running.
+npx uri-scheme open "exp://127.0.0.1:8081/--/detail/123" --ios
 ```
+
+The collection does not execute or claim native simulator, emulator, device, or deep-link verification. If the target project lacks the required platform tool or build, record the native check as unavailable or target-project-owned.
 
 ## Navigation State and TypeScript
 
 ### Navigation-aware data loading
 
-Load screen data in the screen component, triggered by focus:
+Refresh-on-focus is router- and package-specific. For React Navigation, use `useFocusEffect` only when the installed `@react-navigation/native` version exposes it and the target project uses that lifecycle contract:
 
 ```typescript
-import { useFocusEffect } from '@react-navigation/native'; // or expo-router
+import { useFocusEffect } from '@react-navigation/native';
 import { useCallback } from 'react';
 
-const ProfileScreen = () => {
+export const ProfileScreen = () => {
   const { data, refetch } = useProfile();
 
-  // Refetch when screen comes into focus (e.g., returning from edit screen)
   useFocusEffect(
     useCallback(() => {
       refetch();
@@ -339,98 +357,78 @@ const ProfileScreen = () => {
 };
 ```
 
+For Expo Router, use the focus hook exported or explicitly supported by the installed Expo Router version, or its documented equivalent. Do not import a hook merely because the project uses Expo. If the selected router has no compatible focus API, use its documented navigation listener or an explicit refresh action; a mount-only effect is not an equivalent focus refresh.
+
 ### Preventing navigation with unsaved changes
+
+For React Navigation, use `usePreventRemove` only when the installed package version supports it and the target navigator uses that event contract:
 
 ```typescript
 import { usePreventRemove } from '@react-navigation/native';
 
-const EditScreen = () => {
+export const EditScreen = () => {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   usePreventRemove(hasUnsavedChanges, ({ data }) => {
-    Alert.alert(
-      'Discard changes?',
-      'You have unsaved changes. Are you sure you want to leave?',
-      [
-        { text: 'Stay', style: 'cancel' },
-        { text: 'Discard', style: 'destructive', onPress: () => data.action() },
-      ]
-    );
+    Alert.alert('Discard changes?', 'You have unsaved changes.', [
+      { text: 'Stay', style: 'cancel' },
+      { text: 'Discard', style: 'destructive', onPress: () => data.action() },
+    ]);
   });
 };
 ```
 
-### Screen tracking / analytics
+For Expo Router, use the installed version's documented prevention or before-remove mechanism. Do not assume that a React Navigation hook is re-exported by Expo Router; verify the import and compatibility first.
 
-Centralize screen tracking at the navigator level:
+### Screen tracking and analytics
+
+Screen tracking belongs at the selected router's root navigation boundary and must use the analytics client already installed by the target project.
+
+For React Navigation, use `onStateChange` only when the target root owns a `NavigationContainer`:
 
 ```typescript
-// React Navigation
 <NavigationContainer
   onStateChange={(state) => {
     const currentRoute = getActiveRouteName(state);
     analytics.trackScreen(currentRoute);
   }}
 >
+  {/* ... */}
+</NavigationContainer>
 ```
+
+For Expo Router, use the installed version's documented root-layout pathname or navigation-state API, such as `usePathname`, only when that export and the target analytics integration are available:
 
 ```typescript
-// Expo Router — use the pathname hook
 import { usePathname } from 'expo-router';
 
-// In root layout
-const pathname = usePathname();
-useEffect(() => {
-  analytics.trackScreen(pathname);
-}, [pathname]);
+export default function RootLayout() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    analytics.trackScreen(pathname);
+  }, [pathname]);
+
+  return <Stack />;
+}
 ```
+
+Respect the target project's consent, redaction, and event naming rules. If no analytics client or selected-router state API is installed, do not add one from this reference; document the integration prerequisite.
+
+## Verification Boundary
+
+The collection can validate Markdown and, for web-compatible artifacts, browser behavior through its existing web/Playwright workflow. It cannot execute or claim native iOS/Android simulator, emulator, device, deep-link, gesture, safe-area, VoiceOver, TalkBack, or native E2E verification. Those checks require target-project-owned builds, devices, accessibility tooling, and evidence. Keep any browser URL, screenshot, or Playwright result scoped to web behavior and do not use it as native navigation evidence.
 
 ## Anti-Patterns
 
-| Anti-Pattern                                    | Why                                                   | Fix                                                     |
-| ----------------------------------------------- | ----------------------------------------------------- | ------------------------------------------------------- |
-| `@react-navigation/stack` (JS-based stack)      | JS-driven transitions, slower than native              | Use `@react-navigation/native-stack`                    |
-| Untyped `navigation.navigate('Screen')`         | No param validation, runtime crashes                   | Define `ParamList` types, use typed hooks                |
-| Nesting 4+ navigators deep                      | Complex state, hard to reason about, slow transitions  | Flatten: use groups and modal presentations              |
-| Fetching data in `useEffect` without focus check | Stale data when returning to screen                   | Use `useFocusEffect` for screen data that can go stale  |
-| Passing large objects as route params            | Serialized into navigation state, memory overhead      | Pass IDs only, fetch data in the destination screen     |
-| `navigation.reset()` for logout                 | Leaves screens in memory, animations break             | Conditional rendering in root navigator based on auth   |
-| Mixing Expo Router and React Navigation          | Conflicting navigation states, unpredictable behavior | Pick one and use it exclusively                          |
-| Default export for non-layout components         | Inconsistent imports, harder refactoring              | Named exports (except Expo Router `_layout.tsx` files)  |
-| Hardcoded screen names as strings everywhere     | Typo-prone, no refactoring support                    | Use route name constants or typed navigation             |
-| Custom modal via `View` overlay                  | No native transition, no gesture dismissal, a11y gaps | Use `presentation: 'modal'` in stack or `@gorhom/bottom-sheet` |
-
-## Bottom Sheet Pattern
-
-`@gorhom/bottom-sheet` is the standard library for bottom sheet navigation in React Native. It integrates with Reanimated and Gesture Handler for native-quality 60 fps interactions.
-
-```typescript
-import BottomSheet from '@gorhom/bottom-sheet';
-import { useCallback, useMemo, useRef } from 'react';
-
-const FilterSheet = () => {
-  const bottomSheetRef = useRef<BottomSheet>(null);
-  const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
-
-  const handleOpen = useCallback(() => {
-    bottomSheetRef.current?.expand();
-  }, []);
-
-  return (
-    <BottomSheet
-      ref={bottomSheetRef}
-      snapPoints={snapPoints}
-      enablePanDownToClose
-      index={-1}  // Start closed
-    >
-      {/* Sheet content */}
-    </BottomSheet>
-  );
-};
-```
-
-Key rules:
-- Use `@gorhom/bottom-sheet` — not custom `Animated.View` overlays. It handles gesture competition, keyboard avoidance, and accessibility.
-- Define `snapPoints` with `useMemo` to avoid re-creating the array on every render.
-- Use `index={-1}` to start the sheet closed; control it programmatically via the ref.
-- For sheets containing scrollable content, use `BottomSheetScrollView` or `BottomSheetFlatList` instead of standard `ScrollView` / `FlatList` to avoid gesture conflicts.
+| Anti-Pattern | Why | Fix |
+| --- | --- | --- |
+| Treating Expo Router as the default for every project | The collection has no target application profile and projects may use bare React Native or React Navigation. | Inspect the manifest, configuration, entry point, versions, and conventions; preserve the detected router. |
+| Migrating an existing router while adding a screen | Router migration changes route contracts, linking, exports, and native configuration. | Keep the existing router and escalate a migration as a separate target-project decision. |
+| Mixing Expo Router and an independent React Navigation root | Two navigation ownership models can create conflicting state and linking behavior. | Use the selected router's supported integration only after checking its installed-version documentation. |
+| Using static or dynamic APIs without checking the installed version | API availability and signatures vary by router package version. | Match the project's existing API style and verify alternatives against the exact installed packages. |
+| Applying typed-route examples without generated/configured types | Type examples can compile only when the target router has the required generation or param-list setup. | Confirm the target configuration and use its supported type contract or runtime fallback. |
+| Default-exporting every React Native component | Ordinary component imports in this collection use named exports. | Reserve router-required exports for route and layout modules; keep ordinary components named. |
+| Running a deep-link command without a target build and platform tool | A command alone is not evidence that native linking works. | Require the target platform, installed tool, configured scheme, and target-project-owned evidence. |
+| Requiring `@gorhom/bottom-sheet` or another sheet package | Package compatibility depends on the target's RN, router, engine, architecture, and native setup. | Use an installed compatible abstraction, router modal support, or a target-project-approved dependency. |
+| Treating browser or Playwright results as native navigation verification | Browser artifacts do not establish native route, device, gesture, or accessibility behavior. | Keep browser evidence web-only and record native verification as target-project-owned or unavailable. |

@@ -8,6 +8,15 @@ user-invocable: false
 
 Verification process, criteria, and tolerances for comparing UI implementations against Figma designs.
 
+## Platform Boundary
+
+This skill defines the collection's web/Figma browser verification contract only.
+
+- `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` are browser evidence for web/Figma verification only. They are never proof of native iOS or Android behavior.
+- The Playwright/browser contract excludes native safe areas and status bars, platform navigation, device behavior, touch or gesture behavior, VoiceOver, TalkBack, simulator/device accessibility, and native end-to-end testing.
+- When a task makes a native React Native claim, leave native verification as `VERIFICATION NOT RUN` unless the target project supplies a separate native evidence contract. Browser artifacts cannot close or upgrade that native verification status.
+- This boundary does not change the existing web capture-before-review ordering, pinned URL, artifact directory requirements, retry/iteration behavior, or `VERIFICATION NOT RUN` handling for web verification.
+
 > **Default to asking when anything is off — this is a judgment rule, not a checklist.** Every specific blocker named in this skill (missing Figma, auth redirect, wrong page, missing or partial artifacts, unconfirmed URL, tool error, …) is only an EXAMPLE of one underlying rule: whenever you cannot run a real, complete verification against the full artifact base — because something is missing, broken, ambiguous, inconsistent, or simply unexpected, **including situations not listed anywhere here** — stop and raise it through `vscode/askQuestions` (when that tool is available to you). Do not guess, do not improvise a workaround, do not fabricate values, and do not proceed on partial evidence. Think about whether the evidence you actually have supports a verdict; if it does not, ask instead of pushing forward.
 
 ## Verification Process

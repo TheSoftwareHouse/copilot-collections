@@ -11,8 +11,9 @@ This skill is the canonical workflow owner for implementation orchestration in t
 <principles>
 <canonical-source-of-truth>
 Keep planning readiness, task routing, todo protocol, execution-plan steps, and review gates here rather than duplicating them in agents or prompts.
-
 This skill is the single owner of route-varying authorization bases, eligibility, and escalation. Execution owners carry the common invariant inline in their own `<human-approval-precondition>` block; use that inline precondition as the source of truth for the common invariant rather than restating the predicate here as an owners' source of truth.
+
+The `.github/prompts/tsh-implement.prompt.md` prompt remains the thin canonical trigger for this skill; keep React Native classification and verification boundaries here rather than adding RN workflow logic to that prompt.
 </canonical-source-of-truth>
 
 <never-edits-files-directly>
@@ -65,6 +66,18 @@ Use the following rules before any delegation. Broad inputs remain accepted, but
 
 If research or a plan is missing, route to the Full Flow preparation sequence below before selecting an implementation owner. Do not offer or authorize no-plan implementation.
 
+### Platform and work-type classification
+
+Classify the rendered surface and work type before selecting an owner. Do not infer ownership from which skill happens to be loaded.
+
+| Classification | Route | Boundary |
+| -------------- | ----- | -------- |
+| React Native rendered UI: screens, components, navigation, layout, styling, gestures, animations, or accessibility-facing UI | `tsh-ui-engineer` with `tsh-implement-ui-common-task.prompt.md` | The UI owner loads `tsh-implementing-react-native` for this route. The browser URL, Playwright, and Figma artifact gate is not native verification. |
+| React Native non-UI: business logic, state, data, services, integrations, or other non-rendered work | Existing app-code route: `tsh-plan-implementor` by default, or `tsh-software-engineer` for the complex/no-plan non-UI exception, with `tsh-implement-common-task.prompt.md` | Keep the work on the non-UI route; do not route it through RN UI guidance. |
+| Web rendered UI | Existing web UI route | Apply the existing web UI verification ordering and `VERIFICATION NOT RUN` semantics. |
+
+For React Native rendered UI, native simulator/device, accessibility, and native end-to-end evidence is owned by the target project. If that evidence contract is unavailable, record the native verification as a prerequisite or limitation; do not select or name a collection-supported native framework or tool and do not close native verification with browser artifacts.
+
 ### Step 2 - Plan the task order
 
 Produce a task-order plan - the WHAT tasks in WHAT order - before the first delegation, not a binding agent + prompt call sequence.
@@ -84,7 +97,9 @@ This table is the single source of truth for selecting a delegate agent and prom
 | ----------------------------- | ----------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | app code (plan task)          | `tsh-plan-implementor`  | `tsh-implement-common-task.prompt.md`    | DEFAULT route for a Human-approved plan revision's actionable, low-risk plan seams that must be executed exactly as written                                                                                          |
 | app code (complex)            | `tsh-software-engineer` | `tsh-implement-common-task.prompt.md`    | EXCEPTION route for complex non-UI work; choose `Kimi K2.7 Code` or `GPT-5.3-Codex` for medium-reasoning precision on complex work, or `Gemini 3.6 Flash` for fast, low-cost, large-context analysis |
-| UI with Figma                 | `tsh-ui-engineer`       | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for Figma-based UI implementation                                                                                                                                                                                  |
+| Web UI with Figma             | `tsh-ui-engineer`       | `tsh-implement-ui-common-task.prompt.md` | The internal prompt should be used for web Figma-based UI implementation; the browser URL, Playwright, and Figma artifact gate is web-only                                                                                                          |
+| React Native rendered UI      | `tsh-ui-engineer`       | `tsh-implement-ui-common-task.prompt.md` | Route rendered RN UI to the UI owner, which loads `tsh-implementing-react-native`; browser artifacts cannot close native verification                                                                                                                 |
+| React Native non-UI app code  | `tsh-plan-implementor` by default, or `tsh-software-engineer` for the complex/no-plan exception | `tsh-implement-common-task.prompt.md` | Keep RN business logic, state, data, services, integrations, and other non-UI work on the existing non-UI route                                                                                                                                    |
 | E2E                           | `tsh-e2e-engineer`      | `tsh-implement-e2e.prompt.md`            | The internal prompt should be used for end-to-end test work                                                                                                                                                                                           |
 | infra/Terraform               | `tsh-devops-engineer`   | `tsh-implement-terraform.prompt.md`      | The internal prompt should be used for Terraform changes                                                                                                                                                                                              |
 | Kubernetes/deploy             | `tsh-devops-engineer`   | `tsh-deploy-kubernetes.prompt.md`        | The internal prompt should be used for deployment or Kubernetes work                                                                                                                                                                                  |
@@ -95,7 +110,7 @@ This table is the single source of truth for selecting a delegate agent and prom
 | `[REUSE]` UI verification     | `tsh-ui-reviewer`       | `tsh-review-ui.prompt.md`                | Review each UI item individually; do not batch                                                                                                                                                                                                        |
 | `[REUSE]` other               | per the task definition | —                                        | Execute as defined in the task definition; delegate to the matching implementer only when new product code is required                                                                                                                                |
 
-Note: Apply the app-code decision rule consistently during execution and follow-up fixes: `tsh-plan-implementor` is the DEFAULT route for actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work.
+Note: React Native rendered UI follows the platform classification above and does not enter the browser UI verification gate. Apply the app-code decision rule consistently during execution and follow-up fixes: `tsh-plan-implementor` is the DEFAULT route for actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work.
 
 ## Material Revision Handling
 
@@ -144,7 +159,7 @@ Check the current state before creating or executing any plan.
 
 | Artifact or signal  | Treat as ready when                                                                                                                     | If not ready                                                                          |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `*.research.md`     | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links  | Route to `tsh-context-engineer` with `tsh-research.prompt.md`                         |
+| Research artifact   | A plan-associated `research.md` in the same task specification directory as the `*.plan.md`, or a generic `*.research.md`, exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links | Route to `tsh-context-engineer` with `tsh-research.prompt.md` |
 | `*.plan.md`         | It exists for the current task and contains ordered, actionable tasks that can be delegated                                             | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
 | Open questions gate | It exists and contains no `❓ Open` rows in `## Open Questions`, so unresolved questions are not blocking execution readiness           | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
 | Technical Context   | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md`                         |
@@ -153,7 +168,7 @@ Check the current state before creating or executing any plan.
 
 ### Planning sequence
 
-1. **Check for existing research and plan files** - Inspect current `*.research.md` and `*.plan.md` state first.
+1. **Check for existing research and plan files** - Inspect the plan-associated `research.md` in the same task specification directory as the `*.plan.md`, or a generic `*.research.md`, together with the current `*.plan.md` state first.
 2. **Fill missing context when needed** - If research is missing or incomplete, delegate to `tsh-context-engineer` with `tsh-research.prompt.md`.
 3. **Create or refresh the reviewed plan when needed** - If the plan is missing, stale, not actionable, or not reviewer-ready, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The architect owns producing a finished reviewed plan with one invocation per plan lifecycle; the sole exception is an explicitly user-directed new review event, never a routine architect or manager option. If a return is non-revision-bound or a blocker remains unresolved, the architect uses `vscode/askQuestions` with exactly `stop here` and `custom guidance`, neither of which authorizes another review. Preserve append-only review history and never approve with unhandled blockers. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules. Missing research always routes to `tsh-context-engineer` first; missing plans always route to `tsh-architect`. After the review event is settled, the architect runs its own plan-authoring approval gate (`Approve plan`, `I have comments`) and records the literal decision in the plan's `## Human Approval` table; see **Approval Gate Separation**.
 4. **Create execution todos from the plan** - Create todos per plan task, not just per phase.

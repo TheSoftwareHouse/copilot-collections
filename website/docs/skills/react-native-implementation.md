@@ -5,99 +5,37 @@ title: React Native Implementation
 
 # React Native Implementation
 
-**Folder:** `.github/skills/tsh-implementing-react-native/`  
-**Used by:** Software Engineer
+**Folder:** `.github/skills/tsh-implementing-react-native/`<br />
+**Authority:** `.github/skills/tsh-implementing-react-native/SKILL.md`<br />
+**Used by:** UI Engineer for rendered React Native UI; the existing non-UI route for business logic and other non-rendered work
 
-Provides comprehensive React Native guidelines covering component design, platform-specific code, design system integration, navigation, gestures, animations, and performance optimization for mobile apps.
+This page is a curated summary. The source skill is the authority for React Native component design, platform-specific code, navigation, gestures, animations, and performance guidance.
 
-## Component Design Principles
+## Profile-Driven Guidance
 
-- **Composition over complexity** — Build complex screens from small, focused components.
-- **Platform-aware, not platform-split** — Write shared code by default; introduce platform-specific behavior only when platforms genuinely differ.
-- **Design tokens** — All visual values come from a centralized theme. Zero hardcoded colors, spacing, or typography in `StyleSheet.create()`.
-- **Pressable standard** — Use `Pressable` for all touchable elements. Deprecated `TouchableOpacity` / `TouchableHighlight` are not permitted.
+Before applying framework, router, package, version, or API guidance, inspect the target project's profile: Expo managed, Expo prebuild/dev client, or bare React Native; React Native, React, and Expo SDK versions when applicable; router and version; JavaScript engine; New Architecture setting; installed packages; native directories; package manager; and available build, test, capture, and verification tooling.
 
-## Implementation Process
+Use that profile and the relevant official compatibility documentation as the authority. Expo guidance is conditional, not a universal default. Preserve the target project's existing router and conventions, and do not add a package or assume an API without a compatibility check.
 
-A 5-step workflow mirrors the frontend implementation skill, adapted for mobile:
+## UI Ownership
 
-1. **Gather design context** — Extract specs from Figma, map values to tokens, identify platform differences and touch target sizes.
-2. **Plan component structure** — Define boundaries, props interfaces, state ownership, and platform-branching strategy.
-3. **Implement components** — Build with typed props, `StyleSheet.create()`, composition patterns, three UI states (loading/error/empty), safe areas, and proper touch feedback.
-4. **Organize modules** — Barrel files at public boundaries, named exports only.
-5. **Verify implementation** — Test on both iOS and Android, verify touch targets, check with VoiceOver and TalkBack.
+The UI Engineer owns rendered React Native screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI, using this skill for RN guidance. React Native business logic, state, data, services, integrations, native modules, and other non-rendered work remain on the existing non-UI route.
 
-## Platform-Specific Code
+Route and layout files follow the selected router's required export contract. Ordinary React Native components retain the named-export convention. Do not apply an ordinary-component export rule to a route or layout without checking the selected router and installed version.
 
-| Divergence Level | Strategy |
-|---|---|
-| Single value differs (shadow, spacing) | `Platform.select()` inline |
-| A few lines differ | `Platform.OS === 'ios'` conditional |
-| 30%+ of component differs | Separate `.ios.tsx` / `.android.tsx` files |
-| Entirely different native API | Separate files + shared types/hook |
+## Measurement-First Performance
 
-## Styling Patterns
+Record a baseline, representative workload, target profile, and success threshold before optimizing. Choose list implementations, FlatList tuning, memoization, image libraries, lazy loading, bundle analysis, engine settings, or animation libraries only when the measurement identifies a need and the exact target versions and tooling are compatible. Re-measure the same workload after each material change; retain the simpler fallback when it is sufficient or the measured benefit does not justify the added dependency or complexity.
 
-| Pattern | Approach |
-|---|---|
-| **Static styles** | `StyleSheet.create()` — validates at creation, enables native optimizations |
-| **Dynamic styles** | Style arrays: `[styles.base, { opacity: disabled ? 0.5 : 1 }]` |
-| **Variants** | Map variants to pre-created stylesheet entries |
-| **Responsive** | Flexbox by default; `useWindowDimensions()` for screen-relative sizing |
-| **Tokens** | Centralized theme object with colors, spacing, typography, radii |
+See the source references for the detailed decision rules:
 
-## Navigation
+- `.github/skills/tsh-implementing-react-native/references/react-native-patterns.md`
+- `.github/skills/tsh-implementing-react-native/references/react-native-navigation.md`
+- `.github/skills/tsh-implementing-react-native/references/react-native-performance.md`
 
-**Expo Router is the standard** for all Expo projects:
+## Verification Boundary
 
-| Library | Model | When to use |
-|---|---|---|
-| **Expo Router 4+** | File-based | **Default** — all new Expo projects |
-| **React Navigation 7+** | Imperative | Legacy projects already using it |
-
-Key patterns: typed routes, native stack (not JS stack), `useFocusEffect` for data refresh, deep linking configuration.
-
-## Performance Guidelines
-
-| Area | Approach |
-|---|---|
-| **Lists** | `FlashList` with `estimatedItemSize`; `React.memo` on all list items |
-| **Images** | `expo-image` with blurhash placeholders and `recyclingKey` |
-| **Animations** | `react-native-reanimated` (UI thread); never `Animated` from core |
-| **Gestures** | `react-native-gesture-handler` (native thread) |
-| **Startup** | Minimize root imports; inline `require()` for heavy modules; `expo-splash-screen` |
-| **Bundle** | Named imports only; analyze with `react-native-bundle-visualizer` |
-
-## Anti-Patterns
-
-| Anti-Pattern | Correction |
-|---|---|
-| Inline style objects | Use `StyleSheet.create()` |
-| `TouchableOpacity` | Use `Pressable` with platform feedback |
-| `Animated` from react-native core | Use `react-native-reanimated` |
-| `PanResponder` | Use `react-native-gesture-handler` |
-| `ScrollView` for long lists | Use `FlashList` or `FlatList` |
-| Hardcoded colors/spacing | Use design tokens from theme |
-| Missing touch target sizes | Minimum 44×44 pt (iOS) / 48×48 dp (Android) |
-| `@react-navigation/stack` (JS stack) | Use `@react-navigation/native-stack` |
-| Base64 images in state | Use `expo-image` disk cache |
-
-## References
-
-The skill includes detailed reference files:
-
-- **Core patterns** — Component composition, styling, platform code, Pressable, safe areas, gestures, animations, New Architecture.
-- **Navigation** — React Navigation and Expo Router patterns, deep linking, typed routes, screen organization.
-- **Performance** — List optimization, image handling, startup time, bundle size, memoization, memory management, Hermes engine.
-
-## Connected Skills
-
-- `tsh-ui-verifying` — Verification criteria and tolerances.
-- `tsh-technical-context-discovering` — Project conventions.
-- `tsh-ensuring-accessibility` — WCAG compliance on both platforms.
-- `tsh-implementing-forms` — Schema-based validation for mobile forms.
-- `tsh-writing-hooks` — Custom hook patterns.
-- `tsh-reviewing-frontend` — Code review for components.
+Collection-supported browser and Figma verification applies only to web-compatible artifacts and workflows. Browser URLs, Playwright results, screenshots, and accessibility snapshots do not verify native React Native behavior. Native simulator or device builds, native accessibility checks, and native end-to-end evidence are owned by the target project when its tooling provides them; this collection does not claim to execute them.
 
 :::warning Never Guess — Always Ask
 If a design specification is unclear, a token is missing, or behavior is ambiguous, stop and ask. Do not guess or make assumptions about design intent.

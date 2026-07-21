@@ -8,7 +8,11 @@ title: E2E Testing
 **Folder:** `.github/skills/tsh-e2e-testing/`  
 **Used by:** E2E Engineer
 
-Provides Playwright-specific E2E testing patterns, Page Object conventions, mocking strategies, error recovery, and CI readiness checklists.
+Provides Playwright-specific browser E2E testing patterns for web flows, Page Object conventions, mocking strategies, error recovery, and CI readiness checklists.
+
+## Platform Boundary
+
+Playwright is the collection's E2E owner for web flows only. Native React Native E2E, simulator/device automation, and native accessibility/device evidence are target-project responsibilities and outside this collection's promise. Browser E2E and Playwright evidence do not verify native React Native behavior.
 
 ## Page Object Pattern
 

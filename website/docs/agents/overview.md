@@ -49,6 +49,12 @@ Both Architect handoffs — **Start Implementation in a New Discussion** and **S
 
 All seven execution owners apply the same inline, fail-closed precondition before editing: they read the persisted Human Approval record from disk, name the exact failed field, condition, or file when validation fails, and use `vscode/askQuestions` for guided recovery on both delegated and direct entry paths. A delegated owner may offer hand-back to `tsh-engineering-manager` as one choice, but does not dead-end there. The Engineering Manager presents Human Approval, the Architect records it, `tsh-plan-reviewer` provides non-authorizing Reviewer approval, and execution owners validate before edits.
 
+## Platform Boundaries
+
+The existing agent graph and `/tsh-implement` entry point apply to both web and React Native work. Browser capture is a web/Figma contract only: `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` are not evidence of native behavior.
+
+For rendered React Native UI, the existing UI Engineer owns implementation and the target project owns native simulator or device, accessibility, and end-to-end evidence. If that project does not provide an explicit evidence contract, native verification remains an explicit prerequisite or limitation. The collection does not add a mobile worker or native automation promise. Playwright E2E remains web-only; native E2E is target-project-owned.
+
 ## Agent Summary
 
 ### 📋 Product Ideation Agents

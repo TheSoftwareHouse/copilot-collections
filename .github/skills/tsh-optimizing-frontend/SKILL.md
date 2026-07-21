@@ -8,6 +8,10 @@ user-invocable: false
 
 Provides optimization strategies for frontend rendering performance, bundle size reduction, and memory management to maintain fast, responsive user interfaces.
 
+<platform-boundary>
+Apply measurement, bundle, rendering, memoization, cleanup, and memory rules where they fit the target platform. DOM, CSS, browser Core Web Vitals, Lighthouse, SSR/SSG, browser image loading, and browser-only tab/layout checks are web-file guidance; skip or adapt them for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Treat packages, versions, and tooling as profile-dependent rather than universal claims.
+</platform-boundary>
+
 <principles>
 
 <measure-before-optimizing>
@@ -44,7 +48,7 @@ Before optimizing anything, establish baselines:
 
 - Run bundle analysis (bundler-specific analyzer tool) to identify large chunks and their contents.
 - Use browser devtools Performance tab to record and identify slow renders, long tasks, and layout thrashing.
-- Check Core Web Vitals:
+- For web files, check Core Web Vitals:
   - **LCP** (Largest Contentful Paint) — how fast the main content appears.
   - **CLS** (Cumulative Layout Shift) — how much the layout moves unexpectedly.
   - **INP** (Interaction to Next Paint) — how fast the UI responds to user input.
@@ -75,7 +79,7 @@ Reduce unnecessary re-render work:
 - **Key stability**: Use stable, unique keys for list items (database IDs, UUIDs). Never use array indices as keys — index keys cause unnecessary unmount/remount when items are reordered, added, or removed.
 - **Virtualize long lists**: For lists with hundreds or thousands of items, use a virtualization technique (windowing) to render only the visible items. This reduces DOM node count and re-render cost dramatically.
 
-**Step 4: Optimize assets and DOM**
+**Step 4: Optimize assets and DOM (web files only)**
 
 - **Images**: Use modern formats (WebP, AVIF) with fallbacks. Always provide explicit `width` and `height` attributes to prevent layout shift. Lazy-load images below the fold using native `loading="lazy"` or an intersection observer.
 - **CSS and animations**: Avoid layout thrashing — batch DOM reads before DOM writes. Use `transform` and `opacity` for animations (GPU-composited) instead of `top`, `left`, `width`, or `height` (trigger layout recalculation). Use `will-change` sparingly and only on elements that are about to animate — leaving it on permanently increases memory usage.
@@ -98,7 +102,7 @@ Prevent leaks that degrade performance over time:
 After applying optimizations, close the loop:
 
 - **Bundle size**: Run the project's build command and bundle analyzer. Compare chunk sizes against the baselines from Step 1. Flag any chunk still over 200KB gzipped.
-- **Lighthouse audit**: Run a Lighthouse audit against the application. Use `vscode/askQuestions` to gather two inputs from the user:
+- **Lighthouse audit (web files only)**: Run a Lighthouse audit against the application. Use `vscode/askQuestions` to gather two inputs from the user:
   1. **URL to audit** — local dev server, staging/preview deployment, or production URL.
   2. **Expected thresholds** (optional) — custom performance score or Core Web Vitals targets. If the user has no preference, use the defaults below.
 
