@@ -8,12 +8,18 @@ title: UI Verification
 
 Provides detailed criteria for comparing UI implementations against Figma designs, with severity definitions, tolerance rules, and structured report formats.
 
+## Platform Boundary
+
+This skill defines the collection's web/Figma browser verification contract only. `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` are browser evidence. They cannot verify native React Native safe areas or status bars, platform navigation, device behavior, touch or gesture behavior, VoiceOver or TalkBack, simulator or device accessibility, or native end-to-end behavior.
+
+Native React Native verification and evidence are owned by the target project. If the target project does not supply an explicit native evidence contract, native verification remains `VERIFICATION NOT RUN` or an explicit prerequisite or limitation. This collection does not provide a native verification worker or automation promise.
+
 ## Verification Process
 
-The current verification flow has five steps:
+For web/Figma UI, the current verification flow has five steps:
 
 1. **Validate inputs**: confirm the Figma URL, confirm the exact full dev server URL with the user for standalone runs or reuse the caller-provided confirmed URL unchanged for delegated runs, and make sure the target page is reachable through the CLI capture flow using that pinned URL.
-2. **Get EXPECTED from Figma**: MANDATORY before capture — export the Figma node image and save it as `figma-expected.png` into the iteration directory, then extract structure, layout, dimensions, and visual specifications. If Figma cannot be fetched or `figma-expected.png` cannot be saved, the result is `VERIFICATION NOT RUN`.
+2. **Get EXPECTED from Figma**: MANDATORY before capture — export the Figma node image and save it as `specifications/<task-id>/ui-verification/figma-expected.png`, then extract structure, layout, dimensions, and visual specifications. If Figma cannot be fetched or the shared `figma-expected.png` cannot be saved, the result is `VERIFICATION NOT RUN`.
 3. **Get ACTUAL from implementation**: the capture worker owns viewport sizing, page loading, render stabilization, and evidence collection through the CLI-first capture flow.
 4. **Compare using verification categories**: review EXPECTED versus ACTUAL across structure, layout, dimensions, visual, and component categories.
 5. **Generate the report**: summarize all differences with exact expected and actual values plus severity.
@@ -24,8 +30,8 @@ The current verification flow is CLI-first for ACTUAL evidence collection. Figma
 
 - **Ownership boundary:** the capture worker handles viewport/page-loading mechanics and produces the ACTUAL artifacts; the reviewer consumes those artifacts and judges differences against Figma.
 - **Pinned URL contract:** once the user confirms the full dev server URL, that exact URL is pinned for the session and must be forwarded unchanged to every capture and review pass.
-- **Capture contract:** collect fresh `figma-expected.png`, `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for each verification pass, writing every file into the iteration directory with explicit paths. Never leave artifacts in `.playwright-cli/` or the working directory. Code reading is not a substitute for live capture.
-- **Artifact directory:** store each pass under `specifications/<task-id>/ui-verification/iteration-<N>/`, alongside `figma-expected.png`, `report.md`, and optional `pixel-gate/` outputs.
+- **Capture contract:** ensure the shared `figma-expected.png` exists, then collect fresh browser `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` for each verification pass, writing ACTUAL files into the iteration directory with explicit paths. Never leave artifacts in `.playwright-cli/` or the working directory. Code reading is not a substitute for live capture.
+- **Artifact directory:** store the shared reference at `specifications/<task-id>/ui-verification/figma-expected.png`; store each pass under `specifications/<task-id>/ui-verification/iteration-<N>/` with `report.md` and optional `pixel-gate/` outputs.
 - **Render stabilization:** use the pinned app URL only, resize to the Figma frame width, wait for `networkidle`, and emulate reduced motion before capture.
 - **Optional tripwire:** `toHaveScreenshot` can add loose, non-blocking evidence under `pixel-gate/`, but it never replaces reviewer judgment.
 

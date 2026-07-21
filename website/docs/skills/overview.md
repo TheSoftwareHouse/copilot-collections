@@ -37,7 +37,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-creating-implementation-plans](./creating-implementation-plans) | Implementation plan template, structure, and DoD rules         | Architect, CR              |
 | [tsh-technical-context-discovering](./technical-context-discovery) | Project conventions and pattern discovery                     | Architect, CR, SE, E2E, CE |
 | [tsh-implementing-frontend](./frontend-implementation)             | UI component patterns, composition, design tokens             | Software Engineer          |
-| [tsh-implementing-react-native](./react-native-implementation)     | React Native component patterns, navigation, performance      | Software Engineer          |
+| [tsh-implementing-react-native](./react-native-implementation)     | Profile-driven React Native UI patterns, navigation, and performance | UI Engineer for rendered UI; existing non-UI route for non-rendered work |
 | [tsh-implementing-forms](./implementing-forms)                     | Form architecture, schema validation, multi-step flows        | Software Engineer          |
 | [tsh-writing-hooks](./writing-hooks)                               | Custom hook/composable patterns, lifecycle, testing           | Software Engineer          |
 | [tsh-ensuring-accessibility](./ensuring-accessibility)             | WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard nav     | Software Engineer          |
@@ -79,6 +79,8 @@ When an agent starts a task, it checks all available skills and decides which on
 
 ## Agent–Skill Matrix
 
+For React Native, rendered screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI belong to the UI Engineer, which loads this skill. Business logic, state, data, services, integrations, native modules, and other non-rendered work remain on the existing non-UI route.
+
 | Skill                                  | BA  | CE  | Architect | SE  | PE  | CR  | UI Reviewer | E2E | DevOps | Copilot Eng. |
 | -------------------------------------- | --- | --- | --------- | --- | --- | --- | ----------- | --- | ------ | ------------ |
 | tsh-architecture-designing             |     |     | ✅        |     |     |     |             |     |        |              |
@@ -96,7 +98,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | tsh-implementing-ci-cd                 |     |     | ✅        |     |     |     |             |     | ✅     |              |
 | tsh-implementing-forms                 |     |     |           | ✅  |     |     |             |     |        |              |
 | tsh-implementing-frontend              |     |     |           | ✅  |     |     |             |     |        |              |
-| tsh-implementing-react-native          |     |     |           | ✅  |     |     |             |     |        |              |
+| tsh-implementing-react-native (rendered RN UI: UI Engineer; non-rendered RN work: existing non-UI route) |     |     |           |     |     |     |             |     |        |              |
 | tsh-implementing-kubernetes            |     |     | ✅        |     |     |     |             |     | ✅     |              |
 | tsh-implementing-observability         |     |     | ✅        |     |     |     |             |     | ✅     |              |
 | tsh-implementing-terraform-modules     |     |     | ✅        |     |     |     |             |     | ✅     |              |

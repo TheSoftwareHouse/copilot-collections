@@ -3,11 +3,11 @@ sidebar_position: 3
 title: Frontend Flow
 ---
 
-For UI-heavy tasks with Figma designs, use the specialized frontend workflow. This extends the standard flow with iterative Figma verification to ensure the implementation matches the design within tolerance.
+For web UI-heavy tasks with Figma designs, use the specialized frontend workflow. This extends the standard flow with iterative browser/Figma verification to ensure the implementation matches the design within tolerance.
 
-For a full end-to-end breakdown of the post-implementation verify-fix loop, see **[UI Verification Flow](./ui-verification-flow)**.
+For a full end-to-end breakdown of the web-only post-implementation verify-fix loop, see **[UI Verification Flow](./ui-verification-flow)**.
 
-Before you start, make sure the target app is already running, be ready to confirm the exact full dev server URL, and ensure `playwright-cli` is available to the UI capture worker (`npx playwright-cli` or a global install).
+Before you start a web/Figma flow, make sure the target app is already running, be ready to confirm the exact full dev server URL, and ensure `playwright-cli` is available to the UI capture worker (`npx playwright-cli` or a global install). These browser prerequisites do not apply to rendered React Native UI.
 
 ## Command Sequence
 
@@ -20,22 +20,30 @@ Before you start, make sure the target app is already running, be ready to confi
    ↳ 🧪 Engineering Manager delegates to Architect Reviewer via /tsh-review-plan for plan validation
    ↳ 📖 Review plan and review summary – check component breakdown, design references
    ↳ ✅ Confirm the approved plan aligns with Figma structure
-   ↳ 🌐 Confirm the exact full dev server URL once and pin it for the session
+   ↳ 🌐 (Web/Figma only) Confirm the exact full dev server URL once and pin it for the session
    ↳ 💻 Engineering Manager delegates UI tasks to UI Engineer
-   ↳ 📖 Review UI Verification Summary separately from code review
-   ↳ ✅ Manually verify critical UI elements in browser
-   ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until the UI gate is PASS or reaches the structured post-5-iteration user gate
-   ↳ 🚫 Do not start /tsh-review until the UI gate is closed
+   ↳ 📖 (Web/Figma only) Review UI Verification Summary separately from code review
+   ↳ ✅ (Web/Figma only) Manually verify critical UI elements in browser
+   ↳ 🔄 (Web/Figma only) Engineering Manager calls /tsh-review-ui in a loop until the UI gate is PASS or reaches the structured post-5-iteration user gate
+   ↳ 🚫 (Web/Figma only) Do not start /tsh-review until the UI gate is closed
 
 2️⃣ /tsh-review       <JIRA_ID or task description>
    ↳ 📖 Review findings – code quality, a11y, performance
    ↳ ✅ Address all blockers before merging
 ```
 
+## Rendered React Native UI
+
+Rendered React Native screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI stay with the existing UI Engineer route. They do not require a browser URL or Playwright capture artifacts. Native safe areas and status bars, platform navigation, device behavior, touch and gestures, VoiceOver or TalkBack, simulator or device accessibility, and native end-to-end behavior require evidence owned by the target project. Without that evidence contract, record native verification as an explicit prerequisite or limitation.
+
+The collection does not add a native verification worker, framework, or public mobile trigger. `/tsh-implement` remains the single public implementation entry point.
+
 ## How the Verification Loop Works
 
-1. The Engineering Manager delegates a UI component implementation to the UI Engineer via the internal `/tsh-implement-ui` prompt.
-2. After the UI Engineer completes, the Engineering Manager calls `/tsh-review-ui` to perform **single-pass verification** (read-only) on fresh live-capture artifacts.
+The following loop applies to web/Figma UI only.
+
+1. The Engineering Manager delegates a web UI component implementation to the UI Engineer via the internal `/tsh-implement-ui` prompt.
+2. After the UI Engineer completes, the Engineering Manager calls `/tsh-review-ui` to perform **single-pass web verification** (read-only) on fresh live-capture artifacts.
 3. `/tsh-review-ui` uses **Figma MCP** (EXPECTED) + CLI capture artifacts produced through `tsh-ui-capture-worker` (ACTUAL) → returns PASS, FAIL, or VERIFICATION NOT RUN with a diff table or blocker report.
 4. If FAIL → the Engineering Manager delegates the fix to the UI Engineer, then re-captures and re-verifies on the new artifacts before considering the item closed.
 5. Repeats until PASS or max **5 iterations**.
@@ -45,12 +53,14 @@ Before you start, make sure the target app is already running, be ready to confi
 
 ## What `/tsh-review-ui` Does
 
-- Single-pass, **read-only** verification — does not modify code.
+- Single-pass, **read-only web/Figma verification** — does not modify code.
 - Uses **Figma MCP** to extract design specifications (spacing, typography, colors, dimensions).
 - Uses **`tsh-ui-capture-worker` + Playwright CLI artifacts** to capture the current implementation state.
 - Does **not** rely on direct Playwright MCP capture for the ACTUAL side of the comparison.
 - Returns a structured report: **PASS/FAIL/VERIFICATION NOT RUN** + difference table or blocker guidance.
 - Covers: structure (containers, nesting), dimensions (width, height, spacing), visual (typography, colors, radii), and components (variants, tokens, states).
+
+For rendered React Native UI, this reviewer is not a native verifier. Browser artifacts cannot verify native safe areas, status bars, platform navigation, device behavior, touch or gestures, VoiceOver or TalkBack, simulator or device accessibility, or native end-to-end behavior. Native evidence remains target-project-owned.
 
 ## What `/tsh-implement-ui` Does
 

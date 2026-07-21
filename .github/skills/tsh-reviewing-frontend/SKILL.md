@@ -8,6 +8,10 @@ user-invocable: false
 
 Provides frontend-specific review criteria for evaluating component quality, hooks correctness, rendering behavior, accessibility compliance, and performance — to be used alongside the general `tsh-code-reviewing` skill.
 
+<platform-boundary>
+Apply platform-neutral React review rules where they fit the target file. DOM, HTML, CSS, ARIA, browser-only tab and label checks, browser Core Web Vitals, Lighthouse, SSR/SSG, and browser artifact expectations are web-file criteria; skip or adapt them for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Treat packages, versions, and tooling as profile-dependent rather than universal claims.
+</platform-boundary>
+
 <principles>
 
 <frontend-lens>
@@ -96,9 +100,11 @@ Check for:
 - **Ref misuse**: Are mutable refs used to hold state that should trigger re-renders? Is reactive state used for values that should NOT trigger re-renders (e.g., timer IDs, previous values for comparison)? Each is the wrong tool for the job.
 - **Derived state**: Is there state that could be computed from existing state or props? Storing derived values in reactive state creates synchronization bugs. Compute inline or cache with the framework's memoization primitive.
 
-**Step 4: Spot-check accessibility**
+**Step 4: Spot-check accessibility (web criteria)**
 
 Quick checks — not a full audit. Defer to `tsh-ensuring-accessibility` for comprehensive coverage.
+
+Apply the checks below to web files. For RN files, skip HTML/ARIA/DOM checks and use the RN skill's native accessibility and target-project evidence guidance.
 
 - **Interactive elements**: `<button>` for actions, `<a>` for navigation links? Or `<div onClick>` / `<span onClick>` anti-pattern? Non-semantic interactive elements break keyboard and screen reader access — automatic critical. The `<div>` with an `onClick` has no keyboard support, no role, no focus indicator by default.
 - **Labels**: Do form fields have visible `<label>` elements associated via `for`/`id` pairing? Placeholder text as the only label is a warning — the label disappears on input. `aria-label` is acceptable for icon-only buttons but not as a substitute for visible labels on text inputs.
@@ -111,6 +117,8 @@ Quick checks — not a full audit. Defer to `tsh-ensuring-accessibility` for com
 **Step 5: Spot-check performance**
 
 Quick checks — not a full audit. Defer to `tsh-optimizing-frontend` for deep analysis.
+
+Apply browser-specific checks only to web files. For RN files, use the RN skill and its performance reference after the target-project profile gate; do not infer native performance from browser metrics or artifacts.
 
 - **Bundle impact**: Will new imports significantly increase bundle size? Flag heavy library additions (charting, date, rich text) that could be lazy-loaded or replaced with lighter alternatives. Check for full-library imports (`import _ from 'lodash'`) where named imports (`import { debounce } from 'lodash/debounce'`) would suffice.
 - **Lazy loading**: Are new routes and heavy components lazy-loaded? Top-level route components should use dynamic imports. Components only visible after user interaction (modals, drawers, tabs beyond the first) are lazy-loading candidates.

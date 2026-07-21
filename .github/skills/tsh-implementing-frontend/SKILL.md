@@ -8,10 +8,14 @@ user-invocable: false
 
 Provides patterns for building reusable, composable frontend components with design system integration and a structured Figma-to-code workflow.
 
+<platform-boundary>
+Apply platform-neutral React component and state rules where they fit the target file. DOM, HTML, CSS, browser accessibility semantics, browser-only tab and label checks, and browser/Figma verification are web-file guidance; skip or adapt them for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Treat packages, versions, and tooling as profile-dependent rather than universal claims.
+</platform-boundary>
+
 <principles>
 
 <declarative-over-imperative>
-Define what the UI should look like based on state, not how to manipulate the DOM. Describe the desired outcome through components and state declarations. Let the framework handle reconciliation and updates. Compose complex UIs from simple, predictable building blocks rather than writing step-by-step mutation sequences.
+Define what the UI should look like based on state, not how to manipulate the browser DOM or native views. Describe the desired outcome through components and state declarations. Let the framework handle reconciliation and updates. Compose complex UIs from simple, predictable building blocks rather than writing step-by-step mutation sequences.
 </declarative-over-imperative>
 
 <composition-over-complexity>

@@ -33,7 +33,7 @@ Think of this workflow as a **relay race**. Each phase produces a deliverable �
 - Automatically handles the full development cycle:
   1. **Research** — Delegates to Context Engineer to gather context from Jira, Figma, and codebase. Asks for user confirmation before proceeding.
   2. **Plan** — Delegates to Architect to create a structured implementation plan. Asks for user confirmation before proceeding.
-  3. **Implement** — Delegates to Software Engineer, Prompt Engineer, DevOps Engineer, or E2E Engineer based on task type.
+  3. **Implement** — Delegates to the existing implementation owner based on task type, including the UI Engineer for rendered UI.
 - Tracks progress, runs quality checks after each task, and auto-triggers code review.
 - **Produces:** Research document, implementation plan, and concrete code modifications.
 
@@ -43,6 +43,14 @@ Think of this workflow as a **relay race**. Each phase produces a deliverable �
 - **Command:** `/tsh-review <JIRA_ID or description>`
 - Performs a structured code review against acceptance criteria, security, reliability, and maintainability.
 - **Produces:** Structured review with clear pass/blockers/suggestions.
+
+## Platform Boundaries
+
+`/tsh-implement` remains the canonical public implementation entry point. Platform classification and routing stay in the canonical orchestrator; this documentation does not add a second trigger or a mobile worker.
+
+- Web/Figma UI uses the pinned browser URL and the web capture contract. Playwright artifacts such as `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` verify the browser implementation only.
+- Rendered React Native UI follows the existing UI Engineer route but does not enter browser/Figma verification. Native simulator or device behavior, accessibility, and end-to-end evidence are owned by the target project. Without an explicit target-project evidence contract, native verification remains a prerequisite or limitation.
+- Playwright E2E is for web flows only. Native E2E is outside this collection's promise and remains target-project-owned.
 
 ## Workflow Diagram
 

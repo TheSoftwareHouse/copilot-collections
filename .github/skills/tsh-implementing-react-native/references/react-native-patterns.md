@@ -1,43 +1,63 @@
 # React Native Implementation Patterns
 
-React Native-specific patterns for the `tsh-implementing-react-native` skill. Load this reference when working with React Native in Expo projects.
+React Native-specific patterns for the `tsh-implementing-react-native` skill. Load this reference after discovering the consuming project's profile; it is not an Expo application standard or a package catalogue.
 
 ## Table of Contents
 
+- [Target Profile and Compatibility](#target-profile-and-compatibility)
 - [Project Structure](#project-structure)
 - [Component Composition](#component-composition)
 - [Styling Patterns](#styling-patterns)
 - [Platform-Specific Code](#platform-specific-code)
 - [Pressable and Touch Feedback](#pressable-and-touch-feedback)
 - [Safe Areas and Layout](#safe-areas-and-layout)
+- [Images and Media](#images-and-media)
 - [Gestures and Animations](#gestures-and-animations)
 - [New Architecture and Expo Modules](#new-architecture-and-expo-modules)
+- [Verification Boundary](#verification-boundary)
 - [Anti-Patterns](#anti-patterns)
+
+## Target Profile and Compatibility
+
+Before recommending an import, package, API, or migration, inspect and record the target project's evidence:
+
+- package manager, manifest, and lockfile
+- framework mode: Expo managed, Expo prebuild/dev client, or bare React Native
+- exact React Native and React versions, plus the Expo SDK version when Expo is present
+- selected router and version, if any
+- JavaScript engine and New Architecture setting
+- installed packages and native configuration relevant to the requested behavior
+- presence and current state of native `ios/` and `android/` directories, including whether a dev build or prebuild workflow is used
+- available build, test, capture, and native accessibility tooling
+
+Check the official installation and compatibility documentation for the exact discovered versions before giving package or API advice. A package name, an Expo SDK, a React Native version, or a native API in an example is not evidence that it is installed or compatible.
+
+Keep two kinds of guidance separate:
+
+- **Project conventions:** facts observed in the target repository, such as an existing safe-area wrapper, touchable abstraction, router, or design-token API. Preserve them unless the task explicitly changes the convention.
+- **Recommendations:** conditional options evaluated against the profile, official compatibility documentation, native build state, and a measured or demonstrated need. Do not present a recommendation as a required dependency.
 
 ## Project Structure
 
-All projects use Expo as the standard framework. Follow the project's existing structure. If starting fresh, use this layout:
+There is no universal Expo or bare React Native layout. Follow the target project's existing structure and router. An illustrative organization is useful only when it matches the discovered profile:
 
 ```
 src/
-├── app/                  # Expo Router file-based routes (or screens/ for React Navigation)
-├── components/
-│   ├── ui/               # Reusable design system primitives (Button, Text, Card)
-│   └── features/         # Feature-specific composed components
+├── app/                  # Use only when the selected router uses file-based routes
+├── screens/              # Use when the selected router keeps screens separate
+├── components/           # Reusable design system and feature components
 ├── hooks/                # Custom hooks
 ├── services/             # API clients, storage, analytics
-├── stores/               # Global state (Zustand, Jotai, etc.)
-├── theme/                # Design tokens, theme provider
-│   ├── tokens.ts         # Colors, spacing, typography, radii
-│   └── index.ts          # Theme provider and hooks
+├── stores/               # State modules already used by the project
+├── theme/                # Design tokens and theme provider
 ├── types/                # Shared TypeScript types
 └── utils/                # Pure utility functions
 ```
 
-Key conventions:
+Project conventions to preserve when present:
 - Co-locate component types: `Button.types.ts` next to `Button.tsx`.
-- Co-locate component styles: `Button.styles.ts` next to `Button.tsx` (for complex components), or inline `StyleSheet.create()` at the bottom of the component file (for simpler components).
-- One component per file. The filename matches the component name.
+- Co-locate component styles: `Button.styles.ts` next to `Button.tsx` for complex components, or use `StyleSheet.create()` in the component file for simpler components.
+- Keep one component per file when that matches the repository's organization. The filename should match the component name.
 
 ## Component Composition
 
@@ -232,7 +252,9 @@ Metro bundler automatically resolves the correct file. Both files must export th
 
 ## Pressable and Touch Feedback
 
-`Pressable` is the standard touchable primitive. It replaces the deprecated `TouchableOpacity`, `TouchableHighlight`, `TouchableNativeFeedback`, and `TouchableWithoutFeedback`.
+Treat the touch primitive as a profile and project-convention decision. When the target React Native version supports core `Pressable` and the project has no established abstraction, it provides pressed-state styling and accessibility props without adding a package. If the target version or project uses another supported touchable, retain that API and check its official documentation before changing it; do not infer a deprecation or migration requirement from this reference.
+
+When core `Pressable` is supported, an actionable control should provide a sufficient hit area and communicate its state:
 
 ```typescript
 import { Pressable, StyleSheet } from 'react-native';
@@ -241,7 +263,6 @@ const ActionButton = ({ onPress, label, disabled }: ActionButtonProps) => (
   <Pressable
     onPress={onPress}
     disabled={disabled}
-    android_ripple={{ color: theme.colors.primary500 + '33', borderless: false }}
     style={({ pressed }) => [
       styles.button,
       pressed && styles.buttonPressed,
@@ -280,76 +301,71 @@ const styles = StyleSheet.create({
 });
 ```
 
-Key rules:
-- Always set `minHeight` and `minWidth` to meet touch target minimums (44 pt iOS / 48 dp Android).
-- Always provide `accessibilityRole` and `accessibilityLabel` on pressable elements.
-- Use `android_ripple` for Material Design feedback on Android.
-- Use the `pressed` state from the style function for iOS feedback (opacity change, background change).
+Actionable controls should meet the target platform's touch guidance, commonly at least 44x44 pt on iOS and 48x48 dp on Android. Provide the role, accessible name, and state through the API supported by the target profile. Add platform-specific feedback, such as `android_ripple`, only when the selected API, design system, and target React Native version support it.
 
 ## Safe Areas and Layout
 
-Use `react-native-safe-area-context` (included in Expo) for safe area management:
+First inspect the target project's existing safe-area provider and screen composition. Use an installed, compatible safe-area package only when the profile, native configuration, and official installation documentation support it. A package is not included or guaranteed merely because the project uses Expo.
+
+For a project whose target React Native version supports the core component and whose platform requirements fit its documented behavior, the core `SafeAreaView` is a valid fallback:
 
 ```typescript
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native';
 
-// Screen-level wrapper — pads content away from notches, status bar, home indicator
 const SettingsScreen = () => (
-  <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
+  <SafeAreaView style={styles.screen}>
     {/* Screen content */}
   </SafeAreaView>
 );
 ```
 
-- Use `SafeAreaView` at the screen level, not on every component.
-- Specify `edges` explicitly when you only need specific safe areas (e.g., `['top']` on screens with a bottom tab bar that already handles the bottom inset).
-- For finer-grained control, use the `useSafeAreaInsets()` hook to read inset values and apply them as padding to specific views.
-- Do NOT wrap `FlatList` / `ScrollView` in `SafeAreaView` — use `contentContainerStyle` padding with inset values instead, to avoid double-padding issues.
+- Apply safe-area handling at the screen or scroll-content boundary, not indiscriminately to every component.
+- Use the selected provider's documented inset API when a screen needs only selected edges or custom padding.
+- Do not wrap `FlatList` or `ScrollView` in an additional safe-area wrapper when the selected provider already applies those insets. Use the provider's content-container or inset values to avoid double padding.
+- Verify behavior on the target project's supported iOS and Android builds; browser screenshots cannot establish native inset behavior.
 
 ### Keyboard avoidance
 
-Use `react-native-keyboard-controller` (included in Expo) for keyboard handling. It provides Reanimated-powered smooth animations and works reliably on both platforms — unlike the built-in `KeyboardAvoidingView` which has known inconsistencies on Android.
+Start with the core keyboard APIs supported by the target React Native version and the project's existing form pattern. `KeyboardAvoidingView` is a valid baseline when its documented `behavior` and screen layout meet the target requirements:
 
 ```typescript
-import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 const FormScreen = () => (
-  <KeyboardAwareScrollView bottomOffset={theme.spacing.lg}>
-    {/* Form fields — automatically scroll into view when keyboard appears */}
-  </KeyboardAwareScrollView>
+  <KeyboardAvoidingView
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+    style={styles.screen}
+  >
+    {/* Form fields */}
+  </KeyboardAvoidingView>
 );
 ```
 
-For fine-grained control, use the `useKeyboardHandler` hook to react to keyboard events with worklet callbacks:
+Consider a package such as `react-native-keyboard-controller` only when it is already installed or the target owner approves it, the exact React Native/Expo and native build profile is compatible, and its official installation documentation has been checked. Use it for a demonstrated focus, scrolling, or animation requirement; do not make it a default replacement for the core API. Any worklet-based keyboard example also requires a compatible installed animation/runtime setup.
+
+## Images and Media
+
+Use the core `Image` API when the target requirements fit its documented loading, caching, and rendering behavior:
 
 ```typescript
-import { useKeyboardHandler } from 'react-native-keyboard-controller';
-import { useSharedValue } from 'react-native-reanimated';
+import { Image } from 'react-native';
 
-const height = useSharedValue(0);
-
-useKeyboardHandler({
-  onMove: (event) => {
-    'worklet';
-    height.value = event.height;
-  },
-});
+<Image source={{ uri: imageUri }} style={styles.image} accessibilityLabel={imageLabel} />;
 ```
 
-> **Fallback**: If `react-native-keyboard-controller` cannot be used, the built-in `KeyboardAvoidingView` with `behavior={Platform.OS === 'ios' ? 'padding' : 'height'}` works as a basic alternative.
+Consider `expo-image` or another image library only when the target profile includes the compatible framework, the package is installed or explicitly approved, and the official installation and compatibility documentation supports the project's native state. Compare the needed caching, formats, placeholders, transitions, and memory behavior with the core API before introducing a replacement. Do not state that an image package is included or required for every Expo or React Native project.
 
 ## Gestures and Animations
 
-### React Native Gesture Handler
+Choose the simplest API that satisfies the interaction and matches the target profile. Core touch handlers and `PanResponder` can be sufficient for simple interactions. Consider `react-native-gesture-handler` when the target project already uses it or has a demonstrated need for its gesture model, and only after checking its exact React Native/Expo, router, native build, and New Architecture compatibility.
 
-Use `react-native-gesture-handler` for all gesture recognition. It runs gestures on the native thread, avoiding JS thread bottlenecks.
+If the selected gesture library is installed and compatible, its API may be paired with the project's installed animation library:
 
 ```typescript
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 
 const panGesture = Gesture.Pan()
   .onUpdate((event) => {
-    // Runs on UI thread with Reanimated worklets
     translateX.value = event.translationX;
   })
   .onEnd(() => {
@@ -361,105 +377,51 @@ const panGesture = Gesture.Pan()
 </GestureDetector>
 ```
 
-### React Native Reanimated
+Use `react-native-reanimated` only when it is installed or approved for the target project and the official installation, Babel/native setup, and compatibility documentation match the discovered profile. It is not a universal requirement for animation. The core `Animated` API is a supported fallback when its performance and interaction requirements are sufficient.
 
-Use `react-native-reanimated` for animations. It runs animations on the UI thread via worklets, keeping 60/120 fps even when the JS thread is busy.
+When Reanimated is the compatible project choice, keep shared values and animated styles inside the API's documented worklet boundaries. Do not read a shared value during render, and use the target version's documented mechanism when a worklet must call JavaScript. Treat layout-animation and entering/exiting APIs as version-sensitive; check the installed version before using them.
 
-```typescript
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-  withTiming,
-} from 'react-native-reanimated';
-
-const opacity = useSharedValue(0);
-
-// Trigger animation
-opacity.value = withTiming(1, { duration: 300 });
-
-// Derive animated style
-const animatedStyle = useAnimatedStyle(() => ({
-  opacity: opacity.value,
-}));
-
-<Animated.View style={[styles.container, animatedStyle]} />
-```
-
-Key patterns:
-- Use `useSharedValue` instead of `useRef` or `useState` for animated values.
-- Use `useAnimatedStyle` to derive styles from shared values — runs on the UI thread.
-- Use `withSpring`, `withTiming`, `withDecay` for animation drivers.
-- Use `runOnJS` to call JS thread functions from worklets (e.g., updating React state after an animation completes).
-- Never read `sharedValue.value` in the component render body — only in worklets or event handlers.
-
-### Layout animations
-
-Reanimated provides `entering` and `exiting` props for declarative mount/unmount animations:
-
-```typescript
-import Animated, { FadeIn, FadeOut, SlideInRight } from 'react-native-reanimated';
-
-{isVisible && (
-  <Animated.View entering={FadeIn.duration(200)} exiting={FadeOut.duration(150)}>
-    <NotificationBanner />
-  </Animated.View>
-)}
-```
+For any animation path:
+- Define the intended motion and reduced-motion behavior in the project convention.
+- Measure responsiveness on the target build before replacing a core API.
+- Keep accessibility state and interaction completion independent from visual animation.
+- Verify gestures and animation on target iOS and Android builds when native evidence is available.
 
 ## New Architecture and Expo Modules
 
-React Native New Architecture (Fabric + TurboModules) is the default since RN 0.76+. Key implications:
+Inspect the target project's actual New Architecture setting rather than inferring it from a React Native or Expo version. Before adding or changing a native module, check the exact React Native, React, Expo SDK, library, and JavaScript engine versions, native directories or prebuild/dev-build state, and the module's official compatibility and installation documentation.
 
-- **Fabric renderer**: Synchronous and concurrent-capable rendering. Layout is computed synchronously when needed, eliminating layout "flashes" from async bridge communication.
-- **TurboModules**: Native modules are lazily loaded and use JSI (JavaScript Interface) for synchronous, typesafe communication — no serialized JSON bridge.
-- **Codegen**: TypeScript specs generate native interfaces. When writing native modules, define types in TypeScript and let Codegen produce the native bindings.
+When New Architecture is enabled, confirm that each relevant native dependency supports the target renderer, module system, and code-generation requirements. When it is disabled, do not enable it or migrate libraries as part of an unrelated UI task. Any Codegen or native-module advice is conditional on a target project that owns the native build and has an approved implementation path.
 
-For Expo developers, the New Architecture is transparent — it's enabled by default since Expo SDK 52. Be aware of:
+Expo modules are conditional options, not collection-wide dependencies. Use an `expo-*` import only when the target profile includes Expo, the package is installed or explicitly approved, the native build/prebuild state supports it, and the official Expo/package documentation confirms compatibility with the exact SDK and React Native versions. Otherwise keep the project's current implementation or use a supported core API where one meets the requirement.
 
-- Third-party libraries must support New Architecture. Check compatibility before adding dependencies. Expo provides a [directory](https://reactnative.directory/) with compatibility indicators.
-- If a library doesn't support New Architecture, the interop layer handles most cases automatically, but performance-sensitive native modules may need updates.
+| Need | Candidate, only when compatible | Core or existing-project fallback |
+| --- | --- | --- |
+| Image display | `expo-image` | `Image` from `react-native` |
+| Image selection | `expo-image-picker` | Existing project integration or a target-approved native module |
+| Camera | `expo-camera` | Existing project integration or a target-approved native module |
+| File access | `expo-file-system` | Existing project storage or native integration |
+| Haptics | `expo-haptics` | Existing platform API or omit when not required |
+| Secure storage | `expo-secure-store` | Existing project storage integration; do not substitute an insecure store for secrets |
 
-### Expo modules
+The table lists possible choices for a discovered Expo profile; it does not select a dependency for an unknown consumer. Do not infer that an Expo module is installed, bundled, maintained at a particular version, or compatible with the target's architecture without checking the manifest and official documentation.
 
-When native functionality is needed, prefer Expo modules over community packages when available:
+## Verification Boundary
 
-| Need               | Expo Module                 | Notes                                      |
-| ------------------ | --------------------------- | ------------------------------------------ |
-| Camera             | `expo-camera`               |                                            |
-| File system        | `expo-file-system`          |                                            |
-| Image picker       | `expo-image-picker`         |                                            |
-| Image display      | `expo-image`                | Replaces `Image` from RN core             |
-| Haptics            | `expo-haptics`              |                                            |
-| Secure storage     | `expo-secure-store`         |                                            |
-| Local auth (bio)   | `expo-local-authentication` |                                            |
-| Notifications      | `expo-notifications`        |                                            |
-| Location           | `expo-location`             |                                            |
-| Video              | `expo-video`                |                                            |
-| Audio              | `expo-audio`                | Replaces deprecated `expo-av` for audio    |
-| Splash screen      | `expo-splash-screen`        |                                            |
-| Fonts              | `expo-font`                 | Load custom fonts at startup               |
-| Constants          | `expo-constants`            | App config, device info                    |
-| OTA updates        | `expo-updates`              | Over-the-air JS bundle updates             |
-| Linking / URLs     | `expo-linking`              | Deep link handling, URL opening            |
-| In-app browser     | `expo-web-browser`          | Open URLs in system browser / auth flows   |
-| Navigation         | `expo-router`               | File-based routing (see navigation ref)    |
+This collection cannot execute native simulators or devices, native builds, VoiceOver, or TalkBack. Native claims about safe areas, keyboard behavior, navigation, touch and gestures, animation, rendering, or accessibility require evidence from the target project's supported build and tooling.
 
-Expo modules use the New Architecture natively and are maintained as part of the Expo SDK. Always prefer an Expo module over a community alternative when one exists — it guarantees compatibility with the current SDK and New Architecture.
+The collection's browser and Figma artifacts, including Playwright screenshots or accessibility snapshots, apply only to web-compatible workflows. They cannot close native React Native verification. When target-project evidence is unavailable, record the native verification as a prerequisite or limitation rather than claiming it was verified.
 
 ## Anti-Patterns
 
-| Anti-Pattern                                          | Why                                                 | Fix                                                                   |
-| ----------------------------------------------------- | --------------------------------------------------- | --------------------------------------------------------------------- |
-| Inline style objects `style={{ padding: 16 }}`        | New object every render, skips native optimizations  | Use `StyleSheet.create()`                                             |
-| `TouchableOpacity` / `TouchableHighlight`             | Deprecated, inconsistent cross-platform              | Use `Pressable`                                                       |
-| Animated API from `react-native` core                 | Runs on JS thread, drops frames under load           | Use `react-native-reanimated`                                         |
-| `PanResponder` for gestures                           | JS thread gesture handling, laggy                    | Use `react-native-gesture-handler`                                    |
-| `ScrollView` for long dynamic lists                   | Renders all items, memory explosion                  | Use `FlatList` or `FlashList`                                         |
-| `useEffect` + `Animated.timing` for animations        | Extra render cycle, JS thread animation              | `useSharedValue` + `withTiming` from Reanimated                       |
-| Reading `sharedValue.value` during render              | Breaks UI thread isolation, stale values             | Read only in `useAnimatedStyle` worklets or event handlers            |
-| Wrapping `FlatList` in `SafeAreaView`                  | Double padding, content hidden below safe area       | Use `contentContainerStyle` with `useSafeAreaInsets()` padding        |
-| `Platform.OS === 'ios' ? ... : ...` in 10+ places     | Scattered conditionals, hard to maintain             | Use `Platform.select()`, or split into platform-specific files        |
-| Hardcoded pixel values                                 | No design consistency, hard to update                | Reference theme tokens                                                |
-| `setTimeout` for animation sequencing                  | Unreliable timing, can't be cancelled properly       | Use `withDelay`, `withSequence` from Reanimated                       |
-| Raw string outside `<Text>`                            | Runtime crash — RN requires all text in `<Text>`     | Always wrap text content in `<Text>` components                       |
+| Pattern | Profile-aware response |
+| --- | --- |
+| Assuming Expo, a router, or a package is present | Inspect the manifest, lockfile, native state, and exact versions before choosing an API. |
+| Replacing an existing core or project API because a third-party library is popular | Keep the supported API when it meets the requirement; replace it only for a demonstrated need and verified compatibility. |
+| Inline style objects for repeated static styles | Use `StyleSheet.create()` and the target project's design tokens where that matches project conventions. |
+| Wrapping a list in an extra safe-area provider | Use the selected provider's documented content-container or inset handling to avoid double padding. |
+| Reading an animation shared value during render | Follow the installed animation library's documented worklet and event boundaries. |
+| Choosing a gesture or animation library without native setup evidence | Check installed packages, native directories, build mode, New Architecture setting, and official installation documentation first. |
+| Scattered platform conditionals | Use `Platform.select()` or platform files when the target project supports them and the divergence is real. |
+| Hardcoded visual values | Reference the target project's design tokens; ask before inventing a token. |
+| Raw text outside `<Text>` | Wrap text content in `<Text>` components because React Native does not render raw strings inside a `View`. |

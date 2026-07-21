@@ -7,6 +7,33 @@ description: "React Native component patterns, platform-specific code, native st
 
 Provides patterns for building reusable, composable React Native components with design system integration, platform-aware code, and a structured Figma-to-native workflow.
 
+<target-project-profile-gate>
+Before applying any Expo, router, package, version, or API guidance, inspect and record the target project's profile:
+
+- framework mode: Expo managed, Expo prebuild/dev client, or bare React Native, as applicable
+- React Native, React, and Expo SDK versions, when Expo is present
+- router and its version, if any
+- JavaScript engine and New Architecture setting
+- installed packages relevant to the requested work
+- whether native `ios/` and `android/` directories are present
+- package manager
+- available build, test, capture, and verification tooling
+
+Treat this discovered profile and the corresponding official compatibility documentation as authoritative. Do not assume Expo, a router, a package, a version, an API, or a package manager; do not add a dependency unless the target profile and compatibility documentation support it. Load the existing references for detailed compatibility and fallback guidance after this gate.
+</target-project-profile-gate>
+
+<ownership-and-routing>
+Rendered React Native screens, components, navigation, layouts, styling, gestures, animations, and accessibility-facing UI route to the existing `tsh-ui-engineer`, which loads this skill. React Native business logic, state, data, services, integrations, and other non-UI work remain on the existing non-UI route. Do not create or name a new mobile agent or prompt.
+</ownership-and-routing>
+
+<router-and-export-policy>
+Route and layout files follow the required export contract of the selected router. Ordinary React Native components keep the repository's named-export convention. Do not apply the ordinary-component export rule to route or layout files without checking the selected router.
+</router-and-export-policy>
+
+<verification-boundary>
+Collection-supported browser and Figma verification applies only to web-compatible artifacts and workflows. Playwright or other browser artifacts do not verify native React Native UI. Simulator/device builds, native accessibility checks, and native E2E evidence are owned by the target project and only apply when its tooling provides them. Use connected guidance platform-neutrally only where it remains valid, and exclude web-only criteria from native React Native files.
+</verification-boundary>
+
 <principles>
 
 <declarative-over-imperative>
@@ -37,6 +64,7 @@ Use the checklist below and track progress:
 
 ```
 Progress:
+- [ ] Step 0: Discover the target-project profile
 - [ ] Step 1: Gather design context
 - [ ] Step 2: Plan component structure
 - [ ] Step 3: Implement components
@@ -72,13 +100,13 @@ Follow these patterns for every component:
 
 - **Composition**: Use composition patterns — content projection (`children`), render delegation, compound components — to keep components flexible. Avoid prop sprawl — if a component accepts more than ~7 props, it likely needs decomposition.
 - **Typed props**: Define explicit TypeScript types for all props. Never use `any`. Co-locate types in `ComponentName.types.ts`.
-- **Named exports only**: Use `export { ComponentName }` — no default exports. This ensures consistent imports and simplifies refactoring.
+- **Exports by file role**: Use named exports for ordinary React Native components. Route and layout files must follow the selected router's required export contract, including a default export when that router requires one.
 - **StyleSheet.create()**: Always use `StyleSheet.create()` for styles. It validates style properties at creation time and enables native-side optimizations. Never pass raw style objects repeatedly.
 - **Three UI states**: Every data-dependent component must handle loading (skeleton or activity indicator), error (meaningful message + recovery action), and empty (helpful message when no data).
-- **Error boundaries**: Wrap screen-level or feature-level components with an error boundary to catch JS rendering errors gracefully. Use `react-native-error-boundary` or a custom `ErrorBoundary` class component. For Expo projects, `expo-error-recovery` can restore state after fatal JS errors. Note: error boundaries do NOT catch errors in event handlers, async code, or native crashes — handle those separately.
+- **Error boundaries**: Wrap screen-level or feature-level components with the error-boundary approach already supported by the target profile. Use an installed, compatible library or the project's custom `ErrorBoundary`; do not add `react-native-error-boundary` or `expo-error-recovery` solely from this skill. Error boundaries do NOT catch errors in event handlers, async code, or native crashes — handle those separately.
 - **Design tokens**: All visual values (colors, spacing, typography, shadows, radii) must come from the design system theme. Zero hardcoded values in style definitions.
-- **Platform touch feedback**: Use `Pressable` as the standard touchable component. Configure `android_ripple` for Material ripple on Android and opacity/highlight feedback on iOS. Avoid deprecated `TouchableOpacity`, `TouchableHighlight`, `TouchableWithoutFeedback`.
-- **Safe areas**: Use `SafeAreaView` or equivalent safe area hooks from `react-native-safe-area-context` for screens that render near device edges (notches, home indicators, status bars).
+- **Platform touch feedback**: Use the touch API supported by the target React Native version and project conventions. Configure platform-appropriate feedback only when the selected API and profile support it; do not replace existing touchables or add a package without a compatibility check.
+- **Safe areas**: Use the safe-area API supported by the target profile for screens near device edges. Use an installed, compatible safe-area package only when the project already supports it or the target owner approves adding it; otherwise use the supported core fallback.
 
 For framework-specific patterns (React Native with Expo, React Navigation, Reanimated), load the appropriate reference from `./references/`.
 
@@ -94,11 +122,11 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 **Step 5: Verify implementation**
 
 - If a calling workflow provides a verification loop (e.g., the Engineering Manager runs `tsh-ui-reviewer` automatically during `/tsh-implement`), defer to that workflow — do not duplicate verification here.
-- If no verification workflow is active, use the `tsh-ui-verifying` skill directly to compare the implementation against the Figma design.
+- If no verification workflow is active, use the `tsh-ui-verifying` skill only for collection-supported web/Figma browser verification of web-compatible artifacts. For native React Native UI, use target-project-owned simulator/device evidence when available; do not represent browser artifacts as native verification.
 - Walk through each interaction state (pressed, focused, disabled, error, loading, empty) and verify correctness on both platforms.
-- Test on both iOS and Android — styles that look correct on one platform may differ on the other (shadows, elevation, font rendering, status bar overlaps).
+- When the target project provides native build and test tooling, validate on its supported iOS and Android targets — styles that look correct on one platform may differ on the other (shadows, elevation, font rendering, status bar overlaps). The collection does not execute or claim this native verification.
 - Verify touch targets meet minimum size requirements (44×44 pt iOS / 48×48 dp Android).
-- Check with platform-specific accessibility tools (VoiceOver on iOS, TalkBack on Android).
+- Check with platform-specific accessibility tools supplied by the target project (VoiceOver on iOS, TalkBack on Android); browser accessibility artifacts do not establish native accessibility behavior.
 
 ## State Decision Framework
 
@@ -127,17 +155,17 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 Component:
 - [ ] Single responsibility — one clear purpose
 - [ ] Typed props — explicit types, sensible defaults
-- [ ] Named export — no default exports
+- [ ] Export contract — named export for ordinary components; selected router contract for route/layout files
 - [ ] Design tokens — no hardcoded visual values
 - [ ] Error state — handles failure gracefully
 - [ ] Loading state — shows skeleton or activity indicator
 - [ ] Empty state — meaningful message when no data
 - [ ] Composition — uses children/slots, not prop sprawl
 - [ ] StyleSheet.create() — no inline style objects
-- [ ] Pressable — uses Pressable, not deprecated Touchable*
+- [ ] Touch API — follows the target profile and compatibility documentation
 - [ ] Safe areas — respects notches and system bars
 - [ ] Touch targets — minimum 44×44 pt (iOS) / 48×48 dp (Android)
-- [ ] Platform tested — verified on both iOS and Android
+- [ ] Platform tested — verified with the target project's supported iOS and Android tooling, when available
 ```
 
 ## Anti-Patterns
@@ -149,28 +177,28 @@ Component:
 | Props drilling through 4+ levels                 | Use context or composition pattern                                                  |
 | Duplicating existing component                   | Extend existing with variants                                                       |
 | Inline style objects (`style={{ padding: 16 }}`) | Use `StyleSheet.create()` and reference by key                                      |
-| `export default`                                 | Named exports for consistency and refactoring                                       |
+| Default export on an ordinary component         | Named exports for consistency; follow the selected router for route/layout files     |
 | `any` type for props                             | Explicit type definitions                                                           |
 | Barrel file for internal utils                   | Direct imports for single-consumer folders                                          |
-| `TouchableOpacity` / `TouchableHighlight`        | Use `Pressable` with platform-appropriate feedback                                  |
+| Replacing a target-supported touch API blindly  | Check the target profile and compatibility documentation before changing touch APIs  |
 | `Platform.OS === 'ios' ? ... : ...` everywhere   | Use `Platform.select()` or platform-specific file extensions for cleaner separation |
 | Raw `View` as touchable with `onPress`           | Use `Pressable` — raw `View` has no accessibility role or touch feedback            |
 | Percentage-based dimensions for everything       | Use flex layout; reserve percentages for specific layout needs                      |
 
 ## Framework-Specific Patterns
 
-The patterns above are framework-agnostic. All projects use Expo — load the references below for Expo-specific tooling and library details:
+The patterns above are framework-agnostic. Load the references below for detailed framework, router, and performance guidance. Apply Expo-specific tooling and library details only when the discovered profile includes compatible Expo support:
 
 - **Expo + React Native Core**: See `./references/react-native-patterns.md` — Expo modules, New Architecture, styling patterns, platform-specific code, gestures, animations, keyboard handling.
-- **Navigation (Expo Router)**: See `./references/react-native-navigation.md` — Expo Router file-based routing (default), React Navigation patterns (legacy projects), deep linking, screen organization.
+- **Navigation (selected router)**: See `./references/react-native-navigation.md` — apply Expo Router, React Navigation, or another router's file, deep-linking, and screen-organization patterns only when selected by the target profile.
 - **Performance**: See `./references/react-native-performance.md` — FlashList/FlatList optimization, Hermes, memory management, startup time, bundle analysis.
 
 ## Connected Skills
 
-- `tsh-ui-verifying` — for verifying implementation against Figma designs
+- `tsh-ui-verifying` — for collection-supported web/Figma browser verification; target projects own native simulator/device and accessibility evidence
 - `tsh-technical-context-discovering` — for understanding project conventions before implementing
 - `tsh-ensuring-accessibility` — to ensure components meet accessibility standards on both platforms
-- `tsh-optimizing-frontend` — for general performance considerations (memoization, code splitting concepts apply)
+- `tsh-optimizing-frontend` — for platform-neutral performance considerations where they remain valid for the target profile
 - `tsh-implementing-forms` — for form-specific component patterns and validation (schema-first validation applies in RN)
 - `tsh-writing-hooks` — for custom hook patterns used within components
-- `tsh-reviewing-frontend` — for code review of implemented components
+- `tsh-reviewing-frontend` — for platform-neutral component review; exclude its web-only criteria from native React Native files
