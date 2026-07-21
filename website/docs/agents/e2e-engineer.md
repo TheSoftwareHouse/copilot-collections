@@ -7,7 +7,11 @@ title: E2E Engineer
 
 **File:** `.github/agents/tsh-e2e-engineer.agent.md`
 
-The E2E Engineer agent creates, maintains, and debugs end-to-end tests using Playwright. It produces reliable, maintainable, and meaningful test suites.
+The E2E Engineer agent creates, maintains, and debugs web end-to-end tests using Playwright. It produces reliable, maintainable, and meaningful test suites.
+
+## Platform Boundary
+
+Playwright is the collection's E2E owner for web flows only. Native React Native E2E, simulator/device automation, and native accessibility/device evidence are target-project responsibilities and outside this collection's promise. Browser E2E and Playwright evidence do not verify native React Native behavior.
 
 ## Responsibilities
 

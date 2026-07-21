@@ -8,6 +8,10 @@ user-invocable: false
 
 Provides patterns for writing composable, testable custom hooks with stable APIs, proper effect lifecycle management, and clear responsibility boundaries.
 
+<platform-boundary>
+Apply hook contracts, composition, dependency tracking, cleanup, and testing rules across React platforms where valid. DOM events, media queries, browser storage, browser keyboard APIs, and other browser-only examples are web-file guidance; skip or adapt them for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Treat packages, versions, and tooling as profile-dependent rather than universal claims.
+</platform-boundary>
+
 > This skill uses "hook" to refer to any reusable, composable logic unit — React hooks, Vue composables, or equivalent framework abstractions. Adapt naming conventions and specific APIs to the project's framework.
 
 <principles>
@@ -84,7 +88,7 @@ Determine where the hook fits in the dependency hierarchy. This classification c
 
 | Tier     | Name               | Scope                                                | Dependencies                                              | Examples                                    |
 | -------- | ------------------ | ---------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------- |
-| Atom     | UI hooks           | Local state, DOM events, media queries, keyboard     | No remote data. No data-fetching libraries.               | `useToggle`, `useMediaQuery`, `useKeyPress` |
+| Atom     | UI hooks           | Local state, platform events, web media queries/keyboard | No remote data. No data-fetching libraries.               | `useToggle`, `useMediaQuery`, `useKeyPress` |
 | Molecule | Coordination hooks | Compose atom hooks with light coordination logic     | Other atom hooks only. No remote data.                    | `useFormField`, `usePagination`             |
 | Organism | Data hooks         | Wrap data-fetching/mutation libraries. Domain logic. | May call UI hooks internally. Interact with server cache. | `useUserProfile`, `useSearchResults`        |
 
@@ -220,6 +224,7 @@ The patterns above are framework-agnostic. For framework-specific hook/composabl
 ## Connected Skills
 
 - `tsh-implementing-frontend` — hooks are used within components; this skill covers component patterns
+- `tsh-implementing-react-native` — hooks are used the same way in React Native; this skill covers RN-specific component patterns
 - `tsh-optimizing-frontend` — for memoization strategies and performance patterns in hooks
 - `tsh-reviewing-frontend` — for hook-specific code review criteria
 - `tsh-implementing-forms` — for form-related custom hooks (field state, validation triggers)

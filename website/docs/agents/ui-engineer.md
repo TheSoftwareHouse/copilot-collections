@@ -7,12 +7,15 @@ title: UI Engineer
 
 The UI Engineer agent is the specialized implementor for UI and frontend work. It handles design-driven implementation, accessibility, and the verification loop that keeps implementation aligned with the design reference. Non-UI implementation stays with `tsh-software-engineer`.
 
+For React Native, this agent owns rendered screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI, and loads [`tsh-implementing-react-native`](../skills/react-native-implementation) for profile-driven guidance. React Native business logic, state, data, services, integrations, native modules, and other non-rendered work remain on the existing non-UI route. Native simulator/device, native accessibility, and native end-to-end evidence are target-project responsibilities; this collection's browser artifacts do not verify native behavior.
+
 ## Responsibilities
 
 - Implementing UI and frontend solutions from requirements and design context.
 - Translating Figma designs into working interfaces with the right component, spacing, and state choices.
 - Running the implementation loop: implement, delegate ACTUAL capture to `tsh-ui-capture-worker`, delegate design review to `tsh-ui-reviewer`, then apply fixes and re-capture using the same pinned user-confirmed full URL throughout the session.
 - Applying accessibility, hooks, forms, and frontend performance practices during UI work.
+- Loading `tsh-implementing-react-native` for rendered React Native UI and preserving the non-UI ownership boundary.
 - Confirming scope with `vscode/askQuestions` when a plan is missing or the UI task is unclear.
 - Pausing behind `vscode/askQuestions` when capture or review is blocked by missing Figma input, unknown app URL, auth issues, or failed evidence collection.
 - Limiting the verification loop to 5 iterations before pausing behind a structured user gate.
@@ -56,6 +59,7 @@ The UI Engineer agent is the specialized implementor for UI and frontend work. I
 - `tsh-writing-hooks` — Custom hooks: naming, composition, stable returns, effect cleanup, and testing.
 - `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard navigation, and focus management.
 - `tsh-optimizing-frontend` — Rendering optimization, code splitting, memoization, and memory management.
+- `tsh-implementing-react-native` — Profile-driven guidance for rendered React Native screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI.
 - `tsh-ui-verifying` — The implement -> capture -> review loop, verification criteria, tolerances, and report expectations.
 
 ## How It Works

@@ -1,10 +1,14 @@
 ---
 name: tsh-e2e-testing
-description: 'E2E testing patterns, verification procedures, and CI readiness checklists using Playwright. Use for writing, debugging, or reviewing end-to-end tests, fixing flaky tests, creating Page Objects, mocking external APIs.'
+description: 'E2E testing patterns, verification procedures, and CI readiness checklists for web flows using Playwright. Use for writing, debugging, or reviewing web end-to-end tests, fixing flaky tests, creating Page Objects, mocking external APIs.'
 user-invocable: false
 ---
 
 # E2E Testing Patterns & Practices
+
+## Platform Boundary
+
+Playwright is the collection's E2E owner for web flows only. Native React Native E2E, simulator/device automation, and native accessibility/device evidence are target-project responsibilities and outside this collection's promise. Browser E2E and Playwright evidence do not verify native React Native behavior.
 
 ## Page Object Pattern
 
