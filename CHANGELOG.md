@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-07-22
+
+### Changed
+
+- `tsh-orchestrating-implementation` — Added an exact-revision Human approval gate, keeping automated Reviewer approval distinct from Human approval.
+- Implementation routing — Missing research or plan now routes to preparation rather than planless execution.
+- `tsh-creating-implementation-plans` — Added a persisted Human Approval revision record to the plan-state schema and template.
+- Routed execution owners — Added a defense-in-depth pre-file-change predicate to all seven routed execution owners.
+- Public prompt and documentation — Synchronized the public implementation prompt and documentation with the Human approval gate, preparation routing, and execution-owner preconditions.
+
 ## 2026-07-10
 
 ### Changed
