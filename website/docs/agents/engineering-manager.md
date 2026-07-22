@@ -9,11 +9,13 @@ The Engineering Manager is the orchestration seat for implementation delivery. I
 
 The agent declares a shared model array of **GPT-5.6 Luna** and **Claude Sonnet 5**. High-leverage decisions are escalated to the **Architect**.
 
+The Engineering Manager owns the user-facing Human approval gate. Before the first file-changing delegation in either flow, it presents the exact current plan revision and accepts only `Approve current plan`, `Request changes`, or `Stop`. Only the user's explicit `Approve current plan` response authorizes implementation; automated Reviewer approval is not permission to implement. The Architect may record the literal response in the plan, but may not infer, paraphrase, or manufacture consent. A material revision after Human approval requires Reviewer re-review and renewed Human approval.
+
 ## How to Use
 
 The Engineering Manager works from two entry points:
 
-- **Directly** — invoke the agent in chat with a task description, Jira ID, or implementation plan.
+- **Directly** — invoke the agent in chat with a task description, Jira ID, standalone `*.research.md` file, or `*.plan.md` implementation plan.
 - **Via [`/tsh-implement`](../prompts/public/implement)** — the public prompt routes to the agent using the same shared model array.
 
 For any request whose intent is to deliver implementation changes, the agent loads the `tsh-orchestrating-implementation` skill and starts at **Step 0** (creating flow-start todos). Information-only, advisory-only, and standalone review- or research-only requests do not trigger the workflow.
@@ -49,7 +51,9 @@ The agent escalates to the **Architect** when:
 
 | Agent | Delegate when |
 | --- | --- |
-| **Software Engineer** | Backend, frontend, API, database, business logic, or accessibility/UX work in application code |
+| **Plan Implementor** | DEFAULT owner for actionable, low-risk plan seams in a Human-approved app-code task |
+| **Software Engineer** | EXCEPTION owner for complex non-UI application code — API, database, or business logic work the plan flags as needing deeper reasoning |
+| **UI Engineer** | Figma-backed UI and frontend implementation, including the capture-and-review verification loop |
 | **E2E Engineer** | End-to-end test design, mocking strategy, or CI-ready test suites |
 | **DevOps Engineer** | Infrastructure, Terraform, Kubernetes, CI/CD pipelines, or observability |
 | **Architect** | Architectural guidance, codebase analysis, or a missing/incomplete plan |
@@ -57,6 +61,7 @@ The agent escalates to the **Architect** when:
 | **UI Reviewer** | Verifying implemented UI against Figma, including `[REUSE]` UI verification tasks |
 | **Context Engineer** | Gathering requirements and context before the Architect can plan |
 | **Prompt Engineer** | Designing, optimizing, or auditing LLM application prompts |
+| **Technical Writer** | Repository documentation — README, CHANGELOG, in-repo `/docs`, or the published documentation site |
 
 ## Tool Access
 

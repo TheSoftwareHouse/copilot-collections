@@ -7,13 +7,15 @@ title: UI Engineer
 
 The UI Engineer agent is the specialized implementor for UI and frontend work. It handles design-driven implementation, accessibility, and the verification loop that keeps implementation aligned with the design reference. Non-UI implementation stays with `tsh-software-engineer`.
 
+Before any file change, the delegation must identify a plan whose Human Approval record satisfies `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and a valid ISO 8601 UTC `Decision Timestamp` ending in `Z`. If any field is missing, stale, mismatched, or based only on Reviewer approval, refuse and return control to the Engineering Manager for preparation — it never asks the user for confirmation to proceed and never independently decides to continue without a valid plan.
+
 ## Responsibilities
 
 - Implementing UI and frontend solutions from requirements and design context.
 - Translating Figma designs into working interfaces with the right component, spacing, and state choices.
 - Running the implementation loop: implement, delegate ACTUAL capture to `tsh-ui-capture-worker`, delegate design review to `tsh-ui-reviewer`, then apply fixes and re-capture using the same pinned user-confirmed full URL throughout the session.
 - Applying accessibility, hooks, forms, and frontend performance practices during UI work.
-- Confirming scope with `vscode/askQuestions` when a plan is missing or the UI task is unclear.
+- Confirming scope with `vscode/askQuestions` only when the UI task itself is genuinely ambiguous — a missing or invalid plan always routes back to the Engineering Manager instead of a scope-confirmation question.
 - Pausing behind `vscode/askQuestions` when capture or review is blocked by missing Figma input, unknown app URL, auth issues, or failed evidence collection.
 - Limiting the verification loop to 5 iterations before pausing behind a structured user gate.
 - Keeping the UI gate separate from code review until every UI item is verified, escalated, or explicitly acknowledged as blocked.
@@ -44,7 +46,7 @@ The UI Engineer agent is the specialized implementor for UI and frontend work. I
 | **VS Code Commands**      | Execute VS Code commands and preview in browser                                    |
 | **Sub-agents**            | Delegate capture to `tsh-ui-capture-worker` and design review to `tsh-ui-reviewer` |
 | **Todo**                  | Track implementation progress with structured checklists                           |
-| **Ask Questions**         | Confirm missing scope and unblock capture or review failures                       |
+| **Ask Questions**         | Clarify genuine UI-task ambiguity and unblock capture or review failures — never used to seek permission to proceed without a valid plan |
 
 ## Skills Loaded
 

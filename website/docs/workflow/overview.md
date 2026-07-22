@@ -31,11 +31,13 @@ Think of this workflow as a **relay race**. Each phase produces a deliverable �
 - **Agent:** Engineering Manager (orchestrates specialized agents)
 - **Command:** `/tsh-implement <JIRA_ID or description>`
 - Automatically handles the full development cycle:
-  1. **Research** — Delegates to Context Engineer to gather context from Jira, Figma, and codebase. Asks for user confirmation before proceeding.
-  2. **Plan** — Delegates to Architect to create a structured implementation plan. Asks for user confirmation before proceeding.
-  3. **Implement** — Delegates to Software Engineer, Prompt Engineer, DevOps Engineer, or E2E Engineer based on task type.
+  1. **Research** — Delegates to Context Engineer to gather context from Jira, Figma, and codebase. You review the research document; this review is a quality checkpoint, not a separate authorization gate.
+  2. **Plan** — Delegates to Architect to create a structured implementation plan, validated by the Architect Reviewer. You review the plan; the only step that authorizes implementation is the Human approval gate below.
+  3. **Implement** — Delegates to the owning specialist per task: Plan Implementor by default for actionable, low-risk plan seams, Software Engineer for complex non-UI work, UI Engineer for Figma/UI, E2E Engineer for end-to-end tests, DevOps Engineer for infrastructure/CI/CD/observability, Prompt Engineer for LLM prompts, or Technical Writer for repository documentation.
 - Tracks progress, runs quality checks after each task, and auto-triggers code review.
 - **Produces:** Research document, implementation plan, and concrete code modifications.
+
+The command accepts a task description, Jira ID, standalone `*.research.md`, or `*.plan.md`. Missing research or plan companions trigger preparation and never authorize no-plan implementation. Only the Engineering Manager's Human approval gate — `Approve current plan`, `Request changes`, or `Stop` — authorizes or halts execution; intermediate research and plan reviews inform you but are not separate authorization gates on their own. Quick and Full routes both require Human approval of the exact current plan revision before the first file-changing delegation. `tsh-plan-reviewer` `APPROVED` is Reviewer approval only and is not permission to implement.
 
 ### 3. Review
 
@@ -53,7 +55,7 @@ import SdlcDiagram from '@site/src/components/SdlcDiagram';
 ## Human Review at Every Step
 
 :::warning Important
-Each step requires your review and verification. Open the generated documents, go through them carefully, and iterate as many times as needed until the output looks correct. AI assistance does not replace human judgment — treat each output as a draft that needs your approval before proceeding.
+Each step requires your review and verification. Open the generated documents, go through them carefully, and give feedback when something needs to change. AI assistance does not replace human judgment. Reviewing research and draft plans keeps quality high, but the only step that authorizes or halts execution is the Engineering Manager's Human approval gate (`Approve current plan`, `Request changes`, `Stop`) — treat other reviews as checkpoints, not confirmation-to-continue rituals, and reserve your input for real ambiguity or blockers rather than a generic "continue?" prompt.
 :::
 
 ## Workflow Variants
