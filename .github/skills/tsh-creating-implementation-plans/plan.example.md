@@ -52,6 +52,22 @@ List of new components, functions, utilities that need to be built from scratch:
 | --- | ---------- | -------- | --------------------- |
 | 1   | <question> | <answer> | ✅ Resolved / ❓ Open |
 
+## Human Approval
+
+| Field | Value |
+| --- | --- |
+| Plan Revision | 1 |
+| Human Decision | PENDING |
+| Approved Revision | — |
+| Decision Timestamp | — |
+| Note | <optional concise note> |
+
+<human-approval-protocol>
+The Architect owns material plan revision changes and records only literal explicit human responses. `Human Decision` must be exactly one of `PENDING`, `APPROVED`, `CHANGES_REQUESTED`, or `STOPPED`. Human approval is not stored in `.plan-review.md`. Persisted approval is valid if and only if `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and `Decision Timestamp` is valid ISO 8601 UTC ending in `Z`; a fresh session requires that exact predicate.
+
+Material changes before implementation completion increment `Plan Revision`, set `Human Decision=PENDING`, clear `Approved Revision`, and explain the change in Changelog. A material change after an earlier Human approval immediately halts further file-changing delegation and mandates automated re-review with no low-risk exemption before renewed Human approval. The low-risk exemption applies only to initial preparation before any Human approval. Routine task checkbox/progress/status updates and execution/review recording do not invalidate approval. This mechanism is instruction-level and auditable, neither cryptographic nor platform enforcement.
+</human-approval-protocol>
+
 ## Technical Context
 
 Project conventions, coding standards, and patterns discovered during planning. Downstream agents MUST read this section instead of re-discovering the same context.
