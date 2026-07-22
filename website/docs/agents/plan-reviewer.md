@@ -9,6 +9,8 @@ title: Architect Reviewer
 
 The Architect Reviewer is an internal sub-agent that stress-tests implementation plans before code is written. It challenges the plan for likely failure modes, hidden assumptions, sequencing traps, integration mismatches, migration and data risks, and false confidence in testing.
 
+Its `APPROVED` result is **Reviewer approval** only. It reports automated readiness and never grants Human approval or permission to implement; the Engineering Manager must still obtain Human approval of the exact current plan revision before the first file-changing delegation.
+
 ## Responsibilities
 
 - Stress-testing the plan against the research context to expose likely failure modes.
@@ -43,4 +45,4 @@ The Architect Reviewer is an internal sub-agent that stress-tests implementation
 
 - It is not invoked directly by users.
 - The Architect directly invokes the Plan Reviewer as a nested subagent after creating or revising a plan; the Engineering Manager is not part of the review loop.
-- If the reviewer returns revisions, the plan goes back to the Architect and is re-reviewed until approved or escalated.
+- If the reviewer returns revisions, the plan goes back to the Architect and is re-reviewed until the reviewer returns `APPROVED` (Reviewer approval only, never Human approval) or the loop is escalated.

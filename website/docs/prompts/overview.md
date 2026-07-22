@@ -62,25 +62,29 @@ These are the user-facing commands available in VS Code chat.
 
 ## Delegation via /tsh-implement
 
-When you run [`/tsh-implement`](./public/implement), the Engineering Manager automatically handles the full development cycle. It first gathers context and creates an implementation plan (if needed), then delegates tasks to specialized agents. You don’t need to invoke individual agents — the orchestration is handled for you.
+When you run [`/tsh-implement`](./public/implement), the Engineering Manager automatically handles the full development cycle. Its four primary inputs are a task description, Jira ID, standalone `*.research.md`, or `*.plan.md`. Missing research or plan companions trigger preparation, never no-plan implementation. Before the first file-changing delegation in either flow, the manager requires Human approval of the exact current plan revision; automated Reviewer approval is readiness evidence only, not permission to implement. You don’t need to invoke individual agents — the orchestration is handled for you.
 
 | Phase | Delegated To |
 |---|---|
 | Research (context gathering) | Context Engineer (via [internal research prompt](./internal/research)) |
 | Planning (architecture) | Architect (via [internal plan prompt](./internal/plan)) |
 | Plan validation | Architect Reviewer stress-test (via [internal review-plan prompt](./internal/review-plan)) |
-| Backend / general code | Software Engineer |
-| Frontend with Figma | Software Engineer (via [internal UI prompt](./internal/implement-ui)) |
+| Backend / general code (actionable, low-risk seam) | Plan Implementor — DEFAULT |
+| Backend / general code (complex, non-UI) | Software Engineer — EXCEPTION |
+| Frontend with Figma | UI Engineer (via [internal UI prompt](./internal/implement-ui)) |
 | E2E tests | E2E Engineer |
 | LLM application prompts | Prompt Engineer (via [internal engineer-prompt](./internal/engineer-prompt)) |
 | Kubernetes, Terraform, CI/CD, observability | DevOps Engineer |
+| Repository documentation | Technical Writer |
 | UI verification | UI Reviewer |
 
 ## Input Format
 
-All prompts accept either:
+Most prompts accept either:
 
 - A **Jira ticket ID**: `/tsh-implement PROJ-123`
 - A **task description**: `/tsh-implement Add pagination to the user list API`
+
+`/tsh-implement` additionally accepts a standalone `*.research.md` file or a `*.plan.md` implementation plan as a primary input. A missing research or plan companion routes to preparation; it never authorizes no-plan implementation.
 
 The agent adapts its behavior based on the input type — pulling context from Jira/Confluence for ticket IDs, or working from the description and codebase for free-form text.

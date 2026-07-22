@@ -9,6 +9,8 @@ title: Architect
 
 The Architect agent designs technical solutions, system architecture, and detailed implementation plans. It translates business requirements into structured, executable specifications that are validated by the Architect Reviewer before implementation begins.
 
+The Architect owns plan revisions and records only the user's literal Human approval response; it never infers consent from context or from Reviewer approval. `tsh-plan-reviewer` `APPROVED` is Reviewer approval only and leaves Human approval pending. Both **Start Implementation** and **Start Infrastructure Implementation** pass through the Engineering Manager and its Human approval gate; neither handoff directly authorizes file-changing work.
+
 ## Responsibilities
 
 - Designing the overall architecture of the solution (components, interactions, data flow).
@@ -63,6 +65,6 @@ Each technical specification includes:
 
 After creating the plan, the Architect can hand off to:
 
-- **Internal plan review loop** → the Architect invokes `tsh-plan-reviewer` as a nested subagent after creating or revising a plan and addresses all BLOCKER findings. After 3 iterations, if BLOCKERs remain, the Architect asks the user a structured question (try one more iteration, stop here, or give custom guidance) bundled with the remaining findings and iteration history — repeating after every further iteration until the plan is approved or the user chooses to stop.
-- **Engineering Manager** → `/tsh-implement` (`Start Implementation`) once the plan is approved/finalized
-- **DevOps Engineer** → `Start Infrastructure Implementation` for infrastructure work per the architectural plan
+- **Internal plan review loop** → the Architect invokes `tsh-plan-reviewer` as a nested subagent after creating or revising a plan and addresses all BLOCKER findings. After 3 iterations, if BLOCKERs remain, the Architect asks the user a structured question (try one more iteration, stop here, or give custom guidance) bundled with the remaining findings and iteration history — repeating after every further iteration until `tsh-plan-reviewer` returns Reviewer approval (or the Architect records documented reviewer readiness) or the user chooses to stop. This loop only ever settles Reviewer approval; it never grants or implies Human approval.
+- **Engineering Manager** → `/tsh-implement` (`Start Implementation`) once the plan is Reviewer-ready, for the manager's Human approval gate
+- **Engineering Manager** → `Start Infrastructure Implementation` for infrastructure work, through the same Human approval gate

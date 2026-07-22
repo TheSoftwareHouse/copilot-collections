@@ -12,10 +12,10 @@ A thin trigger that starts implementation delivery. It routes execution to the [
 ## Usage
 
 ```text
-/tsh-implement <JIRA_ID, task description, or path to a *.plan.md>
+/tsh-implement <JIRA_ID, task description, *.research.md, or *.plan.md>
 ```
 
-Provide at least one of: a task description, a Jira ID, or a `*.plan.md` implementation plan. Related context such as a `*.research.md` file can be included when available.
+The four primary inputs are a task description, a Jira ID, a standalone `*.research.md` file, and a `*.plan.md` implementation plan. If a research or plan companion is missing, the workflow prepares it; it never authorizes no-plan implementation.
 
 ## What It Does
 
@@ -23,8 +23,10 @@ The prompt routes to the Engineering Manager, which loads the `tsh-orchestrating
 
 - **Step 0 flow-start todos** — creates the todos needed for the selected flow before any delegation begins.
 - **Step 1 flow selection** — recommends Quick Flow or Full Flow based on scope, ambiguity, file impact, planning readiness, and Figma/UI-verification involvement.
-- **Quick Flow** — direct delegation to the Software Engineer, validation checks, and a code-review gate.
+- **Quick Flow** — eligible for any narrow, single-domain qualifying work (app code, E2E, LLM prompts, infra/CI-CD/Kubernetes/observability, repository documentation via `tsh-technical-writer`, and more), delegated to the owning specialist via canonical Task-to-Owner Routing, plus validation checks and a code-review gate. For app-code tasks specifically, Plan Implementor is the default for actionable, low-risk seams and Software Engineer is the exception for complex non-UI work — Quick Flow is never limited to app code. Any Figma or UI-verification involvement hard-excludes Quick Flow and always routes to Full Flow, even when the rest of the change looks narrow.
 - **Full Flow** — planning readiness, plan review, todo and UI inventory, upfront execution plan, delegated execution routing, and the UI-verification and code-review gates.
+
+Both flows require Human approval of the exact current plan revision before the first file-changing delegation. The automated `tsh-plan-reviewer` `APPROVED` verdict is Reviewer approval only; it is not permission to implement.
 
 ## Key Behaviors
 

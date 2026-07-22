@@ -18,6 +18,11 @@ Every plan defines one Wildly Important Goal, stated explicitly as the single mo
 <open-questions-dispatch-gate>
 Plans must not be dispatched to an implementor while any Open Questions row has Status = ❓ Open; unresolved questions must be routed back to `tsh-architect` before execution.
 </open-questions-dispatch-gate>
+<human-approval-protocol>
+The plan's `## Human Approval` record is the canonical, auditable record of approval for the exact current plan revision. Its schema has exactly these fields: `Plan Revision` (integer), `Human Decision`, `Approved Revision`, `Decision Timestamp` (ISO 8601 UTC with a trailing `Z`), and `Note` (optional). `Human Decision` has exactly these values: `PENDING`, `APPROVED`, `CHANGES_REQUESTED`, and `STOPPED`. The Architect owns material plan revision changes and records only literal explicit human responses; Human approval is never stored in `.plan-review.md`.
+
+Persisted approval is valid if and only if `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and `Decision Timestamp` is valid ISO 8601 UTC ending in `Z`. A fresh session accepts persisted approval only under that exact predicate. Material changes before implementation completion increment `Plan Revision`, set `Human Decision=PENDING`, clear `Approved Revision`, and explain the change in Changelog. A material change after an earlier Human approval immediately halts further file-changing delegation and mandates automated re-review with no low-risk exemption before renewed Human approval. The low-risk exemption applies only to initial preparation before any Human approval. Routine task checkbox/progress/status updates and execution/review recording do not invalidate approval. This is an instruction-level, auditable mechanism, not cryptographic and not platform enforcement.
+</human-approval-protocol>
 <executable-slots-dispatch-gate>
 Plans must not be dispatched to an implementor while any executable slot still contains an angle-bracket placeholder or any assumed-default command. Verification fields, DoD command items, and file/spec path arguments must be resolved from Technical Context or the task's app stack before dispatch. This gate is intentionally narrow: it applies only to executable slots, and instructional angle-bracket placeholders elsewhere in the template are allowed.
 </executable-slots-dispatch-gate>

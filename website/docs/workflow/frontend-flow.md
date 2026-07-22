@@ -9,19 +9,20 @@ For a full end-to-end breakdown of the post-implementation verify-fix loop, see 
 
 Before you start, make sure the target app is already running, be ready to confirm the exact full dev server URL, and ensure `playwright-cli` is available to the UI capture worker (`npx playwright-cli` or a global install).
 
+The frontend route accepts a task description, Jira ID, standalone `*.research.md`, or `*.plan.md`. Missing research or plan companions trigger preparation and never authorize no-plan implementation. Before the first file-changing delegation, the Engineering Manager requires Human approval of the exact current plan revision. Automated Reviewer approval is readiness evidence only; it is not permission to implement. A material revision after Human approval requires Reviewer re-review and renewed Human approval.
+
 ## Command Sequence
 
 ```text
 1️⃣ /tsh-implement <JIRA_ID or task description>
    ↳ 🔍 Engineering Manager delegates to Context Engineer for research
-   ↳ 📖 Review research doc – verify Figma links, requirements
-   ↳ ✅ Confirm to proceed to planning
+   ↳ 📖 Review research doc – verify Figma links, requirements (quality checkpoint, not an authorization gate)
    ↳ 🧱 Engineering Manager delegates to Architect for planning
    ↳ 🧪 Engineering Manager delegates to Architect Reviewer via /tsh-review-plan for plan validation
    ↳ 📖 Review plan and review summary – check component breakdown, design references
-   ↳ ✅ Confirm the approved plan aligns with Figma structure
    ↳ 🌐 Confirm the exact full dev server URL once and pin it for the session
-   ↳ 💻 Engineering Manager delegates UI tasks to UI Engineer
+   ↳ ✅ Engineering Manager presents exactly `Approve current plan`, `Request changes`, `Stop`
+   ↳ 💻 Engineering Manager delegates UI tasks to UI Engineer only after `Approve current plan`
    ↳ 📖 Review UI Verification Summary separately from code review
    ↳ ✅ Manually verify critical UI elements in browser
    ↳ 🔄 Engineering Manager calls /tsh-review-ui in a loop until the UI gate is PASS or reaches the structured post-5-iteration user gate

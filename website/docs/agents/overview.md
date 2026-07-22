@@ -30,13 +30,13 @@ Each agent has:
 │   /tsh-implement         │
 └──────┬──────────────────┘
        │ Delegates to specialized agents
-       ├─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┐
-       ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼
-┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
-│  Context     │  │  Architect   │  │  Architect   │  │  UI          │  │  Software    │  │  Plan        │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer │
-│  Engineer    │  │  (plan)      │  │  Reviewer    │  │  Engineer    │  │  Engineer    │  │  Implementor │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review-│
-│  (research)  │  │              │  │ (plan review)│  │  (UI)        │  │  (non-UI)    │  │  (strict     │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui          │
-└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
+       ├─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┬─────────────────┐
+       ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼                 ▼
+┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐
+│  Context     │  │  Architect   │  │  Architect   │  │  UI          │  │  Software    │  │  Plan        │  │  DevOps      │  │  E2E         │  │  Prompt      │  │  UI Reviewer │  │  Technical   │
+│  Engineer    │  │  (plan)      │  │  Reviewer    │  │  Engineer    │  │  Engineer    │  │  Implementor │  │  Engineer    │  │  Engineer    │  │  Engineer    │  │  /tsh-review-│  │  Writer      │
+│  (research)  │  │              │  │ (plan review)│  │  (UI)        │  │  (non-UI)    │  │  (strict     │  │  (infra)     │  │  (tests)     │  │  (prompts)   │  │  ui          │  │  (docs)      │
+└──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘  └──────────────┘
        │
        ▼
 ┌──────────────┐
@@ -44,6 +44,8 @@ Each agent has:
 │ /tsh-review   │
 └──────────────┘
 ```
+
+Both Architect handoffs — **Start Implementation** and **Start Infrastructure Implementation** — pass through the Engineering Manager. The manager owns the Human approval gate for the exact current plan revision before the first file-changing delegation; an automated Reviewer approval does not authorize implementation.
 
 ## Agent Summary
 

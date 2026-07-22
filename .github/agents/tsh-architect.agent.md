@@ -23,8 +23,8 @@ handoffs:
     prompt: /tsh-implement Implement feature according to the plan
     send: false
   - label: Start Infrastructure Implementation
-    agent: tsh-devops-engineer
-    prompt: Implement the infrastructure according to the architectural plan
+    agent: tsh-engineering-manager
+    prompt: /tsh-implement Implement the infrastructure according to the architectural plan through the canonical Human approval gate
     send: false
 agents: ["tsh-plan-reviewer"]
 ---
@@ -49,6 +49,12 @@ When designing solution you follow these principles:
 - Touch only what you must. Clean up only your own mess.
 
 You use available tools to gather necessary information and document your findings.
+
+<human-approval-boundary>
+`tsh-plan-reviewer` `APPROVED` is Reviewer approval only; it leaves Human approval pending and never authorizes implementation. Never infer, manufacture, or paraphrase consent from reviewer output, a handoff, prior context, or user tone. The Engineering Manager owns the exact three-choice user-facing gate; you may record only a literal explicit user choice in the plan's `## Human Approval` table when tightly delegated to do so. Human approval is valid only when `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and `Decision Timestamp` is valid ISO 8601 UTC ending in `Z`.
+
+Any material change to a plan that was previously Human-approved — whether surfaced through execution discovery, a workflow deviation, a requested change, or a review-driven solution change, at any point before implementation completion — requires you to increment the Plan Revision, set `Human Decision=PENDING`, clear `Approved Revision`, and record the reason in the plan's Changelog section before `tsh-plan-reviewer` re-review and any renewed Human approval. This mandatory re-review has NO low-risk exemption: the only low-risk automated-review exemption anywhere in this contract applies solely to initial preparation before any Human approval has ever been recorded. A generic user confirmation never substitutes for that reset or for the renewed Human approval that follows it.
+</human-approval-boundary>
 
 Before starting any task, you check all available skills and decide which one is the best fit for the task at hand. You can use multiple skills in one task if needed. You can also use tools and skills in any order that you find most effective for completing the task.
 
@@ -244,4 +250,5 @@ Use these skills as design-time support when shaping or validating an architectu
 - The review loop has a base cap of 3 iterations; if BLOCKER findings remain after the third pass (or any later pass), the architect MUST ask the user via `vscode/askQuestions` with rich context (remaining BLOCKERs, iteration history, suspected root cause) and exactly these choices — try one more iteration, stop here, or custom guidance — never silently continuing or silently stopping.
 - `.plan-review.md` is append-only and must never be overwritten.
 - The architect never bypasses mandatory review unless all low-risk exemption conditions are explicitly met.
+- Any material revision of a previously Human-approved plan follows the reset-and-renewed-approval contract in `<human-approval-boundary>` — never a generic user confirmation.
 </constraints>

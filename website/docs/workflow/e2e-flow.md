@@ -7,6 +7,8 @@ title: E2E Testing Flow
 
 For features that need end-to-end test coverage, use the E2E testing workflow. This creates comprehensive, reliable Playwright test suites for critical user journeys.
 
+The route accepts a task description, Jira ID, standalone `*.research.md`, or `*.plan.md`. Missing research or plan companions trigger preparation and never authorize no-plan implementation. Before the first file-changing delegation, the Engineering Manager requires Human approval of the exact current plan revision. Automated `tsh-plan-reviewer` `APPROVED` is Reviewer approval only, not permission to implement; a material revision after Human approval requires Reviewer re-review and renewed Human approval.
+
 ## Command Sequence
 
 ```text
@@ -16,7 +18,7 @@ For features that need end-to-end test coverage, use the E2E testing workflow. T
    ↳ ✅ Identify critical paths that need E2E coverage
    ↳ 🧱 Engineering Manager delegates to Architect for planning
    ↳ 📖 Review plan – confirm test scenarios and acceptance criteria
-   ↳ ✅ Ensure E2E testing is included in the plan
+   ↳ ✅ Human approves the exact current plan revision and ensures E2E testing is included
    ↳ 🧪 Engineering Manager delegates E2E tasks to the E2E Engineer agent
    ↳ 📖 Implements Page Objects, test files, and fixtures
    ↳ ✅ Run tests locally, verify they pass
