@@ -55,26 +55,27 @@ src/
 ```
 
 Project conventions to preserve when present:
+
 - Co-locate component types: `Button.types.ts` next to `Button.tsx`.
-- Co-locate component styles: `Button.styles.ts` next to `Button.tsx` for complex components, or use `StyleSheet.create()` in the component file for simpler components.
+- Co-locate component styles according to the established styling system, for example `Button.styles.ts`, a Unistyles stylesheet, or a Gluestack UI component configuration.
 - Keep one component per file when that matches the repository's organization. The filename should match the component name.
 
 ## Component Composition
 
 React Native implements the generic composition patterns as follows:
 
-| Generic Pattern     | React Native Implementation                                                             |
-| ------------------- | --------------------------------------------------------------------------------------- |
-| Content projection  | `children` prop — renders child components inside a container `View`                    |
-| Render delegation   | Render props: `renderItem={(item) => <ListItem data={item} />}`                         |
-| Compound components | Shared context between parent and sub-components (`Select` + `Select.Option`)           |
-| Slots               | Named props accepting `ReactNode`: `leftIcon`, `rightIcon`, `header`, `footer`          |
+| Generic Pattern     | React Native Implementation                                                    |
+| ------------------- | ------------------------------------------------------------------------------ |
+| Content projection  | `children` prop — renders child components inside a container `View`           |
+| Render delegation   | Render props: `renderItem={(item) => <ListItem data={item} />}`                |
+| Compound components | Shared context between parent and sub-components (`Select` + `Select.Option`)  |
+| Slots               | Named props accepting `ReactNode`: `leftIcon`, `rightIcon`, `header`, `footer` |
 
 Prefer `children` for single content projection. Use named `ReactNode` props (slots) when multiple projection points are needed — this is very common in RN for list headers, footers, empty states, and icon slots. Use compound components for tightly coupled UI groups (tabs, accordion, select).
 
-### Text must always be in `<Text>`
+### Text must render through the project's text primitive
 
-In React Native, all text content MUST be wrapped in a `<Text>` component. Unlike web, you cannot place raw strings inside `<View>`. This is the most common mistake for web developers transitioning to RN.
+In React Native, all text content MUST resolve to a native `Text` component. Unlike web, you cannot place raw strings inside a `View`. Use the project's established text primitive, such as a Gluestack UI `Text` component, when it wraps the native contract; otherwise use `Text` from `react-native`.
 
 ```typescript
 // WRONG — crashes at runtime
@@ -86,7 +87,9 @@ In React Native, all text content MUST be wrapped in a `<Text>` component. Unlik
 
 This applies to conditional text too — `{count > 0 && <Text>{count}</Text>}` not `{count > 0 && count}`.
 
-### Typed component pattern
+### React Native Core component example
+
+Use this example only when the target project uses React Native Core primitives and `StyleSheet.create()`. For a component library or styling system such as Gluestack UI, Unistyles, NativeWind, Restyle, or styled-components, preserve its primitives, token resolution, variants, and styling API instead of translating it into this pattern.
 
 ```typescript
 import { type ReactNode } from 'react';
@@ -113,9 +116,18 @@ export type { CardProps };
 
 ## Styling Patterns
 
-### StyleSheet.create()
+### Choose the established styling system first
 
-Always use `StyleSheet.create()`. It validates style keys at creation time and enables optimizations on the native side.
+Do not introduce a parallel styling system. Inspect the target project's component imports, theme setup, style files, and existing components before writing styles:
+
+- **Component library present:** reuse its primitives, theme provider, token props, and variant mechanism. For example, retain Gluestack UI components and their configured theme rather than replacing them with raw `View`, `Text`, or a separate stylesheet.
+- **Styling library present:** use its installed API for themed, dynamic, and platform styles. For example, use Unistyles' configured stylesheet and theme access rather than importing `StyleSheet` from `react-native`.
+- **Utility or CSS-in-JS system present:** retain its existing class, recipe, or styled-component conventions.
+- **React Native Core established:** use `StyleSheet.create()` for static styles and React Native style arrays for supported dynamic values.
+
+`StyleSheet.create()` validates style keys and can optimize native styles, but it is a React Native Core option, not a collection-wide requirement.
+
+### React Native Core `StyleSheet.create()` example
 
 ```typescript
 const styles = StyleSheet.create({
@@ -133,20 +145,20 @@ const styles = StyleSheet.create({
 
 ### Theme and design tokens
 
-Centralize tokens in a theme object. Access them via a theme hook or direct import — match the project's existing pattern.
+Use the target project's existing token source and resolution mechanism. Do not create a parallel `theme/tokens.ts` module when tokens already come from a component library, Unistyles, NativeWind, Restyle, styled-components, or another configured system. The following is a React Native Core example for a project that has chosen a local theme object:
 
 ```typescript
 // theme/tokens.ts
 const tokens = {
   colors: {
-    primary500: '#3B82F6',
-    primary600: '#2563EB',
-    background: '#FFFFFF',
-    surface: '#F8FAFC',
-    textPrimary: '#0F172A',
-    textSecondary: '#64748B',
-    error: '#EF4444',
-    success: '#22C55E',
+    primary500: "#3B82F6",
+    primary600: "#2563EB",
+    background: "#FFFFFF",
+    surface: "#F8FAFC",
+    textPrimary: "#0F172A",
+    textSecondary: "#64748B",
+    error: "#EF4444",
+    success: "#22C55E",
   },
   spacing: {
     xs: 4,
@@ -163,23 +175,23 @@ const tokens = {
     full: 9999,
   },
   typography: {
-    heading1: { fontSize: 32, lineHeight: 40, fontWeight: '700' as const },
-    heading2: { fontSize: 24, lineHeight: 32, fontWeight: '600' as const },
-    body: { fontSize: 16, lineHeight: 24, fontWeight: '400' as const },
-    caption: { fontSize: 12, lineHeight: 16, fontWeight: '400' as const },
+    heading1: { fontSize: 32, lineHeight: 40, fontWeight: "700" as const },
+    heading2: { fontSize: 24, lineHeight: 32, fontWeight: "600" as const },
+    body: { fontSize: 16, lineHeight: 24, fontWeight: "400" as const },
+    caption: { fontSize: 12, lineHeight: 16, fontWeight: "400" as const },
   },
 } as const;
 ```
 
 ### Dynamic / conditional styles
 
-Combine static styles with dynamic values using style arrays. Keep the static base in `StyleSheet.create()` and overlay dynamic parts:
+Use the selected styling system's documented conditional and variant mechanism. For React Native Core, combine static styles with dynamic values using style arrays. Keep the static base in `StyleSheet.create()` and overlay dynamic parts:
 
 ```typescript
 <View style={[styles.container, { opacity: disabled ? 0.5 : 1 }]} />
 ```
 
-For variant-based styling, map variants to pre-created stylesheet entries rather than computing styles inline:
+For React Native Core variant-based styling, map variants to pre-created stylesheet entries rather than computing styles inline. In component libraries or styling systems, use the existing recipe, variant, or compound-variant API:
 
 ```typescript
 const variantStyles = StyleSheet.create({
@@ -208,15 +220,15 @@ React Native uses density-independent pixels. Avoid percentage-based layouts as 
 
 ### Platform.select()
 
-For small, value-level differences:
+For small, value-level differences, use the selected styling system's platform API. The following is a React Native Core example:
 
 ```typescript
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   shadow: Platform.select({
     ios: {
-      shadowColor: '#000',
+      shadowColor: "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.1,
       shadowRadius: 4,
@@ -239,22 +251,22 @@ StatusBarManager.ios.tsx      # iOS-specific implementation
 StatusBarManager.android.tsx  # Android-specific implementation
 ```
 
-Metro bundler automatically resolves the correct file. Both files must export the same public API (same named exports and types).
+Metro bundler automatically resolves the correct file. Both files must expose the same public API according to the target project's export convention.
 
 ### Decision guide
 
-| Divergence level                       | Strategy                              |
-| -------------------------------------- | ------------------------------------- |
-| Single value differs (shadow, spacing) | `Platform.select()` inline            |
-| A few lines differ                     | `Platform.OS === 'ios'` conditional   |
-| 30%+ of component differs             | Separate `.ios.tsx` / `.android.tsx`   |
-| Entirely different native API          | Separate files + shared types/hook    |
+| Divergence level                       | Strategy                             |
+| -------------------------------------- | ------------------------------------ |
+| Single value differs (shadow, spacing) | `Platform.select()` inline           |
+| A few lines differ                     | `Platform.OS === 'ios'` conditional  |
+| 30%+ of component differs              | Separate `.ios.tsx` / `.android.tsx` |
+| Entirely different native API          | Separate files + shared types/hook   |
 
 ## Pressable and Touch Feedback
 
 Treat the touch primitive as a profile and project-convention decision. When the target React Native version supports core `Pressable` and the project has no established abstraction, it provides pressed-state styling and accessibility props without adding a package. If the target version or project uses another supported touchable, retain that API and check its official documentation before changing it; do not infer a deprecation or migration requirement from this reference.
 
-When core `Pressable` is supported, an actionable control should provide a sufficient hit area and communicate its state:
+When core `Pressable` is supported and the project has no established control primitive, an actionable control should provide a sufficient hit area and communicate its state. This is a React Native Core example; use the component library's button or pressable primitive when one is already established:
 
 ```typescript
 import { Pressable, StyleSheet } from 'react-native';
@@ -382,6 +394,7 @@ Use `react-native-reanimated` only when it is installed or approved for the targ
 When Reanimated is the compatible project choice, keep shared values and animated styles inside the API's documented worklet boundaries. Do not read a shared value during render, and use the target version's documented mechanism when a worklet must call JavaScript. Treat layout-animation and entering/exiting APIs as version-sensitive; check the installed version before using them.
 
 For any animation path:
+
 - Define the intended motion and reduced-motion behavior in the project convention.
 - Measure responsiveness on the target build before replacing a core API.
 - Keep accessibility state and interaction completion independent from visual animation.
@@ -395,14 +408,14 @@ When New Architecture is enabled, confirm that each relevant native dependency s
 
 Expo modules are conditional options, not collection-wide dependencies. Use an `expo-*` import only when the target profile includes Expo, the package is installed or explicitly approved, the native build/prebuild state supports it, and the official Expo/package documentation confirms compatibility with the exact SDK and React Native versions. Otherwise keep the project's current implementation or use a supported core API where one meets the requirement.
 
-| Need | Candidate, only when compatible | Core or existing-project fallback |
-| --- | --- | --- |
-| Image display | `expo-image` | `Image` from `react-native` |
-| Image selection | `expo-image-picker` | Existing project integration or a target-approved native module |
-| Camera | `expo-camera` | Existing project integration or a target-approved native module |
-| File access | `expo-file-system` | Existing project storage or native integration |
-| Haptics | `expo-haptics` | Existing platform API or omit when not required |
-| Secure storage | `expo-secure-store` | Existing project storage integration; do not substitute an insecure store for secrets |
+| Need            | Candidate, only when compatible | Core or existing-project fallback                                                     |
+| --------------- | ------------------------------- | ------------------------------------------------------------------------------------- |
+| Image display   | `expo-image`                    | `Image` from `react-native`                                                           |
+| Image selection | `expo-image-picker`             | Existing project integration or a target-approved native module                       |
+| Camera          | `expo-camera`                   | Existing project integration or a target-approved native module                       |
+| File access     | `expo-file-system`              | Existing project storage or native integration                                        |
+| Haptics         | `expo-haptics`                  | Existing platform API or omit when not required                                       |
+| Secure storage  | `expo-secure-store`             | Existing project storage integration; do not substitute an insecure store for secrets |
 
 The table lists possible choices for a discovered Expo profile; it does not select a dependency for an unknown consumer. Do not infer that an Expo module is installed, bundled, maintained at a particular version, or compatible with the target's architecture without checking the manifest and official documentation.
 
@@ -414,14 +427,14 @@ The collection's browser and Figma artifacts, including Playwright screenshots o
 
 ## Anti-Patterns
 
-| Pattern | Profile-aware response |
-| --- | --- |
-| Assuming Expo, a router, or a package is present | Inspect the manifest, lockfile, native state, and exact versions before choosing an API. |
-| Replacing an existing core or project API because a third-party library is popular | Keep the supported API when it meets the requirement; replace it only for a demonstrated need and verified compatibility. |
-| Inline style objects for repeated static styles | Use `StyleSheet.create()` and the target project's design tokens where that matches project conventions. |
-| Wrapping a list in an extra safe-area provider | Use the selected provider's documented content-container or inset handling to avoid double padding. |
-| Reading an animation shared value during render | Follow the installed animation library's documented worklet and event boundaries. |
-| Choosing a gesture or animation library without native setup evidence | Check installed packages, native directories, build mode, New Architecture setting, and official installation documentation first. |
-| Scattered platform conditionals | Use `Platform.select()` or platform files when the target project supports them and the divergence is real. |
-| Hardcoded visual values | Reference the target project's design tokens; ask before inventing a token. |
-| Raw text outside `<Text>` | Wrap text content in `<Text>` components because React Native does not render raw strings inside a `View`. |
+| Pattern                                                                            | Profile-aware response                                                                                                                                                    |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Assuming Expo, a router, or a package is present                                   | Inspect the manifest, lockfile, native state, and exact versions before choosing an API.                                                                                  |
+| Replacing an existing core or project API because a third-party library is popular | Keep the supported API when it meets the requirement; replace it only for a demonstrated need and verified compatibility.                                                 |
+| Replacing an established styling or component system with React Native Core styles | Preserve the target project's primitives, token resolution, variants, and styling API; use `StyleSheet.create()` only when React Native Core is the established approach. |
+| Wrapping a list in an extra safe-area provider                                     | Use the selected provider's documented content-container or inset handling to avoid double padding.                                                                       |
+| Reading an animation shared value during render                                    | Follow the installed animation library's documented worklet and event boundaries.                                                                                         |
+| Choosing a gesture or animation library without native setup evidence              | Check installed packages, native directories, build mode, New Architecture setting, and official installation documentation first.                                        |
+| Scattered platform conditionals                                                    | Use `Platform.select()` or platform files when the target project supports them and the divergence is real.                                                               |
+| Hardcoded visual values                                                            | Reference the target project's design tokens; ask before inventing a token.                                                                                               |
+| Raw text outside `<Text>`                                                          | Wrap text content in `<Text>` components because React Native does not render raw strings inside a `View`.                                                                |

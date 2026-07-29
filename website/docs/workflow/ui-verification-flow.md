@@ -228,12 +228,12 @@ specifications/<task-id>/ui-verification/
 
 ### Who Produces What
 
-| Owner | Input | Output |
-| --- | --- | --- |
-| Engineering Manager | task description, Jira ID, standalone `*.research.md`, or `*.plan.md` | routing, gates, user questions, and — once per item, before iteration 1 — the shared verification root and `figma-expected.png` path |
-| UI Engineer | plan + UI task slice | code changes |
-| UI Capture Worker | pinned full URL + iteration dir | browser `actual.png`, `computed-styles.json`, `a11y-snapshot.yml` for this iteration only — never `figma-expected.png` |
-| UI Reviewer | Figma URL + shared `figma-expected.png` path + current iteration's ACTUAL artifacts | reuses or exports `figma-expected.png` when needed, then web `PASS`, `FAIL`, or `VERIFICATION NOT RUN` |
+| Owner               | Input                                                                               | Output                                                                                                                               |
+| ------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Engineering Manager | task description, Jira ID, standalone `*.research.md`, or `*.plan.md`               | routing, gates, user questions, and — once per item, before iteration 1 — the shared verification root and `figma-expected.png` path |
+| UI Engineer         | plan + UI task slice                                                                | code changes                                                                                                                         |
+| UI Capture Worker   | pinned full URL + iteration dir                                                     | browser `actual.png`, `computed-styles.json`, `a11y-snapshot.yml` for this iteration only — never `figma-expected.png`               |
+| UI Reviewer         | Figma URL + shared `figma-expected.png` path + current iteration's ACTUAL artifacts | reuses or exports `figma-expected.png` when needed, then web `PASS`, `FAIL`, or `VERIFICATION NOT RUN`                               |
 
 ## Web/Figma Invariants
 

@@ -13,7 +13,7 @@ This skill is the canonical workflow owner for implementation orchestration in t
 Keep planning readiness, task routing, todo protocol, execution-plan steps, and review gates here rather than duplicating them in agents or prompts.
 This skill is the single owner of route-varying authorization bases, eligibility, and escalation. Execution owners carry the common invariant inline in their own `<human-approval-precondition>` block; use that inline precondition as the source of truth for the common invariant rather than restating the predicate here as an owners' source of truth.
 
-The `.github/prompts/tsh-implement.prompt.md` prompt remains the thin canonical trigger for this skill; keep React Native classification and verification boundaries here rather than adding RN workflow logic to that prompt.
+The `.github/prompts/tsh-implement.prompt.md` prompt remains the thin canonical trigger for this skill; keep React Native classification and verification boundaries here rather than adding RN workflow logic to that prompt. The direct `/tsh-implement-figma-rn` prompt is outside this orchestration workflow and owns its bounded no-plan fast path for one unambiguous rendered React Native or Expo view.
 </canonical-source-of-truth>
 
 <never-edits-files-directly>
@@ -70,11 +70,11 @@ If research or a plan is missing, route to the Full Flow preparation sequence be
 
 Classify the rendered surface and work type before selecting an owner. Do not infer ownership from which skill happens to be loaded.
 
-| Classification | Route | Boundary |
-| -------------- | ----- | -------- |
-| React Native rendered UI: screens, components, navigation, layout, styling, gestures, animations, or accessibility-facing UI | `tsh-ui-engineer` with `tsh-implement-ui-common-task.prompt.md` | The UI owner loads `tsh-implementing-react-native` for this route. The browser URL, Playwright, and Figma artifact gate is not native verification. |
-| React Native non-UI: business logic, state, data, services, integrations, or other non-rendered work | Existing app-code route: `tsh-plan-implementor` by default, or `tsh-software-engineer` for the complex/no-plan non-UI exception, with `tsh-implement-common-task.prompt.md` | Keep the work on the non-UI route; do not route it through RN UI guidance. |
-| Web rendered UI | Existing web UI route | Apply the existing web UI verification ordering and `VERIFICATION NOT RUN` semantics. |
+| Classification                                                                                                               | Route                                                                                                                                                                       | Boundary                                                                                                                                            |
+| ---------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| React Native rendered UI: screens, components, navigation, layout, styling, gestures, animations, or accessibility-facing UI | `tsh-ui-engineer` with `tsh-implement-ui-common-task.prompt.md`                                                                                                             | The UI owner loads `tsh-implementing-react-native` for this route. The browser URL, Playwright, and Figma artifact gate is not native verification. |
+| React Native non-UI: business logic, state, data, services, integrations, or other non-rendered work                         | Existing app-code route: `tsh-plan-implementor` by default, or `tsh-software-engineer` for the complex/no-plan non-UI exception, with `tsh-implement-common-task.prompt.md` | Keep the work on the non-UI route; do not route it through RN UI guidance.                                                                          |
+| Web rendered UI                                                                                                              | Existing web UI route                                                                                                                                                       | Apply the existing web UI verification ordering and `VERIFICATION NOT RUN` semantics.                                                               |
 
 For React Native rendered UI, native simulator/device, accessibility, and native end-to-end evidence is owned by the target project. If that evidence contract is unavailable, record the native verification as a prerequisite or limitation; do not select or name a collection-supported native framework or tool and do not close native verification with browser artifacts.
 

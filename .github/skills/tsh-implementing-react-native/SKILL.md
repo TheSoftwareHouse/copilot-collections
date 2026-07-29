@@ -23,11 +23,11 @@ Treat this discovered profile and the corresponding official compatibility docum
 </target-project-profile-gate>
 
 <ownership-and-routing>
-Rendered React Native screens, components, navigation, layouts, styling, gestures, animations, and accessibility-facing UI route to the existing `tsh-ui-engineer`, which loads this skill. React Native business logic, state, data, services, integrations, and other non-UI work remain on the existing non-UI route. Do not create or name a new mobile agent or prompt.
+Rendered React Native screens, components, navigation, layouts, styling, gestures, animations, and accessibility-facing UI route to the existing `tsh-ui-engineer`, which loads this skill. React Native business logic, state, data, services, integrations, and other non-UI work remain on the existing non-UI route. A direct prompt may start a focused view implementation only when it routes to this same UI owner and requires this skill's target-project profile gate; do not create a separate mobile agent.
 </ownership-and-routing>
 
 <router-and-export-policy>
-Route and layout files follow the required export contract of the selected router. Ordinary React Native components keep the repository's named-export convention. Do not apply the ordinary-component export rule to route or layout files without checking the selected router.
+Follow the target project's established route, layout, and component export conventions after the profile gate. Where a selected router defines an export contract, it takes precedence. Do not impose a collection-wide named- or default-export convention without confirming the target project's pattern.
 </router-and-export-policy>
 
 <verification-boundary>
@@ -45,7 +45,7 @@ Build complex screens by composing small, focused components rather than creatin
 </composition-over-complexity>
 
 <design-system-first>
-Always use design tokens (colors, spacing, typography, radii) from the project's design system. Never hardcode visual values. Map Figma specs to existing tokens. If no exact token match exists, find the closest and document the deviation — do not invent tokens without approval. In React Native this means referencing a shared theme object or token constants — never inline raw numbers or hex colors in `StyleSheet.create()`.
+Follow the target project's established styling and token conventions. Map Figma specifications to its existing tokens, theme, primitives, or local style conventions. If no exact token exists, use the project's established fallback or ask before introducing a new token. Do not impose a collection-wide styling API, token shape, or hardcoded-value rule over a target project with different conventions.
 </design-system-first>
 
 <platform-aware-not-platform-split>
@@ -100,8 +100,8 @@ Follow these patterns for every component:
 
 - **Composition**: Use composition patterns — content projection (`children`), render delegation, compound components — to keep components flexible. Avoid prop sprawl — if a component accepts more than ~7 props, it likely needs decomposition.
 - **Typed props**: Define explicit TypeScript types for all props. Never use `any`. Co-locate types in `ComponentName.types.ts`.
-- **Exports by file role**: Use named exports for ordinary React Native components. Route and layout files must follow the selected router's required export contract, including a default export when that router requires one.
-- **StyleSheet.create()**: Always use `StyleSheet.create()` for styles. It validates style properties at creation time and enables native-side optimizations. Never pass raw style objects repeatedly.
+- **Exports by file role**: Follow the export conventions discovered in the target project. Route and layout files must follow the selected router's required export contract.
+- **Styling**: Use the target project's established styling system and avoid introducing a parallel style API. Reuse existing style objects and patterns where they are already established.
 - **Three UI states**: Every data-dependent component must handle loading (skeleton or activity indicator), error (meaningful message + recovery action), and empty (helpful message when no data).
 - **Error boundaries**: Wrap screen-level or feature-level components with the error-boundary approach already supported by the target profile. Use an installed, compatible library or the project's custom `ErrorBoundary`; do not add `react-native-error-boundary` or `expo-error-recovery` solely from this skill. Error boundaries do NOT catch errors in event handlers, async code, or native crashes — handle those separately.
 - **Design tokens**: All visual values (colors, spacing, typography, shadows, radii) must come from the design system theme. Zero hardcoded values in style definitions.
@@ -144,7 +144,7 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 | ------------------ | ------------------------------------------------------------------ |
 | Create barrel when | Folder exports are consumed by OTHER modules (public API boundary) |
 | Avoid barrel when  | Internal utils serving a single parent component — import directly |
-| Re-export style    | Named re-exports only: `export { Button } from './Button'`         |
+| Re-export style    | Follow the target project's existing barrel and export convention  |
 | Never wildcard     | Avoid `export * from` — breaks tree shaking, hides API surface     |
 | Keep flat          | One level deep — no barrel importing another barrel                |
 | Test with build    | Verify barrel doesn't pull unused code into bundle                 |
@@ -155,13 +155,13 @@ Apply barrel file rules from the Barrel File Guidelines table below:
 Component:
 - [ ] Single responsibility — one clear purpose
 - [ ] Typed props — explicit types, sensible defaults
-- [ ] Export contract — named export for ordinary components; selected router contract for route/layout files
-- [ ] Design tokens — no hardcoded visual values
+- [ ] Export contract — follows the target project's component and selected router conventions
+- [ ] Styling and tokens — follows the target project's established styling system
 - [ ] Error state — handles failure gracefully
 - [ ] Loading state — shows skeleton or activity indicator
 - [ ] Empty state — meaningful message when no data
 - [ ] Composition — uses children/slots, not prop sprawl
-- [ ] StyleSheet.create() — no inline style objects
+- [ ] Styling API — no parallel styling system introduced
 - [ ] Touch API — follows the target profile and compatibility documentation
 - [ ] Safe areas — respects notches and system bars
 - [ ] Touch targets — minimum 44×44 pt (iOS) / 48×48 dp (Android)
@@ -170,20 +170,20 @@ Component:
 
 ## Anti-Patterns
 
-| Anti-Pattern                                     | Instead Do                                                                          |
-| ------------------------------------------------ | ----------------------------------------------------------------------------------- |
-| Hardcoded colors/spacing (`#3B82F6`, `16`)       | Use design tokens (`theme.colors.primary500`, `theme.spacing.md`)                   |
-| Monolithic screen component (300+ lines)         | Split into composed sub-components                                                  |
-| Props drilling through 4+ levels                 | Use context or composition pattern                                                  |
-| Duplicating existing component                   | Extend existing with variants                                                       |
-| Inline style objects (`style={{ padding: 16 }}`) | Use `StyleSheet.create()` and reference by key                                      |
-| Default export on an ordinary component         | Named exports for consistency; follow the selected router for route/layout files     |
-| `any` type for props                             | Explicit type definitions                                                           |
-| Barrel file for internal utils                   | Direct imports for single-consumer folders                                          |
-| Replacing a target-supported touch API blindly  | Check the target profile and compatibility documentation before changing touch APIs  |
-| `Platform.OS === 'ios' ? ... : ...` everywhere   | Use `Platform.select()` or platform-specific file extensions for cleaner separation |
-| Raw `View` as touchable with `onPress`           | Use `Pressable` — raw `View` has no accessibility role or touch feedback            |
-| Percentage-based dimensions for everything       | Use flex layout; reserve percentages for specific layout needs                      |
+| Anti-Pattern                                   | Instead Do                                                                          |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Inventing a new styling or token convention    | Follow the target project's established styling and token conventions               |
+| Monolithic screen component (300+ lines)       | Split into composed sub-components                                                  |
+| Props drilling through 4+ levels               | Use context or composition pattern                                                  |
+| Duplicating existing component                 | Extend existing with variants                                                       |
+| Introducing an unfamiliar style API            | Reuse the target project's established styling approach                             |
+| Forcing named or default exports               | Follow the target project's component and selected router conventions               |
+| `any` type for props                           | Explicit type definitions                                                           |
+| Barrel file for internal utils                 | Direct imports for single-consumer folders                                          |
+| Replacing a target-supported touch API blindly | Check the target profile and compatibility documentation before changing touch APIs |
+| `Platform.OS === 'ios' ? ... : ...` everywhere | Use `Platform.select()` or platform-specific file extensions for cleaner separation |
+| Raw `View` as touchable with `onPress`         | Use `Pressable` — raw `View` has no accessibility role or touch feedback            |
+| Percentage-based dimensions for everything     | Use flex layout; reserve percentages for specific layout needs                      |
 
 ## Framework-Specific Patterns
 

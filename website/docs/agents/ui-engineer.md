@@ -39,16 +39,16 @@ For React Native, this agent owns rendered screens, components, navigation, layo
 
 ## Tool Access
 
-| Tool                      | Usage                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------- |
-| **Context7**              | Look up design-system documentation and UI library guidance                        |
-| **Figma**                 | Extract design specifications for UI tasks                                         |
-| **Sequential Thinking**   | Plan complex UI refactors and debug layout or interaction issues                   |
-| **Terminal**              | Run build tools, tests, linters, and scripts                                       |
-| **File Read/Edit/Search** | Read, modify, and search workspace files                                           |
-| **VS Code Commands**      | Execute VS Code commands and preview in browser                                    |
-| **Sub-agents**            | Delegate capture to `tsh-ui-capture-worker` and design review to `tsh-ui-reviewer` |
-| **Todo**                  | Track implementation progress with structured checklists                           |
+| Tool                      | Usage                                                                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Context7**              | Look up design-system documentation and UI library guidance                                                                              |
+| **Figma**                 | Extract design specifications for UI tasks                                                                                               |
+| **Sequential Thinking**   | Plan complex UI refactors and debug layout or interaction issues                                                                         |
+| **Terminal**              | Run build tools, tests, linters, and scripts                                                                                             |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                                                                                 |
+| **VS Code Commands**      | Execute VS Code commands and preview in browser                                                                                          |
+| **Sub-agents**            | Delegate capture to `tsh-ui-capture-worker` and design review to `tsh-ui-reviewer`                                                       |
+| **Todo**                  | Track implementation progress with structured checklists                                                                                 |
 | **Ask Questions**         | Clarify genuine UI-task ambiguity and unblock capture or review failures — never used to seek permission to proceed without a valid plan |
 
 ## Skills Loaded

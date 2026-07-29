@@ -21,6 +21,7 @@ agents:
     "tsh-plan-implementor",
     "tsh-devops-engineer",
     "tsh-architect",
+    "tsh-plan-reviewer",
     "tsh-code-reviewer",
     "tsh-ui-reviewer",
     "tsh-context-engineer",
@@ -130,6 +131,15 @@ For cross-artifact Copilot customization work, delegate to the existing `tsh-cop
   - You cannot defend the next implementation step with confidence.
 - **SHOULD NOT delegate to**:
   - Straightforward implementation work whose ownership is already clear and does not require architectural clarification.
+</agent>
+
+<agent name="tsh-plan-reviewer">
+- **MUST delegate to when**:
+  - A plan produced or updated by `tsh-architect` needs automated review before Human approval.
+  - A previously approved plan has a material revision and mandatory re-review is required.
+- **SHOULD NOT delegate to**:
+  - Plans that already have an `APPROVED` review for the current revision.
+  - Implementation work or code review.
 </agent>
 
 <agent name="tsh-copilot-orchestrator">

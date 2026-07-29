@@ -40,7 +40,7 @@ On every delegated or direct UI execution-owner entry path, the owner validates 
 
 Rendered React Native screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI stay with the existing UI Engineer route. They do not require a browser URL or Playwright capture artifacts. Native safe areas and status bars, platform navigation, device behavior, touch and gestures, VoiceOver or TalkBack, simulator or device accessibility, and native end-to-end behavior require evidence owned by the target project. Without that evidence contract, record native verification as an explicit prerequisite or limitation.
 
-The collection does not add a native verification worker, framework, or public mobile trigger. `/tsh-implement` remains the single public implementation entry point.
+The collection does not add a native verification worker or framework. `/tsh-implement` remains the canonical full-delivery entry point. For one Figma-backed React Native or Expo view in a known app, [`/tsh-implement-figma-rn`](../prompts/public/implement-figma-rn) is a direct fast path to the same UI Engineer: it profiles the target project, inspects Figma through MCP, implements the view, and runs focused project validation. It intentionally skips planning, orchestration, and the web browser verification loop.
 
 ## How the Verification Loop Works
 

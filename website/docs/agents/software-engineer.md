@@ -35,16 +35,16 @@ The agent's model array is **Kimi K2.7 Code**, **GPT-5.3-Codex**, and **Gemini 3
 
 ## Tool Access
 
-| Tool | Usage |
-| --- | --- |
-| **Context7** | Search API documentation, find solutions to errors, research best practices |
-| **Sequential Thinking** | Implement complex algorithms, debug issues, plan refactoring |
-| **Terminal** | Run build tools, tests, linters, and scripts |
-| **File Read/Edit/Search** | Read, modify, and search workspace files |
-| **VS Code Commands** | Execute VS Code commands and preview in browser |
-| **Sub-agents** | Delegate subtasks to specialized agents |
-| **Todo** | Track implementation progress with structured checklists |
-| **Ask Questions** | Clarify genuine implementation ambiguity within a Human-approved current plan revision — never used to seek permission to proceed without a valid plan |
+| Tool                      | Usage                                                                                                                                                  |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Context7**              | Search API documentation, find solutions to errors, research best practices                                                                            |
+| **Sequential Thinking**   | Implement complex algorithms, debug issues, plan refactoring                                                                                           |
+| **Terminal**              | Run build tools, tests, linters, and scripts                                                                                                           |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                                                                                               |
+| **VS Code Commands**      | Execute VS Code commands and preview in browser                                                                                                        |
+| **Sub-agents**            | Delegate subtasks to specialized agents                                                                                                                |
+| **Todo**                  | Track implementation progress with structured checklists                                                                                               |
+| **Ask Questions**         | Clarify genuine implementation ambiguity within a Human-approved current plan revision — never used to seek permission to proceed without a valid plan |
 
 ## Skills Loaded
 

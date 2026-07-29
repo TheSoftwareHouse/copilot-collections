@@ -52,7 +52,7 @@ When the Architect records plan-authoring Human approval, the authoring discussi
 
 ## Platform Boundaries
 
-`/tsh-implement` remains the canonical public implementation entry point. Platform classification and routing stay in the canonical orchestrator; this documentation does not add a second trigger or a mobile worker.
+`/tsh-implement` remains the canonical full-delivery implementation entry point. For a single Figma-backed React Native or Expo view in a known app, [`/tsh-implement-figma-rn`](../prompts/public/implement-figma-rn) is a direct fast path to the same UI Engineer; it skips full planning, orchestration, and web browser verification without introducing a mobile worker.
 
 - Web/Figma UI uses the pinned browser URL and the web capture contract. Playwright artifacts such as `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` verify the browser implementation only.
 - Rendered React Native UI follows the existing UI Engineer route but does not enter browser/Figma verification. Native simulator or device behavior, accessibility, and end-to-end evidence are owned by the target project. Without an explicit target-project evidence contract, native verification remains a prerequisite or limitation.

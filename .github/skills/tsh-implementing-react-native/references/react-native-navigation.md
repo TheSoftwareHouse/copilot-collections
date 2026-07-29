@@ -30,9 +30,9 @@ Do not mix Expo Router and an independently configured React Navigation root in 
 
 ## Navigation Libraries
 
-| Router path | Routing model | Apply when |
-| --- | --- | --- |
-| Expo Router | File-based routes and layouts | The target profile contains a compatible Expo Router installation and its configured route entry/conventions. |
+| Router path      | Routing model                                                                                        | Apply when                                                                                                             |
+| ---------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| Expo Router      | File-based routes and layouts                                                                        | The target profile contains a compatible Expo Router installation and its configured route entry/conventions.          |
 | React Navigation | Navigator composition with dynamic or, when supported by the installed version, static configuration | The target profile uses React Navigation as its active navigation tree, including existing bare React Native projects. |
 
 Keep the project's current router and API style. A new screen should follow the selected router's structure and installed package versions; do not introduce a second router or convert dynamic configuration to static configuration as part of unrelated work.
@@ -91,8 +91,8 @@ src/
 ### Export contract by file role
 
 - **Expo Router route files and layout files:** follow the route-module contract documented for the installed Expo Router version and configured route directory. If that version requires a default-exported route or layout component, use that default export. Do not apply this rule to ordinary components imported by the route.
-- **React Navigation route screen files and navigator/layout composition files:** React Navigation does not impose a file-based route export contract. Follow the target project's established module convention; in this collection, ordinary screen, navigator, and layout components use named exports unless the target project explicitly requires another contract.
-- **Ordinary React Native components in either path:** retain the collection's named-export convention. A route or layout file is an exception only when the selected router's installed version requires it, not because it is a UI component or because the project targets web.
+- **React Navigation route screen files and navigator/layout composition files:** React Navigation does not impose a file-based route export contract. Follow the target project's established module convention.
+- **Ordinary React Native components in either path:** retain the target project's established export convention. A route or layout file is an exception only when the selected router's installed version requires it.
 
 Verify the contract against the consuming project's installed router and official version-specific documentation before changing an export. If it cannot be verified, stop under the Task 1.3 stop rule.
 
@@ -173,16 +173,19 @@ type HomeStackParamList = {
   Search: { query?: string };
 };
 
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-type HomeScreenNavigationProp = NativeStackNavigationProp<HomeStackParamList, 'Home'>;
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  HomeStackParamList,
+  "Home"
+>;
 
 export const HomeScreen = () => {
   const navigation = useNavigation<HomeScreenNavigationProp>();
 
   const handlePress = (item: Item) => {
-    navigation.navigate('Detail', { id: item.id, title: item.title });
+    navigation.navigate("Detail", { id: item.id, title: item.title });
   };
 };
 ```
@@ -215,7 +218,7 @@ const TabLayout = () => (
 export default TabLayout;
 ```
 
-If the installed version or project configuration specifies another contract, follow that contract. Route files and layouts are router modules; ordinary components imported by them remain named exports.
+If the installed version or project configuration specifies another contract, follow that contract. Route files and layouts are router modules; ordinary components imported by them retain the target project's established export convention.
 
 ### Typed and dynamic routes
 
@@ -343,8 +346,8 @@ The collection does not execute or claim native simulator, emulator, device, or 
 Refresh-on-focus is router- and package-specific. For React Navigation, use `useFocusEffect` only when the installed `@react-navigation/native` version exposes it and the target project uses that lifecycle contract:
 
 ```typescript
-import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 export const ProfileScreen = () => {
   const { data, refetch } = useProfile();
@@ -352,7 +355,7 @@ export const ProfileScreen = () => {
   useFocusEffect(
     useCallback(() => {
       refetch();
-    }, [refetch])
+    }, [refetch]),
   );
 };
 ```
@@ -364,15 +367,15 @@ For Expo Router, use the focus hook exported or explicitly supported by the inst
 For React Navigation, use `usePreventRemove` only when the installed package version supports it and the target navigator uses that event contract:
 
 ```typescript
-import { usePreventRemove } from '@react-navigation/native';
+import { usePreventRemove } from "@react-navigation/native";
 
 export const EditScreen = () => {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   usePreventRemove(hasUnsavedChanges, ({ data }) => {
-    Alert.alert('Discard changes?', 'You have unsaved changes.', [
-      { text: 'Stay', style: 'cancel' },
-      { text: 'Discard', style: 'destructive', onPress: () => data.action() },
+    Alert.alert("Discard changes?", "You have unsaved changes.", [
+      { text: "Stay", style: "cancel" },
+      { text: "Discard", style: "destructive", onPress: () => data.action() },
     ]);
   });
 };
@@ -421,14 +424,14 @@ The collection can validate Markdown and, for web-compatible artifacts, browser 
 
 ## Anti-Patterns
 
-| Anti-Pattern | Why | Fix |
-| --- | --- | --- |
-| Treating Expo Router as the default for every project | The collection has no target application profile and projects may use bare React Native or React Navigation. | Inspect the manifest, configuration, entry point, versions, and conventions; preserve the detected router. |
-| Migrating an existing router while adding a screen | Router migration changes route contracts, linking, exports, and native configuration. | Keep the existing router and escalate a migration as a separate target-project decision. |
-| Mixing Expo Router and an independent React Navigation root | Two navigation ownership models can create conflicting state and linking behavior. | Use the selected router's supported integration only after checking its installed-version documentation. |
-| Using static or dynamic APIs without checking the installed version | API availability and signatures vary by router package version. | Match the project's existing API style and verify alternatives against the exact installed packages. |
-| Applying typed-route examples without generated/configured types | Type examples can compile only when the target router has the required generation or param-list setup. | Confirm the target configuration and use its supported type contract or runtime fallback. |
-| Default-exporting every React Native component | Ordinary component imports in this collection use named exports. | Reserve router-required exports for route and layout modules; keep ordinary components named. |
-| Running a deep-link command without a target build and platform tool | A command alone is not evidence that native linking works. | Require the target platform, installed tool, configured scheme, and target-project-owned evidence. |
-| Requiring `@gorhom/bottom-sheet` or another sheet package | Package compatibility depends on the target's RN, router, engine, architecture, and native setup. | Use an installed compatible abstraction, router modal support, or a target-project-approved dependency. |
-| Treating browser or Playwright results as native navigation verification | Browser artifacts do not establish native route, device, gesture, or accessibility behavior. | Keep browser evidence web-only and record native verification as target-project-owned or unavailable. |
+| Anti-Pattern                                                             | Why                                                                                                          | Fix                                                                                                                  |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| Treating Expo Router as the default for every project                    | The collection has no target application profile and projects may use bare React Native or React Navigation. | Inspect the manifest, configuration, entry point, versions, and conventions; preserve the detected router.           |
+| Migrating an existing router while adding a screen                       | Router migration changes route contracts, linking, exports, and native configuration.                        | Keep the existing router and escalate a migration as a separate target-project decision.                             |
+| Mixing Expo Router and an independent React Navigation root              | Two navigation ownership models can create conflicting state and linking behavior.                           | Use the selected router's supported integration only after checking its installed-version documentation.             |
+| Using static or dynamic APIs without checking the installed version      | API availability and signatures vary by router package version.                                              | Match the project's existing API style and verify alternatives against the exact installed packages.                 |
+| Applying typed-route examples without generated/configured types         | Type examples can compile only when the target router has the required generation or param-list setup.       | Confirm the target configuration and use its supported type contract or runtime fallback.                            |
+| Forcing named or default exports on every React Native component         | Export conventions vary between target projects and router modules.                                          | Follow the target project's component convention; reserve router-specific requirements for route and layout modules. |
+| Running a deep-link command without a target build and platform tool     | A command alone is not evidence that native linking works.                                                   | Require the target platform, installed tool, configured scheme, and target-project-owned evidence.                   |
+| Requiring `@gorhom/bottom-sheet` or another sheet package                | Package compatibility depends on the target's RN, router, engine, architecture, and native setup.            | Use an installed compatible abstraction, router modal support, or a target-project-approved dependency.              |
+| Treating browser or Playwright results as native navigation verification | Browser artifacts do not establish native route, device, gesture, or accessibility behavior.                 | Keep browser evidence web-only and record native verification as target-project-owned or unavailable.                |
