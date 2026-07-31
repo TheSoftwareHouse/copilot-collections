@@ -26,7 +26,7 @@ handoffs:
     agent: tsh-engineering-manager
     prompt: /tsh-implement Implement the infrastructure according to the architectural plan through the canonical Human approval gate
     send: false
-agents: ["tsh-plan-reviewer"]
+agents: ["tsh-plan-reviewer", "tsh-project-manager"]
 ---
 
 <agent-role>
@@ -238,6 +238,9 @@ Use these skills as design-time support when shaping or validating an architectu
 - **MUST use when**: invoking `tsh-plan-reviewer` for the architect-owned nested plan review loop.
 - **IMPORTANT**: use the `tsh-plan-reviewer` agent to review implementation plans, capture findings, and continue the revise-and-recheck loop.
 - **SHOULD NOT use for**: unrelated delegation that does not belong to the plan review handoff.
+- **MUST delegate project-management work to** `tsh-project-manager` when reading or writing plan/task records and metadata in the configured project-management system. Do not delegate product code, implementation work, or anything outside project records.
+- **The delegation prompt MUST specify** the project-management operation, target record(s), required fields, and exact expected answer structure. State that `tsh-project-manager` is a delegated worker with NO conversation history, so the prompt must include the full task statement and needed context.
+- **Require the bounded `pm-result` return contract** using only: `success/completed`, `success/no-results`; `invalid/configuration-missing`, `invalid/configuration-malformed`, `invalid/unsupported-provider-value`, `invalid/markdown-root-outside-repository`; `blocked/read-only-policy`, `blocked/confirmation-required`; `unavailable/provider-not-enabled-in-this-release`; `conflict/id-already-allocated`, `conflict/record-changed`; `error/filesystem-write-failed`. Callers may branch on CATEGORY alone; name `conflict/id-already-allocated` for Markdown ID collisions and `invalid/markdown-root-outside-repository` for path-confinement rejection.
 </tool>
 
 <tool name="vscode/runCommand">

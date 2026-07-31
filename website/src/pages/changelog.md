@@ -12,6 +12,12 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-07-31
+
+### Added
+
+- Project management capability — Added the unified internal `tsh-project-manager`, its `tsh-managing-project` router, the confined Markdown provider, public documentation, and explicit consumer opt-in guidance. Jira/Shortcut availability and validation, migrations, prompts, synchronization, and physical deletion remain deferred.
+
 ## 2026-07-28
 
 ### Changed

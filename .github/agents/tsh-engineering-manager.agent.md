@@ -26,6 +26,7 @@ agents:
     "tsh-context-engineer",
     "tsh-prompt-engineer",
     "tsh-technical-writer",
+    "tsh-project-manager",
   ]
 ---
 
@@ -167,6 +168,15 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
 - **SHOULD NOT delegate to**:
   - Product code, test, infrastructure, or prompt changes that belong with their respective specialists.
   - In-code comments that belong with `tsh-software-engineer`.
+</agent>
+<agent name="tsh-project-manager">
+- **MUST delegate to when**:
+  - Reading or writing delegated task-status records, project records, and metadata in the configured project-management system.
+  - The delegation prompt specifies the exact project-management operation, target record(s), required fields, and exact expected answer structure; state that this worker receives NO conversation history and include the full task statement and needed context.
+  - The prompt requires the bounded `pm-result` envelope using only `success/completed`, `success/no-results`; `invalid/configuration-missing`, `invalid/configuration-malformed`, `invalid/unsupported-provider-value`, `invalid/markdown-root-outside-repository`; `blocked/read-only-policy`, `blocked/confirmation-required`; `unavailable/provider-not-enabled-in-this-release`; `conflict/id-already-allocated`, `conflict/record-changed`; `error/filesystem-write-failed`.
+  - Callers branch on CATEGORY alone when suitable and use REASON for precision, explicitly naming `conflict/id-already-allocated` for a Markdown ID collision and `invalid/markdown-root-outside-repository` for a path-confinement rejection.
+- **SHOULD NOT delegate to**:
+  - Product code, implementation work, or anything outside project records.
 </agent>
 </delegation-roster>
 </agent-role>

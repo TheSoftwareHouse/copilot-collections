@@ -1,7 +1,7 @@
 ---
 description: "Agent specializing in converting discovery workshop materials (transcripts, designs, codebase context) into Jira-ready epics and user stories."
 tools: ['atlassian/*', 'figma/*', 'pdf-reader/*', 'sequential-thinking/*', 'read', 'edit', 'search', 'todo', 'agent', 'vscode/askQuestions']
-agents: ['tsh-ba-transcript-worker', 'tsh-ba-analysis-worker', 'tsh-ba-extraction-worker', 'tsh-ba-quality-worker', 'tsh-ba-formatting-worker']
+agents: ['tsh-ba-transcript-worker', 'tsh-ba-analysis-worker', 'tsh-ba-extraction-worker', 'tsh-ba-quality-worker', 'tsh-ba-formatting-worker', 'tsh-project-manager']
 handoffs:
   - label: Start Implementation
     agent: tsh-engineering-manager
@@ -180,6 +180,14 @@ Use this routing map when delegating BA work:
 - Jira-ready formatting, post-push verification, and baseline-refresh support -> `tsh-ba-formatting-worker`
 
 ## Tool Usage Guidelines
+
+### Delegating project-management work
+
+- **MUST delegate when**: reading or writing epic and story records and metadata in the configured project-management system; do not delegate product code, implementation work, or anything outside project records.
+- **Ask for** the specific project-management operation, target epic/story record(s), and required fields.
+- **State in the delegation prompt** the exact expected answer structure and that `tsh-project-manager` is a delegated worker with NO conversation history; include the full task statement and all needed context.
+- **Require the bounded `pm-result` envelope** using only `success/completed`, `success/no-results`; `invalid/configuration-missing`, `invalid/configuration-malformed`, `invalid/unsupported-provider-value`, `invalid/markdown-root-outside-repository`; `blocked/read-only-policy`, `blocked/confirmation-required`; `unavailable/provider-not-enabled-in-this-release`; `conflict/id-already-allocated`, `conflict/record-changed`; `error/filesystem-write-failed`.
+- **Branch on CATEGORY alone** when appropriate, while using REASON for precision; explicitly name `conflict/id-already-allocated` for a Markdown ID collision and `invalid/markdown-root-outside-repository` for a path-confinement rejection.
 
 You have access to the `Atlassian` tool.
 
