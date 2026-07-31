@@ -10,9 +10,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 - `plugin.json` manifest at repository root for GitHub Copilot CLI plugin installation (`/plugin install tsh/copilot-collections`)
 - `.github/plugin/marketplace.json` registry for marketplace discovery (`/plugin marketplace add tsh/copilot-collections`)
-- `.mcp.json` at repository root for CLI-compatible MCP server configuration (6 servers: Playwright, Context7, Sequential Thinking, PDF Reader, Figma, Atlassian)
+- `.mcp.json` at repository root for CLI-compatible MCP server configuration (6 servers: Playwright, Context7, Sequential Thinking, PDF Reader, Figma, Atlassian); this plugin/CLI-facing manifest stays boundary-distinct from the unchanged, VS Code-facing `.vscode/mcp.json`
 - CLI installation instructions in README alongside existing VS Code installation guide
 - Prompts declared as CLI commands via `commands` field in `plugin.json`, exposing all 15 `tsh-*` workflow prompts to Copilot CLI users
+- Complete `plugin.json.skills` inventory: all 35 `tsh-` prefixed skills plus the unchanged, bundled `playwright-cli` skill (36 total), matching every on-disk `.github/skills/` directory
+
+### Changed
+
+- Plugin and marketplace identity — `plugin.json.name`, `.github/plugin/marketplace.json.name`, and `.github/plugin/marketplace.json.plugins[0].name` are `tsh-cc`; all three version fields remain `1.0.0` for this pre-publication, unreleased configuration
 
 ## 2026-07-28
 
