@@ -121,7 +121,7 @@ If you use GitHub Copilot CLI, you can install this collection as a plugin with 
 /plugin install tsh/copilot-collections
 ```
 
-This clones the repository and registers all agents, skills, and MCP servers from `plugin.json`.
+This clones the repository and registers all agents, skills, and MCP servers from `plugin.json`, including the bundled `playwright-cli` skill (agent usage guidance only — it does not install the `playwright-cli` executable itself).
 
 ### Option 2: Marketplace install
 
@@ -134,7 +134,7 @@ First, register the marketplace:
 Then install the plugin from the marketplace:
 
 ```bash
-/plugin install tsh-copilot-collections@tsh-copilot-collections
+/plugin install tsh-cc@tsh-cc
 ```
 
 ### Option 3: Install from a Local Path
@@ -183,7 +183,7 @@ Once configured, open your target project and start with one of these:
 - `/tsh-review-ui`
 - `/tsh-analyze-materials <transcript, notes, links, or workshop assets>`
 
-For Figma-backed UI work, keep the target app running and be ready to confirm the exact full dev server URL. The UI verification loop uses Figma MCP for EXPECTED and `tsh-ui-capture-worker` Playwright CLI artifacts for ACTUAL, so `playwright-cli` must also be available on the machine running VS Code (`npx playwright-cli` or a global install).
+For Figma-backed UI work, keep the target app running and be ready to confirm the exact full dev server URL. The UI verification loop uses Figma MCP for EXPECTED and `tsh-ui-capture-worker` Playwright CLI artifacts for ACTUAL, so the `playwright-cli` executable must also be available on the machine running VS Code (`npx playwright-cli` or a global install). The bundled `playwright-cli` skill provides agent guidance only; it does not install or replace this required local executable.
 
 If you want to extend the system itself, use:
 

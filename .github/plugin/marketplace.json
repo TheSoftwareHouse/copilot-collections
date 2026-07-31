@@ -1,5 +1,5 @@
 {
-  "name": "tsh-copilot-collections",
+  "name": "tsh-cc",
   "metadata": {
     "description": "Opinionated GitHub Copilot setup by The Software House.",
     "version": "1.0.0"
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "tsh-copilot-collections",
+      "name": "tsh-cc",
       "source": ".",
       "description": "Full product development lifecycle workflows for GitHub Copilot.",
       "version": "1.0.0",
