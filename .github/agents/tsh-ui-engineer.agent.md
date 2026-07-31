@@ -1,5 +1,5 @@
 ---
-model: ["Claude Sonnet 5", "GPT-5.6 Terra"]
+model: ["Grok 4.5", "GPT-5.6 Terra"]
 description: "Agent specializing in implementing user interfaces and frontend solutions based on specified requirements and technical designs."
 tools:
   [

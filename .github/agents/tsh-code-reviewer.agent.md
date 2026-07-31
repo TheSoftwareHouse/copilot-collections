@@ -16,6 +16,7 @@ tools:
     "vscode/runCommand",
     "vscode/askQuestions",
   ]
+agents: ["tsh-project-manager"]
 handoffs:
   - label: Implement changes requested after code review
     agent: tsh-software-engineer
@@ -58,6 +59,14 @@ Before starting any task, you check all available skills and decide which one is
 - `tsh-engineering-prompts` - when reviewing LLM prompt code: verify prompt injection defenses, proper delimiter separation, output format specification, no hardcoded role/persona in user prompts. To detect: search for prompt/template files (e.g., `prompts/` directory, `*.prompt.txt`) and LLM client usage in code (`openai`, `anthropic`, `bedrock`, `converse`, `langchain`).
 
 ## Tool Usage Guidelines
+
+### Delegating project-management work
+
+- **MUST delegate when**: reading or writing review-finding records and metadata in the configured project-management system; do not delegate product code, implementation work, or anything outside project records.
+- **Ask for** the specific project-management operation, target review-finding record(s), and required fields.
+- **State in the delegation prompt** the exact expected answer structure and that `tsh-project-manager` is a delegated worker with NO conversation history; include the full task statement and all needed context.
+- **Require the bounded `pm-result` envelope** using only `success/completed`, `success/no-results`; `invalid/configuration-missing`, `invalid/configuration-malformed`, `invalid/unsupported-provider-value`, `invalid/markdown-root-outside-repository`; `blocked/read-only-policy`, `blocked/confirmation-required`; `unavailable/provider-not-enabled-in-this-release`; `conflict/id-already-allocated`, `conflict/record-changed`; `error/filesystem-write-failed`.
+- **Branch on CATEGORY alone** when appropriate, while using REASON for precision; explicitly name `conflict/id-already-allocated` for a Markdown ID collision and `invalid/markdown-root-outside-repository` for a path-confinement rejection.
 
 You have access to the `Atlassian` tool.
 

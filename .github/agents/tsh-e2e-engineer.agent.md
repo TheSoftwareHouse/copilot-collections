@@ -1,6 +1,7 @@
 ---
 description: "Agent specializing in creating, maintaining, and debugging end-to-end tests using Playwright."
 tools: ['execute', 'read', 'atlassian/search', 'context7/*', 'figma/*', 'playwright/*', 'sequential-thinking/*', 'edit', 'search', 'todo', 'agent', 'vscode/runCommand', 'vscode/askQuestions']
+agents: ['tsh-project-manager']
 model: ["GPT-5.6 Luna", "Gemini 3.6 Flash"]
 handoffs:
   - label: Report critical bug found during testing
@@ -84,6 +85,14 @@ Security: Never hardcode credentials; use environment variables.
 Pattern: 'should [behavior] when [condition]' (e.g., 'should display error when login fails').
 
 ## Tool Usage Guidelines
+
+### Delegating project-management work
+
+- **MUST delegate when**: reading or writing defect and test-task records and metadata in the configured project-management system; do not delegate product code, implementation work, or anything outside project records.
+- **Ask for** the specific project-management operation, target defect/test-task record(s), and required fields.
+- **State in the delegation prompt** the exact expected answer structure and that `tsh-project-manager` is a delegated worker with NO conversation history; include the full task statement and all needed context.
+- **Require the bounded `pm-result` envelope** using only `success/completed`, `success/no-results`; `invalid/configuration-missing`, `invalid/configuration-malformed`, `invalid/unsupported-provider-value`, `invalid/markdown-root-outside-repository`; `blocked/read-only-policy`, `blocked/confirmation-required`; `unavailable/provider-not-enabled-in-this-release`; `conflict/id-already-allocated`, `conflict/record-changed`; `error/filesystem-write-failed`.
+- **Branch on CATEGORY alone** when appropriate, while using REASON for precision; explicitly name `conflict/id-already-allocated` for a Markdown ID collision and `invalid/markdown-root-outside-repository` for a path-confinement rejection.
 
 You have access to the `context7` tool.
 - **Playwright docs library ID**: `/microsoft/playwright.dev` — use this ID directly with `query-docs` to skip the `resolve-library-id` step.
