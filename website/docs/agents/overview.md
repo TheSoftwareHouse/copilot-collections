@@ -91,7 +91,7 @@ All seven execution owners apply the same inline, fail-closed precondition befor
 
 ### 🔧 Internal Worker Agents
 
-These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, the Copilot Orchestrator delegates to the customization workers below, and the Engineering Manager delegates implementation-specialist and documentation-only work to the workers below.
+These agents are not invoked directly by users. The Business Analyst internally delegates transcript, analysis, extraction, quality-review, and formatting phases to BA workers, the Copilot Orchestrator delegates to the customization workers below, and the Engineering Manager delegates implementation-specialist and documentation-only work to the workers below. `tsh-architect`, `tsh-business-analyst`, `tsh-engineering-manager`, `tsh-code-reviewer`, `tsh-context-engineer`, and `tsh-e2e-engineer` can also delegate project-management requests to `tsh-project-manager`.
 
 | Agent | File | Role |
 |---|---|---|
@@ -101,3 +101,4 @@ These agents are not invoked directly by users. The Business Analyst internally 
 | [Architect Reviewer](./plan-reviewer) | `tsh-plan-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |
 | [Plan Implementor](./plan-implementor) | `tsh-plan-implementor.agent.md` | Internal strict single-task implementor for one plan step at a time |
 | [Technical Writer](./technical-writer) | `tsh-technical-writer.agent.md` | Authors and updates README, CHANGELOG, `/docs`, and published documentation-site pages |
+| [Project Manager](./project-manager) | `tsh-project-manager.agent.md` | Manages configured project records and metadata through the router |

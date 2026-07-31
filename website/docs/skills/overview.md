@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **32 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **33 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -28,6 +28,7 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-task-extracting](./task-extraction)             | Epic and user story extraction from workshop materials | Business Analyst               |
 | [tsh-task-quality-reviewing](./task-quality-review)  | Quality analysis for extracted task lists              | Business Analyst               |
 | [tsh-jira-task-formatting](./jira-task-formatting)   | Jira-ready task formatting and import/push management  | Business Analyst               |
+| [tsh-managing-project](./managing-project)           | Provider-configured project-record and metadata routing | Project Manager              |
 
 ### 🛠 Development Skills
 
@@ -77,6 +78,8 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-creating-instructions](./creating-instructions) | Creating custom instructions (.instructions.md) | Copilot Engineer |
 
 ## Agent–Skill Matrix
+
+*Note: `tsh-managing-project` is used exclusively by the internal `tsh-project-manager` agent and therefore has no user-facing column in this matrix.*
 
 | Skill                                  | BA  | CE  | Architect | SE  | PE  | CR  | UI Reviewer | E2E | DevOps | Copilot Eng. |
 | -------------------------------------- | --- | --- | --------- | --- | --- | --- | ----------- | --- | ------ | ------------ |
