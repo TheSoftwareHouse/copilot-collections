@@ -26,7 +26,7 @@ handoffs:
     send: false
   - label: Write E2E Tests
     agent: tsh-e2e-engineer
-    prompt: /tsh-implement-e2e Create E2E tests for the implemented feature
+    prompt: Delegate to `tsh-e2e-engineer` using private skill `tsh-implement-e2e` to create E2E tests for the implemented feature
     send: false
 ---
 

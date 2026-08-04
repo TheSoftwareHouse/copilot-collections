@@ -111,6 +111,69 @@ If Copilot cannot complete the setup automatically:
 2. Run `MCP: Open User Configuration`.
 3. Copy the contents of [`.vscode/mcp.json`](.vscode/mcp.json) into your user MCP config.
 
+## Installation via Copilot CLI
+
+If you use GitHub Copilot CLI, you can install this collection as a plugin with a single command.
+
+### Option 1: Direct install (recommended)
+
+```bash
+/plugin install tsh/copilot-collections
+```
+
+This clones the repository and registers all agents, skills, and MCP servers from `plugin.json`, including the bundled `playwright-cli` skill (agent usage guidance only — it does not install the `playwright-cli` executable itself).
+
+### Option 2: Marketplace install
+
+First, register the marketplace:
+
+```bash
+/plugin marketplace add tsh/copilot-collections
+```
+
+Then install the plugin from the marketplace:
+
+```bash
+/plugin install tsh-cc@tsh-cc
+```
+
+### Option 3: Install from a Local Path
+
+If you've already cloned the repository locally (e.g., during the [VS Code installation](#-installation-in-vs-code)), you can install it directly from disk:
+
+```bash
+/plugin install /path/to/copilot-collections
+```
+
+For example, if you cloned to `~/projects`:
+
+```bash
+/plugin install ~/projects/copilot-collections
+```
+
+This registers the local copy as a plugin without cloning it again. Useful when you want to use the same checkout for both VS Code and CLI.
+
+### Updating
+
+To update to the latest version:
+
+```bash
+/plugin update
+```
+
+Restart your Copilot CLI session after installing or updating the plugin for changes to take effect.
+
+### Known CLI limitations
+
+The collection was originally built for VS Code. When used via CLI, some features may have reduced functionality:
+
+- **`vscode/*` tools** — Agents that use `vscode/runCommand` or `vscode/askQuestions` may not have access to these tools in CLI context. The agents remain functional for their core capabilities.
+- **`handoffs` blocks** — Agent handoff declarations in YAML frontmatter are VS Code-specific. The CLI may ignore them silently or produce warnings.
+- **HTTP-based MCP servers** — The Figma and Atlassian MCP servers use `type: "http"`, which is a VS Code-specific server type. These may require additional CLI configuration or may not be available.
+- **Prompts** — `.prompt.md` file discovery in CLI is unconfirmed. Prompts may not be available as slash commands after CLI installation.
+
+For maximum feature coverage, use the VS Code installation described above.
+
 ## First Commands To Try
 
 Once configured, open your target project and start with one of these:
@@ -120,7 +183,7 @@ Once configured, open your target project and start with one of these:
 - `/tsh-review-ui`
 - `/tsh-analyze-materials <transcript, notes, links, or workshop assets>`
 
-For Figma-backed UI work, keep the target app running and be ready to confirm the exact full dev server URL. The UI verification loop uses Figma MCP for EXPECTED and `tsh-ui-capture-worker` Playwright CLI artifacts for ACTUAL, so `playwright-cli` must also be available on the machine running VS Code (`npx playwright-cli` or a global install).
+For Figma-backed UI work, keep the target app running and be ready to confirm the exact full dev server URL. The UI verification loop uses Figma MCP for EXPECTED and `tsh-ui-capture-worker` Playwright CLI artifacts for ACTUAL, so the `playwright-cli` executable must also be available on the machine running VS Code (`npx playwright-cli` or a global install). The bundled `playwright-cli` skill provides agent guidance only; it does not install or replace this required local executable.
 
 If you want to extend the system itself, use:
 

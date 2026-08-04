@@ -32,7 +32,7 @@ description: "<What the skill does — core capabilities>. <When to use it — t
 
 <!-- GUARD: This file defines HOW to perform a specific task. Do NOT define
      agent personality or behavior here (those belong in .agent.md files).
-     Do NOT define workflow triggers here (those belong in .prompt.md files).
+     Do NOT define command workflow triggers here (those belong in command skills).
      Keep instructions concise — only add context the LLM doesn't already have. -->
 
 <!-- Skill Title -->

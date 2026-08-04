@@ -1,0 +1,18 @@
+{
+  "name": "tsh-cc",
+  "description": "Opinionated GitHub Copilot setup covering the full product development lifecycle.",
+  "version": "1.0.0",
+  "author": {
+    "name": "The Software House",
+    "url": "https://tsh.io"
+  },
+  "homepage": "https://github.com/tsh/copilot-collections",
+  "repository": "https://github.com/tsh/copilot-collections",
+  "license": "MIT",
+  "keywords": ["copilot", "agents", "skills", "prompts", "mcp", "product-lifecycle", "product-ideation", "development", "quality-assurance", "jira", "figma", "playwright", "copilot-customization"],
+  "category": "developer-tools",
+  "tags": ["product-ideation", "development", "quality", "agents", "skills", "prompts", "mcp", "jira", "figma", "playwright"],
+  "agents": ".github/agents/",
+  "skills": ".github/skills/",
+  "mcpServers": ".mcp.json"
+}

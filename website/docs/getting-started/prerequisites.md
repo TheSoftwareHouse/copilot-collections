@@ -40,3 +40,5 @@ If you plan to use `/tsh-implement` or `/tsh-review-ui` on UI work backed by Fig
 - Preferred: `npx playwright-cli`
 - Fallback: `npm install -g @playwright/cli@latest`
 - You also need the target app running locally and must be able to provide the exact full dev server URL when the workflow asks for it.
+
+This collection also bundles a `playwright-cli` skill (`.github/skills/playwright-cli/SKILL.md`) that gives agents usage guidance for the CLI. That bundled skill is documentation only — it does not install the executable and does not remove the local-executable requirement above.

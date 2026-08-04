@@ -5,7 +5,7 @@ title: Skills Overview
 
 # Skills Overview
 
-Copilot Collections includes **32 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
+Copilot Collections includes **36 reusable skills** — knowledge modules that provide specialized domain expertise, structured processes, and quality templates. They encode tested best practices for every phase of the product lifecycle. Skills are stored in `.github/skills/` and loaded automatically by agents when their domain applies to the current task.
 
 ## How Skills Work
 
@@ -75,6 +75,15 @@ When an agent starts a task, it checks all available skills and decides which on
 | [tsh-creating-skills](./creating-skills)             | Creating custom skills (SKILL.md)               | Copilot Engineer |
 | [tsh-creating-prompts](./creating-prompts)           | Creating custom prompts (.prompt.md)            | Copilot Engineer |
 | [tsh-creating-instructions](./creating-instructions) | Creating custom instructions (.instructions.md) | Copilot Engineer |
+
+### 📦 Unlinked Bundled Skills
+
+These skills are bundled in `plugin.json.skills` but are not listed in the tables above:
+
+- `tsh-implementing-backend` — Backend service implementation patterns and procedures for REST/GraphQL APIs across Node.js, PHP, .NET, Java, and Go
+- `tsh-orchestrating-implementation` — Canonical implementation orchestration workflow used by the Engineering Manager to route work to execution-owner agents
+- `tsh-writing-documentation` — Documentation-writing conventions for README, CHANGELOG, in-repo docs, and the documentation site, used by the Technical Writer
+- `playwright-cli` — External-tool wrapper providing CLI usage guidance for `tsh-ui-capture-worker`'s Figma-backed UI verification evidence capture; distinct from the required local `playwright-cli` executable
 
 ## Agent–Skill Matrix
 

@@ -1,7 +1,7 @@
 ---
 name: tsh-writing-documentation
 description: "Authors and updates repository documentation — README, CHANGELOG, in-repo `/docs`, and the published documentation site. Covers documentation structure, documentation-site build expectations, and the write-vs-review boundary. Use when creating or editing documentation content without touching product code."
-user-invocable: false
+user-invocable: true
 ---
 
 # Writing Documentation

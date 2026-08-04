@@ -16,7 +16,7 @@ An agent file (.agent.md) defines WHO the agent is. It must NOT define HOW speci
 
 - **Agent** = behavior, personality, responsibilities, and problem-solving approach
 - **Skills** = reusable workflows, domain knowledge, step-by-step processes (SKILL.md files)
-- **Prompts** = task triggers, workflow starters, reusable prompt templates (.prompt.md files)
+- **Command skills** = user-invocable workflow starters; private workflow skills are model-loaded procedures
 
 Every agent is designed to be extendable with skills and prompts. The agent itself provides the foundation; skills and prompts layer on top for specific workflows.
 </separation-of-concerns>
@@ -179,7 +179,7 @@ Role: You are a...
 
 ## Connected Skills
 
-- `tsh-creating-prompts` - to understand how prompts reference agents and ensure agents don't overlap with prompt responsibilities
+- `tsh-creating-command-skills` - to understand how command and private workflow skills reference agents without overlapping agent responsibilities
 - `tsh-creating-skills` - to ensure this skill's own structure follows the canonical skill creation requirements
 - `tsh-technical-context-discovering` - to understand existing agent patterns in the project before creating a new one
 - `tsh-codebase-analysing` - to analyze existing agents and identify patterns to follow

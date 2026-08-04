@@ -47,7 +47,7 @@ Figma-backed UI verification in `/tsh-implement` does **not** collect ACTUAL evi
 - Playwright MCP configured in `mcp.json`.
 - Local development server must be running.
 - Target page must be accessible (authentication handled if needed).
-- For the Figma-backed UI verification loop, `playwright-cli` must also be available to `tsh-ui-capture-worker` (`npx playwright-cli` or a global install).
+- For the Figma-backed UI verification loop, the `playwright-cli` executable must also be available to `tsh-ui-capture-worker` (`npx playwright-cli` or a global install). The collection separately bundles a `playwright-cli` skill with agent usage guidance; that skill does not install the executable or remove this requirement.
 
 ## Official Documentation
 
