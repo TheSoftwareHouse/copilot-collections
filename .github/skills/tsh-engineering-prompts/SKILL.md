@@ -13,7 +13,7 @@ Technology-agnostic patterns for designing, optimizing, and securing LLM applica
 <scope>
 This skill covers prompts consumed by LLM APIs at runtime — system prompts, user prompt templates, few-shot examples, RAG context injection templates, agent tool-calling instructions, and classification/extraction prompts.
 
-It does NOT cover Copilot customization files (`.prompt.md`, `.agent.md`, `SKILL.md`). Those belong to the `tsh-creating-prompts`, `tsh-creating-agents`, and `tsh-creating-skills` skills.
+It does NOT cover Copilot customization files (`.agent.md`, `SKILL.md`, or command/private workflow skills). Those belong to the `tsh-creating-command-skills`, `tsh-creating-agents`, and `tsh-creating-skills` skills.
 </scope>
 
 <determinism>
@@ -418,6 +418,6 @@ Always test prompts against adversarial and boundary inputs:
 
 ## Connected Skills
 
-- `tsh-creating-prompts` — for Copilot `.prompt.md` files (different domain, complementary)
+- `tsh-creating-command-skills` — for Copilot command/private workflow skills (different domain, complementary)
 - `tsh-code-reviewing` — for reviewing prompt code quality alongside application code
 - `tsh-architecture-designing` — for prompt strategy decisions as part of system architecture

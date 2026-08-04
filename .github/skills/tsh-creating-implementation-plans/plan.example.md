@@ -193,7 +193,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 #### Task 2.2 - [REUSE] UI Verification of <ui-component-name> by `tsh-ui-reviewer` agent
 
-**Description**: Run `tsh-ui-reviewer` agent via `tsh-review-ui.prompt.md` to verify <ui-component-name> against Figma design. Pass the Figma URL and dev server URL. If verification fails, delegate fix to `tsh-ui-engineer` and re-verify (max 5 iterations per component).
+**Description**: Run `tsh-ui-reviewer` agent via public skill `tsh-review-ui` to verify <ui-component-name> against Figma design. Pass the Figma URL and dev server URL. If verification fails, delegate fix to `tsh-ui-engineer` and re-verify (max 5 iterations per component).
 
 **Files:** `src/components/<ui-component-name>.tsx` (reuse), `src/components/<ui-component-name>.test.tsx` (reuse)
 
@@ -250,7 +250,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 #### Task 4.1 - [REUSE] Code review by `tsh-code-reviewer` agent
 
-**Description**: Run `tsh-code-reviewer` agent via `tsh-review.prompt.md` to review the complete implementation. Pass e2e test execution to that agent as part of the prompt — do not run e2e tests outside this review.
+**Description**: Run `tsh-code-reviewer` agent via private skill `tsh-review` to review the complete implementation. Pass e2e test execution to that agent as part of the skill workflow — do not run e2e tests outside this review.
 
 **Files:** `src/<feature>.ts` (reuse), `src/<feature>.spec.ts` (reuse)
 

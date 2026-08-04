@@ -6,7 +6,7 @@ model: ["Claude Sonnet 5", "GPT-5.6 Terra"]
 handoffs: 
   - label: Review IaC/Pipeline code
     agent: tsh-code-reviewer
-    prompt: /review Review the infrastructure-as-code and CI/CD pipeline changes
+    prompt: /tsh-review Review the infrastructure-as-code and CI/CD pipeline changes
     send: false
 ---
 

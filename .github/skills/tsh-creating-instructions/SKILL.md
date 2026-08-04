@@ -157,7 +157,7 @@ Validation:
 - [ ] No duplication of rules already enforced by linters/formatters
 - [ ] No procedural workflow content (that belongs in skills)
 - [ ] No agent personality or behavior definitions (that belongs in .agent.md)
-- [ ] No prompt/workflow triggers (that belongs in .prompt.md)
+- [ ] No workflow procedures or command-skill triggers (those belong in command/private workflow skills)
 - [ ] Repository-level file covers: architecture, stack with versions, key conventions
 - [ ] Granular files have descriptive, non-overlapping `applyTo` patterns
 ```
@@ -186,6 +186,6 @@ Higher takes precedence on conflict:
 
 - `tsh-creating-agents` - to ensure agent files don't embed coding standards that belong in instructions
 - `tsh-creating-skills` - to understand the boundary between procedural knowledge (skills) and declarative rules (instructions)
-- `tsh-creating-prompts` - to ensure prompts reference instructions rather than duplicating conventions
+- `tsh-creating-command-skills` - to ensure command skills reference instructions rather than duplicating conventions
 - `tsh-technical-context-discovering` - the complementary skill that discovers and reads existing instruction files
 - `tsh-codebase-analysing` - to analyze existing instruction files and identify patterns to follow

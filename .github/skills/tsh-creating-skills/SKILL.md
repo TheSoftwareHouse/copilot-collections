@@ -17,7 +17,7 @@ A skill is a folder containing a `SKILL.md` file with YAML frontmatter and Markd
 
 - **Skills** = reusable workflows, domain knowledge, step-by-step processes, templates (SKILL.md files)
 - **Agents** = behavior, personality, responsibilities, problem-solving approach (.agent.md files)
-- **Prompts** = workflow triggers, task starters, reusable prompt templates (.prompt.md files)
+- **Command skills** = user-invocable workflow triggers; private workflow skills are non-invocable procedures
 
 A skill must NOT define who the agent is — that belongs in the agent file. A skill defines HOW to perform a specific task or workflow.
 </what-is-a-skill>
@@ -330,7 +330,7 @@ For standard workflow patterns (checklists, templates, conditional workflows, fe
 ## Connected Skills
 
 - `tsh-creating-agents` - to understand how skills relate to agent definitions and avoid overlap
-- `tsh-creating-prompts` - to understand how prompts reference and trigger skills
+- `tsh-creating-command-skills` - to understand command/private workflow skill routing and invocation boundaries
 - `tsh-technical-context-discovering` - to discover existing skill patterns in the project before creating a new one
 - `tsh-codebase-analysing` - to analyze existing skills and identify conventions to follow
 - `tsh-creating-instructions` - to understand when project rules belong in instruction files rather than skill content
