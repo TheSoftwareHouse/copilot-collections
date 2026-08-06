@@ -28,16 +28,32 @@ For files under `.github/`, follow the scoped naming rule in `.github/instructio
 
 Public prompts belong in `.github/prompts/`; internal orchestrator-only prompts belong in `.github/internal-prompts/`. Internal-only worker agents must declare `user-invocable: false`.
 
+### Generated architect band variants
+
+`.github/agents/tsh-architect.agent.md` is the single source of truth for all three architect agents. `.github/agents/tsh-architect-deep.agent.md` and `.github/agents/tsh-architect-fast.agent.md` are generated files: their bodies are byte-identical to the base, and only the `model`, `description`, and `user-invocable` frontmatter fields differ.
+
+Never edit a variant file directly, and never change one architect without the others. Edit `tsh-architect.agent.md` only, then regenerate from the repository root as part of the same change:
+
+```
+node scripts/sync-architect-variants.mjs
+```
+
+A base edit that is not followed by a sync run leaves the variants stale and fails CI. To change a variant's model band, description, or `user-invocable` value, edit the `VARIANTS` table in `scripts/sync-architect-variants.mjs` and re-run it — never edit the generated file directly.
+
+Band selection between the three architects is route-varying logic owned by `.github/skills/tsh-orchestrating-implementation/SKILL.md`; do not encode it in the agent files.
+
 Both XML-like structural tags and Markdown headings are established and both are conforming under `.github/`; XML-like tags predominate among many `.agent.md` files and a small number of public prompts; Markdown headings predominate among remaining agents, most public prompts, all internal prompts, and `SKILL.md` bodies, with scoped XML-like blocks where an owned/localized semantic contract requires them; preserve each artifact’s existing structure and match nearest siblings; do not convert an artifact from one structure to the other as incidental cleanup. When prompts reference agents, skills, or related artifacts, use their prefixed names exactly.
 
 Prompt files end with the repository version marker comment in the form `<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-<name>:v<n> -->`.
 
 ## Technology and workflow facts
 
-The documentation site in `website/` uses npm (as evidenced by `website/package-lock.json`) with Docusaurus 3 (`^3.7.0`), React (`^18.3.1`), and TypeScript (`~5.7.0`) on Node `>=18.0`. Repository scripts are defined only in `website/package.json` and must be run from the `website/` directory: `start`, `build`, `serve`, and `clear`.
+The documentation site in `website/` uses npm (as evidenced by `website/package-lock.json`) with Docusaurus 3 (`^3.7.0`), React (`^18.3.1`), and TypeScript (`~5.7.0`) on Node `>=18.0`. Docusaurus scripts are defined in `website/package.json` and must be run from the `website/` directory: `start`, `build`, `serve`, and `clear`.
+
+Repository maintenance scripts live in `scripts/` as dependency-free Node ESM modules run from the repository root with `node scripts/<name>.mjs`. `.github/workflows/ci.yml` runs on pull requests only and gates two things: the architect variants are in sync, and the documentation site builds.
 
 ## Validation guidance
 
-For `.github/` artifact changes, validate placement, prefixed naming, cross-references, and structure against nearby existing artifacts and any applicable scoped instructions. Keep artifact intent aligned with its directory: public vs internal prompts, behavior vs procedure vs workflow vs rules.
+For `.github/` artifact changes, validate placement, prefixed naming, cross-references, and structure against nearby existing artifacts and any applicable scoped instructions. Keep artifact intent aligned with its directory: public vs internal prompts, behavior vs procedure vs workflow vs rules. When the change touches `tsh-architect.agent.md`, validate by re-running `node scripts/sync-architect-variants.mjs` from the repository root and confirming it produces no further diff in the two generated variant files.
 
 For `website/` changes, validate by running the docs build from `website/`; this is the main quality gate. `website/docusaurus.config.ts` sets `onBrokenLinks: 'throw'`, so broken links are build failures, not cosmetic issues. Ensure links, navigation targets, and documentation paths remain valid. If an artifact change affects public behavior or usage, update the matching docs layer rather than leaving `.github/` and `website/` out of sync.
