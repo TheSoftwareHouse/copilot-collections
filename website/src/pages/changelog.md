@@ -12,6 +12,23 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-08-06
+
+### Added
+
+- Plan Tier Selection — `tsh-creating-implementation-plans` gained a canonical `<tier-predicate>` (single owner of the light-template gate, the low-risk automated-review exemption, and the `*.research.md` waiver) and `<tier-selection-rules>` governing when `tsh-architect` authors on the new light template instead of the full one; added `plan-light.example.md` as the light-tier plan template.
+- Architect model bands — Added two generated architect variants: `tsh-architect-deep.agent.md` (`Claude Opus 5` / `Claude Sonnet 5`, for irreversible or high-cost decisions, schema migrations, security boundary design, or cross-component architecture) and `tsh-architect-fast.agent.md` (`GPT-5.6 Luna` / `Gemini 3.6 Flash`, restricted to light-tier plans only). Both are `user-invocable: false` delegation-only targets whose bodies are byte-identical to `tsh-architect.agent.md`. `tsh-orchestrating-implementation` gained an "Architect Band Selection" table defining default/deep/fast routing, and `tsh-engineering-manager` gained matching roster entries and `agents:` registrations.
+- CI — Added `.github/workflows/ci.yml`, the repository's first CI workflow. It runs on pull requests only (`actions/checkout@v7`, `actions/setup-node@v7`) and gates two checks: architect variant sync and the documentation site build.
+- `scripts/sync-architect-variants.mjs` — New dependency-free Node ESM script that regenerates `tsh-architect-deep.agent.md` and `tsh-architect-fast.agent.md` from `tsh-architect.agent.md`, keeping bodies byte-identical and swapping only `model`, `description`, and `user-invocable`; CI fails if regenerating produces a diff.
+- `.github/copilot-instructions.md` — Added the repository's root-level Copilot instructions file, documenting the `.github/` vs `website/` layer separation, top-level structure, the Reviewer-approval-vs-Human-approval terminology rule, prompt placement rules, structural-tag conventions, and validation guidance for both layers. Later extended with a "Generated architect band variants" section describing the sync-script contract and CI enforcement.
+
+### Changed
+
+- `tsh-architect` — Skip-review eligibility now defers to the canonical `<tier-predicate>` (light template + Tier Justification) instead of restating an inline seven-condition list; tier-mismatch handling is now band-conditional — `tsh-architect-fast` stops and returns a tier mismatch instead of switching to the full template in place, while the default and deep bands still switch in place.
+- `tsh-orchestrating-implementation` — The planning readiness table now treats a recorded Tier Justification as satisfying the research and reviewer-readiness rows for light-tier plans, without requiring a `*.research.md` file or a reviewer invocation.
+- `tsh-copilot-artifact-reviewer` — Simplified `model` from a two-entry cross-provider array to a single `Claude Sonnet 5`.
+- Website synchronization — Updated the Architect, Engineering Manager, and Agents Overview pages with the three-band model table, the generated-variant sync explanation, and the band-routing rows.
+
 ## 2026-08-05
 
 ### Changed
