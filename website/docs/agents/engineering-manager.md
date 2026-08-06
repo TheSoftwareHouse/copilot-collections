@@ -58,6 +58,8 @@ The agent escalates to the **Architect** when:
 | **E2E Engineer** | End-to-end test design, mocking strategy, or CI-ready test suites |
 | **DevOps Engineer** | Infrastructure, Terraform, Kubernetes, CI/CD pipelines, or observability |
 | **Architect** | Architectural guidance, codebase analysis, or a missing/incomplete plan |
+| **Architect (deep band)** | Planning work with a deep-band signal — irreversible or high-cost decisions, schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs, or an explicit user request |
+| **Architect (fast band)** | Planning work that on its face satisfies the light-tier predicate; returns a tier mismatch instead of switching to the full template |
 | **Code Reviewer** | Reviewing implemented changes against the plan, tests, and acceptance criteria |
 | **UI Reviewer** | Verifying implemented UI against Figma, including `[REUSE]` UI verification tasks |
 | **Context Engineer** | Gathering requirements and context before the Architect can plan |
