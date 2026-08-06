@@ -31,6 +31,35 @@ The plan must not contain real implementation code or full implementation bodies
 </no-real-code>
 </principles>
 
+## Plan Tier Selection
+
+Every plan is authored on exactly one of two templates, both owned by this skill:
+
+- **Full tier** — [`./plan.example.md`](./plan.example.md). The default whenever any tier condition fails.
+- **Light tier** — [`./plan-light.example.md`](./plan-light.example.md). Permitted only when ALL seven low-risk conditions hold.
+
+<tier-predicate>
+The light tier is permitted only when the change meets ALL of these conditions:
+
+1. It is a single phase with very few tasks.
+2. It makes no irreversible or high-cost decisions such as database-engine choice, framework or language choice, vendor lock-in, or data-model shape.
+3. It includes no schema changes, migrations, or backfills.
+4. It introduces no security, authentication, or privacy behavior changes.
+5. It introduces no new external dependency and no new architectural pattern.
+6. It does not deviate from the research or the established direction.
+7. It is confined to one component or concern, such as a copy tweak, one-line config change, or doc-only change.
+
+This is the single canonical statement of these conditions. The same predicate governs the light template, the low-risk automated-review exemption, and the research.md waiver — one predicate, three consequences, never assessed independently of each other.
+</tier-predicate>
+
+<tier-selection-rules>
+- The architect assesses the predicate at planning start, before any broad research. When all conditions hold, select the light tier by default and announce it in chat with a one-line reason; honor an explicit user request for the full tier at any time before authoring. When any condition fails, the full tier is mandatory: name the failing conditions in chat. User preference never downgrades a predicate-failing change to the light tier.
+- On the light tier, do not run broad research, industry-standard exploration, or full technical-context discovery. Read only the files the change touches, populate the minimal Technical Context commands, and author the plan. `*.research.md` is not required; the Tier Justification table is the record that the request plus a bounded code read sufficed. If the justification cannot be completed confidently, or any Open Question would be needed, the change is not light — switch to the full tier.
+- On the light tier, `tsh-plan-reviewer` is never invoked; the recorded Tier Justification is the explicitly recorded valid low-risk automated-review exemption. The architect's plan-authoring approval gate does not fire; the Engineering Manager's execution-authorization gate is the only user-facing gate.
+- A material revision during execution that breaks any tier condition disqualifies the light tier: halt file-changing delegation, re-author on the full template, and obtain renewed Human approval per the canonical protocol.
+- The light tier is a plan-artifact property inside Full Flow, never an alternative flow. No-plan implementation remains prohibited on every tier.
+</tier-selection-rules>
+
 ## Plan Creation Process
 
 Before drafting, read [`./plan.example.md`](./plan.example.md) in full first — it is the canonical structure every plan must follow. Knowing the required sections up front tells you which fields you must research, discover, or design (for example Technical Context, Current Implementation Analysis, and Security Considerations) before you begin, so you gather the right information deliberately rather than backfilling it later.
