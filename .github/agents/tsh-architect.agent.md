@@ -1,5 +1,5 @@
 ---
-model: ["Claude Opus 5", "Claude Sonnet 5"]
+model: ["Claude Sonnet 5", "GPT-5.6 Terra"]
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools:
   [

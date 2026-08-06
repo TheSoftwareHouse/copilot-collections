@@ -97,6 +97,25 @@ This table is the single source of truth for selecting a delegate agent and prom
 
 Note: Apply the app-code decision rule consistently during execution and follow-up fixes: `tsh-plan-implementor` is the DEFAULT route for actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work.
 
+## Architect Band Selection
+
+Planning delegations select one of three architect bands. All three run the identical agent body; only the model band differs. Route-varying selection lives here, not in the agent files.
+
+| Band | Agent | Select when |
+| --- | --- | --- |
+| default | `tsh-architect` | Any full-tier planning work without a deep-band signal. This is the standard route. |
+| deep | `tsh-architect-deep` | The request or research shows a deep-band signal: irreversible or high-cost decisions (database engine, framework, vendor, data-model shape), schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs, or an explicit user request for deep planning. Expected to be rare. |
+| fast | `tsh-architect-fast` | The request appears on its face to satisfy the light-tier predicate. Light tier only. |
+
+Band rules:
+
+- The fast band authors light-tier plans only. On any tier-predicate failure it stops and returns a tier mismatch; the manager re-delegates to the default band (or deep, when a deep-band signal surfaced). It never continues on the full template.
+- Over-provisioning is permitted: the default or deep band may author a light-tier plan when the predicate holds. Under-provisioning is never permitted.
+- The user may name a band. An upward request (default → deep) is always honored. A downward request to fast is honored only when the tier predicate holds; the architect remains the authority, exactly as for the plan tier.
+- When in doubt between bands, choose the higher band. Band selection is a routing bet; the tier predicate assessed by the architect is the authority.
+
+Wherever the Planning readiness table and Planning sequence route to `tsh-architect` with `tsh-plan.prompt.md`, the delegate is the band selected by this table.
+
 ## Material Revision Handling
 
 This rule is universal: it applies at any point before implementation completion — including execution discovery, a workflow deviation, a `Request changes` response, or a review-driven solution change.

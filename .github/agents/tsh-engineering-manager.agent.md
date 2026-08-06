@@ -21,6 +21,8 @@ agents:
     "tsh-plan-implementor",
     "tsh-devops-engineer",
     "tsh-architect",
+    "tsh-architect-deep",
+    "tsh-architect-fast",
     "tsh-code-reviewer",
     "tsh-ui-reviewer",
     "tsh-context-engineer",
@@ -125,6 +127,23 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - You cannot defend the next implementation step with confidence.
 - **SHOULD NOT delegate to**:
   - Straightforward implementation work whose ownership is already clear and does not require architectural clarification.
+</agent>
+
+<agent name="tsh-architect-deep">
+- **MUST delegate to when**:
+  - Planning work matches a deep-band signal per the Architect band selection table in `tsh-orchestrating-implementation`: irreversible or high-cost decisions, schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs in the research, or an explicit user request for deep planning.
+- **SHOULD NOT delegate to**:
+  - Typical planning work that `tsh-architect` handles on the default band.
+  - Requests that satisfy the light-tier predicate, which belong with `tsh-architect-fast`.
+</agent>
+
+<agent name="tsh-architect-fast">
+- **MUST delegate to when**:
+  - The request appears on its face to satisfy the light-tier predicate owned by `tsh-creating-implementation-plans` — a copy tweak, one-line config change, doc-only change, or similarly single-concern work.
+- **IMPORTANT**:
+  - This variant authors light-tier plans only. If it returns a tier mismatch because a predicate condition fails, re-delegate the planning task to `tsh-architect` (or `tsh-architect-deep` when a deep-band signal is present); never ask it to continue on the full template.
+- **SHOULD NOT delegate to**:
+  - Any request with a visible deep-band signal or any doubt about the light-tier predicate; when in doubt, use `tsh-architect`.
 </agent>
 
 <agent name="tsh-code-reviewer">
