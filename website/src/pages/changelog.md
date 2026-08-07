@@ -12,6 +12,12 @@ The canonical source for this changelog is [CHANGELOG.md](https://github.com/The
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-08-07
+
+### Changed
+
+- `tsh-plan-implementor` — Main model is now `GPT-5.6 Luna`; `MAI-Code-1-Flash` remains the fallback model.
+
 ## 2026-08-06
 
 ### Added
