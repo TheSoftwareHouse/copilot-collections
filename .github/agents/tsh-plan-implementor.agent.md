@@ -1,10 +1,8 @@
 ---
 model:
   [
-    "MAI-Code-1-Flash",
-    "qwen3-coder-30b-a3b-instruct (customendpoint)",
-    "Kimi K2.7 Code",
-    "Claude Haiku 4.5"
+    "GPT-5.6 Luna",
+    "MAI-Code-1-Flash"
   ]
 description: "Internal implementor that executes one plan task at a time exactly as written."
 tools:
