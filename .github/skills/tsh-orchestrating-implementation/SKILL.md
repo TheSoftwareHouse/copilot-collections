@@ -135,7 +135,7 @@ Two distinct user-facing gates exist. They must not duplicate each other, and ne
 | Gate | Owner | Exact labels | When it fires | Who writes the record |
 | --- | --- | --- | --- | --- |
 | Plan-authoring approval | `tsh-architect` | `Approve plan`, `I have comments` | Immediately after a settled review event: a revision-bound verdict accepted for the revision read plus a written disposition for every eligible blocker. It does not fire on the low-risk-exemption path, where no reviewer verdict exists. | `tsh-architect` writes the literal decision into the plan's `## Human Approval` table. |
-| Execution authorization (recovery-only) | `tsh-engineering-manager` | `Approve current plan`, `Request changes`, `Stop` | Before the first file-changing delegation, and again after any material revision — but only when no valid approval already exists for the current unchanged `Plan Revision`. | `tsh-engineering-manager` delegates the write to `tsh-architect`; it never writes the record itself because it has no `edit` tool. |
+| Execution authorization (recovery-only) | `tsh-engineering-manager` | `Approve current plan`, `Request changes`, `Stop` | Before the first file-changing delegation, and again after any material revision — but only when no valid approval already exists for the current unchanged `Plan Revision`. | `tsh-engineering-manager` delegates the write to `tsh-architect-fast`; it never writes the record itself because it has no `edit` tool. |
 
 The Manager's gate is fail-closed recovery only, never a second normal authorization when a valid current-revision record already exists, including one recorded by `tsh-architect`.
 
