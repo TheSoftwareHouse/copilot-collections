@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 
 - Human Approval record-update routing — After the execution-authorization gate, `tsh-engineering-manager` delegates the narrowly scoped literal `## Human Approval` record update to the repository's actual `tsh-architect-fast` agent.
+- Implementation Code-Review Eligibility — `tsh-orchestrating-implementation` now owns a canonical `## Implementation Code-Review Eligibility` rule and runs the final `tsh-code-reviewer` gate only for delivered reviewable implementation artifacts; planning artifacts, plan bookkeeping, and documentation-only delivery never trigger it, and the reviewer's own bookkeeping writes stay non-recursive. `tsh-creating-implementation-plans` plus both plan templates make the review phase conditional on that rule; `tsh-review.prompt.md` and `tsh-code-reviewer` treat the plan as comparison context only and redirect plan-only requests to the plan-quality owners. `tsh-implement-e2e.prompt.md` and `tsh-implement-ui.prompt.md` now return completion to `tsh-engineering-manager`, which owns the single final implementation-review gate. Website synchronization mirrors the eligibility rule across the affected agent, prompt, skill, and workflow pages.
 
 ## 2026-08-07
 
