@@ -155,6 +155,37 @@ New implementation discussions enter through `/tsh-implement` or a direct `tsh-e
 
 Invalid or missing states remain fail-closed, and **Material Revision Handling** remains unchanged; the boundary grants no exception. The low-risk-exemption path is excluded: no Architect plan-authoring gate ran there, and the manager's execution-authorization gate remains the only user-facing gate. This boundary is instruction-level and auditable; it does not detect or enforce a VS Code conversation identifier. It introduces no fields, values, provenance, receipts, ledgers, or additional predicate terms.
 
+## Implementation Code-Review Eligibility
+
+A **reviewable implementation artifact** is a delivered artifact in one of these classes:
+
+A delivered change set must contain at least one reviewable implementation artifact before the final implementation code-review gate can open.
+
+| Class | Examples | Opens the final review gate |
+| --- | --- | --- |
+| Application / product source code | Feature code, libraries, and this repository's own `.github/**` Copilot customization artifacts | Yes |
+| Automated tests | Unit, integration, and E2E specs, Page Objects, and fixtures | Yes |
+| Infrastructure, CI/CD, and observability code | Terraform, Helm/Kubernetes manifests, pipeline definitions, and dashboards or alerts as code | Yes |
+| LLM application prompts delivered as product artifacts | System prompts, RAG templates, and tool-calling instructions | Yes |
+
+These classes never open the final review gate on their own:
+
+| Excluded class | Examples | Opens the final review gate |
+| --- | --- | --- |
+| Planning artifacts | `specifications/**/*.plan.md`, `*.plan-review.md`, and `*.research.md` | No |
+| Plan bookkeeping | Task checkboxes, progress/status, `UI Verification Status`, `Code Review Findings`, and Changelog entries | No |
+| Repository-documentation-only delivery | README, CHANGELOG, in-repo `/docs`, and `website/docs/**` | No |
+
+When implementation artifacts are delivered alongside a plan, the plan remains required comparison context for scope, Definition of Done, and acceptance criteria, and is never a review target. Plan prose, structure, and bookkeeping are never review findings and never a review trigger. “Never a review target” scopes review rather than forbidding file writes: the reviewer's narrowly defined bookkeeping writes — completed Definition of Done and acceptance-criteria boxes, `Code Review Findings`, and the Changelog entry — remain required and permitted.
+
+The final review gate runs once per delivered implementation change set, after the UI verification gate clears. The reviewer's own mandated plan writes are bookkeeping, are not a new delivered change set, and can never re-open the gate. A re-run is justified only by a review-driven fix that delivers new implementation artifacts, under the existing execution rules.
+
+Repository-documentation-only delivery is owned by `tsh-technical-writer` and uses the documentation build as its validation gate; it does not open the implementation code-review gate. Documentation delivered alongside implementation artifacts is reviewed as part of that single delivered change set.
+
+Plans authored from old unconditional templates are governed by this workflow eligibility rule: for a plan-only, bookkeeping-only, or documentation-only delivery, the manager marks the stale review task `NOT APPLICABLE — no reviewable implementation artifacts delivered`. That status write is bookkeeping and is not a review trigger.
+
+This section changes invocation eligibility only. It does not alter Human Approval semantics, gate labels, or the UI verification ordering.
+
 ## Full Flow
 
 ### Planning readiness
@@ -221,10 +252,10 @@ Process tasks in plan order. Consult the todo list before each task and update t
    - Mark each item individually as **PASSED** or **ESCALATED**.
    - Never batch multiple UI verification items into one review step.
 8. **Enforce the UI verification gate** - Do not start code review until every UI/visual/layout change on a Figma-backed screen has cleared the live-capture + Figma verification loop (`tsh-ui-capture-worker` artifacts compared by `tsh-ui-reviewer`, iterated up to 5) and is individually PASSED or individually ESCALATED. This applies to every visual/layout change, not only to changes that happen to carry a `[REUSE]` task. Type checks, build, unit/integration tests, and code review are NOT UI verification and can never substitute for it — "it compiles" and "code review passed" do not mean the UI matches Figma.
-9. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item.
+9. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item. The delegation also requires the delivered change set to qualify under **Implementation Code-Review Eligibility**; when it does not qualify, close the flow with no review invocation and no substitute gate.
    - Treat UI verification and code review as separate gates with separate owners and separate outputs. Do not communicate or batch them as one combined step, and report UI verification status separately from code review status.
-10. **Classify review fixes before routing** - If code review finds issues that require changes, determine whether each fix is non-material and remains within the unchanged current Human-approved plan revision, or is material to that revision. A non-material, plan-conforming fix requires no repeated user approval before it is routed. If a fix causes or reveals a material change to a previously Human-approved plan revision, apply **Material Revision Handling** instead of routing the fix: halt subsequent file-changing delegation, reset the Plan Revision and record it in the plan's Changelog, then resume only after renewed Human approval through the exact gate choices. A new review event occurs only through the explicitly user-directed new review event exception.
-11. **Route review fixes back through the correct implementer** - For a non-material, plan-conforming fix, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and re-run review when needed.
+10. **Classify review fixes before routing** - If code review finds issues that require changes, determine whether each fix is non-material and remains within the unchanged current Human-approved plan revision, or is material to that revision. A non-material, plan-conforming fix requires no repeated user approval before it is routed. Plan bookkeeping is never a change requiring review. If a fix causes or reveals a material change to a previously Human-approved plan revision, apply **Material Revision Handling** instead of routing the fix: halt subsequent file-changing delegation, reset the Plan Revision and record it in the plan's Changelog, then resume only after renewed Human approval through the exact gate choices. A new review event occurs only through the explicitly user-directed new review event exception.
+11. **Route review fixes back through the correct implementer** - For a non-material, plan-conforming fix, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and, only when a fix delivers new reviewable implementation artifacts, re-run review when needed. Plan status, findings, and Changelog entries never justify a re-run.
 12. **Treat any direct file edit as a workflow violation** - The orchestrator never edits any file directly; always delegates every file change to the owning specialist. If the orchestrator starts editing any file itself, stop that path, return to delegated execution, and continue only through the correct owner. If no suitable specialist exists, stop and ask the user.
 13. **Record solution changes in the plan Changelog** - Document any solution change or workflow deviation in the plan file's Changelog section with a timestamp. When the change is material to a previously Human-approved plan revision, this record is produced as part of **Material Revision Handling**, not as a separate confirmation-only step.
 

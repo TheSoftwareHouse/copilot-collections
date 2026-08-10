@@ -7,6 +7,12 @@ Your goal is to review the implementation against the provided implementation pl
 
 Make sure to review not only the code and its acceptance criteria but also consider security aspects, code quality, testing coverage, and documentation.
 
+## Review Scope
+
+This review targets delivered reviewable implementation artifacts as defined by `## Implementation Code-Review Eligibility` in `tsh-orchestrating-implementation`. `*.plan.md` and `*.plan-review.md` are comparison context and never a review target, so plan wording, structure, checkboxes, progress, `UI Verification Status`, `Code Review Findings`, and Changelog entries are out of review scope. This scopes review rather than forbidding writes: the narrow bookkeeping writes this prompt already mandates in its workflow steps remain required.
+
+If the supplied change set contains only planning artifacts or plan bookkeeping, perform no implementation review. Report the request as not applicable and name `tsh-plan-reviewer` and `tsh-architect` as the plan-quality owners.
+
 ## Required Skills
 
 Before starting, load and follow these skills:
@@ -28,6 +34,8 @@ Before starting, load and follow these skills:
 7. **Document results**: Add findings to the plan file at the end in a new section named "Code Review Findings".
 8. **Update changelog**: Add information that code review was performed to the changelog section of the plan file.
 
+The plan writes required by steps 3, 4, 7, and 8 are bookkeeping and must never be treated as a new reviewable change or used to invoke another review.
+
 When it comes to updating the definition of done and acceptance criteria checklist, you can only update those by checking the box for completed items. Do not modify the text of those sections.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-review:v2 -->

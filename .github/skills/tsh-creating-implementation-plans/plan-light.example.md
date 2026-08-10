@@ -75,7 +75,7 @@ Verbatim runnable commands for this change's app stack, used by task Definitions
 
 - [ ] Code review completed
 
-**Description**: Delegate review of the implemented change to `tsh-code-reviewer` using `tsh-review.prompt.md`, against this plan and the change's Definition of Done.
+**Description**: Use this task only when the delivered change contains reviewable implementation artifacts under `## Implementation Code-Review Eligibility` in `tsh-orchestrating-implementation`. Delegate review of the implemented change to `tsh-code-reviewer` using `tsh-review.prompt.md`, against this plan and the change's Definition of Done. A light-tier doc-only, config-only-without-code, or plan-only change omits this task entirely or records `NOT APPLICABLE — no reviewable implementation artifacts delivered`.
 
 **Definition of Done:**
 

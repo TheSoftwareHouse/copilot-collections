@@ -71,7 +71,7 @@ Do NOT skip verification or delegate without a Figma reference.
 - Design gaps discovered and how they were handled
 - Any deviations from design with rationale
 
-11. **Delegate code review** — Delegate to `tsh-code-reviewer` agent via [tsh-review.prompt.md](../prompts/tsh-review.prompt.md). Include E2E test execution as part of the review. The code reviewer runs all quality gates (unit, integration, E2E tests, linting, build).
+11. **Return to the Engineering Manager** — Return the completed UI work and the UI Verification Summary from step 10 to `tsh-engineering-manager`. The manager owns the single final gate per `## Implementation Code-Review Eligibility` in `tsh-orchestrating-implementation`; this prompt must not invoke `tsh-code-reviewer` itself. E2E execution remains part of that single final review rather than a separate specialist call.
 
 ## Verification Loop (MANDATORY — never stop after one pass)
 
@@ -140,4 +140,4 @@ If `tsh-ui-reviewer` consistently returns LOW confidence or tool errors:
 3. Document the issue in the plan's Changelog
 4. Continue with next component or escalate
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-ui:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-ui:v2 -->

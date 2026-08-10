@@ -148,10 +148,12 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
 
 <agent name="tsh-code-reviewer">
 - **MUST delegate to when**:
-  - Implemented changes need review against the plan, feature context, requirements, tests, and acceptance criteria.
-  - An implementation path needs an explicit review step before completion.
+  - The delivered change set contains reviewable implementation artifacts and the UI verification gate has cleared; defer invocation timing to `tsh-orchestrating-implementation`.
 - **SHOULD NOT delegate to**:
   - Primary implementation, planning, or context-gathering work.
+  - Plan-only changes; `tsh-plan-reviewer` owns plan quality.
+  - Plan bookkeeping; it is not a reviewable change.
+  - Documentation-only delivery; `tsh-technical-writer` owns it and the documentation build is its validation gate.
 </agent>
 
 <agent name="tsh-ui-reviewer">
