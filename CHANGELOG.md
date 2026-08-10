@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## 2026-08-10
+
+### Changed
+
+- Human Approval record-update routing — After the execution-authorization gate, `tsh-engineering-manager` delegates the narrowly scoped literal `## Human Approval` record update to the repository's actual `tsh-architect-fast` agent.
+
 ## 2026-08-07
 
 ### Changed
