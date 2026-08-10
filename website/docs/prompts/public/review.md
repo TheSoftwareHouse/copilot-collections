@@ -16,6 +16,12 @@ Performs a structured code review against the implementation plan and feature co
 /tsh-review <JIRA_ID or task description>
 ```
 
+## Review Scope
+
+`/tsh-review` targets the delivered reviewable implementation artifacts in a change set — application/product source code, automated tests, infrastructure/CI/CD/observability code, and LLM application prompts delivered as product artifacts. A `*.plan.md` file is required comparison context for scope, Definition of Done, and acceptance criteria, but it is never a review target: plan wording, structure, and bookkeeping are out of scope. A planning-artifact-only request (no reviewable implementation artifacts delivered) is reported as not applicable and redirected to the plan-quality owners — `tsh-plan-reviewer` and the Architect.
+
+The plan writes listed under [What It Does](#what-it-does) below — checked Definition of Done and acceptance criteria items, the "Code Review Findings" section, and the Changelog entry — are permitted bookkeeping and do not themselves constitute a review of the plan.
+
 ## What It Does
 
 1. **Understands context** — Loads `.research.md` and `.plan.md` files, reviews `*.instructions.md` for project guidelines.

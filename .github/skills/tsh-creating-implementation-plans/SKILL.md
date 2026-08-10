@@ -31,6 +31,35 @@ The plan must not contain real implementation code or full implementation bodies
 </no-real-code>
 </principles>
 
+## Plan Tier Selection
+
+Every plan is authored on exactly one of two templates, both owned by this skill:
+
+- **Full tier** — [`./plan.example.md`](./plan.example.md). The default whenever any tier condition fails.
+- **Light tier** — [`./plan-light.example.md`](./plan-light.example.md). Permitted only when ALL seven low-risk conditions hold.
+
+<tier-predicate>
+The light tier is permitted only when the change meets ALL of these conditions:
+
+1. It is a single phase with very few tasks.
+2. It makes no irreversible or high-cost decisions such as database-engine choice, framework or language choice, vendor lock-in, or data-model shape.
+3. It includes no schema changes, migrations, or backfills.
+4. It introduces no security, authentication, or privacy behavior changes.
+5. It introduces no new external dependency and no new architectural pattern.
+6. It does not deviate from the research or the established direction.
+7. It is confined to one component or concern, such as a copy tweak, one-line config change, or doc-only change.
+
+This is the single canonical statement of these conditions. The same predicate governs the light template, the low-risk automated-review exemption, and the research.md waiver — one predicate, three consequences, never assessed independently of each other.
+</tier-predicate>
+
+<tier-selection-rules>
+- The architect assesses the predicate at planning start, before any broad research. When all conditions hold, select the light tier by default and announce it in chat with a one-line reason; honor an explicit user request for the full tier at any time before authoring. When any condition fails, the full tier is mandatory: name the failing conditions in chat. User preference never downgrades a predicate-failing change to the light tier.
+- On the light tier, do not run broad research, industry-standard exploration, or full technical-context discovery. Read only the files the change touches, populate the minimal Technical Context commands, and author the plan. `*.research.md` is not required; the Tier Justification table is the record that the request plus a bounded code read sufficed. If the justification cannot be completed confidently, or any Open Question would be needed, the change is not light. On the default or deep band, switch to the full template in place. On the fast band, do not author a full-template plan: stop and return a tier mismatch to the orchestrator for re-delegation.
+- On the light tier, `tsh-plan-reviewer` is never invoked; the recorded Tier Justification is the explicitly recorded valid low-risk automated-review exemption. The architect's plan-authoring approval gate does not fire; the Engineering Manager's execution-authorization gate is the only user-facing gate.
+- A material revision during execution that breaks any tier condition disqualifies the light tier: halt file-changing delegation, re-author on the full template, and obtain renewed Human approval per the canonical protocol.
+- The light tier is a plan-artifact property inside Full Flow, never an alternative flow. No-plan implementation remains prohibited on every tier.
+</tier-selection-rules>
+
 ## Plan Creation Process
 
 Before drafting, read [`./plan.example.md`](./plan.example.md) in full first — it is the canonical structure every plan must follow. Knowing the required sections up front tells you which fields you must research, discover, or design (for example Technical Context, Current Implementation Analysis, and Security Considerations) before you begin, so you gather the right information deliberately rather than backfilling it later.
@@ -54,7 +83,7 @@ Example: do not require checking whether tests were failing before the change, b
 </definition-of-done-rules>
 
 <mandatory-plan-content>
-- The plan must include a code review phase at the end, fully done by `tsh-code-reviewer` using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). Pass e2e execution to that agent as part of the prompt; do not run those tests from the plan author level.
+- The plan must include a final code review phase only when its delivered change set contains a reviewable implementation artifact as defined by `## Implementation Code-Review Eligibility` in `tsh-orchestrating-implementation`, fully done by `tsh-code-reviewer` using [`tsh-review.prompt.md`](../../prompts/tsh-review.prompt.md). A plan-only, bookkeeping-only, or documentation-only plan must not include a `tsh-code-reviewer` task. Pass e2e execution to that agent as part of the prompt; do not run those tests from the plan author level. Recording a review outcome in the plan is bookkeeping and never a reason to invoke review again.
 - For features with UI components based on Figma designs, each UI implementation task should be followed by a `[REUSE]` UI verification task delegated to `tsh-ui-reviewer` using [`tsh-review-ui.prompt.md`](../../prompts/tsh-review-ui.prompt.md). Include the Figma URL in every verification task. Figma-based plans must track per-component UI verification status, keep the exact casing `UI Verification Status` in the plan, and record it separately from code review status, using the terminal states `PASSED`, `ESCALATED`, or `VERIFICATION NOT RUN`, along with the component name, iteration count, and Figma URL. Do not run UI verification from the software engineer level — let the engineering manager orchestrate the verify-fix loop. This scoped UI-verification is distinct from full e2e: the UI-verification outcome is owned by `tsh-ui-reviewer`, while full e2e remains owned by `tsh-code-reviewer`.
 - For features involving LLM application prompts (system prompts, RAG templates, tool-calling instructions, classification/extraction prompts), add a `[REUSE]` prompt engineering task delegated to `tsh-prompt-engineer` using [`tsh-engineer-prompt.prompt.md`](../../internal-prompts/tsh-engineer-prompt.prompt.md). Separate prompt design from application code — the software engineer implements the integration code, the prompt engineer designs the prompt content. Include the use case, target model, and any existing prompt drafts in the task description.
 - Do not provide deployment plans, code pushing instructions, or repository code review instructions.

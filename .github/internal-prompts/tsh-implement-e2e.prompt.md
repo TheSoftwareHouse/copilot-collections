@@ -79,8 +79,8 @@ Update plan (if plan file exists): check acceptance criteria, add files to Chang
 
 ---
 
-## 5. Code Review (automatic)
+## 5. Completion Handoff
 
-After completing E2E tests implementation, always run `tsh-code-reviewer` agent to review the E2E tests against best practices and test quality standards. The agent should be executed automatically without user confirmation. Update the changelog section of the plan file to indicate that E2E code review was performed and include a summary of the findings.
+After completing E2E tests implementation and the section 4 suite/reporting responsibilities, return completion and the E2E summary to `tsh-engineering-manager`. E2E tests are reviewable implementation artifacts and are reviewed once at the manager's final gate per `## Implementation Code-Review Eligibility` in `tsh-orchestrating-implementation`; this prompt must not invoke `tsh-code-reviewer` itself. The E2E summary and any plan Changelog entry recording delivered test files are bookkeeping.
 
-<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-e2e:v1 -->
+<!-- TSH_COPILOT_COLLECTIONS:prompt:tsh-implement-e2e:v2 -->

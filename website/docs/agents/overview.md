@@ -99,5 +99,7 @@ These agents are not invoked directly by users. The Business Analyst internally 
 | [Copilot Artifact Creator](./copilot-artifact-creator) | `tsh-copilot-artifact-creator.agent.md` | Creates and modifies Copilot customization artifacts |
 | [Copilot Artifact Reviewer](./copilot-artifact-reviewer) | `tsh-copilot-artifact-reviewer.agent.md` | Validates quality and consistency of artifacts |
 | [Architect Reviewer](./plan-reviewer) | `tsh-plan-reviewer.agent.md` | Stress-tests implementation plans before implementation starts |
+| [Architect — deep band](./architect#model-bands) | `tsh-architect-deep.agent.md` | Generated Architect variant for the rare hardest planning problems |
+| [Architect — fast band](./architect#model-bands) | `tsh-architect-fast.agent.md` | Generated Architect variant restricted to light-tier plans |
 | [Plan Implementor](./plan-implementor) | `tsh-plan-implementor.agent.md` | Internal strict single-task implementor for one plan step at a time |
 | [Technical Writer](./technical-writer) | `tsh-technical-writer.agent.md` | Authors and updates README, CHANGELOG, `/docs`, and published documentation-site pages |

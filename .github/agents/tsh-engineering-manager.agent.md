@@ -21,6 +21,8 @@ agents:
     "tsh-plan-implementor",
     "tsh-devops-engineer",
     "tsh-architect",
+    "tsh-architect-deep",
+    "tsh-architect-fast",
     "tsh-code-reviewer",
     "tsh-ui-reviewer",
     "tsh-context-engineer",
@@ -41,7 +43,7 @@ The three-choice gate is fail-closed recovery only: present exactly `Approve cur
 
 When the current discussion is the one in which `tsh-architect` recorded plan-authoring Human approval, follow the `Implementation Discussion Boundary` in `.github/skills/tsh-orchestrating-implementation/SKILL.md`: report the exact plan path, current `Plan Revision`, persisted `Decision Timestamp`, and review path when available; say implementation is the next step in a new discussion; and stop before any file-changing delegation. This is a lifecycle-only stop, NEVER a validity judgement; the persisted record remains reusable in the new discussion. The low-risk-exemption path is excluded because no Architect plan-authoring gate ran and the manager's execution-authorization gate is the only user-facing gate.
 
-After a literal explicit user response, you may delegate only a tightly scoped update of the plan's `## Human Approval` record to `tsh-architect`. Architect may record that response but must not infer, manufacture, or paraphrase consent, and must not update `tsh-plan-reviewer` or `.plan-review.md` as an approval record. A persisted decision is valid only when `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and `Decision Timestamp` is valid ISO 8601 UTC ending in `Z`.
+After a literal explicit user response, you may delegate only a tightly scoped update of the plan's `## Human Approval` record to `tsh-architect-fast`. Architect may record that response but must not infer, manufacture, or paraphrase consent, and must not update `tsh-plan-reviewer` or `.plan-review.md` as an approval record. A persisted decision is valid only when `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and `Decision Timestamp` is valid ISO 8601 UTC ending in `Z`.
 
 ANY material change to a plan that was previously Human-approved — from execution discovery, a workflow deviation, a requested change, or a review-driven solution change, at any point before implementation completion — halts all file-changing delegation. Renewed Human approval is required before you request this gate again; a generic user confirmation never substitutes for it. A new review event occurs only through an explicitly user-directed new review event, and the manager never initiates one.
 </human-approval-ownership>
@@ -127,12 +129,31 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - Straightforward implementation work whose ownership is already clear and does not require architectural clarification.
 </agent>
 
+<agent name="tsh-architect-deep">
+- **MUST delegate to when**:
+  - Planning work matches a deep-band signal per the Architect band selection table in `tsh-orchestrating-implementation`: irreversible or high-cost decisions, schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs in the research, or an explicit user request for deep planning.
+- **SHOULD NOT delegate to**:
+  - Typical planning work that `tsh-architect` handles on the default band.
+  - Requests that satisfy the light-tier predicate, which belong with `tsh-architect-fast`.
+</agent>
+
+<agent name="tsh-architect-fast">
+- **MUST delegate to when**:
+  - The request appears on its face to satisfy the light-tier predicate owned by `tsh-creating-implementation-plans` — a copy tweak, one-line config change, doc-only change, or similarly single-concern work.
+- **IMPORTANT**:
+  - This variant authors light-tier plans only. If it returns a tier mismatch because a predicate condition fails, re-delegate the planning task to `tsh-architect` (or `tsh-architect-deep` when a deep-band signal is present); never ask it to continue on the full template.
+- **SHOULD NOT delegate to**:
+  - Any request with a visible deep-band signal or any doubt about the light-tier predicate; when in doubt, use `tsh-architect`.
+</agent>
+
 <agent name="tsh-code-reviewer">
 - **MUST delegate to when**:
-  - Implemented changes need review against the plan, feature context, requirements, tests, and acceptance criteria.
-  - An implementation path needs an explicit review step before completion.
+  - The delivered change set contains reviewable implementation artifacts and the UI verification gate has cleared; defer invocation timing to `tsh-orchestrating-implementation`.
 - **SHOULD NOT delegate to**:
   - Primary implementation, planning, or context-gathering work.
+  - Plan-only changes; `tsh-plan-reviewer` owns plan quality.
+  - Plan bookkeeping; it is not a reviewable change.
+  - Documentation-only delivery; `tsh-technical-writer` owns it and the documentation build is its validation gate.
 </agent>
 
 <agent name="tsh-ui-reviewer">

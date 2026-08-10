@@ -244,7 +244,9 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 **Goal**: <how-verified-quality-of-the-delivered-changes-secures-the-wildly-important-goal>
 
-**Description**: Final verification of the full implementation. This phase is mandatory and always comes last.
+**Description**: Final verification of the full implementation. This phase runs once and only when the plan's delivered change set contains reviewable implementation artifacts under `## Implementation Code-Review Eligibility`; otherwise mark it `NOT APPLICABLE — no reviewable implementation artifacts delivered` and skip it. When applicable, it always comes last.
+
+**Applicability:** <APPLICABLE — reviewable implementation artifacts delivered / NOT APPLICABLE — no reviewable implementation artifacts delivered>
 
 **Verification:** <fast checks from Technical Context → Tech Stack / Testing Patterns; never assumed from Node/npm>
 
@@ -258,7 +260,7 @@ Project conventions, coding standards, and patterns discovered during planning. 
 
 - [ ] Run `<verification command from Technical Context → Testing Patterns>`
 - [ ] Code review passes with no blocking findings
-- [ ] Review outcome documented in Changelog
+- [ ] Review outcome documented in Changelog _(bookkeeping only — this record never re-opens the gate)_
 
 **Stop Rule:** <stop condition, or omit>
 

@@ -97,6 +97,25 @@ This table is the single source of truth for selecting a delegate agent and prom
 
 Note: Apply the app-code decision rule consistently during execution and follow-up fixes: `tsh-plan-implementor` is the DEFAULT route for actionable, low-risk plan seams, while `tsh-software-engineer` is the EXCEPTION route for complex non-UI work.
 
+## Architect Band Selection
+
+Planning delegations select one of three architect bands. All three run the identical agent body; only the model band differs. Route-varying selection lives here, not in the agent files.
+
+| Band | Agent | Select when |
+| --- | --- | --- |
+| default | `tsh-architect` | Any full-tier planning work without a deep-band signal. This is the standard route. |
+| deep | `tsh-architect-deep` | The request or research shows a deep-band signal: irreversible or high-cost decisions (database engine, framework, vendor, data-model shape), schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs, or an explicit user request for deep planning. Expected to be rare. |
+| fast | `tsh-architect-fast` | The request appears on its face to satisfy the light-tier predicate. Light tier only. |
+
+Band rules:
+
+- The fast band authors light-tier plans only. On any tier-predicate failure it stops and returns a tier mismatch; the manager re-delegates to the default band (or deep, when a deep-band signal surfaced). It never continues on the full template.
+- Over-provisioning is permitted: the default or deep band may author a light-tier plan when the predicate holds. Under-provisioning is never permitted.
+- The user may name a band. An upward request (default → deep) is always honored. A downward request to fast is honored only when the tier predicate holds; the architect remains the authority, exactly as for the plan tier.
+- When in doubt between bands, choose the higher band. Band selection is a routing bet; the tier predicate assessed by the architect is the authority.
+
+Wherever the Planning readiness table and Planning sequence route to `tsh-architect` with `tsh-plan.prompt.md`, the delegate is the band selected by this table.
+
 ## Material Revision Handling
 
 This rule is universal: it applies at any point before implementation completion — including execution discovery, a workflow deviation, a `Request changes` response, or a review-driven solution change.
@@ -116,7 +135,7 @@ Two distinct user-facing gates exist. They must not duplicate each other, and ne
 | Gate | Owner | Exact labels | When it fires | Who writes the record |
 | --- | --- | --- | --- | --- |
 | Plan-authoring approval | `tsh-architect` | `Approve plan`, `I have comments` | Immediately after a settled review event: a revision-bound verdict accepted for the revision read plus a written disposition for every eligible blocker. It does not fire on the low-risk-exemption path, where no reviewer verdict exists. | `tsh-architect` writes the literal decision into the plan's `## Human Approval` table. |
-| Execution authorization (recovery-only) | `tsh-engineering-manager` | `Approve current plan`, `Request changes`, `Stop` | Before the first file-changing delegation, and again after any material revision — but only when no valid approval already exists for the current unchanged `Plan Revision`. | `tsh-engineering-manager` delegates the write to `tsh-architect`; it never writes the record itself because it has no `edit` tool. |
+| Execution authorization (recovery-only) | `tsh-engineering-manager` | `Approve current plan`, `Request changes`, `Stop` | Before the first file-changing delegation, and again after any material revision — but only when no valid approval already exists for the current unchanged `Plan Revision`. | `tsh-engineering-manager` delegates the write to `tsh-architect-fast`; it never writes the record itself because it has no `edit` tool. |
 
 The Manager's gate is fail-closed recovery only, never a second normal authorization when a valid current-revision record already exists, including one recorded by `tsh-architect`.
 
@@ -136,6 +155,37 @@ New implementation discussions enter through `/tsh-implement` or a direct `tsh-e
 
 Invalid or missing states remain fail-closed, and **Material Revision Handling** remains unchanged; the boundary grants no exception. The low-risk-exemption path is excluded: no Architect plan-authoring gate ran there, and the manager's execution-authorization gate remains the only user-facing gate. This boundary is instruction-level and auditable; it does not detect or enforce a VS Code conversation identifier. It introduces no fields, values, provenance, receipts, ledgers, or additional predicate terms.
 
+## Implementation Code-Review Eligibility
+
+A **reviewable implementation artifact** is a delivered artifact in one of these classes:
+
+A delivered change set must contain at least one reviewable implementation artifact before the final implementation code-review gate can open.
+
+| Class | Examples | Opens the final review gate |
+| --- | --- | --- |
+| Application / product source code | Feature code, libraries, and this repository's own `.github/**` Copilot customization artifacts | Yes |
+| Automated tests | Unit, integration, and E2E specs, Page Objects, and fixtures | Yes |
+| Infrastructure, CI/CD, and observability code | Terraform, Helm/Kubernetes manifests, pipeline definitions, and dashboards or alerts as code | Yes |
+| LLM application prompts delivered as product artifacts | System prompts, RAG templates, and tool-calling instructions | Yes |
+
+These classes never open the final review gate on their own:
+
+| Excluded class | Examples | Opens the final review gate |
+| --- | --- | --- |
+| Planning artifacts | `specifications/**/*.plan.md`, `*.plan-review.md`, and `*.research.md` | No |
+| Plan bookkeeping | Task checkboxes, progress/status, `UI Verification Status`, `Code Review Findings`, and Changelog entries | No |
+| Repository-documentation-only delivery | README, CHANGELOG, in-repo `/docs`, and `website/docs/**` | No |
+
+When implementation artifacts are delivered alongside a plan, the plan remains required comparison context for scope, Definition of Done, and acceptance criteria, and is never a review target. Plan prose, structure, and bookkeeping are never review findings and never a review trigger. “Never a review target” scopes review rather than forbidding file writes: the reviewer's narrowly defined bookkeeping writes — completed Definition of Done and acceptance-criteria boxes, `Code Review Findings`, and the Changelog entry — remain required and permitted.
+
+The final review gate runs once per delivered implementation change set, after the UI verification gate clears. The reviewer's own mandated plan writes are bookkeeping, are not a new delivered change set, and can never re-open the gate. A re-run is justified only by a review-driven fix that delivers new implementation artifacts, under the existing execution rules.
+
+Repository-documentation-only delivery is owned by `tsh-technical-writer` and uses the documentation build as its validation gate; it does not open the implementation code-review gate. Documentation delivered alongside implementation artifacts is reviewed as part of that single delivered change set.
+
+Plans authored from old unconditional templates are governed by this workflow eligibility rule: for a plan-only, bookkeeping-only, or documentation-only delivery, the manager marks the stale review task `NOT APPLICABLE — no reviewable implementation artifacts delivered`. That status write is bookkeeping and is not a review trigger.
+
+This section changes invocation eligibility only. It does not alter Human Approval semantics, gate labels, or the UI verification ordering.
+
 ## Full Flow
 
 ### Planning readiness
@@ -144,7 +194,7 @@ Check the current state before creating or executing any plan.
 
 | Artifact or signal  | Treat as ready when                                                                                                                     | If not ready                                                                          |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| `*.research.md`     | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links  | Route to `tsh-context-engineer` with `tsh-research.prompt.md`                         |
+| `*.research.md`     | It exists for the current task and contains enough context to explain scope, constraints, requirements, and referenced inputs or links  | Route to `tsh-context-engineer` with `tsh-research.prompt.md`; for a light-tier plan, a recorded Tier Justification in the plan satisfies this row without a research file |
 | `*.plan.md`         | It exists for the current task and contains ordered, actionable tasks that can be delegated                                             | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
 | Open questions gate | It exists and contains no `❓ Open` rows in `## Open Questions`, so unresolved questions are not blocking execution readiness           | Route to `tsh-architect` with `tsh-plan.prompt.md`                                    |
 | Technical Context   | The plan has a populated `Technical Context` section with conventions, patterns, stack, and testing guidance relevant to implementation | Route to `tsh-architect` with `tsh-review-codebase.prompt.md`                         |
@@ -155,7 +205,7 @@ Check the current state before creating or executing any plan.
 
 1. **Check for existing research and plan files** - Inspect current `*.research.md` and `*.plan.md` state first.
 2. **Fill missing context when needed** - If research is missing or incomplete, delegate to `tsh-context-engineer` with `tsh-research.prompt.md`.
-3. **Create or refresh the reviewed plan when needed** - If the plan is missing, stale, not actionable, or not reviewer-ready, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The architect owns producing a finished reviewed plan with one invocation per plan lifecycle; the sole exception is an explicitly user-directed new review event, never a routine architect or manager option. If a return is non-revision-bound or a blocker remains unresolved, the architect uses `vscode/askQuestions` with exactly `stop here` and `custom guidance`, neither of which authorizes another review. Preserve append-only review history and never approve with unhandled blockers. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules. Missing research always routes to `tsh-context-engineer` first; missing plans always route to `tsh-architect`. After the review event is settled, the architect runs its own plan-authoring approval gate (`Approve plan`, `I have comments`) and records the literal decision in the plan's `## Human Approval` table; see **Approval Gate Separation**.
+3. **Create or refresh the reviewed plan when needed** - If the plan is missing, stale, not actionable, or not reviewer-ready, delegate to `tsh-architect` with `tsh-plan.prompt.md`. The architect owns producing a finished reviewed plan with one invocation per plan lifecycle; the sole exception is an explicitly user-directed new review event, never a routine architect or manager option. If a return is non-revision-bound or a blocker remains unresolved, the architect uses `vscode/askQuestions` with exactly `stop here` and `custom guidance`, neither of which authorizes another review. Preserve append-only review history and never approve with unhandled blockers. The plan MUST be authored following the `tsh-creating-implementation-plans` skill — it owns the plan template and structure rules. That skill also owns plan-tier selection: the architect assesses the tier predicate at planning start and authors on the light or full template accordingly. A light-tier plan with a recorded Tier Justification satisfies the Open questions and Reviewer readiness rows above, and its minimal Technical Context section satisfies the Technical Context row without a `tsh-review-codebase.prompt.md` delegation. The light tier is a plan-artifact property inside Full Flow, not an alternative flow. Missing research always routes to `tsh-context-engineer` first; missing plans always route to `tsh-architect`. After the review event is settled, the architect runs its own plan-authoring approval gate (`Approve plan`, `I have comments`) and records the literal decision in the plan's `## Human Approval` table; see **Approval Gate Separation**.
 4. **Create execution todos from the plan** - Create todos per plan task, not just per phase.
 5. **Capture UI inventory early** - Find every `[REUSE]` UI task and every Figma URL in the plan and research files. If a Figma-backed UI task does not have a Figma reference, stop and get it from the user before execution starts.
 6. **Ask for the dev server URL when UI tasks exist** - If the UI inventory is non-empty, use `vscode/askQuestions` to get the exact user-confirmed full dev server URL before execution starts. Treat it as a pinned session input and forward it unchanged through every reviewer and capture delegation.
@@ -202,10 +252,10 @@ Process tasks in plan order. Consult the todo list before each task and update t
    - Mark each item individually as **PASSED** or **ESCALATED**.
    - Never batch multiple UI verification items into one review step.
 8. **Enforce the UI verification gate** - Do not start code review until every UI/visual/layout change on a Figma-backed screen has cleared the live-capture + Figma verification loop (`tsh-ui-capture-worker` artifacts compared by `tsh-ui-reviewer`, iterated up to 5) and is individually PASSED or individually ESCALATED. This applies to every visual/layout change, not only to changes that happen to carry a `[REUSE]` task. Type checks, build, unit/integration tests, and code review are NOT UI verification and can never substitute for it — "it compiles" and "code review passed" do not mean the UI matches Figma.
-9. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item.
+9. **Run code review after the UI gate clears** - Delegate to `tsh-code-reviewer` with `tsh-review.prompt.md` only after the UI verification gate passes or is explicitly escalated per item. The delegation also requires the delivered change set to qualify under **Implementation Code-Review Eligibility**; when it does not qualify, close the flow with no review invocation and no substitute gate.
    - Treat UI verification and code review as separate gates with separate owners and separate outputs. Do not communicate or batch them as one combined step, and report UI verification status separately from code review status.
-10. **Classify review fixes before routing** - If code review finds issues that require changes, determine whether each fix is non-material and remains within the unchanged current Human-approved plan revision, or is material to that revision. A non-material, plan-conforming fix requires no repeated user approval before it is routed. If a fix causes or reveals a material change to a previously Human-approved plan revision, apply **Material Revision Handling** instead of routing the fix: halt subsequent file-changing delegation, reset the Plan Revision and record it in the plan's Changelog, then resume only after renewed Human approval through the exact gate choices. A new review event occurs only through the explicitly user-directed new review event exception.
-11. **Route review fixes back through the correct implementer** - For a non-material, plan-conforming fix, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and re-run review when needed.
+10. **Classify review fixes before routing** - If code review finds issues that require changes, determine whether each fix is non-material and remains within the unchanged current Human-approved plan revision, or is material to that revision. A non-material, plan-conforming fix requires no repeated user approval before it is routed. Plan bookkeeping is never a change requiring review. If a fix causes or reveals a material change to a previously Human-approved plan revision, apply **Material Revision Handling** instead of routing the fix: halt subsequent file-changing delegation, reset the Plan Revision and record it in the plan's Changelog, then resume only after renewed Human approval through the exact gate choices. A new review event occurs only through the explicitly user-directed new review event exception.
+11. **Route review fixes back through the correct implementer** - For a non-material, plan-conforming fix, package the review findings as a structured follow-up list (one actionable item per finding, scoped to its owner) and delegate the fixes through the same routing rules rather than dumping raw review commentary; run affected checks again, and, only when a fix delivers new reviewable implementation artifacts, re-run review when needed. Plan status, findings, and Changelog entries never justify a re-run.
 12. **Treat any direct file edit as a workflow violation** - The orchestrator never edits any file directly; always delegates every file change to the owning specialist. If the orchestrator starts editing any file itself, stop that path, return to delegated execution, and continue only through the correct owner. If no suitable specialist exists, stop and ask the user.
 13. **Record solution changes in the plan Changelog** - Document any solution change or workflow deviation in the plan file's Changelog section with a timestamp. When the change is material to a previously Human-approved plan revision, this record is produced as part of **Material Revision Handling**, not as a separate confirmation-only step.
 

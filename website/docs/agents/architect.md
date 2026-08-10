@@ -65,6 +65,22 @@ Each technical specification includes:
 - `tsh-implementing-observability` — Monitoring architecture, SLO frameworks, alerting, distributed tracing.
 - `tsh-engineering-prompts` — LLM prompt architecture: prompt template strategy, system prompt design, few-shot vs zero-shot decisions.
 
+## Model Bands
+
+The Architect ships as three agents that share one identical body and differ only in the frontmatter model array. Selection is route-varying logic owned by `tsh-orchestrating-implementation`, and the Engineering Manager picks the band at delegation time.
+
+| Band | File | Models | Select when |
+| --- | --- | --- | --- |
+| default | `tsh-architect.agent.md` | Claude Sonnet 5, GPT-5.6 Terra | Any full-tier planning work without a deep-band signal. The standard route. |
+| deep | `tsh-architect-deep.agent.md` | Claude Opus 5, Claude Sonnet 5 | Irreversible or high-cost decisions, schema migrations or backfills, security or authentication boundary design, cross-component architecture, competing viable designs, or an explicit user request. Expected to be rare. |
+| fast | `tsh-architect-fast.agent.md` | GPT-5.6 Luna, Gemini 3.6 Flash | The request on its face satisfies the light-tier predicate. Light tier only. |
+
+The two variants set `user-invocable: false`, so the chat dropdown shows a single Architect and the bands exist only as delegation targets.
+
+The band–tier coupling is hard, not advisory. The fast band authors light-tier plans only: if a tier-predicate condition fails, it stops and returns a tier mismatch instead of switching to the full template, and the manager re-delegates to the default or deep band. Over-provisioning is permitted — the default or deep band may author a light-tier plan — but under-provisioning never is. A user request upward is always honored; a request down to the fast band is honored only when the predicate holds.
+
+`tsh-architect.agent.md` is the single source of truth. `scripts/sync-architect-variants.mjs` regenerates both variants, and CI fails if regeneration produces a diff — so edit the base file only and re-run the script.
+
 ## Pre-Submission Self-Check and Review Loop
 
 Before submitting a plan, the Architect runs a pre-submission self-check against the same six `BLOCKER` categories used by the Architect Reviewer: materially invalid architecture; security, privacy, or authentication risk; unsupported irreversible or high-cost decisions; critical integration, data, migration, rollout, or rollback failure; an execution-critical unresolved decision; and material contradiction with research or an omitted requirement.

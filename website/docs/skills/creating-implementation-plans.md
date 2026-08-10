@@ -46,7 +46,7 @@ Give every task a Description, a `**Files:**` field, a Definition of Done checkl
 
 ### Step 5: Add Mandatory Cross-Cutting Tasks
 
-Include the required shared tasks for code review, UI verification, and prompt engineering when those domains apply.
+Include the required shared tasks for code review, UI verification, and prompt engineering when those domains apply; the code-review task is conditional on the delivered change set containing reviewable implementation artifacts.
 
 ### Step 6: Save the Plan Using the Template
 
@@ -61,7 +61,7 @@ Write the plan as a document that follows `plan.example.md` exactly. Do not add 
 | UI Verification Status        | Figma-based plans must track per-component `UI Verification Status` separately from code review, including the component name, iteration count, Figma URL, and a final status of `PASSED`, `ESCALATED`, or `VERIFICATION NOT RUN`.                                                                                                                                               |
 | No real code                  | Do not include production implementation code or full function bodies. Task-boundary seam artifacts (type definitions, function signatures, DTOs, interfaces, API shapes) are allowed when they clarify the contract without supplying implementation bodies. Use pseudo-code only when a complicated algorithm truly needs it; diagrams and explanatory context are encouraged. |
 | Open-questions gate           | A plan must not be dispatched to an implementor while any `## Open Questions` row has Status `❓ Open`. Unresolved questions route back to `tsh-architect` before execution.                                                                                                                                                                                                     |
-| Mandatory cross-cutting tasks | End with a code review phase handled by `tsh-code-reviewer`. Add `[REUSE]` UI verification tasks for Figma-based UI via `tsh-ui-reviewer`, and `[REUSE]` prompt engineering tasks for LLM prompts via `tsh-prompt-engineer`. Do not add deployment plans.                                                                                                                        |
+| Mandatory cross-cutting tasks | End with a code review phase handled by `tsh-code-reviewer`, conditional on the delivered change set containing reviewable implementation artifacts. Add `[REUSE]` UI verification tasks for Figma-based UI via `tsh-ui-reviewer`, and `[REUSE]` prompt engineering tasks for LLM prompts via `tsh-prompt-engineer`. Do not add deployment plans. |
 
 ## Connected Skills
 

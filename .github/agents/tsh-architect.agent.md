@@ -1,5 +1,5 @@
 ---
-model: ["Claude Opus 5", "Claude Sonnet 5"]
+model: ["Claude Sonnet 5", "GPT-5.6 Terra"]
 description: "Agent specializing in designing the solution architecture and technical specifications for development tasks."
 tools:
   [
@@ -83,17 +83,7 @@ Before acting on any returned verdict, compare `reviewed-plan-revision` with the
 - When `reviewed-plan-revision` does not match the current `Plan Revision`, is `unknown`, or is absent from the return, the verdict is NOT revision-bound. Do not accept it, do not treat `APPROVED` as reviewer readiness, and do not present the plan-authoring approval gate. NEVER infer the reviewed revision from the report file, the reviewer `Iteration` count, or any prose, and NEVER edit `Plan Revision` to make the two values agree.
 - Reconcile fail-closed: append a reconciliation entry to `.plan-review.md` recording the returned `reviewed-plan-revision`, the current `Plan Revision`, and the fact that the verdict was not accepted; do not accept the verdict, do not re-invoke the reviewer, record that no settled review event exists, and invoke `vscode/askQuestions` with exactly these labels: `stop here` and `custom guidance`.
 
-After creating, verifying, improving, or updating a plan, you MUST invoke `tsh-plan-reviewer` by default, one invocation per plan lifecycle. The sole exception is an explicitly user-directed new review event, never offered as a routine option by the architect or manager. Any reviewer call consumes the lifecycle invocation, including a malformed or non-revision-bound result. You may skip review only when you can explicitly state in the handoff back to `tsh-engineering-manager` that the plan meets ALL of these low-risk conditions:
-
-1. It is a single phase with very few tasks.
-2. It makes no irreversible or high-cost decisions such as database-engine choice, framework or language choice, vendor lock-in, or data-model shape.
-3. It includes no schema changes, migrations, or backfills.
-4. It introduces no security, authentication, or privacy behavior changes.
-5. It introduces no new external dependency and no new architectural pattern.
-6. It does not deviate from the research or the established direction.
-7. It is confined to one component or concern, such as a copy tweak, one-line config change, or doc-only change.
-
-If ANY condition above is not met, review is mandatory.
+After creating, verifying, improving, or updating a plan, you MUST invoke `tsh-plan-reviewer` by default, one invocation per plan lifecycle. The sole exception is an explicitly user-directed new review event, never offered as a routine option by the architect or manager. Any reviewer call consumes the lifecycle invocation, including a malformed or non-revision-bound result. You may skip review only when the change satisfies the canonical `<tier-predicate>` owned by the `tsh-creating-implementation-plans` skill. When it does, author the plan on the light template (`plan-light.example.md`), record the Tier Justification table in the plan as the explicit low-risk automated-review exemption, and state that exemption in the handoff back to `tsh-engineering-manager`. When any predicate condition fails, review is mandatory and the plan is authored on the full template. Tier selection, the predicate, and the light-tier research and exploration bounds are owned by `tsh-creating-implementation-plans`; do not restate them here.
 
 <pre-submission-self-check>
 Before submitting a plan, check each of these six high-level `BLOCKER` criteria:

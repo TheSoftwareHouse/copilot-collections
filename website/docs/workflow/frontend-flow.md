@@ -66,7 +66,7 @@ On every delegated or direct UI execution-owner entry path, the owner validates 
 - Runs **iterative verification loop** delegating to the `tsh-ui-reviewer` subagent after each component.
 - **Fixes mismatches** by delegating fixes back to the UI Engineer based on subagent reports, then re-captures and re-verifies on fresh artifacts using the same pinned user-confirmed full URL.
 - After 5 failed iterations, pauses behind a structured user gate with a detailed summary and exactly 3 options: continue with explicit extra iterations, stop and accept as `ESCALATED`, or provide a custom instruction.
-- Produces a **UI Verification Summary** before handoff to code review, but keeps the UI gate separate from code review.
+- Returns the **UI Verification Summary** to the Engineering Manager, which owns the single final code-review gate, but keeps the UI gate separate from and preceding code review.
 
 ## Required Skills
 

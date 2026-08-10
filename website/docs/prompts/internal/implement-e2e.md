@@ -48,9 +48,9 @@ Maps acceptance criteria to test scenarios:
 - Verifies tests pass 3+ consecutive times in headless mode.
 - Follows the `tsh-e2e-testing` skill for patterns, mocking, and CI readiness.
 
-### 4. Automatic Code Review
+### 4. Return to Manager
 
-Runs `tsh-code-reviewer` agent automatically at the end to review E2E test quality.
+Returns the completed E2E test summary and files to the Engineering Manager, which owns the single final code-review gate for the delivered change set.
 
 ## Skills Loaded
 
