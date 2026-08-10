@@ -9,6 +9,8 @@ title: Code Reviewer
 
 The Code Reviewer agent performs structured code reviews against the implementation plan, requirements, and project standards.
 
+The agent reviews only delivered reviewable implementation artifacts — application/product source code, automated tests, infrastructure/CI/CD/observability code, and LLM application prompts delivered as product artifacts. A `*.plan.md` file is comparison context for scope, Definition of Done, and acceptance criteria, never a review target; plan-only or planning-artifact-only input is reported as not applicable and redirected to `tsh-plan-reviewer` and the Architect, the owners of plan quality.
+
 ## Responsibilities
 
 - Verifying code **correctness** — functions as intended, meets requirements.

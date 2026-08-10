@@ -28,7 +28,7 @@ Everything from [`/tsh-implement`](../public/implement), plus:
 2. **Confirms the exact full dev server URL** with the user before the first verification, then pins that URL for the session.
 3. **Delegates UI implementation** to the UI Engineer with Figma design context.
 4. **Delegates UI verification** to the `tsh-ui-reviewer` subagent after each UI component. If PASS, move to the next component. If FAIL, delegate the fix to UI Engineer, then re-run verification on fresh capture made with the same pinned URL. If VERIFICATION NOT RUN, resolve the blocker first, then re-run capture and verification without consuming the 5-iteration budget. Maximum **5 iterations** per component, then escalate.
-5. **Produces a UI Verification Summary** before handing off to code review.
+5. **Returns the UI Verification Summary and completed work** to the Engineering Manager, which owns the single final code-review gate.
 
 ## Verification Loop
 

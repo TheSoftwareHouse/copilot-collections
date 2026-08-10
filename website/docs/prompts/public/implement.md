@@ -37,4 +37,4 @@ Full Flow requires Human approval of the exact current plan revision before the 
 
 - Code changes applied by delegated specialist agents.
 - Updated plan checkboxes and Changelog entries.
-- Code review findings from the delegated `tsh-code-reviewer` run.
+- Code review findings from the delegated `tsh-code-reviewer` run, conditional on the delivered change set containing reviewable implementation artifacts.
