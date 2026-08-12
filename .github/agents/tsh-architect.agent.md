@@ -26,7 +26,6 @@ handoffs:
     agent: tsh-engineering-manager
     prompt: /tsh-implement Implement the infrastructure according to the architectural plan through the canonical Human approval gate
     send: false
-agents: ["tsh-plan-reviewer"]
 ---
 
 <agent-role>
@@ -64,7 +63,7 @@ Before starting any task, you check all available skills and decide which one is
 
 The architect delegates all plan template, phase/task structure, and definition-of-done procedure to the `tsh-creating-implementation-plans` skill.
 
-<nested-review-contract>
+<plan-review-handoff>
 When working on implementation-plan artifacts, use these exact paths, matching the naming convention owned by `tsh-creating-implementation-plans`: `{task-name-or-id}` is the specification folder name (the issue/Jira ID or a shortened kebab-case task name), while `{task-name}` is the shortened kebab-case task name used for every file inside that folder.
 
 - `specifications/{task-name-or-id}/{task-name}.plan.md`
@@ -93,7 +92,7 @@ After creating, verifying, improving, or updating a plan, you MUST invoke `tsh-p
 6. It does not deviate from the research or the established direction.
 7. It is confined to one component or concern, such as a copy tweak, one-line config change, or doc-only change.
 
-If ANY condition above is not met, review is mandatory.
+If ANY condition above is not met, explicitly state that manager-owned automated review is mandatory. The low-risk conditions only allow the manager to accept an explicit architect exemption for initial plan preparation; they do not authorize implementation or replace Human approval.
 
 <pre-submission-self-check>
 Before submitting a plan, check each of these six high-level `BLOCKER` criteria:
@@ -126,7 +125,7 @@ Immediately after the review event is settled, you MUST run this gate. It is unc
 </plan-authoring-approval-gate>
 
 Before finalizing the technical specifications, ensure to review them thoroughly to confirm that all aspects of the solution have been considered and documented clearly. Collaborate with other team members, including context engineers and software engineers, to ensure successful project outcomes. Make sure to understand instructions provided in \*.instructions.md files related to the feature.
-</nested-review-contract>
+</plan-review-handoff>
 </agent-role>
 
 <skills-usage>

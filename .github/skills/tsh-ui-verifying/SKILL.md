@@ -8,6 +8,15 @@ user-invocable: false
 
 Verification process, criteria, and tolerances for comparing UI implementations against Figma designs.
 
+## Platform Boundary
+
+This skill defines the collection's web/Figma browser verification contract only.
+
+- `actual.png`, `computed-styles.json`, and `a11y-snapshot.yml` are browser evidence for web/Figma verification only. They are never proof of native iOS or Android behavior.
+- The Playwright/browser contract excludes native safe areas and status bars, platform navigation, device behavior, touch or gesture behavior, VoiceOver, TalkBack, simulator/device accessibility, and native end-to-end testing.
+- When a task makes a native React Native claim, leave native verification as `VERIFICATION NOT RUN` unless the target project supplies a separate native evidence contract. Browser artifacts cannot close or upgrade that native verification status.
+- This boundary does not change the existing web capture-before-review ordering, pinned URL, artifact directory requirements, retry/iteration behavior, or `VERIFICATION NOT RUN` handling for web verification.
+
 > **Default to asking when anything is off — this is a judgment rule, not a checklist.** Every specific blocker named in this skill (missing Figma, auth redirect, wrong page, missing or partial artifacts, unconfirmed URL, tool error, …) is only an EXAMPLE of one underlying rule: whenever you cannot run a real, complete verification against the full artifact base — because something is missing, broken, ambiguous, inconsistent, or simply unexpected, **including situations not listed anywhere here** — stop and raise it through `vscode/askQuestions` (when that tool is available to you). Do not guess, do not improvise a workaround, do not fabricate values, and do not proceed on partial evidence. Think about whether the evidence you actually have supports a verdict; if it does not, ask instead of pushing forward.
 
 ## Verification Process
@@ -65,7 +74,7 @@ This step is mandatory and always runs before capturing the implementation. A ve
 3. **Extract the design specifications** to compare against:
    - Layer hierarchy and component structure
    - Layout direction, alignment, spacing
-   - Frame width (use it as the capture viewport width in Step 3)
+   - Frame width (use it as the capture viewport width in Step 3 for browser-based verification of mobile screens)
    - Typography, colors, radii, shadows
    - Component variants and states
 
@@ -102,7 +111,7 @@ Write every ACTUAL capture artifact into the task's iteration directory, never i
 
 1. **Ensure shared Figma reference when the caller provided a Figma URL** — export or verify `"$FIGMA_EXPECTED"` before browser capture begins. If the shared reference export fails, stop as `VERIFICATION NOT RUN` before opening the app page.
 2. **Open named session** — `playwright-cli open -s <session-name>`.
-3. **Resize to the Figma frame width** — `playwright-cli resize <figma-width> 1080 -s <session-name>`.
+3. **Resize to a mobile viewport derived from the Figma frame** — for mobile UIs, use the frame width with a sensible device-height viewport or the closest Playwright device preset; never keep the browser at its default desktop width. Example: `playwright-cli resize <figma-width> 1080 -s <session-name>` when using raw width-based capture.
 4. **Navigate to the full target URL** including query params — `playwright-cli goto <full-url> -s <session-name>`.
 5. **Stabilize render** before collecting evidence:
    - `playwright-cli run-code -s <session-name> "async page => { await page.emulateMedia({ reducedMotion: 'reduce' }); await page.waitForLoadState('networkidle'); }"`
@@ -124,6 +133,7 @@ The `JSON.stringify(...)` payload should cover the major containers and controls
 
 - Wait for `networkidle` before capture.
 - Emulate reduced motion before taking evidence.
+- For mobile UIs verified in a browser, ensure the viewport is explicitly set before navigation or evidence capture; desktop-width captures are invalid evidence for mobile width and spacing.
 - Use optional route mocks only to remove nondeterministic backend data, not to hide real UI defects.
 - Mask dynamic regions when they are known noise sources.
 - Different image heights or dimensions between Figma and the implementation are evidence for the reviewer brain; they are NOT hard failures that abort the loop.

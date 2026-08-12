@@ -8,6 +8,10 @@ user-invocable: false
 
 Provides patterns and workflows for building robust, accessible forms with schema-based validation, composable field components, and multi-step form flows.
 
+<platform-boundary>
+Apply schema, state, submission, and error-handling rules where they fit the target platform. HTML labels, `aria-*`, `<form>`, browser-native validation, keyboard-submit behavior, and browser-only field checks below are web-file guidance; skip or adapt them for native React Native files. For RN files, load `tsh-implementing-react-native` after its target-project profile gate. RN-specific accessibility, forms, lifecycle/hooks, performance, and review guidance comes from that skill and its existing references; do not duplicate it wholesale here. Treat form libraries, packages, versions, and tooling as profile-dependent rather than universal claims.
+</platform-boundary>
+
 <principles>
 
 <schema-first-validation>
@@ -19,7 +23,7 @@ Show validation errors at the right moment: on field blur or form submission, no
 </progressive-disclosure-of-errors>
 
 <accessible-by-default>
-Every form field must have a visible label. Error messages must be announced to screen readers via `role="alert"` or `aria-live` regions. The form must be fully navigable by keyboard alone — Tab through fields, Enter to submit, Escape to cancel where applicable. Associate error messages with their fields using `aria-describedby`.
+Every web form field must have a visible label. Error messages must be announced to screen readers via `role="alert"` or `aria-live` regions. The web form must be fully navigable by keyboard alone — Tab through fields, Enter to submit, Escape to cancel where applicable. Associate error messages with their fields using `aria-describedby`.
 </accessible-by-default>
 
 </principles>
@@ -46,6 +50,8 @@ Progress:
 
 **Step 2: Build field components**
 
+For web files, apply the HTML label, input, and `aria-*` rules below. For RN files, use the native field and accessibility contract from `tsh-implementing-react-native` and its existing references.
+
 Create composable field wrapper components that connect the form library's state to the component library's inputs. Each field wrapper:
 
 - Receives the field name (and optionally the form context) as props.
@@ -60,6 +66,8 @@ Create composable field wrapper components that connect the form library's state
 - Keeps the wrapper generic — the same field component works for different forms by accepting the field name as a parameter.
 
 **Step 3: Compose the form**
+
+The `<form>`, `novalidate`, browser-native validation, and Enter-key rules in this step apply to web files only.
 
 Assemble field components into a form:
 
@@ -89,6 +97,8 @@ When a form spans multiple steps or pages:
 **Step 5: Verify accessibility**
 
 Use the `tsh-ensuring-accessibility` skill for a thorough audit. At minimum, verify:
+
+For web files, perform the HTML, ARIA, and browser keyboard checks below. For RN files, skip these web-only checks and follow the RN skill's target-project accessibility guidance.
 
 - Every `<input>`, `<select>`, and `<textarea>` has an associated `<label>` element (via `for`/`id` pairing or wrapping).
 - Error messages use `role="alert"` or are in an `aria-live="polite"` region so screen readers announce them.
@@ -147,6 +157,7 @@ Form:
 ## Connected Skills
 
 - `tsh-implementing-frontend` — for component composition patterns and framework-specific references (form library integration, validation library choice)
+- `tsh-implementing-react-native` — for React Native form implementation (KeyboardAvoidingView, mobile input patterns)
 - `tsh-ensuring-accessibility` — for WCAG compliance in form fields, labels, and error announcements
 - `tsh-writing-hooks` — for custom form-related hooks/composables (useFormField, useMultiStepForm)
 - `tsh-reviewing-frontend` — for form-specific review criteria during code review

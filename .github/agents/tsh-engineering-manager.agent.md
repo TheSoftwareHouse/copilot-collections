@@ -21,11 +21,13 @@ agents:
     "tsh-plan-implementor",
     "tsh-devops-engineer",
     "tsh-architect",
+    "tsh-plan-reviewer",
     "tsh-code-reviewer",
     "tsh-ui-reviewer",
     "tsh-context-engineer",
     "tsh-prompt-engineer",
     "tsh-technical-writer",
+    "tsh-copilot-orchestrator",
   ]
 ---
 
@@ -68,6 +70,10 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
 - If the task has sufficient information but is missing an implementation plan, delegate to `tsh-architect`.
 - If the task is missing both the necessary information and the implementation plan, delegate first to `tsh-context-engineer`, then to `tsh-architect`.
 </artifact-readiness-cascade>
+
+<customization-delegation>
+For cross-artifact Copilot customization work, delegate to the existing `tsh-copilot-orchestrator` as the customization owner. That orchestrator coordinates the design and delegates file edits to `tsh-copilot-artifact-creator` and read-only structural review to `tsh-copilot-artifact-reviewer` through its declared roster. The Engineering Manager does not edit customization files directly and does not add a new agent or worker for this route.
+</customization-delegation>
 
 <delegation-roster>
 <agent name="tsh-ui-engineer">
@@ -125,6 +131,26 @@ When uncertainty remains after your own review, stop, delegate a focused clarifi
   - You cannot defend the next implementation step with confidence.
 - **SHOULD NOT delegate to**:
   - Straightforward implementation work whose ownership is already clear and does not require architectural clarification.
+</agent>
+
+<agent name="tsh-plan-reviewer">
+- **MUST delegate to when**:
+  - A plan produced or updated by `tsh-architect` needs automated review before Human approval.
+  - A previously approved plan has a material revision and mandatory re-review is required.
+- **SHOULD NOT delegate to**:
+  - Plans that already have an `APPROVED` review for the current revision.
+  - Implementation work or code review.
+</agent>
+
+<agent name="tsh-copilot-orchestrator">
+- **MUST delegate to when**:
+  - The task creates, modifies, or audits multiple Copilot customization artifacts such as agents, skills, prompts, or instructions.
+  - The task requires a coordinated customization design and cross-artifact consistency handoff.
+- **IMPORTANT**:
+  - The orchestrator owns coordination and design judgment, while its existing `tsh-copilot-artifact-creator` worker applies file edits and its existing `tsh-copilot-artifact-reviewer` worker performs read-only review.
+  - Do not edit customization files from the Engineering Manager or invent a new customization worker.
+- **SHOULD NOT delegate to**:
+  - Product implementation, ordinary repository documentation, or unrelated application work that belongs to the specialist routes above.
 </agent>
 
 <agent name="tsh-code-reviewer">

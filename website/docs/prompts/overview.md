@@ -5,7 +5,7 @@ title: Prompts Overview
 
 # Prompts Overview
 
-Copilot Collections includes **13 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
+Copilot Collections includes **14 public prompts** — slash commands that trigger specific workflow actions across the full product lifecycle. Prompts are stored in `.github/prompts/` and become available as `/command` shortcuts in VS Code chat.
 
 ## How Prompts Work
 
@@ -23,45 +23,48 @@ These are the user-facing commands available in VS Code chat.
 
 ### 📋 Product Ideation Commands
 
-| Command | Agent | Description |
-|---|---|---|
-| [/tsh-explore-materials](./public/explore-materials) | Business Analyst | Explore workshop materials before backlog extraction |
+| Command                                              | Agent            | Description                                                  |
+| ---------------------------------------------------- | ---------------- | ------------------------------------------------------------ |
+| [/tsh-explore-materials](./public/explore-materials) | Business Analyst | Explore workshop materials before backlog extraction         |
 | [/tsh-analyze-materials](./public/analyze-materials) | Business Analyst | Process workshop materials into Jira-ready epics and stories |
 
 ### 🛠 Development Commands
 
-| Command | Agent | Description |
-|---|---|---|
-| [/tsh-implement](./public/implement) | Engineering Manager | Orchestrate the full cycle: research/context gathering if needed → plan → implementation |
+| Command                                                | Agent               | Description                                                                              |
+| ------------------------------------------------------ | ------------------- | ---------------------------------------------------------------------------------------- |
+| [/tsh-implement](./public/implement)                   | Engineering Manager | Orchestrate the full cycle: research/context gathering if needed → plan → implementation |
+| [/tsh-implement-figma-rn](./public/implement-figma-rn) | UI Engineer         | Quickly implement one Figma-backed React Native or Expo view in a known app              |
 
 ### ✅ Quality Commands
 
-| Command | Agent | Description |
-|---|---|---|
-| [/tsh-review](./public/review) | Code Reviewer | Review implementation against plan and standards |
-| [/tsh-review-ui](./public/review-ui) | UI Reviewer | Single-pass Figma vs implementation comparison |
-| [/tsh-review-codebase](./public/review-codebase) | Architect | Comprehensive code quality analysis |
+| Command                                          | Agent         | Description                                      |
+| ------------------------------------------------ | ------------- | ------------------------------------------------ |
+| [/tsh-review](./public/review)                   | Code Reviewer | Review implementation against plan and standards |
+| [/tsh-review-ui](./public/review-ui)             | UI Reviewer   | Single-pass Figma vs implementation comparison   |
+| [/tsh-review-codebase](./public/review-codebase) | Architect     | Comprehensive code quality analysis              |
 
 ### ⚙️ Copilot Customization Commands
 
-| Command | Agent | Description |
-|---|---|---|
-| [/tsh-create-custom-agent](./public/create-custom-agent) | Copilot Orchestrator | Create a new custom agent |
-| [/tsh-create-custom-skill](./public/create-custom-skill) | Copilot Orchestrator | Create a new custom skill |
-| [/tsh-create-custom-prompt](./public/create-custom-prompt) | Copilot Orchestrator | Create a new custom prompt |
+| Command                                                                | Agent                | Description                     |
+| ---------------------------------------------------------------------- | -------------------- | ------------------------------- |
+| [/tsh-create-custom-agent](./public/create-custom-agent)               | Copilot Orchestrator | Create a new custom agent       |
+| [/tsh-create-custom-skill](./public/create-custom-skill)               | Copilot Orchestrator | Create a new custom skill       |
+| [/tsh-create-custom-prompt](./public/create-custom-prompt)             | Copilot Orchestrator | Create a new custom prompt      |
 | [/tsh-create-custom-instructions](./public/create-custom-instructions) | Copilot Orchestrator | Create custom instruction files |
 
 ### 🏗 Infrastructure & Cost Analysis Commands
 
-| Command | Agent | Description |
-|---|---|---|
+| Command                                                    | Agent           | Description                                                            |
+| ---------------------------------------------------------- | --------------- | ---------------------------------------------------------------------- |
 | [/tsh-audit-infrastructure](./public/audit-infrastructure) | DevOps Engineer | Audit infrastructure for security gaps, cost waste, and best practices |
-| [/tsh-analyze-aws-costs](./public/analyze-aws-costs) | DevOps Engineer | AWS cost optimization and tagging compliance audit |
-| [/tsh-analyze-gcp-costs](./public/analyze-gcp-costs) | DevOps Engineer | GCP cost optimization and labeling compliance audit |
+| [/tsh-analyze-aws-costs](./public/analyze-aws-costs)       | DevOps Engineer | AWS cost optimization and tagging compliance audit                     |
+| [/tsh-analyze-gcp-costs](./public/analyze-gcp-costs)       | DevOps Engineer | GCP cost optimization and labeling compliance audit                    |
 
 ## Delegation via /tsh-implement
 
 When you run [`/tsh-implement`](./public/implement), the Engineering Manager automatically handles the full development cycle. Its four primary inputs are a task description, Jira ID, standalone `*.research.md`, or `*.plan.md`. Missing research or plan companions trigger preparation, never no-plan implementation. Before the first file-changing delegation, the manager requires Human approval of the exact current plan revision; automated Reviewer approval is readiness evidence only, not permission to implement. You don’t need to invoke individual agents — the orchestration is handled for you.
+
+For one Figma-backed React Native or Expo view in an app you already know, use [`/tsh-implement-figma-rn`](./public/implement-figma-rn). It routes to the same UI Engineer for a focused, no-plan implementation workflow when the Figma node, target app, and view scope are unambiguous.
 
 | Phase | Delegated To |
 |---|---|

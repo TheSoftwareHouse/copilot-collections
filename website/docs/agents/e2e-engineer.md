@@ -7,7 +7,11 @@ title: E2E Engineer
 
 **File:** `.github/agents/tsh-e2e-engineer.agent.md`
 
-The E2E Engineer agent creates, maintains, and debugs end-to-end tests using Playwright. It produces reliable, maintainable, and meaningful test suites.
+The E2E Engineer agent creates, maintains, and debugs web end-to-end tests using Playwright. It produces reliable, maintainable, and meaningful test suites.
+
+## Platform Boundary
+
+Playwright is the collection's E2E owner for web flows only. Native React Native E2E, simulator/device automation, and native accessibility/device evidence are target-project responsibilities and outside this collection's promise. Browser E2E and Playwright evidence do not verify native React Native behavior.
 
 Before any file change, validate from disk a plan whose current Human Approval record satisfies exactly `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and a valid ISO 8601 UTC `Decision Timestamp` ending in `Z`. Fail closed when a field is missing, stale, mismatched, inferred, based only on Reviewer approval, or when the plan cannot be located or read; retry an unreadable or ambiguous reference once and resolve relative paths against the workspace root. Name the exact failed field, condition, or file, then use `vscode/askQuestions` for guided recovery on every entry path, including direct selection as the primary chat agent. Offer pointing to the correct plan, obtaining Human approval for an existing plan, starting plan preparation, or, when delegated, handing back to `tsh-engineering-manager`; continue only from the user's explicit choice, which is never Human approval.
 

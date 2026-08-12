@@ -9,6 +9,8 @@ The UI Engineer agent is the specialized implementor for UI and frontend work. I
 
 Before any file change, including UI implementation or capture/verification-related artifacts, validate from disk a plan whose current Human Approval record satisfies exactly `Human Decision=APPROVED`, `Approved Revision=current Plan Revision`, and a valid ISO 8601 UTC `Decision Timestamp` ending in `Z`. Fail closed when a field is missing, stale, mismatched, inferred, based only on Reviewer approval, or when the plan cannot be located or read; retry an unreadable or ambiguous reference once and resolve relative paths against the workspace root. Name the exact failed field, condition, or file, then use `vscode/askQuestions` for guided recovery on every entry path, including direct selection as the primary chat agent. Offer pointing to the correct plan, obtaining Human approval for an existing plan, starting plan preparation, or, when delegated, handing back to `tsh-engineering-manager`; continue only from the user's explicit choice, which is never Human approval.
 
+For React Native, this agent owns rendered screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI, and loads [`tsh-implementing-react-native`](../skills/react-native-implementation) for profile-driven guidance. React Native business logic, state, data, services, integrations, native modules, and other non-rendered work remain on the existing non-UI route. Native simulator/device, native accessibility, and native end-to-end evidence are target-project responsibilities; this collection's browser artifacts do not verify native behavior.
+
 ## Responsibilities
 
 - Implementing UI and frontend solutions from requirements and design context.
@@ -16,6 +18,7 @@ Before any file change, including UI implementation or capture/verification-rela
 - Running the implementation loop: implement, delegate ACTUAL capture to `tsh-ui-capture-worker`, delegate design review to `tsh-ui-reviewer`, then apply fixes and re-capture using the same pinned user-confirmed full URL throughout the session.
 - Applying accessibility, hooks, forms, and frontend performance practices during UI work.
 - Confirming scope with `vscode/askQuestions` when the UI task is genuinely ambiguous, and using the same tool for approval-precondition recovery before any file change.
+- Loading `tsh-implementing-react-native` for rendered React Native UI and preserving the non-UI ownership boundary.
 - Pausing behind `vscode/askQuestions` when capture or review is blocked by missing Figma input, unknown app URL, auth issues, or failed evidence collection.
 - Limiting the verification loop to 5 iterations before pausing behind a structured user gate.
 - Keeping the UI gate separate from code review until every UI item is verified, escalated, or explicitly acknowledged as blocked.
@@ -36,16 +39,16 @@ Before any file change, including UI implementation or capture/verification-rela
 
 ## Tool Access
 
-| Tool                      | Usage                                                                              |
-| ------------------------- | ---------------------------------------------------------------------------------- |
-| **Context7**              | Look up design-system documentation and UI library guidance                        |
-| **Figma**                 | Extract design specifications for UI tasks                                         |
-| **Sequential Thinking**   | Plan complex UI refactors and debug layout or interaction issues                   |
-| **Terminal**              | Run build tools, tests, linters, and scripts                                       |
-| **File Read/Edit/Search** | Read, modify, and search workspace files                                           |
-| **VS Code Commands**      | Execute VS Code commands and preview in browser                                    |
-| **Sub-agents**            | Delegate capture to `tsh-ui-capture-worker` and design review to `tsh-ui-reviewer` |
-| **Todo**                  | Track implementation progress with structured checklists                           |
+| Tool                      | Usage                                                                                                                                    |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Context7**              | Look up design-system documentation and UI library guidance                                                                              |
+| **Figma**                 | Extract design specifications for UI tasks                                                                                               |
+| **Sequential Thinking**   | Plan complex UI refactors and debug layout or interaction issues                                                                         |
+| **Terminal**              | Run build tools, tests, linters, and scripts                                                                                             |
+| **File Read/Edit/Search** | Read, modify, and search workspace files                                                                                                 |
+| **VS Code Commands**      | Execute VS Code commands and preview in browser                                                                                          |
+| **Sub-agents**            | Delegate capture to `tsh-ui-capture-worker` and design review to `tsh-ui-reviewer`                                                       |
+| **Todo**                  | Track implementation progress with structured checklists                                                                                 |
 | **Ask Questions**         | Clarify genuine UI-task ambiguity and unblock capture or review failures — never used to seek permission to proceed without a valid plan |
 
 ## Skills Loaded
@@ -58,6 +61,7 @@ Before any file change, including UI implementation or capture/verification-rela
 - `tsh-writing-hooks` — Custom hooks: naming, composition, stable returns, effect cleanup, and testing.
 - `tsh-ensuring-accessibility` — WCAG 2.1 AA compliance, semantic HTML, ARIA, keyboard navigation, and focus management.
 - `tsh-optimizing-frontend` — Rendering optimization, code splitting, memoization, and memory management.
+- `tsh-implementing-react-native` — Profile-driven guidance for rendered React Native screens, components, navigation, layout, styling, gestures, animations, and accessibility-facing UI.
 - `tsh-ui-verifying` — The implement -> capture -> review loop, verification criteria, tolerances, and report expectations.
 
 ## How It Works
