@@ -854,3 +854,12 @@
 .cc-home .pz-rv .cmt{margin-left:12px!important;margin-right:12px!important}
 .cc-home .pz-ui .iter{flex-wrap:wrap;white-space:normal}
 .cc-home .pz-ui .v-h small{display:none}}
+@media (max-width:700px){
+.cc-home .p-gh{display:none}
+.cc-home .p-logo{white-space:nowrap}
+.cc-home .p-docs{margin-right:0;white-space:nowrap}
+}
+@media (max-width:360px){
+.cc-home .prc{padding:20px}
+.cc-home .prc b.big{font-size:84px!important;letter-spacing:-3px}
+}
