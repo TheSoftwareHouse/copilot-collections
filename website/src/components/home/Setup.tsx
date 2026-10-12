@@ -10,7 +10,9 @@ export default function Setup(): React.JSX.Element {
           <div className="su-head">
             <div>
               <h2>
-                Set it up in minutes and every project gets the same agents, skills and&nbsp;checks
+                Set it up in minutes and every project
+                <br />
+                gets the same agents, skills and&nbsp;checks
               </h2>
             </div>
             <a className="btn btn-p" href="https://github.com/TheSoftwareHouse/copilot-collections">

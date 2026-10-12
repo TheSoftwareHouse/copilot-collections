@@ -786,8 +786,8 @@
 .cc-home .su-t .ok2{color:#4fc38a}
 .cc-home .su-t .d{color:#ffc269}
 .cc-home .su-t .cp{float:right;font-size:11px;border:1px solid #3a3f44;border-radius:5px;padding:1px 8px;color:#9aa0a6;cursor:pointer;font-family:inherit}
-.cc-home .su-cn{background:#f6f8f9;border:1px solid #eef1f2;padding:10px;display:flex;flex-direction:column;gap:5px}
-.cc-home .cn-r{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #e9edef;border-radius:9px;padding:7px 11px}
+.cc-home .su-cn{background:#f6f8f9;border:1px solid #eef1f2;padding:10px;display:flex;flex-direction:column;gap:5px;overflow:hidden}
+.cc-home .cn-r{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #e9edef;border-radius:9px;padding:6px 11px;line-height:1.25;flex:1 1 auto}
 .cc-home .cn-r img{height:24px;width:44px;object-fit:contain;object-position:left center;flex:none}
 .cc-home .cn-ic{width:24px;height:24px;flex:none;margin-right:20px}
 .cc-home .cn-ic{border-radius:6px;background:#313435;display:grid;place-items:center}
