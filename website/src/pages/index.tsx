@@ -1,36 +1,50 @@
 import React from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import WorkflowShowcase from '@site/src/components/WorkflowShowcase';
-import QuickWins from '@site/src/components/QuickWins';
-import SocialProof from '@site/src/components/SocialProof';
-import GettingStartedSection from '@site/src/components/GettingStartedSection';
-import HeroSection from "@site/src/components/HeroSection";
+import HomeNav from '@site/src/components/home/HomeNav';
+import Hero from '@site/src/components/home/Hero';
+import UseCases from '@site/src/components/home/UseCases';
+import Skills from '@site/src/components/home/Skills';
+import Proof from '@site/src/components/home/Proof';
+import Setup from '@site/src/components/home/Setup';
+import TshBlock from '@site/src/components/home/TshBlock';
+import HomeFooter from '@site/src/components/home/HomeFooter';
+import '@site/src/components/home/home.css';
 
-import styles from './index.module.css';
+const TITLE = 'Copilot Collections | Open-Source Agentic SDLC Framework';
+const DESCRIPTION =
+  'Open-source agents and skills for GitHub Copilot. Plan, build and review every ticket the same way. 40% shorter lead time. MIT licence.';
+const SOCIAL_TITLE = 'Copilot Collections: an open-source framework for the agentic SDLC';
+const SOCIAL_DESCRIPTION =
+  '25 agents and 36 skills take work from workshop notes to a reviewed pull request. Nothing merges without your approval.';
 
 export default function Home(): React.JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
-
   return (
-    <Layout
-      title={siteConfig.title}
-      description="AI-powered product engineering framework — specialized agents, structured workflows, and MCP integrations covering the full product lifecycle from ideation to delivery."
-    >
-      <main className={styles.homePage}>
-          <HeroSection />
-          <div className={styles.divider} />
-          <HomepageFeatures />
-          <div className={styles.divider} />
-          <SocialProof />
-          <div className={styles.divider} />
-          <WorkflowShowcase />
-          <div className={styles.divider} />
-          <QuickWins />
-          <div className={styles.divider} />
-          <GettingStartedSection />
-      </main>
+    <Layout description={DESCRIPTION} noFooter>
+      <Head>
+        <title>{TITLE}</title>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap"
+          rel="stylesheet"
+        />
+        <meta property="og:title" content={SOCIAL_TITLE} />
+        <meta property="og:description" content={SOCIAL_DESCRIPTION} />
+        <meta property="og:image:alt" content={SOCIAL_TITLE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={SOCIAL_TITLE} />
+        <meta name="twitter:description" content={SOCIAL_DESCRIPTION} />
+        <meta name="twitter:image:alt" content={SOCIAL_TITLE} />
+      </Head>
+      <div className="cc-home">
+        <HomeNav />
+        <Hero />
+        <UseCases />
+        <Skills />
+        <Proof />
+        <Setup />
+        <TshBlock />
+        <HomeFooter />
+      </div>
     </Layout>
   );
 }
