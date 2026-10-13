@@ -14,7 +14,7 @@ export default function Hero(): React.JSX.Element {
             </div>
             <div style={{ paddingTop: '12px' }}>
               <p className="lead">
-                12 agents and 32 skills take work from workshop notes to a reviewed pull request,
+                25 agents and 36 skills take work from workshop notes to a reviewed pull request,
                 inside the tools your team already uses. Nothing merges without your approval.
               </p>
               <div className="ctas">
@@ -334,7 +334,7 @@ export default function Hero(): React.JSX.Element {
               <small>engineers use it</small>
             </div>
             <div>
-              <b>12</b>
+              <b>25</b>
               <small>specialised AI agents</small>
             </div>
             <div>

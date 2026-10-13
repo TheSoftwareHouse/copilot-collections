@@ -41,10 +41,10 @@ export default function Setup(): React.JSX.Element {
                 <br />
                 <br />
                 <span className="d">▸ agents/</span>&nbsp;&nbsp;&nbsp;
-                <span className="mu">12 agents</span>
+                <span className="mu">25 agents</span>
                 <br />
                 <span className="d">▸ skills/</span>&nbsp;&nbsp;&nbsp;
-                <span className="mu">32 skills</span>
+                <span className="mu">36 skills</span>
                 <br />
                 <span className="d">▸ prompts/</span>&nbsp;&nbsp;
                 <span className="mu">/tsh-* commands</span>

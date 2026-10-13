@@ -16,12 +16,13 @@ const DESCRIPTION =
   'Open-source agents and skills for GitHub Copilot. Plan, build and review every ticket the same way. 40% shorter lead time. MIT licence.';
 const SOCIAL_TITLE = 'Copilot Collections: an open-source framework for the agentic SDLC';
 const SOCIAL_DESCRIPTION =
-  '12 agents and 32 skills take work from workshop notes to a reviewed pull request. Nothing merges without your approval.';
+  '25 agents and 36 skills take work from workshop notes to a reviewed pull request. Nothing merges without your approval.';
 
 export default function Home(): React.JSX.Element {
   return (
-    <Layout title={TITLE} description={DESCRIPTION} noFooter>
+    <Layout description={DESCRIPTION} noFooter>
       <Head>
+        <title>{TITLE}</title>
         <link
           href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600&display=swap"
           rel="stylesheet"

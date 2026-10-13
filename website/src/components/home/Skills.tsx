@@ -6,7 +6,7 @@ export default function Skills(): React.JSX.Element {
       <section className="skl" id="skills">
         <div className="wrap skl-grid">
           <div>
-            <h2>32 skills of senior engineering know&#8209;how</h2>
+            <h2>36 skills of senior engineering know&#8209;how</h2>
             <p className="lead">
               Practice drawn from 160+ projects The Software House has delivered, packaged for
               agents. Each task loads the skills it needs, so every task follows the same standard.
@@ -16,13 +16,13 @@ export default function Skills(): React.JSX.Element {
                 Product ideation<span>5 skills</span>
               </div>
               <div>
-                Development<span>12 skills</span>
+                Development<span>15 skills</span>
               </div>
               <div>
                 Cloud &amp; infrastructure<span>7 skills</span>
               </div>
               <div>
-                Quality<span>4 skills</span>
+                Quality<span>5 skills</span>
               </div>
               <div>
                 Customization<span>4 skills</span>
@@ -238,7 +238,7 @@ export default function Skills(): React.JSX.Element {
                       </svg>
                     </span>
                   </div>
-                  <b>Loaded by 12 agents</b>
+                  <b>Loaded by 25 agents</b>
                 </div>
               </div>
             </div>
